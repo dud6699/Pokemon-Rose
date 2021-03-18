@@ -1,0 +1,11 @@
+['Sturdy','Rock Head']
+[1.2,1.8,1,2.8,1,.8]
+['Steel','Rock']
+[42,'Aggron']
+{1:['Tackle','Harden','Mud-Slap','Headbutt'],4:'Mud-Slap',7:'Headbutt',10:'Metal Claw',13:'Rock Tomb',16:'Protect',19:'Roar',22:'Iron Head',25:'Rock Slide',28:'Take Down',31:'Metal Sound',35:'Iron Tail',29:'Iron Defense',43:'Double-Edge',47:'Autotomize',51:'Heavy Slam',55:'Metal Burst'}
+90
+120
+35
+57
+[]
+['Iron Armor','Lairon feeds on iron contained in rocks and', 'water. It makes its nest on mountains where', 'iron ore is buried. As a result, the', 'Pokemon often clashes with humans mining', 'the iron ore.']

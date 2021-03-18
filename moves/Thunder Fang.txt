@@ -1,0 +1,10 @@
+Electric
+0
+65
+.95
+{0.1:['Par'],0.1:['Fln']}
+1
+15
+['The user bites with', 'electrified fangs.', 'This may also make', 'the target flinch or', 'leave it with', 'paralysis.']
+0
+0

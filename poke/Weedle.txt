@@ -1,0 +1,11 @@
+['Shield Dust']
+[.8,.7,.4,.6,.4,1]
+['Bug','Poison']
+[7,'Kakuna','Harden']
+{1:['Poison Sting','String Shot'],9:'Bug Bite'}
+255
+3.2
+12
+16
+['route_1','route_2']
+['Hairy Bug','Weedle has an extremely acute sense of', 'smell. It is capable of distinguishing its', 'favorite kinds of leaves from those it', 'dislikes just by sniffing with its big red', 'proboscis.']

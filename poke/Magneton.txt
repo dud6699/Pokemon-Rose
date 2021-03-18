@@ -1,0 +1,11 @@
+['Magnet Pull','Sturdy']
+[1,1.2,2.4,1.9,1.4,1.4]
+['Electric','Steel']
+[30,'Magnezone']
+{1:['Electric Terrain','Supersonic','Tackle','Thunder Shock','Thunder Wave','Tri Attack','Zap Cannon'],5:'Thunder Shock',7:'Thunder Wave',11:'Magnet Bomb',13:'Light Screen',17:'Sonic Boom',19:'Spark',23:'Mirror Shot',25:'Metal Sound',29:'Electro Ball',33:'Flash Cannon',39:'Screech',43:'Discharge',49:'Lock-On',53:'Magnet Rise',59:'Gyro Ball',63:'Zap Cannon'}
+60
+60
+39
+73
+[]
+['Magnet','Magneton emits a powerful magnetic force', 'that is fatal to mechanical devices. As a', 'result, large cities sound sirens to warn', 'citizens of large-scale outbreaks of this', 'Pokemon.']

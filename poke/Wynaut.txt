@@ -1,0 +1,11 @@
+['Shadow Tag']
+[1.9,.46,.46,.96,.96,.46]
+['Psychic',None]
+[15,'Wobbuffet']
+{1:['Splash','Charm','Encore'],15:['Counter','Mirror Coat','Safeguard','Destiny Bond']}
+125
+14
+24
+911
+[]
+['Bright','Wynaut gather on moonlit nights to play by', 'squeezing up against each other. By being', 'squeezed, this Pokemon gains endurance and', 'is trained to dole out powerful', 'counterattacks.'] 

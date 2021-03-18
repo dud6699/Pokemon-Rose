@@ -1,0 +1,10 @@
+Normal
+2
+---
+1
+{1:['SAD','SAD']}
+1
+20
+['Charms opposing', 'Pokémon that are the', 'opposite gender of', 'the user, which', 'harshly lowers its', 'Sp. Atk stat.']
+0
+0

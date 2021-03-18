@@ -1,0 +1,102 @@
+Alto Mare - Skitty 20%, Poochyena 25%, Caterpie 30%, Joltik 25%
+Route 1 - Scyther 7%, Weedle 28%, Pidgey 25%, Bellsprout 15%, Poochyena 15%, Oddish 10%
+Route 2 - Kakuna 15%, Nidoran 25%, Machop 15%, Pidgey 20%, Spearow 15%, Skitty 10%
+Echoing Cave - Noibat 10%, Aron 25%, Whismur 28%, Zubat 30%, Dunsparce 7%, Voltorb, Dwebble
+Vigore Dam - Magnemite 7%, Machop 18%, Electrike 25%, Psyduck 25%, Togedemaru 10%, Spearow 15%
+Route 3 (p1) - (Carbink 10%, Metapod/Butterfree 10%), Psyduck 25% , Drowzee 20%, seedot 25%, bellsprout 20%
+Scarab Woods (left) - Metapod/Butterfree 20%, Karrablast 10%, Bellsprout 20%, Zangoose 10%, Seedot/Nuzleaf 20%, Hoothoot/Murkrow 20%
+Scarab Woods (right) - Kakuna/Beedrill 20%, Shelmet 10%, Oddish 20%, Seviper 10%, Lotad/Lombre 20%, Pidgey/Pidgeotto/Misdreavus 20% 
+Route 3 (p2) - Lotad/Lombre 15%, Drowzee 15%, Ponyta 10%, Buneary 20%, Joltik 15%, Nidorans/Nidorins 25%
+Route 3 (beach) - Krabby 25%, Corphish 25%, Slowpoke 10%, Shellder 25%, Psyduck 15%
+Mirror Cave - Sableye 10%, Onix 15%, Aron 20%, Golett 10%, zubat/Golbat 25%, Whismur/Loudred 20%, Geodude
+Route 4 - Vulpix 7%, Ponyta 18%, Kagaskhan 15%, Spearow/Fearow 25%, Timburr/Gurdurr 15%, Dwebble 20%, dratini(fishing)
+Route 5 - Scyther 10%, Sandile/Krokorok 15%, Foongus 20%, Cottonee 15%, Buizel/Floatzel 20%, Spinarak/Ariados 20%
+Route 5 (beach)	Krabby/Kingler 20%, Mareanie 15%, Corphish/Crawdaunt 20%, Frillish M/F 25%, Binacle 20%
+
+
+electric house in the woods?
+
+pokemon:
+#3
+weedle: 	r1, r2
+    kakuna:	r2, scarab_r
+    beedrill:	scarab_r
+caterpie/m/b: 	am
+    metapod:	r3(1), scarab_l
+    butterfree:	r3(1), scarab_l
+pidgey: 	r1, r2, scarab_r
+    pidgeotto:	scarab_r
+bellsprout: 	r1, r3(1), scarab_l
+psyduck: 	vigore, r3(1), r3(b)
+spearow: 	r2, vigore, r4
+    fearow:	r4
+
+#2
+seedot:		r3(1), scarab_l
+    nuzleaf:	scarab_l
+lotad:		scarab_r, r3(2)
+    lombre:	scarab_r, r3(2)
+nidoran(m): 	r2,r3(2)
+    nidorino:	r3(2)
+nidoran(f): 	r2,r3(2)
+    nidorina:	r3(2)
+skitty: 	am, r2
+poochyena: 	am, r1
+machop: 	r2, vigore
+oddish: 	r1,scarab_r
+joltik: 	am, r3(2)
+drowzee:	r3(1,2)
+aron: 		echo, mirror
+ponyta:		r3(2), r4
+whismur: 	echo, mirror
+    loudred:	mirror
+zubat: 		echo, mirror
+    golbat:	mirror
+scyther: 	r1, r5
+krabby:		r3(b), r5(b)
+    kingler:	r5(b)
+corphish:	r3(b), r5(b)
+    crawdaunt:	r5(b)
+
+#1
+timburr:	r4
+kangaskhan: 	r4
+vulpix:		r4
+golett:		mirror
+sableye:	mirror
+onix:		mirror
+noibat: 	echo
+hoothoot:	scarab_l
+murkrow:	scarab_l
+magnemite: 	vigore
+electrike: 	vigore
+togedemaru: 	vigore
+dwebble:	r4, [echo-rock]
+misdreavus:	scarab_r
+buneary:	r3(2)
+sandile:	r5
+    krokorok:	r5
+foongus:	r5, [scarab-pokeball]
+cottonee:	r5
+buizel:		r5
+    floatzel:	r5
+spinarak:	r5
+    ariados:	r5
+mareanie:	r5(b)
+frillish(m):	r5(b)
+frillish(f):	r5(b)
+binacle:	r5(b)
+
+
+#rare
+zangoose:	scarab_l
+seviper:	scarab_r
+carbink:	r3(1)
+shelmet:	scarab_r
+karrablast:	scarab_l
+dunsparce: 	echo
+shellder:	r3(b)
+slowpoke:	r3(b)
+
+voltorb:
+geodude:

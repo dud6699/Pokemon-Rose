@@ -1,0 +1,3 @@
+['Evo','Item']
+['A mysterious scale', 'that causes a', 'certain Pokemon to', 'evolve. It shines in', 'rainbow colors.']
+9600

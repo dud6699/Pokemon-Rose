@@ -1,0 +1,10 @@
+Psychic
+1
+80
+1
+{.1:['Fln']}
+1
+20
+['The user attacks', 'with an odd,', 'unseeable power.', 'This may also make', 'the target flinch.']
+0
+0

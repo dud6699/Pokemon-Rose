@@ -1,0 +1,3 @@
+['Bulldoze','TM']
+['The user strikes', 'everything around it', 'by stomping down on', 'the ground. This', 'lowers the Speed', 'stats of those hit.']
+-1

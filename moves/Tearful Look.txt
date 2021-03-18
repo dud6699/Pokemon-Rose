@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{1:['AD','SAD']}
+1
+20
+['The user gets teary', 'eyed to make the', 'target lose its', 'combative spirit,', 'lowering its Attack','and Sp. Atk stats.']
+0
+0

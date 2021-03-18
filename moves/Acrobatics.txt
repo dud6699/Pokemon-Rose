@@ -1,0 +1,10 @@
+Flying
+0
+55
+1
+{}
+1
+15
+['The user nimbly', 'strikes the target.', 'If the user is not', 'holding an item,', 'this attack inflicts', 'massive damage.']
+0
+0

@@ -1,0 +1,10 @@
+Electric
+1
+110
+.7
+{.3:['Par']}
+1
+10
+['A wicked thunderbolt', 'is dropped on the', 'target. This may', 'also leave the', 'target with', 'paralysis.']
+0
+0

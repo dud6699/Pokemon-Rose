@@ -1,0 +1,10 @@
+Fighting
+0
+85
+.9
+{}
+1
+15
+['The user attacks the', 'target with an', 'uppercut thrown', 'skyward with force.']
+0
+0

@@ -1,0 +1,10 @@
+Bug
+0
+25
+.95
+{}
+1
+20
+['Sharp spikes are', 'shot at the target', 'in rapid succession.', 'They hit two to five', 'times in a row.']
+0
+2

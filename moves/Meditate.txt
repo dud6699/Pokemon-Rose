@@ -1,0 +1,10 @@
+Psychic
+2
+---
+100
+{1:['AU']}
+0
+40
+['The user meditates', 'to awaken the power', 'deep within its body', 'and raise its Attack', 'stat.']
+0
+0

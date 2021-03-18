@@ -1,0 +1,7 @@
+['Iron Barbs']
+[1.48,1.88,1.08,2.62,2.32,.4]
+['Grass','Steel']
+[]
+{1:['Power Whip','Rock Climb','Tackle','Harden','Rollout','Curse'],6:'Rollout',9:'Curse',14:'Metal Claw',18:'Pin Missile',21:'Gyro Ball',26:'Iron Defense',30:'Mirror Shot',35:'Ingrain',38:'Self-Destruct',46:'Iron Head',53:'Payback',61:'Flash Cannon',67:'Explosion'}
+90
+110

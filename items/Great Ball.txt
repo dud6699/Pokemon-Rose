@@ -1,0 +1,3 @@
+['Ball','Ball']
+['A good, high-','performance Poke', 'Ball that provides a', 'higher Pokemon catch', 'rate than a standard', 'Poke Ball can.']
+600

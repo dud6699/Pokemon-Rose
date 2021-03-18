@@ -1,0 +1,7 @@
+['Clear Body']
+[1.2,1.5,1.1,2,1.6,1]
+['Steel','Psychic']
+[45,'Metagross','Hammer Arm']
+{1:['Confusion','Metal Claw','Magnet Rise','Take Down'],23:'Pursuit',26:'Bullet Punch',29:'Miracle Eye',32:'Zen Headbutt',35:'Scary Face',38:'Psychic',41:'Agility',44:'Meteor Mash',47:'Iron Defense',50:'Hyper Beam'}
+3
+202.5

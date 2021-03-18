@@ -1,0 +1,10 @@
+Psychic
+2
+---
+1
+{}
+1
+15
+['For five turns, the', 'user prevents the', 'opposing team from', 'using any moves,', 'abilities, or held', 'items to recover HP.']
+0
+0

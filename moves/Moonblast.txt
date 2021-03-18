@@ -1,0 +1,10 @@
+Fairy
+1
+95
+1
+{.3:['SAD']}
+1
+15
+['Borrowing the power', 'of the moon, the', 'user attacks the', 'target. This may', 'also lower the', 'target\'s Sp. Atk.']
+0
+0

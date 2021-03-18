@@ -1,0 +1,10 @@
+Normal
+0
+20
+1
+{}
+1
+40
+['A spin attack that', 'can also eliminate', 'such moves as Bind,', 'Wrap, Leech Seed,', 'and Spikes.']
+0
+0

@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+1
+20
+['The target is blown', 'away, and a another', 'Pokemon is dragged', 'out. In the wild,', 'this ends a battle.']
+-6
+0

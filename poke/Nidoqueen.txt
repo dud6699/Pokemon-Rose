@@ -1,0 +1,11 @@
+['Poison Point','Rivalry']
+[1.8,1.84,1.5,1.74,1.7,1.52]
+['Poison','Ground']
+[]
+{1:['Superpower','Scratch','Tail Whip','Double Kick','Poison Sting'],23:'Chip Away',35:'Body Slam',43:'Earth Power',58:'Superpower'}
+45
+60
+51
+45
+[]
+['Drill','Nidoqueen\'s body is encased in extremely', 'hard scales. It is adept at sending foes', 'flying with harsh tackles. This Pokemon is', 'at its strongest when it is defending its', 'young.']

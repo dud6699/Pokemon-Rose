@@ -1,0 +1,10 @@
+Ghost
+2
+---
+100
+{}
+1
+5
+['If the user faints', 'after using this', 'move, the Pokemon', 'that landed the', 'knockout hit also', 'faints.']
+0
+0

@@ -1,0 +1,10 @@
+Ground
+2
+---
+100
+{}
+1
+15
+['The user kicks up', 'mud on the', 'battlefield. This', 'weakens Electric-','type moves for five', 'turns.']
+0
+0

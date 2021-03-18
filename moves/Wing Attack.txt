@@ -1,0 +1,10 @@
+Flying
+0
+60
+1
+{}
+1
+35
+['The target is struck', 'with large, imposing', 'wings spread wide to', 'inflict damage.']
+0
+0

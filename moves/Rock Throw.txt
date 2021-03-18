@@ -1,0 +1,10 @@
+Rock
+0
+50
+.9
+{}
+1
+15
+['The user picks up', 'and throws a small', 'rock at the target', 'to attack.']
+0
+0

@@ -1,0 +1,10 @@
+Bug
+2
+---
+100
+{1:['Trp']}
+1
+10
+['The user ensnares', 'the target with', 'thin, gooey silk so', 'it can\'t flee from', 'battle.']
+0
+0

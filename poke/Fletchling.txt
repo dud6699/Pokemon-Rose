@@ -1,0 +1,11 @@
+['Big Pecks']
+[1,1.2,.9,.86,.76,1.24]
+['Normal','Flying']
+[17,'Fletchinder','Ember']
+{1:['Tackle','Growl'],6:'Quick Attack',10:'Peck',13:'Agility',16:'Flail',18:'Aerial Ace',21:'Flame Charge',25:'Razor Wind',29:'Natural Gift',34:'Roost',39:'Acrobatics',41:'Flare Blitz',45:'Tailwind',48:'Steel Wing'}
+255
+1.7
+12
+4
+[]
+['Tiny Robin','These friendly Pokemon send signals to one', 'another with beautiful chirps and tail-','feather movements.']

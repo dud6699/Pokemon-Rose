@@ -1,0 +1,10 @@
+Fire
+0
+85
+.9
+{.1:['Brn']}
+1
+10
+['The user launches a', 'kick that lands a', 'critical hit more', 'easily. This may', 'also leave the', 'target with a burn.']
+0
+1

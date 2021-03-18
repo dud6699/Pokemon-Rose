@@ -1,0 +1,10 @@
+Grass
+0
+45
+1
+{}
+1
+25
+['The target is struck', 'with slender,', 'whiplike vines to', 'inflict damage.']
+0
+0

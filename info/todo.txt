@@ -1,0 +1,228 @@
+sandstorm
+jobs:	research(colress)(mega evo, soul dew, fossils), blue 
+nursery(cheryl)(baby pokemon), pale
+gardening(marian)(stat boost petal?/berries/shrooms/balm shroom?), green
+cooking(siebold)(friendship food), orange
+beauty contest(lisia)(heart scales), pink
+tourney(riley)(BP for battle items(focus sash...), dark red
+mining(alain)(gems, nuggets/bones/misc items, plates, stones, shards?(stat boost)), candy?, brown
+(water race?) bounty(finding criminals)(zinnia)(ability capsules), 
+trade evoitems buyable
+shiny item
+ability capsules
+oddish evos /stone evos
+music fade
+colress/professor/girl spr size
+change candy price
+eviolite on things like combee
+karrablast evo chingling evo
+ghost type special benefits (running etc)
+maractus can learn drain punch
+mart stock expand with badges
+tm hail sandstorm img
+simple accupressure
+long moves stick out
+forces of nature therian tms
+redo horsea, sandile
+in battle order
+clear body with fainting
+update bide with other effects
+wrap not proc when dead?
+indicator in pc for item
+no rototiller
+no wide guard
+no oricorio
+update pokedex number every time
+redundant pcx/pcy
+comet punch not effective
+uproar bugged
+iron barbs bug
+
+
+festival:
+money/ball roulette? 2x ball?
+pokemon training/playing
+water bottle/ice cream(friendship) misc food
+fortune teller
+mega mewtwo xy/charizard omega/alpha groudon oricorio forms kyurem
+no wormadam
+learn moves multiple times
+
+before 1st gym:
+STREET MARACTUS (shiny) done (sat)
+berry seller done missing some berries (sat)
+mushroom collector done (sun)
+free water guy done (sun)
+
+1st gym:
+ball roulette done missing some balls (sun)
+
+pineapple man:
+free pinaps done (sat)
+
+2nd gym:
+massage done (sat)
+
+fisherman:
+rare items shop (sun)
+simple:
+water gem, splash plate, mystic water, damp rock, oval stone
+ice gem, ice plate, never melt ice, icy rock, light clay
+rock gem, rock plate, hard stone, smooth rock, everstone
+rare: deep sea scale/tooth, prism scale, dragon scale
+legend: heart scale, water stone, shell bell
+
+[heart scales, deep sea scale/tooth, prism scale, water/ice/rock gem, damp rock, water stone? 
+dragon scale, everstone, seafood, mystic water, never melt ice? shell bell? splash plate
+light clay, icy rock, oval stone?]
+
+make shops set when load file icy/smooth rock
+
+potion roulette
+
+berry list
+supereffective dec
+pp inc
+
+ball list
+dusk,moon,love,heavy,lure,repeat,dive,heal
+
+
+moves:
+recharge moves
+trap moves (mean look, block)
+sunny day
+crit u notifier
+lock on
+psycho shift
+baton pass
+brick break
+fury cutter
+stealth rock/toxic spikes/sticky web
+/traps/spider web
+aqua ring
+disable
+mud sport
+soak
+giga impact/hyper beam
+psych up
+reflect
+guard split
+bounce
+heal block
+skill swap
+hail
+fly
+wonder room
+quick guard
+curse
+water sport
+memento
+imprison
+sleep talk
+last resort
+dive
+stomping tantrum
+weather ball
+insomnia
+entrainment
+healing wish
+Lucky Chant
+Moonlight
+Natural Gift
+tailwind/safeguard/light screen
+mirror move/copycat
+happiny evo
+whirlwind/roar
+refresh
+rage
+torment
+embargo
+dig
+outrage/thrash/Petal Dance
+Grassy Terrain
+assist
+covet
+spite
+me first
+tri attack
+miracle eye
+genderless pokemon
+thaw attacks (ie flare blitz)
+thief
+circle throw
+ingrain
+payback
+smack down
+future sight
+bestow
+\water spout
+switcheroo
+clear smog
+phantom force
+mist
+grudge
+perish song
+belch
+synthesis
+final gambit
+power swap
+glowing or something woods
+golden brozong tm gyroball
+necrozma forms tm gyroball
+leech seed
+refresh
+hidden power
+slack off
+forest curse
+spikes
+dsetinybond
+trump card
+won't flinch...because of shield dust
+hurt by trap moves after fainted
+slowking
+mimic
+round
+recycle
+encore
+trick
+role play
+snatch
+fling
+triple kick
+stored power
+substitute
+slowpoke evo with shellder
+misty terrain
+gravity
+wish
+skull bash
+
+bonsly evo + other baby
+
+
+abilities:
+
+klutz
+volt absorb
+rain dish
+magic guard
+cloud nine
+regenerator
+competitive
+merciless
+tough claws
+cursed body
+
+need other stuff:
+sand force
+mold breaker
+sticky hold(covet, theif, pickpock, magician, incinerate, knock off,trick switcherroo, corrosive gas)
+air lock
+chrlolphyll
+pickup
+infiltrator
+unnerve
+sand stream
+leaf guard
+immunity/insomnia... with ability changing

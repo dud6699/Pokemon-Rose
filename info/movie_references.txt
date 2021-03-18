@@ -1,0 +1,4 @@
+bell_tower:
+18:45/19:05 - front
+11:39 - side
+12:00 - whole

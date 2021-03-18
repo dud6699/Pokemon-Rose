@@ -1,0 +1,10 @@
+Flying
+1
+60
+.95
+{}
+1
+25
+['The user launches', 'razor-like wind to', 'slash the opposing', 'Pokemon. Critical', 'hits land more', 'easily.']
+0
+1

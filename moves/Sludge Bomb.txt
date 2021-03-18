@@ -1,0 +1,10 @@
+Poison
+1
+90
+1
+{.3:['Psn']}
+1
+10
+['Unsanitary sludge is', 'hurled at the', 'target. This may', 'also poison the', 'target.']
+0
+0

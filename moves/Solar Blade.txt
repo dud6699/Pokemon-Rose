@@ -1,0 +1,10 @@
+Grass
+0
+125
+1
+{}
+1
+10
+['The user gathers', 'light and fills a', 'blade with the', 'light\'s energy,', 'attacking the target', 'on the next turn.']
+0
+3

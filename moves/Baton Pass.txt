@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+0
+40
+['The user switches', 'places with a party', 'Pokémon in waiting', 'and passes along any', 'stat changes.']
+0
+0

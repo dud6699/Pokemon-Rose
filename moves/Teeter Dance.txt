@@ -1,0 +1,10 @@
+Normal
+2
+---
+1
+{1:['Cfs']}
+1
+20
+['The user performs a', 'wobbly dance that', 'confuses the Pokémon', 'around it.']
+0
+0

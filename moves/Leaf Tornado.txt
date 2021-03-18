@@ -1,0 +1,10 @@
+Grass
+1
+65
+.9
+{.5:['AcD']}
+1
+10
+['The user attacks its', 'target by encircling', 'it in sharp leaves.', 'This attack may also', 'lower the target\'s', 'accuracy.']
+0
+0

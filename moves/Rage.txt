@@ -1,0 +1,10 @@
+Normal
+0
+20
+1
+{}
+1
+20
+['As long as this move', 'is in use, the power', 'of rage raises the', 'Attack stat each', 'time the user is hit', 'in battle.']
+0
+0

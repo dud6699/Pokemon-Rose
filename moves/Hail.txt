@@ -1,0 +1,10 @@
+Ice
+2
+---
+100
+{}
+0
+10
+['The user summons a', 'hailstorm lasting', 'five turns. It', 'damages all Pokemon', 'except the Ice type.']
+0
+0

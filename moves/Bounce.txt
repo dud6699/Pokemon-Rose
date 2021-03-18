@@ -1,0 +1,10 @@
+Flying
+0
+85
+.85
+{.3:['Par']}
+1
+5
+['The user bounces up,', 'then drops on the', 'target on the second', 'turn. This may also', 'leave the target', 'with paralysis.']
+0
+0

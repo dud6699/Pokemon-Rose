@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{1:['Trp']}
+1
+5
+['The user pins the', 'target with a dark,', 'arresting look. The', 'target becomes', 'unable to flee.']
+0
+0

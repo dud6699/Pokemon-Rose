@@ -1,0 +1,10 @@
+Poison
+1
+30
+.7
+{.4:['Psn']}
+1
+20
+['The target is', 'attacked with a', 'discharge of filthy', 'gases. This may also', 'poison the target.']
+0
+0

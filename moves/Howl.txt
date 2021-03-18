@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{1:['AU']}
+0
+40
+['The user howls', 'loudly to raise its', 'spirit, which raises', 'its Attack stat.']
+0
+0

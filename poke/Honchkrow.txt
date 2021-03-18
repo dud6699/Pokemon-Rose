@@ -1,0 +1,11 @@
+['Insomnia','Super Luck']
+[2,2.5,2.1,1.04,1.04,1.42]
+['Dark','Flying']
+[]
+{1:['Night Slash','Sucker Punch','Astonish','Pursuit','Haze','Wing Attack'],25:'Swagger',35:'Nasty Plot',45:'Foul Play',55:'Night Slash',65:'Roost',75:'Dark Pulse'}
+30
+27.3
+35
+89
+[]
+['Big Boss','Its goons take care of most of the fighting', 'for it. The only time it dirties its own', 'hands is in delivering a final blow to', 'finish off an opponent.'] 

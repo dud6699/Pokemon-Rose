@@ -1,0 +1,11 @@
+['Rough Skin']
+[0.9,1.9,1,2,1,1.6]
+['Grass','Electric']
+[]
+{1:['Leafage','Acid','Nuzzle'],5:'Pin Missile',9:'Ingrain',13:'Razor Leaf',15:'Acid Armor',17:'Gastro Acid',19:'Needle Arm',23:'Zing Zap',27:'Self-Destruct',31:'Spiky Shield',35:'Leaf Blade',39:'Cross Poison',43:'Toxic Spikes',47:'Volt Tackle',51:'Explosion',55:'Solar Blade'}
+90
+12.8
+20
+96
+[]
+['Weed','This rare species of Oddish searches for', 'healthy gardens where it can blend in, then', 'plants itself. It draws all the nutrients', 'from the soil, causing the other plants in', 'the garden to die.']

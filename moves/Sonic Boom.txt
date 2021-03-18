@@ -1,0 +1,10 @@
+Normal
+1
+---
+.9
+{}
+1
+20
+['The target is hit', 'with a destructive', 'shock wave that', 'always inflicts 20', 'HP damage.']
+0
+0

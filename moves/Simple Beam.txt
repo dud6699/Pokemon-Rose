@@ -1,0 +1,10 @@
+Normal
+2
+---
+1
+{}
+1
+15
+['The user\'s', 'mysterious psychic', 'wave changes the', 'target\'s Ability to', 'Simple.']
+0
+0

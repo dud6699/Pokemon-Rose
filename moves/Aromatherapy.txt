@@ -1,0 +1,10 @@
+Grass
+2
+---
+100
+{}
+0
+5
+['The user releases a', 'soothing scent that', 'heals all status', 'conditions affecting', 'the user\'s party.']
+0
+0

@@ -1,0 +1,10 @@
+Psychic
+2
+---
+100
+{}
+0
+5
+['Enables airborne', 'Pokemon to be hit by', 'Ground-type moves.', 'Moves that involve' ,'flying can\'t be','used.']
+0
+0

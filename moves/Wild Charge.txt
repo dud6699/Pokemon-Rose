@@ -1,0 +1,10 @@
+Electric
+0
+90
+1
+{}
+1
+15
+['The user shrouds', 'itself in', 'electricity and', 'smashes into its', 'target. This also', 'damages the user.']
+0
+0

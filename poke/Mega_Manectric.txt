@@ -1,0 +1,11 @@
+['Intimidate']
+[1.4,1.5,2.7,1.6,1.6,2.7]
+['Electric',None]
+[]
+{1:['Electric Terrain','Fire Fang','Tackle','Thunder Wave','Leer','Howl'],4:'Leer',7:'Howl',10:'Quick Attack',13:'Spark',16:'Odor Sleuth',19:'Thunder Fang',24:'Bite',30:'Discharge',36:'Roar',42:'Wild Charge',48:'Charge',54:'Thunder',60:'Electric Terrain'}
+45
+40.2
+71
+70
+[]
+['Discharge','At times, too much electricity is built up', 'in its body, irritating Manectric. Its', 'explosive speed is equal to that of a', 'lightning bolt.']

@@ -1,0 +1,10 @@
+Flying
+2
+---
+100
+{}
+1
+20
+['The user counters', 'the target by', 'mimicking the', 'target\'s last move.']
+0
+0

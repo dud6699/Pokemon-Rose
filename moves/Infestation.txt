@@ -1,0 +1,10 @@
+Bug
+1
+20
+1
+{1:['Bnd']}
+1
+20
+['The target is', 'infested and', 'attacked for four to', 'five turns. The', 'target can\'t flee', 'during this time.']
+0
+0

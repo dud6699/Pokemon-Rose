@@ -1,0 +1,10 @@
+Fighting
+0
+130
+.9
+{}
+1
+10
+['The target is', 'attacked with a knee', 'kick from a jump. If', 'it misses, the user', 'is hurt instead.']
+0
+0

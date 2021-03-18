@@ -1,0 +1,10 @@
+Fighting
+0
+100
+.8
+{}
+1
+5
+['The user delivers a', 'double chop with its', 'forearms crossed.', 'Critical hits land', 'more easily.']
+0
+1

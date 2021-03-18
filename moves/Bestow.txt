@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+1
+15
+['The user passes its', 'held item to the', 'target when the', 'target isn\'t holding', 'an item.']
+0
+0

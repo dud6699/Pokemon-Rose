@@ -1,0 +1,10 @@
+Grass
+1
+60
+100
+{}
+1
+20
+['The user scatters', 'curious leaves that', 'chase the target.', 'This attack never', 'misses.']
+0
+0

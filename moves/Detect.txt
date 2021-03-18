@@ -1,0 +1,10 @@
+Fighting
+2
+---
+100
+{}
+0
+5
+['Enables the user to', 'evade all attacks.', 'Its chance of', 'failing rises if it', 'is used in', 'succession.']
+4
+0

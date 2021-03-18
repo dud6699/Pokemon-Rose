@@ -1,0 +1,11 @@
+['Merciless','Limber']
+[1,1.26,1.06,3.04,2.84,0.7]
+['Poison','Water']
+[]
+{1:['Baneful Bunker','Poison Sting','Peck','Bite','Toxic Spikes'],5:'Peck',9:'Bite',13:'Toxic Spikes',17:'Protect',21:'Toxic',25:'Venoshock',29:'Spike Cannon',33:'Recover',37:'Poison Jab',44:'Venom Drench',51:'Pin Missile',58:'Liquidation'}
+75
+14.5
+28
+154
+[]
+['Brutal Star','To attack, this Pokemon sends toxic spikes', 'flying at its enemies. Ones that come close', 'get mown down by the claws on its feet.'] 

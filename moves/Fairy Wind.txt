@@ -1,0 +1,10 @@
+Fairy
+1
+40
+1
+{}
+1
+30
+['The user stirs up a', 'fairy wind and', 'strikes the target', 'with it.']
+0
+0

@@ -1,0 +1,10 @@
+Fighting
+0
+50
+1
+{}
+1
+25
+['The target is', 'attacked with a', 'sharp chop. Critical', 'hits land more', 'easily.']
+0
+1

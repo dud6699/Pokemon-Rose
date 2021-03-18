@@ -1,0 +1,11 @@
+['Chlorophyll']
+[1,1.5,1.4,.7,.6,.8]
+['Grass','Poison']
+[21,'Weepinbell']
+{1:['Vine Whip'],7:'Growth',11:'Wrap',13:'Sleep Powder',15:'Poison Powder',17:'Stun Spore',23:'Acid',27:'Knock Off',29:'Sweet Scent',35:'Gastro Acid',39:'Razor Leaf',41:'Poison Jab',47:'Slam',50:'Wring Out'}
+255
+4
+28
+30
+['route_1','route_3','scarab_l']
+['Flower','Bellsprout\'s thin and flexible body lets it', 'bend and sway to avoid any attack, however', 'strong it may be. From its mouth, this', 'Pokemon spits a corrosive fluid that melts', 'even iron.']

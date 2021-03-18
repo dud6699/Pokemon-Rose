@@ -1,0 +1,11 @@
+['Parental Bond']
+[2.1,2.5,1.2,2,2,2]
+['Normal',None]
+[]
+{1:['Comet Punch','Leer'],7:'Fake Out',10:'Tail Whip',13:'Bite',19:'Double Hit',22:'Rage',25:'Mega Punch',31:'Chip Away',34:'Dizzy Punch',37:'Crunch',43:'Endure',46:'Outrage',49:'Sucker Punch',50:'Reversal'}
+45
+100
+87
+138
+[]
+['Parent','Kangaskhan\'s strength derives from the', 'mother\'s happiness about her child\'s', 'growth. Watching it grow up keeps her', 'spirits high.'] 

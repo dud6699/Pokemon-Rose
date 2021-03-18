@@ -1,0 +1,11 @@
+['Chlorophyll']
+[1.5,1.6,1.8,1.9,2.0,1.0]
+['Grass',None]
+[]
+{1:['Magical Leaf','Leaf Storm','Leaf Blade','Mega Drain','Sweet Scent','Stun Spore','Sunny Day'],39:'Quiver Dance',49:'Petal Blizzard',59:'Petal Dance',69:'Leaf Storm'}
+45
+5.8
+16
+36
+[]
+['Flower','When Bellossom gets exposed to plenty of', 'sunlight, the leaves ringing its body begin', 'to spin around. This Pokemon\'s dancing is', 'renowned in the southern lands.']

@@ -1,0 +1,10 @@
+Fire
+0
+65
+.95
+{.1:['Brn'],.1:['Fln']}
+1
+15
+['The user bites with', 'flame-cloaked fangs.', 'This may also make', 'the target flinch or', 'leave it with a', 'burn.']
+0
+0

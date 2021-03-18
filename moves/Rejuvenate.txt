@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+0
+20
+['If you have this', 'move, you\'re', 'cheating >:(']
+0
+0

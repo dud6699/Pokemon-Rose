@@ -1,0 +1,10 @@
+Psychic
+2
+---
+100
+{1:['DU','DU']}
+0
+20
+['The user throws up', 'a sturdy wall that', 'sharply raises its', 'Defense stat.']
+0
+0

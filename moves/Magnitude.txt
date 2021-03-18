@@ -1,0 +1,10 @@
+Ground
+0
+---
+1
+{}
+1
+30
+['The user attacks', 'everything around it', 'with a ground-','shaking quake. Its', 'power varies.']
+0
+0

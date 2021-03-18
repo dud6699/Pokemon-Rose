@@ -1,0 +1,10 @@
+Dark
+2
+---
+100
+{}
+1
+10
+['The user steals the', 'effects of any', 'attempts to use a', 'healing or stat-','changing move.']
+4
+0

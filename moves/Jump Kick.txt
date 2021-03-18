@@ -1,0 +1,10 @@
+Fighting
+0
+100
+.95
+{}
+1
+10
+['The user jumps up', 'high, then strikes', 'with a kick. If the', 'kick misses, the', 'user hurts itself.']
+0
+0

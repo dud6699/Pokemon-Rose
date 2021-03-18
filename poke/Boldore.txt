@@ -1,0 +1,7 @@
+['Sturdy','Weak Armor']
+[1.4,2.1,1,2.1,0.8,0.4]
+['Rock',None]
+[34,'Gigalith']
+{1:['Power Gem','Tackle'],4:'Harden',7:'Sand Attack',10:'Headbutt',14:'Rock Blast',17:'Mud-Slap',20:'Iron Defense',23:'Smack Down',30:'Rock Slide',36:'Stealth Rock',42:'Sandstorm',48:'Stone Edge',55:'Explosion'}
+120
+102

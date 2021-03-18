@@ -1,0 +1,10 @@
+Normal
+0
+120
+1
+{}
+1
+15
+['A reckless, life-', 'risking tackle. This', 'also damages the', 'user quite a lot.']
+0
+0

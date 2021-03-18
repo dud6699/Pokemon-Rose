@@ -1,0 +1,10 @@
+Ground
+0
+35
+.85
+{1:['Bnd']}
+1
+15
+['The user traps the', 'target inside a', 'harshly raging', 'sandstorm for four', 'to five turns.']
+0
+0

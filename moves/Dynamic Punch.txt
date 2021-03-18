@@ -1,0 +1,10 @@
+Fighting
+0
+100
+.5
+{1:['Cfs']}
+1
+5
+['The user punches the', 'target with full,', 'concentrated power.', 'This confuses the', 'target if it hits.']
+0
+0

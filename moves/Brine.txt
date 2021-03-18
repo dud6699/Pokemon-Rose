@@ -1,0 +1,10 @@
+Water
+1
+65
+1
+{}
+1
+10
+['If the target\'s HP', 'is half or less,', 'this attack will hit', 'with double the', 'power.']
+0
+0

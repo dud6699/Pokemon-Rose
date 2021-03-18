@@ -1,0 +1,10 @@
+Grass
+0
+120
+100
+{}
+1
+15
+['The user slams its', 'rugged body into the', 'target to attack.', 'This also damages', 'the user quite a', 'lot.']
+0
+0

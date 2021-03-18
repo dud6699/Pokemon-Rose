@@ -1,0 +1,10 @@
+Grass
+2
+---
+1
+{}
+1
+20
+['The user puts a', 'forest curse on the', 'target. The target','is now Grass type as', 'well']
+0
+0

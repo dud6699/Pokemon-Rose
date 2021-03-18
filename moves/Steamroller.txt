@@ -1,0 +1,10 @@
+Bug
+0
+65
+1
+{.3:['Fln']}
+1
+20
+['The user crushes its', 'target by rolling', 'over the target with','its rolled-up body.', 'This may also make', 'the target flinch.']
+0
+0

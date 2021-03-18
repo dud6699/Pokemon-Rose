@@ -1,0 +1,10 @@
+Ghost
+2
+---
+1
+{1:['Cfs']}
+1
+10
+['The target is', 'exposed to a', 'sinister ray that', 'triggers confusion.']
+0
+0

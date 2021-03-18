@@ -1,0 +1,10 @@
+Normal
+0
+120
+.75
+{}
+1
+5
+['The target is', 'attacked by a kick', 'launched with', 'muscle-packed power.']
+0
+0

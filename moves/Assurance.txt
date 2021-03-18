@@ -1,0 +1,10 @@
+Dark
+0
+60
+1
+{}
+1
+10
+['If the target has', 'already taken some', 'damage in the same', 'turn, this attack\'s', 'power is doubled.']
+0
+0

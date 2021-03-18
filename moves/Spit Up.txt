@@ -1,0 +1,10 @@
+Normal
+1
+???
+1
+{}
+1
+10
+['The power stored', 'from using Stockpile', 'is released in an', 'attack. Storing more', 'power deals more', 'damage.']
+0
+0

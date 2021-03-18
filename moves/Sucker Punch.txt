@@ -1,0 +1,10 @@
+Dark
+0
+70
+1
+{}
+1
+5
+['This move enables', 'the user to attack', 'first. This move', 'fails if the target', 'is not readying an', 'attack.']
+1
+0

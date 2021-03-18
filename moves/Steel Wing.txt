@@ -1,0 +1,10 @@
+Steel
+0
+70
+.9
+{-0.1:['DU']}
+1
+25
+['The target is hit', 'with wings of steel.', 'This may also raise',' the user\'s Defense', 'stat.']
+0
+0

@@ -1,0 +1,10 @@
+Poison
+1
+120
+.9
+{}
+1
+10
+['The user lets out a', 'damaging belch at', 'the target. The user', 'must eat a held', 'Berry to use this', 'move.']
+0
+0

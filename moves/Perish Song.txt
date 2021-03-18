@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+1
+5
+['Any Pokemon that', 'hears this song', 'faints in three', 'turns, unless it', 'switches out of', 'battle.']
+0
+0

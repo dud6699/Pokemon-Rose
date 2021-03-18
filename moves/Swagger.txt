@@ -1,0 +1,10 @@
+Normal
+2
+---
+.85
+{1:['Cfs','AU','AU']}
+1
+15
+['The user enrages and', 'confuses the target.', 'However, this also', 'sharply raises the', 'target\'s Attack', 'stat.']
+0
+0

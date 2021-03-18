@@ -1,0 +1,10 @@
+Poison
+2
+---
+100
+{}
+0
+10
+['In addition to', 'protecting the user', 'from attacks, this', 'move also poisons', 'anyone who makes', 'direct contact.']
+4
+0

@@ -1,0 +1,10 @@
+Dark
+0
+---
+1
+{}
+1
+10
+['The user flings its', 'held item at the', 'target to attack.', 'This move\'s power', 'and effects depend', 'on the item.']
+0
+0

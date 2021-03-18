@@ -1,0 +1,10 @@
+Water
+0
+80
+1
+{}
+1
+10
+['Diving on the first', 'turn, the user', 'floats up and', 'attacks on the next', 'turn.']
+0
+0

@@ -1,0 +1,10 @@
+Steel
+0
+50
+.95
+{-.1:['AU']}
+1
+35
+['The target is raked', 'with steel claws.', 'This may also raise', 'the user\'s Attack', 'stat.']
+0
+0

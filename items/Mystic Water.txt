@@ -1,0 +1,3 @@
+['Held','Item']
+['An item to be held', 'by a Pokemon. This', 'teardrop-shaped gem', 'boosts the power of', 'Water-type moves.']
+2400

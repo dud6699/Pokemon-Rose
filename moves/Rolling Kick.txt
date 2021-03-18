@@ -1,0 +1,10 @@
+Fighting
+0
+60
+.85
+{.3:['Fln']}
+1
+15
+['The user lashes out', 'with a quick,', 'spinning kick. This', 'may also make the', 'target flinch.']
+0
+0

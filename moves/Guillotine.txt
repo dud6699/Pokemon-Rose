@@ -1,0 +1,10 @@
+Normal
+0
+---
+.3
+{}
+1
+5
+['A vicious, tearing', 'attack with big', 'pincers. The target', 'faints instantly if', 'this attack hits.']
+0
+4

@@ -1,0 +1,10 @@
+Rock
+0
+50
+1
+{}
+1
+15
+['The user throws a', 'stone to attack an', 'opponent. A flying', 'Pokemon will fall to', 'the ground when it\'s', 'hit.']
+0
+0

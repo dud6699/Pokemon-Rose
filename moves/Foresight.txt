@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{1:['Idf']}
+1
+40
+['Enables a Ghost-type', 'target to be hit by', 'Normal and Fighting','attacks. This also', 'enables an evasive', 'target to be hit.']
+0
+0

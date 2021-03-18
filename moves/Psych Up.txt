@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+0
+10
+['The user hypnotizes', 'itself into copying', 'any stat change made', 'by the target.']
+0
+0

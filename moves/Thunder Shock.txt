@@ -1,0 +1,10 @@
+Electric
+1
+40
+1
+{.1:['Par']}
+1
+30
+['A jolt of', 'electricity crashes', 'down on the target.', 'This may also leave', 'the target with', 'paralysis.']
+0
+0

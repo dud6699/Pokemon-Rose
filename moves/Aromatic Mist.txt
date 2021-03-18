@@ -1,0 +1,10 @@
+Fairy
+2
+---
+100
+{1:['SDU']}
+0
+20
+['The user raises its', 'Sp. Def stat by', 'using a mysterious', 'aroma.']
+0
+0

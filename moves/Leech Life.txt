@@ -1,0 +1,10 @@
+Bug
+0
+80
+1
+{}
+1
+10
+['The user drains the', 'target\'s blood. The', 'user\'s HP is', 'restored by half the', 'damage taken by the', 'target.']
+0
+0

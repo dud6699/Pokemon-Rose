@@ -1,0 +1,10 @@
+Flying
+0
+90
+.95
+{}
+1
+15
+['The user soars and', 'then strikes its', 'target on the next', 'turn.']
+0
+3

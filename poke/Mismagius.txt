@@ -1,0 +1,11 @@
+['Levitate']
+[1.2,1.2,2.1,1.2,2.1,2.1]
+['Ghost',None]
+[]
+{1:['Mystical Fire','Power Gem','Phantom Force','Lucky Chant','Magical Leaf','Growl','Psywave','Spite','Astonish']}
+45
+4.4
+35
+104
+[]
+['Magical','Its cries sound like incantations to', 'torment the foe. It appears where you least', 'expect it.'] 

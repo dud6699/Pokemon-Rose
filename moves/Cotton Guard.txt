@@ -1,0 +1,10 @@
+Grass
+2
+---
+100
+{1:['DU','DU','DU']}
+0
+10
+['The user protects', 'itself by wrapping', 'its body in soft', 'cotton, which', 'drastically raises', 'it\'s Defense stat.']
+0
+0

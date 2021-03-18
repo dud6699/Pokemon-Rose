@@ -1,0 +1,10 @@
+Dark
+0
+40
+1
+{}
+1
+20
+['The power of this', 'attack move is', 'doubled if it\'s used', 'on a target that\'s', 'switching out of', 'battle.']
+0
+0

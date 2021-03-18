@@ -1,0 +1,10 @@
+Water
+2
+---
+100
+{}
+0
+15
+['The user soaks the', 'battlefield with', 'water. This weakens', 'Fire-type moves for', 'five turns.']
+0
+0

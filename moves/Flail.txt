@@ -1,0 +1,10 @@
+Normal
+0
+???
+1
+{}
+1
+15
+['The user flails', 'about aimlessly to', 'attack. The less HP', 'the user has, the', 'greater the move\'s', 'power.']
+0
+0

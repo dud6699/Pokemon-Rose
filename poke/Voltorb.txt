@@ -1,0 +1,11 @@
+['Soundproof','Static']
+[.8,.6,1.1,1,1.1,2]
+['Electric',None]
+[30,'Electrode']
+{1:['Charge','Tackle'],4:'Sonic Boom',6:'Eerie Impulse',9:'Spark',11:'Rollout',13:'Screech',16:'Charge Beam',20:'Swift',22:'Electro Ball',26:'Self-Destruct',29:'Light Screen',34:'Magnet Rise',37:'Discharge',41:'Explosion',46:'Gyro Ball',48:'Mirror Coat'}
+190
+10.4
+20
+66
+[]
+['Ball','Voltorb is extremely sensitive, exploding', 'at the slightest of shocks. It is rumored', 'that it was first created when a Poke Ball', 'was exposed to a powerful pulse of energy.']

@@ -1,0 +1,10 @@
+Water
+2
+---
+100
+{}
+0
+20
+['The user envelops', 'itself in a veil', 'made of water. It', 'regains some HP', 'every turn.']
+0
+0

@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{1:['CU','CU']}
+0
+30
+['The user takes a', 'deep breath and', 'focuses so that', 'critical hits land', 'more easily.']
+0
+0

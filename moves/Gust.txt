@@ -1,0 +1,10 @@
+Flying
+1
+40
+1
+{}
+1
+35
+['A gust of wind is', 'whipped up by wings', 'and launched at the', 'target to inflict', 'damage.']
+0
+0

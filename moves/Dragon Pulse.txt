@@ -1,0 +1,10 @@
+Dragon
+1
+85
+1
+{}
+1
+10
+['The target is', 'attacked with a', 'shock wave generated', 'by the user\'s gaping', 'mouth.']
+0
+0

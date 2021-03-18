@@ -1,0 +1,10 @@
+Ice
+0
+65
+.95
+{.1:['Frz'],.1:['Fln']}
+1
+15
+['The user bites with', 'cold-infused fangs.', 'This may also make', 'the target flinch or', 'leave it frozen.']
+0
+0

@@ -1,0 +1,10 @@
+Psychic
+1
+50
+1
+{.1:['Cfs']}
+1
+25
+['The target is hit by', 'a weak telekinetic', 'force. This may also', 'confuse the target.']
+0
+0

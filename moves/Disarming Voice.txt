@@ -1,0 +1,10 @@
+Fairy
+1
+40
+100
+{}
+1
+15
+['Letting out a','charming cry, the', 'user does emotional', 'damage to opposing', 'Pokemon. This attack', 'never misses.']
+0
+0

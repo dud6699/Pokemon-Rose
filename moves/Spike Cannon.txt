@@ -1,0 +1,10 @@
+Normal
+0
+20
+1
+{}
+1
+15
+['Sharp spikes are', 'shot at the target', 'in rapid succession.', 'They hit two to five', 'times in a row.']
+0
+2

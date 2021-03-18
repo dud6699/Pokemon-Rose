@@ -1,0 +1,10 @@
+Dark
+1
+55
+.95
+{1:['SAD']}
+1
+15
+['The user yells as if', 'it\'s ranting about', 'something, which', 'lowers the Sp. Atk', 'stats of opposing', 'Pokemon.']
+0
+0

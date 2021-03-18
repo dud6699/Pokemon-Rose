@@ -1,0 +1,10 @@
+Normal
+0
+15
+.9
+{1:['Bnd']}
+1
+15
+['A long body, vines,', 'or the like are used', 'to wrap and squeeze', 'the target for four', 'to five turns.']
+0
+0

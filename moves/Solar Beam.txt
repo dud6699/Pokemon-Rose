@@ -1,0 +1,10 @@
+Grass
+1
+120
+1
+{}
+1
+10
+['In this two-turn', 'attack, the user', 'gathers light, then', 'blasts a bundled', 'beam on the next', 'turn.']
+0
+3

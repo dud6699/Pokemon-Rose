@@ -1,0 +1,10 @@
+Dark
+2
+---
+1
+{}
+1
+20
+['The target is', 'taunted into a rage', 'that allows it to', 'use only attack', 'moves for three', 'turns.']
+0
+0

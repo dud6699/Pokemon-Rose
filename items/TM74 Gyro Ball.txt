@@ -1,0 +1,3 @@
+['Gyro Ball','TM']
+['The user tackles the', 'target with a high-', 'speed spin. The', 'slower the user, the', 'greater the move\'s', 'power.']
+-1

@@ -1,0 +1,3 @@
+['Evo','Item']
+['This fang gleams a', 'sharp silver and', 'raises a Clamperl\'s', 'Sp. Atk stat when','held or causes it to', 'evolve when used.']
+6400

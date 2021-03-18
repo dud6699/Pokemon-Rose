@@ -1,0 +1,10 @@
+Fighting
+0
+100
+.9
+{-1:['SD']}
+1
+10
+['The user swings and', 'hits with its', 'strong, heavy fist.', 'It lowers the user\'s', 'Speed, however.']
+0
+0

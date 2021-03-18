@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{1:['DU','SDU']}
+0
+20
+['The user charges up', 'power and raises', 'both its Defense and', 'Sp. Def. stats. The', 'move can be used', 'three times.']
+0
+0

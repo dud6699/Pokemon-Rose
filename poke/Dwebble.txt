@@ -1,0 +1,11 @@
+['Sturdy','Shell Armor']
+[1,1.3,.7,1.7,.7,1.1]
+['Bug','Rock']
+[34,'Crustle']
+{1:['Fury Cutter'],5:'Rock Blast',7:'Withdraw',11:'Sand Attack',13:'Feint Attack',17:'Smack Down',19:'Rock Polish',23:'Bug Bite',24:'Stealth Rock',29:'Rock Slide',31:'Slash',35:'X-Scissor',37:'Shell Smash',41:'Flail',43:'Rock Wrecker'}
+190
+14.5
+12
+64
+['route_4']
+['Rock Inn','When it finds a stone of a suitable size,', 'it secretes a liquid from its mouth to open', 'up a hole to crawl into.']

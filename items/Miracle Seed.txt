@@ -1,0 +1,3 @@
+['Held','Item']
+['An item to be held', 'by a Pokemon. It\'s a', 'seed imbued with', 'life force that', 'boosts the power of', 'Grass-type moves.']
+2400

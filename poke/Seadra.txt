@@ -1,0 +1,7 @@
+['Sniper','Poison Point']
+[1.1,1.3,1.9,1.9,0.9,1.7]
+['Water',None]
+[36,'Kingdra']
+{1:['Hydro Pump','Pound','Bubble','Smokescreen','Leer','Water Gun'],5:'Smokescreen',9:'Leer',13:'Water Gun',17:'Twister',21:'Bubble Beam',26:'Focus Energy',31:'Brine',38:'Agility',45:'Dragon Pulse',52:'Dragon Dance',60:'Hydro Pump'}
+75
+25

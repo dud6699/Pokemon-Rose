@@ -1,0 +1,10 @@
+Ghost
+2
+---
+100
+{1:['AU','DU','SD']}
+0
+10
+['A move that works', 'differently for the', 'Ghost type than for', 'all other types.']
+0
+0

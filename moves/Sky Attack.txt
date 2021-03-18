@@ -1,0 +1,10 @@
+Flying
+0
+140
+.9
+{.3:['Fln']}
+1
+5
+['A second-turn attack', 'move where critical', 'hits land more', 'easily. This may', 'also make the target', 'flinch.']
+0
+3

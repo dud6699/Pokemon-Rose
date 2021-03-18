@@ -1,0 +1,7 @@
+['Plus','Minus']
+[.8,1.1,.9,1.4,1.2,.6]
+['Steel',None]
+[38,'Klang']
+{1:['Vice Grip'],6:'Charge',11:'Thunder Shock',16:'Gear Grind',21:'Bind',26:'Charge Beam',31:'Autotomize',36:'Mirror Shot',39:'Screech',42:'Discharge',45:'Metal SOund',48:'Shift Gear',50:'Lock-On',54:'Zap Cannon',57:'Hyper Beam'}
+130
+21

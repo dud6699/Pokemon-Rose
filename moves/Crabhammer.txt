@@ -1,0 +1,10 @@
+Water
+0
+100
+.9
+{}
+1
+10
+['The target is', 'hammered with a', 'large pincer.', 'Critical hits land', 'more easily.']
+0
+1

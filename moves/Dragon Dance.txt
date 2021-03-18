@@ -1,0 +1,10 @@
+Dragon
+2
+---
+100
+{1:['AU','SU']}
+0
+20
+['The user vigorously', 'performs a mystic,', 'powerful dance that', 'boosts its Attack', 'and Speed stats.']
+0
+0

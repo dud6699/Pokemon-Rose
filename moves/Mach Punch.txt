@@ -1,0 +1,10 @@
+Fighting
+0
+40
+1
+{}
+1
+30
+['The user throws a', 'punch at blinding', 'speed. This move', 'always goes first.']
+1
+0

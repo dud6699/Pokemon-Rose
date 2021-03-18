@@ -1,0 +1,11 @@
+['Water Absorb']
+[.9,1.1,1.1,.8,.8,1.8]
+['Water',None]
+[17,'Poliwhirl']
+{1:['Water Sport'],5:'Bubble',8:'Hypnosis',11:'Aqua Jet',15:'Double Slap',18:'Rain Dance',21:'Body Slam',25:'Bubble Beam',28:'Mud Bomb',31:'Belly Drum',35:'Wake-Up Slap',38:'Hydro Pump'}
+255
+12.4
+24
+7
+[]
+['Tadpole','Poliwag has a very thin skin. It is', 'possible to see the Pokemon\'s spiral', 'innards right through the skin. Despite its', 'thinness, the skin is also very flexible.', 'Even sharp fangs bounce right off it.']

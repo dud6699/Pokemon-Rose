@@ -1,0 +1,3 @@
+['Ball','Ball']
+['A device for', 'catching wild', 'Pokemon. It\'s thrown', 'like a ball at a', 'Pokemon, comfortably', 'encapsulating its', 'target.']
+200

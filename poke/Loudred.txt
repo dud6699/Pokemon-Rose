@@ -1,0 +1,11 @@
+['Soundproof']
+[1.68,1.42,1.42,.86,.86,.96]
+['Normal',None]
+[40,'Exploud','Crunch']
+{1:['Bite','Pound','Echoed Voice','Astonish','Howl'],4:'Echoed Voice',9:'Astonish',11:'Howl',15:'Screech',18:'Supersonic',23:'Stomp',27:'Uproar',32:'Roar',36:'Rest',41:'Sleep Talk',45:'Hyper Voice',50:'Synchronoise'}
+120
+40.5
+39
+61
+['mirror_cave']
+['Big Voice','Loudred shouts while stamping its feet.', 'After it finishes shouting, this Pokemon', 'becomes incapable of hearing anything for a', 'while. This is considered to be a weak', 'point.']

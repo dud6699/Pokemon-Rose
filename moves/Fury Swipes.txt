@@ -1,0 +1,10 @@
+Normal
+0
+18
+80
+{}
+1
+15
+['The target is raked', 'with sharp claws or', 'scythes quickly two', 'to five times in a', 'row.']
+0
+2

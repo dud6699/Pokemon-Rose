@@ -1,0 +1,10 @@
+Fighting
+0
+---
+1
+{}
+1
+20
+['A retaliation move', 'that counters any', 'physical attack,', 'inflicting double', 'the damage taken.']
+-5
+0

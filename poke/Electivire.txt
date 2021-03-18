@@ -1,0 +1,7 @@
+['Motor Drive']
+[1.5,2.46,1.9,1.34,1.7,1.9]
+['Electric',None]
+[]
+{1:['Electric Terrain','Ion Deluge','Fire Punch','Quick Attack','Leer','Thunder Shock','Low Kick'],5:'Thunder Shock',8:'Low Kick',12:'Swift',15:'Shock Wave',19:'Thunder Wave',22:'Electro Ball',26:'Light Screen',29:'Thunder Punch',36:'Discharge',42:'Screech',49:'Thunderbolt',55:'Thunder',62:'Giga Impact',65:'Electric Terrain'}
+30
+138.6

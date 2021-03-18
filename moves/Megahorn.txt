@@ -1,0 +1,10 @@
+Bug
+0
+120
+.85
+{}
+1
+10
+['Using its tough and', 'impressive horn, the', 'user rams into the', 'target with no', 'letup.']
+0
+0

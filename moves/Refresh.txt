@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+0
+20
+['The user rests to', 'cure itself of', 'poisoning, a burn,', 'or paralysis.']
+0
+0

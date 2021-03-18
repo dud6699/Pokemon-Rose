@@ -1,0 +1,11 @@
+['Merciless','Limber']
+[1,1.06,0.86,1.24,1.04,0.9]
+['Poison','Water']
+[38,'Toxapex','Baneful Bunker']
+{1:['Poison Sting'],5:'Peck',9:'Bite',13:'Toxic Spikes',17:'Protect',21:'Toxic',25:'Venoshock',29:'Spike Cannon',33:'Recover',37:'Poison Jab',41:'Venom Drench',45:'Pin Missile',49:'Liquidation'}
+190
+8
+16
+153
+['route_5b']
+['Brutal Star','Aside from its head, its body parts', 'regenerate quickly if they\'re cut off.', 'After a good night\'s sleep, Mareanie is', 'back to normal.'] 

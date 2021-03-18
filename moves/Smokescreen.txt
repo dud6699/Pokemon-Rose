@@ -1,0 +1,10 @@
+Normal
+2
+---
+1
+{1:['AcD']}
+1
+20
+['The user releases', 'an obscuring cloud', 'of smoke or ink.', 'This lowers the', 'target\'s accuracy.']
+0
+0

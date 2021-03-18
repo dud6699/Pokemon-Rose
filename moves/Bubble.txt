@@ -1,0 +1,10 @@
+Water
+1
+40
+1
+{0.1:['SD']}
+1
+30
+['A spray of countless', 'bubbles is jetted at', 'the opposing', 'Pokemon. This may', 'also lower their', 'Speed stat.']
+0
+0

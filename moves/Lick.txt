@@ -1,0 +1,10 @@
+Ghost
+0
+30
+1
+{0.3:['Par']}
+1
+30
+['The target is licked','with a long tongue,', 'causing damage. This','may also leave the', 'target with', 'paralysis.']
+0
+0

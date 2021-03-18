@@ -1,0 +1,10 @@
+Dragon
+0
+100
+.75
+{.2:['Fln']}
+1
+10
+['The user tackles the', 'target while showing', 'overwhelming menace.', 'This may also make', 'the target flinch.']
+0
+0

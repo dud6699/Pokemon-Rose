@@ -1,0 +1,10 @@
+Water
+0
+75
+.95
+{.5:['DD']}
+1
+10
+['The user cuts its', 'target with sharp', 'shells. This may', 'also lower the', 'target\'s Defense','stat.']
+0
+0

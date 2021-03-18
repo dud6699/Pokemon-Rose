@@ -1,0 +1,10 @@
+Fighting
+0
+65
+1
+{1:['SD']}
+1
+20
+['The user makes a', 'swift attack on the', 'target\'s legs, which', 'lowers the target\'s', 'Speed stat.']
+0
+0

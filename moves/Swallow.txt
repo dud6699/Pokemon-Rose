@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+0
+10
+['The power stored', 'from using Stockpile', 'is absorbed by the', 'user to heal its HP.', 'Storing more power', 'heals more HP.']
+0
+0

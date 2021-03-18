@@ -1,0 +1,11 @@
+['Rock Head','Sturdy']
+[1.1,1.9,.9,2.3,.9,.7]
+['Rock','Ground']
+[36,'Golem']
+{1:['Tackle','Defense Curl','Mud Sport','Rock Polish'],4:'Mud Sport',6:'Rock Polish',10:'Rollout',12:'Magnitude',16:'Rock Throw',18:'Smack Down',22:'Bulldoze',24:'Self-Destruct',30:'Stealth Rock',34:'Rock Blast',40:'Earthquake',44:'Explosion',50:'Double-Edge',54:'Stone Edge'}
+120
+105
+42
+130
+[]
+['Rock','Rocks are Graveler\'s favorite food. This', 'Pokemon will climb a mountain from the base', 'to the summit, crunchingly feasting on', 'rocks all the while. Upon reaching the', 'peak, it rolls back down to the bottom.'] 

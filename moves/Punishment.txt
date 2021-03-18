@@ -1,0 +1,10 @@
+Dark
+0
+???
+1
+{}
+1
+5
+['The more the target', 'has powered up with', 'stat changes, the', 'greater the move\'s', 'power.']
+0
+0

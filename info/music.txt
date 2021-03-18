@@ -1,0 +1,37 @@
+menus:
+title - Lati@s Fly
+saves - Opening
+new save - Introduction/Route 123
+
+maps:
+Cruise - Birch's Laboratory
+Alto Mare - Horai (multiple themes)
+Poke Center - Pokemon Center
+Route 1 - Route 110
+Egida City - Slateport City
+Route 2 - Route 119
+Echoing Cave - Cave Music (Sun & Moon)
+Vigore Dam - Surf Music
+Power Plant - The Floating City (Anaden) change? city of the butterfly dream? whispering by ripples
+Gym theme - Gym theme
+Route 3 - Barouki (Anaden)
+Scarab woods - Vega Forest
+Fiore Town - Route 101
+Pianura City - Little Root
+Mirror Cave - Reflection Cave (XY)
+Route 4 - IDA town MMO
+Isola Town - Konium
+route 5 - garado
+verde - oldale
+water city - ida title?
+
+battle music:
+trainer battle - VS Trainer
+wild pokemon - Wild Pokemon
+Steven battle (Egida) - Steven battle theme
+Colress gym battle - bw2 Colress remix
+Thundurus_T battle - Forces of Nature battle
+
+potential: anaden to the sky of time, laula dome, another eden, fine- theme of love, one morning, 
+joyful moments, surrounded by smiles, untuned dancers, the divine crystal, decent destructors(gym battle?)
+stone slumbers, unigan

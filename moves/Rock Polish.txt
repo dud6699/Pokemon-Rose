@@ -1,0 +1,10 @@
+Rock
+2
+---
+100
+{1:['SU','SU']}
+0
+20
+['The user polishes', 'its body to reduce', 'drag. This sharply', 'raises the Speed', 'stat.']
+0
+0

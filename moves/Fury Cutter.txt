@@ -1,0 +1,10 @@
+Bug
+0
+40
+.95
+{}
+1
+20
+['The target is', 'slashed with scythes', 'or claws. This', 'attack becomes more', 'powerful if it hits', 'in succession.']
+0
+0

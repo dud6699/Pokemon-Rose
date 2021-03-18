@@ -1,0 +1,10 @@
+Electric
+2
+---
+100
+{}
+0
+25
+['The user disperses', 'electrically charged', 'particles, which', 'changes Normal-type', 'moves to Electric-', 'type moves.']
+1
+0

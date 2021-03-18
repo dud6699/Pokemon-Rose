@@ -1,0 +1,10 @@
+Normal
+0
+100
+.75
+{}
+1
+10
+['A large egg is', 'hurled at the target', 'with maximum force', 'to inflict damage.']
+0
+0

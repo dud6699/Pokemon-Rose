@@ -1,0 +1,10 @@
+Normal
+2
+---
+1
+{}
+1
+15
+['The user dances with', 'an odd rhythm that', 'compels the target', 'to mimic it, making', 'the target\'s Ability', 'the same as the', 'user\'s.']
+0
+0

@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{1:['SAD']}
+1
+20
+['The user tells the', 'target a secret, and', 'the target loses its', 'concentration. This', 'lowers the target\'s', 'Sp. Atk stat.']
+0
+0

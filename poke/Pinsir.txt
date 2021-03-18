@@ -1,0 +1,11 @@
+['Hyper Cutter','Mold Breaker']
+[1.3,2.5,1.1,2,1.4,1.7]
+['Bug',None]
+['Mega','Mega_Pinsir']
+{1:['Vice Grip','Focus Energy'],4:'Bind',8:'Seismic Toss',11:'Harden',15:'Revenge',18:'Vital Throw',22:'Double Hit',26:'Brick Break',29:'X-Scissor',33:'Submission',36:'Storm Throw',40:'Swords Dance',43:'Thrash',47:'Superpower',50:'Guillotine'}
+45
+55
+59
+94
+[]
+['Stag Beetle','Pinsir has a pair of massive horns.', 'Protruding from the surface of these horns', 'are thorns. These thorns are driven deeply', 'into the foe\'s body when the pincer closes,', 'making it tough for the foe to escape.'] 

@@ -1,0 +1,10 @@
+Ghost
+2
+---
+1
+{}
+1
+10
+['The user unleashes', 'its grudge on the', 'move last used by', 'the target by', 'cutting 4 PP from', 'it.']
+0
+0

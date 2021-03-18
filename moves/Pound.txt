@@ -1,0 +1,10 @@
+Normal
+0
+40
+1
+{}
+1
+35
+['The target is', 'physically pounded', 'with a long tail, a', 'foreleg, or the', 'like.']
+0
+0

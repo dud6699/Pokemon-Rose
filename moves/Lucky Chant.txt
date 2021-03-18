@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+0
+30
+['The user chants an', 'incantation,', 'preventing opposing','Pokémon from landing', 'critical hits for', 'five turns.']
+0
+0

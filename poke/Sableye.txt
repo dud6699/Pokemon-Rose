@@ -1,0 +1,11 @@
+['Keen Eye','Stall']
+[1,1.5,1.3,1.5,1.3,1]
+['Dark','Ghost']
+['Mega','Mega_Sableye']
+{1:['Leer','Scratch'],4:'Foresight',6:'Night Shade',9:'Astonish',11:'Fury Swipes',14:'Detect',16:'Shadow Sneak',19:'Feint Attack',21:'Fake Out',24:'Punishment',26:'Knock Off',29:'Shadow Claw',31:'Confuse Ray',34:'Zen Headbutt',36:'Power Gem',39:'Shadow Ball',41:'Foul Play',44:'Nasty Plot',46:'Mean Look'}
+45
+11
+20
+127
+['mirror_cave']
+['Darkness','Sableye digs the ground with sharpened', 'claws to find rocks that it eats.', 'Substances in the eaten rocks crystallize', 'and rise up to the Pokemon\'s body surface.'] 

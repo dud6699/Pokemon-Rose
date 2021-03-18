@@ -1,0 +1,10 @@
+Normal
+0
+130
+1
+{}
+1
+10
+['The user tucks in', 'its head to raise', 'its Defense stat on', 'the first turn, then', 'rams the target on', 'the next turn.']
+0
+3

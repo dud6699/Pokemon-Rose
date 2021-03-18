@@ -1,0 +1,10 @@
+Ice
+0
+40
+1
+{}
+1
+30
+['The user flash-','freezes chunks of', 'ice and hurls them', 'at the target. This', 'move always goes', 'first.']
+1
+0

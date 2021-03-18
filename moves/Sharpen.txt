@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{1:['AU']}
+0
+30
+['The user makes its', 'edges more jagged,', 'which raises its', 'Attack stat.']
+0
+0

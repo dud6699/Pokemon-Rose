@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+0
+10
+['One turn after this', 'move is used, the', 'user\'s or its', 'replacement\'s HP is', 'restored by half the', 'user\'s max HP.']
+0
+0

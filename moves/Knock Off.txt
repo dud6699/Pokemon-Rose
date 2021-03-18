@@ -1,0 +1,10 @@
+Dark
+0
+65
+1
+{}
+1
+20
+['The user slaps down', 'the target\'s held', 'item. The move does', 'more damage if the', 'target has a held', 'item.']
+0
+0

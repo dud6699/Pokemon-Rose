@@ -1,0 +1,10 @@
+Fighting
+0
+70
+100
+{}
+1
+10
+['The user attacks', 'last. In return,', 'this throw move', 'never misses.']
+-1
+0

@@ -1,0 +1,10 @@
+Steel
+0
+40
+1
+{}
+1
+30
+['The user strikes the', 'target with tough', 'punches as fast as', 'bullets. This move', 'always goes first.']
+1
+0

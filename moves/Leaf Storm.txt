@@ -1,0 +1,10 @@
+Grass
+1
+130
+.9
+{-1:['SAD','SAD']}
+1
+5
+['The user whips up a', 'storm of leaves', 'around the target.', 'The attack\'s recoil', 'harshly lowers the', 'user\'s Sp. Atk stat.']
+0
+0

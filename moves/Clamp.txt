@@ -1,0 +1,10 @@
+Water
+0
+35
+.85
+{1:['Bnd']}
+1
+15
+['The target is', 'clamped and squeezed', 'by the user\'s very', 'thick and sturdy', 'shell for four to', 'five turns.']
+0
+0

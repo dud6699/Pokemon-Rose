@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+1
+20
+['The user mimics the', 'move used', 'immediately before', 'it. The move fails', 'if no other move has', 'been used yet.']
+0
+0

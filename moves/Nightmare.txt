@@ -1,0 +1,10 @@
+Ghost
+2
+---
+1
+{}
+1
+15
+['A sleeping target', 'sees a nightmare', 'that inflicts some', 'damage every turn.']
+0
+0

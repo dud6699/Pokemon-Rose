@@ -1,0 +1,10 @@
+Steel
+2
+---
+100
+{1:['DU','DU']}
+0
+15
+['The user hardens its', 'body\'s surface like', 'iron, sharply', 'raising its Defense', 'stat.']
+0
+0

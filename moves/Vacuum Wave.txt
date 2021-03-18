@@ -1,0 +1,10 @@
+Fighting
+1
+40
+1
+{}
+1
+30
+['The user whirls its', 'fists to send a wave', 'of pure vacuum at', 'the target. This', 'move always goes', 'first.']
+1
+0

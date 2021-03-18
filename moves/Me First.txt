@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+1
+20
+['The user copies and', 'use the target\'s', 'intended move first', 'with greater power.', 'This move fails if', 'it isn\'t used first.']
+0
+0

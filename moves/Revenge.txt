@@ -1,0 +1,10 @@
+Fighting
+0
+60
+1
+{}
+1
+10
+['This attack move\'s', 'power is doubled if', 'the user has been', 'hurt by the opponent', 'in the same turn.']
+-4
+0

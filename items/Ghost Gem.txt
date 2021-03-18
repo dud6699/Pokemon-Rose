@@ -1,0 +1,3 @@
+['Gem','Item']
+['A gem with a', 'spectral essence.', 'When held, it', 'strengthens the', 'power of a Ghost-','type move one time.']
+200

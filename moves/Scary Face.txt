@@ -1,0 +1,10 @@
+Normal
+2
+---
+1
+{1:['SD','SD']}
+1
+10
+['The user frightens', 'the target with a', 'scary face to', 'harshly lower its', 'Speed stat.']
+0
+0

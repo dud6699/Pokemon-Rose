@@ -1,0 +1,3 @@
+['Held','Item']
+['A rather small pearl', 'that has a very nice', 'silvery sheen to it.', 'It can be sold', 'cheaply to shops.']
+2000

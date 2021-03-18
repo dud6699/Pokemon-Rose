@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+0
+10
+['The user endures any', 'attack with at least', '1 HP. Its chance of', 'failing rises if it', 'is used in', 'succession.']
+4
+0

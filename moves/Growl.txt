@@ -1,0 +1,10 @@
+Normal
+2
+---
+1
+{1:['AD']}
+1
+40
+['The user growls in', 'an endearing way,', 'making opposing', 'Pokemon less wary.', 'This lowers their', 'Attack stat.']
+0
+0

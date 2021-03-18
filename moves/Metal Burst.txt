@@ -1,0 +1,10 @@
+Steel
+0
+???
+1
+{}
+1
+10
+['The user retaliates', 'with much greater', 'force against the', 'opponent that last', 'inflicted damage on', 'it.']
+0
+0

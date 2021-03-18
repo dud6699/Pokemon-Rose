@@ -1,0 +1,10 @@
+Psychic
+2
+---
+100
+{}
+0
+15
+['A barrier reflects', 'back to the target', 'moves like Leech', 'Seed and moves that', 'damage status.']
+4
+0

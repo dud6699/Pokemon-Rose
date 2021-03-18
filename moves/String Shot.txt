@@ -1,0 +1,10 @@
+Bug
+2
+---
+.95
+{1:['SD','SD']}
+1
+40
+['The opposing Pokémon', 'are bound with silk', 'blown from the', 'user\'s mouth that', 'harshly lowers the', 'Speed stat.']
+0
+0

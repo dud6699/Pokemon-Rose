@@ -1,0 +1,10 @@
+Bug
+0
+80
+1
+{}
+1
+15
+['The user slashes at', 'the target by', 'crossing its scythes', 'or claws as if they', 'were a pair of', 'scissors.']
+0
+0

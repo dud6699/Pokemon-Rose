@@ -1,0 +1,10 @@
+Electric
+2
+---
+100
+{}
+0
+10
+['The user levitates', 'using electrically', 'generated magnetism', 'for five turns.']
+0
+0

@@ -1,0 +1,11 @@
+['Thick Fat','Huge Power']
+[1,.4,.4,.8,.8,.4]
+['Normal','Fairy']
+['friend','Marill']
+{1:['Splash','Water Gun'],2:'Tail Whip',5:'Water Sport',7:'Bubble',10:'Charm',13:'Bubble Beam',16:'Baby-Doll Eyes',20:'Slam',23:'Bounce'}
+150
+2
+8
+913
+[]
+['Polka Dot','Azurill\'s tail is large and bouncy. It is', 'packed full of the nutrients this Pokemon', 'needs to grow. Azurill can be seen bouncing', 'and playing on its big, rubbery tail.'] 

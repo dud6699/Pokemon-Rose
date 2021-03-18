@@ -1,0 +1,10 @@
+Psychic
+0
+80
+.9
+{.2:['Fln']}
+1
+15
+['The user focuses its', 'willpower to its', 'head and attacks the', 'target. This may', 'also make the target', 'flinch.']
+0
+0

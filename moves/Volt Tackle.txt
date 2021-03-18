@@ -1,0 +1,10 @@
+Electric
+0
+120
+1
+{.1:['Par']}
+1
+15
+['The user electrifies', 'itself, and charges.', 'It also damages the', 'user. This may leave', 'the target with', 'paralysis.']
+0
+0

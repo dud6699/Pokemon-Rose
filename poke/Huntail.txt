@@ -1,0 +1,11 @@
+['Swift Swim']
+[1.1,2.08,1.88,2.1,1.5,1.04]
+['Water',None]
+[]
+{1:['Whirlpool','Bite'],5:'Screech',9:'Scary Face',11:'Feint Attack',14:'Water Pulse',16:'Ice Fang',19:'Brine',23:'Sucker Punch',26:'Dive',29:'Baton Pass',34:'Crunch',39:'Aqua Tail',45:'Coil',50:'Hydro Pump'}
+60
+27
+67
+140
+[]
+['Deep Sea','Huntail\'s tail is shaped like a fish. It', 'uses the tail to attract prey, then', 'swallows the prey whole with its large,', 'gaping mouth. This Pokemon swims by', 'wiggling its slender body like a snake.'] 

@@ -1,0 +1,11 @@
+['Moxie','Intimidate']
+[1.2,1.64,.9,.9,.9,1.48]
+['Ground','Dark']
+[40,'Krookodile']
+{1:['Leer','Rage','Bite','Sand Attack'],4:'Bite',7:'Sand Attack',10:'Torment',13:'Sand Tomb',16:'Assurance',19:'Mud-Slap',22:'Embargo',25:'Swagger',28:'Crunch',32:'Dig',36:'Scary Face',40:'Foul Play',44:'Sandstorm',48:'Earthquake',52:'Thrash'}
+90
+33.4
+42
+143
+['route_5']
+['Desert Croc','The special membrane covering its eyes can', 'sense the heat of objects, so it can see', 'its surroundings even in darkness.']

@@ -1,0 +1,11 @@
+['Poison Point','Rivalry']
+[1.22,1.44,1.1,1.14,1.1,1.3]
+['Poison',None]
+['Moon Stone','Nidoking']
+{1:['Leer','Peck'],7:'Focus Energy',9:'Double Kick',13:'Poison Sting',20:'Fury Attack',23:'Horn Attack',28:'Taunt',35:'Toxic Spikes',38:'Flatter',43:'Poison Jab',50:'Captivate',58:'Horn Drill'}
+120
+19.5
+35
+41
+['route_3']
+['Poison Pin','Nidorino has a horn that is harder than a', 'diamond. If it senses a hostile presence,', 'all the barbs on its back bristle up at', 'once, and it challenges the foe with all', 'its might.']

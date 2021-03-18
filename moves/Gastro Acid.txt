@@ -1,0 +1,10 @@
+Poison
+2
+---
+1
+{}
+1
+10
+['The user hurls up', 'its stomach acids on', 'the target. The', 'fluid eliminates the', 'effect of the', 'target\'s Ability.']
+0
+0

@@ -1,0 +1,10 @@
+Steel
+0
+???
+1
+{}
+1
+5
+['The user tackles the', 'target with a high-', 'speed spin. The', 'slower the user, the', 'greater the move\'s', 'power.']
+0
+0

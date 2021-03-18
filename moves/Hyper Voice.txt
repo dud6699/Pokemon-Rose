@@ -1,0 +1,10 @@
+Normal
+1
+90
+1
+{}
+1
+10
+['The user lets loose', 'a horribly echoing', 'shout with the', 'power to inflict', 'damage.']
+0
+0

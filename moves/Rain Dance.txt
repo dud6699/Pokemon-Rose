@@ -1,0 +1,10 @@
+Water
+2
+---
+100
+{}
+0
+5
+['The user summons a', 'heavy rain that', 'falls for five', 'turns, powering up', 'Water-type moves.']
+0
+0

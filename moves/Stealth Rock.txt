@@ -1,0 +1,10 @@
+Rock
+2
+---
+100
+{}
+1
+20
+['The user lays a trap', 'of levitating stones', 'around the opposing', 'team. The trap hurts', 'opposing Pokémon', 'that switch in.']
+0
+0

@@ -1,0 +1,10 @@
+Fighting
+0
+60
+1
+{}
+1
+10
+['The user strikes the', 'target with a fierce', 'blow. This attack', 'always results in a', 'critical hit.']
+0
+0

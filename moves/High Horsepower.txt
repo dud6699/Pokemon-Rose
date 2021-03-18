@@ -1,0 +1,10 @@
+Ground
+0
+95
+.95
+{}
+1
+10
+['The user fiercely', 'attacks the target', 'using its entire', 'body.']
+0
+0

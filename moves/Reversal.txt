@@ -1,0 +1,10 @@
+Fighting
+0
+---
+1
+{}
+1
+15
+['An all-out attack', 'that becomes more', 'powerful the less HP', 'the user has.']
+0
+0

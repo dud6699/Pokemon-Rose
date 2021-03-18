@@ -1,0 +1,10 @@
+Rock
+0
+75
+.9
+{.3:['Fln']}
+1
+10
+['Large boulders are', 'hurled at the', 'opposing Pokémon.', 'This may also make', 'the opposing Pokémon', 'flinch.']
+0
+0

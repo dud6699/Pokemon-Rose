@@ -1,0 +1,10 @@
+Fairy
+2
+---
+.75
+{1:['Cfs']}
+1
+10
+['The user kisses the', 'target with a sweet,', 'angelic cuteness', 'that causes', 'confusion.']
+0
+0

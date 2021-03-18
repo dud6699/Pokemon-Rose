@@ -1,0 +1,3 @@
+['Rock Polish','TM']
+['The user polishes', 'its body to reduce', 'drag. This sharply', 'raises the Speed', 'stat.']
+-1

@@ -1,0 +1,10 @@
+Poison
+2
+---
+0.9
+{1:['BPs']}
+1
+10
+['A move that leaves', 'the target badly', 'poisoned. Its poison', 'damage worsens every', 'turn.']
+0
+0

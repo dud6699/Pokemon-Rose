@@ -1,0 +1,10 @@
+Normal
+1
+140
+1
+{}
+1
+10
+['The user attacks', 'everything around it', 'with the destructive', 'power of a terrible,', 'explosive sound.']
+0
+0

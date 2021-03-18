@@ -1,0 +1,10 @@
+Ground
+2
+---
+1
+{1:['AcD']}
+1
+15
+['Sand is hurled in', 'the target\'s face,', 'reducing the', 'target\'s accuracy.']
+0
+0

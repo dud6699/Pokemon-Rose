@@ -1,0 +1,10 @@
+Grass
+1
+120
+1
+{}
+1
+10
+['The user attacks the', 'target by scattering', 'petals for two to', 'three turns. The', 'user then becomes', 'confused.']
+0
+0

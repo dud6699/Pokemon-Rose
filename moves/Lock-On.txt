@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+0
+5
+['The user takes sure', 'aim at the target.', 'This ensures the', 'next attack does not', 'miss the target.']
+0
+0

@@ -1,0 +1,11 @@
+['Hyper Cutter','Shell Armor']
+[1.26,2.4,1.8,1.7,1.1,1.1]
+['Water','Dark']
+[]
+{1:['Swift','Bubble','Harden','Vice Grip','Leer'],5:'Harden',7:'Vice Grip',10:'Leer',14:'Bubble Beam',17:'Protect',20:'Double Hit',23:'Knock Off',26:'Night Slash',32:'Razor Shell',36:'Taunt',40:'Swords Dance',43:'Crunch',48:'Crabhammer',54:'Guillotine'}
+155
+32.8
+46
+115
+['route_5b']
+['Rogue','Crawdaunt molts its shell regularly.', 'Immediately after molting, its shell is', 'soft and tender. Until the shell hardens,', 'this Pokemon hides in its streambed burrow', 'to avoid attack from its foes.'] 

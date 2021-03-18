@@ -1,0 +1,11 @@
+['Swarm','Guts']
+[1.6,2.5,.8,1.5,1.9,1.7]
+['Bug','Fighting']
+['Mega','Mega_Heracross']
+{1:['Arm Thrust','Bullet Seed','Night Slash','Tackle','Leer','Horn Attack','Endure'],7:'Feint',10:'Aerial Ace',16:'Chip Away',19:'Counter',25:'Fury Attack',28:'Brick Break',31:'Pin Missile',34:'Take Down',37:'Megahorn',43:'Close Combat',46:'Reversal'}
+45
+54
+59
+92
+[]
+['Single Horn','Heracross charges in a straight line at its', 'foe, slips beneath the foe\'s grasp, and', 'then scoops up and hurls the opponent with', 'its mighty horn. This Pokemon even has', 'enough power to topple a massive tree.'] 

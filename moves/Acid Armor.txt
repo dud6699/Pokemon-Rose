@@ -1,0 +1,10 @@
+Poison
+2
+---
+100
+{1:['DU','DU']}
+0
+20
+['The user alters its', 'cellular structure', 'to liquefy itself,', 'sharply raising its', 'Defense stat.']
+0
+0

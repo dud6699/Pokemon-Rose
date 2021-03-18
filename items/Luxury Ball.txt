@@ -1,0 +1,3 @@
+['Ball','Ball']
+['A particularly', 'comfortable Poke', 'Ball that makes a', 'wild Pokemon quickly', 'grow friendlier', 'after being caught.']
+1000

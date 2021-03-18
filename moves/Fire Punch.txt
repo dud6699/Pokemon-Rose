@@ -1,0 +1,10 @@
+Fire
+0
+75
+1
+{.1:['Brn']}
+1
+15
+['The target is', 'punched with a fiery', 'fist. This may also', 'leave the target', 'with a burn.']
+0
+0

@@ -1,0 +1,10 @@
+Fighting
+0
+???
+1
+{}
+1
+20
+['The target is thrown', 'using the power of', 'gravity. It inflicts', 'damage equal to the', 'user\'s level.']
+0
+0

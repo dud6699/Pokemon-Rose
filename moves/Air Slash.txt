@@ -1,0 +1,10 @@
+Flying
+1
+75
+.95
+{.3:['Fln']}
+1
+15
+['The user attacks', 'with a blade of air', 'that slices even the', 'sky. This may also', 'make the target', 'flinch.']
+0
+0

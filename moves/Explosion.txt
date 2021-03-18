@@ -1,0 +1,10 @@
+Normal
+0
+250
+1
+{}
+1
+5
+['The user attacks', 'everything by', 'causing a tremendous', 'explosion. The user', 'faints upon using', 'this move.']
+0
+0

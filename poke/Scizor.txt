@@ -1,0 +1,11 @@
+['Swarm','Technician']
+[1.4,2.6,1.1,2,1.6,1.3]
+['Bug','Steel']
+['Mega','Mega_Scizor']
+{1:['Feint','Quick Attack','Leer','Bullet Punch'],5:'Focus Energy',9:'Pursuit',13:'False Swipe',17:'Agility',21:'Metal Claw',25:'Fury Cutter',29:'Slash',33:'Razor Wind',37:'Iron Defense',41:'X-Scissor',45:'Night Slash',49:'Double Hit',50:'Iron Head',57:'Swords Dance',61:'Feint'}
+25
+118
+71
+38
+[]
+['Pincer','Scizor has a body with the hardness of', 'steel. It is not easily fazed by ordinary', 'sorts of attacks. This Pokemon flaps its', 'wings to regulate its body temperature.']

@@ -1,0 +1,74 @@
+route 1 (beedrill) 1/40
+route 2 (none) 1/40 
+echoing cave (aggron) 2/40
+hydro dam (manectric) 3/40
+route 3 (p1) (diancie) 4/40
+scarab woods l (pinsir) 5/40
+scarab woods r (heracross) 6/40
+route 3 (p2) (slowbro, lopunny) 8/40
+cave of mirrors (sableye, steelix) 10/40
+route 4 kangaskhan 11/40
+
+route 5 scizor 12/40
+
+
+victory road (charizard x/y, blastoise, venasaur, swampert, sceptile, blaziken) 7
+
+beedrill - route 1 - one hit metapod in 3 turns
+aggron - Echoing Cave - defeat in 3(?) turns
+manectric - Hydro Dam - defeat 3 in a row
+heracross - scarab l - beat in tournament battle
+pinsir - scarab r - beat in tournament battle
+lopunny - route 3 - survive 3 turns
+slowbro - route 3
+steelix - cave of mirrors - beat steelix with 3 turn sleep
+sableye - cave of mirrors - find and beat sableye
+kangaskhan - route 4 - protect child
+
+scizor - route 5 always flinch
+pidgeot - forest after water gym - raging wind (decreased acc besides hurricane)
+alakazam - forest
+
+gengar - forest ghost
+banette - forest ghost
+
+gyrados - forest water
+sharpedo - forest water
+
+gardevoir - forest - fairy
+gallade - forest
+
+audino - forest fairy
+
+absol - mount mid
+abomasnow - mount ice
+glalie - mount ice
+medicham - mount base
+ampharos - mount base
+houndoom - mount volcano
+camerupt - mount volcano
+altaria - mount mid
+mawile - mount mid
+
+lucario - high tourney rank?
+
+garchomp - victory road
+tyranitar - victory road
+metagross - victory road
+aerodactyl - victory road
+salamence - victory road
+
+blastoise - Victory Road
+blaziken - Victory Road
+venasaur - Victory Road
+charizard x - Victory Road
+charizard y - Victory Road
+sceptile - Victory Road
+swampert - Victory Road
+
+lati@s
+diancie - Route 3 (Near Egida)
+mewtwo x - forest ghosty
+mewtwo y - forest ghosty
+rayquaza - mount ice
+

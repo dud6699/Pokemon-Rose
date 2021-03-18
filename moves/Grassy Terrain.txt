@@ -1,0 +1,10 @@
+Grass
+2
+---
+100
+{}
+0
+10
+['The user turns the', 'ground to grass for', 'five turns. This', 'restores the HP of', 'Pokémon and powers', 'up Grass type-moves.']
+0
+0

@@ -1,0 +1,10 @@
+Water
+1
+40
+1
+{}
+1
+25
+['The target is', 'blasted with a', 'forceful shot of', 'water.']
+0
+0

@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{1:['AU','AU']}
+0
+20
+['A frenetic dance to', 'uplift the fighting', 'spirit. This sharply', 'raises the user\'s', 'Attack stat.']
+0
+0

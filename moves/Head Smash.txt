@@ -1,0 +1,10 @@
+Rock
+0
+150
+.8
+{}
+1
+5
+['The user attacks the', 'target with a', 'hazardous, full-','power headbutt. This', 'also damages the', 'user terribly.']
+0
+0

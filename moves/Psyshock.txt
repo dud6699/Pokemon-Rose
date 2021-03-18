@@ -1,0 +1,10 @@
+Psychic
+1
+80
+1
+{}
+1
+10
+['The user', 'materializes an odd', 'psychic wave to', 'attack the target.', 'This attack does', 'physical damage.']
+0
+0

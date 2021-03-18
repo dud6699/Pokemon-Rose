@@ -1,0 +1,10 @@
+Dark
+1
+80
+1
+{.2:['Fln']}
+1
+15
+['The user releases a', 'horrible aura imbued', 'with dark thoughts.', 'This may also make', 'the target flinch.']
+0
+0

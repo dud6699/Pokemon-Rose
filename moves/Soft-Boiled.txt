@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+0
+10
+['The user restores', 'its own HP by up to', 'half of its max HP.']
+0
+0

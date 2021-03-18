@@ -1,0 +1,10 @@
+Psychic
+1
+120
+1
+{}
+1
+10
+['Using an odd shock', 'wave, the user', 'inflicts damage on', 'any Pokemon of the', 'same type in the', 'area around it.']
+0
+0

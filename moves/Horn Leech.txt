@@ -1,0 +1,10 @@
+Grass
+0
+75
+1
+{}
+1
+10
+['The user drains the', 'target\'s energy with', 'its horns. The', 'user\'s HP is', 'restored by half the', 'damage dealt.']
+0
+0

@@ -1,0 +1,10 @@
+Ground
+0
+60
+1
+{1:['SD']}
+1
+20
+['The user strikes', 'everything around it', 'by stomping down on', 'the ground. This', 'lowers the Speed', 'stats of those hit.']
+0
+0

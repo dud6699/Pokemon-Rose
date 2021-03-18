@@ -1,0 +1,10 @@
+Electric
+1
+55
+.95
+{1:['SD']}
+1
+15
+['The user attacks and', 'captures opposing', 'Pokémon using an', 'electric net. This', 'lowers their Speed', 'stat.']
+0
+0

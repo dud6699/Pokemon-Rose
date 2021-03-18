@@ -1,0 +1,422 @@
+message:
+1 - (Poison Point,Static)
+2 - ([message],ability,turn)
+3 - Stat Cap
+4 - Stat Floor
+5 - (Rough Skin,Iron Barbs)
+6 - Spiky Shield
+7 - Flat Message
+8 - Cute Charm
+9 - Moxie
+
+pyinstaller https://www.youtube.com/watch?v=lTxaran0Cig
+pyinstaller pokemon.py --onefile --noconsole --icon=game_icon.ico
+
+Prog:
+0 - Main Story
+	0: prof front of ship/talk to prof
+	1: prof move
+	(2-5):prof gone
+	6: choosing pokemon
+	7: battle with prof
+	8 (combined with 7): after battle + heal
+	9: moving rival (square 1)
+	10: turn player
+	11: rival talking (pokeballs,gondolier) am
+	12: rival leaving
+	13: explore
+	14: moving rival/talking (pokecenter) north am
+	15: rival leaving
+	16: explore
+	17: fight rival (route 1, pidgey, starter)
+	18: rival walk away
+	19: explore
+	20: rocket pushes player away (egida)
+	21: rocket runs away
+	22: explore
+	23: colress walk/talk (echo)
+	24: colress leave
+	25: explore
+	-1: Manaphy move 
+	-2: wave appear
+	-3: clear cave wave disappear
+	26: Manaphy clears cave/eusine in pp1
+	27: Rocket grunt in power plant basement
+	28: move player down
+	29: move player left
+	30: colress talk
+	31: grunt enters & talks
+	32: other grunt talks and moves
+	33: colress talk
+	34: battle grunt
+	35: colress talk
+	36: grunt runs
+	37: colress moves
+	38: colress tells player to catch grunt/grunt on pp roof/colress in egida
+reminder/eusine text changed to thank player
+	39: finds grunt/moves to egida/eusine at his desk
+	40: colress thanks player/lift open
+	41: press controller in gym/left light unlocked
+	42: steven move
+	43: battle steven (Metang:20)
+	44: steven leave
+	45: player move to bottom of arena (colress)
+	46: camera pan/colress fight
+	-4: camera pan
+	47: gym won
+	48: left gym, route 3 open, grunt in scarab
+	49: cut down tree, grunt move
+	50: grunt talk, grunt leave
+	51: player can move/rival in scarab r
+	52: rival move
+	53: rival talk/leave
+	54: rival gone/rival near clearing
+	55: player walk towards rival
+	56: pan camera/proton talk finds player
+	57: pan camera/player found
+	58: move into clearing
+	59: proton talk/leave
+	60: rocket talk fight
+	61: rocket talk run
+	62: rival turn
+	63: rival talk leave
+ 	64: check rival gone
+	65: player can move
+	66: rival talk cheryl move
+	67: cheryl talk cheryl leave
+	68: rival talk rival leave
+	69: player move
+	70: officer move out of way
+	71: Cheryl walk up and talk
+	72: cheryl, rival, player move
+	73: Cheryl talk
+	74: player can move
+	75: Thundurus battle
+	76: fade in
+	77: cheryl walk up and talk
+	78: rival walk up and talk
+	79: rival leave
+	80: player free
+	81: player enter pianura (people in route 3, fishers left pianura)
+	82: gym shelf moved aside
+	83: player talk to cheryl
+	84: player move turn around
+	85: pan camera beat cheryl
+	86: pan camera player can leave
+	87: player leave gym cheryl free
+	88: sableye spooked, leaves
+	89: player free
+	90: latias walk up
+	91: latias talk
+	92: rocket talk
+	93: fight rocket 1
+	94: fight rocket 2
+	95: latias move
+	96: manaphy gives mystic water
+	97: latias leave
+	98: player can move
+	99: player left route 4 (exp in route 4)
+1 - Pineapple Oddish
+	0: man in house
+	1: pineapple moving
+	2: pineapple beaten
+	3: farm back man in altomare
+2 - Celebi
+	0: celebi in tree/bug catcher talk
+	1: celebi gone/bug catcher change
+3 - Manaphy
+	0: latias in square 1
+	1: latias move
+	2: player move
+	3: see manaphy
+	4: latias leave
+	5: manaphy gone
+4 - Victini
+	0: victini in nam
+	1: victini turn around
+	2: start light
+	3: start light fade
+	4: victini gone
+5 - Trainers
+	0 - route 1 youngster 		timmy (Bellsprout:7)
+	1 - route 1 lass 		amy (Oddish:6,Skitty:6)
+	2 - route 1 bug catcher 	robb (Weedle:5,Caterpie:5,Scyther:6)
+	3 - route 1 gentleman 		noland (Nidorino:16,Nidorina:16)
+	4 - route 2 battle girl 	ayla (Machop:9,Timburr:9)
+	5 - route 2 hiker 		robby (Spearow:7,Aron:8,Trapinch:10)
+	6 - echo cave preschoolerb 	carlos (Whismur:8,Whismur:9,Whismur:10)
+	7 - echo cave acef 		vivian (Nidoran_F:10,Noibat:10,Roggenrola:10,Butterfree:11)
+	8 - vigore dam triathelete 	troy (Joltik:12,Electrike:12,Elekid:12)
+	9 - vigore dam expert 		chuck (Pidgey:12,Spearow:12,Scyther:12)
+	10 - vigore dam acem 		victor (Nidoran_M:12,Togedemaru:12,Sandile:13,Beedrill:13)
+	11 - egida gym scientistf 	sandy (Klink:14, Togedemaru:15)
+	12 - egida gym scientistm 	george (Klink:13, Aron:14, Magnemite:14)
+	13 - route 3 bug catcher	charlie (Joltik:14/100,Venipede:14/100,Beedrill:14/50,Butterfree:14/50)
+	14 - route 3 hiker 		bryson (Roggenrola:16/50,Dwebble:17/50)
+	15 - route 3 scientistf		rosa (Voltorb:15/50,Aron:15/50,Carbink:16)
+	16 - scarab l psychic		hugo (Drowzee:18/100,Chimecho:19/150)
+	17 - scarab l rich boy		leonard (Electrike:17/100,Nidorino:17/50,Luxio:18/50)
+	18 - scarab l acef		jesse (skitty:17/150, dunsparce:17/50, zubat:17/100, nuzleaf:18/100, heracross:18/50)
+	19 - scarab r beauty		lucille	(psyduck:19/100, nidorina:19/100, maractus:19/150)
+	20 - scarab l acem		james (mightyena:19/100, furret:19/100, murkrow:19/100, lombre:20/150, pinsir:20/100)
+	21 - route 3 battle girl	harper (machop: 21/150, nuzleaf: 21/200, zangoose: 21/120)
+	22 - route 3 fisher		santiago (magikarp: 19/50, magikarp: 20/50, magikarp: 21/50, magikarp: 22/50, magikarp: 23/400, gyarados: 24/100)
+	23 - route 3 fisher		curt (shellder: 22/100, krabby: 23/150, psyduck: 24/150)
+	24 - route 3 triathelete	ethan (ponyta: 23/150,pidgeotto: 23/250,seviper: 23/150)
+	25 - pia_gym lass		sophie (jigglypuff: 25/300, lopunny: 25/250) 
+	26 - pia_gym youngster		lucas (loudred: 25/200, zangoose: 25/150)
+	27 - pia_gym gentleman		anderson (dunsparce:24/100, pidgeotto: 24/300, noctowl:25/150)
+	28 - pia_gym preschoolerg	ellie (happiny:24/300, azurill:24/300, igglybuff:24/300, munchlax:24/300)
+	29 - mirror_cave hex		scarlett (misdreavus:26 mightyena:27 hypno:28)
+	30 - mirror_cave hiker		ben (geodude:28/200,onix:28/200,sudowoodo:28/200)
+	31 - route 4 expertm		owen (machoke:31/300 hitmonlee:31/300)
+	32 - route 4 battle girl	lily (gurdurr:32/300 hitmonchan:32/400)
+	33 - route 4 fisher		richard (kingler:30/300, crawdaunt:30/300, cloyster:32/300)
+	34 - route 4 expertf		stella (ferrothorn:40/400, scizor:40/400, steelix:40/400)
+	35 - route 5 psychic		lucas (mismagius:34/350, wobbuffet:35/400)
+	36 - route 5 bug catcher	ethan (joltik:32/400, joltik:32/400, spinarak:32/400, ariados:34/300)
+	37 - route 5 lass		emma (vulpix:32/400, furret:33/300, floatzel:34/300)
+	38 - route 5 beauty		aria (bellossom:34/300, roserade:34/300) 
+
+6 - Items
+	echo_cave:
+	0 - voltorb bot left
+	1 - voltorb bot mid
+	2 - voltorb bot right
+	3 - ground gem
+	4 - dwebble bot left
+	5 - dwebble bot mid
+	6 - dwebble bot right
+	7 - dwebble mid
+	8 - dwebble top
+	route_1:
+	9 - everstone
+	vigore_dam:
+	10 - common candy
+	11 - tm01 work up
+	cruise:
+	12 - pearl
+	route_3:
+	13 - heart scale
+	14 - miracle seed
+	35 - heart scale
+	house_1:
+	15 - (2) tiny mushroom
+	16 - (4) old candy
+	17 - (6) pokeball
+	27 - (10) expired candy
+	32 - (14) old candy
+	34 - (13) lum berry
+	house_2:
+	18 - (1) tiny mushroom
+	24 - (3) tiny mushroom
+	33 - (5) poffin
+	house_3:
+	49 - (3) tiny mushroom
+	50 - (4) expired candy
+	scarab_l:
+	19 - foongus
+	20 - tiny mushroom
+	21 - foongus
+	22 - big mushroom
+	23 - foongus
+	fiore:
+	25 - heart scale
+	26 - tm83 infestation
+	scarab_r:
+	28 - foongus
+	29 - foongus
+	30 - tiny mushroom
+	31 - common candy
+	mirror_cave:
+	36 - TM78 bulldoze
+	37 - geodude bot left
+	38 - geodude left
+	42 - geodude top
+	43 - geodude bot top
+	44 - geodude bot bot
+	45 - moon stone
+	pianura_gym:
+	39 - (1) old candy
+	40 - (4) old candy
+	41 - (5) luxury ball
+	route_4:
+	46 - rare candy
+	47 - tm69 rock polish
+	48 - luxury ball
+	route_5:
+	51 - petal 
+	52 - heart scale
+	
+#last: 51
+7 - Locations
+	0 - south am
+	1 - north am
+	2 - route 1
+	3 - egida
+	4 - route 2
+	5 - echo cave
+	6 - vigore dam
+	7 - route 3
+	8 - scarab_l
+	9 - fiore
+	10 - scarab_r
+	11 - pianura
+	12 - mirror cave
+	13 - route 4
+	14 - isola
+8 - Jobs
+	0 - Research [lvl,exp,[time,time,time]]
+	1 - Nursing  [lvl,exp,[poke,poke,poke]]
+9 - candyman
+	0 - no candy man
+	1 - yes
+10 - interacts
+	trees:
+	0 - [0,0,0,0] scarab l top
+	1 - [0,0,1,0] scarab l left
+	2 - [0,0,1,0] scarab l bot
+	3 - [0,0,0,1] scarab l mid top
+	4 - [0,1,0,0] scarab l mid bot
+	5 - [0,0,1,0] fiore left
+	6 - [0,0,0,1] fiore right up
+	7 - [0,0,0,0] fiore right down
+	8 - [0,1,0,0] scarab r left bot
+	9 - [1,0,0,0] scarab r left mid
+	10 - [0,0,1,0] scarab r left top
+	11 - [1,0,0,0] scarab r mid bot
+	12 - [0,0,0,0] scarab r mid mid
+	13 - [0,1,0,0] scarab r mid top
+	14 - [1,0,0,0] scarab r right top
+	15 - [0,0,0,1] scarab r right bot
+	16 - [0,0,0,0] route 2 phantump
+	17 - [0,0,0,0] route 4 mid left
+	18 - [0,0,0,0] route 4 mid right
+	19 - [0,0,0,0] route 5 bot
+	20 - [0,1,0,0] route 5 top
+	21 - [0,0,0,1] route 5 right
+11 - market
+	0 - maractus (money given > 10000? give)
+	1 - berry seller ([date,[shop],{stock}])
+	2 - ball roulette([date])
+	3 - free water ([date])
+	4 - mushroom collector ([small,large])
+	5 - pinap man ([date])
+	6 - massager ([date])
+	7 - seedot man ([date,[shop],{stock}])
+12 - trades
+	0: heracross
+		0 - kid in fiore left house
+		1 - likes karrablast
+		2 - wants to trade
+		3 - traded 1st evo
+		4 - wants to trade 2nd
+		5 - traded 2nd evo
+	1: pinsir
+		0 - kid in fiore right house
+		1 - likes shelmet
+		2 - wants to trade
+		3 - traded 1st evo
+		4 - wants to trade 2nd
+		5 - traded 2nd evo
+	2: clamperl
+		0 - 
+13 - birthday
+	None/[Date,prog]
+		0 - not entered pc
+		
+14 - nursery
+	None/[Poke/Date]
+15 - mega pokemon
+	0 - mega progress
+		0 - no mega
+		1 - mega unlocked
+		2 - one mega complete
+	1 - Beedrill
+		0 - not started
+		1 - beedril moves
+		2 - battle metapod
+		3 - successful battle
+	2 - Aggron
+	3 - Manectric
+		0 - not started
+		1 - first battle
+		2 - second battle
+		3 - third battle
+		4 - won all three
+	4 - Heracross
+		0 - not started
+		1 - move forward/battle
+		2 - won battle
+	5 - Pinsir
+		0 - not started
+		1 - move forward/battle
+		2 - won battle
+	6 - Lopunny
+		0 - not started
+		1 - player move forward/battle
+		2 - won battle
+	7 - Slowbro
+	8 - Steelix
+		0 - not started
+		1 - move forward/battle
+		2 - won battle
+	9 - Sableye
+		0 - not started
+		1 - failed left
+		2 - failed bot left
+		3 - failed mid
+		4 - failed right
+		5 - failed top right
+		6 - success
+	10 - Kangaskhan
+		0 - not started
+		1 - move forward/battle
+		2 - won battle
+16 - fisher dude
+	0 - guy in isola
+	1 - talk wants seedot
+	2 - got seedot
+
+Channels:
+	0 - bg effects
+	1 - sfx
+	2 - txt sfx
+
+jobs in city:
+am: beauty contest, race, tourney
+egida: mining, research
+town: gardening
+pianura: nursery, cooking
+
+isola: race
+verde: gardening, tourney 
+ghost: nursing
+water: cooking, research
+fairy: beauty, mining
+
+
+wonders of evolution:
+	1 - Evo Stone
+	2 - Special Items (Metal Coat)
+	3 - Trade Evo
+	4 - Friendship Evo
+	7 - Slowpoke
+	9 - Karrablast Shelmet
+
+legends of alto mare:
+	1 - Latias/Latios?
+	2 - Manaphy/Celebi/Victini?
+	3 - Forces of Nature
+	4 - Diancie
+
+food:
+jello-psychic
+sundae-ice
+
+
+30 lines per text 11 lines after "the foe poke"
+menu icons: Arial Regular, 18pt
+Foam size: 8 move up 5px color:#a5edfd Blur: 2
+box font: MS Gothic Regular
+shadows: 30% gauss blur: 10px half px under

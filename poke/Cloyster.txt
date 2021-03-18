@@ -1,0 +1,11 @@
+['Shell Armor','Skill Link']
+[1,1.9,1.7,3.6,.9,1.4]
+['Water',None]
+[]
+{1:['Hydro Pump','Shell Smash','Toxic Spikes','Withdraw','Supersonic','Protect','Aurora Beam'],13:'Spike Cannon',28:'Spikes',50:'Icicle Crash'}
+60
+132.5
+59
+117
+[]
+['Bivalve','Cloyster is capable of swimming in the sea.', 'It does so by swallowing water, then', 'jetting it out toward the rear. This', 'Pokemon shoots spikes from its shell using', 'the same system.'] 

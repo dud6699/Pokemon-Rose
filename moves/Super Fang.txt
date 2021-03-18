@@ -1,0 +1,10 @@
+Normal
+0
+???
+.9
+{}
+1
+10
+['The user chomps hard', 'on the target with', 'its sharp front', 'fangs. This cuts the', 'target\'s HP in half.']
+0
+0

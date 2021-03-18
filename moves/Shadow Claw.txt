@@ -1,0 +1,10 @@
+Ghost
+0
+70
+1
+{}
+1
+15
+['The user slashes', 'with a sharp claw', 'made from shadows.', 'Critical hits land', 'more easily.']
+0
+1

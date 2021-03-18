@@ -1,0 +1,10 @@
+Normal
+0
+???
+1
+{}
+1
+5
+['The user powerfully', 'wrings the target.', 'The more HP the', 'target has, the', 'greater the move\'s', 'power.']
+0
+0

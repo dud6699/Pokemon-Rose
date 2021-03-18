@@ -1,0 +1,3 @@
+['Held','Item']
+['An item to be held', 'by a Pokemon. It', 'doubles any prize', 'money received if', 'the holding Pokemon', 'joins a battle.']
+9600

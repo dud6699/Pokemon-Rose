@@ -1,0 +1,10 @@
+Electric
+1
+80
+1
+{0.3:['Par']}
+1
+15
+['The user strikes', 'everything around it', 'with a flare of', 'electricity. This', 'may also cause', 'paralysis.']
+0
+0

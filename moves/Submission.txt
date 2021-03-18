@@ -1,0 +1,10 @@
+Fighting
+0
+80
+.8
+{}
+1
+20
+['The user grabs the', 'target and', 'recklessly dives for', 'the ground. This', 'also damages the', 'user a little.']
+0
+0

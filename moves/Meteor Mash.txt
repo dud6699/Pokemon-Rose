@@ -1,0 +1,10 @@
+Steel
+0
+90
+.9
+{-.2:['AU']}
+1
+10
+['The target is hit', 'with a hard punch', 'fired like a meteor.', 'This may also raise', 'the user\'s Attack', 'stat.']
+0
+0

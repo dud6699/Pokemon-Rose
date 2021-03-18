@@ -1,0 +1,8 @@
+40
+True
+5
+1
+Dynamic
+0.5
+0.5
+['up', 'down', 'left', 'right', 'z', 'x', 'c', 'v']

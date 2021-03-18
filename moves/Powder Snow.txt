@@ -1,0 +1,10 @@
+Ice
+1
+40
+1
+{.1:['Frz']}
+1
+25
+['The user attacks', 'with a chilling gust', 'of powdery snow.', 'This may also freeze', 'the opposing', 'Pokemon.']
+0
+0

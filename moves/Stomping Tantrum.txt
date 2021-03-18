@@ -1,0 +1,10 @@
+Ground
+0
+75
+1
+{}
+1
+10
+['The user attacks in', 'frustration. If the', 'user\'s previous move', 'has failed, the', 'power of this move', 'doubles.']
+0
+0

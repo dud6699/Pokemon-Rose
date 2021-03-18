@@ -1,0 +1,10 @@
+Steel
+1
+65
+.85
+{.3:['AcD']}
+1
+10
+['The user lets loose', 'a flash of energy at', 'the target from its', 'polished body. This', 'may also lower the', 'target\'s accuracy.']
+0
+0

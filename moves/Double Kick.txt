@@ -1,0 +1,10 @@
+Fighting
+0
+30
+1
+{}
+1
+30
+['The target is', 'quickly kicked', 'twice in succession', 'using both feet.']
+0
+0

@@ -1,0 +1,3 @@
+['Held','Item']
+['A peculiar stone', 'that can make', 'certain species of', 'Pokemon evolve. It\'s', 'as round as a', 'Pokemon Egg.']
+4800

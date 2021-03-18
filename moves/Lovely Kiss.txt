@@ -1,0 +1,10 @@
+Normal
+2
+---
+.75
+{1:['Slp']}
+1
+10
+['With a scary face,', 'the user tries to', 'force a kiss on the', 'target. If it', 'succeeds, the target', 'falls asleep.']
+0
+0

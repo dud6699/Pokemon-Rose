@@ -1,0 +1,10 @@
+Rock
+1
+60
+1
+{-0.1:['AU','DU','SAU','SDU','SU']}
+1
+5
+['The user attacks', 'with a prehistoric', 'power. It may also', 'raise all the user\'s', 'stats at once.']
+0
+0

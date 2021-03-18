@@ -1,0 +1,10 @@
+Dark
+0
+80
+1
+{0.2:['DD']}
+1
+15
+['The user crunches up', 'the target with', 'sharp fangs. This', 'may also lower the', 'target\'s Defense', 'stat.']
+0
+0

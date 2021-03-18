@@ -1,0 +1,10 @@
+Flying
+2
+---
+100
+{}
+0
+10
+['The user lands and', 'rests its body. It', 'restores the user\'s', 'HP by up to half of', 'its max HP.']
+0
+0

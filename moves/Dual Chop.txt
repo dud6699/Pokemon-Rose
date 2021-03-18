@@ -1,0 +1,10 @@
+Dragon
+0
+40
+.9
+{}
+1
+15
+['The user attacks its', 'target by hitting it', 'with brutal strikes.', 'The target is hit', 'twice in a row.']
+0
+0

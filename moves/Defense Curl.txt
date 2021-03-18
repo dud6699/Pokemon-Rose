@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{1:['DU']}
+0
+40
+['The user curls up to', 'conceal weak spots', 'and raise its', 'Defense stat.']
+0
+0

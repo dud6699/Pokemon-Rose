@@ -1,0 +1,10 @@
+Psychic
+1
+100
+1
+{}
+1
+15
+['The user eats the', 'dreams of a sleeping', 'target. It absorbs', 'half the damage', 'caused to heal its', 'own HP.']
+0
+0

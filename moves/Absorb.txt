@@ -1,0 +1,10 @@
+Grass
+1
+20
+1
+{}
+1
+25
+['A nutrient-draining', 'attack. The user\'s', 'HP is restored by', 'half the damage', 'taken by the target.']
+0
+0

@@ -1,0 +1,10 @@
+Poison
+2
+---
+.9
+{1:['Psn']}
+1
+40
+['A cloud of poison', 'gas is sprayed in', 'the face of opposing', 'Pokemon, poisoning', 'those it hits.']
+0
+0

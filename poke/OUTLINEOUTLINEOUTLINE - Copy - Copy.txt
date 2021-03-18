@@ -1,0 +1,11 @@
+['Ability','*Hidden']
+[hp,atk,satk,def,sdef,spd]
+['Type',None]
+[lvl,'evo','evoskill']
+{1:['name'],lvl:'name'}
+catch rate
+weight(kg)
+height(inch)
+dex num
+[] locations
+['category','description(43 per line 5 max)'] 

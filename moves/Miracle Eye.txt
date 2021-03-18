@@ -1,0 +1,10 @@
+Psychic
+2
+---
+100
+{}
+1
+40
+['Enables a Dark-type', 'target to be hit by', 'Psychic-type', 'attacks. This also', 'enables an evasive', 'target to be hit.']
+0
+0

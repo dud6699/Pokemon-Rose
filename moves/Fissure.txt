@@ -1,0 +1,10 @@
+Ground
+0
+---
+.3
+{}
+1
+5
+['The user opens up a', 'fissure in the', 'ground and drops the', 'target in. The', 'target faints if', 'this attack hits.']
+0
+4

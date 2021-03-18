@@ -1,0 +1,10 @@
+Steel
+2
+---
+.85
+{1:['SDD','SDD']}
+1
+40
+['A horrible sound', 'like scraping metal', 'harshly lowers the', 'target\'s Sp. Def', 'stat.']
+0
+0

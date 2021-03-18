@@ -1,0 +1,10 @@
+Water
+1
+150
+1
+{}
+1
+5
+['The user spouts', 'water to damage', 'opposing Pokemon.', 'The lower the user\'s', 'HP, the lower the', 'move\'s power.']
+0
+0

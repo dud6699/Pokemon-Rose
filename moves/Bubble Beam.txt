@@ -1,0 +1,10 @@
+Water
+1
+65
+1
+{0.1:['SD']}
+1
+20
+['A spray of bubbles', 'is forcefully', 'ejected at the', 'target. This may', 'also lower its Speed', 'stat.']
+0
+0

@@ -1,0 +1,11 @@
+['Intimidate']
+[1.9,2.5,1.2,1.58,2,1.62]
+['Water','Flying']
+['Mega','Mega_Gyarados']
+{1:['Bite','Thrash'],21:'Leer',24:'Twister',27:'Ice Fang',30:'Aqua Tail',33:'Scary Face',36:'Dragon Rage',39:'Crunch',42:'Hydro Pump',45:'Dragon Dance',51:'Rain Dance',54:'Hyper Beam'}
+45
+235
+256
+902
+[]
+['Atrocious','Once Gyarados goes on a rampage, its', 'ferociously violent blood doesn\'t calm', 'until it has burned everything down. There', 'are records of this Pokemon\'s rampages', 'lasting a whole month.'] 

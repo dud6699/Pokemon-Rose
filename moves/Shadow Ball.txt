@@ -1,0 +1,10 @@
+Ghost
+1
+80
+1
+{.2:['SDD']}
+1
+15
+['The user hurls a', 'shadowy blob at the', 'target. This may', 'also lower the', 'target\'s Sp. Def', 'stat.']
+0
+0

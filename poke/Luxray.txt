@@ -1,0 +1,7 @@
+['Intimidate','Rivalry']
+[1.6,2.4,1.9,1.58,1.58,1.68]
+['Electric',None]
+[]
+{1:['Electric Terrain','Tackle','Leer','Charge'],5:'Leer',9:'Spark',13:'Charge',18:'Bite',23:'Roar',28:'Swagger',35:'Thunder Fang',42:'Crunch',49:'Scary Face',56:'Discharge',63:'Wild Charge',67:'Electric Terrain'}
+45
+42

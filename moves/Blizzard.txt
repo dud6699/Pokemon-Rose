@@ -1,0 +1,10 @@
+Ice
+1
+110
+.7
+{.1:['Frz']}
+1
+5
+['A howling blizzard', 'is summoned to', 'strike opposing', 'Pokemon. This may', 'also leave the', 'target frozen.']
+0
+0

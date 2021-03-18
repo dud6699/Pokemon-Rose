@@ -1,0 +1,10 @@
+Fire
+0
+50
+1
+{-1:['SU']}
+1
+20
+['Cloaking itself in', 'flame, the user', 'attacks. It then', 'builds up more power', 'to raise its Speed', 'stat.']
+0
+0

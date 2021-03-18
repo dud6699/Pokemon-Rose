@@ -1,0 +1,10 @@
+Bug
+1
+60
+1
+{-.1:['AU','SAU','DU','SDU','SU']}
+1
+5
+['The target is', 'attacked with', 'powdery scales blown', 'by the wind. This', 'may also raise all', 'the user\'s stats.']
+0
+0

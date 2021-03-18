@@ -1,0 +1,10 @@
+Steel
+2
+---
+100
+{1:['SU','SU','AU']}
+0
+10
+['The user rotates its', 'gears, raising its', 'Attack stat and', 'sharply raising its', 'Speed stat.']
+0
+0

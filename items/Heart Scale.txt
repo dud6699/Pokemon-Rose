@@ -1,0 +1,3 @@
+['Heart Scale','Item']
+['A pretty, heart-','shaped scale that is', 'extremely rare. It', 'can be used to teach', 'a Pokemon an old', 'move.']
+1000

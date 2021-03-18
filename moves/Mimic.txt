@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+1
+10
+['The user copies the', 'target\'s last move.', 'The move can be used', 'during battle until', 'the Pokemon is', 'switched out.']
+0
+0

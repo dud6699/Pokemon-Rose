@@ -1,0 +1,10 @@
+Psychic
+2
+---
+100
+{1:['SU','SU']}
+0
+30
+['The user relaxes', 'and lightens its', 'body to move', 'faster. This sharply', 'raises the Speed', 'stat.']
+0
+0

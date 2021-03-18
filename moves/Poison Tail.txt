@@ -1,0 +1,10 @@
+Poison
+0
+50
+1
+{.1:['Psn']}
+1
+25
+['The user hits the', 'target with its', 'tail. This may also', 'poison the target.', 'Critical hits land', 'more easily.']
+0
+1

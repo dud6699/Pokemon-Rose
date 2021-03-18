@@ -1,0 +1,10 @@
+Normal
+0
+30
+1
+{}
+1
+10
+['This attack hits a', 'target using a move', 'such as Protect or', 'Detect.']
+2
+0

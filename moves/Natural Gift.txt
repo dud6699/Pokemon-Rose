@@ -1,0 +1,10 @@
+Normal
+2
+???
+1
+{}
+1
+15
+['The user draws power', 'to attack by using', 'its held Berry. The', 'Berry determines the', 'move\'s type and', 'power.']
+0
+0

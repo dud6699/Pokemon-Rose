@@ -1,0 +1,10 @@
+Grass
+2
+---
+1
+{1:['SD','SD']}
+1
+40
+['The user releases', 'cotton-like spores', 'that cling to the', 'opposing Pokemon,', 'which harshly lowers', 'their Speed stat.']
+0
+0

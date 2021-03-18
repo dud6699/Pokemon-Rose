@@ -1,0 +1,10 @@
+Dark
+0
+70
+1
+{}
+1
+15
+['The user slashes the', 'target the instant', 'an opportunity', 'arises. Critical', 'hits land more', 'easily.']
+0
+1

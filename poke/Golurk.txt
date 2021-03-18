@@ -1,0 +1,11 @@
+['Iron Fist','Klutz']
+[1.78,2.48,1.1,1.6,1.6,1.1]
+['Ground','Ghost']
+[]
+{1:['Heavy Slam','High Horsepower','Pound','Astonish','Defense Curl','Mud-Slap'],5:'Mud-Slap',9:'Rollout',13:'Shadow Punch',17:'Iron Defense',21:'Stomping Tantrum',25:'Mega Punch',30:'Magnitude',35:'Dynamic Punch',40:'Night Shade',47:'Curse',54:'Earthquake',61:'Hammer Arm',69:'Focus Punch',76:'Phantom Force'}
+90
+330
+110
+126
+[]
+['Automaton','It flies across the sky at Mach speeds.', 'Removing the seal on its chest makes its', 'internal energy go out of control.'] 

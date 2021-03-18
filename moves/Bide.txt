@@ -1,0 +1,10 @@
+Normal
+0
+---
+100
+{}
+1
+10
+['The user endures', 'attacks for two', 'turns, then strikes', 'back to cause double', 'the damage taken.']
+1
+0

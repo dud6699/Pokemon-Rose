@@ -1,0 +1,10 @@
+Electric
+1
+60
+100
+{}
+1
+20
+['The user strikes the', 'target with a quick', 'jolt of electricity.', 'This attack never', 'misses.']
+0
+0

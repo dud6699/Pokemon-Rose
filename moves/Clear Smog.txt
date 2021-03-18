@@ -1,0 +1,10 @@
+Poison
+2
+50
+100
+{}
+1
+15
+['The user attacks by', 'throwing a clump of', 'special mud. All', 'stat changes are', 'returned to normal.']
+0
+0

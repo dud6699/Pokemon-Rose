@@ -1,0 +1,3 @@
+['Infestation','TM']
+['The target is', 'infested and', 'attacked for four to', 'five turns. The', 'target can\'t flee', 'during this time.']
+-1

@@ -1,0 +1,10 @@
+Normal
+2
+---
+0.55
+{1:['Cfs']}
+1
+20
+['The user generates', 'odd sound waves from', 'its body that', 'confuse the target.']
+0
+0

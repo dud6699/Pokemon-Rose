@@ -1,0 +1,10 @@
+Bug
+1
+90
+1
+{0.1:['SDD']}
+1
+10
+['The user generates a', 'damaging sound wave.', 'This may also lower', 'the target\'s Sp. Def', 'stat.']
+0
+0

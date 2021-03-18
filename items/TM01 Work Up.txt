@@ -1,0 +1,3 @@
+['Work Up','TM']
+['The user is roused,', 'and its Attack and', 'Sp. Atk stats', 'increase.']
+-1

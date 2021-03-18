@@ -1,0 +1,10 @@
+Dark
+0
+20
+1
+{}
+1
+10
+['The user boasts its', 'strength and attacks', 'the target. The more', 'the user\'s stats are', 'raised, the greater', 'the move\'s power.']
+0
+0

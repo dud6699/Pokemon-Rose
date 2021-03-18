@@ -1,0 +1,10 @@
+Dragon
+0
+120
+1
+{}
+1
+10
+['The user rampages', 'and attacks for two', 'to three turns. The', 'user then becomes', 'confused.']
+0
+0

@@ -1,0 +1,3 @@
+['Ball','Ball']
+['A somewhat different', 'Poke Ball that is', 'more effective when', 'attempting to catch', 'Water- or Bug-type', 'Pokemon.']
+1000

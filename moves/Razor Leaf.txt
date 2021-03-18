@@ -1,0 +1,10 @@
+Grass
+0
+55
+.95
+{}
+1
+25
+['Sharp-edged leaves', 'are launched to', 'slash at the', 'opposing Pokémon.', 'Critical hits land', 'more easily.']
+0
+1

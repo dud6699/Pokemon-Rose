@@ -1,0 +1,10 @@
+Normal
+2
+---
+.55
+{1:['Slp']}
+1
+15
+['A soothing lullaby', 'is sung in a calming', 'voice that puts the', 'target into a deep', 'slumber.']
+0
+0

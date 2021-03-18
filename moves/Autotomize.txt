@@ -1,0 +1,10 @@
+Steel
+2
+---
+100
+{1:['SU','SU']}
+0
+15
+['The user sheds part', 'of its body to make', 'itself lighter and', 'sharply raise its', 'Speed stat.']
+0
+0

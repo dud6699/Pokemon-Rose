@@ -1,0 +1,10 @@
+Water
+0
+85
+1
+{.2:['DD']}
+1
+10
+['The user slams into', 'the target using a', 'full-force blast of', 'water. This may also', 'lower the target\'s', 'Defense stat.']
+0
+0

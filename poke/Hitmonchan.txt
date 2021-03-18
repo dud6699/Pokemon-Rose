@@ -1,0 +1,11 @@
+['Keen Eye','Iron Fist']
+[1,2.1,.7,1.58,2.2,1.52]
+['Fighting',None]
+[]
+{1:['Comet Punch','Close Combat','Counter','Focus Punch','Revenge','Agility','Pursuit','Mach Punch'],6:'Agility',11:'Pursuit',16:['Mach Punch','Bullet Punch'],21:'Feint',26:'Vacuum Wave',31:'Quick Guard',36:['Thunder Punch','Fire Punch','Ice Punch'],41:'Sky Uppercut',46:'Mega Punch',50:'Detect',56:'Focus Punch',61:'Counter',66:'Close Combat'}
+45
+50.2
+55
+934
+[]
+['Punching','Hitmonchan is said to possess the spirit of', 'a boxer who had been working toward a world', 'championship. This Pokemon has an', 'indomitable spirit and will never give up', 'in the face of adversity.'] 

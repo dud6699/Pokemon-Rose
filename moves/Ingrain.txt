@@ -1,0 +1,10 @@
+Grass
+2
+---
+100
+{}
+0
+20
+['The user lays roots', 'that restore its HP', 'on every turn.', 'Because it\'s rooted,', 'it can\'t switch out.']
+0
+0

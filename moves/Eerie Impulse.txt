@@ -1,0 +1,10 @@
+Electric
+2
+---
+1
+{1:['SAD','SAD']}
+1
+15
+['The user\'s body', 'generates an eerie', 'impulse which', 'harshly lowers the', 'target\'s Sp. Atk', 'stat.']
+0
+0

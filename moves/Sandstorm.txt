@@ -1,0 +1,10 @@
+Rock
+2
+---
+100
+{}
+1
+10
+['A sandstorm is', 'summoned to hurt all', 'combatants except', 'Rock, Ground, and', 'Steel types.']
+0
+0

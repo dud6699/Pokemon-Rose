@@ -1,0 +1,3 @@
+['Ball','Ball']
+['A somewhat different', 'Poke Ball that', 'becomes more', 'effective the lower', 'the level of the', 'wild Pokemon.']
+1000

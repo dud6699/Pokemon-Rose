@@ -1,0 +1,10 @@
+Fire
+1
+70
+1
+{}
+1
+15
+['The user attacks the', 'target with a', 'bursting flame.']
+0
+0

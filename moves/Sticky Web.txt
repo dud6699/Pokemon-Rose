@@ -1,0 +1,10 @@
+Bug
+2
+---
+100
+{}
+1
+20
+['The user weaves a', 'sticky net around', 'the opposing team,', 'which lowers their', 'Speed stat upon', 'switching in.']
+0
+0

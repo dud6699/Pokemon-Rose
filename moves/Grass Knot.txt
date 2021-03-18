@@ -1,0 +1,10 @@
+Grass
+2
+---
+1
+{}
+1
+20
+['The user snares the', 'target with grass', 'and trips it. The', 'heavier the target,', 'the greater the', 'move\'s power.']
+0
+0

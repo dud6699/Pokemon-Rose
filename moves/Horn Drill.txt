@@ -1,0 +1,10 @@
+Normal
+0
+---
+.3
+{}
+1
+5
+['The user stabs the', 'target with a horn', 'that rotates like a', 'drill. The target', 'faints instantly if', 'this attack hits.']
+0
+4

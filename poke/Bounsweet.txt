@@ -1,0 +1,11 @@
+['Leaf Guard']
+[1.1,1.1,0.8,1.3,1.3,0.9]
+['Grass',None]
+[18,'Steenee','Double Slap']
+{1:['Splash','Pound'],5:'Play Nice',8:'Razor Leaf', 11:'Swagger',14:'Rapid Spin',18:'Sweet Scent',21:'Magical Leaf',25:'Teeter Dance',29:'Flail',33:'Aromatic Mist'}
+235
+3.2
+12
+1
+[]
+['Fruit','It tries to resist being swallowed by a', 'bird Pokemon by spinning the sepals on its', 'head. It\'s usually a fruitless attempt.']

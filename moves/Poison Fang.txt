@@ -1,0 +1,10 @@
+Poison
+0
+50
+1
+{.3:['BPs']}
+1
+15
+['The user bites the', 'target with toxic', 'fangs. This may also', 'leave the target', 'badly poisoned.']
+0
+0

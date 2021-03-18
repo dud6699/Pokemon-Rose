@@ -1,0 +1,10 @@
+Psychic
+1
+???
+1
+{}
+1
+15
+['The target is', 'attacked with an odd', 'psychic wave. The', 'attack varies in', 'intensity.']
+0
+0

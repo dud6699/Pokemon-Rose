@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+0
+10
+['The user maximizes', 'its Attack stat in', 'exchange for HP', 'equal to half its', 'max HP.']
+0
+0

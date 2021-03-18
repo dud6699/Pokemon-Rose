@@ -1,0 +1,10 @@
+Normal
+1
+80
+1
+{}
+1
+10
+['After a turn of', 'charging, blades of', 'wind hit opposing', 'Pokemon. Critical', 'hits land more','easily.']
+0
+3

@@ -1,0 +1,11 @@
+['Moxie','Intimidate']
+[1.9,2.34,1.3,1.6,1.4,1.84]
+['Ground','Dark']
+[]
+{1:['Thrash','Power Trip','Leer','Rage','Bite','Sand Attack'],4:'Bite',7:'Sand Attack',10:'Torment',13:'Sand Tomb',16:'Assurance',19:'Mud-Slap',22:'Embargo',25:'Swagger',28:'Crunch',32:'Dig',36:'Scary Face',42:'Foul Play',48:'Sandstorm',54:'Earthquake',60:'Outrage'}
+45
+96.3
+59
+144
+[]
+['Intimidation','They never allow prey to escape. Their jaws', 'are so powerful, they can crush the body of', 'an automobile.']

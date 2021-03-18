@@ -1,0 +1,10 @@
+Grass
+2
+---
+100
+{}
+0
+10
+['In addition to', 'protecting the user', 'from attacks, this', 'move also damages', 'anyone who makes', 'direct contact.']
+4
+0

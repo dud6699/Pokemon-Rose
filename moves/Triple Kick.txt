@@ -1,0 +1,10 @@
+Fighting
+0
+10
+.9
+{}
+1
+10
+['A consecutive three-','kick attack that', 'becomes more', 'powerful with each', 'successive hit.']
+0
+0

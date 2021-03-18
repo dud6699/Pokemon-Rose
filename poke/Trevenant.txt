@@ -1,0 +1,11 @@
+['Natural Cure']
+[1.7,2.2,1.3,1.52,1.64,1.12]
+['Ghost','Grass']
+[]
+{1:['Shadow Claw','Horn Leech','Tackle','Confuse Ray','Astonish','Growth'],5:'Astonish',8:'Growth',13:'Ingrain',19:'Feint Attack',23:'Leech Seed',28:'Curse',31:'Will-O-Wisp',35:'Forest\'s Curse',39:'Destiny Bond',45:'Phantom Force',49:'Wood Hammer',54:'Horn Leech'}
+60
+71
+59
+106
+[]
+['Elder Tree','Using its roots as a nervous system, it', 'controls the trees in the forest. It\'s kind', 'to the Pokemon that reside in its body.'] 

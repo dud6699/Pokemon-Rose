@@ -1,0 +1,10 @@
+Dark
+2
+---
+1
+{}
+1
+15
+['This move prevents', 'the target from', 'using its held item', 'for five turns. Its', 'Trainer also can\'t', 'use items on it.']
+0
+0

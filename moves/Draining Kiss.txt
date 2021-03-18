@@ -1,0 +1,10 @@
+Fairy
+1
+5
+1
+{}
+1
+10
+['The user steals the', 'target\'s HP with a', 'kiss. The user\'s HP', 'is restored by over', 'half of the damage', 'taken by the target.']
+0
+0

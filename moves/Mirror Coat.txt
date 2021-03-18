@@ -1,0 +1,10 @@
+Psychic
+1
+---
+1
+{}
+1
+20
+['A retaliation move', 'that counters any', 'special attack,', 'inflicting double', 'the damage taken.']
+-5
+0

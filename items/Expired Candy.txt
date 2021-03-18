@@ -1,0 +1,3 @@
+['Candy','Medicine']
+['A candy that has', 'gone bad. When', 'consumed, it will', 'decrease the level', 'of a Pokemon by one.']
+60

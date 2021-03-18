@@ -1,0 +1,10 @@
+Normal
+0
+80
+1
+{}
+1
+15
+['The target is', 'slugged with a punch', 'thrown at maximum', 'power.']
+0
+0

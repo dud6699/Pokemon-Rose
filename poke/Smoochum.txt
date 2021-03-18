@@ -1,0 +1,11 @@
+['Oblivious','Forewarn']
+[.9,.6,1.7,.3,1.3,1.3]
+['Ice','Psychic']
+[30,'Jynx']
+{1:['Pound'],5:'Lick',8:'Sweet Kiss',11:'Powder Snow',15:'Confusion',18:'Sing',21:'Heart Stamp',25:'Mean Look',28:'Fake Tears',31:'Lucky Chant',35:'Avalanche',38:'Psychic',41:'Copycat',45:'Perish Song',48:'Blizzard'}
+45
+6
+16
+950
+[]
+['Kiss','Smoochum actively runs about, but also', 'falls quite often. Whenever the chance', 'arrives, it will look for its reflection to', 'make sure its face hasn\'t become dirty.'] 

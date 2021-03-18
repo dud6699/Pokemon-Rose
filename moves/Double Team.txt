@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{1:['EvU']}
+0
+15
+['By moving rapidly,', 'the user makes', 'illusory copies of', 'itself to raise its', 'evasiveness.']
+0
+0

@@ -1,0 +1,10 @@
+Normal
+0
+60
+1
+{}
+1
+25
+['The user endearingly', 'approaches the', 'target, then steals', 'the target\'s held', 'item.']
+0
+0

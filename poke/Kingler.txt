@@ -1,0 +1,11 @@
+['Hyper Cutter','Shell Armor']
+[1.1,2.6,1,2.3,1,1.5]
+['Water',None]
+[]
+{1:['Mud Sport','Bubble','Vice Grip','Leer'],5:'Vice Grip',9:'Leer',11:'Harden',15:'Bubble Beam',19:'Mud Shot',21:'Metal Claw',25:'Stomp',32:'Protect',37:'Guillotine',44:'Slam',51:'Brine',56:'Crabhammer',63:'Flail'}
+60
+60
+51
+113
+['route_5b']
+['Pincer','Kingler has an enormous, oversized claw. It', 'waves this huge claw in the air to', 'communicate with others. However, because', 'the claw is so heavy, the Pokemon quickly', 'tires.'] 

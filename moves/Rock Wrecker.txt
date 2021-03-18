@@ -1,0 +1,10 @@
+Rock
+0
+150
+.9
+{}
+1
+5
+['The user launches a', 'huge boulder at the', 'target to attack.', 'The user can\'t move', 'on the next turn.']
+0
+5

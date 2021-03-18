@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+0
+10
+['While it is asleep,', 'the user randomly', 'uses one of the', 'moves it knows.']
+0
+0

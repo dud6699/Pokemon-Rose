@@ -1,0 +1,11 @@
+['Flame Body']
+[1.24,1.6,1.3,1.1,1.1,1.68]
+['Fire','Flying']
+[36,'Talonflame']
+{1:['Ember','Tackle','Growl','Quick Attack'],6:'Quick Attack',10:'Peck',13:'Agility',16:'Flail',20:'Aerial Ace',25:'Flame Charge',27:'Razor Wind',31:'Natural Gift',38:'Roost',42:'Acrobatics',46:'Flare Blitz',51:'Tailwind',55:'Steel Wing'}
+120
+16
+28
+5
+[]
+['Ember','The hotter the flame sac on its belly, the', 'faster it can fly, but it takes some time', 'to get the fire going.']

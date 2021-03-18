@@ -1,0 +1,10 @@
+Dark
+0
+95
+1
+{}
+1
+15
+['The user turns the', 'target\'s power', 'against it. The', 'higher the target\'s', 'Attack, the greater', 'the move\'s power.']
+0
+0

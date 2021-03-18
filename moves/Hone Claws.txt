@@ -1,0 +1,10 @@
+Dark
+2
+---
+100
+{1:['AU','AcU']}
+0
+15
+['The user sharpens', 'its claws to boost', 'its Attack stat and', 'accuracy.']
+0
+0

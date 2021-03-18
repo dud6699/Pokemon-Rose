@@ -1,0 +1,10 @@
+Normal
+1
+150
+.9
+{}
+1
+5
+['The target is', 'attacked with a', 'powerful beam. The', 'user can\'t move on', 'the next turn.']
+0
+5

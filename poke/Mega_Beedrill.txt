@@ -1,0 +1,11 @@
+['Adaptability']
+[1.3,3,.3,.8,1.6,2.9]
+['Bug','Poison']
+[]
+{1:['Twineedle'],11:'Fury Attack',14:'Rage',17:'Pursuit',20:'Focus Energy',23:'Venoshock',26:'Assurance',29:'Toxic Spikes',32:'Pin Missile',35:'Poison Jab',38:'Agility',41:'Endeavor',44:'Fell Stinger'}
+45
+40.5
+55
+19
+[]
+['Poison Bee','Its legs are poisonous stingers. It stabs', 'its prey repeatedly with the stingers on', 'its limbs, dealing the final blow with the', 'stinger on its rear.']

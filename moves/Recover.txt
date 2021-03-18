@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+0
+10
+['Restoring its own', 'cells, the user', 'restores its own HP', 'by half of its max', 'HP.']
+0
+0

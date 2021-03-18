@@ -1,0 +1,11 @@
+['Frisk','Infiltrator']
+[1.7,1.4,1.94,1.6,1.6,2.46]
+['Flying','Dragon']
+[]
+{1:['Boomburst','Dragon Pulse','Hurricane','Moonlight','Screech','Supersonic','Tackle','Absorb'],5:'Absorb',11:'Gust',13:'Bite',16:'Wing Attack',18:'AGility',23:'Air Cutter',27:'Roost',31:'Razor Wind',35:'Tailwind',40:'Whirlwind',43:'Super Fang',53:'Air Slash',62:'Hurricane',70:'Dragon Pulse',75:'Boomburst'}
+45
+85
+59
+55
+[]
+['Sound Wave','The ultrasonic waves it emits from its ears', 'can reduce a large boulder to pebbles. It', 'swoops out of the dark to attack.']

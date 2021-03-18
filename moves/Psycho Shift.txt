@@ -1,0 +1,10 @@
+Psychic
+2
+---
+1
+{}
+1
+10
+['Using its psychic', 'power of suggestion,', 'the user transfers', 'its status', 'conditions to the', 'target.']
+0
+0

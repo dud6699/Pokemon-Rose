@@ -1,0 +1,10 @@
+Normal
+0
+65
+1
+{}
+1
+25
+['The target is jabbed', 'with a sharply', 'pointed horn to', 'inflict damage.']
+0
+0

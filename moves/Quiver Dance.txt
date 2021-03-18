@@ -1,0 +1,10 @@
+Bug
+2
+---
+100
+{1:['SAU','SDU','SU']}
+0
+20
+['The user lightly', 'performs a mystic', 'dance. This boosts', 'the user\'s Sp. Atk,', 'Sp. Def, and Speed', 'stats.']
+0
+0

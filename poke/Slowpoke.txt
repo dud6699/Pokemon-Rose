@@ -1,0 +1,11 @@
+['Oblivious','Own Tempo']
+[1.8,1.3,.8,1.3,.8,.3]
+['Water','Psychic']
+[37,'Slowbro','Withdraw']
+{1:['Curse','Yawn','Tackle'],5:'Growl',9:'Water Gun',14:'Confusion',19:'Disable',23:'Headbutt',28:'Water Pulse',32:'Zen Headbutt',36:'Slack Off',41:'Amnesia',45:'Psychic',49:'Rain Dance',54:'Psych Up',58:'Heal Pulse'}
+190
+36
+50
+118
+['route_3b']
+['Dopey','Slowpoke uses its tail to catch prey by', 'dipping it in water at the side of a river.', 'However, this Pokemon often forgets what', 'it\'s doing and often spends entire days', 'just loafing at water\'s edge.'] 

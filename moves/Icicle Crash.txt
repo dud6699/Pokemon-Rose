@@ -1,0 +1,10 @@
+Ice
+0
+85
+.9
+{.3:['Fln']}
+1
+10
+['The user attacks by', 'harshly dropping', 'large icicles onto', 'the target. This may', 'also make the target', 'flinch.']
+0
+0

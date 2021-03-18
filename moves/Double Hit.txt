@@ -1,0 +1,10 @@
+Normal
+0
+35
+.9
+{}
+1
+10
+['The user slams the', 'target with a long', 'tail, vines, or a', 'tentacle. The target', 'is hit twice in a', 'row.']
+0
+0

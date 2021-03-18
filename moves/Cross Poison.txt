@@ -1,0 +1,10 @@
+Poison
+0
+70
+1
+{.1:['Psn']}
+1
+20
+['A slashing attack', 'with a poisonous', 'blade that may also', 'poison the target.', 'Critical hits land', 'more easily.']
+0
+1

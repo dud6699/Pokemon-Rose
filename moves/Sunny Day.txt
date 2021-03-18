@@ -1,0 +1,10 @@
+Fire
+2
+---
+100
+{}
+0
+5
+['The user intensifies', 'the sun for five', 'turns, powering up', 'Fire-type moves. It', 'lowers the power of', 'Water-type moves.']
+0
+0

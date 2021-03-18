@@ -1,0 +1,3 @@
+['Sandstorm','TM']
+['A sandstorm is', 'summoned to hurt all', 'combatants except', 'Rock, Ground, and', 'Steel types.']
+-1

@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+0
+10
+['The user recycles a', 'held item that has', 'been used in battle', 'so it can be used', 'again.']
+0
+0

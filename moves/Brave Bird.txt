@@ -1,0 +1,10 @@
+Flying
+0
+120
+1
+{}
+1
+15
+['The user tucks in', 'its wings and', 'charges from a low', 'altitude. This also', 'damages the user', 'quite a lot.']
+0
+0

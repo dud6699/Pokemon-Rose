@@ -1,0 +1,10 @@
+Fighting
+2
+---
+100
+{1:['AU','DU']}
+0
+20
+['The user tenses its', 'muscles to bulk up', 'its body, raising', 'both its Attack and', 'Defense stats.']
+0
+0

@@ -1,0 +1,10 @@
+Normal
+2
+---
+1
+{1:['DD']}
+1
+30
+['The user gives', 'opposing Pokemon an', 'intimidating leer', 'that lowers the', 'Defense stat.']
+0
+0

@@ -1,0 +1,10 @@
+Psychic
+2
+---
+1
+{}
+1
+10
+['The user catches the', 'target off guard and', 'swaps its held item', 'with its own.']
+0
+0

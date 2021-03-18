@@ -1,0 +1,10 @@
+Grass
+2
+---
+.55
+{1:['Slp']}
+1
+15
+['The user plays a', 'pleasant melody that', 'lulls the target', 'into a deep sleep.']
+0
+0

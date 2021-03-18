@@ -1,0 +1,10 @@
+Fighting
+0
+120
+1
+{-1:['DD','SDD']}
+1
+5
+['The user fights the', 'target up close', 'without guarding', 'itself. This lowers', 'the user\'s Defense', 'and Sp. Def stats.']
+0
+0

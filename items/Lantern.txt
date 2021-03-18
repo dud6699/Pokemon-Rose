@@ -1,0 +1,3 @@
+['Use','Key']
+['A handy lantern that', 'can be used to shed', 'light in very dark', 'places.']
+-1

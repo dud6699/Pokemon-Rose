@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{1:['AU','SAU']}
+0
+30
+['The user is roused,', 'and its Attack and', 'Sp. Atk stats', 'increase.']
+0
+0

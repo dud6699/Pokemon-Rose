@@ -1,0 +1,11 @@
+['Flame Body']
+[1.66,1.72,1.58,1.42,1.38,2.52]
+['Fire','Flying']
+[]
+{1:['Ember','Brave Bird','Flare Blitz','Tackle','Growl','Quick Attack','Peck'],6:'Quick Attack',10:'Peck',13:'Agility',16:'Flail',20:'Aerial Ace',25:'Flame Charge',27:'Razor Wind',31:'Natural Gift',39:'Roost',44:'Acrobatics',49:'Flare Blitz',55:'Tailwind',60:'Steel Wing',64:'Brave Bird'}
+45
+24.5
+47
+6
+[]
+['Scorching','In the fever of an exciting battle, it', 'showers embers from the gaps between its', 'feathers and takes to the air.']

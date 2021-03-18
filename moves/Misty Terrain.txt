@@ -1,0 +1,10 @@
+Fairy
+2
+---
+100
+{}
+0
+10
+['This protects', 'Pokemon on the', 'ground from statuses', 'and halves Dragon-','type damage for five', 'turns.']
+0
+0

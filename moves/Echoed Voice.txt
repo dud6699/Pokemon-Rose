@@ -1,0 +1,10 @@
+Normal
+1
+40
+1
+{}
+1
+15
+['The user attacks the', 'target with an', 'echoing voice. If', 'this move is used', 'every turn, its', 'power is increased.']
+0
+0

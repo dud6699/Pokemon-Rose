@@ -1,0 +1,11 @@
+['Effect Spore']
+[1.28,1.1,1.1,.9,1.1,.3]
+['Grass','Poison']
+[39,'Amoonguss']
+{1:['Absorb'],6:'Growth',8:'Astonish',12:'Bide',15:'Mega Drain',18:'Ingrain',20:'Feint Attack',24:'Sweet Scent',28:'Giga Drain',32:'Toxic',35:'Synthesis',39:'Clear Smog',43:'Solar Beam',45:'Sludge Bomb',50:'Spore'}
+190
+1
+8
+90
+['route_5']
+['Mushroom','It lures Pokemon with its pattern that', 'looks just like a Poke Ball then releases', 'poison spores.']

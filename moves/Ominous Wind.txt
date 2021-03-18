@@ -1,0 +1,10 @@
+Ghost
+1
+60
+1
+{-0.1:['AU','DU','SAU','SDU','SU']}
+1
+5
+['The user blasts the', 'target with a gust', 'of repulsive wind.', 'This may also raise', 'all the user\'s stats', 'at once.']
+0
+0

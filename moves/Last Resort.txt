@@ -1,0 +1,10 @@
+Normal
+0
+140
+1
+{}
+1
+5
+['This move can be', 'used only after the', 'user has used all', 'the other moves it', 'knows in the battle.']
+0
+0

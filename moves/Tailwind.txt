@@ -1,0 +1,10 @@
+Flying
+2
+---
+100
+{}
+0
+15
+['The user whips up a', 'whirlwind that ups', 'the Speed stat of', 'the user and its', 'allies for four', 'turns.']
+0
+0

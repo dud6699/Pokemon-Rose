@@ -1,0 +1,3 @@
+['Held','Item']
+['An item to be held', 'by a Pokemon. It', 'extends the duration', 'of the move', 'Sandstorm when used', 'by the holder.']
+1600

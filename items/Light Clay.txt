@@ -1,0 +1,3 @@
+['Held','Item']
+['An item to be held', 'by a Pokemon.', 'Protective moves', 'like Light Screen', 'and Reflect will be', 'effective longer.']
+2400

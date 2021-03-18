@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+0
+5
+['The user makes a', 'soothing bell chime', 'to heal the status', 'conditions of all', 'the party Pokemon.']
+0
+0

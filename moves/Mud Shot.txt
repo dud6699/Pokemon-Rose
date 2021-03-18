@@ -1,0 +1,10 @@
+Ground
+1
+55
+.95
+{1:['SD']}
+1
+15
+['The user attacks by', 'hurling a blob of', 'mud at the target.', 'This also lowers the', 'target\'s Speed stat.']
+0
+0

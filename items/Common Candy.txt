@@ -1,0 +1,3 @@
+['Candy','Medicine']
+['A candy that is', 'packed with energy.', 'When consumed, it', 'will grant a Pokemon', 'a small amount of', 'Exp. Points.']
+200

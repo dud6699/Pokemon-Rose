@@ -1,0 +1,10 @@
+Ice
+0
+75
+1
+{.1:['Frz']}
+1
+15
+['The target is', 'punched with an icy', 'fist. This may also', 'leave the target', 'frozen.']
+0
+0

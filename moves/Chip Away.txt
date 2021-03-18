@@ -1,0 +1,10 @@
+Normal
+0
+70
+1
+{}
+1
+20
+['The user strikes', 'after looking for an', 'opening. This attack', 'ignores the target\'s', 'stat changes.']
+0
+0

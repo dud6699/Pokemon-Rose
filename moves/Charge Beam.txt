@@ -1,0 +1,10 @@
+Electric
+1
+50
+.9
+{-0.7:['SAU']}
+1
+10
+['The user attacks', 'with an electric', 'charge. The user may', 'use any remaining', 'electricity to raise', 'its Sp. Atk stat.']
+0
+0

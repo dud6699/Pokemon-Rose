@@ -1,0 +1,11 @@
+['Cute Charm','Magic Guard']
+[1,.5,.9,.56,1.1,.3]
+['Fairy',None]
+['friend','Clefairy']
+{1:['Pound','Charm'],4:'Encore',7:'Sing',10:'Sweet Kiss',13:'Copycat',16:'Magical Leaf'}
+150
+3
+12
+920
+[]
+['Star Shape','On nights with many shooting stars, Cleffa', 'can be seen dancing in a ring. They dance', 'through the night and stop only at the', 'break of day, when these Pokemon quench', 'their thirst with the morning dew.'] 

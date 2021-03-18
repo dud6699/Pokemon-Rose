@@ -1,0 +1,10 @@
+Ghost
+2
+---
+100
+{}
+0
+5
+['If the user faints,', 'the user\'s grudge', 'fully depletes the', 'PP of the opponent\'s', 'move that knocked it', 'out.']
+0
+0

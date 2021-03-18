@@ -1,0 +1,10 @@
+Normal
+2
+---
+1
+{}
+0
+30
+['The user applies', 'pressure to stress', 'points, sharply', 'boosting one of its', 'stats.']
+0
+0

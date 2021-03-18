@@ -1,0 +1,10 @@
+Psychic
+2
+---
+100
+{1:['SDU','SDU']}
+0
+20
+['The user temporarily', 'empties its mind to', 'forget its concerns.', 'This sharply raises', 'the user\'s Sp. Def', 'stat.']
+0
+0

@@ -1,0 +1,10 @@
+Bug
+1
+50
+1
+{1:['SAD']}
+1
+20
+['While resisting, the', 'user attacks the', 'opposing Pokemon.', 'This lowers the Sp.', 'Atk stat of those', 'hit.']
+0
+0

@@ -1,0 +1,10 @@
+Poison
+2
+---
+100
+{}
+1
+20
+['The user lays a trap', 'of poison spikes', 'that poison opposing', 'Pokémon that switch', 'into battle.']
+0
+0

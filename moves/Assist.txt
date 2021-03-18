@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+1
+20
+['The user hurriedly', 'and randomly uses a', 'move among those', 'known by ally', 'Pokemon.']
+0
+0

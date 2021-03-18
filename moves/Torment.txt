@@ -1,0 +1,10 @@
+Dark
+2
+---
+1
+{}
+1
+15
+['The user torments', 'and enrages the', 'target, making it', 'incapable of using', 'the same move twice', 'in a row.']
+0
+0

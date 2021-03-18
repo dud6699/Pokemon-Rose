@@ -1,0 +1,10 @@
+Ice
+0
+60
+1
+{}
+1
+10
+['The power of this', 'attack move is', 'doubled if the user', 'has been hurt by the', 'target in the same', 'turn.']
+-4
+0

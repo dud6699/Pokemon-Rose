@@ -1,0 +1,11 @@
+['Cloud Nine','Damp']
+[1.6,1.64,1.9,1.56,1.6,1.7]
+['Water',None]
+[]
+{1:['Me First','Aqua Jet','Water Sport','Scratch','Tail Whip','Water Gun'],4:'Tail Whip',7:'Water Gun',10:'Confusion',13:'Fury Swipes',16:'Water Pulse',19:'Disable',22:'Screech',25:'Zen Headbutt',28:'Aqua Tail',31:'Soak',36:'Psych Up',41:'Amnesia',46:'Hydro Pump',51:'Wonder Room'}
+75
+76.6
+67
+76
+[]
+['Duck','Golduck is the fastest swimmer among all', 'Pokemon. It swims effortlessly, even in a', 'rough, stormy sea. It sometimes rescues', 'people from wrecked ships floundering in', 'high seas.']

@@ -1,0 +1,3 @@
+['Ball','Ball']
+['A special Poke Ball', 'used by the nursery.', 'It greatly increases', 'the friendship a', 'Pokemon gets.']
+200

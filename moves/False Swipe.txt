@@ -1,0 +1,10 @@
+Normal
+0
+40
+1
+{}
+1
+40
+['A restrained attack', 'that prevents the', 'target from', 'fainting. The target', 'is left with at', 'least 1 HP.']
+0
+0

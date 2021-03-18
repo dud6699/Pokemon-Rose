@@ -1,0 +1,10 @@
+Grass
+2
+---
+1
+{.75:['Par']}
+1
+30
+['The user scatters a', 'cloud of numbing', 'powder that', 'paralyzes the', 'target.']
+0
+0

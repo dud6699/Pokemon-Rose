@@ -1,0 +1,10 @@
+Ground
+0
+80
+.95
+{}
+1
+10
+['The user crashes', 'into its target', 'while rotating its', 'body like a drill.', 'Critical hits land', 'more easily.']
+0
+1

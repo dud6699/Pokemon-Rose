@@ -1,0 +1,10 @@
+Normal
+2
+---
+1
+{}
+1
+5
+['The user compels the', 'target to keep using', 'the move it encored', 'for three turns.']
+0
+0

@@ -1,0 +1,11 @@
+['Limber','Reckless']
+[1,2.4,.7,1.06,2.2,1.74]
+['Fighting',None]
+[]
+{1:['Double Kick','Reversal','Close Combat','Mega Kick','Revenge','Meditate','Rolling Kick','Jump Kick'],5:'Meditate',9:'Rolling Kick',13:'Jump Kick',17:'Brick Break',21:'Focus Energy',25:'Feint',29:'High Jump Kick',33:'Mind Reader',37:'Foresight',41:'Swagger',45:'Blaze Kick',49:'Endure',53:'Mega Kick',57:'Close Combat',61:'Reversal'}
+45
+49.8
+59
+933
+[]
+['Kicking','Hitmonlee\'s legs freely contract and', 'stretch. Using these springlike legs, it', 'bowls over foes with devastating kicks.', 'After battle, it rubs down its legs and', 'loosens the muscles to overcome fatigue.'] 

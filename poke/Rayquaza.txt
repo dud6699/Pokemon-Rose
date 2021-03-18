@@ -1,0 +1,7 @@
+['Air Lock']
+[2.1,3.0,3.0,1.8,1.8,1.9]
+['Dragon','Flying']
+[]
+{1:['Twister'],5:'Scary Face',15:'Ancient Power',20:'Crunch',30:'Air Slash',35:'Rest',45:'Extreme Speed',50:'Dragon Pulse',60:'Dragon Dance',65:'Fly',75:'Hyper Voice',80:'Outrage',90:'Hyper Beam'}
+45
+206

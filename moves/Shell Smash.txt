@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{1:['DD','SDD','AU','AU','SAU','SAU','SU','SU']}
+0
+15
+['The user breaks its', 'shell, which lowers', 'its Defense and Sp.', 'Def but sharply', 'raises its Attack,', 'Sp. Atk, and Speed.']
+0
+0

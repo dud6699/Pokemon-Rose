@@ -1,0 +1,10 @@
+Psychic
+2
+---
+.6
+{1:['Slp']}
+1
+20
+['The user employs', 'hypnotic suggestion', 'to make the target', 'fall into a deep', 'sleep.']
+0
+0

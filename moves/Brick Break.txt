@@ -1,0 +1,10 @@
+Fighting
+0
+75
+1
+{}
+1
+15
+['The user attacks', 'with a swift chop.', 'It can also break', 'barriers, such as', 'Light Screen and', 'Reflect.']
+0
+0

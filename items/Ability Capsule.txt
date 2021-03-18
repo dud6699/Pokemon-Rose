@@ -1,0 +1,3 @@
+['Ability Capsule','Medicine']
+['A capsule that', 'allows a Pokemon', 'with two Abilities', 'to switch between', 'these Abilities when', 'it is used.']
+1000

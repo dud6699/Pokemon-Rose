@@ -1,0 +1,10 @@
+Normal
+2
+---
+.85
+{1:['DD','DD']}
+1
+40
+['An earsplitting', 'screech harshly', 'lowers the target\'s', 'Defense stat.']
+0
+0

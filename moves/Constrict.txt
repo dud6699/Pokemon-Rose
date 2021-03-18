@@ -1,0 +1,10 @@
+Normal
+0
+10
+1
+{.1:['SD']}
+1
+35
+['The target is', 'attacked with long,', 'creeping tentacles,', 'vines, or the like.', 'This may lower the', 'target\'s Speed stat.']
+0
+0

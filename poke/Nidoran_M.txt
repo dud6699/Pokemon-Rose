@@ -1,0 +1,11 @@
+['Poison Point','Rivalry']
+[.92,1.14,.8,.8,.8,1]
+['Poison',None]
+[16,'Nidorino']
+{1:['Leer','Peck'],7:'Focus Energy',9:'Double Kick',13:'Poison Sting',19:'Fury Attack',21:'Horn Attack',25:'Taunt',31:'Toxic Spikes',33:'Flatter',37:'Poison Jab',43:'Captivate',45:'Horn Drill'}
+235
+9
+20
+40
+['route_2','route_3']
+['Poison Pin','Nidoran has developed muscles for moving', 'its ears. Thanks to them, the ears can be', 'freely moved in any direction. Even the', 'slightest sound does not escape this', 'Pokemon\'s notice.']

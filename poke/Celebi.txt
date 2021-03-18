@@ -1,0 +1,7 @@
+['Natural Cure']
+[2,2,2,2,2,2]
+['Grass','Psychic']
+[]
+{}
+45
+5

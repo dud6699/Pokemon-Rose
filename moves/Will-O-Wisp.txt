@@ -1,0 +1,10 @@
+Fire
+2
+---
+.85
+{1:['Brn']}
+1
+15
+['The user shoots a', 'sinister, bluish-','white flame at the', 'target to inflict a', 'burn.']
+0
+0

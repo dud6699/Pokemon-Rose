@@ -1,0 +1,3 @@
+['Held','Item']
+['An item to be held', 'by a Pokemon. This', 'exotic-smelling', 'incense boosts the', 'power of Rock-type', 'moves.']
+9600

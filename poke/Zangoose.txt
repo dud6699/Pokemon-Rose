@@ -1,0 +1,11 @@
+['Immunity']
+[1.46,2.3,1.2,1.2,.2,1.8]
+['Normal',None]
+[]
+{1:['Scratch','Leer'],5:'Quick Attack',8:'Fury Cutter',12:'Pursuit',15:'Hone Claws',19:'Slash',22:'Revenge',26:'Crush Claw',29:'False Swipe',33:'Embargo',36:'Detect',40:'X-Scissor',43:'Taunt',47:'Swords Dance',50:'Close Combat'}
+90
+40.3
+51
+87
+['scarab_l']
+['Cat Ferret','Zangoose usually stays on all fours, but', 'when angered, it gets up on its hind legs', 'and extends its claws. This Pokemon shares', 'a bitter rivalry with Seviper that dates', 'back over generations.']

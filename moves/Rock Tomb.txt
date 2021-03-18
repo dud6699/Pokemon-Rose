@@ -1,0 +1,10 @@
+Rock
+0
+60
+.95
+{1:['SD']}
+1
+15
+['Boulders are hurled', 'at the target. This', 'also lowers the', 'target\'s Speed stat', 'by preventing its', 'movement.']
+0
+0

@@ -1,0 +1,11 @@
+['Chlorophyll','Early Bird']
+[1.4,1.4,1.2,.8,.8,1.2]
+['Grass','Dark']
+['Leaf Stone','Shiftry']
+{1:['Razor Leaf','Pound'],3:'Harden',6:'Growth',9:'Torment',12:'Fake Out',16:'Nature Power',20:'Razor Wind',24:'Feint Attack',28:'Leaf Blade',32:'Swagger',36:'Extrasensory'}
+120
+28
+39
+81
+['scarab_l']
+['Wily','This Pokemon pulls out the leaf on its head', 'and makes a flute with it. The sound of', 'Nuzleaf\'s flute strikes fear and', 'uncertainty in the hearts of people lost in', 'a forest.']

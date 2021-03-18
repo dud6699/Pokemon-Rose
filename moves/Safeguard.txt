@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+0
+25
+['The user creates a', 'protective field', 'that prevents status', 'conditions for five', 'turns.']
+0
+0

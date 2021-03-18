@@ -1,0 +1,10 @@
+Flying
+1
+110
+.7
+{.3:['Cfs']}
+1
+10
+['The user attacks by', 'wrapping the', 'opponent in a fierce', 'wind. This may also', 'confuse the target.']
+0
+0

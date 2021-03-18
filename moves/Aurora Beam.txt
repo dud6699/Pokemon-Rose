@@ -1,0 +1,10 @@
+Ice
+1
+65
+1
+{.1:['AD']}
+1
+20
+['The target is hit', 'with a rainbow-','colored beam. This', 'may also lower the', 'target\'s Attack', 'stat.']
+0
+0

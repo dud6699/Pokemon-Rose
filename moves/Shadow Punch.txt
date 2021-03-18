@@ -1,0 +1,10 @@
+Ghost
+0
+60
+100
+{}
+1
+20
+['The user throws a', 'punch from the', 'shadows. This attack', 'never misses.']
+0
+0

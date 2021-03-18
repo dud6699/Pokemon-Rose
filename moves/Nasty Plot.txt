@@ -1,0 +1,10 @@
+Dark
+2
+---
+100
+{1:['SAU','SAU']}
+0
+20
+['The user stimulates', 'its brain thinking', 'bad thoughts. This', 'sharply raises the', 'user\'s Sp. Atk stat.']
+0
+0

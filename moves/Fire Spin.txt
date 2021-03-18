@@ -1,0 +1,10 @@
+Fire
+1
+35
+.85
+{1:['Bnd']}
+1
+15
+['The target becomes', 'trapped within a', 'fierce vortex of', 'fire that rages for', 'four to five turns.']
+0
+0

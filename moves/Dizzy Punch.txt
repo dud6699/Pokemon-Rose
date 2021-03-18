@@ -1,0 +1,10 @@
+Normal
+0
+70
+1
+{.2:['Cfs']}
+1
+10
+['The target is hit', 'with rhythmically', 'launched punches.', 'This may also leave', 'the target confused.']
+0
+0

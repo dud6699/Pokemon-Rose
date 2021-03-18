@@ -1,0 +1,10 @@
+Psychic
+2
+---
+100
+{1:['SAU','SDU']}
+0
+20
+['The user quietly', 'focuses its mind and', 'calms its spirit to', 'raise its Sp. Atk', 'and Sp. Def stats.']
+0
+0

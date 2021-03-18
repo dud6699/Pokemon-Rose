@@ -1,0 +1,11 @@
+['Keen Eye','Tangled Feet']
+[1.26,1.2,1,1.1,1,1.42]
+['Normal','Flying']
+[36,'Pidgeot']
+{1:['Tackle'],5:'Sand Attack',9:'Gust',13:'Quick Attack',17:'Whirlwind',22:'Twister',27:'Feather Dance',32:'Agility',37:'Wing Attack',42:'Roost',47:'Tailwind',52:'Mirror Move',57:'Air Slash',62:'Hurricane'}
+120
+30
+43
+21
+['scarab_r']
+['Bird','Pidgeotto claims a large area as its own', 'territory. This Pokemon flies around,', 'patrolling its living space. If its', 'territory is violated, it shows no mercy in', 'thoroughly punishing the foe with its sharp', 'claws.']

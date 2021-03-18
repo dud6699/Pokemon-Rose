@@ -1,0 +1,11 @@
+['Flash Fire','Flame Body']
+[1,0.6,1.1,1.3,1.1,0.4]
+["Ghost","Fire"]
+[17,'Lampent']
+{1:['Ember','Astonish'],3:'Minimize',5:'Smog',7:'Fire Spin',10:'Confuse Ray',13:'Night Shade',16:'Will-O-Wisp',19:'Flame Burst',23:'Imprison',26:'Hex',31:'Memento',34:'Inferno',40:'Curse',45:'Shadow Ball'}
+190
+3.1
+12
+10
+[]
+['Candle','Litwick shines a light that absorbs the', 'life energy of people and Pokemon, which', 'becomes the fuel that it burns.']

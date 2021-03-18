@@ -1,0 +1,10 @@
+Poison
+2
+---
+1
+{1:['AD','SAD','SD']}
+1
+20
+['Drenches opposing', 'poisoned Pokémon in', 'a poisonous liquid.', 'This lowers their', 'Attack, Sp. Atk, and', 'Speed stats.']
+0
+0

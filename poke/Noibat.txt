@@ -1,0 +1,11 @@
+['Frisk','Infiltrator']
+[.8,.6,.9,.7,.8,1.1]
+['Flying','Dragon']
+[48,'Noivern']
+{1:['Screech','Supersonic','Tackle'],5:'Absorb',11:'Gust',13:'Bite',16:'Wing Attack',18:'Agility',23:'Air Cutter',27:'Roost',31:'Razor Wind',35:'Tailwind',40:'Whirlwind',43:'Super Fang',48:'Air Slash',58:'Hurricane'}
+190
+8
+20
+54
+['echo_cave']
+['Sound Wave','They live in pitch black caves. Their', 'enormous ears can emit ultrasonic waves of', '200,000 hertz.']

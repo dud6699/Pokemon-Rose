@@ -1,0 +1,10 @@
+Fighting
+0
+70
+1
+{}
+1
+10
+['This attack inflicts', 'big damage on a', 'sleeping target.', 'This also wakes the', 'target up, however.']
+0
+0

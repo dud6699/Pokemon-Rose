@@ -1,0 +1,11 @@
+['Sturdy','Rock Head']
+[1,1.6,.2,1.9,.9,.2]
+['Rock',None]
+['move','Sudowoodo','Slam']
+{1:['Fake Tears','Copycat'],5:'Flail',8:'Low Kick',12:'Rock Throw',15:'Mimic',19:'Feint Attack',22:'Tearful Look',26:'Rock Tomb',29:'Block',33:'Rock Slide',36:'Counter',40:'Sucker Punch',43:'Double-Edge'}
+255
+15
+20
+909
+[]
+['Bonsai','It prefers an arid atmosphere. It leaks', 'water that looks like tears when adjusting', 'its moisture level.'] 

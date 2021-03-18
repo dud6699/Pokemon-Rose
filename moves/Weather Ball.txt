@@ -1,0 +1,10 @@
+Normal
+1
+100
+1
+{}
+1
+10
+['This attack move', 'varies in power and', 'type depending on', 'the weather.']
+0
+0

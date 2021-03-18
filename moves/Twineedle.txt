@@ -1,0 +1,10 @@
+Bug
+0
+25
+1
+{.2:['Psn']}
+1
+20
+['The user damages the', 'target twice by', 'jabbing it with two', 'spikes. This may', 'also poison the', 'target.']
+0
+0

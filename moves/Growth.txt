@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{1:['AU','SAU']}
+0
+20
+['The user\'s body', 'grows all at once,', 'raising the Attack', 'and Sp. Atk stats.']
+0
+0

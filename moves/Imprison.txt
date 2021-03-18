@@ -1,0 +1,10 @@
+Psychic
+2
+---
+100
+{}
+1
+10
+['If opposing Pokémon', 'know any move also', 'known by the user,', 'they are prevented', 'from using it.']
+0
+0

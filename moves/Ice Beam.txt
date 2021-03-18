@@ -1,0 +1,10 @@
+Ice
+1
+90
+1
+{.1:['Frz']}
+1
+10
+['The target is struck', 'with an icy-cold', 'beam of energy. This', 'may also leave the', 'target frozen.']
+0
+0

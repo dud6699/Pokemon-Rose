@@ -1,0 +1,11 @@
+['Chlorophyll','Early Bird']
+[.8,.8,.6,1,.6,.6]
+['Grass',None]
+[14,'Nuzleaf','Razor Leaf']
+{1:['Bide'],3:'Harden',9:'Growth',15:'Nature Power',21:'Synthesis',27:'Sunny Day',33:'Explosion'}
+255
+4
+20
+80
+['route_3','scarab_l']
+['Acorn','Seedot looks exactly like an acorn when it', 'is dangling from a tree branch. It startles', 'other Pokemon by suddenly moving. This', 'Pokemon polishes its body once a day using', 'leaves.']

@@ -1,0 +1,10 @@
+Grass
+2
+---
+1
+{}
+1
+10
+['A seed that causes', 'worry is planted on', 'the target. It', 'prevents sleep by', 'making the target\'s', 'Ability Insomnia.']
+0
+0

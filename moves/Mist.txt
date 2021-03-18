@@ -1,0 +1,10 @@
+Ice
+2
+---
+100
+{}
+0
+30
+['The user cloaks its', 'allies in a white', 'mist that prevents','any of their stats', 'from being lowered', 'for five turns.']
+0
+0

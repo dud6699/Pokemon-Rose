@@ -1,0 +1,10 @@
+Normal
+0
+75
+.95
+{.5:['DD']}
+1
+10
+['The user slashes the', 'target with hard and', 'sharp claws. This', 'may also lower the', 'target\'s Defense.']
+0
+0

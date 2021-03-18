@@ -1,0 +1,10 @@
+Psychic
+1
+90
+1
+{0.1:['SDD']}
+1
+10
+['The target is hit by', 'a strong telekinetic', 'force. This may also', 'lower the target\'s', 'Sp. Def stat.']
+0
+0

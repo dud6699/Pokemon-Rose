@@ -1,0 +1,10 @@
+Normal
+0
+---
+1
+{}
+1
+5
+['This attack move', 'cuts down the', 'target\'s HP to equal', 'the user\'s HP.']
+0
+0

@@ -1,0 +1,10 @@
+Ground
+1
+90
+1
+{.1:['SDD']}
+1
+10
+['The user makes the', 'ground under the', 'target erupt with', 'power. This may also', 'lower the target\'s', 'Sp. Def stat.']
+0
+0

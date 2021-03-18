@@ -1,0 +1,10 @@
+Normal
+2
+---
+1
+{}
+1
+10
+['The user lets loose', 'a huge yawn that', 'lulls the target', 'into falling asleep', 'on the next turn.']
+0
+0

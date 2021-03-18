@@ -1,0 +1,10 @@
+Normal
+1
+60
+1
+{}
+1
+15
+['A unique attack that', 'varies in type', 'depending on the', 'Pokemon using it.']
+0
+0

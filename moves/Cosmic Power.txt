@@ -1,0 +1,10 @@
+Psychic
+2
+---
+100
+{1:['SDU','DU']}
+0
+20
+['The user absorbs a', 'mystical power from', 'space to raise its', 'Defense and Sp. Def', 'stats.']
+0
+0

@@ -1,0 +1,10 @@
+Fighting
+0
+15
+1
+{}
+1
+20
+['The user lets loose', 'a flurry of open-','palmed arm thrusts', 'that hit two to five', 'times in a row.']
+0
+2

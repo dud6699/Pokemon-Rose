@@ -1,0 +1,10 @@
+Grass
+2
+---
+.75
+{1:['Slp']}
+1
+15
+['The user scatters a', 'big cloud of sleep-','inducing dust around', 'the target.']
+0
+0

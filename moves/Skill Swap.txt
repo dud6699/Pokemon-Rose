@@ -1,0 +1,10 @@
+Psychic
+2
+---
+100
+{}
+1
+10
+['The user employs its', 'psychic power to', 'exchange abilities', 'with the target.']
+0
+0

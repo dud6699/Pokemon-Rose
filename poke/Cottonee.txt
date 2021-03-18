@@ -1,0 +1,11 @@
+['Prankster','Infiltrator']
+[.8,.54,.74,1.2,1,1.32]
+['Grass','Fairy']
+['Sun Stone','Whimsicott']
+{1:['Absorb','Fairy Wind'],4:'Growth',8:'Leech Seed',10:'Stun Spore',13:'Mega Drain',17:'Cotton Spore',19:'Razor Leaf',22:'Poison Powder',26:'Giga Drain',28:'Charm',31:'Endeavor',35:'Energy Ball',37:'Cotton Guard',40:'Sunny Day',44:'Dazzling Gleam',46:'Solar Beam'}
+190
+0.6
+12
+145
+['route_5']
+['Cotton Puff','Perhaps because they feel more at ease in a', 'group, they stick to others they find. They', 'end up looking like a cloud.'] 

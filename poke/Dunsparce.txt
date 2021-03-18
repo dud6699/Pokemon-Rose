@@ -1,0 +1,11 @@
+['Serene Grace','Run Away']
+[2,1.4,1.3,1.4,1.3,.9]
+['Normal',None]
+[]
+{1:['Rage','Defense Curl'],3:'Rollout',6:'Spite',8:'Pursuit',11:'Screech',13:'Mud-Slap',16:'Yawn',18:'Ancient Power',21:'Drill Run',26:'Roost',28:'Take Down',31:'Coil',33:'Dig',36:'Glare',38:'Double-Edge',41:'Endeavor',43:'Air Slash',46:'Dragon Rush',48:'Endure',51:'Flail'}
+190
+14
+59
+63
+['echo_cave']
+['Land Snake','Dunsparce has a drill for its tail. It uses', 'this tail to burrow into the ground', 'backward. This Pokemon is known to make its', 'nest in complex shapes deep under the', 'ground.']

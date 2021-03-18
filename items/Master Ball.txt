@@ -1,0 +1,3 @@
+['Ball','Ball']
+['The best Poke Ball', 'with the ultimate', 'level of', 'performance. With', 'it, you will catch', 'any wild Pokemon', 'without fail.']
+-1

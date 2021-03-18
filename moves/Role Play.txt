@@ -1,0 +1,10 @@
+Psychic
+2
+---
+100
+{}
+0
+10
+['The user mimics the', 'target completely,', 'copying the target\'s', 'natural Ability.']
+0
+0

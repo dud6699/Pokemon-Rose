@@ -1,0 +1,3 @@
+['Held','Item']
+['A mysterious', 'evolutionary lump.', 'When held by a', 'Pokemon that can', 'still evolve, it', 'raises both Defense', 'and Sp. Def.']
+200

@@ -1,0 +1,10 @@
+Normal
+2
+---
+1
+{1:['Par']}
+1
+30
+['The user intimidates', 'the target with the', 'pattern on its belly', 'to cause paralysis.']
+0
+0

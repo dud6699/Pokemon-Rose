@@ -1,0 +1,10 @@
+Electric
+1
+120
+.5
+{1:['Par']}
+1
+5
+['The user fires an', 'electric blast like', 'a cannon to inflict', 'damage and cause', 'paralysis.']
+0
+0

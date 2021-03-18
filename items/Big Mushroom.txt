@@ -1,0 +1,3 @@
+['Held','Item']
+['A very large and', 'rare mushroom. It\'s', 'popular with a', 'certain class of', 'collectors and', 'sought out by them.']
+5000

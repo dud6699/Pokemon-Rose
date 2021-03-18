@@ -1,0 +1,10 @@
+Normal
+0
+15
+.85
+{1:['Bnd']}
+1
+20
+['Things such as long', 'bodies or tentacles', 'are used to bind and', 'squeeze the target', 'for four to five', 'turns.']
+0
+0

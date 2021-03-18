@@ -1,0 +1,10 @@
+Electric
+0
+20
+1
+{1:['Par']}
+1
+20
+['The user attacks by', 'nuzzling its cheeks', 'against the target.', 'This also leaves the', 'target with', 'paralysis.']
+0
+0

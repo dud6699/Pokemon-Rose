@@ -1,0 +1,10 @@
+Steel
+0
+50
+.85
+{}
+1
+15
+['The user attacks by', 'throwing steel gears', 'at its target twice.']
+0
+0
