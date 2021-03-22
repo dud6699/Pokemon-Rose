@@ -165,8 +165,8 @@ def verde_f(P,temppx,temppy,tim):
 
 def verde(P,enter = False) -> None:
     #sci_tim = None,sci_curr = None
-    if P.song != "music/isola.wav":
-        P.song = "music/isola.wav"
+    if P.song != "music/verde.wav":
+        P.song = "music/verde.wav"
         pygame.mixer.music.load(P.song)
         set_mixer_volume(P,P.vol)
         pygame.mixer.music.play(-1)
@@ -11361,11 +11361,7 @@ def house_1(P,num) -> None:
                                                 if event.type == pygame.KEYDOWN:
                                                     if len(name) < 9:
                                                         if (pygame.K_a <= event.key <= pygame.key.key_code(P.controls[4])) or (pygame.K_0 <= event.key <= pygame.K_9):
-                                                            char = chr(event.key)
-                                                            if pygame.key.get_mods() and pygame.KMOD_SHIFT:
-                                                                name += str(char).upper()
-                                                            else:
-                                                                name += str(char)
+                                                            name += event.unicode
                                                         if event.key == K_SPACE:
                                                             name += " "
                                                     if event.key == K_ESCAPE:

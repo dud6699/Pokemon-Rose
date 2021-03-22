@@ -17,7 +17,7 @@ class Pokemon:
         pygame.display.set_mode((800,600))
         #self.poke_tester()
         self.running = True
-        self.state = 2
+        self.state = 1
         #1
         f = open("save_files/Sett!ngs.txt","r")
         data = f.readlines()
@@ -353,7 +353,7 @@ class Pokemon:
             self.r4_fish = npc.NPC(self,'Fisherman','Harper',[2600,700],[['r',80]],["Well shellfish are great for","lots of other things!","","Like eating and stuff, you","know?",""],loc = "route_4")
         self.r4_team1 = [poke.Poke('Ferrothorn',[40,random.randint(0,1),334,"Pin Missile",-1,"Iron Defense",-1,"Gyro Ball",-1,"Curse",-1,'Metal Coat',None,0,"Luxury Ball",400,"Iron Barbs"]),poke.Poke('Scizor',[40,random.randint(0,1),334,"Quick Attack",-1,"Iron Defense",-1,"Bullet Punch",-1,"Pursuit",-1,'Metal Coat',None,0,"Luxury Ball",400,"Technician"]),poke.Poke('Steelix',[40,random.randint(0,1),334,"Thunder Fang",-1,"Rock Slide",-1,"Crunch",-1,"Iron Tail",-1,'Metal Coat',None,0,"Luxury Ball",400,"Sturdy"])]
         if self.prog[5][35] == 0:
-            self.r5_psy = npc.NPC(self,'Psychic','Lucas',[600,-300],[['mr',40],['r',60],['md',40],['d',80],['ml',40],['l',100],['mu',40],['u',60]],["You better watch out or you'll", "end up hitting yourself!",""],["Hmm, looks like I should have","been watching out for myself!",""],True,[200,200,200,200],[poke.Poke('Mismagius',[34,random.randint(0,1),334,"Confuse Ray",-1,"Pain Split",-1,"Mystical Fire",-1,"Shadow Ball",-1,None,None,0,"Poke Ball",350,"Levitate"]),poke.Poke('Wobbuffet',[35,random.randint(0,1),334,"Counter",-1,"Mirror Coat",-1,None,None,None,None,None,None,0,"Poke Ball",400,"Shadow Tag"])],35,loc = "route_5")
+            self.r5_psy = npc.NPC(self,'Psychic','Lucas',[600,-300],[['mr',40],['r',60],['md',40],['d',80],['ml',40],['l',100],['mu',40],['u',60]],["You better watch out or you'll", "end up hitting yourself!",""],["Hmm, looks like I should have","been watching out myself!",""],True,[150,150,150,150],[poke.Poke('Mismagius',[34,random.randint(0,1),334,"Confuse Ray",-1,"Pain Split",-1,"Mystical Fire",-1,"Shadow Ball",-1,None,None,0,"Poke Ball",350,"Levitate"]),poke.Poke('Wobbuffet',[35,random.randint(0,1),334,"Counter",-1,"Mirror Coat",-1,None,None,None,None,None,None,0,"Poke Ball",400,"Shadow Tag"])],35,loc = "route_5")
         else:
             self.r5_psy = npc.NPC(self,'Psychic','Harper',[600,-300],[['mr',40],['r',60],['md',40],['d',80],['ml',40],['l',100],['mu',40],['u',60]],["I'm just keeping you on your","toes! You never know what can", "happen in a Pokemon battle!"],loc = "route_5")
         if self.prog[5][36] == 0:

@@ -865,10 +865,10 @@ class Move:
             if r <= 0.1 and 'Poison' not in pokes.type and 'Steel' not in pokes.type and pokes.ability != 'Immunity':
                 if pokes.status == None:
                     message.append([1,'Effect Spore',eturn,pokes,'Psn','Poisoned!'])
-            elif r <= 0.2 and (P.battle_terrain == None or P.battle_terrain[0] != 'Electric' or pokes.grounded() == False) and pokes.ability != 'Insomnia':
+            elif r > 0.1 and r <= 0.2 and (P.battle_terrain == None or P.battle_terrain[0] != 'Electric' or pokes.grounded() == False) and pokes.ability != 'Insomnia':
                 if pokes.status == None:
                     message.append([1,'Effect Spore',eturn,pokes,'Slp','Asleep!'])
-            elif r <= 0.3 and 'Electric' not in pokes.type and pokes.ability != 'Limber':
+            elif r > 0.2 and r <= 0.3 and 'Electric' not in pokes.type and pokes.ability != 'Limber':
                 if pokes.status == None:
                     message.append([1,'Effect Spore',eturn,pokes,'Par','Paralyzed!'])
         if pok[targ].ability == 'Motor Drive' and self.type == 'Electric' and targ == 1:
@@ -977,7 +977,7 @@ class Move:
                                     message.append([2,["It doesn't affect ", pok[targ_temp].get_name(True) + '!'],'Immunity',eturn])
                                 else:
                                     pok[targ_temp].status = 'Psn'
-                        if y == 'BPs':
+                        if y == 'BPs' and 'Poison' not in pok[targ_temp].type and 'Steel' not in pok[targ_temp].type:
                             if pok[targ_temp].status == None:
                                 if pok[targ_temp].ability == 'Immunity' and x == 1:
                                     message.append([2,["It doesn't affect ", pok[targ_temp].get_name(True) + '!'],'Immunity',eturn])

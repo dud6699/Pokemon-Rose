@@ -3686,11 +3686,7 @@ def get_poke(P,poke,show_pokedex = True) -> None:
                     if event.type == pygame.KEYDOWN:
                         if len(name) < 9:
                             if (pygame.K_a <= event.key <= pygame.key.key_code(P.controls[4])) or (pygame.K_0 <= event.key <= pygame.K_9):
-                                char = chr(event.key)
-                                if pygame.key.get_mods() and (pygame.KMOD_SHIFT):
-                                    name += str(char).upper()
-                                else:
-                                    name += str(char)
+                                name += event.unicode
                             if event.key == K_SPACE:
                                 name += " "
                         if event.key == K_ESCAPE:
@@ -9041,11 +9037,7 @@ def new_save(P) -> None:
             if event.type == pygame.KEYDOWN:
                 if len(name) < 10:
                     if (pygame.K_a <= event.key <= pygame.key.key_code(P.controls[4])) or (pygame.K_0 <= event.key <= pygame.K_9):
-                        char = chr(event.key)
-                        if pygame.key.get_mods() and (pygame.KMOD_LSHIFT or pygame.KMOD_RSHIFT or pygame.KMOD_CAPS):
-                            name += str(char).upper()
-                        else:
-                            name += str(char)
+                        name += event.unicode
                     if event.key == K_SPACE:
                         name += " "
                 if event.key == K_BACKSPACE:
@@ -9202,6 +9194,8 @@ def trainer_check(P,trainer,music,font = None):
             P.habitat = 'dock'
         elif trainer.tid in [32,34]:
             P.habitat = 'mount'
+        elif trainer.tid in [37,38]:
+            P.habitat = 'beach'
         if trainer.tid in [3,34]:
             battle(P,trainer.team,no_pc = True)
         else:
