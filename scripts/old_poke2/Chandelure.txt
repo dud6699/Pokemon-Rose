@@ -1,0 +1,11 @@
+['Flash Fire','Flame Body']
+[1.2,1.1,2.9,1.8,1.8,1.6]
+['Ghost','Fire']
+[]
+{1:['Pain Split','Smog','Confuse Ray','Flame Burst','Hex'],3:'Minimize',5:'Smog',7:'Fire Spin',10:'Confuse Ray',13:'Night Shade',16:'Will-O-Wisp',20:'Flame Burst',24:'Imprison',28:'Hex',33:'Memento',38:'Inferno',45:'Curse',53:'Shadow Ball',61:'Pain Split',69:'Overheat'}
+45
+34.3
+39
+12
+[]
+['Luring','The spirits burned up in its ominous flame', 'lose their way and wander this world', 'forever.']

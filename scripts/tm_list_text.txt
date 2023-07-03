@@ -1,0 +1,764 @@
+001	Bulbasaur	Bulbasaur
+GrassIC Big.png
+PoisonIC Big.png	Monster	Grass	✔	✔	✔	✔	✔	✔	✔	✔
+002	Ivysaur	Ivysaur
+GrassIC Big.png
+PoisonIC Big.png	Monster	Grass	✔	✔	✔	✔	✔	✔	✔	✔
+003	Venusaur	Venusaur
+GrassIC Big.png
+PoisonIC Big.png	Monster	Grass	✔	✔	✔	✔	✔	✔	✔	✔
+006	Charizard	Charizard
+FireIC Big.png
+FlyingIC Big.png	Monster	Dragon				✔	✔	✔	✔	✔
+012	Butterfree	Butterfree
+BugIC Big.png
+FlyingIC Big.png	Bug	✔	✔	✔	✔	✔	✔	✔	✔
+015	Beedrill	Beedrill
+BugIC Big.png
+PoisonIC Big.png	Bug			✔	✔	✔	✔	✔	✔BDSP
+035	Clefairy	Clefairy
+FairyIC Big.png	Fairy	✔	✔	✔	✔	✔	✔	✔	✔
+036	Clefable	Clefable
+FairyIC Big.png	Fairy	✔	✔	✔	✔	✔	✔	✔	✔
+038	Ninetales	Ninetales
+FireIC Big.png	Field				✔	✔	✔	✔	✔
+038	Ninetales	Ninetales
+Alolan Form	IceIC Big.png
+FairyIC Big.png	Field								✔
+039	Jigglypuff	Jigglypuff
+NormalIC Big.png
+FairyIC Big.png	Fairy	✔	✔	✔	✔	✔	✔	✔	✔
+040	Wigglytuff	Wigglytuff
+NormalIC Big.png
+FairyIC Big.png	Fairy	✔	✔	✔	✔	✔	✔	✔	✔
+043	Oddish	Oddish
+GrassIC Big.png
+PoisonIC Big.png	Grass	✔	✔	✔	✔	✔	✔	✔	✔
+044	Gloom	Gloom
+GrassIC Big.png
+PoisonIC Big.png	Grass	✔	✔	✔	✔	✔	✔	✔	✔
+045	Vileplume	Vileplume
+GrassIC Big.png
+PoisonIC Big.png	Grass	✔	✔	✔	✔	✔	✔	✔	✔
+046	Paras	Paras
+BugIC Big.png
+GrassIC Big.png	Bug	Grass	✔	✔	✔	✔	✔	✔	✔	✔BDSP
+047	Parasect	Parasect
+BugIC Big.png
+GrassIC Big.png	Bug	Grass	✔	✔	✔	✔	✔	✔	✔	✔BDSP
+048	Venonat	Venonat
+BugIC Big.png
+PoisonIC Big.png	Bug	✔	✔	✔	✔	✔	✔	✔	✔BDSP
+049	Venomoth	Venomoth
+BugIC Big.png
+PoisonIC Big.png	Bug	✔	✔	✔	✔	✔	✔	✔	✔BDSP
+059	Arcanine	Arcanine
+FireIC Big.png	Field				✔	✔	✔	✔	✔
+069	Bellsprout	Bellsprout
+GrassIC Big.png
+PoisonIC Big.png	Grass	✔	✔	✔	✔	✔	✔	✔	✔BDSP
+070	Weepinbell	Weepinbell
+GrassIC Big.png
+PoisonIC Big.png	Grass	✔	✔	✔	✔	✔	✔	✔	✔BDSP
+071	Victreebel	Victreebel
+GrassIC Big.png
+PoisonIC Big.png	Grass	✔	✔	✔	✔	✔	✔	✔	✔BDSP
+077	Ponyta	Ponyta
+FireIC Big.png	Field			✔	✔	✔	✔	✔	✔
+078	Rapidash	Rapidash
+FireIC Big.png	Field			✔	✔	✔	✔	✔	✔
+102	Exeggcute	Exeggcute
+GrassIC Big.png
+PsychicIC Big.png	Grass		✔	✔	✔	✔	✔	✔	✔
+103	Exeggutor	Exeggutor
+GrassIC Big.png
+PsychicIC Big.png	Grass	✔	✔	✔	✔	✔	✔	✔	✔
+103	Exeggutor	Exeggutor
+Alolan Form	GrassIC Big.png
+DragonIC Big.png	Grass							✔	✔
+108	Lickitung	Lickitung
+NormalIC Big.png	Monster			✔	✔	✔	✔	✔	✔
+113	Chansey	Chansey
+NormalIC Big.png	Fairy	✔	✔	✔	✔	✔	✔	✔	✔
+114	Tangela	Tangela
+GrassIC Big.png	Grass	✔	✔	✔	✔	✔	✔	✔	✔
+115	Kangaskhan	Kangaskhan
+NormalIC Big.png	Monster			✔	✔	✔	✔	✔	✔
+122	Mr. Mime	Mr. Mime
+PsychicIC Big.png
+FairyIC Big.png	Human-Like	✔	✔	✔	✔	✔	✔	✔	✔
+122	Mr. Mime	Mr. Mime
+Galarian Form	IceIC Big.png
+PsychicIC Big.png	Human-Like								✔
+128	Tauros	Tauros
+NormalIC Big.png	Field			✔	✔	✔	✔	✔	✔
+131	Lapras	Lapras
+WaterIC Big.png
+IceIC Big.png	Monster	Water 1	✔						✔PE	
+137	Porygon	Porygon
+NormalIC Big.png	Mineral			✔	✔	✔	✔	✔	✔
+143	Snorlax	Snorlax
+NormalIC Big.png	Monster	✔	✔	✔	✔	✔	✔	✔	✔
+146	Moltres	Moltres
+FireIC Big.png
+FlyingIC Big.png	No Eggs Discovered				✔	✔	✔	✔	✔
+150	Mewtwo	Mewtwo
+PsychicIC Big.png	No Eggs Discovered	✔	✔	✔	✔	✔	✔	✔	✔
+151	Mew	Mew
+PsychicIC Big.png	No Eggs Discovered	✔	✔	✔	✔	✔	✔	✔	✔
+152	Chikorita	Chikorita
+GrassIC Big.png	Monster	Grass		✔	✔	✔	✔	✔	✔	✔BDSP
+153	Bayleef	Bayleef
+GrassIC Big.png	Monster	Grass		✔	✔	✔	✔	✔	✔	✔BDSP
+154	Meganium	Meganium
+GrassIC Big.png	Monster	Grass		✔	✔	✔	✔	✔	✔	✔BDSP
+157	Typhlosion	Typhlosion
+FireIC Big.png	Field				✔	✔	✔	✔	✔BDSP
+161	Sentret	Sentret
+NormalIC Big.png	Field			✔	✔	✔	✔	✔	✔BDSP
+162	Furret	Furret
+NormalIC Big.png	Field			✔	✔	✔	✔	✔	✔BDSP
+165	Ledyba	Ledyba
+BugIC Big.png
+FlyingIC Big.png	Bug		✔	✔	✔	✔	✔	✔	✔BDSP
+166	Ledian	Ledian
+BugIC Big.png
+FlyingIC Big.png	Bug		✔	✔	✔	✔	✔	✔	✔BDSP
+167	Spinarak	Spinarak
+BugIC Big.png
+PoisonIC Big.png	Bug		✔	✔	✔	✔	✔	✔	✔BDSP
+168	Ariados	Ariados
+BugIC Big.png
+PoisonIC Big.png	Bug		✔	✔	✔	✔	✔	✔	✔BDSP
+173	Cleffa	Cleffa
+FairyIC Big.png	No Eggs Discovered		✔	✔	✔	✔	✔	✔	✔
+174	Igglybuff	Igglybuff
+NormalIC Big.png
+FairyIC Big.png	No Eggs Discovered		✔	✔	✔	✔	✔	✔	✔
+175	Togepi	Togepi
+FairyIC Big.png	No Eggs Discovered		✔	✔	✔	✔	✔	✔	✔
+176	Togetic	Togetic
+FairyIC Big.png
+FlyingIC Big.png	Flying	Fairy		✔	✔	✔	✔	✔	✔	✔
+177	Natu	Natu
+PsychicIC Big.png
+FlyingIC Big.png	Flying		✔	✔	✔	✔	✔	✔	✔
+178	Xatu	Xatu
+PsychicIC Big.png
+FlyingIC Big.png	Flying		✔	✔	✔	✔	✔	✔	✔
+182	Bellossom	Bellossom
+GrassIC Big.png	Grass		✔	✔	✔	✔	✔	✔	✔
+187	Hoppip	Hoppip
+GrassIC Big.png
+FlyingIC Big.png	Fairy	Grass		✔	✔	✔	✔	✔	✔	✔BDSP
+188	Skiploom	Skiploom
+GrassIC Big.png
+FlyingIC Big.png	Fairy	Grass		✔	✔	✔	✔	✔	✔	✔BDSP
+189	Jumpluff	Jumpluff
+GrassIC Big.png
+FlyingIC Big.png	Fairy	Grass		✔	✔	✔	✔	✔	✔	✔BDSP
+190	Aipom	Aipom
+NormalIC Big.png	Field			✔	✔	✔	✔	✔	✔BDSP
+191	Sunkern	Sunkern
+GrassIC Big.png	Grass		✔	✔	✔	✔	✔	✔	✔BDSP
+192	Sunflora	Sunflora
+GrassIC Big.png	Grass		✔	✔	✔	✔	✔	✔	✔BDSP
+193	Yanma	Yanma
+BugIC Big.png
+FlyingIC Big.png	Bug		✔	✔	✔	✔	✔	✔	✔BDSP
+204	Pineco	Pineco
+BugIC Big.png	Bug		✔	✔	✔	✔	✔	✔	✔BDSP
+205	Forretress	Forretress
+BugIC Big.png
+SteelIC Big.png	Bug		✔	✔	✔	✔	✔	✔	✔BDSP
+206	Dunsparce	Dunsparce
+NormalIC Big.png	Field		✔	✔	✔	✔	✔	✔	✔
+209	Snubbull	Snubbull
+FairyIC Big.png	Field	Fairy			✔	✔	✔	✔	✔	✔BDSP
+210	Granbull	Granbull
+FairyIC Big.png	Field	Fairy			✔	✔	✔	✔	✔	✔BDSP
+219	Magcargo	Magcargo
+FireIC Big.png
+RockIC Big.png	Amorphous				✔	✔	✔	✔	✔BDSP
+228	Houndour	Houndour
+DarkIC Big.png
+FireIC Big.png	Field		✔	✔	✔	✔	✔	✔	✔BDSP
+229	Houndoom	Houndoom
+DarkIC Big.png
+FireIC Big.png	Field		✔	✔	✔	✔	✔	✔	✔BDSP
+233	Porygon2	Porygon2
+NormalIC Big.png	Mineral			✔	✔	✔	✔	✔	✔
+234	Stantler	Stantler
+NormalIC Big.png	Field			✔	✔	✔	✔	✔	✔BDSP
+241	Miltank	Miltank
+NormalIC Big.png	Field			✔	✔	✔	✔	✔	✔
+242	Blissey	Blissey
+NormalIC Big.png	Fairy		✔	✔	✔	✔	✔	✔	✔
+244	Entei	Entei
+FireIC Big.png	No Eggs Discovered		✔	✔	✔	✔	✔	✔	✔
+250	Ho-Oh	Ho-Oh
+FireIC Big.png
+FlyingIC Big.png	No Eggs Discovered		✔	✔	✔	✔	✔	✔	✔
+251	Celebi	Celebi
+PsychicIC Big.png
+GrassIC Big.png	No Eggs Discovered		✔	✔	✔	✔	✔	✔	✔
+252	Treecko	Treecko
+GrassIC Big.png	Monster	Dragon			✔	✔	✔	✔	✔	✔
+253	Grovyle	Grovyle
+GrassIC Big.png	Monster	Dragon			✔	✔	✔	✔	✔	✔
+254	Sceptile	Sceptile
+GrassIC Big.png	Monster	Dragon			✔	✔	✔	✔	✔	✔
+257	Blaziken	Blaziken
+FireIC Big.png
+FightingIC Big.png	Field				✔	✔	✔	✔	✔
+267	Beautifly	Beautifly
+BugIC Big.png
+FlyingIC Big.png	Bug			✔	✔	✔	✔	✔	✔BDSP
+269	Dustox	Dustox
+BugIC Big.png
+PoisonIC Big.png	Bug			✔	✔	✔	✔	✔	✔BDSP
+270	Lotad	Lotad
+WaterIC Big.png
+GrassIC Big.png	Water 1	Grass			✔	✔	✔	✔	✔	✔
+271	Lombre	Lombre
+WaterIC Big.png
+GrassIC Big.png	Water 1	Grass			✔	✔	✔	✔	✔	✔
+272	Ludicolo	Ludicolo
+WaterIC Big.png
+GrassIC Big.png	Water 1	Grass			✔	✔	✔	✔	✔	✔
+273	Seedot	Seedot
+GrassIC Big.png	Field	Grass			✔	✔	✔	✔	✔	✔
+274	Nuzleaf	Nuzleaf
+GrassIC Big.png
+DarkIC Big.png	Field	Grass			✔	✔	✔	✔	✔	✔
+275	Shiftry	Shiftry
+GrassIC Big.png
+DarkIC Big.png	Field	Grass			✔	✔	✔	✔	✔	✔
+283	Surskit	Surskit
+BugIC Big.png
+WaterIC Big.png	Water 1	Bug			✔	✔	✔	✔	✔	✔BDSP
+284	Masquerain	Masquerain
+BugIC Big.png
+FlyingIC Big.png	Water 1	Bug			✔	✔	✔	✔	✔	✔BDSP
+285	Shroomish	Shroomish
+GrassIC Big.png	Fairy	Grass			✔	✔	✔	✔	✔	✔BDSP
+286	Breloom	Breloom
+GrassIC Big.png
+FightingIC Big.png	Fairy	Grass			✔	✔	✔	✔	✔	✔BDSP
+287	Slakoth	Slakoth
+NormalIC Big.png	Field			✔	✔	✔	✔	✔	✔BDSP
+288	Vigoroth	Vigoroth
+NormalIC Big.png	Field			✔	✔	✔	✔	✔	✔BDSP
+289	Slaking	Slaking
+NormalIC Big.png	Field			✔	✔	✔	✔	✔	✔BDSP
+290	Nincada	Nincada
+BugIC Big.png
+GroundIC Big.png	Bug			✔	✔	✔	✔	✔	✔
+291	Ninjask	Ninjask
+BugIC Big.png
+FlyingIC Big.png	Bug			✔	✔	✔	✔	✔	✔
+292	Shedinja	Shedinja
+BugIC Big.png
+GhostIC Big.png	Mineral			✔	✔	✔	✔	✔	✔
+293	Whismur	Whismur
+NormalIC Big.png	Monster	Field			✔	✔	✔	✔	✔	✔
+294	Loudred	Loudred
+NormalIC Big.png	Monster	Field			✔	✔	✔	✔	✔	✔
+295	Exploud	Exploud
+NormalIC Big.png	Monster	Field			✔	✔	✔	✔	✔	✔
+300	Skitty	Skitty
+NormalIC Big.png	Field	Fairy			✔	✔	✔	✔	✔	✔BDSP
+301	Delcatty	Delcatty
+NormalIC Big.png	Field	Fairy			✔	✔	✔	✔	✔	✔BDSP
+303	Mawile	Mawile
+SteelIC Big.png
+FairyIC Big.png	Field	Fairy			✔	✔	✔	✔	✔	✔
+306	Aggron	Aggron
+SteelIC Big.png
+RockIC Big.png	Monster			✔	✔	✔	✔	✔	✔
+313	Volbeat	Volbeat
+BugIC Big.png	Bug	Human-Like			✔	✔	✔	✔	✔	✔BDSP
+314	Illumise	Illumise
+BugIC Big.png	Bug	Human-Like			✔	✔	✔	✔	✔	✔BDSP
+315	Roselia	Roselia
+GrassIC Big.png
+PoisonIC Big.png	Fairy	Grass			✔	✔	✔	✔	✔	✔
+316	Gulpin	Gulpin
+PoisonIC Big.png	Amorphous			✔	✔	✔	✔	✔	✔BDSP
+317	Swalot	Swalot
+PoisonIC Big.png	Amorphous			✔	✔	✔	✔	✔	✔BDSP
+323	Camerupt	Camerupt
+FireIC Big.png
+GroundIC Big.png	Field				✔	✔	✔	✔	✔BDSP
+324	Torkoal	Torkoal
+FireIC Big.png	Field				✔	✔	✔	✔	✔
+328	Trapinch	Trapinch
+GroundIC Big.png	Bug	Dragon			✔	✔	✔	✔	✔	✔
+329	Vibrava	Vibrava
+GroundIC Big.png
+DragonIC Big.png	Bug	Dragon			✔	✔	✔	✔	✔	✔
+330	Flygon	Flygon
+GroundIC Big.png
+DragonIC Big.png	Bug	Dragon			✔	✔	✔	✔	✔	✔
+331	Cacnea	Cacnea
+GrassIC Big.png	Grass	Human-Like			✔	✔	✔	✔	✔	✔BDSP
+332	Cacturne	Cacturne
+GrassIC Big.png
+DarkIC Big.png	Grass	Human-Like			✔	✔	✔	✔	✔	✔BDSP
+333	Swablu	Swablu
+NormalIC Big.png
+FlyingIC Big.png	Flying	Dragon			✔	✔	✔	✔	✔	✔
+334	Altaria	Altaria
+DragonIC Big.png
+FlyingIC Big.png	Flying	Dragon			✔	✔	✔	✔	✔	✔
+335	Zangoose	Zangoose
+NormalIC Big.png	Field			✔	✔	✔	✔	✔	✔BDSP
+338	Solrock	Solrock
+RockIC Big.png
+PsychicIC Big.png	Mineral			✔	✔	✔	✔	✔	✔
+343	Baltoy	Baltoy
+GroundIC Big.png
+PsychicIC Big.png	Mineral			✔	✔	✔	✔	✔	✔
+344	Claydol	Claydol
+GroundIC Big.png
+PsychicIC Big.png	Mineral			✔	✔	✔	✔	✔	✔
+345	Lileep	Lileep
+RockIC Big.png
+GrassIC Big.png	Water 3			✔	✔	✔	✔	✔	✔
+346	Cradily	Cradily
+RockIC Big.png
+GrassIC Big.png	Water 3			✔	✔	✔	✔	✔	✔
+351	Castform	Castform
+NormalIC Big.png	Fairy	Amorphous			✔	✔	✔	✔	✔	✔BDSP
+352	Kecleon	Kecleon
+NormalIC Big.png	Field			✔	✔	✔	✔	✔	✔BDSP
+357	Tropius	Tropius
+GrassIC Big.png
+FlyingIC Big.png	Monster	Grass			✔	✔	✔	✔	✔	✔BDSP
+380	Latias	Latias
+DragonIC Big.png
+PsychicIC Big.png	No Eggs Discovered			✔	✔	✔	✔	✔	✔
+381	Latios	Latios
+DragonIC Big.png
+PsychicIC Big.png	No Eggs Discovered			✔	✔	✔	✔	✔	✔
+383	Groudon	Groudon
+GroundIC Big.png	No Eggs Discovered			✔	✔	✔	✔	✔	✔
+384	Rayquaza	Rayquaza
+DragonIC Big.png
+FlyingIC Big.png	No Eggs Discovered			✔	✔	✔	✔	✔	✔
+386	Deoxys	Deoxys
+PsychicIC Big.png	No Eggs Discovered			✔	✔	✔	✔	✔	✔BDSP
+387	Turtwig	Turtwig
+GrassIC Big.png	Monster	Grass				✔	✔	✔	✔	✔BDSP
+388	Grotle	Grotle
+GrassIC Big.png	Monster	Grass				✔	✔	✔	✔	✔BDSP
+389	Torterra	Torterra
+GrassIC Big.png
+GroundIC Big.png	Monster	Grass				✔	✔	✔	✔	✔BDSP
+392	Infernape	Infernape
+FireIC Big.png
+FightingIC Big.png	Field	Human-Like				✔	✔	✔	✔	✔BDSP
+406	Budew	Budew
+GrassIC Big.png
+PoisonIC Big.png	No Eggs Discovered				✔	✔	✔	✔	✔
+407	Roserade	Roserade
+GrassIC Big.png
+PoisonIC Big.png	Fairy	Grass				✔	✔	✔	✔	✔
+413	Wormadam	Wormadam
+Plant Cloak	BugIC Big.png
+GrassIC Big.png	Bug				✔	✔	✔	✔	✔BDSP
+413	Wormadam	Wormadam
+Sandy Cloak	BugIC Big.png
+GroundIC Big.png	Bug								✔BDSP
+413	Wormadam	Wormadam
+Trash Cloak	BugIC Big.png
+SteelIC Big.png	Bug								✔BDSP
+414	Mothim	Mothim
+BugIC Big.png
+FlyingIC Big.png	Bug				✔	✔	✔	✔	✔BDSP
+420	Cherubi	Cherubi
+GrassIC Big.png	Fairy	Grass				✔	✔	✔	✔	✔
+421	Cherrim	Cherrim
+GrassIC Big.png	Fairy	Grass				✔	✔	✔	✔	✔
+424	Ambipom	Ambipom
+NormalIC Big.png	Field				✔	✔	✔	✔	✔BDSP
+427	Buneary	Buneary
+NormalIC Big.png	Field	Human-Like				✔	✔	✔	✔	✔
+428	Lopunny	Lopunny
+NormalIC Big.png	Field	Human-Like				✔	✔	✔	✔	✔
+436	Bronzor	Bronzor
+SteelIC Big.png
+PsychicIC Big.png	Mineral				✔	✔	✔	✔	✔
+437	Bronzong	Bronzong
+SteelIC Big.png
+PsychicIC Big.png	Mineral				✔	✔	✔	✔	✔
+439	Mime Jr.	Mime Jr.
+PsychicIC Big.png
+FairyIC Big.png	No Eggs Discovered				✔	✔	✔	✔	✔
+440	Happiny	Happiny
+NormalIC Big.png	No Eggs Discovered				✔	✔	✔	✔	✔
+446	Munchlax	Munchlax
+NormalIC Big.png	No Eggs Discovered				✔	✔	✔	✔	✔
+455	Carnivine	Carnivine
+GrassIC Big.png	Grass				✔	✔	✔	✔	✔BDSP
+459	Snover	Snover
+GrassIC Big.png
+IceIC Big.png	Monster	Grass				✔	✔	✔	✔	✔
+460	Abomasnow	Abomasnow
+GrassIC Big.png
+IceIC Big.png	Monster	Grass				✔	✔	✔	✔	✔
+463	Lickilicky	Lickilicky
+NormalIC Big.png	Monster				✔	✔	✔	✔	✔
+465	Tangrowth	Tangrowth
+GrassIC Big.png	Grass				✔	✔	✔	✔	✔
+467	Magmortar	Magmortar
+FireIC Big.png	Human-Like				✔	✔	✔	✔	✔
+468	Togekiss	Togekiss
+FairyIC Big.png
+FlyingIC Big.png	Flying	Fairy				✔	✔	✔	✔	✔
+469	Yanmega	Yanmega
+BugIC Big.png
+FlyingIC Big.png	Bug				✔	✔	✔	✔	✔BDSP
+470	Leafeon	Leafeon
+GrassIC Big.png	Field				✔	✔	✔	✔	✔
+474	Porygon-Z	Porygon-Z
+NormalIC Big.png	Mineral				✔	✔	✔	✔	✔
+480	Uxie	Uxie
+PsychicIC Big.png	No Eggs Discovered				✔	✔	✔	✔	✔
+485	Heatran	Heatran
+FireIC Big.png
+SteelIC Big.png	No Eggs Discovered				✔	✔	✔	✔	✔
+488	Cresselia	Cresselia
+PsychicIC Big.png	No Eggs Discovered				✔	✔	✔	✔	✔
+492	Shaymin	Shaymin
+Land Forme	GrassIC Big.png	No Eggs Discovered				✔	✔	✔	✔	✔BDSP
+492	Shaymin	Shaymin
+Sky Forme	GrassIC Big.png
+FlyingIC Big.png	No Eggs Discovered				✔PtHGSS	✔	✔	✔	✔BDSP
+493	Arceus	Arceus
+NormalIC Big.png	No Eggs Discovered				✔	✔	✔	✔	✔BDSP
+494	Victini	Victini
+PsychicIC Big.png
+FireIC Big.png	No Eggs Discovered					✔	✔	✔	✔
+495	Snivy	Snivy
+GrassIC Big.png	Field	Grass					✔	✔	✔	
+496	Servine	Servine
+GrassIC Big.png	Field	Grass					✔	✔	✔	
+497	Serperior	Serperior
+GrassIC Big.png	Field	Grass					✔	✔	✔	
+498	Tepig	Tepig
+FireIC Big.png	Field					✔	✔	✔	
+499	Pignite	Pignite
+FireIC Big.png
+FightingIC Big.png	Field					✔	✔	✔	
+500	Emboar	Emboar
+FireIC Big.png
+FightingIC Big.png	Field					✔	✔	✔	
+511	Pansage	Pansage
+GrassIC Big.png	Field					✔	✔	✔	
+512	Simisage	Simisage
+GrassIC Big.png	Field					✔	✔	✔	
+513	Pansear	Pansear
+FireIC Big.png	Field					✔	✔	✔	
+514	Simisear	Simisear
+FireIC Big.png	Field					✔	✔	✔	
+526	Gigalith	Gigalith
+RockIC Big.png	Mineral					✔	✔	✔	✔
+531	Audino	Audino
+NormalIC Big.png	Fairy					✔	✔	✔	✔
+540	Sewaddle	Sewaddle
+BugIC Big.png
+GrassIC Big.png	Bug					✔	✔	✔	
+541	Swadloon	Swadloon
+BugIC Big.png
+GrassIC Big.png	Bug					✔	✔	✔	
+542	Leavanny	Leavanny
+BugIC Big.png
+GrassIC Big.png	Bug					✔	✔	✔	
+543	Venipede	Venipede
+BugIC Big.png
+PoisonIC Big.png	Bug					✔	✔	✔	✔
+544	Whirlipede	Whirlipede
+BugIC Big.png
+PoisonIC Big.png	Bug					✔	✔	✔	✔
+545	Scolipede	Scolipede
+BugIC Big.png
+PoisonIC Big.png	Bug					✔	✔	✔	✔
+546	Cottonee	Cottonee
+GrassIC Big.png
+FairyIC Big.png	Grass	Fairy					✔	✔	✔	✔
+547	Whimsicott	Whimsicott
+GrassIC Big.png
+FairyIC Big.png	Grass	Fairy					✔	✔	✔	✔
+548	Petilil	Petilil
+GrassIC Big.png	Grass					✔	✔	✔	✔
+549	Lilligant	Lilligant
+GrassIC Big.png	Grass					✔	✔	✔	✔
+554	Darumaka	Darumaka
+FireIC Big.png	Field					✔	✔	✔	✔
+554	Darumaka	Darumaka
+Galarian Form	IceIC Big.png	Field								✔
+555	Darmanitan	Darmanitan
+FireIC Big.png	Field					✔	✔	✔	✔
+555	Darmanitan	Darmanitan
+Galarian Form	IceIC Big.png	Field								✔
+556	Maractus	Maractus
+GrassIC Big.png	Grass					✔	✔	✔	✔
+557	Dwebble	Dwebble
+BugIC Big.png
+RockIC Big.png	Bug	Mineral					✔	✔	✔	✔
+558	Crustle	Crustle
+BugIC Big.png
+RockIC Big.png	Bug	Mineral					✔	✔	✔	✔
+561	Sigilyph	Sigilyph
+PsychicIC Big.png
+FlyingIC Big.png	Flying					✔	✔	✔	✔
+569	Garbodor	Garbodor
+PoisonIC Big.png	Mineral					✔	✔	✔	✔
+585	Deerling	Deerling
+NormalIC Big.png
+GrassIC Big.png	Field					✔	✔	✔	
+586	Sawsbuck	Sawsbuck
+NormalIC Big.png
+GrassIC Big.png	Field					✔	✔	✔	
+587	Emolga	Emolga
+ElectricIC Big.png
+FlyingIC Big.png	Field								✔
+590	Foongus	Foongus
+GrassIC Big.png
+PoisonIC Big.png	Grass					✔	✔	✔	✔
+591	Amoonguss	Amoonguss
+GrassIC Big.png
+PoisonIC Big.png	Grass					✔	✔	✔	✔
+597	Ferroseed	Ferroseed
+GrassIC Big.png
+SteelIC Big.png	Grass	Mineral					✔	✔	✔	✔
+598	Ferrothorn	Ferrothorn
+GrassIC Big.png
+SteelIC Big.png	Grass	Mineral					✔	✔	✔	✔
+607	Litwick	Litwick
+GhostIC Big.png
+FireIC Big.png	Amorphous					✔	✔	✔	✔
+608	Lampent	Lampent
+GhostIC Big.png
+FireIC Big.png	Amorphous					✔	✔	✔	✔
+609	Chandelure	Chandelure
+GhostIC Big.png
+FireIC Big.png	Amorphous					✔	✔	✔	✔
+615	Cryogonal	Cryogonal
+IceIC Big.png	Mineral					✔	✔	✔	✔
+623	Golurk	Golurk
+GroundIC Big.png
+GhostIC Big.png	Mineral					✔	✔	✔	✔
+631	Heatmor	Heatmor
+FireIC Big.png	Field					✔	✔	✔	✔
+636	Larvesta	Larvesta
+BugIC Big.png
+FireIC Big.png	Bug					✔	✔	✔	✔
+637	Volcarona	Volcarona
+BugIC Big.png
+FireIC Big.png	Bug					✔	✔	✔	✔
+640	Virizion	Virizion
+GrassIC Big.png
+FightingIC Big.png	No Eggs Discovered					✔	✔	✔	✔
+643	Reshiram	Reshiram
+DragonIC Big.png
+FireIC Big.png	No Eggs Discovered					✔	✔	✔	✔
+649	Genesect	Genesect
+BugIC Big.png
+SteelIC Big.png	No Eggs Discovered					✔	✔	✔	✔
+650	Chespin	Chespin
+GrassIC Big.png	Field						✔	✔	
+651	Quilladin	Quilladin
+GrassIC Big.png	Field						✔	✔	
+652	Chesnaught	Chesnaught
+GrassIC Big.png
+FightingIC Big.png	Field						✔	✔	
+653	Fennekin	Fennekin
+FireIC Big.png	Field						✔	✔	
+654	Braixen	Braixen
+FireIC Big.png	Field						✔	✔	
+655	Delphox	Delphox
+FireIC Big.png
+PsychicIC Big.png	Field						✔	✔	
+663	Talonflame	Talonflame
+FireIC Big.png
+FlyingIC Big.png	Flying						✔	✔	✔
+666	Vivillon	Vivillon
+BugIC Big.png
+FlyingIC Big.png	Bug						✔	✔	
+667	Litleo	Litleo
+FireIC Big.png
+NormalIC Big.png	Field						✔	✔	
+668	Pyroar	Pyroar
+FireIC Big.png
+NormalIC Big.png	Field						✔	✔	
+669	Flabébé	Flabébé
+FairyIC Big.png	Fairy						✔	✔	
+670	Floette	Floette
+FairyIC Big.png	Fairy						✔	✔	
+670	Floette	Floette
+Eternal Flower	FairyIC Big.png	No Eggs Discovered						✔	✔	
+671	Florges	Florges
+FairyIC Big.png	Fairy						✔	✔	
+672	Skiddo	Skiddo
+GrassIC Big.png	Field						✔	✔	
+673	Gogoat	Gogoat
+GrassIC Big.png	Field						✔	✔	
+695	Heliolisk	Heliolisk
+ElectricIC Big.png
+NormalIC Big.png	Monster	Dragon								✔
+708	Phantump	Phantump
+GhostIC Big.png
+GrassIC Big.png	Grass	Amorphous						✔	✔	✔
+709	Trevenant	Trevenant
+GhostIC Big.png
+GrassIC Big.png	Grass	Amorphous						✔	✔	✔
+710	Pumpkaboo	Pumpkaboo
+GhostIC Big.png
+GrassIC Big.png	Amorphous						✔	✔	✔
+711	Gourgeist	Gourgeist
+GhostIC Big.png
+GrassIC Big.png	Amorphous						✔	✔	✔
+714	Noibat	Noibat
+FlyingIC Big.png
+DragonIC Big.png	Flying	Dragon						✔	✔	✔
+715	Noivern	Noivern
+FlyingIC Big.png
+DragonIC Big.png	Flying	Dragon						✔	✔	✔
+721	Volcanion	Volcanion
+FireIC Big.png
+WaterIC Big.png	No Eggs Discovered						✔	✔	✔
+722	Rowlet	Rowlet
+GrassIC Big.png
+FlyingIC Big.png	Flying							✔	✔
+723	Dartrix	Dartrix
+GrassIC Big.png
+FlyingIC Big.png	Flying							✔	✔
+724	Decidueye	Decidueye
+GrassIC Big.png
+GhostIC Big.png	Flying							✔	✔
+738	Vikavolt	Vikavolt
+BugIC Big.png
+ElectricIC Big.png	Bug							✔	✔
+743	Ribombee	Ribombee
+BugIC Big.png
+FairyIC Big.png	Bug	Fairy							✔	✔
+753	Fomantis	Fomantis
+GrassIC Big.png	Grass							✔	✔
+754	Lurantis	Lurantis
+GrassIC Big.png	Grass							✔	✔
+755	Morelull	Morelull
+GrassIC Big.png
+FairyIC Big.png	Grass							✔	✔
+756	Shiinotic	Shiinotic
+GrassIC Big.png
+FairyIC Big.png	Grass							✔	✔
+761	Bounsweet	Bounsweet
+GrassIC Big.png	Grass							✔	✔
+762	Steenee	Steenee
+GrassIC Big.png	Grass							✔	✔
+763	Tsareena	Tsareena
+GrassIC Big.png	Grass							✔	✔
+764	Comfey	Comfey
+FairyIC Big.png	Grass							✔	✔
+774	Minior	Minior
+RockIC Big.png
+FlyingIC Big.png	Mineral							✔	
+776	Turtonator	Turtonator
+FireIC Big.png
+DragonIC Big.png	Monster	Dragon							✔	✔
+780	Drampa	Drampa
+NormalIC Big.png
+DragonIC Big.png	Monster	Dragon							✔	✔
+781	Dhelmise	Dhelmise
+GhostIC Big.png
+GrassIC Big.png	Mineral							✔	✔
+787	Tapu Bulu	Tapu Bulu
+GrassIC Big.png
+FairyIC Big.png	No Eggs Discovered							✔	✔
+791	Solgaleo	Solgaleo
+PsychicIC Big.png
+SteelIC Big.png	No Eggs Discovered							✔	✔
+792	Lunala	Lunala
+PsychicIC Big.png
+GhostIC Big.png	No Eggs Discovered							✔	✔
+796	Xurkitree	Xurkitree
+ElectricIC Big.png	No Eggs Discovered							✔	✔
+797	Celesteela	Celesteela
+SteelIC Big.png
+FlyingIC Big.png	No Eggs Discovered							✔	✔
+800	Necrozma	Necrozma
+PsychicIC Big.png	No Eggs Discovered							✔	✔
+800	Necrozma	Necrozma
+Dusk Mane	PsychicIC Big.png
+SteelIC Big.png	No Eggs Discovered							✔USUM	✔
+800	Necrozma	Necrozma
+Dawn Wings	PsychicIC Big.png
+GhostIC Big.png	No Eggs Discovered							✔USUM	✔
+801	Magearna	Magearna
+SteelIC Big.png
+FairyIC Big.png	No Eggs Discovered							✔	✔
+806	Blacephalon	Blacephalon
+FireIC Big.png
+GhostIC Big.png	No Eggs Discovered								✔
+809	Melmetal	Melmetal
+SteelIC Big.png	No Eggs Discovered							✔PE	✔
+810	Grookey	Grookey
+GrassIC Big.png	Field	Grass								✔
+811	Thwackey	Thwackey
+GrassIC Big.png	Field	Grass								✔
+812	Rillaboom	Rillaboom
+GrassIC Big.png	Field	Grass								✔
+825	Dottler	Dottler
+BugIC Big.png
+PsychicIC Big.png	Bug								✔
+826	Orbeetle	Orbeetle
+BugIC Big.png
+PsychicIC Big.png	Bug								✔
+829	Gossifleur	Gossifleur
+GrassIC Big.png	Grass								✔
+830	Eldegoss	Eldegoss
+GrassIC Big.png	Grass								✔
+839	Coalossal	Coalossal
+RockIC Big.png
+FireIC Big.png	Mineral								✔
+841	Flapple	Flapple
+GrassIC Big.png
+DragonIC Big.png	Grass	Dragon								✔
+842	Appletun	Appletun
+GrassIC Big.png
+DragonIC Big.png	Grass	Dragon								✔
+851	Centiskorch	Centiskorch
+FireIC Big.png
+BugIC Big.png	Bug								✔
+866	Mr. Rime	Mr. Rime
+IceIC Big.png
+PsychicIC Big.png	Human-Like								✔
+869	Alcremie	Alcremie
+FairyIC Big.png	Fairy	Amorphous								✔
+884	Duraludon	Duraludon
+SteelIC Big.png
+DragonIC Big.png	Mineral	Dragon								✔
+887	Dragapult	Dragapult
+DragonIC Big.png
+GhostIC Big.png	Amorphous	Dragon								✔
+889	Zamazenta	Zamazenta
+FightingIC Big.png	No Eggs Discovered								✔
+890	Eternatus	Eternatus
+PoisonIC Big.png
+DragonIC Big.png	No Eggs Discovered								✔
+893	Zarude	Zarude
+DarkIC Big.png
+GrassIC Big.png	No Eggs Discovered								✔
+898	Calyrex	Calyrex
+PsychicIC Big.png
+GrassIC Big.png	No Eggs Discovered								✔
+898	Calyrex	Calyrex
+Ice Rider	PsychicIC Big.png
+IceIC Big.png	No Eggs Discovered								✔
+898	Calyrex	Calyrex
+Shadow Rider	PsychicIC Big.png
+GhostIC Big.png	No Eggs Discovered								✔
+Bold indicates a Pokémon gains STAB from this move.
+Italics indicates a Pokémon whose evolution or alternate form receives STAB from this move.

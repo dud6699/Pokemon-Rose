@@ -1,0 +1,11 @@
+['Keen Eye','Tangled Feet']
+[.8,.9,.7,.8,.7,1.12]
+['Normal','Flying']
+[18,'Pidgeotto']
+{1:['Tackle'],5:'Sand Attack',9:'Gust',13:'Quick Attack',17:'Whirlwind',21:'Twister',25:'Feather Dance',29:'Agility',33:'Wing Attack',37:'Roost',41:'Tailwind',45:'Mirror Move',49:'Air Slash',53:'Hurricane'}
+255
+1.8
+12
+20
+['route_1','route_2','scarab_r']
+['Tiny Bird','Pidgey has an extremely sharp sense of', 'direction. It is capable of unerringly', 'returning home to its nest, however far it', 'may be removed from its familiar', 'surroundings.']

@@ -1,0 +1,11 @@
+['Swift Swim']
+[1.7,2.1,1.7,1.1,1,2.3]
+['Water',None]
+[]
+{1:['Ice Fang','Crunch','Sonic Boom','Growl','Water Sport','Quick Attack'],4:'Growl',7:'Water Sport',11:'Quick Attack',15:'Water Gun',18:'Pursuit',21:'Swift',24:'Aqua Jet',29:'Double Hit',35:'Whirlpool',41:'Razor Wind',46:'Aqua Tail',51:'Agility',57:'Hydro Pump'}
+75
+33.5
+43
+170
+['route_5']
+['Sea Weasel','Its flotation sac developed as a result of', 'pursuing aquatic prey. It can double as a', 'rubber raft.'] 

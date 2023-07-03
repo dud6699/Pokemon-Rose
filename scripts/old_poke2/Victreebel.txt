@@ -1,0 +1,11 @@
+['Chlorophyll']
+[1.6,2.1,2,1.3,1.4,1.4]
+['Grass','Poison']
+[]
+{1:['Leaf Tornado','Stockpile','Swallow','Spit Up','Vine Whip','Sleep Powder','Sweet Scent','Razor Leaf'],32:'Leaf Storm',44:'Leaf Blade'}
+45
+15.5
+67
+32
+[]
+['Flycatcher','Victreebel has a long vine that extends', 'from its head. This vine is waved and', 'flicked about as if it were an animal to', 'attract prey. When an unsuspecting prey', 'draws near, this Pokemon swallows it whole.']

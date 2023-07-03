@@ -1,0 +1,11 @@
+['Natural Cure','Serene Grace']
+[5.1,.2,1.5,.2,2.7,1.1]
+['Normal',None]
+[]
+{1:['Defense Curl','Double-Edge','Growl','Pound'],5:'Tail Whip',9:'Refresh',12:'Double Slap',16:'Soft-Boiled',20:'Bestow',23:'Minimize',27:'Take Down',31:'Sing',34:'Fling',39:'Heal Pulse',44:'Egg Bomb',50:'Light Screen',57:'Healing Wish',65:'Double-Edge'}
+30
+46.8
+59
+925
+[]
+['Happiness','Blissey senses sadness with its fluffy coat', 'of fur. If it does so, this Pokemon will rush over to', 'a sad person, no matter how far away, to', 'share a Lucky Egg that brings a smile to', 'any face.'] 

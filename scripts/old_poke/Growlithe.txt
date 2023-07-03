@@ -1,0 +1,11 @@
+['Intimidate','Flash Fire']
+[1.1,1.4,1.4,.9,1,1.2]
+['Fire',None]
+['Fire Stone','Arcanine']
+{1:['Bite','Roar'],6:'Ember',8:'Leer',10:'Odor Sleuth',12:'Work Up',17:'Flame Wheel',19:'Reversal',21:'Fire Fang',23:'Take Down',28:'Flame Burst',30:'Agility',32:'Retaliate',34:'Flamethrower',39:'Crunch',41:'Heat Wave',43:'Outrage',45:'Flare Blitz'}
+190
+19
+28
+198
+['route_6']
+['Puppy','Growlithe has a superb sense of smell. Once', 'it smells anything, this Pokemon won\'t', 'forget the scent, no matter what. It uses', 'its advanced olfactory sense to determine', 'the emotions of other living things.'] 

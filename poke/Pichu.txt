@@ -1,0 +1,11 @@
+['Static']
+[.4,.8,.7,.3,.7,1.2]
+['Electric',None]
+['friend','Pikachu']
+{1:['Thunder Shock','Charm'],5:'Tail Whip',10:'Sweet Kiss',13:'Nasty Plot',19:'Thunder Wave'}
+190
+2
+12
+938
+[]
+['Tiny Mouse','Pichu charges itself with electricity more', 'easily on days with thunderclouds or when', 'the air is very dry. You can hear the', 'crackling of static electricity coming off', 'this Pokemon.'] 

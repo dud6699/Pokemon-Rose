@@ -1,0 +1,11 @@
+['Hyper Cutter','Sand Veil']
+[1.3,1.5,.7,2.1,1.3,1.7]
+['Ground','Flying']
+['Razor Fang','Gliscor']
+{1:['Poison Sting'],4:'Sand Attack',7:'Harden',10:'Knock Off',13:'Quick Attack',16:'Fury Cutter',19:'Feint Attack',22:'Acrobatics',27:'Slash',30:'U-turn',35:'Screech',40:'X-Scissor',45:'Sky Uppercut',50:'Swords Dance',55:'Guillotine'}
+60
+64.8
+43
+245
+['sunken_cave']
+['Fly Scorpion','Gligar glides through the air without a', 'sound as if it were sliding. This Pokemon', 'hangs on to the face of its foe using its', 'clawed hind legs and the large pincers,', 'then injects the prey with its poison barb.'] 

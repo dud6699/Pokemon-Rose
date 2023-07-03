@@ -1,0 +1,11 @@
+['Intimidate']
+[1.4,1.2,2,1.24,1.64,1.6]
+['Bug','Flying']
+[]
+{1:['Quiver Dance','Whirlwind','Bug Buzz','Ominous Wind','Bubble','Quick Attack','Sweet Scent','Water Sport'],6:'Quick Attack',9:'Sweet Scent',14:'Water Sport',17:'Gust',22:['Scary Face','Air Cutter'],26:'Stun Spore',32:'Silver Wind',38:'Air Slash',42:'Bug Buzz',48:'Whirlwind',52:'Quiver Dance'}
+75
+3.6
+31
+252
+['route_6']
+['Eyeball','Masquerain\'s antennas have eyelike patterns', 'that usually give it an angry look. If the', '\"eyes\" are droopy and appear sad, it is', 'said to be a sign that a heavy rainfall is', 'on its way.'] 

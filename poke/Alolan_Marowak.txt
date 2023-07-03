@@ -1,0 +1,11 @@
+['Cursed Body','Lightning Rod']
+[1.2,1.6,1,2.2,1.6,.9]
+['Fire','Ghost']
+[]
+{1:['Growl','Tail Whip','Bone Club','Flame Wheel'],3:'Tail Whip',7:'Bone Club',11:'Flame Wheel',13:'Leer',17:'Hex',21:'Bonemerang',23:'Will-O-Wisp',27:'Shadow Bone',33:'Thrash',37:'Fling',43:'Stomping Tantrum',49:'Endeavor',53:'Flare Blitz',59:'Retaliate',65:'Bone Rush'}
+75
+34
+39
+198
+[]
+['Bone Keeper','When it beats opponents with its bone, the', 'cursed flames spread to them. No amount of', 'water will stop those flames from burning.'] 

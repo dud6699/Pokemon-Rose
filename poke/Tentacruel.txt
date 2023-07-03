@@ -1,0 +1,11 @@
+['Clear Body','Liquid Ooze']
+[1.6,1.4,1.6,1.3,2.4,2]
+['Water','Poison']
+[]
+{1:['Reflect Type','Wring Out','Poison Sting','Supersonic','Constrict','Acid'],4:'Supersonic',7:'Constrict',10:'Acid',13:'Toxic Spikes',16:'Water Pulse',19:'Wrap',22:'Acid Spray',25:'Bubble Beam',28:'Barrier',32:'Poison Jab',36:'Brine',40:'Screech',44:'Hex',48:'Sludge Wave',52:'Hydro Pump',56:'Wring Out'}
+60
+55
+63
+154
+['route_4f','forbiddenf']
+['Jellyfish','Tentacruel has large red orbs on its head.', 'The orbs glow before lashing the vicinity', 'with a harsh ultrasonic blast. This', 'Pokemon\'s outburst creates rough waves', 'around it.'] 

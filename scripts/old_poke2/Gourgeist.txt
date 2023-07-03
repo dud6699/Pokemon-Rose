@@ -1,0 +1,11 @@
+['Pickup','Frisk']
+[1.3,1.8,1.16,2.44,1.5,1.68]
+['Ghost','Grass']
+[]
+{1:['Explosion','Phantom Force','Trick','Astonish','Confuse Ray','Scary Face'],4:'Scary Face',6:'Trick-or-Treat',11:'Worry Seed',16:'Razor Leaf',20:'Leech Seed',23:'Trick-or-Treat',26:'Bullet Seed',30:'Shadow Sneak',36:'Shadow Ball',40:'Trick-or-Treat',42:'Pain Split',48:'Seed Bomb',57:'Phantom Force',63:'Trick-or-Treat',70:'Explosion'}
+60
+12.5
+35
+207
+['forbidden']
+['Pumpkin','Singing in eerie voices, they wander town', 'streets on the night of the new moon.', 'Anyone who hears their song is cursed.'] 

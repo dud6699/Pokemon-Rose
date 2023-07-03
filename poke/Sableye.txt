@@ -6,6 +6,6 @@
 45
 11
 20
-127
-['mirror_cave']
+141
+['mirror_cave','forbidden']
 ['Darkness','Sableye digs the ground with sharpened', 'claws to find rocks that it eats.', 'Substances in the eaten rocks crystallize', 'and rise up to the Pokemon\'s body surface.'] 

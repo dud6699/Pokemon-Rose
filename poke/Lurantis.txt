@@ -1,0 +1,11 @@
+['Leaf Guard']
+[1.4,2.1,1.6,1.8,1.8,.9]
+['Grass',None]
+[]
+{1:['Petal Blizzard','X-Scissor','Night Slash','Fury Cutter','Leafage','Razor Leaf','Growth'],5:'Leafage',10:'Razor Leaf',14:'Growth',19:'Ingrain',23:'Leaf Blade',28:'Synthesis',32:'Slash',40:'Sweet Scent',47:'Solar Blade',55:'Sunny Day'}
+75
+18.5
+35
+270
+['route_6']
+['Bloom Sickle','For self-protection, it pretends to be a', 'bug Pokemon. Both of its arms bear keen-','edged petals.'] 

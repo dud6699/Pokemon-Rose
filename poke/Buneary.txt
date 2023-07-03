@@ -6,6 +6,6 @@
 190
 5.5
 16
-107
+112
 ['route_3']
 ['Rabbit','Its arms and legs are weak, but when it', 'rolls its ears up tight and then unleashes', 'them with its full force, it can smash', 'boulders to dust.'] 

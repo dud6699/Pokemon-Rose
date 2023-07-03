@@ -6,6 +6,6 @@
 190
 36
 50
-118
+123
 ['route_3b']
 ['Dopey','Slowpoke uses its tail to catch prey by', 'dipping it in water at the side of a river.', 'However, this Pokemon often forgets what', 'it\'s doing and often spends entire days', 'just loafing at water\'s edge.'] 

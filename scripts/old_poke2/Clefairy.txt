@@ -1,0 +1,11 @@
+['Cute Charm','Magic Guard']
+[1.4,.9,1.2,.96,1.3,.7]
+['Fairy',None]
+['Moon Stone','Clefable']
+{1:['Disarming Voice','Pound','Growl','Encore'],7:'Sing',10:'Double Slap',13:'Defense Curl',16:'Reflect',19:'Bestow',22:'Wake-Up Slap',25:'Minimize',28:'Stored Power',31:'Metronome',34:'Cosmic Power',37:'Lucky Chant',40:'Body Slam',43:'Moonlight',46:'Gravity',50:'Meteor Mash',55:'Healing Wish',58:'Psych Up'}
+150
+7.5
+24
+921
+[]
+['Fairy','On every night of a full moon, groups of', 'this Pokemon come out to play. When dawn', 'arrives, the tired Clefairy return to their', 'quiet mountain retreats and go to sleep', 'nestled up against each other.'] 

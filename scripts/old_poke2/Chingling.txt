@@ -1,0 +1,11 @@
+['Levitate']
+[.9,.6,1.3,1,1,.9]
+['Psychic',None]
+['friend','Chimecho']
+{1:['Wrap'],4:'Growl',7:'Astonish',10:'Confusion',13:'Yawn',16:'Last Resort',19:'Entrainment',32:'Uproar'}
+120
+0.6
+8
+916
+[]
+['Bell','There is an orb inside its mouth. When it', 'hops, the orb bounces all over and makes a', 'ringing sound.']

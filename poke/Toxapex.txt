@@ -6,6 +6,6 @@
 75
 14.5
 28
-154
-[]
+174
+['route_3f']
 ['Brutal Star','To attack, this Pokemon sends toxic spikes', 'flying at its enemies. Ones that come close', 'get mown down by the claws on its feet.'] 

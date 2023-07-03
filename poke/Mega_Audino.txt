@@ -6,6 +6,6 @@
 255
 32
 59
-953
+277
 []
 ['Healer','Using the feelers on its ears, it can tell', 'how someone is feeling or when an egg might', 'hatch.'] 

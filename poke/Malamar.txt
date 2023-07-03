@@ -1,0 +1,11 @@
+['Contrary','Suction Cups']
+[1.72,1.84,1.36,1.76,1.5,1.46]
+['Dark','Psychic']
+[]
+{1:['Reversal','Tackle','Peck','Constrict','Reflect'],4:'Reflect',8:'Foul Play',12:'Swagger',13:'Psywave',15:'Topsy-Turvy',18:'Hypnosis',21:'Psybeam',23:'Switcheroo',27:'Payback',31:'Light Screen',35:'Pluck',39:'Psycho Cut',43:'Slash',46:'Night Slash',48:'Superpower'}
+80
+47
+59
+218
+['forbiddenf']
+['Overturning','It lures prey close with hypnotic motions,', 'then wraps its tentacles around it before', 'finishing it off with digestive fluids.'] 

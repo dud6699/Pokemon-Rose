@@ -1,0 +1,11 @@
+['Sniper','Swift Swim']
+[1.5,1.9,1.9,1.9,1.9,1.7]
+['Water','Dragon']
+[]
+{1:['Hydro Pump','Yawn','Bubble','Smokescreen','Leer','Water Gun'],5:'Smokescreen',9:'Leer',13:'Water Gun',17:'Twister',21:'Bubble Beam',26:'Focus Energy',31:'Brine',38:'Agility',45:'Dragon Pulse',52:'Dragon Dance',60:'Hydro Pump'}
+45
+152
+71
+987
+[]
+['Dragon','Kingdra lives at extreme ocean depths that', 'are otherwise uninhabited. It has long been', 'believed that the yawning of this Pokemon', 'creates spiraling ocean currents.']

@@ -1,0 +1,11 @@
+['Flash Fire']
+[1.46,1.52,1.62,1.5,2,2]
+['Fire',None]
+[]
+{1:['Imprison','Nasty Plot','Flamethrower','Quick Attack','Confuse Ray','Safeguard']}
+75
+19.9
+46
+152
+[]
+['Fox','Ninetales casts a sinister light from its', 'bright red eyes to gain total control over', 'its foe\'s mind. This Pokemon is said to', 'live for one thousand years.'] 

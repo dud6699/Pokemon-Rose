@@ -1,0 +1,10 @@
+Poison
+1
+95
+1
+{.1:['Psn']}
+1
+10
+['The user strikes', 'everything around it', 'by swamping the area', 'with a giant sludge', 'wave. This may also', 'poison those hit.']
+0
+0

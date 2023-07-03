@@ -1,0 +1,3 @@
+['Petal','Medicine']
+['A colorful petal', 'that can be given to', 'a Pokemon to', 'increase its HP.']
+1000

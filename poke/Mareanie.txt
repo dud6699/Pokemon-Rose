@@ -6,6 +6,6 @@
 190
 8
 16
-153
-['route_5b']
+173
+['route_5b','route_3f']
 ['Brutal Star','Aside from its head, its body parts', 'regenerate quickly if they\'re cut off.', 'After a good night\'s sleep, Mareanie is', 'back to normal.'] 

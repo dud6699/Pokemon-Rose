@@ -6,6 +6,6 @@
 75
 120
 79
-120
+125
 []
 ['Hermit Crab','Having been swallowed whole by Shellder,', 'Slowbro now has an iron defense. It\'s', 'pretty comfortable in there, too.'] 

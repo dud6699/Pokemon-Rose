@@ -1,0 +1,11 @@
+['Flash Fire']
+[.76,.82,1,.8,1.3,1.3]
+['Fire',None]
+['Fire Stone','Ninetales']
+{1:['Ember'],4:'Tail Whip',7:'Roar',9:'Baby-Doll Eyes',10:'Quick Attack',12:'Confuse Ray',15:'Fire Spin',18:'Payback',20:'Will-O-Wisp',23:'Feint Attack',26:'Hex',28:'Flame Burst',31:'Extrasensory',34:'Safeguard',36:'Flamethrower',39:'Imprison',42:'Fire Blast',44:'Grudge',47:'Captivate',50:'Inferno'}
+190
+9.9
+24
+151
+['route_4']
+['Fox','Inside Vulpix\'s body burns a flame that', 'never goes out. During the daytime, when', 'the temperatures rise, this Pokemon', 'releases flames from its mouth to prevent', 'its body from growing too hot.'] 

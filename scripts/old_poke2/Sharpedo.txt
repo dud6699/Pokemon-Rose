@@ -1,0 +1,11 @@
+['Rough Skin']
+[1.4,2.4,1.9,.8,.8,1.9]
+['Water','Dark']
+['Mega','Mega_Sharpedo']
+{1:['Slash','Night Slash','Feint','Leer','Bite','Rage','Focus Energy'],4:'Rage',8:'Focus Energy',11:'Aqua Jet',15:'Assurance',18:'Screech',22:'Swagger',25:'Ice Fang',29:'Scary Face',34:'Poison Fang',40:'Crunch',45:'Agility',51:'Skull Bash',56:'Taunt',62:'Night Slash'}
+60
+88.8
+71
+262
+['route_6f']
+['Brutal','Sharpedo can swim at speeds of up to 75 mph', 'by jetting seawater out of its backside.', 'This Pokemon\'s drawback is its inability to', 'swim long distances.'] 

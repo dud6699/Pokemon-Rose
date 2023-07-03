@@ -11,7 +11,9 @@ from pygame.locals import*
 #ex P.party["Litwick"] = [5,random.randint(0,1),62,"Ember",25,"Astonish",15,"Minimize",10,"Smog",20,None,None,0,"pokeball"]
 
 class Poke:
-    def __init__(self, name, data):
+    def __init__(self, name, data, petals = None, over_ability = None, legendary = False):
+        if legendary:
+            print('hi')
         self.name = name
         self.actual_name = name
         self.code = name
@@ -45,9 +47,14 @@ class Poke:
         else:
             self.friend = 0
         if len(data) >= 17:
-            self.ability = data[16]
+            if over_ability != None:
+                self.ability = over_ability
+            else:
+                self.ability = data[16]
+            self.true_ability = data[16]
         else:
             self.ability = None
+            self.true_ability = None
         if len(data) >= 18:
             self.player = True
         else:
@@ -59,21 +66,34 @@ class Poke:
             self.nurse = data[19]
         else:
             self.nurse = False
+        if len(data) >= 21:
+            self.petals = data[20]
+        elif petals:
+            self.petals = petals
+        else:
+            self.petals = []
         self.icon = pygame.transform.scale(pygame.image.load("p/poke/"+self.code+"_ico.png"),(70,70))
         #self.full = pygame.image.load("p/poke/"+self.code+"_full.png")
+        self.mega_debuff = 0
+        self.stat_swap = [None,None,None,None,None,None]
         self.get_stats(True)
         self.flinch = False
         self.idf = False
         self.dc = False
         self.protect = False
-        self.spikyshield = False
+        self.spikyshield = [False,False] #spiky shield, baneful bunker
         self.minimize = False
         self.pursuit = False
         self.charge = None
         self.inf = False
+        self.leech = False
         self.explode = False
+        self.exit = False
+        self.drag = False
         self.endure = False
+        self.gastro = False
         self.nightmare = False
+        self.curse = False
         self.bugbite = False
         self.rest = False
         self.bellydrum = False
@@ -107,11 +127,22 @@ class Poke:
         self.evam = 0
         self.critm = 0
         self.ff = 0
+        self.legendary = legendary
 
     def code_nos(self):
         if self.code[-2:] == '_S':
             return self.code[:-2]
         return self.code
+
+    def check_last(self,P,type):
+        if type == 1:
+            if self.player:
+                if poke_func.last_poke(P.party):
+                    self.exit = False
+            else:
+                if poke_func.last_poke(P.opponent):
+                    self.exit = False
+
 
     def grounded(self):
         if self.ability != 'Levitate' and 'Flying' not in self.type and self.magnet_rise == 0:
@@ -120,38 +151,96 @@ class Poke:
 
     def get_spd(self,P):
         ans = self.spd*moves.modifier(self.spdm)
+        if (P.player_buffs[0] > 0 and self.player) or (P.enemy_buffs[0] > 0 and not self.player):
+            ans *= 2
         if self.status != None and self.ability == 'Quick Feet':
             ans *= 1.5
         elif self.status == 'Par':
             ans *= 0.25
         if P.battle_weather != None and P.battle_weather[0] == 'Rain' and self.ability == 'Swift Swim':
             ans *= 2
+        if P.battle_weather != None and P.battle_weather[0] == 'Sunny' and self.ability == 'Chlorophyll':
+            ans *= 2
         return ans
+
+    def get_num_buffs(self):
+        return self.akm+self.sakm+self.dfm+self.sdfm+self.spdm+self.accm+self.evam+self.critm
+
+    def get_df(self):
+        df = self.df
+        if self.item == 'Eviolite' and self.evo != [] and self.evo[0] != 'Mega':
+            df *= 1.5
+        if self.get_ability() == 'Marvel Scale' and self.status != None:
+            df *= 1.5
+        return df
 
     def take_damage(self,P,amount):
         print(amount)
-        if P.tourney_battle and self.bellydrum == False and self.explode == False:
+        can_exit = False
+        if self.get_ability() in ['Wimp Out','Emergency Exit'] and self.ch > self.hp/2:
+            can_exit = True
+        if (P.tourney_battle or self.legendary) and self.bellydrum == False and self.explode == False:
             amount /= 4
         if amount > 0 and amount < 1:
             amount = 1
         if amount > self.ch:
             amount = self.ch
+        if amount < 0 and amount > -1:
+            amount = -1
+        if amount < 0 and amount < self.ch-self.hp:
+            amount = self.ch-self.hp
         self.ch -= int(amount)
-        self.damage_taken += int(amount)
+        if amount > 0:
+            self.damage_taken += int(amount)
+        if can_exit and self.ch < self.hp/2 and self.ch > 0:
+            if type(P.opponent[0]) != str and self.player == False and P.legendary_battle == False and P.tourney_battle == False:
+                P.end_battle = self
+            self.exit = True
+
+    def get_ability(self):
+        if self.gastro:
+            return ""
+        return self.ability
+
+    def set_ability(self,ability):
+        if ability == '':
+            self.gasto = True
+            if self.true_ability == "Huge Power":
+                self.ak /= 2
+            if self.true_ability == "Hustle":
+                self.ak /= 1.5
+        else:
+            self.ability = ability
+            if self.stat_swap[1] == None:
+                if self.true_ability == "Huge Power":
+                    self.ak /= 2
+                if self.true_ability == "Hustle":
+                    self.ak /= 1.5
+                if self.ability == "Huge Power":
+                    self.ak *= 2
+                if self.ability == 'Hustle':
+                    self.ak *= 1.5
 
     def reset_stats(self) -> None:
         self.flinch = False
         self.idf = False
         self.dc = False
         self.protect = False
-        self.spikyshield = False
+        self.spikyshield = [False,False]
         self.minimize = False
         self.pursuit = False
         self.charge = None
         self.inf = False
+        self.leech = False
         self.explode = False
+        self.exit = False
+        self.drag = False
+        self.endure = False
+        self.gastro = False
         self.rest = False
         self.nightmare = False
+        self.curse = False
+        self.stat_swap = [None,None,None,None,None,None]
         self.bellydrum = False
         self.trapped = [None,0]
         self.type_hit = None
@@ -179,11 +268,13 @@ class Poke:
         self.evam = 0
         self.critm = 0
         self.ff = 0
+        self.mega_debuff = 0
         self.rollcount = 0
         self.stockpile = [0,0,0]
-        self.turn_count = -1
+        self.turn_count = 0
         if self.ability == 'Natural Cure' and self.status != 'Faint':
             self.status = None
+        self.ability = self.true_ability
         self.get_stats(True)
 
     def get_pp(self,move):
@@ -191,11 +282,11 @@ class Poke:
         return m.pp
 
     def equals(self, poke) -> bool:
-        return self.code == poke.code and self.name == poke.name and self.lvl == poke.lvl and self.gen == poke.gen and self.ch == poke.ch and self.m1 == poke.m1 and self.m2 == poke.m2 and self.m3 == poke.m3 and self.m4 == poke.m4 and self.p1 == poke.p1 and self.p2 == poke.p2 and self.p3 == poke.p3 and self.p4 == poke.p4 and self.status == poke.status and self.akm == poke.akm and self.sakm == poke.sakm and self.dfm == poke.dfm and self.sdfm == poke.sdfm and self.spdm == poke.spdm and self.accm == poke.accm and self.evam == poke.evam and self.idf == poke.idf and self.inf == poke.inf and self.cfs == poke.cfs
+        return self.code == poke.code and self.name == poke.name and self.lvl == poke.lvl and self.gen == poke.gen and self.ch == poke.ch and self.m1 == poke.m1 and self.m2 == poke.m2 and self.m3 == poke.m3 and self.m4 == poke.m4 and self.p1 == poke.p1 and self.p2 == poke.p2 and self.p3 == poke.p3 and self.p4 == poke.p4 and self.status == poke.status and self.akm == poke.akm and self.sakm == poke.sakm and self.dfm == poke.dfm and self.sdfm == poke.sdfm and self.spdm == poke.spdm and self.accm == poke.accm and self.evam == poke.evam and self.idf == poke.idf and self.inf == poke.inf and self.leech == poke.leech and self.cfs == poke.cfs and self.mega_debuff == poke.mega_debuff
         #return (and self.item == poke.item and self.exp == poke.exp and self.ball == poke.ball and self.icon == poke.icon and self.full == poke.full and self.flinch == poke.flinch and self.ability == poke.ability and self.hp == poke.hp and self.ak == poke.ak and self.sak == poke.sak and self.df == poke.df and self.sdf == poke.sdf and self.spd == poke.spd and self.type == poke.type)
 
     def same(self, poke):
-        return self.name == poke.name and self.ability == poke.ability and self.lvl == poke.lvl and self.exp == poke.exp and self.gen == poke.gen and self.m1 == poke.m1 and self.m2 == poke.m2 and self.m3 == poke.m3 and self.m4 == poke.m4
+        return self.name == poke.name and self.ability == poke.ability and self.true_ability == poke.true_ability and self.lvl == poke.lvl and self.exp == poke.exp and self.gen == poke.gen and self.m1 == poke.m1 and self.m2 == poke.m2 and self.m3 == poke.m3 and self.m4 == poke.m4
 
     def gain_friend(self,amount,P = None):
         if self.ball == 'Luxury Ball':
@@ -233,7 +324,28 @@ class Poke:
             if self.status != 'Faint':
                 self.ch += self.hp-thp
 
-    def has_move(self,move):
+    def can_poison(self,x = 0):
+        if 'Poison' in self.type or 'Steel' in self.type or (x == 1 and self.ability == 'Immunity') or self.status != None:
+            return False
+        return True
+
+    def has_move(self,move,change_move = None):
+        if change_move:
+            if self.m1 == move:
+                self.m1 = change_move
+                self.p1 = self.get_pp(self.m1)
+            elif self.m2 == move:
+                self.m2 = change_move
+                self.p2 = self.get_pp(self.m2)
+            elif self.m3 == move:
+                self.m3 = change_move
+                self.p3 = self.get_pp(self.m3)
+            elif self.m4 == move:
+                self.m4 = change_move
+                self.p4 = self.get_pp(self.m4)
+            else:
+                return False
+            return True
         if self.m1 == move or self.m2 == move or self.m3 == move or self.m4 == move:
             return True
         return False
@@ -416,7 +528,7 @@ class Poke:
             P.surface.blit(ball,(18,18))
             P.surface.blit(name,(60,10))
             if self.code[:5] == 'Mega_':
-                P.surface.blit(name,(65+name_size,20))
+                P.surface.blit(mega,(65+name_size,20))
             P.surface.blit(gen_i,(350,10))
             P.surface.blit(lvl,(20,50))
             if mv.cat == '0':
@@ -526,11 +638,12 @@ class Poke:
             self.p4 = self.get_pp(self.m4)
     
     def copy(self):
-        copy = Poke(self.code,[self.lvl,self.gen,self.ch,self.m1,self.p1,self.m2,self.p2,self.m3,self.p3,self.m4,self.p4,self.item,self.status,self.exp,self.ball,self.friend,self.ability,self.player,self.name,self.nurse])
+        copy = Poke(self.code,[self.lvl,self.gen,self.ch,self.m1,self.p1,self.m2,self.p2,self.m3,self.p3,self.m4,self.p4,self.item,self.status,self.exp,self.ball,self.friend,self.true_ability,self.player,self.name,self.nurse,self.petals],over_ability=self.ability,legendary = self.legendary)
         copy.flinch = self.flinch
         copy.idf = self.idf
         copy.cfs = self.cfs
         copy.inf = self.inf
+        copy.leech = self.leech
         copy.pursuit = self.pursuit
         copy.minimize = self.minimize
         copy.protect = self.protect
@@ -540,6 +653,8 @@ class Poke:
         copy.cont_move = self.cont_move
         copy.procount = self.procount
         copy.nightmare = self.nightmare
+        copy.curse = self.curse
+        copy.stat_swap = self.stat_swap
         copy.can_sucker = self.can_sucker
         copy.charge = self.charge
         copy.magic_coat = self.magic_coat
@@ -548,6 +663,10 @@ class Poke:
         copy.type_hit = self.type_hit
         copy.chrg = self.chrg
         copy.explode = self.explode
+        copy.exit = self.exit
+        copy.drag = self.drag
+        copy.endure = self.endure
+        copy.gastro = self.gastro
         copy.taunt = self.taunt
         copy.yawn = self.yawn
         copy.roost = self.roost
@@ -567,6 +686,7 @@ class Poke:
         copy.evam = self.evam
         copy.critm = self.critm
         copy.ff = self.ff
+        copy.mega_debuff = self.mega_debuff
         copy.rollcount = self.rollcount
         copy.stockpile = self.stockpile
         return copy
@@ -577,18 +697,57 @@ class Poke:
             for s in range(len(stats)):
                 stats[s] += (self.friend-300)*0.002
         mod = .9+(min(300,self.friend)*0.0002)
-        self.hp = int((10+stats[0]*self.lvl)*mod)+self.lvl
+        if self.stat_swap[0] == None:
+            self.hp = int((10+stats[0]*self.lvl)*mod)+self.lvl
+        if self.stat_swap[1] == None:
+            self.ak = int((5+stats[1]*self.lvl)*mod)
+        if self.stat_swap[2] == None:
+            self.sak = int((5+stats[2]*self.lvl)*mod)
+        if self.stat_swap[3] == None:
+            self.df = int((5+stats[3]*self.lvl)*mod)
+        if self.stat_swap[4] == None:
+            self.sdf = int((5+stats[4]*self.lvl)*mod)
+        if self.stat_swap[5] == None:
+            self.spd = int((5+stats[5]*self.lvl)*mod)
+        p_mod = self.lvl * 0.2
+        if p_mod < 1:
+            p_mod = 1
+        else:
+            p_mod = int(p_mod)
+        for petal in self.petals:
+            if petal == 'hp' and self.stat_swap[0] == None:
+                self.hp += p_mod
+            elif petal == 'ak' and self.stat_swap[1] == None:
+                self.ak += p_mod
+            elif petal == 'sak' and self.stat_swap[2] == None:
+                self.sak += p_mod
+            elif petal == 'df' and self.stat_swap[3] == None:
+                self.df += p_mod
+            elif petal == 'sdf' and self.stat_swap[4] == None:
+                self.sdf += p_mod
+            elif self.stat_swap[5] == None:
+                self.spd += p_mod
+        if self.ability == "Huge Power" and self.stat_swap[1] == None:
+            self.ak *= 2
+        if self.ability == 'Hustle' and self.stat_swap[1] == None:
+            self.ak *= 1.5
+        if self.mega_debuff > 0:
+            if self.stat_swap[1] == None:
+                self.ak = int(self.ak*self.mega_debuff)
+            if self.stat_swap[2] == None:
+                self.sak = int(self.sak*self.mega_debuff)
+            if self.stat_swap[3] == None:
+                self.df = int(self.df*self.mega_debuff)
+            if self.stat_swap[4] == None:
+                self.sdf = int(self.sdf*self.mega_debuff)
+            if self.stat_swap[5] == None:
+                self.spd = int(self.spd*self.mega_debuff)
+        if self.ch == 787:
+            self.ch = self.hp
+        if self.ch == 737:
+            self.ch = int(self.hp/2)
         if self.ch > self.hp:
             self.ch = self.hp
-        self.ak = int((5+stats[1]*self.lvl)*mod)
-        if self.ability == "Huge Power":
-            self.ak *= 2
-        if self.ability == 'Hustle':
-            self.ak *= 1.5
-        self.sak = int((5+stats[2]*self.lvl)*mod)
-        self.df = int((5+stats[3]*self.lvl)*mod)
-        self.sdf = int((5+stats[4]*self.lvl)*mod)
-        self.spd = int((5+stats[5]*self.lvl)*mod)
 
 
     def get_stats(self,weight = False) -> None:
@@ -600,8 +759,14 @@ class Poke:
             self.name = self.name[:-2]
         if self.name == 'Pineapple_Oddish':
             self.name = 'Oddish'
+        if self.name == 'Spooky_Wobbuffet':
+            self.name = 'Wobbuffet'
         if self.name[:5] == 'Mega_':
             self.name = self.name[5:]
+        if self.name[:7] == 'Alolan_':
+            self.name = self.name[7:]
+        if self.name[-5:-1] == '_rot':
+            self.name = self.name[:-5]
         if self.name[-2:] == '_M':
             self.name = self.name[:-2]
         if self.name[-2:] == '_F':
@@ -616,13 +781,19 @@ class Poke:
             self.actual_name = self.actual_name[:-2]
         if self.actual_name == 'Pineapple_Oddish':
             self.actual_name = 'Oddish'
+        if self.actual_name == 'Spooky_Wobbuffet':
+            self.actual_name = 'Wobbuffet'
+        if self.actual_name[:7] == 'Alolan_':
+            self.actual_name = self.actual_name[7:]
         if self.actual_name[:5] == 'Mega_':
             self.actual_name = self.actual_name[5:]
+        if self.actual_name[-5:-1] == '_rot':
+            self.actual_name = self.actual_name[:-5]
         if self.actual_name[-2:] == '_M':
             self.actual_name = self.actual_name[:-2]
         if self.actual_name == 'Mime Jr':
             self.actual_name = 'Mime Jr.'
-        if self.actual_name == 'Mr. Mime':
+        if self.actual_name == 'Mr Mime':
             self.actual_name = 'Mr. Mime'
         if self.actual_name[-2:] == '_F':
             self.actual_name = self.actual_name[:-2]
@@ -635,8 +806,11 @@ class Poke:
             if abilist[a][0] == '*':
                 no_hidden.remove(abilist[a])
                 abilist[a] = abilist[a][1:]
-        if self.ability == None or self.ability not in abilist:
-            self.ability = no_hidden[random.randint(0,len(no_hidden)-1)]
+        if self.true_ability == None or self.true_ability not in abilist:
+            new_ability = no_hidden[random.randint(0,len(no_hidden)-1)]
+            if self.ability == self.true_ability:
+                self.ability = new_ability
+            self.true_ability = new_ability
         #check ability
         abis = open("info/abilities.txt","r")
         abidata = [line[:-1] for line in abis]
@@ -684,14 +858,12 @@ class Poke:
             #     file.write("[]")
             #     file.close()
         file.close()
-        if self.ch == 334:
-            self.ch = self.hp
 
     def get_exp(self) -> int:
         l = self.lvl
         return int((4*(l+1)*(l+1)*(l+1)/5)-(4*l*l*l/5))
 
     def to_list(self):
-        ret = [self.lvl,self.gen,self.ch,self.m1,self.p1,self.m2,self.p2,self.m3,self.p3,self.m4,self.p4,self.item,self.status,self.exp,self.ball,self.friend,self.ability,self.player,self.name,self.nurse]
+        ret = [self.lvl,self.gen,self.ch,self.m1,self.p1,self.m2,self.p2,self.m3,self.p3,self.m4,self.p4,self.item,self.status,self.exp,self.ball,self.friend,self.ability,self.player,self.name,self.nurse,self.petals]
         return ret
         

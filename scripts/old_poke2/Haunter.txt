@@ -1,0 +1,11 @@
+['Levitate']
+[.9,1,2.3,.9,1.1,1.9]
+['Ghost','Poison']
+[48,'Gengar']
+{1:['Shadow Punch','Hypnosis','Lick','Spite'],5:'Spite',8:'Mean Look',12:'Curse',15:'Night Shade',19:'Confuse Ray',22:'Sucker Punch',28:'Payback',33:'Shadow Ball',39:'Dream Eater',44:'Dark Pulse',50:'Destiny Bond',55:'Hex',61:'Nightmare'}
+90
+0.1
+63
+182
+['forbidden']
+['Gas','Haunter is a dangerous Pokemon. If one', 'beckons you while floating in darkness, you', 'must never approach it. This Pokemon will', 'try to lick you with its tongue and steal', 'your life away.'] 

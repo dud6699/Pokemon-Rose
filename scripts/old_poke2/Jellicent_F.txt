@@ -1,0 +1,11 @@
+['Water Absorb','Cursed Body']
+[2,1.2,1.7,1.4,2.1,1.2]
+['Water','Ghost']
+[]
+{1:['Water Spout','Wring Out','Bubble','Water Sport','Absorb','Night Shade'],5:'Absorb',9:'Night Shade',13:'Bubble Beam',17:'Recover',22:'Water Pulse',27:'Ominous Wind',32:'Brine',37:'Rain Dance',45:'Hex',53:'Hydro Pump',61:'Wring Out',69:'Water Spout'}
+60
+135
+87
+180
+['forbiddenf']
+['Floating','Its body is mostly seawater. It\'s said', 'there\'s a castle of ships Jellicent have', 'sunk on the seafloor.'] 

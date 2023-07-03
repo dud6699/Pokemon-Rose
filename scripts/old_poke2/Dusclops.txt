@@ -1,0 +1,11 @@
+['Pressure']
+[.8,1.4,1.2,2.6,2.6,.5]
+['Ghost',None]
+['Reaper Cloth','Dusknoir']
+{1:['Shadow Punch','Future Sight','Fire Punch','Ice Punch','Thunder Punch','Gravity','Bind','Leer','Night Shade','Disable','Astonish'],6:'Disable',9:'Astonish',14:'Foresight',17:'Shadow Sneak',22:'Pursuit',25:'Will-O-Wisp',30:'Confuse Ray',33:'Curse',40:'Hex',45:'Shadow Ball',52:'Mean Look',57:'Payback',64:'Future Sight'}
+90
+30.6
+63
+189
+['forbidden']
+['Beckon','Dusclops\'s body is completely hollow. There', 'is nothing at all inside. It is said that', 'its body is like a black hole. This Pokemon', 'will absorb anything into its body, but', 'nothing will ever come back out.'] 

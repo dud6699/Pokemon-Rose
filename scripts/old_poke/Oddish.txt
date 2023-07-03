@@ -1,0 +1,11 @@
+['Chlorophyll']
+[.9,1,1.5,1.1,1.3,.6]
+['Grass','Poison']
+[21,'Gloom']
+{1:['Absorb','Growth'],5:'Sweet Scent',9:'Acid',13:'Poison Powder',14:'Stun Spore',15:'Sleep Powder',19:'Mega Drain',23:'Lucky Chant',27:'Moonlight',31:'Giga Drain',35:'Toxic',39:'Natural Gift',43:'Moonblast',47:'Grassy Terrain',51:'Petal Dance'}
+255
+5.4
+20
+33
+['route_1','scarab_r']
+['Weed','Oddish searches for fertile, nutrient-rich', 'soil, then plants itself. During the', 'daytime, while it is planted, this', 'Pokemon\'s feet are thought to change shape', 'and become similar to the roots of trees.']

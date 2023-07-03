@@ -1,0 +1,11 @@
+['Rock Head','Sturdy']
+[1.5,1.7,1.1,4,1.3,.6]
+['Steel','Ground']
+['Mega','Mega_Steelix']
+{1:['Thunder Fang','Ice Fang','Fire Fang','Mud Sport','Tackle','Harden','Bind'],4:'Curse',7:'Rock Throw',10:'Rock Tomb',13:'Rage',16:'Stealth Rock',19:'Autotomize',20:'Gyro Ball',22:'Smack Down',25:'Dragon Breath',28:'Slam',31:'Screech',34:'Rock Slide',37:'Crunch',40:'Iron Tail',43:'Dig',46:'Stone Edge',49:'Double-Edge',52:'Sandstorm'}
+25
+400
+362
+139
+[]
+['Iron Snake','Steelix lives even further underground than' ,'Onix. This Pokemon is known to dig toward the earth\'s', 'core. There are records of this Pokemon', 'reaching a depth of over six-tenths of a', 'mile underground.'] 

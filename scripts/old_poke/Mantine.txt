@@ -1,0 +1,11 @@
+['Swift Swim','Water Absorb']
+[1.7,.8,1.6,1.4,2.8,1.4]
+['Water','Flying']
+[]
+{1:['Psybeam','Bullet Seed','Signal Beam','Tackle','Bubble','Supersonic','Bubble Beam','Roost'],3:'Supersonic',7:'Bubble Beam',11:'Confuse Ray',14:'Wing Attack',16:'Headbutt',19:'Water Pulse',23:'Rain Dance',27:'Take Down',32:'Agility',36:'Air Slash',39:'Aqua Ring',46:'Bounce',49:'Hydro Pump'}
+25
+220
+83
+927
+[]
+['Kite','On sunny days, schools of Mantine can be', 'seen elegantly leaping over the sea\'s', 'waves. This Pokemon is not bothered by the', 'Remoraid that hitches rides.'] 

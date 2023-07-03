@@ -1,0 +1,11 @@
+['Shed Skin']
+[1.46,2,2,1.2,1.2,1.3]
+['Poison',None]
+[]
+{1:['Wrap','Swagger'],4:'Bite',6:'Lick',9:'Poison Tail',11:'Feint',14:'Screech',16:'Venoshock',19:'Glare',21:'Poison Fang',24:'Venom Drench',26:'Night Slash',29:'Gastro Acid',31:'Poison Jab',34:'Haze',36:'Swords Dance',39:'Crunch',41:'Belch',44:'Coil',46:'Wring Out'}
+90
+52.5
+106
+102
+['scarab_r']
+['Fang Snake','Seviper shares a generations-long feud with', 'Zangoose. The scars on its body are', 'evidence of vicious battles. This Pokemon', 'attacks using its sword-edged tail.'] 

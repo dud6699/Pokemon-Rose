@@ -1,0 +1,11 @@
+['Marvel Scale','Competitive']
+[1.9,1.2,2,1.58,2.5,1.62]
+['Water',None]
+[]
+{1:['Water Pulse','Wrap','Water Gun','Water Sport','Refresh'],4:'Water Sport',7:'Refresh',11:'Disarming Voice',14:'Twister',17:'Aqua Ring',21:'Captivate',24:'Dragon Tail',27:'Recover',31:'Aqua Tail',34:'Attract',37:'Safeguard',41:'Coil',44:'Hydro Pump',47:'Rain Dance'}
+60
+162
+244
+260
+['route_6f']
+['Tender','Milotic live at the bottom of large lakes.', 'When this Pokemon\'s body glows a vivid', 'pink, it releases a pulsing wave of energy', 'that brings soothing calm to troubled', 'hearts.'] 

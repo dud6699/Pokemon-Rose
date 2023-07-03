@@ -6,6 +6,6 @@
 190
 9.9
 24
-135
+149
 ['route_4']
 ['Fox','Inside Vulpix\'s body burns a flame that', 'never goes out. During the daytime, when', 'the temperatures rise, this Pokemon', 'releases flames from its mouth to prevent', 'its body from growing too hot.'] 

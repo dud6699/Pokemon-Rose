@@ -1,0 +1,11 @@
+['Skill Link']
+[1.6,3.7,.8,2.3,2.1,1.5]
+['Bug','Fighting']
+[]
+{1:['Arm Thrust','Bullet Seed','Night Slash','Tackle','Leer','Horn Attack','Endure'],7:'Feint',10:'Aerial Ace',16:'Chip Away',19:'Counter',25:'Fury Attack',28:'Brick Break',31:'Pin Missile',34:'Take Down',37:'Megahorn',43:'Close Combat',46:'Reversal'}
+45
+62.5
+67
+93
+[]
+['Single Horn','With its Herculean powers, it can grip and', 'easily throw around an object that is 500', 'times its own weight.'] 

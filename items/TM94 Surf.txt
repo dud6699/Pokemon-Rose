@@ -1,0 +1,3 @@
+['Surf','TM']
+['The user attacks', 'everything around it', 'by swamping its', 'surroundings with a', 'giant wave.']
+-1

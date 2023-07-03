@@ -1,0 +1,11 @@
+['Hustle','Serene Grace']
+[.7,.4,.8,1.3,1.3,.4]
+['Fairy',None]
+['friend','Togetic']
+{1:['Growl','Charm'],5:'Metronome',9:'Sweet Kiss',13:'Yawn',17:'Encore',21:'Echoed Voice',25:'Bestow',29:'Wish',33:'Ancient Power',37:'Safeguard',41:'Baton Pass',45:'Double-Edge',49:'Last Resort',53:'Dazzling Gleam'}
+190
+1.5
+12
+935
+[]
+['Spike Ball','As its energy, Togepi uses the positive', 'emotions of compassion and pleasure exuded', 'by people and Pokemon. This Pokemon then', 'stores up feelings of happiness inside its', 'shell, then shares them with others.'] 

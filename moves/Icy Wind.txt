@@ -1,0 +1,10 @@
+Ice
+1
+55
+.95
+{1:['SD']}
+1
+15
+['The user attacks', 'with a gust of', 'chilled air. This', 'also lowers the', 'opposing Pokemon\'s', 'Speed stats.']
+0
+0

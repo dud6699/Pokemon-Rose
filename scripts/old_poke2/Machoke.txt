@@ -1,0 +1,11 @@
+['Guts','No Guard']
+[1.6,2.0,1.0,1.4,1.2,0.9]
+['Fighting',None]
+[43,'Machamp','Strength']
+{1:['Low Kick','Leer','Focus Energy','Karate Chop'],3:'Focus Energy',7:'Karate Chop',9:'Foresight',13:'Low Sweep',15:'Seismic Toss',19:'Revenge',21:'Knock Off',25:'Vital Throw',27:'Wake-Up Slap',33:'Dual Chop',37:'Submission',43:'Bulk Up',47:'Cross Chop',53:'Scary Face',57:'Dynamic Punch'}
+90
+70.5
+59
+47
+[]
+['Superpower','Machoke undertakes bodybuilding every day', 'even as it helps people with tough,', 'physically demanding labor. On its days', 'off, this Pokemon heads to the fields and', 'mountains to exercise and train.']

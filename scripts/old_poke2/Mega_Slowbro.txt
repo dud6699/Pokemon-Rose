@@ -1,0 +1,11 @@
+['Shell Armor']
+[1.9,1.5,2.6,3.6,1.6,.6]
+['Water','Psychic']
+[]
+{1:['Withdraw','Heal Pulse','Curse','Yawn','Tackle','Growl'],5:'Growl',9:'Water Gun',14:'Confusion',19:'Disable',23:'Headbutt',28:'Water Pulse',32:'Zen Headbutt',36:'Slack Off',43:'Amnesia',49:'Psychic',55:'Rain Dance',62:'Psych Up',68:'Heal Pulse'}
+75
+120
+79
+127
+[]
+['Hermit Crab','Having been swallowed whole by Shellder,', 'Slowbro now has an iron defense. It\'s', 'pretty comfortable in there, too.'] 

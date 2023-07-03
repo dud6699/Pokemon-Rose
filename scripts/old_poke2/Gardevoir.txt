@@ -1,0 +1,11 @@
+['Synchronize','Trace']
+[1.36,1.3,2.5,1.3,2.3,1.6]
+['Psychic','Fairy']
+['Mega','Mega_Gardevoir']
+{1:['Moonblast','Stored Power','Misty Terrain','Healing Wish','Growl','Confusion','Double Team','Teleport'],4:'Confusion',6:'Double Team',9:'Teleport',11:'Disarming Voice',14:'Wish',17:'Magical Leaf',19:'Heal Pulse',23:'Draining Kiss',26:'Calm Mind',31:'Psychic',35:'Imprison',40:'Future Sight',44:'Captivate',49:'Hypnosis',53:'Dream Eater',58:'Stored Power',62:'Moonblast'}
+45
+48.4
+63
+255
+['route_6']
+['Embrace','Gardevoir has the ability to read the', 'future. If it senses impending danger to', 'its Trainer, this Pokemon is said to', 'unleash its psychokinetic energy at full', 'power.'] 

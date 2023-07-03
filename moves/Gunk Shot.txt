@@ -1,0 +1,10 @@
+Poison
+0
+120
+.8
+{.3:['Psn']}
+1
+5
+['The user shoots', 'filthy garbage at', 'the target to', 'attack. This may', 'also poison the', 'target.']
+0
+0

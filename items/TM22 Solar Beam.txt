@@ -1,0 +1,3 @@
+['Solar Beam','TM']
+['In this two-turn', 'attack, the user', 'gathers light, then', 'blasts a bundled', 'beam on the next', 'turn.']
+-1

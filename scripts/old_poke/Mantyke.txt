@@ -1,0 +1,11 @@
+['Swift Swim','Water Absorb']
+[.9,.4,1.2,1,2.4,1]
+['Water',None]
+[1,'Mantine']
+{1:['Tackle','Bubble'],3:'Supersonic',7:'Bubble Beam',11:'Confuse Ray',14:'Wing Attack',16:'Headbutt',19:'Water Pulse',23:'Rain Dance',27:'Take Down',32:'Agility',36:'Air Slash',39:'Aqua Ring',46:'Bounce',49:'Hydro Pump'}
+25
+65
+42
+926
+[]
+['Kite','When it swims close to the surface of the', 'ocean, people aboard ships are able to', 'observe the pattern on its back.'] 

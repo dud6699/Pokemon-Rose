@@ -1,0 +1,3 @@
+['Held','Item']
+['Very large pearls', 'that sparkle in a', 'pretty silver color.', 'They can be sold at', 'a high price to', 'shops.']
+30000

@@ -1,0 +1,10 @@
+Flying
+0
+100
+1
+{}
+1
+15
+['The user heats up', 'its beak, and then', 'attacks the target.', 'Making contact while', 'it\'s heating up', 'results in a burn.']
+-3
+3

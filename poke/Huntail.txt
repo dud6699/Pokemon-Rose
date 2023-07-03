@@ -6,6 +6,6 @@
 60
 27
 67
-140
+160
 []
 ['Deep Sea','Huntail\'s tail is shaped like a fish. It', 'uses the tail to attract prey, then', 'swallows the prey whole with its large,', 'gaping mouth. This Pokemon swims by', 'wiggling its slender body like a snake.'] 

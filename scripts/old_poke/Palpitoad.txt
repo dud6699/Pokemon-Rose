@@ -1,0 +1,11 @@
+['Swift Swim','Hydration']
+[1.5,1.3,1.3,1.1,1.1,1.38]
+['Water','Ground']
+[36,'Seismitoad','Acid']
+{1:['Bubble','Growl','Supersonic','Round'],5:'Supersonic',9:'Round',12:'Bubble Beam',16:'Mud Shot',20:'Aqua Ring',23:'Uproar',28:'Muddy Water',33:'Rain Dance',37:'Flail',42:'Echoed Voice',47:'Hydro Pump',51:'Hyper Voice'}
+120
+17
+31
+964
+[]
+['Vibration','When they vibrate the bumps on their heads,', 'they can make waves in water or earthquake-','like vibrations on land.'] 

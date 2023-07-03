@@ -1,0 +1,11 @@
+['Healer']
+[2.06,1.2,1.6,2.52,2.52,1]
+['Normal','Fairy']
+[]
+{1:['Last Resort','Hyper Voice','Misty Terrain','Play Nice','Pound','Growl'],5:'Baby-Doll Eyes',9:'Refresh',13:'Disarming Voice',17:'Double Slap',21:'Attract',25:'Secret Power',29:'Entrainment',33:'Take Down',37:'Heal Pulse',41:'Dazzling Gleam',45:'Simple Beam',49:'Double-Edge',53:'Hyper Voice',57:'Last Resort'}
+255
+32
+59
+953
+[]
+['Healer','Using the feelers on its ears, it can tell', 'how someone is feeling or when an egg might', 'hatch.'] 

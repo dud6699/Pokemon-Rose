@@ -6,6 +6,6 @@
 45
 300
 55
-131
+145
 []
 ['Megaton','Golem live up on mountains. If there is a', 'large earthquake, these Pokemon will come', 'rolling down off the mountains to the', 'foothills below.'] 

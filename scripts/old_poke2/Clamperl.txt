@@ -1,0 +1,11 @@
+['Shell Armor']
+[.7,1.28,1.48,1.7,1.1,.64]
+['Water',None]
+[]
+{1:['Clamp','Water Gun','Whirlpool','Iron Defense'],50:'Shell Smash'}
+255
+52.5
+16
+161
+[]
+['Bivalve','Clamperl grows while being protected by its', 'rock-hard shell. When its body becomes too', 'large to fit inside the shell, it is sure', 'evidence that this Pokemon is getting close', 'to evolution.'] 

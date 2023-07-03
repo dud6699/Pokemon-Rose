@@ -1,0 +1,11 @@
+['No Guard']
+[1.66,1.6,2.7,1.6,1.6,2.42]
+['Normal','Flying']
+[]
+{1:['Tackle'],5:'Sand Attack',9:'Gust',13:'Quick Attack',17:'Whirlwind',22:'Twister',27:'Feather Dance',32:'Agility',38:'Wing Attack',44:'Roost',50:'Tailwind',56:'Mirror Move',62:'Air Slash',68:'Hurricane'}
+45
+50.5
+87
+23
+[]
+['Bird','With its enormous muscular strength, it can', 'fly continuously for two weeks without', 'resting.']

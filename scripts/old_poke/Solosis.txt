@@ -1,0 +1,11 @@
+['Overcoat','Magic Guard']
+[.9,.6,2.1,.8,1,.4]
+['Psychic',None]
+[32,'Duosion']
+{1:['Psywave'],3:'Reflect',7:'Rollout',10:'Snatch',14:'Hidden Power',16:'Light Screen',19:'Charm',24:'Recover',25:'Psyshock',28:'Endeavor',31:'Future Sight',33:'Pain Split',37:'Psychic',40:'Skill Swap',46:'Heal Block',48:'Wonder Room'}
+200
+1
+12
+181
+['forbidden']
+['Cell','Because their bodies are enveloped in a', 'special liquid, they are fine in any', 'environment, no matter how severe.'] 

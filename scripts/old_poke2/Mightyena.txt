@@ -1,0 +1,11 @@
+['Intimidate','Quick Feet']
+[1.4,1.8,1.2,1.4,1.2,1.4]
+['Dark',None]
+[]
+{1:['Snarl','Fire Fang','Thunder Fang','Ice Fang','Crunch','Thief','Tackle','Howl','Sand Attack','Bite'],4:'Howl',7:'Sand Attack',10:'Bite',13:'Odor Sleuth',16:'Roar',20:'Swagger',24:'Assurance',28:'Scary Face',32:'Embargo',36:'Taunt',40:'Crunch',44:'Yawn',48:'Take Down',52:'Sucker Punch',56:'Play Rough'}
+127
+37
+39
+27
+[]
+['Bite','Mightyena travel and act as a pack in the', 'wild. The memory of its life in the wild', 'compels the Pokemon to obey only those', 'Trainers that it recognizes to possess', 'superior skill.']

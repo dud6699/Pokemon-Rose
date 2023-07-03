@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+0
+20
+['The user\'s type is', 'changed depending on', 'its environment,', 'such as at water\'s', 'edge, in grass, or', 'in a cave.']
+0
+0

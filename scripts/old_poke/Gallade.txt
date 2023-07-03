@@ -1,0 +1,11 @@
+['Steadfast']
+[1.36,2.5,1.3,1.3,2.3,1.6]
+['Psychic','Fighting']
+['Mega','Mega_Gallade']
+{1:['Slash','Stored Power','Close Combat','Leaf Blade','Night Slash','Leer','Confusion','Double Team','Teleport'],4:'Confusion',6:'Double Team',9:'Teleport',11:'Quick Guard',14:'Fury Cutter',17:'Aerial Ace',19:'Heal Pulse',23:'Detect',26:'Swords Dance',31:'Psycho Cut',35:'Foresight',40:'Feint',44:'False Swipe',49:'Protect',53:'Close Combat',58:'Stored Power'}
+45
+52
+63
+232
+[]
+['Blade','Because it can sense what its foe is', 'thinking, its attacks burst out first,', 'fast, and fierce.'] 

@@ -1,0 +1,10 @@
+Steel
+0
+80
+1
+{1:['Trp']}
+1
+20
+['The user entangles', 'the target with its', 'anchor chain while', 'attacking. The', 'target becomes', 'unable to flee.']
+0
+0

@@ -1,0 +1,10 @@
+Normal
+2
+---
+1
+{1:['AcD']}
+1
+20
+['The user flashes a', 'bright light that', 'cuts the target\'s', 'accuracy.']
+0
+0

@@ -1,0 +1,11 @@
+['Sand Rush','Sand Force']
+[1.2,1.7,.6,.8,.9,1.36]
+['Ground',None]
+[31,'Excadrill','Horn Drill']
+{1:['Scratch','Mud Sport'],5:'Rapid Spin',8:'Mud-Slap',12:'Fury Swipes',15:'Metal Claw',19:'Dig',22:'Hone Claws',26:'Slash',29:'Rock Slide',33:'Earthquake',36:'Swords Dance',40:'Sandstorm',43:'Drill Run',47:'Fissure'}
+120
+8.5
+12
+218
+['sunken_cave']
+['Mole','It makes its way swiftly through the soil', 'by putting both claws together and rotating', 'at high speed.'] 

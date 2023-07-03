@@ -1,0 +1,10 @@
+Water
+1
+80
+1
+{.3:['Brn']}
+1
+15
+['The user shoots', 'boiling hot water at', 'its target. This may', 'also leave the', 'target with a burn.']
+0
+0

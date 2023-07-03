@@ -1,0 +1,11 @@
+['Natural Cure','Frisk']
+[.86,1.4,1,.96,1.2,.76]
+['Ghost','Grass']
+[32,'Trevenant','Shadow Claw']
+{1:['Tackle','Confuse Ray'],5:'Astonish',8:'Growth',13:'Ingrain',19:'Feint Attack',23:'Leech Seed',28:'Curse',31:'Will-O-Wisp',35:'Forest\'s Curse',39:'Destiny Bond',45:'Phantom Force',49:'Wood Hammer',54:'Horn Leech'}
+120
+7
+16
+112
+['forbidden']
+['Stump','According to old tales, these Pokemon are', 'stumps possessed by the spirits of children', 'who died while lost in the forest.'] 

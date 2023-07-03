@@ -1,0 +1,11 @@
+['Swarm','Insomnia']
+[.8,1.2,.8,.8,.8,.6]
+['Bug','Poison']
+[22,'Ariados','Swords Dance']
+{1:['Poison Sting','String Shot','Constrict'],5:'Absorb',8:'Infestation',12:'Scary Face',15:'Night Shade',19:'Shadow Sneak',22:'Fury Swipes',26:'Sucker Punch',29:'Spider Web',33:'Agility',36:'Pin Missile',40:'Psychic',43:'Poison Jab',47:'Cross Poison',50:'Sticky Web',54:'Toxic Thread'}
+255
+8.5
+20
+171
+['route_5']
+['String Spit','The web spun by Spinarak can be considered', 'its second nervous system. It is said that', 'this Pokemon can determine what kind of', 'prey is touching its web by feeling the', 'tiny vibrations from the web\'s strands.']

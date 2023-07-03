@@ -1,0 +1,11 @@
+['Compound Eyes']
+[1.2,0.9,1.8,1.0,1.6,1.4]
+['Bug','Flying']
+[]
+{1:['Gust','Confusion'],11:'Confusion',13:['Poison Powder','Stun Spore','Sleep Powder'],17:'Psybeam',19:'Silver Wind',23:'Supersonic',25:'Safeguard',29:'Whirlwind',31:'Bug Buzz',37:'Captivate',41:'Tailwind',43:'Air Slash',47:'Quiver Dance'}
+45
+32
+43
+15
+['route_3','scarab_l']
+['Butterfly','Butterfree has a superior ability to search', 'for delicious honey from flowers. It can', 'even search out, extract, and carry honey', 'from flowers that are blooming over six', 'miles from its nest.']

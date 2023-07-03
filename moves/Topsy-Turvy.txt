@@ -1,0 +1,10 @@
+Dark
+2
+---
+100
+{}
+1
+20
+['All stat changes', 'affecting the target', 'turn topsy-turvy and', 'become the opposite', 'of what they were.']
+0
+0

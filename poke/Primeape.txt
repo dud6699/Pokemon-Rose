@@ -1,0 +1,11 @@
+['Vital Spirit','Anger Point']
+[1.3,2.1,1.2,1.2,1.4,1.9]
+['Fighting',None]
+[]
+{1:['Rage','Final Gambit','Fling','Scratch','Low Kick','Leer','Focus Energy'],5:'Fury Swipes',8:'Karate Chop',12:'Pursuit',15:'Seismic Toss',19:'Swagger',22:'Cross Chop',26:'Assurance',30:'Punishment',35:'Thrash',39:'Close Combat',44:'Screech',48:'Stomping Tantrum',53:'Outrage',57:'Final Gambit'}
+75
+32
+39
+222
+['route_6']
+['Pig Monkey','When Primeape becomes furious, its blood', 'circulation is boosted. In turn, its', 'muscles are made even stronger. However,', 'it also becomes much less intelligent at', 'the same time.'] 

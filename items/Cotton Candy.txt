@@ -1,0 +1,3 @@
+['Food','Medicine']
+['A tasty treat', 'especially loved by', 'Ghost-type Pokemon.', 'It can be used to', 'raise the friendship', 'level of a Pokemon', 'by a moderate', 'amount.']
+800

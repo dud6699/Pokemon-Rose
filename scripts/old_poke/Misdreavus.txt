@@ -1,0 +1,11 @@
+['Levitate']
+[1.2,1.2,1.7,.2,1.7,1.7]
+['Ghost',None]
+['Dusk Stone','Mismagius']
+{1:['Growl','Psywave'],5:'Spite',10:'Astonish',14:'Confuse Ray',19:'Mean Look',23:'Hex',28:'Psybeam',32:'Pain Split',37:'Payback',41:'Shadow Ball',46:'Perish Song',50:'Grudge',55:'Power Gem'}
+45
+1
+28
+103
+['scarab_r','forbidden']
+['Screech','Misdreavus frightens people with a creepy,', 'sobbing cry. The Pokemon apparently uses', 'its red spheres to absorb the fearful', 'feelings of foes and turn them into', 'nutrition.'] 

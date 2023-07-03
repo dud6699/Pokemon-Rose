@@ -6,6 +6,6 @@
 60
 22.6
 71
-141
+161
 []
 ['South Sea','Although Gorebyss is the very picture of', 'elegance and beauty while swimming, it is', 'also cruel. This Pokemon inserts its thin', 'mouth into its prey\'s bodies and drains', 'them of its body fluids.'] 

@@ -1,0 +1,11 @@
+['Soundproof','Filter']
+[.4,.5,1.4,.9,1.8,1.2]
+['Psychic','Fairy']
+['move','Mr Mime']
+{1:['Barrier','Confusion','Pound','Tickle'],4:'Copycat',8:'Meditate',11:'Double Slap',15:'Mimic',18:'Encore',22:['Light Screen','Reflect'],25:'Psybeam',29:'Substitute',32:'Recycle',36:'Trick',39:'Psychic',43:'Role Play',46:'Baton Pass',50:'Safeguard'}
+145
+13
+24
+907
+[]
+['Mime','In an attempt to confuse its enemy, it', 'mimics the enemy\'s movements. Then it', 'wastes no time in making itself scarce!'] 

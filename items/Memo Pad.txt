@@ -1,0 +1,3 @@
+['Use','Key']
+['A handy notepad used', 'to keep track of any', 'requests or goals', 'you are pursuing,','or any important', 'notes you read.']
+-1

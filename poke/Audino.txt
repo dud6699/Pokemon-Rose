@@ -6,6 +6,6 @@
 255
 31
 46
-952
-[]
+276
+['route_6']
 ['Healer','It touches others with the feelers on its', 'ears, using the sound of their heartbeats', 'to tell how they are feeling.'] 

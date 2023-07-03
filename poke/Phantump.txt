@@ -6,6 +6,6 @@
 120
 7
 16
-105
-[]
+179
+['forbidden']
 ['Stump','According to old tales, these Pokemon are', 'stumps possessed by the spirits of children', 'who died while lost in the forest.'] 

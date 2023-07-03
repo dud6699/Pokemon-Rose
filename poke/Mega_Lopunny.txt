@@ -6,6 +6,6 @@
 60
 28.3
 51
-109
+114
 []
 ['Rabbit','It swings its ears like whips and strikes', 'its enemies with them. It has an intensely', 'combative disposition.'] 

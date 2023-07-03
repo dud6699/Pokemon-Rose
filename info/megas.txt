@@ -1,44 +1,47 @@
-route 1 (beedrill) 1/40
-route 2 (none) 1/40 
-echoing cave (aggron) 2/40
-hydro dam (manectric) 3/40
-route 3 (p1) (diancie) 4/40
-scarab woods l (pinsir) 5/40
-scarab woods r (heracross) 6/40
-route 3 (p2) (slowbro, lopunny) 8/40
-cave of mirrors (sableye, steelix) 10/40
-route 4 kangaskhan 11/40
+35 normal 6(7) starters 4(6) legendary
 
-route 5 scizor 12/40
+route 1 (beedrill) 1/35
+route 2 (none) 1/35
+echoing cave (aggron) 2/35
+hydro dam (manectric) 3/35
+scarab woods l (pinsir) 4/35
+scarab woods r (heracross) 5/35
+route 3 (p2) (slowbro, lopunny) 7/35
+cave of mirrors (sableye, steelix) 9/35
+route 4 (gyarados,kangaskhan) 11/35
+route 5 scizor 12/35
+forbidden forest (p1) gengar banette 14/35
+forbidden forest (p2) alakazam 15/35
+sunken cave (mawile,gardevoir,gallade) 18/35
+route 6 (sharpedo,audinite) 20/35
 
+victory road (charizard xy, blastoise, venasaur, swampert, sceptile, blaziken) 6(7)
 
-victory road (charizard x/y, blastoise, venasaur, swampert, sceptile, blaziken) 7
+route 3 (p1) (diancie) 1/6
+spooky town mewtwo(xy) 3/6
+ice mount rayquaza 4/6
+idk lati@s 6/6
 
 beedrill - route 1 - one hit metapod in 3 turns
-aggron - Echoing Cave - defeat in 3(?) turns
+aggron - Echoing Cave - defeat in 3 turns
 manectric - Hydro Dam - defeat 3 in a row
 heracross - scarab l - beat in tournament battle
 pinsir - scarab r - beat in tournament battle
 lopunny - route 3 - survive 3 turns
-slowbro - route 3
+slowbro - route 3 ranged only
 steelix - cave of mirrors - beat steelix with 3 turn sleep
 sableye - cave of mirrors - find and beat sableye
 kangaskhan - route 4 - protect child
-
+gyrados - route 4 water fish up
 scizor - route 5 always flinch
-pidgeot - forest after water gym - raging wind (decreased acc besides hurricane)
-alakazam - forest
-
-gengar - forest ghost
-banette - forest ghost
-
-gyrados - forest water
-sharpedo - forest water
-
-gardevoir - forest - fairy
-gallade - forest
-
-audino - forest fairy
+gengar - ff p1 roam around when dark
+banette - ff p1 set up puppets in the field
+alakazam - ff p2 meditate until hit
+mawile - sunken cave approach from back
+gardevoir - sunken cave tournament night
+gallade - sunken cave tournament day
+audino - route 6 don't kill audino
+sharpedo - route 6 water fish up
 
 absol - mount mid
 abomasnow - mount ice
@@ -47,11 +50,12 @@ medicham - mount base
 ampharos - mount base
 houndoom - mount volcano
 camerupt - mount volcano
-altaria - mount mid
-mawile - mount mid
+
+pidgeot - mount mid - raging wind (decreased acc besides hurricane)
 
 lucario - high tourney rank?
 
+altaria - victory road
 garchomp - victory road
 tyranitar - victory road
 metagross - victory road
@@ -61,14 +65,14 @@ salamence - victory road
 blastoise - Victory Road
 blaziken - Victory Road
 venasaur - Victory Road
-charizard x - Victory Road
-charizard y - Victory Road
+charizard x - Victory Road os
+charizard y - Victory Road as
 sceptile - Victory Road
 swampert - Victory Road
 
 lati@s
 diancie - Route 3 (Near Egida)
-mewtwo x - forest ghosty
-mewtwo y - forest ghosty
+mewtwo x - forest ghosty os (spooky town)
+mewtwo y - forest ghosty as (spooky town)
 rayquaza - mount ice
 

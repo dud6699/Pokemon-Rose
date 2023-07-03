@@ -1,0 +1,7 @@
+['Intimidate','Rivalry']
+[1.2,1.8,1.2,1.08,1.08,1.4]
+['Electric',None]
+[36,"Luxray"]
+{1:['Tackle','Leer'],5:'Leer',9:'Spark',13:'Charge',17:'Bite',23:'Roar',28:'Swagger',33:'Thunder Fang',38:'Crunch',43:'Scary Face',48:'Discharge',53:'Wild Charge'}
+120
+30.5

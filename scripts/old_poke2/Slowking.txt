@@ -1,0 +1,11 @@
+['Oblivious','Own Tempo']
+[1.9,1.5,2,1.6,2.2,.6]
+['Water','Psychic']
+[]
+{1:['Heal Pulse','Power Gem','Hidden Power','Curse','Yawn','Tackle'],5:'Growl',9:'Water Gun',14:'Confusion',19:'Disable',23:'Headbutt',28:'Water Pulse',32:'Zen Headbutt',36:'Nasty Plot',41:'Swagger',45:'Psychic',49:'Trump Card',54:'Psych Up',58:'Heal Pulse'}
+70
+79.5
+79
+128
+[]
+['Royal','Slowking undertakes research every day in', 'an effort to solve the mysteries of the', 'world. However, this Pokemon apparently', 'forgets everything it has learned if the', 'Shellder on its head comes off.'] 

@@ -1,0 +1,10 @@
+Fighting
+0
+100
+.95
+{}
+1
+10
+['The user dives down', 'onto the target from', 'the sky. This move', 'is Fighting and', 'Flying type', 'simultaneously.']
+0
+0

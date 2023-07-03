@@ -1,0 +1,11 @@
+['Guts','No Guard']
+[1.4,1.6,.7,1,.7,.7]
+['Fighting',None]
+[28,'Machoke']
+{1:['Low Kick','Leer'],3:'Focus Energy',7:'Karate Chop',9:'Foresight',13:'Low Sweep',15:'Seismic Toss',19:'Revenge',21:'Knock Off',25:'Vital Throw',27:'Wake-Up Slap',31:'Dual Chop',33:'Submission',37:'Bulk Up',39:'Cross Chop',43:'Scary Face',45:'Dynamic Punch'}
+180
+19.5
+31
+46
+['route_2','vigore']
+['Superpower','Machop\'s muscles are special. They never', 'get sore no matter how much they are used', 'in exercise. This Pokemon has sufficient', 'power to hurl a hundred adult humans.']

@@ -1,0 +1,11 @@
+['Static','Lightning Rod']
+[.8,.9,1.4,.8,.8,1.3]
+['Electric',None]
+[26,'Manectric']
+{1:['Tackle','Thunder Wave'],4:'Leer',7:'Howl',10:'Quick Attack',13:'Spark',16:'Odor Sleuth',19:'Thunder Fang',24:'Bite',29:'Discharge',34:'Roar',39:'Wild Charge',44:'Charge',49:'Thunder'}
+120
+15.2
+24
+68
+['vigore']
+['Lightning','Electrike runs faster than the human eye', 'can follow. The friction from running is', 'converted into electricity, which is then', 'stored in this Pokemon\'s fur.']

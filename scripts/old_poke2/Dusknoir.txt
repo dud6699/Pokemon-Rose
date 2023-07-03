@@ -1,0 +1,11 @@
+['Pressure']
+[.9,2,1.3,2.7,2.7,.9]
+['Ghost',None]
+[]
+{1:['Shadow Punch','Future Sight','Fire Punch','Ice Punch','Thunder Punch','Gravity','Bind','Leer','Night Shade','Disable','Astonish'],6:'Disable',9:'Astonish',14:'Foresight',17:'Shadow Sneak',22:'Pursuit',25:'Will-O-Wisp',30:'Confuse Ray',33:'Curse',40:'Hex',45:'Shadow Ball',52:'Mean Look',57:'Payback',64:'Future Sight'}
+45
+106.6
+87
+190
+[]
+['Gripper','At the bidding of transmissions from the', 'spirit world, it steals people and Pokemon', 'away. No one knows whether it has a will of', 'its own.'] 

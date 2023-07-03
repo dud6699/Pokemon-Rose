@@ -6,6 +6,6 @@
 190
 4
 12
-116
-['route_3b']
+121
+['echo_cavef','route_3b']
 ['Bivalve','At night, this Pokemon uses its broad', 'tongue to burrow a hole in the seafloor', 'sand and then sleep in it. While it is', 'sleeping, Shellder closes its shell, but', 'leaves its tongue hanging out.'] 

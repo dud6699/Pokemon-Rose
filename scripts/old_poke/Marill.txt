@@ -1,0 +1,11 @@
+['Thick Fat','Huge Power']
+[1.5,.4,.4,1,1,.8]
+['Water','Fairy']
+[18,'Azumarill']
+{1:['Tackle','Water Gun'],2:'Tail Whip',5:'Water Sport',7:'Bubble',10:['Defense Curl','Rollout'],13:'Bubble Beam',16:'Baby-Doll Eyes',20:'Aqua Tail',23:'Play Rough',28:'Aqua Ring',31:'Rain Dance',37:'Double-Edge',40:'Superpower',47:'Hydro Pump'}
+190
+8.5
+16
+914
+[]
+['Aqua Mouse','When fishing for food at the edge of a', 'fast-running stream, Marill wraps its tail', 'around the trunk of a tree. This Pokemon\'s', 'tail is flexible and configured to stretch.'] 

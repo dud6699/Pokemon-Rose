@@ -1,0 +1,10 @@
+Water
+1
+90
+1
+{}
+1
+15
+['The user attacks', 'everything around it', 'by swamping its', 'surroundings with a', 'giant wave.']
+0
+0

@@ -1,0 +1,11 @@
+['Swarm','Shell Armor']
+[1.4,2.7,1.2,2.1,2.1,.4]
+['Bug','Steel']
+[]
+{1:['Double-Edge','Fell Stinger','Peck','Leer','Quick Guard','Twineedle'],4:'Leer',8:'Quick Guard',13:'Twineedle',16:'Fury Attack',20:'Headbutt',25:'False Swipe',28:'Bug Buzz',32:'Slash',37:'Iron Head',40:'Iron Defense',44:'X-Scissor',49:'Reversal',52:'Swords Dance',56:'Giga Impact',60:'Fell Stinger'}
+75
+33
+39
+86
+[]
+['Cavalry','Wearing the shell covering they stole from', 'Shelmet, they defend themselves and attack', 'with two lances.']

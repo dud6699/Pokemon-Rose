@@ -1,0 +1,11 @@
+['Swift Swim']
+[1.1,1.3,1.2,.7,.6,1.7]
+['Water',None]
+[26,'Floatzel']
+{1:['Sonic Boom'],4:'Growl',7:'Water Sport',11:'Quick Attack',15:'Water Gun',18:'Pursuit',21:'Swift',24:'Aqua Jet',27:'Double Hit',31:'Whirlpool',35:'Razor Wind',38:'Aqua Tail',41:'Agility',45:'Hydro Pump'}
+190
+29.5
+28
+169
+['route_5']
+['Sea Weasel','It inflates the flotation sac around its', 'neck and pokes its head out of the water to', 'see what is going on.'] 

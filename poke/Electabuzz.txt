@@ -5,3 +5,7 @@
 {1:['Quick Attack','Leer','Thunder Shock'],5:'Thunder Shock',8:'Low Kick',12:'Swift',15:'Shock Wave',19:'Thunder Wave',22:'Electro Ball',26:'Light Screen',29:'Thunder Punch',36:'Discharge',42:'Screech',49:'Thunderbolt',55:'Thunder'}
 45
 30
+43
+942
+[]
+['Electric','When a storm arrives, gangs of this Pokemon', 'compete with each other to scale heights', 'that are likely to be stricken by lightning', 'bolts. Some towns use Electabuzz in place', 'of lightning rods.']

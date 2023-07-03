@@ -1,0 +1,11 @@
+['Leaf Guard']
+[1.44,2.4,1.3,1.96,1.96,1.68]
+['Grass',None]
+[]
+{1:['Trop Kick','Punishment','Double Slap','Splash'],5:'Razor Leaf',9:'Swagger',13:'Rapid Spin',17:'Sweet Scent',21:'Magical Leaf',25:'Teeter Dance',29:'Stomp',33:'Aromatic Mist',37:'Leaf Storm',41:'Aromatherapy',45:'High Jump Kick',49:'Captivate',53:'Power Whip',59:'Solar Blade'}
+45
+21.4
+47
+3
+[]
+['Fruit','A Pokemon with an aggressive personality', 'and a mastery of kicking, it cackles every', 'time it kicks an opponent.']

@@ -1,0 +1,10 @@
+Water
+1
+90
+.85
+{.3:['AcD']}
+1
+10
+['The user attacks by', 'shooting muddy water', 'at the opposing', 'Pokemon. This may', 'also lower their', 'accuracy.']
+0
+0

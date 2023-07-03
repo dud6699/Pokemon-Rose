@@ -1,0 +1,3 @@
+['Use','Key']
+['A new, good-quality', 'fishing rod. Use it', 'by any body of water', 'to fish for wild', 'aquatic Pokemon.']
+-1

@@ -1,0 +1,11 @@
+['Sturdy','Shell Armor']
+[1.4,2.1,1.3,2.5,1.5,.9]
+['Bug','Rock']
+[]
+{1:['Shell Smash','Rock Blast','Withdraw','Sand Attack'],5:'Rock Blast',7:'Withdraw',11:'Sand Attack',13:'Feint Attack',17:'Smack Down',19:'Rock Polish', 23:'Bug Bite',24:'Stealth Rock',29:'Rock Slide',31:'Slash',38:'X-Scissor',43:'Shell Smash',50:'Flail',55:'Rock Wrecker'}
+75
+100
+55
+65
+[]
+['Stone Home','Competing for territory, Crustle fight', 'viciously. The one whose boulder is broken', 'is the loser of the battle.']

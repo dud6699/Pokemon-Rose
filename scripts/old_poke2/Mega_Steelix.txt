@@ -1,0 +1,11 @@
+['Sand Force']
+[1.5,2.5,1.1,4.6,1.9,.6]
+['Steel','Ground']
+[]
+{1:['Thunder Fang','Ice Fang','Fire Fang','Mud Sport','Tackle','Harden','Bind'],4:'Curse',7:'Rock Throw',10:'Rock Tomb',13:'Rage',16:'Stealth Rock',19:'Autotomize',20:'Gyro Ball',22:'Smack Down',25:'Dragon Breath',28:'Slam',31:'Screech',34:'Rock Slide',37:'Crunch',40:'Iron Tail',43:'Dig',46:'Stone Edge',49:'Double-Edge',52:'Sandstorm'}
+25
+740
+413
+140
+[]
+['Iron Snake','Tempered underground under high pressure', 'and heat, its body is harder than any', 'metal.'] 

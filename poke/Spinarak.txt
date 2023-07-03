@@ -6,6 +6,6 @@
 255
 8.5
 20
-149
+169
 ['route_5']
 ['String Spit','The web spun by Spinarak can be considered', 'its second nervous system. It is said that', 'this Pokemon can determine what kind of', 'prey is touching its web by feeling the', 'tiny vibrations from the web\'s strands.']

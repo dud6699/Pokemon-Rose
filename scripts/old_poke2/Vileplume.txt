@@ -1,0 +1,11 @@
+['Chlorophyll']
+[1.5,1.6,2.2,1.7,1.8,1.0]
+['Grass','Poison']
+[]
+{1:['Mega Drain','Aromatherapy','Poison Powder','Stun Spore'],49:'Petal Blizzard',59:'Petal Dance',69:'Solar Beam'}
+45
+18.6
+47
+35
+[]
+['Flower','Vileplume\'s toxic pollen triggers atrocious', 'allergy attacks. That\'s why it is advisable', 'never to approach any attractive flowers in', 'a jungle, however pretty they may be.']

@@ -2,10 +2,10 @@
 [1.4,1.8,1.2,1.4,1.4,.8]
 ['Bug','Poison']
 []
-{1:['Swords Dance','Focus Energy','Venom Drench','Fell Stinger','Bug Bite','Poison Sting','String Shot','Constrict','Absorb'],5:'Absorb',8:'Infestation',12:'Scary Face',15:'Night Shade',19:'Shadow Sneak',23:'Fury Swipes',28:'Sucker Punch',32:'Spider Web',37:'Agility',41:'Pin Missile',46:'Psychic',50:'Poison Jab',55:'Cross Poison', 58:'Spider Web',63:'Toxic Thread'}
+{1:['Swords Dance','Focus Energy','Venom Drench','Fell Stinger','Bug Bite','Poison Sting','String Shot','Constrict','Absorb'],5:'Absorb',8:'Infestation',12:'Scary Face',15:'Night Shade',19:'Shadow Sneak',23:'Fury Swipes',28:'Sucker Punch',32:'Spider Web',37:'Agility',41:'Pin Missile',46:'Psychic',50:'Poison Jab',55:'Cross Poison', 58:'Sticky Web',63:'Toxic Thread'}
 90
 33.5
 43
-150
+170
 ['route_5']
 ['Long Leg','Ariados\'s feet are tipped with tiny hooked', 'claws that enable it to scuttle on ceilings', 'and vertical walls. This Pokemon constricts', 'the foe with thin and strong silk webbing.']

@@ -1,0 +1,11 @@
+['Water Veil','Oblivious']
+[2.6,1.4,1.4,.7,.7,1.2]
+['Water',None]
+[40,'Wailord']
+{1:['Splash'],4:'Growl',7:'Water Gun',10:'Rollout',13:'Whirlpool',16:'Astonish',19:'Water Pulse',22:'Mist',25:'Brine',29:'Rest',33:'Water Spout',37:'Amnesia',41:'Dive',45:'Bounce',49:'Hydro Pump',53:'Heavy Slam'}
+125
+130
+81
+155
+['route_4f']
+['Ball Whale','Wailmer\'s nostrils are located above its', 'eyes. This playful Pokemon loves to startle', 'people by forcefully snorting out seawater', 'it stores inside its body out of its', 'nostrils.'] 

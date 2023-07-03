@@ -1,0 +1,11 @@
+['Guts','Sheer Force']
+[1.5,1.6,.5,1.1,.7,.7]
+['Fighting',None]
+[25,'Gurdurr']
+{1:['Pound','Leer'],4:'Focus Energy',8:'Bide',12:'Low Kick',16:'Rock Throw',20:'Wake-Up Slap',24:'Chip Away',28:'Bulk Up',31:'Rock Slide',34:'Dynamic Punch',37:'Scary Face',40:'Hammer Arm',43:'Stone Edge',46:'Focus Punch',49:'Superpower'}
+180
+12.5
+24
+132
+['route_4']
+['Muscular','Always carrying squared logs, they help out', 'with construction. As they grow, they carry', 'bigger logs.']

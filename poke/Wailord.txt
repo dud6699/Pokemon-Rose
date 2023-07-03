@@ -1,0 +1,11 @@
+['Water Veil','Oblivious']
+[3.3,1.8,1.8,.9,.9,1.2]
+['Water',None]
+[]
+{1:['Soak','Noble Roar','Heavy Slam','Splash','Growl','Water Gun','Rollout'],4:'Growl',7:'Water Gun',10:'Rollout',13:'Whirlpool',16:'Astonish',19:'Water Pulse',22:'Mist',25:'Brine',29:'Rest',33:'Water Spout',37:'Amnesia',44:'Dive',51:'Bounce',58:'Hydro Pump',65:'Heavy Slam'}
+60
+398
+571
+156
+['route_4f']
+['Float Whale','Wailord is the largest of all identified', 'Pokemon up to now. This giant Pokemon swims', 'languorously in the vast open sea, eating', 'massive amounts of food at once with its', 'enormous mouth.'] 

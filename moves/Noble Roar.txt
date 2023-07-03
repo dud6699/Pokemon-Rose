@@ -1,0 +1,10 @@
+Water
+2
+---
+1
+{1:['AD','SAD']}
+1
+30
+['Letting out a noble', 'roar, the user', 'intimidates the', 'target and lowers', 'its Attack and Sp.', 'Atk stats.']
+0
+0

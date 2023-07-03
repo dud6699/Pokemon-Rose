@@ -6,6 +6,6 @@
 155
 32.8
 46
-115
-['route_5b']
+120
+['route_4f','route_5b']
 ['Rogue','Crawdaunt molts its shell regularly.', 'Immediately after molting, its shell is', 'soft and tender. Until the shell hardens,', 'this Pokemon hides in its streambed burrow', 'to avoid attack from its foes.'] 

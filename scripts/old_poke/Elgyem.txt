@@ -1,0 +1,11 @@
+['Analytic','Synchronize']
+[1.1,1.1,1.7,1.1,1.1,.6]
+['Psychic',None]
+[42,'Beheeyem']
+{1:['Confusion'],4:'Growl',8:'Heal Block',11:'Miracle Eye',15:'Psybeam',18:'Headbutt',22:'Hidden Power',25:'Imprison',29:'Simple Beam',32:'Zen Headbutt',36:'Psych Up',39:'Psychic',43:'Calm Mind',46:'Recover',50:['Guard Split','Power Split'],53:'Synchronoise',56:'Wonder Room'}
+255
+9
+20
+186
+['forbidden']
+['Cerebral','It uses its strong psychic power to squeeze', 'its opponent\'s brain, causing unendurable', 'headaches.'] 

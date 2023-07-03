@@ -1,0 +1,11 @@
+['Leaf Guard']
+[.8,1.1,1,.7,.7,.7]
+['Grass',None]
+[34,'Lurantis','Petal Blizzard']
+{1:['Fury Cutter'],5:'Leafage',10:'Razor Leaf',14:'Growth',19:'Ingrain',23:'Leaf Blade',28:'Synthesis',32:'Slash',37:'Sweet Scent',41:'Solar Beam',46:'Sunny Day'}
+190
+1.5
+12
+269
+['route_6']
+['Sickle Grass','When the sun rises, Fomantis spreads its', 'four leaves and bathes in the sunlight. The', 'tip of its head has a pleasant aroma.'] 

@@ -1,0 +1,11 @@
+['Wimp Out']
+[.5,.7,.4,.8,.6,1.6]
+['Bug','Water']
+[30,'Golisopod','First Impression']
+{1:['Struggle Bug','Sand Attack']}
+90
+12
+20
+73
+['echo_cavef']
+['Turn Tail','An astonishingly cowardly Pokemon, Wimpod', 'will whir its legs at high speeds to run', 'away if anything comes near it.'] 

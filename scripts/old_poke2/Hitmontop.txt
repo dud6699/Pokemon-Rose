@@ -1,0 +1,11 @@
+['Intimidate','Technician']
+[1,1.9,.7,1.9,2.2,1.4]
+['Fighting',None]
+[]
+{1:['Rolling Kick','Endeavor','Close Combat','Detect','Revenge','Focus Energy','Pursuit','Quick Attack'],6:'Focus Energy',10:'Pursuit',15:'Quick Attack',19:'Rapid Spin',24:'Feint',28:'Counter',33:'Triple Kick',37:'Agility',42:'Gyro Ball',46:'Quick Guard',50:'Detect',55:'Close Combat',60:'Endeavor'}
+45
+48
+55
+932
+[]
+['Handstand','Hitmontop spins on its head at high speed,', 'all the while delivering kicks. This', 'technique is a remarkable mix of both', 'offense and defense. The Pokemon travels', 'faster spinning than it does walking.'] 

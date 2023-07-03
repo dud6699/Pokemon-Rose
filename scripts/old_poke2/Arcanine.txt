@@ -1,0 +1,11 @@
+['Intimidate','Flash Fire']
+[1.8,2.2,2,1.6,1.6,1.9]
+['Fire',None]
+[]
+{1:['Thunder Fang','Bite','Roar','Odor Sleuth','Fire Fang'],34:'Extreme Speed'}
+75
+155
+75
+224
+[]
+['Legendary','Arcanine is known for its high speed. It is', 'said to be capable of running over 6,200', 'miles in a single day and night. The fire', 'that blazes wildly within this Pokemon\'s', 'body is its source of power.'] 

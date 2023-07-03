@@ -1,0 +1,11 @@
+['Prankster','Infiltrator']
+[1.2,1.34,1.54,1.7,1.5,2.32]
+['Grass','Fairy']
+[]
+{1:['Growth','Leech Seed','Mega Drain','Cotton Spore'],10:'Gust',28:'Tailwind',46:'Hurricane',50:'Moonblast'}
+75
+6.6
+28
+168
+[]
+['Windveiled','They appear along with whirlwinds. They', 'pull pranks, such as moving furniture and', 'leaving balls of cotton in homes.'] 

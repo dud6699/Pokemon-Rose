@@ -1,0 +1,11 @@
+['Insomnia','Keen Eye']
+[1.2,.6,.72,.6,1.12,1]
+['Normal','Flying']
+[20,'Noctowl']
+{1:['Tackle','Growl','Foresight'],4:'Hypnosis',7:'Peck',10:'Confusion',13:'Echoed Voice',16:'Zen Headbutt',19:'Psycho Shift',22:'Extrasensory',25:'Take Down',28:'Reflect',31:'Air Slash',34:'Uproar',37:'Roost',40:'Moonblast',43:'Synchronoise',46:'Dream Eater'}
+255
+21.2
+28
+83
+['scarab_l']
+['Owl','Hoothoot has an internal organ that senses', 'and tracks the earth\'s rotation. Using this', 'special organ, this Pokemon begins hooting', 'at precisely the same time every day.']

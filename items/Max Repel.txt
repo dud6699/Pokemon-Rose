@@ -1,0 +1,3 @@
+['Use','Key']
+['This item prevents', 'wild Pokemon from', 'jumping out at you.', 'Can be refilled at', 'the Poke Mart.']
+-1

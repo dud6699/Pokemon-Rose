@@ -1,0 +1,11 @@
+['Illuminate','Natural Cure']
+[1.2,1.5,2,1.7,1.7,2.3]
+['Water','Psychic']
+[]
+{1:['Hydro Pump','Water Gun','Rapid Spin','Recover','Swift'],40:'Confuse Ray'}
+60
+80
+43
+131
+['route_3f']
+['Mysterious','Starmie swims through water by spinning its', 'star-shaped body as if it were a propeller', 'on a ship. The core at the center of this', 'Pokemon\'s body glows in seven colors.'] 

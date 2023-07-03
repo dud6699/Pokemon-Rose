@@ -1,0 +1,11 @@
+['Levitate']
+[.6,.7,2,.6,.7,1.6]
+['Ghost','Poison']
+[25,'Haunter','Shadow Punch']
+{1:['Hypnosis','Lick'],5:'Spite',8:'Mean Look',12:'Curse',15:'Night Shade',19:'Confuse Ray',22:'Sucker Punch',26:'Payback',29:'Shadow Ball',33:'Dream Eater',36:'Dark Pulse',40:'Destiny Bond',43:'Hex',47:'Nightmare'}
+190
+0.1
+51
+159
+['forbidden']
+['Gas','Gastly is largely composed of gaseous', 'matter. When exposed to a strong wind, the', 'gaseous body quickly dwindles away. Groups', 'of this Pokemon cluster under the eaves of', 'houses to escape the ravages of wind.'] 

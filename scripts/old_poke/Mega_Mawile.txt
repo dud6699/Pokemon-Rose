@@ -1,0 +1,11 @@
+['Huge Power']
+[1,2.1,1.1,2.5,1.9,1]
+['Steel','Fairy']
+[]
+{1:['Play Rough','Iron Head','Taunt','Growl','Fairy Wind','Astonish'],5:'Fake Tears',9:'Bite',13:'Sweet Scent',17:'Vice Grip',21:'Feint Attack',25:'Baton Pass',29:'Crunch',33:'Iron Defense',37:'Sucker Punch',41:['Stockpile','Swallow','Spit Up'],45:'Iron Head',49:'Play Rough'}
+45
+23.5
+39
+217
+[]
+['Deceiver','Its two sets of jaws thrash about violently', 'as if they each had a will of their own.', 'One gnash from them can turn a boulder to', 'dust.']

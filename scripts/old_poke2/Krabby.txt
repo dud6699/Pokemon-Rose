@@ -1,0 +1,11 @@
+['Hyper Cutter','Shell Armor']
+[.6,2.1,.5,1.8,.25,1]
+['Water',None]
+[28,'Kingler']
+{1:['Mud Sport','Bubble'],5:'Vice Grip',9:'Leer',11:'Harden',15:'Bubble Beam',19:'Mud Shot',21:'Metal Claw',25:'Stomp',29:'Protect',31:'Guillotine',35:'Slam',39:'Brine',41:'Crabhammer',45:'Flail'}
+225
+6.5
+16
+119
+['echo_cavef','route_3b','route_5b','route_6f']
+['River Crab','Krabby live on beaches, burrowed inside', 'holes dug into the sand. On sandy beaches', 'with little in the way of food, these', 'Pokemon can be seen squabbling with each', 'other over territory.'] 

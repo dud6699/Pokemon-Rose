@@ -1,0 +1,11 @@
+['Oblivious','Own Tempo','*Ranged']
+[1.9,1.5,2,2.2,1.6,.6]
+['Water','Psychic']
+['Mega','Mega_Slowbro']
+{1:['Withdraw','Heal Pulse','Curse','Yawn','Tackle','Growl'],5:'Growl',9:'Water Gun',14:'Confusion',19:'Disable',23:'Headbutt',28:'Water Pulse',32:'Zen Headbutt',36:'Slack Off',43:'Amnesia',49:'Psychic',55:'Rain Dance',62:'Psych Up',68:'Heal Pulse'}
+75
+78.5
+63
+119
+[]
+['Hermit Crab','Slowbro\'s tail has a Shellder firmly', 'attached with a bite. As a result, the tail', 'can\'t be used for fishing anymore. This', 'causes Slowbro to grudgingly swim and catch', 'prey instead.'] 

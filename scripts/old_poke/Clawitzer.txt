@@ -1,0 +1,11 @@
+['Mega Launcher']
+[1.42,1.46,2.4,1.76,1.78,1.38]
+['Water',None]
+[]
+{1:['Aura Sphere','Dark Pulse','Dragon Pulse','Heal Pulse','Splash','Water Gun','Water Sport','Vice Grip'],7:'Water Sport',9:'Vice Grip',12:'Bubble',16:'Flail',20:'Bubble Beam',25:'Swords Dance',30:'Crabhammer',34:'Water Pulse',42:'Smack Down',49:'Aqua Jet',57:'Muddy Water'}
+55
+35.3
+51
+971
+[]
+['Howitzer','Their enormous claws launch cannonballs of', 'water powerful enough to pierce tanker', 'hulls.'] 

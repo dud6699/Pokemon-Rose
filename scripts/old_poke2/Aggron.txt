@@ -1,0 +1,11 @@
+['Sturdy','Rock Head']
+[1.4,2.2,1.2,3.6,1.2,1]
+['Steel','Rock']
+['Mega','Mega_Aggron']
+{1:['Tackle','Harden','Mud-Slap','Headbutt'],4:'Mud-Slap',7:'Headbutt',10:'Metal Claw',13:'Rock Tomb',16:'Protect',19:'Roar',22:'Iron Head',25:'Rock Slide',28:'Take Down',31:'Metal Sound',35:'Iron Tail',39:'Iron Defense',45:'Double-Edge',51:'Autotomize',57:'Heavy Slam',63:'Metal Burst'}
+45
+360
+83
+58
+[]
+['Iron Armor','Aggron is protective of its environment. If', 'its mountain is ravaged by a landslide or a', 'fire, this Pokemon will haul topsoil to the', 'area, plant trees, and beautifully restore', 'its own territory.']

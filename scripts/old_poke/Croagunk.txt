@@ -1,0 +1,11 @@
+['Anticipation','Dry Skin']
+[.96,1.22,1.22,.8,.8,1]
+['Poison','Fighting']
+[37,'Toxicroak']
+{1:['Astonish'],3:'Mud-Slap',8:'Poison Sting',10:'Taunt',15:'Pursuit',17:'Feint Attack',22:'Revenge',24:'Swagger',29:'Mud Bomb',31:'Sucker Punch',36:'Venoshock',38:'Nasty Plot',43:'Poison Jab',45:'Sludge Bomb',47:'Belch',50:'Flatter'}
+140
+23
+28
+200
+['route_6']
+['Toxic Mouth','Its cheeks hold poison sacs. It tries to', 'catch foes off guard to jab them with toxic', 'fingers.'] 

@@ -1,0 +1,11 @@
+['Cute Charm','Normalize']
+[1,.9,.7,.9,.7,1]
+['Normal',None]
+['Moon Stone','Delcatty']
+{1:['Fake Out','Growl','Tail Whip','Tackle'],4:'Foresight',7:'Sing',10:'Attract',13:'Disarming Voice',16:'Double Slap',19:'Copycat',22:'Feint Attack',25:'Charm',28:'Wake-Up Slap',31:'Assist',34:'Covet',37:'Heal Bell',40:'Double-Edge',43:'Captivate',46:'Play Rough'}
+255
+11
+24
+24
+['square_1','route_2']
+['Kitten','Skitty is known to chase around playfully', 'after its own tail. In the wild, this', 'Pokemon lives in holes in the trees of', 'forests. It is very popular as a pet', 'because of its adorable looks.']

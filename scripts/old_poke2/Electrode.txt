@@ -1,0 +1,11 @@
+['Soundproof','Static']
+[1.2,1,1.6,1.4,1.6,3]
+['Electric',None]
+[]
+{1:['Charge','Tackle','Sonic Boom','Eerie Impulse'],4:'Sonic Boom',6:'Eerie Impulse',9:'Spark',11:'Rollout',13:'Screech',16:'Charge Beam',20:'Swift',22:'Electro Ball',26:'Self-Destruct',29:'Light Screen',36:'Magnet Rise',41:'Discharge',47:'Explosion',54:'Gyro Ball',58:'Mirror Coat'}
+60
+66.6
+47
+67
+[]
+['Ball','Electrode eats electricity in the', 'atmosphere. On days when lightning strikes,', 'you can see this Pokemon exploding all over', 'the place from eating too much electricity.']

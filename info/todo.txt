@@ -1,49 +1,70 @@
+1.2.4
+baking (testing)
+npcs in no transition areas
+clamperl in house
+bug die after using item
+
+#everytime:
+reset professor
+update get_indoors()
+disable check ability?
+
 sandstorm
 jobs:	research(colress)(mega evo, soul dew, fossils), blue 
 nursery(cheryl)(baby pokemon), pale
 gardening(marian)(stat boost petal?/berries/shrooms/balm shroom?), green
 cooking(siebold)(friendship food), orange
-beauty contest(lisia)(heart scales), pink
-tourney(riley)(BP for battle items(focus sash...), dark red
-mining(alain)(gems, nuggets/bones/misc items, plates, stones, shards?(stat boost)), candy?, brown
-(water race?) bounty(finding criminals)(zinnia)(ability capsules), 
+beauty contest(lisia)(heart scales), pink	beauty tracker
+tourney(riley)(BP for battle items(focus sash....candy?), dark red	rope
+mining(alain)(gems, nuggets/bones/misc items, plates, stones), candy?, brown		
+(water race?) bounty(finding criminals)(zinnia)(ability capsules), 	more shiny/ more encounter
 trade evoitems buyable
-shiny item
 ability capsules
-oddish evos /stone evos
+set gender of trainer pokemon
 music fade
 colress/professor/girl spr size
 change candy price
 eviolite on things like combee
-karrablast evo chingling evo
 ghost type special benefits (running etc)
 maractus can learn drain punch
 mart stock expand with badges
+solar blade with flinch
 tm hail sandstorm img
 simple accupressure
 long moves stick out
 forces of nature therian tms
-redo horsea, sandile
 in battle order
 clear body with fainting
 update bide with other effects
 wrap not proc when dead?
-indicator in pc for item
 no rototiller
+no helping hand
 no wide guard
 no oricorio
-update pokedex number every time
+no telepathy
+update pokedex number every time in profile
 redundant pcx/pcy
 comet punch not effective
 uproar bugged
 iron barbs bug
-
+stun spore on steel no text
+bypass protect
+bide + effect spore/switch out?
+poison spikes poison types
+hit status bug
+pain split not effective
+run with teleport
+stab to opp_ai
+rollout with enemies
+magic bounce with certain status moves and failing
+aron in aron cave
 
 festival:
 money/ball roulette? 2x ball?
 pokemon training/playing
 water bottle/ice cream(friendship) misc food
 fortune teller
+
 mega mewtwo xy/charizard omega/alpha groudon oricorio forms kyurem
 no wormadam
 learn moves multiple times
@@ -72,9 +93,15 @@ rock gem, rock plate, hard stone, smooth rock, everstone
 rare: deep sea scale/tooth, prism scale, dragon scale
 legend: heart scale, water stone, shell bell
 
-[heart scales, deep sea scale/tooth, prism scale, water/ice/rock gem, damp rock, water stone? 
-dragon scale, everstone, seafood, mystic water, never melt ice? shell bell? splash plate
-light clay, icy rock, oval stone?]
+3rd gym:
+stat petal roulette (sat)
+
+repel man: (sun)
+
+4th gym:
+discount bakery(sat)
+
+fisherman (sun)
 
 make shops set when load file icy/smooth rock
 
@@ -89,33 +116,24 @@ dusk,moon,love,heavy,lure,repeat,dive,heal
 
 
 moves:
-recharge moves
 trap moves (mean look, block)
-sunny day
 crit u notifier
 lock on
 psycho shift
 baton pass
-brick break
-fury cutter
-stealth rock/toxic spikes/sticky web
 /traps/spider web
 aqua ring
 disable
 mud sport
 soak
-giga impact/hyper beam
 psych up
-reflect
-guard split
 bounce
 heal block
-skill swap
 hail
 fly
 wonder room
+beak blast
 quick guard
-curse
 water sport
 memento
 imprison
@@ -125,38 +143,35 @@ dive
 stomping tantrum
 weather ball
 insomnia
-entrainment
 healing wish
 Lucky Chant
+retalitate
 Moonlight
 Natural Gift
-tailwind/safeguard/light screen
+safeguard/mist/lucky chant
 mirror move/copycat
 happiny evo
-whirlwind/roar
 refresh
 rage
 torment
 embargo
 dig
-outrage/thrash/Petal Dance
 Grassy Terrain
 assist
 covet
 spite
 me first
+trickortreat
 tri attack
 miracle eye
 genderless pokemon
-thaw attacks (ie flare blitz)
+thaw attacks (ie flare blitz,scald)
 thief
-circle throw
 ingrain
 payback
 smack down
-future sight
 bestow
-\water spout
+spider web text?
 switcheroo
 clear smog
 phantom force
@@ -164,54 +179,69 @@ mist
 grudge
 perish song
 belch
-synthesis
-final gambit
 power swap
 glowing or something woods
 golden brozong tm gyroball
 necrozma forms tm gyroball
-leech seed
 refresh
 hidden power
-slack off
+telekinesis
 forest curse
 spikes
+sky drop
+reflect type
 dsetinybond
 trump card
 won't flinch...because of shield dust
 hurt by trap moves after fainted
-slowking
 mimic
 round
 recycle
 encore
 trick
-role play
 snatch
 fling
+topsy turvy
 triple kick
 stored power
 substitute
-slowpoke evo with shellder
 misty terrain
+volt switch
 gravity
 wish
-skull bash
+wimpout with poison
+uproar with sleep?
+shadow force
+
 
 bonsly evo + other baby
 
 
 abilities:
-
+sand rush
+sand force
 klutz
-volt absorb
+suction cups
+vital spirit
+wimp out
+anger point
 rain dish
 magic guard
 cloud nine
 regenerator
 competitive
-merciless
-tough claws
+anticipation
+snowcloak
+water bubble
+regenerator
+overcoat
+illuminate
+speed boost
+tinted lens
+pixilate
+liquid ooze
+prankster dark poke
+synchronize
 cursed body
 
 need other stuff:
@@ -219,7 +249,6 @@ sand force
 mold breaker
 sticky hold(covet, theif, pickpock, magician, incinerate, knock off,trick switcherroo, corrosive gas)
 air lock
-chrlolphyll
 pickup
 infiltrator
 unnerve

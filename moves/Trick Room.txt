@@ -1,0 +1,10 @@
+Psychic
+2
+---
+100
+{}
+1
+5
+['The user creates a', 'bizarre area in', 'which slower Pokemon', 'get to move first', 'for five turns.']
+-7
+0

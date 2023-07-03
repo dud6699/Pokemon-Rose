@@ -7,4 +7,4 @@ Normal
 10
 ['The user rampages', 'and attacks for two', 'to three turns. The', 'user then becomes', 'confused.']
 0
-0
+6

@@ -1,0 +1,11 @@
+['Natural Cure','Poison Point']
+[.8,.6,1,.7,1.4,1.1]
+['Grass','Poison']
+['friend','Roselia']
+{1:['Absorb'],4:'Growth',7:'Water Sport',10:'Stun Spore',13:'Mega Drain',16:'Worry Seed'}
+255
+1.2
+8
+928
+[]
+['Bud','Over the winter, it closes its bud and', 'endures the cold. In spring, the bud opens', 'and releases pollen.'] 

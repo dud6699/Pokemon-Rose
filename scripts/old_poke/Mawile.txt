@@ -1,0 +1,11 @@
+['Hyper Cutter','Intimidate']
+[1,1.7,1.1,1.7,1.1,1]
+['Steel','Fairy']
+['Mega','Mega_Mawile']
+{1:['Play Rough','Iron Head','Taunt','Growl','Fairy Wind','Astonish'],5:'Fake Tears',9:'Bite',13:'Sweet Scent',17:'Vice Grip',21:'Feint Attack',25:'Baton Pass',29:'Crunch',33:'Iron Defense',37:'Sucker Punch',41:['Stockpile','Swallow','Spit Up'],45:'Iron Head',49:'Play Rough'}
+45
+11.5
+24
+216
+['sunken_cave']
+['Deceiver','Mawile\'s huge jaws are actually steel horns', 'that have been transformed. Its docile-','looking face serves to lull its foe into', 'letting down its guard.']

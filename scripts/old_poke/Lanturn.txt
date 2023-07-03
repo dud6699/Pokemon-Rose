@@ -1,0 +1,11 @@
+['Volt Absorb','Illuminate']
+[2.5,1.16,1.52,1.16,1.52,1.34]
+['Water','Electric']
+[]
+{1:['Stockpile','Swallow','Spit Up','Eerie Impulse','Bubble','Supersonic','Thunder Wave','Electro Ball'],6:'Thunder Wave',9:'Electro Ball',12:'Water Gun',17:'Confuse Ray',20:'Bubble Beam',23:'Spark',29:'Signal Beam',33:'Flail',37:'Discharge',43:'Take Down',47:'Aqua Ring',51:'Hydro Pump',54:'Ion Deluge',58:'Charge'}
+75
+22.5
+44
+978
+[]
+['Light','Lanturn is nicknamed "the deep-sea star"', 'for its illuminated antenna. This Pokemon', 'produces light by causing a chemical', 'reaction between bacteria and its bodily', 'fluids inside the antenna.'] 

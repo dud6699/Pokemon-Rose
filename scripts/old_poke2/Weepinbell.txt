@@ -1,0 +1,11 @@
+['Chlorophyll']
+[1.1,1.8,1.7,1,.9,1.1]
+['Grass','Poison']
+['Leaf Stone','Victreebel','Leaf Tornado']
+{1:['Vine Whip','Growth','Wrap'],7:'Growth',11:'Wrap',13:'Sleep Powder',15:'Poison Powder',17:'Stun Spore',24:'Acid',29:'Knock Off',32:'Sweet Scent',39:'Gastro Acid',44:'Razor Leaf',47:'Poison Jab',54:'Slam',58:'Wring Out'}
+120
+6.4
+39
+31
+[]
+['Flycatcher','Weepinbell has a large hook on its rear', 'end. At night, the Pokemon hooks on to a', 'tree branch and goes to sleep. If it moves', 'around in its sleep, it may wake up to find', 'itself on the ground.']

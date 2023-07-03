@@ -1,0 +1,11 @@
+['Emergency Exit']
+[1.5,2.5,1.2,2.8,1.8,.8]
+['Bug','Water']
+[]
+{1:['First Impression','Struggle Bug','Sand Attack','Fury Cutter','Rock Smash'],4:'Fury Cutter',7:'Rock Smash',10:'Bug Bite',13:'Spite',16:'Swords Dance',21:'Slash',26:'Razor Shell',31:'Sucker Punch',36:'Iron Defense',41:'Pin Missile',48:'Liquidation'}
+45
+108
+79
+980
+[]
+['Hard Scale','Its claws, which it can extend and retract', 'at will, are its greatest weapons.', 'Golisopod is sometimes accompanied by', 'Wimpod.'] 

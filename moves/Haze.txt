@@ -5,6 +5,6 @@ Ice
 {}
 0
 30
-['The user creates a', 'haze that eliminates', 'every stat change', 'among all the', 'Pokémon engaged in', 'battle.']
+['The user creates a', 'haze that eliminates', 'every stat change', 'among all the', 'Pokemon engaged in', 'battle.']
 0
 0

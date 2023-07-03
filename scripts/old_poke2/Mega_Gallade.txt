@@ -1,0 +1,11 @@
+['Inner Focus']
+[1.36,3.3,1.3,1.9,2.3,2.2]
+['Psychic','Fighting']
+[]
+{1:['Slash','Stored Power','Close Combat','Leaf Blade','Night Slash','Leer','Confusion','Double Team','Teleport'],4:'Confusion',6:'Double Team',9:'Teleport',11:'Quick Guard',14:'Fury Cutter',17:'Aerial Ace',19:'Heal Pulse',23:'Detect',26:'Swords Dance',31:'Psycho Cut',35:'Foresight',40:'Feint',44:'False Swipe',49:'Protect',53:'Close Combat',58:'Stored Power'}
+45
+56.4
+63
+258
+[]
+['Blade','The blades extending from its elbows are', 'sharper than the finest swords. Its', 'swordsmanship, albeit self-taught, is', 'astonishingly impressive.'] 

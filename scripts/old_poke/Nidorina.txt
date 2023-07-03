@@ -1,0 +1,11 @@
+['Poison Point','Rivalry']
+[1.4,1.24,1.1,1.34,1.1,1.12]
+['Poison',None]
+['Moon Stone','Nidoqueen']
+{1:['Growl','Scratch'],7:'Tail Whip',9:'Double Kick',13:'Poison Sting',20:'Fury Swipes',23:'Bite',28:'Taunt',35:'Toxic Spikes',38:'Flatter',43:'Crunch',50:'Captivate',58:'Poison Fang'}
+120
+20
+31
+44
+['route_3']
+['Poison Pin','When Nidorina are with their friends or', 'family, they keep their barbs tucked away', 'to prevent hurting each other. This Pokemon', 'appears to become nervous if separated from', 'the others.']

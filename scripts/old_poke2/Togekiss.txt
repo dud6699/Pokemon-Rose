@@ -1,0 +1,11 @@
+['Hustle','Serene Grace']
+[1.7,1,2.4,1.9,2.3,1.6]
+['Fairy','Flying']
+[]
+{1:['Dazzling Gleam','Sky Attack','Extreme Speed','Aura Sphere','Air Slash']}
+30
+38
+59
+937
+[]
+['Jubilee','It shares many blessings with people who', 'respect one another\'s rights and avoid', 'needless strife.'] 

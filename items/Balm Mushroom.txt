@@ -1,3 +1,3 @@
 ['Balm Mushroom','Item']
 ['A very rare mushroom', 'that gives off a', 'nice fragrance.', 'Using it will have a', 'strange effect on', 'Pokemon.','This doesn\'t work on', 'every Pokemon yet,', 'but will eventually.']
-9600
+20000

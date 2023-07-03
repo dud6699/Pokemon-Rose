@@ -9,14 +9,39 @@ Scarab Woods (right) - Kakuna/Beedrill 20%, Shelmet 10%, Oddish 20%, Seviper 10%
 Route 3 (p2) - Lotad/Lombre 15%, Drowzee 15%, Ponyta 10%, Buneary 20%, Joltik 15%, Nidorans/Nidorins 25%
 Route 3 (beach) - Krabby 25%, Corphish 25%, Slowpoke 10%, Shellder 25%, Psyduck 15%
 Mirror Cave - Sableye 10%, Onix 15%, Aron 20%, Golett 10%, zubat/Golbat 25%, Whismur/Loudred 20%, Geodude
-Route 4 - Vulpix 7%, Ponyta 18%, Kagaskhan 15%, Spearow/Fearow 25%, Timburr/Gurdurr 15%, Dwebble 20%, dratini(fishing)
-Route 5 - Scyther 10%, Sandile/Krokorok 15%, Foongus 20%, Cottonee 15%, Buizel/Floatzel 20%, Spinarak/Ariados 20%
-Route 5 (beach)	Krabby/Kingler 20%, Mareanie 15%, Corphish/Crawdaunt 20%, Frillish M/F 25%, Binacle 20%
+Route 4 - Vulpix 7%, Ponyta 18%, Kagaskhan 15%, Spearow/Fearow 25%, Timburr/Gurdurr 15%, Dwebble 20%,
+Route 5 - Scyther 10%, Pikipek/Trumbeak/Toucannon 15%, Foongus 20%, Cottonee 15%, Buizel/Floatzel 20%, Spinarak/Ariados 20% (27-33)
+Route 5 (beach)	- Krabby/Kingler 20%, Mareanie 15%, Corphish/Crawdaunt 20%, Frillish M/F 25%, Binacle 20%
+Forbidden Forest (bot) - Gastly/Haunter 25%, Phantump/Trevenant 15%, Shuppet 15%, Misdreavus 18%, Murkrow 20%, Duskull/Dusclops 7% (30-37)
+Forbidden Forest (top) - Abra/Kadabra 25%, Pumpkaboo/Gourgeist 15%, Solosis/Duosion 15%, Sableye 18%, Drowzee/Hypno 20%, Elgyem 7% (34-41)
+Route 6 (p1) - Eevee 25%, Ekans/Arbok 20%, Mankey/Primeape 15%, Cottonee 20%, Croagunk/Toxicroak 13%, Growlithe 7% (37-43)
+Sunken Cave - Roggenrola/Boldore 20%, Geodude/Graveler 20%, Wooper/Quagsire 20%, Mawile 20%, Drilbur/Excadrill 13%, Gligar 7%, Barbaracle (40-46)
+Route 6 (p2) - Eevee 25%, Surskit/Masquerain 20%, Yanma/Yanmega 15%, Timburr/Gurdurr/Conkeldurr 15%, Ralts/Kirlia/Gardevoir 15%, Dewpider/Araquanid 10% (42-49)
+Route 6 (p3) - Tangela/Tangrowth 20%, Mankey/Primeape 20%, Cutiefly/Ribombee/Morelull/Shiinotic 20%, Dedenne 15%, Audino 15%, Fomantis/Lurantis 10% (45-52)
+Route 6 (mr) - Eevee 15%, Tangela/ 15%, Mankey/ 15%, Cutiefly//Morellul// 15%, Dedenne 10%, Audino 10%, Fomantis/ 10%, Ralts// 10%
 
+Fishing Spots:
+echo cave - wooper 40%, krabby 40%, shellder 20% (20-40)| kingler 20%, chinchou 20%, tympole 40%, Quagsire 20% (30-45)| cloyster 15%, Lanturn 20% Palpitoad/30%, wimpod/ 35%
+route 3 - magikarp 50%, remoraid 30%, staryu 20% (15-40)| octillery 30%, marienie/Toxapex 60%, starmie 10% (30-50) | gyarados 30%, barboach/whiscash 70%
+route 4 -  magikarp 50%,  corphish 25%, tenta 25% (15-40)| tentacruel 20%, crawdaunt 20%, wailmer 60% (35-45)| wailord 25%, gyarados 25%, clauncher/ 50% (40-max)
+forbidden forest - tentacool 50%, frillishes 50% (20-40)|  jelli 40%, tentacruel 30%, chinchou 30% (30-50)| Lanturn 20%, dhelmise 30%, inkay/ 50% (40-max)
+route 6 -  feebas 50%, krabby 30%, carvanha 20% (15-40)| remoraid/octillery 60%, kingler 20%, sharpedo 20% (30-50)| Sharpedo 20%, Milotic 15%, Horsea/Seadra/Kingdra 65 (40-max)
+route after fighting - feeb staryu, shellder, corhpish | wailmer, crawd, starmie  | milotic cloyster wailord, lapras
+victory road - wooper skrelp || dratini
 
-electric house in the woods?
+special evo: starmie, milotic, cloyster, kingdra
+items: (150%) water/ice/rock gem 60%, pearl 30%, damp/icy/smooth rock/light clay/everstone 30%, expired/common candy 30%
+(100%) rare/shiny candy 40%, big pearl 20%, splash/ice/stone plate 10%, mystic water/nm ice/hard stone 10%, oval stone, deep sea scale/tooth, prism scale, dragon scale 20%
+(50%) tms (94surf,98waterfall,18raindance)(50%) heart scale 25%,pearl string 10%, myth candy 3%,  water stone 7%, shell bell/kingsrock 5%
+
+possible: horsea,  staryu, remoraid(need), wailmer, feebas, finneon, clauncher, tentacool, lapras, chinchou, 
+wooper, carvanha, barboach, skrelp, wimpod, shellder, krabby, corphish
 
 pokemon:
+#4
+krabby:		echo(f), r3(b), r5(b), r6(f)
+    kingler:	echo(f), r5(b), r6(f)
+
 #3
 weedle: 	r1, r2
     kakuna:	r2, scarab_r
@@ -30,12 +55,20 @@ bellsprout: 	r1, r3(1), scarab_l
 psyduck: 	vigore, r3(1), r3(b)
 spearow: 	r2, vigore, r4
     fearow:	r4
+drowzee:	r3(1,2), ff2
+    hypno:	ff2
+corphish:	r3(b), r4(f), r5(b)
+    crawdaunt:	r4(f), r5(b)
+remoraid:	r3(f), r4(f), r6(f)
+    octillery:	r3(f), r4(f), r6(f)
 
 #2
 seedot:		r3(1), scarab_l
     nuzleaf:	scarab_l
+murkrow:	scarab_l, ff1
 lotad:		scarab_r, r3(2)
     lombre:	scarab_r, r3(2)
+misdreavus:	scarab_r, ff1
 nidoran(m): 	r2,r3(2)
     nidorino:	r3(2)
 nidoran(f): 	r2,r3(2)
@@ -45,7 +78,6 @@ poochyena: 	am, r1
 machop: 	r2, vigore
 oddish: 	r1,scarab_r
 joltik: 	am, r3(2)
-drowzee:	r3(1,2)
 aron: 		echo, mirror
 ponyta:		r3(2), r4
 whismur: 	echo, mirror
@@ -53,40 +85,116 @@ whismur: 	echo, mirror
 zubat: 		echo, mirror
     golbat:	mirror
 scyther: 	r1, r5
-krabby:		r3(b), r5(b)
-    kingler:	r5(b)
-corphish:	r3(b), r5(b)
-    crawdaunt:	r5(b)
+sableye:	mirror, ff2
+cottonee:	r5, r6
+wooper:		echo(f), sunken
+    quagsire:	echo(f), sunken
+shellder:	echo(f), r3(b)
+    cloyster:	echo(f)
+magikarp:	r3(f), r4(f)
+    gyarados:	r3(f), r4(f)
+tentacool:	r4(f), ff(f)
+    tentacruel:	r4(f), ff(f)
+frillish(m):	r5(b), ff(f)
+    jelli(m): 	ff(f)
+frillish(f):	r5(b), ff(f)
+    jelli(f): 	ff(f)
+chinchou:	echo(f), ff(f)
+    lanturn:	echo(f), ff(f)
+timburr:	r4, r6
+    gurdurr:	r6
+    conkeldurr:	r6
+mankey:		r6 (p1,p3)
+    primeape:	r6 (p1,p3)
 
 #1
-timburr:	r4
 kangaskhan: 	r4
 vulpix:		r4
 golett:		mirror
-sableye:	mirror
 onix:		mirror
 noibat: 	echo
 hoothoot:	scarab_l
-murkrow:	scarab_l
 magnemite: 	vigore
 electrike: 	vigore
 togedemaru: 	vigore
 dwebble:	r4, [echo-rock]
-misdreavus:	scarab_r
 buneary:	r3(2)
-sandile:	r5
-    krokorok:	r5
+Pikipek:	r5
+    Trumbeak:	r5
+    Toucannon:  r5
 foongus:	r5, [scarab-pokeball]
-cottonee:	r5
 buizel:		r5
     floatzel:	r5
 spinarak:	r5
     ariados:	r5
 mareanie:	r5(b)
-frillish(m):	r5(b)
-frillish(f):	r5(b)
 binacle:	r5(b)
-
+    barbaracle:	[sunken-rock]
+phantump:	ff1, [ff1/2 tree], [r2-tree]
+    trevenant:	ff1
+gastly:		ff1
+    haunter:	ff1
+shuppet:	ff1
+abra:		ff2
+    kadabra:	ff2
+pumpkaboo:	ff2
+    gourgeist:	ff2
+solosis:	ff2
+    duosion:	ff2
+ekans:		r6
+    arbok:	r6
+croagunk:	r6
+    toxicroak:	r6
+tangela:	r6
+    tangrowth:	r6
+fomantis:	r6
+    lurantis	r6
+cutiefly:	r6
+    ribombee:	r6
+morelull:	r6
+    shiinotic:	r6
+dedenne:	r6
+audino:		r6
+roggenrola:	sunken
+    boldore:	sunken
+geodude:	sunken, [mirror-rock]
+    graveler:	sunken
+mawile:		sunken
+drilbur:	sunken
+    excadrill:	sunken
+gligar:		sunken
+wimpod:		echo(f)
+    golisopod:	echo(f)
+tympole:	echo(f)
+    palpitoad:	echo(f)
+    seismitoad: echo(f)
+staryu:		r3(f)
+    starmie:	r3(f)
+barboach:	r3(f)
+    whiscash:	r3(f)
+wailmer:	r4(f)
+    wailord:	r4(f)
+clauncher:	r4(f)
+    clawitzer:	r4(f)
+dhelmise	ff(f)
+inkay:		ff(f)
+    malamar:	ff(f)
+feebas:		r6(f)
+    milotic:	r6(f)
+carvahna:	r6(f)
+    sharpedo:	r6(f)
+horsea:		r6(f)
+    seadra:	r6(f)
+    kingdra:	r6(f)
+surskit:	r6
+    masquerain:	r6
+yanma:		r6
+    yanmega:	r6
+ralts:		r6
+    kirlia:	r6
+    gardevoir:	r6
+dewpider:	r6
+    araquanid:	r6
 
 #rare
 zangoose:	scarab_l
@@ -95,8 +203,16 @@ carbink:	r3(1)
 shelmet:	scarab_r
 karrablast:	scarab_l
 dunsparce: 	echo
-shellder:	r3(b)
 slowpoke:	r3(b)
+duskull:	ff1
+    dusclops:	ff1
+elgyem:		ff2
+growlithe:	r6
+eevee:		r6
+
+#special:
+pineapple_oddish:	fiore
+spooky_wobbuffet:	ff1
 
 voltorb:
 geodude:

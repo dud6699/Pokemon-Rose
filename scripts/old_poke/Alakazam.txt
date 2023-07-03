@@ -1,0 +1,11 @@
+['Synchronize','Inner Focus','*Meditate']
+[1.1,1,2.7,.9,1.9,2.4]
+['Psychic',None]
+['Mega','Mega_Alakazam']
+{1:['Kinesis','Teleport','Confusion'],16:'Confusion',18:'Disable',21:'Psybeam',23:'Miracle Eye',26:'Reflect',28:'Psycho Cut',31:'Recover',33:'Telekinesis',36:'Trick Room',38:'Psychic',41:'Calm Mind',43:'Future Sight',46:'Trick'}
+50
+48
+59
+179
+[]
+['Psi','Alakazam\'s brain continually grows, making', 'its head far too heavy to support with its', 'neck. This Pokemon holds its head up using', 'its psychokinetic power instead.'] 

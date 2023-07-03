@@ -1,0 +1,11 @@
+['Cute Charm','Normalize']
+[1.4,1.3,1.1,1.3,1.1,1.8]
+['Normal',None]
+[]
+{1:['Fake Out','Sing','Attract','Double Slap']}
+60
+32.6
+43
+25
+[]
+['Prim','Delcatty prefers to live an unfettered', 'existence in which it can do as it pleases', 'at its own pace. Because this Pokemon eats', 'and sleeps whenever it decides, its daily', 'routines are completely random.']

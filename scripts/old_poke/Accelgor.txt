@@ -1,0 +1,11 @@
+['Hydration','Sticky Hold']
+[1.6,1.4,2,.8,1.2,2.9]
+['Bug',None]
+[]
+{1:['Water Shruiken','Final Gambit','Power Swap','Absorb','Acid Spray','Double Team','Quick Attack'],4:'Acid Spray',8:'Double Team',13:'Quick Attack',16:'Struggle Bug',20:'Mega Drain',25:'Swift',28:'Me First',32:'Agility',37:'Giga Drain',40:'U-turn',44:'Bug Buzz',49:'Recover',52:'Power Swap',56:'Final Gambit'}
+75
+25.3
+21
+101
+[]
+['Shell Out','When its body dries out, it weakens. So, to', 'prevent dehydration, it wraps itself in', 'many layers of thin membrane.'] 

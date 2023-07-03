@@ -1,0 +1,11 @@
+['Thick Fat','Pickup']
+[2.7,1.7,0.8,0.8,1.7,0.1]
+['Normal',None]
+['friend','Snorlax']
+{1:['Last Resort','Recycle','Lick','Metronome','Odor Sleuth','Tackle'],4:'Defense Curl',9:'Amnesia',12:'Lick',17:'Chip Away',20:'Screech',25:'Body Slam',28:'Stockpile',33:'Swallow',36:'Rollout',41:'Fling',44:'Belly Drum',49:'Natural Gift',50:'Snatch',57:'Last Resort'}
+50
+105
+24
+918
+[]
+['Big Eater','Anything that looks edible, Munchlax will', 'go on and swallow whole. Its stomach is', 'tough enough to handle it even if the food', 'has gone rotten.']

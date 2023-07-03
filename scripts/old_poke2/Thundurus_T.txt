@@ -1,0 +1,11 @@
+['Volt Absorb']
+[1.48,2.1,2.9,1.4,1.6,2.02]
+['Electric','Flying']
+['Reveal Glass','Thundurus']
+{1:['Thrash','Hammer Arm','Nasty Plot','Uproar','Astonish','Thunder Shock','Swagger'],7:'Bite',13:'Revenge',19:'Shock Wave',25:'Heal Block',31:'Agility',37:'Discharge',43:'Crunch',49:'Charge',55:'Nasty Plot',61:'Thunder',67:'Dark Pulse',73:'Hammer Arm',79:'Thrash'}
+3
+61
+118
+-1
+[]
+['Bolt Strike','The spikes on its tail discharge immense', 'bolts of lightning. It flies around the', 'islands firing off lightning bolts.'] 

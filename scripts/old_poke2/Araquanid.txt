@@ -1,0 +1,11 @@
+['Water Bubble']
+[1.36,1.4,1,1.84,2.64,.84]
+['Water','Bug']
+[]
+{1:['Soak','Bubble','Infestation','Spider Web','Bug Bite'],5:'Infestation',8:'Spider Web',13:'Bug Bite',16:'Bubble Beam',21:'Bite',26:'Aqua Ring',33:'Leech Life',38:'Crunch',45:'Lunge',50:'Mirror Coat',57:'Liquidation',62:'Entrainment'}
+100
+82
+71
+248
+['route_6']
+['Water Bubble','It delivers headbutts with the water bubble', 'on its head. Small Pokemon get sucked into', 'the bubble, where they drown.'] 

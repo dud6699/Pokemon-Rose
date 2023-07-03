@@ -8,6 +8,8 @@ import pygame
 import random
 from pygame.locals import*
 
+#eturn 0 = player, 1 = enemy
+
 class Move:
     def __init__(self,name):
         self.name = name
@@ -27,6 +29,17 @@ class Move:
         self.boost = 1
 
     def cast(self,P,pokes,pokee,mvnum,eturn = 1) -> None:
+        if pokes.exit:
+            if eturn == 1:
+                if not poke_func.last_poke(P.opponent):
+                    return [3,False,0,[],0,0]
+                else:
+                    pokes.exit = False
+            else:
+                if not poke_func.last_poke(P.party):
+                    return [3,False,0,[],0,0]
+                else:
+                    pokes.exit = False
         pokes.can_sucker = False
         if pokee.status == 'Faint':
             opp_dead = True
@@ -35,22 +48,30 @@ class Move:
                     opp_dead = False
             if opp_dead:
                 return [3,False,0,[],0,0]
+        if pokes.get_ability() == 'Meditate' and pokes.ch == pokes.hp:
+            poke_func.new_battle_txt(P)
+            poke_func.battle_write(P,pokes.get_name() + " is", "meditating!")
+            P.clock.tick(P.bat_spd)
+            return [3,False,0,[],0,0]
         if P.ion_deluge and self.type == 'Normal':
             self.type  = 'Electric'
             self.boost *= 1.2
-        if pokes.ability == 'Normalize':
+        if pokes.get_ability() == 'Normalize':
             self.type = 'Normal'
             self.boost *= 1.2
-        if pokes.ability == 'Aerialate' and self.type == 'Normal':
+        if pokes.get_ability() == 'Aerialate' and self.type == 'Normal':
             self.type = 'Flying'
+        pp_amount = 1
+        if pokee.get_ability() == 'Pressure':
+            pp_amount = 2
         if mvnum == 0:
-            pokes.p1 -= 1
+            pokes.p1 = max(0,pokes.p1-pp_amount)
         elif mvnum == 1:
-            pokes.p2 -= 1
+            pokes.p2 = max(0,pokes.p2-pp_amount)
         elif mvnum == 2:
-            pokes.p3 -= 1
+            pokes.p3 = max(0,pokes.p3-pp_amount)
         elif mvnum == 3:
-            pokes.p4 -= 1
+            pokes.p4 = max(0,pokes.p4-pp_amount)
         move = 0
         if pokes.cfs > 0:
             pokes.cfs -= 1
@@ -73,6 +94,7 @@ class Move:
             poke_func.battle_write(P,pokes.get_name() + " is","immobilized by love!")
             P.clock.tick(P.bat_spd)
             move = 1
+            poke_func.cancelled(pokes)
         if pokes.status == 'Par':
             if random.random() <= 0.25:
                 poke_func.new_battle_txt(P)
@@ -80,6 +102,7 @@ class Move:
                 P.clock.tick(P.bat_spd)
                 pokes.bide = [0,0]
                 move = 1
+                poke_func.cancelled(pokes)
         elif pokes.status == 'Frz':
             if random.random() <= 0.2:
                 pokes.status = None
@@ -109,20 +132,20 @@ class Move:
         if pokes.flinch == True:
             poke_func.new_battle_txt(P)
             poke_func.battle_write(P,pokes.get_name() + " flinched!")
-            if pokes.ability == 'Steadfast':
+            if pokes.get_ability() == 'Steadfast':
                 if pokes.spdm < 6:
                     pokes.spdm += 1
                     poke_func.show_ability(P,'Steadfast',abs(1-eturn))
             P.clock.tick(P.bat_spd)
             pokes.bide = [0,0]
             move = 1
-        if self.priority > 0 and pokee.ability == 'Queenly Majesty':
+        if self.priority > 0 and pokee.get_ability() == 'Queenly Majesty':
             poke_func.new_battle_txt(P)
             poke_func.battle_write(P,pokes.get_name() + " cannot", "use " + self.name + '!')
             P.clock.tick(P.bat_spd)
             move = 1
         if move == 0:
-            if self.sec == '3' and pokes.charge == None:
+            if self.sec == '3' and pokes.charge == None and not (P.battle_weather != None and P.battle_weather[0] == 'Sunny' and self.name in ['Solar Beam','Solar Blade']):
                 pokes.charge = self.name
                 poke_func.new_battle_txt(P)
                 if self.name == 'Razor Wind':
@@ -131,6 +154,12 @@ class Move:
                     poke_func.battle_write(P,f'{pokes.get_name()} took in','sunlight!')
                 elif self.name == 'Sky Attack':
                     poke_func.battle_write(P,f'{pokes.get_name()} became','cloaked in a harsh light!')
+                elif self.name == 'Skull Bash':
+                    poke_func.battle_write(P,f'{pokes.get_name()} tucked in', 'its head!')
+                    P.clock.tick(P.bat_spd)
+                    self = Move("Withdraw")
+                    eff = self.use(P,pokes,pokee,eturn)
+                    return eff
                 else:
                     poke_func.battle_write(P,"I'm missing a description!")
                 P.clock.tick(P.bat_spd)
@@ -209,60 +238,87 @@ class Move:
                         self.acc = 0
                 if pokee.idf == True and pokee.evam <= 0:
                     acc = float(self.acc)*self.acc_mod(pokes.accm)
-                elif pokes.ability == 'Keen Eye' and pokee.evam <= 0:
+                elif pokes.get_ability() == 'Keen Eye' and pokee.evam <= 0:
                     acc = float(self.acc)*self.acc_mod(pokes.accm)
                 else:
                     acc = float(self.acc)*self.acc_mod(pokes.accm)*self.acc_mod(pokee.evam)
                 if self.name == 'Chip Away':
                     pokee.evam = teva
-                if self.name == 'Protect' or self.name == 'Spiky Shield' or self.name == 'Endure' or self.name == 'Detect':
+                if self.name in ['Protect','Spiky Shield','Baneful Bunker','Endure','Detect']:
                     acc = float(0.3**pokes.procount)
                     pokes.procount += 1
                 else:
                     pokes.procount = 0
                 if self.sec == '4':
-                    acc = (pokes.lvl-pokee.lvl+30)/100*5
+                    acc = (pokes.lvl-pokee.lvl+30)/100
                 if (self.name == 'Heavy Slam' or self.name == 'Stomp' or self.name == 'Steamroller' or self.name == 'Body Slam') and pokee.minimize:
                     acc = 1
-                if pokes.ability == 'Compound Eyes':
+                if pokes.get_ability() == 'Compound Eyes':
                     acc *= 1.3
-                if pokee.ability == 'Tangled Feet' and pokee.cfs > 0:
+                if pokee.get_ability() == 'Tangled Feet' and pokee.cfs > 0:
                     acc *= 0.5
-                if pokes.ability == 'Hustle' and self.cat == '0':
+                if pokes.get_ability() == 'Hustle' and self.cat == '0':
                     acc *= 0.8
                 #weather
                 if P.battle_weather != None and P.battle_weather[0] == 'Rain':
                     if self.name == 'Thunder' or self.name == 'Hurricane':
                         acc = 1
+                if P.battle_weather != None and P.battle_weather[0] == 'Sunny':
+                    if self.name == 'Thunder' or self.name == 'Hurricane':
+                        acc = 0.5
                 random_variable = 0
                 if self.cat == '2':
                     for e in self.eff:
                         if ('BPs' in self.eff[e] or 'Frz' in self.eff[e] or 'Brn' in self.eff[e] or 'Psn' in self.eff[e] or 'Slp' in self.eff[e] or 'Par' in self.eff[e]) and pokee.status != None:
                             print_fail(P)
                             random_variable = 1
-                        elif (('BPs' in self.eff[e] or 'Psn' in self.eff[e]) and ('Poison' in pokee.type or 'Steel' in pokee.type)) or ('Frz' in self.eff[e] and 'Ice' in pokee.type) or ('Brn' in self.eff[e] and 'Fire' in pokee.type) or ('Par' in self.eff[e] and 'Electric' in pokee.type):
+                        elif (('BPs' in self.eff[e] or 'Psn' in self.eff[e]) and not pokee.can_poison()) or ('Frz' in self.eff[e] and 'Ice' in pokee.type) or ('Brn' in self.eff[e] and ('Fire' in pokee.type or pokee.get_ability() == 'Water Bubble')) or ('Par' in self.eff[e] and 'Electric' in pokee.type):
                             poke_func.new_battle_txt(P)
                             poke_func.battle_write(P,f'It doesn\'t affect',pokee.get_name(True) +'!')
-                            P.clock.tick(P.bat_spd)
+                            if ('BPs' in self.eff[e] or 'Psn' in self.eff[e]) and pokee.get_ability() == 'Immunity':
+                                poke_func.show_ability(P,'Immunity',eturn)
+                            else:
+                                P.clock.tick(P.bat_spd)
                             random_variable = 2
-                if pokee.status == 'Faint':
+                if pokee.status == 'Faint' and not (self.cat == '2' and self.tar == '0'):
                     poke_func.new_battle_txt(P)
                     poke_func.battle_write(P, "But there was no target...")
                     P.clock.tick(P.bat_spd)
                 elif random_variable != 0:
                     pass
-                elif self.name == 'Captivate' and (pokes.gen == pokee.gen or pokee.ability == 'Oblivious' or pokes.gen == 2 or pokee.gen == 2):
+                elif self.name == 'Captivate' and (pokes.gen == pokee.gen or pokee.get_ability() == 'Oblivious' or pokes.gen == 2 or pokee.gen == 2):
                     poke_func.new_battle_txt(P)
-                    if pokee.ability == 'Oblivious':
+                    if pokee.get_ability() == 'Oblivious':
                         poke_func.battle_write(P,f'It doesn\'t affect',pokee.get_name(True) +'!')
                         poke_func.show_ability(P,'Oblivious',eturn)
                     else:
                         poke_func.battle_write(P,"But it failed!")
                     P.clock.tick(P.bat_spd)
-                elif pokee.ability == 'Dodge' and self.cat != '2':
+                elif pokee.get_ability() == 'Dodge' and self.cat != '2':
                     poke_func.new_battle_txt(P)
                     poke_func.battle_write(P,pokee.get_name() + " nimbly","dodged your attack!")
                     P.clock.tick(P.bat_spd)
+                elif pokee.get_ability() == 'Ranged' and self.is_contact():
+                    poke_func.new_battle_txt(P)
+                    poke_func.battle_write(P,pokee.get_name() + " is out of","range!")
+                    P.clock.tick(P.bat_spd)
+                elif pokee.get_ability() == 'Endless Hunger' and self.cat == '1' and random.random() < 0.33:
+                    poke_func.new_battle_txt(P)
+                    poke_func.battle_write(P,pokee.get_name() + " swallowed","the attack!")
+                    poke_func.show_ability(P,'Endless Hunger',eturn)
+                    P.clock.tick(P.bat_spd)
+                elif self.name == 'Future Sight':
+                    if eturn == 0 and P.future_sight[0] > 0:
+                        print_fail(P)
+                    elif eturn == 1  and P.future_sight[1] > 0:
+                        print_fail(P)
+                    elif random.random() <= acc or pokes.get_ability() == 'No Guard' or pokee.get_ability() == 'No Guard':
+                        poke_func.new_battle_txt(P)
+                        poke_func.battle_write(P,pokes.get_name() + " foresaw an","attack!")
+                        P.clock.tick(P.bat_spd)
+                        P.future_sight[eturn] = 3
+                    else:
+                        print_fail(P)
                 elif self.name == 'Spikes' and ((eturn == 1 and P.self_traps[0] == 3) or (eturn == 0 and P.enemy_traps[0] == 3)):
                     print_fail(P)
                 elif self.name == 'Toxic Spikes' and ((eturn == 1 and P.self_traps[1] == 2) or (eturn == 0 and P.enemy_traps[1] == 2)):
@@ -273,13 +329,31 @@ class Move:
                     print_fail(P)
                 elif P.battle_terrain != None and P.battle_terrain[0] == 'Electric' and ((self.name == 'Yawn' and pokee.grounded()) or (self.name == 'Rest' and pokes.grounded())):
                     print_fail(P)
-                if self.name == 'Snore' and pokes.status != 'Slp':
+                elif self.name == 'Snore' and pokes.status != 'Slp':
                     print_fail(P)
                 elif (self.name == 'Metal Burst' and pokes.damage_taken == 0) or (self.name == 'Counter' and (pokes.type_hit != '0' or pokes.damage_taken == 0)) or (self.name == 'Mirror Coat' and (pokes.type_hit != '1' or pokes.damage_taken == 0)):
                     print_fail(P)
                 elif (self.name == 'Sucker Punch' and pokee.can_sucker == False):
                     print_fail(P)
-                elif self.name == 'Rain Dance' and P.battle_weather != None and P.battle_weather[0] == 'Rain':
+                elif self.name == 'Rain Dance' and P.battle_weather != None and P.battle_weather[0] in ['Rain','Windy']:
+                    if P.battle_weather[0] == 'Windy':
+                        poke_func.new_battle_txt(P)
+                        poke_func.battle_write(P,"The mysterious strong winds", "blow on regardless!")
+                        P.clock.tick(P.bat_spd)
+                    else:
+                        print_fail(P)
+                elif self.name == 'Sunny Day' and P.battle_weather != None and P.battle_weather[0] in ['Sunny','Windy']:
+                    if P.battle_weather[0] == 'Windy':
+                        poke_func.new_battle_txt(P)
+                        poke_func.battle_write(P,"The mysterious strong winds", "blow on regardless!")
+                        P.clock.tick(P.bat_spd)
+                    else:
+                        print_fail(P)
+                elif self.name == 'Tailwind' and ((eturn == 1 and P.enemy_buffs[0] > 0) or (eturn == 0 and P.player_buffs[0] > 0)):
+                    print_fail(P)
+                elif self.name == 'Light Screen' and ((eturn == 1 and P.enemy_buffs[1] > 0) or (eturn == 0 and P.player_buffs[1] > 0)):
+                    print_fail(P)
+                elif self.name == 'Reflect' and ((eturn == 1 and P.enemy_buffs[2] > 0) or (eturn == 0 and P.player_buffs[2] > 0)):
                     print_fail(P)
                 elif self.name == 'Electric Terrain' and P.battle_terrain != None and P.battle_terrain[0] == 'Electric':
                     print_fail(P)
@@ -291,28 +365,36 @@ class Move:
                     pass
                 elif self.name in ['Spit Up','Swallow'] and pokes.stockpile[0] == 0:
                     print_fail(P)
-                elif self.name == 'Rest' and (pokes.ability == 'Insomnia' or pokes.ch == pokes.hp):
+                elif self.name == 'Rest' and (pokes.get_ability() == 'Insomnia' or pokes.ch == pokes.hp):
                     print_fail(P)
-                elif self.name in ['Swallow','Recover','Roost','Synthesis','Soft-Boiled','Rejuvenate','Heal Pulse'] and pokes.ch == pokes.hp:
+                elif self.name in ['Swallow','Recover','Roost','Synthesis','Soft-Boiled','Rejuvenate','Heal Pulse','Moonlight'] and pokes.ch == pokes.hp:
                     poke_func.new_battle_txt(P)
                     poke_func.battle_write(P,pokes.get_name()+"'s HP is","full!")
                     P.clock.tick(P.bat_spd)
                 elif self.name in ['Dream Eater','Nightmare'] and pokee.status != 'Slp':
                     print_fail(P)
+                elif self.name == 'Nightmare' and pokee.nightmare:
+                    print_fail(P)
+                elif self.name == 'Curse' and 'Ghost' in pokes.type and pokee.curse:
+                    print_fail(P)
                 elif self.name == 'Belly Drum' and (pokes.ch/pokes.hp <= 0.5 or pokes.akm == 6):
                     print_fail(P)
                 elif self.name == 'Taunt' and pokee.taunt > 0:
+                    print_fail(P)
+                elif self.name == 'Teleport' and (P.legendary_battle or len(P.opponent) > 1 or ((pokee.get_ability() == 'Shadow Tag' and pokes.get_ability() != 'Shadow Tag' and 'Ghost' not in pokes.type) or (pokee.get_ability() == 'Arena Trap' and pokes.get_ability() != 'Levitate' and pokes.magnet_rise == 0 and 'Flying' not in pokes.type) or (pokee.get_ability() == 'Magnet Pull' and 'Steel' in pokes.type) or (pokes.trapped[1] != 0)) and (pokes.get_ability() != 'Run Away' or 'Ghost' in pokes.type)):
+                    print_fail(P)
+                elif self.name in ['Roar','Whirlwind'] and (type(P.opponent[0]) != str and pokes.player):
                     print_fail(P)
                 elif self.cat == '2' and pokes.taunt > 0:
                     poke_func.new_battle_txt(P)
                     poke_func.battle_write(P,pokes.get_name() + " can't use",self.name+" due to taunt!")
                     pokes.taunt -= 1
                     P.clock.tick(P.bat_spd)
-                elif self.name == 'Fake Out' and pokes.turn_count > 0:
+                elif self.name in ['Fake Out','First Impression'] and pokes.turn_count > 0:
                     print_fail(P)
-                elif (self.name == 'Self-Destruct' or self.name == 'Explosion') and (pokes.ability == 'Damp' or pokee.ability == 'Damp'):
+                elif (self.name == 'Self-Destruct' or self.name == 'Explosion') and (pokes.get_ability() == 'Damp' or pokee.get_ability() == 'Damp'):
                     print_fail(P)
-                    if pokes.ability == 'Damp':
+                    if pokes.get_ability() == 'Damp':
                         poke_func.show_ability(P,'Damp',1)
                     else:
                         poke_func.show_ability(P,'Damp',0)
@@ -322,11 +404,25 @@ class Move:
                     print_fail(P)
                 elif self.name == 'Taunt' and pokee.taunt != 0:
                     print_fail(P)
-                elif self.name == 'Taunt' and pokee.ability == 'Oblivious':
+                elif self.name == 'Taunt' and pokee.get_ability() == 'Oblivious':
                     poke_func.new_battle_txt(P)
                     poke_func.battle_write(P,f'It doesn\'t affect',pokee.get_name(True) +'!')
                     poke_func.show_ability(P,'Oblivious',eturn)
                 elif self.name == 'Attract' and (pokee.inf == True or pokes.gen == pokee.gen or pokes.gen == 2 or pokee.gen == 2):
+                    print_fail(P)
+                elif self.name == 'Leech Seed' and (pokee.leech == True or 'Grass' in pokee.type):
+                    print_fail(P)
+                elif self.name == 'Gastro Acid' and (pokee.gastro or pokee.ability in ['Meditate','Stun','Dodge','Ranged','Puppet','Multitype','Stance Change','Schooling','Comatose','Shields Down','Disguise','RKS System','Battle Bond','Power Construct']):
+                    print_fail(P)
+                elif self.name == 'Simple Beam' and (pokee.ability in ['Meditate','Stun','Dodge','Ranged','Puppet','Simple','Truant','Multitype','Stance Change','Schooling','Comatose','Shields Down','Disguise','RKS System','Battle Bond','Power Construct']):
+                    print_fail(P)
+                elif self.name == 'Worry Seed' and (pokee.ability in ['Meditate','Stun','Dodge','Ranged','Puppet','Insomnia','Truant','Multitype','Stance Change','Schooling','Comatose','Shields Down','Disguise','RKS System','Battle Bond','Power Construct']):
+                    print_fail(P)
+                elif self.name == 'Entrainment' and (pokee.ability == pokes.ability or pokee.ability in ['Meditate','Stun','Dodge','Ranged','Puppet','Truant','Multitype','Stance Change','Schooling','Comatose','Shields Down','Disguise','RKS System','Battle Bond'] or pokes.ability in ['Trace','Forecast','Flower Gift','Zen Mode','Illusion','Imposter','Power of Alchemy','Receiver','Disguise','Power Construct','Neutralizing Gas']):
+                    print_fail(P)
+                elif self.name == 'Role Play' and (pokee.ability == pokes.ability or pokee.ability in ['Meditate','Stun','Dodge','Ranged','Puppet','Trace','Wonder Guard','Forecast','Flower Gift','Multitype','Illusion','Zen Mode','Imposter','Stance Change','Power of Alchemy','Receiver','Schooling','Comatose','Shields Down','Power Construct','Disguise','RKS System','Battle Bond'] or pokes.ability in ['Multitype','Stance Change','Schooling','Zen Mode','Comatose','Shields Down','RKS System','Power Construct','Disguise','Battle Bond']):
+                    print_fail(P)
+                elif self.name == 'Skill Swap' and (pokee.ability in ['Meditate','Stun','Dodge','Ranged','Puppet','Wonder Guard','Multitype','Illusion','Stance Change','Schooling','Comatose','Shields Down','Disguise','RKS System','Battle Bond','Power Construct','Neutralizing Gas'] or pokes.ability in ['Meditate','Stun','Dodge','Ranged','Puppet','Wonder Guard','Multitype','Illusion','Stance Change','Schooling','Comatose','Shields Down','Disguise','RKS System','Battle Bond','Power Construct','Neutralizing Gas']):
                     print_fail(P)
                 elif (pokee.status != 'Psn' or pokee.status != 'BPs') and self.name == 'Venom Drench':
                     print_fail(P)
@@ -334,17 +430,19 @@ class Move:
                 elif (self.name == 'Poison Powder' or self.name == 'Stun Spore' or self.name == 'Sleep Powder' or self.name == 'Spore' or self.name == 'Powder' or self.name == 'Cotton Spore' or self.name == 'Magic Powder') and 'Grass' in pokee.type:
                     poke_func.new_battle_txt(P)
                     poke_func.battle_write(P,f'It doesn\'t affect',pokee.get_name(True) +'!')
-                    P.clock.tick(P.bat_spd) 
-                elif random.random() <= acc or pokes.ability == 'No Guard' or pokee.ability == 'No Guard':
+                    P.clock.tick(P.bat_spd)
+                elif random.random() <= acc or pokes.get_ability() == 'No Guard' or pokee.get_ability() == 'No Guard':
                     fail = False
-                    if self.name == 'Protect' or self.name == 'Spiky Shield' or self.name == 'Detect':
+                    if self.name in ['Protect','Spiky Shield','Detect','Baneful Bunker']:
                         poke_func.new_battle_txt(P)
                         poke_func.battle_write(P,pokes.get_name() + " protected","itself!")
                         P.clock.tick(P.bat_spd)
                         if self.name == 'Protect' or self.name == 'Detect':
                             pokes.protect = True
-                        else:
-                            pokes.spikyshield = True
+                        elif self.name == 'Spiky Shield':
+                            pokes.spikyshield[0] = True
+                        elif self.name == 'Baneful Bunker':
+                            pokes.spikyshield[1] = True
                     if self.name == 'Endure':
                         poke_func.new_battle_txt(P)
                         poke_func.battle_write(P,pokes.get_name() + " braced","itself!")
@@ -369,6 +467,8 @@ class Move:
                         if pokee.evam > 0:
                             sc += 20*pokee.evam
                         self.pow = sc
+                    if self.name == 'Water Spout':
+                        self.pow = int(max(1,150*pokes.ch/pokes.hp))
                     if self.name == 'Wring Out':
                         self.pow = int(120*(pokee.ch/pokee.hp))
                     if self.name == 'Heavy Slam':
@@ -425,7 +525,6 @@ class Move:
                             self.pow += 20*pokes.evam
                     if self.name == 'Gyro Ball':
                         self.pow = int(min(150,(25*pokee.get_spd(P)/pokes.get_spd(P))+1))
-                        print('gyro ball power: '+str(self.pow))
                         if self.pow == 0:
                             self.pow = 1
                     if self.name == 'Echoed Voice':
@@ -451,7 +550,6 @@ class Move:
                             self.pow = 150
                         else:
                             self.pow = 200
-                        print(self.pow)
                     if self.name == 'Flail':
                         pc = float(pokes.ch/pokes.hp)
                         if pc >= 0.6875:
@@ -517,34 +615,41 @@ class Move:
                         poke_func.new_battle_txt(P)
                         poke_func.battle_write(P,pokee.get_name() + " is", "protecting itself!")
                         P.clock.tick(P.bat_spd)
+                        if pokes.cont_move[0] != None and pokes.cont_move[0] != "Uproar":
+                            pokes.cont_move = [None,0]
                     elif (self.name == 'Teeter Dance' or self.name == 'Confuse Ray' or self.name == 'Supersonic' or self.name == 'Sweet Kiss') and pokee.cfs > 0:
                         poke_func.new_battle_txt(P)
                         poke_func.battle_write(P,pokee.get_name() + " is already","confused!")
                         P.clock.tick(P.bat_spd)
-                    elif pokee.spikyshield and self.tar == '1':
+                    elif (pokee.spikyshield[0] or pokee.spikyshield[1]) and self.tar == '1':
                         poke_func.new_battle_txt(P)
                         poke_func.battle_write(P,pokee.get_name() + " is", "protecting itself!")
                         P.clock.tick(P.bat_spd)
+                        if pokes.cont_move[0] != None and pokes.cont_move[0] != "Uproar":
+                            pokes.cont_move = [None,0]
                         mes = []
                         if self.is_contact():
-                            rec = int(pokes.hp/8)
-                            if pokes.ch - rec < 0:
-                                rec = pokes.ch
-                            mes.append([6,rec,pokes.get_name()])
+                            if pokee.spikyshield[0]:
+                                rec = int(pokes.hp/8)
+                                if pokes.ch - rec < 0:
+                                    rec = pokes.ch
+                                mes.append([6,rec,pokes.get_name()])
+                            elif pokee.spikyshield[1] and pokes.can_poison():
+                                pokes.status = 'Psn'
+                                #mes.append([7,rec,pokes.get_name()]):
                         return [3,False,0,mes,0,0]
                     elif fail:
                         print_fail(P)
                     else:
-                        eff = self.use(P,pokes,pokee,eturn)                          
+                        eff = self.use(P,pokes,pokee,eturn)
                         return eff
                 else:
                     poke_func.new_battle_txt(P)
-                    if self.name == 'Protect' or self.name == 'Spiky Shield' or self.name == 'Endure' or self.name == 'Detect' \
-                                                                                                                      '':
+                    if self.name in ['Protect','Spiky Shield','Endure','Detect','Baneful Bunker']:
                         poke_func.battle_write(P,'But it failed!')
                     else:
+                        poke_func.cancelled(pokes)
                         poke_func.battle_write(P,pokes.get_name() + "'s attack", "missed!")
-                    pokes.rollcount = 0
                     pokes.procount = 0
                     P.clock.tick(P.bat_spd)
                     if self.name in ['High Jump Kick','Jump Kick']:
@@ -553,9 +658,16 @@ class Move:
                         P.clock.tick(P.bat_spd)
                         if pokes.ch > int(pokes.hp/2):
                             pokes.take_damage(P,int(pokes.hp/2))
+        if self.name in ['Explosion','Self-Destruct']:
+            pokes.explode = True
+            return [3,False,pokes.ch,[],0,0]
         return [3,False,0,[],0,0]
 
-    def use(self,P,pokes,pokee,eturn) -> list:
+    def use(self,P,pokes,pokee,eturn,blit_p = None, blit_e = None) -> list:
+        if blit_p == None:
+            blit_p = pokes
+        if blit_e == None:
+            blit_e = pokee
         if pokes.child_hit:
             poke_func.show_ability(P, 'Parental Bond', abs(eturn-1))
         if self.name == 'Ion Deluge':
@@ -566,7 +678,7 @@ class Move:
         else:
             targ = 0
         message = []
-        if pokee.ability == 'Magic Bounce' and targ == 1 and self.cat == '2':
+        if pokee.get_ability() == 'Magic Bounce' and targ == 1 and self.cat == '2':
             targ = 0
             poke_func.new_battle_txt(P)
             poke_func.battle_write(P,pokee.get_name() +" bounced","the "+self.name+" back!")
@@ -578,6 +690,9 @@ class Move:
             P.clock.tick(P.bat_spd)
         if targ == 1:
             mod = self.effective(P,pok[targ],pokes,eturn)
+            if self.name == 'Flying Press':
+                flying_move = Move('Wing Attack')
+                mod *= flying_move.effective(P,pok[targ],pokes,eturn)
         else:
             mod = 1
         eff = 3
@@ -586,11 +701,11 @@ class Move:
             if mod == 0:
                 if self.cat != '2':
                     eff = 0
-                    if not (self.type == 'Water' and pok[targ].ability == 'Water Absorb'):
+                    if not ((self.type == 'Water' and pok[targ].get_ability() == 'Water Absorb') or (self.type == 'Electric' and pok[targ].get_ability() == 'Volt Absorb')):
                         poke_func.new_battle_txt(P)
                         poke_func.battle_write(P,"It doesn't affect ", pok[targ].get_name(True) + '!')
                         P.clock.tick(P.bat_spd)
-                        if pok[targ].ability == 'Soundproof' and self.in_soundproof():
+                        if pok[targ].get_ability() == 'Soundproof' and self.in_soundproof():
                             poke_func.show_ability(P,'Soundproof',eturn)
                 else:
                     mod = 1
@@ -610,7 +725,10 @@ class Move:
                     pokes.item = None
                     P.gem_active = True
             if P.ani_on:
-                self.animate(P,pokes,pokee,eturn)
+                self.animate(P,blit_p,blit_e,eturn)
+        else:
+            if pokes.cont_move[0] != None and pokes.cont_move[0] != "Uproar":
+                pokes.cont_move = [None,0]
         if self.pow != '---' and self.pow != '???':
             power = int(self.pow)
             power *= self.boost
@@ -633,19 +751,24 @@ class Move:
         if pokes.child_hit:
             power *= 0.25
         #weather
-        if P.battle_weather != None and P.battle_weather[0] == 'Rain':
+        if P.battle_weather != None and P.battle_weather[0] == 'Rain' and self.cat != '2':
             if self.type == 'Water':
                 power *= 1.5
             if self.type == 'Fire':
                 power *= 0.5
             if self.name == 'Solar Blade' or self.name == 'Solar Beam':
                 power *= 0.5
+        if P.battle_weather != None and P.battle_weather[0] == 'Sunny' and self.cat != '2':
+            if self.type == 'Fire':
+                power *= 1.5
+            if self.type == 'Water':
+                power *= 0.5
         #terrain
-        if P.battle_terrain != None and P.battle_terrain[0] == 'Electric':
+        if P.battle_terrain != None and P.battle_terrain[0] == 'Electric' and self.cat != '2':
             if self.type == 'Electric' and pokes.grounded():
                 power *= 1.5
         sheer = False
-        if self.cat != '2' and self.eff != [] and pokes.ability == 'Sheer Force':
+        if self.cat != '2' and self.eff != [] and pokes.get_ability() == 'Sheer Force':
             sheer = True
             for x in self.eff:
                 if x < 0 and (('AD' in self.eff[x]) or ('DD' in self.eff[x]) or ('SDD' in self.eff[x]) or ('SAD' in self.eff[x]) or ('SD' in self.eff[x]) or ('AcD' in self.eff[x]) or ('EvD' in self.eff[x])):
@@ -656,7 +779,7 @@ class Move:
             power *= 2
         if self.name == 'Defense Curl':
             pokes.dc = True
-        if (self.name == 'Bug Bite' or self.name == 'Pluck') and pok[targ].ability != 'Sticky Hold':
+        if (self.name == 'Bug Bite' or self.name == 'Pluck') and pok[targ].get_ability() != 'Sticky Hold':
             pok[targ].bugbite = True
         if self.name == 'Magnet Rise':
             pokes.magnet_rise = 5
@@ -666,6 +789,15 @@ class Move:
         if self.name == 'Uproar' and pokes.cont_move == [None,0]:
             pokes.cont_move = ['Uproar',3]
             message.append([7,pokes.get_name()+" caused an","uproar!"])
+        if self.sec == '6':
+            if pokes.cont_move == [None,0]:
+                pokes.cont_move = [self.name,random.randint(2,3)]
+            elif pokes.cont_move[1] == 1:
+                if pokes.cfs == 0:
+                    if pokes.get_ability() == 'Own Tempo' and x == 1:
+                        message.append([2,[pokes.get_name()+" can't be","confused!"],'Own Tempo',eturn])
+                    else:
+                        pokes.cfs = random.randint(2,5)
         if self.name == 'Fury Cutter':
             if pokes.fury_count < 2:
                 pokes.fury_count += 1
@@ -681,41 +813,54 @@ class Move:
             poke_func.new_battle_txt(P)
             poke_func.battle_write(P, pok[targ].get_name() + " began", "having a nightmare!")
             P.clock.tick(P.bat_spd)
+        if self.name == 'Curse' and 'Ghost' in pokes.type:
+            pokee.curse = True
+            poke_func.new_battle_txt(P)
+            poke_func.battle_write(P, pokes.get_name() + " cut its HP", "to curse "+pokee.get_name(True)+"!")
+            P.clock.tick(P.bat_spd)
         if self.name == 'Toxic Spikes':
             poke_func.new_battle_txt(P)
-            if eturn == 1:
+            if eturn == targ and P.self_traps[1] < 2:
                 poke_func.battle_write(P,"Poison spikes were scattered", "all around your team!")
                 P.self_traps[1] += 1
-            else:
+            elif P.enemy_traps[1] < 2:
                 poke_func.battle_write(P,"Poison spikes were scattered", "all around the opposing team!")
                 P.enemy_traps[1] += 1
+            else:
+                print_fail(P)
             P.clock.tick(P.bat_spd)
         if self.name == 'Spikes':
             poke_func.new_battle_txt(P)
-            if eturn == 1:
+            if eturn == targ and P.self_traps[0] < 3:
                 poke_func.battle_write(P,"Spikes were scattered all", "around your team!")
                 P.self_traps[0] += 1
-            else:
+            elif P.enemy_traps[0] < 3:
                 poke_func.battle_write(P,"Spikes were scattered all", "around the opposing team!")
                 P.enemy_traps[0] += 1
+            else:
+                print_fail(P)
             P.clock.tick(P.bat_spd)
         if self.name == 'Stealth Rock':
             poke_func.new_battle_txt(P)
-            if eturn == 1:
+            if eturn == targ and P.self_traps[2] == 0:
                 poke_func.battle_write(P,"Pointed stones float in the", "air around your team!")
                 P.self_traps[2] += 1
-            else:
+            elif P.enemy_traps[2] == 0:
                 poke_func.battle_write(P,"Pointed stones float in the", "air around the opposing team!")
                 P.enemy_traps[2] += 1
+            else:
+                print_fail(P)
             P.clock.tick(P.bat_spd)
         if self.name == 'Sticky Web':
             poke_func.new_battle_txt(P)
-            if eturn == 1:
+            if eturn == targ and P.self_traps[3] == 0:
                 poke_func.battle_write(P,"A sticky web has been laid out", "around your team!")
                 P.self_traps[3] += 1
-            else:
+            elif P.enemy_traps[3] == 0:
                 poke_func.battle_write(P,"A sticky web has been laid out", "around the opposing team!")
                 P.enemy_traps[3] += 1
+            else:
+                print_fail(P)
             P.clock.tick(P.bat_spd)
         if self.name == 'Stockpile':
             pokes.stockpile[0] += 1
@@ -732,6 +877,93 @@ class Move:
             poke_func.battle_write(P, "An electric current ran across", "the battlefield!")
             P.clock.tick(P.bat_spd)
             P.battle_terrain = ['Electric',6,poke_func.load("p/terrain/Electric_Terrain.png")]
+        if self.name == 'Gastro Acid':
+            poke_func.new_battle_txt(P)
+            poke_func.battle_write(P, pok[targ].get_name() + "'s ability", "was suppressed!")
+            P.clock.tick(P.bat_spd)
+            pokee.set_ability("")
+        if self.name == 'Simple Beam':
+            poke_func.new_battle_txt(P)
+            poke_func.battle_write(P, pokee.get_name() + " acquired", "Simple!")
+            P.clock.tick(P.bat_spd)
+            pokee.set_ability("Simple")
+            poke_func.show_ability(P, "Simple", eturn)
+        if self.name == 'Worry Seed':
+            poke_func.new_battle_txt(P)
+            poke_func.battle_write(P, pokee.get_name() + " acquired", "Insomnia!")
+            P.clock.tick(P.bat_spd)
+            pokee.set_ability("Insomnia")
+            poke_func.show_ability(P, "Insomnia", eturn)
+            if pokee.status == 'Slp':
+                pokee.status = None
+                poke_func.new_battle_txt(P)
+                poke_func.battle_write(P,pokee.get_name() + " woke up!")
+                P.clock.tick(P.bat_spd)
+        if self.name == 'Entrainment':
+            poke_func.new_battle_txt(P)
+            poke_func.battle_write(P, pokee.get_name() + " acquired", pokes.ability+"!")
+            P.clock.tick(P.bat_spd)
+            pokee.set_ability(pokes.ability)
+            poke_func.show_ability(P, pokes.ability, eturn)
+            poke_func.start_abilities(P,pokee,pokes,eturn,False)
+        if self.name == 'Role Play':
+            poke_func.new_battle_txt(P)
+            poke_func.battle_write(P, pokes.get_name() + " acquired", pokee.ability+"!")
+            P.clock.tick(P.bat_spd)
+            pokes.set_ability(pokee.ability)
+            poke_func.show_ability(P, pokee.ability, abs(eturn-1))
+            poke_func.start_abilities(P,pokes,pokee, abs(eturn-1),False)
+        if self.name == 'Skill Swap':
+            poke_func.new_battle_txt(P)
+            poke_func.battle_write(P, pokes.get_name() + " swapped", "abilities with its target!")
+            P.clock.tick(P.bat_spd)
+            temp_ability = pokee.ability
+            pokee.set_ability(pokes.ability)
+            pokes.set_ability(temp_ability)
+            poke_func.show_ability(P, pokee.ability, eturn)
+            poke_func.show_ability(P, pokes.ability, abs(eturn-1))
+            poke_func.start_abilities(P,pokee,pokes, eturn,False)
+            poke_func.start_abilities(P,pokes,pokee, abs(eturn-1),False)
+        if self.name == 'Tailwind':
+            poke_func.new_battle_txt(P)
+            if eturn == 1:
+                poke_func.battle_write(P, "The tailwind blew from behind", "the opposing team!")
+                P.enemy_buffs[0] = 4
+            else:
+                poke_func.battle_write(P, "The tailwind blew from behind", "your team!")
+                P.player_buffs[0] = 4
+            P.clock.tick(P.bat_spd)
+        if self.name == 'Light Screen':
+            poke_func.new_battle_txt(P)
+            if eturn == 1:
+                poke_func.battle_write(P, "Light Screen raised the other", "team's Special Defense!")
+                P.enemy_buffs[1] = 5
+            else:
+                poke_func.battle_write(P, "Light Screen raised your", "team's Special Defense!")
+                P.player_buffs[1] = 5
+            P.clock.tick(P.bat_spd)
+        if self.name == 'Brick Break':
+            if eturn == 0 and (P.enemy_buffs[1] > 0 or P.enemy_buffs[2] > 0):
+                poke_func.new_battle_txt(P)
+                poke_func.battle_write(P,"It shattered the barrier!")
+                P.clock.tick(P.bat_spd)
+                P.enemy_buffs[1] = 0
+                P.enemy_buffs[2] = 0
+            elif eturn == 1 and (P.player_buffs[1] > 0 or P.player_buffs[2] > 0):
+                poke_func.new_battle_txt(P)
+                poke_func.battle_write(P,"It shattered the barrier!")
+                P.clock.tick(P.bat_spd)
+                P.player_buffs[1] = 0
+                P.player_buffs[2] = 0
+        if self.name == 'Reflect':
+            poke_func.new_battle_txt(P)
+            if eturn == 1:
+                poke_func.battle_write(P, "Reflect raised the opposing", "team's Defense!")
+                P.enemy_buffs[2] = 5
+            else:
+                poke_func.battle_write(P, "Reflect raised your team's", "Defense!")
+                P.player_buffs[2] = 5
+            P.clock.tick(P.bat_spd)
         if self.name == 'Rain Dance':
             poke_func.new_battle_txt(P)
             poke_func.battle_write(P, "It started to rain!")
@@ -752,6 +984,24 @@ class Move:
                 P.battle_weather = ['Rain',9]
             else:
                 P.battle_weather = ['Rain',6]
+        if self.name == 'Sunny Day':
+            poke_func.new_battle_txt(P)
+            poke_func.battle_write(P, "The sunlight turned harsh!")
+            sun_temp = P.surface.copy()
+            sun_val = 0
+            if P.ani_on:
+                for r in range(60):
+                    P.surface.blit(sun_temp,(0,0))
+                    poke_func.blit_sun(P,sun_val)
+                    poke_func.update_screen(P)
+                    P.clock.tick(P.ani_spd)
+                    sun_val += 1
+            else:
+                P.clock.tick(P.bat_spd)
+            if pokes.item == 'Heat Rock':
+                P.battle_weather = ['Sunny',9]
+            else:
+                P.battle_weather = ['Sunny',6]
         if self.name == 'Autotomize':
             pokes.weight -= 100
             if pokes.weight <= 0.1:
@@ -762,9 +1012,9 @@ class Move:
         critm = pokes.critm
         if (self.sec == '1' or self.name == 'Razor Wind' or self.name == 'Sky Attack') and critm < 4:
             critm += 1
-        if (pokes.ability == 'Super Luck'):
+        if (pokes.get_ability() == 'Super Luck'):
             critm += 1
-        if (self.name == 'Storm Throw' and pok[targ].ability != 'Shell Armor' and pok[targ].ability != 'Battle Armor') or (self.cat != '2' and random.random() <= self.crit_mod(critm) and self.name != 'Psywave' and pok[targ].ability != 'Shell Armor' and self.name != 'Night Shade' and self.name != 'Super Fang' and self.name != 'Seismic Toss' and self.sec != '4'):
+        if eff != 0 and (((self.name == 'Storm Throw' or (pokes.get_ability() == 'Merciless' and pok[targ].status in ['Psn','BPs'])) and pok[targ].get_ability() != 'Shell Armor' and pok[targ].get_ability() != 'Battle Armor') or (self.cat != '2' and random.random() <= self.crit_mod(critm) and self.name != 'Psywave' and pok[targ].get_ability() != 'Shell Armor' and self.name != 'Night Shade' and self.name != 'Super Fang' and self.name != 'Final Gambit' and self.name != 'Seismic Toss' and self.sec != '4')):
             crit = True
         if self.cat == '0':
             akm = modifier(pokes.akm)
@@ -787,32 +1037,36 @@ class Move:
                 if dfm > 1:
                     dfm = 1
             ak = pokes.ak
-            if pokes.ability == 'Guts' and pokes.status != None:
+            if pokes.get_ability() == 'Guts' and pokes.status != None:
                 ak *= 1.5
             if self.name == 'Foul Play':
                 ak = pok[targ].ak
-                if pok[targ].ability == 'Guts' and pok[targ].status != None:
+                if pok[targ].get_ability() == 'Guts' and pok[targ].status != None:
                     ak *= 1.5
-            if pokes.ability == 'Technician' and power <= 60:
+            if pokes.get_ability() == 'Technician' and power <= 60:
                 power *= 1.5
             if pokes.item in ['Splash Plate','Icicle Plate','Stone Plate','Hard Stone','Never-Melt Ice','Metal Coat','Miracle Seed','Mystic Water','Rose Incense','Odd Incense','Rock Incense','Sea Incense','Smoke Incense'] and self.type == items.Item(pokes.item).mod():
                 power *= 1.2
-            if pokes.ability == 'Iron Fist' and self.name in ['Bullet Punch','Comet Punch','Dizzy Punch','Drain Punch','Dynamic Punch','Fire Punch','Focus Punch','Hammer Arm','Ice Hammer','Ice Punch','Mach Punch','Mega Punch','Meteor Mash','Plasma Fists','Power-Up Punch','Shadow Punch','Sky Uppercut','Thunder Punch']:
+            if pokes.get_ability() == 'Iron Fist' and self.name in ['Bullet Punch','Comet Punch','Dizzy Punch','Drain Punch','Dynamic Punch','Fire Punch','Focus Punch','Hammer Arm','Ice Hammer','Ice Punch','Mach Punch','Mega Punch','Meteor Mash','Plasma Fists','Power-Up Punch','Shadow Punch','Sky Uppercut','Thunder Punch']:
                 power *= 1.2
-            if pokes.ability == 'Reckless' and self.name in ['Brave Bird','Double-Edge','Flare Blitz','Head Charge','Head Smash','High Jump Kick','Jump Kick','Light of Ruin','Submission','Take Down','Volt Tackle','Wood Hammer','Wild Charge']:
+            if pokes.get_ability() == 'Reckless' and self.name in ['Brave Bird','Double-Edge','Flare Blitz','Head Charge','Head Smash','High Jump Kick','Jump Kick','Light of Ruin','Submission','Take Down','Volt Tackle','Wood Hammer','Wild Charge']:
                 power *= 1.2
-            if pokee.ability == 'Thick Fat' and (self.type == 'Fire' or self.type == 'Ice'):
+            if pokee.get_ability() == 'Thick Fat' and (self.type == 'Fire' or self.type == 'Ice'):
                 poke_func.new_battle_txt(P)
                 poke_func.battle_write(P,pok[targ].get_name() + " is", "protected by it's Thick Fat!")
                 poke_func.show_ability(P, 'Thick Fat', eturn)
                 ak *= 0.5
-            if pokes.ability == 'Swarm' and (pokes.ch/pokes.hp) < 0.33:
+            if pokes.get_ability() == 'Swarm' and (pokes.ch/pokes.hp) < 0.33 and self.type == 'Bug':
+                ak *= 1.5
+            if pokes.get_ability() == 'Blaze' and (pokes.ch/pokes.hp) < 0.33 and self.type == 'Fire':
+                ak *= 1.5
+            if pokes.get_ability() == 'Torrent' and (pokes.ch/pokes.hp) < 0.33 and self.type == 'Water':
+                ak *= 1.5
+            if pokes.get_ability() == 'Overgrow' and (pokes.ch/pokes.hp) < 0.33 and self.type == 'Grass':
                 ak *= 1.5
             if pokes.ff == 1 and self.type == 'Fire':
                 ak *= 1.5
-            pdf = pokee.df
-            if pokee.item == 'Eviolite' and pokee.evo != [] and pokee.evo[0] != 'Mega':
-                pdf *= 1.3
+            pdf = pokee.get_df()
             damage = (((2*pokes.lvl/5)*power*(ak*akm)/(pdf*dfm)/50)+2)
         elif self.cat == '1':
             sakm = modifier(pokes.sakm)
@@ -825,69 +1079,73 @@ class Move:
             if self.name == 'Venoshock' and (pok[targ].status == 'Psn' or pok[targ].status == 'BPs'):
                 power *= 2
             sak = pokes.sak
-            if pokes.ability == 'Technician' and power <= 60:
+            if pokes.get_ability() == 'Technician' and power <= 60:
                 power *= 1.5
-            if pokee.ability == 'Thick Fat' and (self.type == 'Fire' or self.type == 'Ice'):
+            if pokee.get_ability() == 'Thick Fat' and (self.type == 'Fire' or self.type == 'Ice'):
                 poke_func.new_battle_txt(P)
                 poke_func.battle_write(P,pok[targ].get_name() + " is", "protected by it's Thick Fat!")
                 poke_func.show_ability(P, 'Thick Fat', eturn)
                 sak *= 0.5
-            if (pokes.ability == 'Plus' or pokes.ability == 'Minus') and (pokee.ability == 'Plus' or pokee.ability == 'Minus'):
+            if (pokes.get_ability() == 'Plus' or pokes.get_ability() == 'Minus') and (pokee.get_ability() == 'Plus' or pokee.get_ability() == 'Minus'):
                 sak *= 1.5
-            if pokes.ability == 'Swarm' and (pokes.ch/pokes.hp) < 0.33:
+            if pokes.get_ability() == 'Swarm' and (pokes.ch/pokes.hp) < 0.33 and self.type == 'Bug':
+                sak *= 1.5
+            if pokes.get_ability() == 'Blaze' and (pokes.ch/pokes.hp) < 0.33 and self.type == 'Fire':
+                sak *= 1.5
+            if pokes.get_ability() == 'Torrent' and (pokes.ch/pokes.hp) < 0.33 and self.type == 'Water':
+                sak *= 1.5
+            if pokes.get_ability() == 'Overgrow' and (pokes.ch/pokes.hp) < 0.33 and self.type == 'Grass':
                 sak *= 1.5
             if pokes.ff == 1 and self.type == 'Fire':
                 sak *= 1.5
             psdf = pokee.sdf
             if pokee.item == 'Eviolite' and pokee.evo != [] and pokee.evo[0] != 'Mega':
-                psdf *= 1.3
+                psdf *= 1.5
             if self.name == 'Psyshock':
-                psdf = pokee.df
+                psdf = pokee.get_df()
             damage = (((2*pokes.lvl/5)*power*(sak*sakm)/(psdf*sdfm)/50)+2)
             if self.name == 'Psyshock':
                 damage = (((2*pokes.lvl/5)*power*(sak*sakm)/(psdf*modifier(pokee.dfm))/50)+2)
         else:
             damage = 0
-        if self.is_contact() and pokee.ability == 'Static':
+        if self.is_contact() and pokee.get_ability() == 'Static':
             if random.random() <= 0.3 and 'Electric' not in pokes.type:
                 if pokes.status == None:
                     message.append([1,'Static',eturn,pokes,'Par','Paralyzed!'])
-        if self.is_contact() and pokee.ability == 'Flame Body':
-            if random.random() <= 0.3 and 'Fire' not in pokes.type:
+        if self.is_contact() and pokee.get_ability() == 'Flame Body':
+            if random.random() <= 0.3 and ('Fire' not in pokes.type and pokes.get_ability() != 'Water Bubble'):
                 if pokes.status == None:
                     message.append([1,'Flame Body',eturn,pokes,'Brn','Burned!'])
-        if self.is_contact() and pokee.ability == 'Poison Point':
-            if random.random() <= 0.3 and ('Poison' not in pokes.type and 'Steel' not in pokes.type):
-                if pokes.status == None:
-                    message.append([1,'Poison Point',eturn,pokes,'Psn','Poisoned!'])
-        if self.is_contact() and pokee.ability == 'Effect Spore':
+        if self.is_contact() and pokee.get_ability() == 'Poison Point':
+            if random.random() <= 0.3 and pokes.can_poison():
+                message.append([1,'Poison Point',eturn,pokes,'Psn','Poisoned!'])
+        if self.is_contact() and pokee.get_ability() == 'Effect Spore':
             r = random.random()
-            if r <= 0.1 and 'Poison' not in pokes.type and 'Steel' not in pokes.type and pokes.ability != 'Immunity':
-                if pokes.status == None:
-                    message.append([1,'Effect Spore',eturn,pokes,'Psn','Poisoned!'])
-            elif r > 0.1 and r <= 0.2 and (P.battle_terrain == None or P.battle_terrain[0] != 'Electric' or pokes.grounded() == False) and pokes.ability != 'Insomnia':
+            if r <= 0.1 and pokes.can_poison():
+                message.append([1,'Effect Spore',eturn,pokes,'Psn','Poisoned!'])
+            elif r > 0.1 and r <= 0.2 and (P.battle_terrain == None or P.battle_terrain[0] != 'Electric' or pokes.grounded() == False) and pokes.get_ability() != 'Insomnia':
                 if pokes.status == None:
                     message.append([1,'Effect Spore',eturn,pokes,'Slp','Asleep!'])
-            elif r > 0.2 and r <= 0.3 and 'Electric' not in pokes.type and pokes.ability != 'Limber':
+            elif r > 0.2 and r <= 0.3 and 'Electric' not in pokes.type and pokes.get_ability() != 'Limber':
                 if pokes.status == None:
                     message.append([1,'Effect Spore',eturn,pokes,'Par','Paralyzed!'])
-        if pok[targ].ability == 'Motor Drive' and self.type == 'Electric' and targ == 1:
+        if pok[targ].get_ability() == 'Motor Drive' and self.type == 'Electric' and targ == 1:
             if pok[targ].spdm < 6:
                 pok[targ].spdm += 1
             elif [3, pok[targ].get_name(), 'speed'] not in message:
                 message.append([3, pok[targ].get_name(), 'speed'])
-        if pok[targ].ability == 'Storm Drain' and self.type == 'Water' and targ == 1:
+        if pok[targ].get_ability() == 'Storm Drain' and self.type == 'Water' and targ == 1:
             if pok[targ].sakm < 6:
                 pok[targ].sakm += 1
             elif [3, pok[targ].get_name(), 'special attack'] not in message:
                 message.append([3, pok[targ].get_name(), 'special attack'])
-        if pok[targ].ability == 'Lightning Rod' and self.type == 'Electric' and targ == 1:
+        if pok[targ].get_ability() == 'Lightning Rod' and self.type == 'Electric' and targ == 1:
             if pok[targ].sakm < 6:
                 pok[targ].sakm += 1
             elif [3, pok[targ].get_name(), 'special attack'] not in message:
                 message.append([3, pok[targ].get_name(), 'special attack'])
         orig_stats = pok[targ].copy()
-        if pokee.ability == 'Weak Armor' and self.cat == '0':
+        if pokee.get_ability() == 'Weak Armor' and self.cat == '0':
             if pok[targ].dfm > -6:
                 pok[targ].dfm -= 1
             elif [4,pok[targ].get_name(),'defense'] not in message and pok[targ].dfm == orig_stats.dfm:
@@ -946,6 +1204,8 @@ class Move:
                 effect = 'Slp'
             self.eff = {0.3:effect}
         if self.eff != {} and mod != 0 and not sheer:
+            if P.battle_weather != None and P.battle_weather[0] == 'Sunny' and self.name == 'Growth':
+                self.eff = {1:['AU','AU','SAU','SAU']}
             for x in self.eff:
                 if x < 0:
                     targ_temp = abs(targ-1)
@@ -955,57 +1215,55 @@ class Move:
                     targ_temp = targ
                     orig_stats_temp = orig_stats
                     x_mod = x
-                if pokes.ability == 'Serene Grace':
+                if pokes.get_ability() == 'Serene Grace':
                     x_mod *= 2
-                if random.random()<x_mod and (self.cat == '2' or pokee.ability != 'Shield Dust' or x < 0):
+                if random.random()<x_mod and (self.cat == '2' or pokee.get_ability() != 'Shield Dust' or x < 0):
                     for y in self.eff[x]:
                         if y == 'Fln':
-                            if pok[targ_temp].ability == 'Inner Focus':
+                            if pok[targ_temp].get_ability() == 'Inner Focus':
                                 if x == 1:
                                     message.append([2,[pok[targ_temp].get_name()+" won't","flinch with its Inner Focus!"],'Inner Focus',eturn])
                             else:
                                 pok[targ_temp].flinch = True
-                        if y == 'Brn' and 'Fire' not in pok[targ_temp].type:
+                        if y == 'Brn' and ('Fire' not in pok[targ_temp].type and pok[targ_temp].get_ability() != 'Water Bubble'):
                             if pok[targ_temp].status == None:
                                 pok[targ_temp].status = 'Brn'
                         if y == 'Frz' and 'Ice' not in pok[targ_temp].type:
                             if pok[targ_temp].status == None:
                                 pok[targ_temp].status = 'Frz'
-                        if y == 'Psn' and 'Poison' not in pok[targ_temp].type and 'Steel' not in pok[targ_temp].type:
-                            if pok[targ_temp].status == None:
-                                if pok[targ_temp].ability == 'Immunity' and x == 1:
-                                    message.append([2,["It doesn't affect ", pok[targ_temp].get_name(True) + '!'],'Immunity',eturn])
-                                else:
-                                    pok[targ_temp].status = 'Psn'
-                        if y == 'BPs' and 'Poison' not in pok[targ_temp].type and 'Steel' not in pok[targ_temp].type:
-                            if pok[targ_temp].status == None:
-                                if pok[targ_temp].ability == 'Immunity' and x == 1:
-                                    message.append([2,["It doesn't affect ", pok[targ_temp].get_name(True) + '!'],'Immunity',eturn])
-                                else:
-                                    pok[targ_temp].status = 'BPs'
+                        if y == 'Psn' and pok[targ_temp].can_poison(x):
+                            if pok[targ_temp].get_ability() == 'Immunity':
+                                message.append([2,["It doesn't affect ", pok[targ_temp].get_name(True) + '!'],'Immunity',eturn])
+                            else:
+                                pok[targ_temp].status = 'Psn'
+                        if y == 'BPs' and pok[targ_temp].can_poison(x):
+                            if pok[targ_temp].get_ability() == 'Immunity':
+                                message.append([2,["It doesn't affect ", pok[targ_temp].get_name(True) + '!'],'Immunity',eturn])
+                            else:
+                                pok[targ_temp].status = 'BPs'
                         if y == 'Par' and 'Electric' not in pok[targ_temp].type:
                             if pok[targ_temp].status == None:
-                                if pok[targ_temp].ability == 'Limber' and x == 1:
+                                if pok[targ_temp].get_ability() == 'Limber' and x == 1:
                                     message.append([2,[pok[targ_temp].get_name()+" can't be", "Paralyzed!"],'Limber',eturn])
                                 else:
                                     pok[targ_temp].status = 'Par'
                         if y == 'Slp':
                             if pok[targ_temp].status == None:
-                                if pok[targ_temp].ability == 'Insomnia' and x == 1:
+                                if pok[targ_temp].get_ability() == 'Insomnia' and x == 1:
                                     message.append([2,["It doesn't affect ", pok[targ_temp].get_name(True) + '!'],'Insomnia',eturn])
                                 elif P.battle_terrain != None and P.battle_terrain[0] == 'Electric' and pok[targ_temp].grounded():
                                     message.append([7,pok[targ_temp].get_name()+" can't fall","asleep!"])
                                 else:
                                     pok[targ_temp].status = 'Slp'
                                     pok[targ_temp].slptim = random.randint(1,4)
-                                    if pok[targ_temp].ability == 'Early Bird':
+                                    if pok[targ_temp].get_ability() == 'Early Bird':
                                         pok[targ_temp].slptim = int(pok[targ_temp].slptim/2)
                         if y == 'AD':
                             if pok[targ_temp].akm > -6:
-                                if pok[targ_temp].ability == 'Hyper Cutter' and x > 0:
+                                if pok[targ_temp].get_ability() == 'Hyper Cutter' and x > 0:
                                     if x == 1:
                                         message.append([2,[pok[targ_temp].get_name()+"'s attack","can't be lowered!"],'Hyper Cutter',eturn])
-                                elif pok[targ_temp].ability == 'Clear Body' and x > 0:
+                                elif pok[targ_temp].get_ability() == 'Clear Body' and x > 0:
                                     if x == 1:
                                         message.append([2,[pok[targ_temp].get_name()+"'s attack","can't be lowered!"],'Clear Body',eturn])
                                 else:
@@ -1014,7 +1272,7 @@ class Move:
                                 message.append([4,pok[targ_temp].get_name(),'attack'])
                         if y == 'SAD':
                             if pok[targ_temp].sakm > -6:
-                                if pok[targ_temp].ability == 'Clear Body' and x > 0:
+                                if pok[targ_temp].get_ability() == 'Clear Body' and x > 0:
                                     if x == 1:
                                         message.append([2,[pok[targ_temp].get_name()+"'s special","attack can't be lowered!"],'Clear Body',eturn])
                                 else:
@@ -1023,10 +1281,10 @@ class Move:
                                 message.append([4,pok[targ_temp].get_name(),'special attack'])
                         if y == 'DD':
                             if pok[targ_temp].dfm > -6:
-                                if pok[targ_temp].ability == 'Big Pecks' and x > 0:
+                                if pok[targ_temp].get_ability() == 'Big Pecks' and x > 0:
                                     if x == 1:
                                         message.append([2,[pok[targ_temp].get_name()+"'s defense","can't be lowered!"],'Big Pecks',eturn])
-                                elif pok[targ_temp].ability == 'Clear Body' and x > 0:
+                                elif pok[targ_temp].get_ability() == 'Clear Body' and x > 0:
                                     if x == 1:
                                         message.append([2,[pok[targ_temp].get_name()+"'s defense","can't be lowered!"],'Clear Body',eturn])
                                 else:
@@ -1035,7 +1293,7 @@ class Move:
                                 message.append([4,pok[targ_temp].get_name(),'defense'])
                         if y == 'SDD':
                             if pok[targ_temp].sdfm > -6:
-                                if pok[targ_temp].ability == 'Clear Body' and x > 0:
+                                if pok[targ_temp].get_ability() == 'Clear Body' and x > 0:
                                     if x == 1:
                                         message.append([2,[pok[targ_temp].get_name()+"'s special","defense can't be lowered!"],'Clear Body',eturn])
                                 else:
@@ -1044,7 +1302,7 @@ class Move:
                                 message.append([4,pok[targ_temp].get_name(),'special defense'])
                         if y == 'SD':
                             if pok[targ_temp].spdm > -6:
-                                if pok[targ_temp].ability == 'Clear Body' and x > 0:
+                                if pok[targ_temp].get_ability() == 'Clear Body' and x > 0:
                                     if x == 1:
                                         message.append([2,[pok[targ_temp].get_name()+"'s speed","can't be lowered!"],'Clear Body',eturn])
                                 else:
@@ -1053,10 +1311,10 @@ class Move:
                                 message.append([4,pok[targ_temp].get_name(),'speed'])
                         if y == 'AcD':
                             if pok[targ_temp].accm > -6:
-                                if pok[targ_temp].ability == 'Keen Eye' and x > 0:
+                                if pok[targ_temp].get_ability() == 'Keen Eye' and x > 0:
                                     if x == 1:
                                         message.append([2,[pok[targ_temp].get_name()+"'s accuracy","can't be lowered!"],'Keen Eye',eturn])
-                                elif pok[targ_temp].ability == 'Clear Body' and x > 0:
+                                elif pok[targ_temp].get_ability() == 'Clear Body' and x > 0:
                                     if x == 1:
                                         message.append([2,[pok[targ_temp].get_name()+"'s accuracy","can't be lowered!"],'Clear Body',eturn])
                                 else:
@@ -1065,7 +1323,7 @@ class Move:
                                 message.append([4,pok[targ_temp].get_name(),'accuracy']) and pok[targ_temp].accm == orig_stats_temp.accm
                         if y == 'EvD':
                             if pok[targ_temp].evam < 6:
-                                if pok[targ_temp].ability == 'Clear Body' and x > 0:
+                                if pok[targ_temp].get_ability() == 'Clear Body' and x > 0:
                                     if x == 1:
                                         message.append([2,[pok[targ_temp].get_name()+"'s evasion","can't be lowered!"],'Clear Body',eturn])
                                 else:
@@ -1126,9 +1384,12 @@ class Move:
                         if y == 'Inf':
                             if pok[targ_temp].inf == False:
                                 pok[targ_temp].inf = True
+                        if y == 'Seed':
+                            if pok[targ_temp].leech == False:
+                                pok[targ_temp].leech = True
                         if y == 'Cfs':
                             if pok[targ_temp].cfs == 0:
-                                if pok[targ_temp].ability == 'Own Tempo' and x == 1:
+                                if pok[targ_temp].get_ability() == 'Own Tempo' and x == 1:
                                     message.append([2,[pok[targ_temp].get_name()+" can't be","confused!"],'Own Tempo',eturn])
                                 else:
                                     pok[targ_temp].cfs = random.randint(2,5)
@@ -1147,29 +1408,33 @@ class Move:
                                     message.append([7,pok[targ_temp].get_name()+" became","trapped by Sand Tomb!"])
                                 else:
                                     message.append([7,pok[targ_temp].get_name()+" became","trapped in the vortex!"])
+        if pokes.get_ability() == 'Stun':
+            if pok[targ].get_ability() == 'Inner Focus':
+                if x == 1:
+                    message.append([2,[pok[targ_temp].get_name()+" won't","flinch with its Inner Focus!"],'Inner Focus',eturn])
+            else:
+                pok[targ].flinch = True
+        if self.name in ['Dragon Tail','Roar','Whirlwind','Circle Throw'] and ((eturn == 1 and not poke_func.last_poke(P.party)) or (eturn == 0 and not poke_func.last_poke(P.opponent))):
+            pok[targ].exit = True
+            pok[targ].drag = True
+        if self.name in ['Dragon Tail','Circle Throw'] and type(P.opponent[0]) != str and P.legendary_battle == False and P.tourney_battle == False and pokes.player:
+            P.end_battle = pok[targ]
+            pok[targ].drag = True
         if self.name == 'Rest':
             poke_func.new_battle_txt(P)
             poke_func.battle_write(P,pokes.get_name()+' slept and', 'became healthy!')
             P.clock.tick(P.bat_spd)
             pokes.status = 'Slp'
             pokes.slptim = 2
-            if pokes.ability == 'Early Bird':
+            if pokes.get_ability() == 'Early Bird':
                 pokes.slptim = 1
         if self.name == 'Haze':
             message.append([7,'All stat changes were','eliminated!'])
             pokes.akm,pokes.sakm,pokes.dfm,pokes.sdfm,pokes.spdm,pokes.accm,pokes.evam,pokes.critm = 0,0,0,0,0,0,0,0
             pokee.akm,pokee.sakm,pokee.dfm,pokee.sdfm,pokee.spdm,pokee.accm,pokee.evam,pokee.critm = 0,0,0,0,0,0,0,0
             P.haze_active = 2
-        if self.name == 'Gastro Acid':
-            if pok[targ].ability != 'None':
-                pok[targ].ability = 'None'
-                poke_func.new_battle_txt(P)
-                poke_func.battle_write(P,f'{pok[targ].get_name()}\'s ability','was suppressed!')
-                P.clock.tick(P.bat_spd)
-            else:
-                poke_func.new_battle_txt(P)
-                poke_func.battle_write(P,'But it failed!')
-                P.clock.tick(P.bat_spd)
+        if self.name == 'Teleport':
+            P.end_battle = pokes
         if self.name == 'Charge':
             pok[targ].chrg = 1
         if self.name == 'Focus Energy' and [3,pok[targ].get_name(),'crit rate'] not in message:
@@ -1178,6 +1443,8 @@ class Move:
             P.clock.tick(P.bat_spd)
         if self.sec == '3':
             pokes.charge = None
+        if self.sec == '5':
+            pokes.charge = 'Splash'
         if self.name == 'Aromatherapy' or self.name == 'Heal Bell':
             if eturn == 0:
                 for pk in P.party:
@@ -1193,31 +1460,44 @@ class Move:
                     poke_func.battle_write(P,f'{pokes.get_name()} was', 'cured!')
                     P.clock.tick(P.bat_spd)
         #end
-        if pok[0].status == 'Brn' and self.cat == '0' and pokes.ability != 'Guts':
+        if pok[0].status == 'Brn' and self.cat == '0' and pokes.get_ability() != 'Guts':
             damage = damage/2
         damage *= mod
         if self.type in pok[0].type:
-            if pok[0].ability == 'Adaptability':
+            if pok[0].get_ability() == 'Adaptability':
                 damage *= 2
             else:
                 damage *= 1.5
         if crit == True:
             damage *= 1.5
-            if pokes.ability == 'Sniper':
+            if pokes.get_ability() == 'Sniper':
                 damage *= 1.5
         if pok[targ].minimize and (self.name == 'Heavy Slam' or self.name == 'Steamroller' or self.name == 'Stomp' or self.name == 'Body Slam'):
             damage *= 2
         if self.name == 'Assurance' and pok[targ].damage_taken > 0:
             damage *= 2
-        if eff == 2 and pok[targ].ability == 'Filter':
+        if self.type == 'Water' and pokes.get_ability() == 'Water Bubble':
+            damage *= 2
+        if self.type == 'Steel' and pokes.get_ability() == 'Steelworker':
+            damage *= 1.5
+        if pokee.get_ability() == 'Water Bubble' and self.type == 'Fire':
+            poke_func.new_battle_txt(P)
+            poke_func.battle_write(P,pok[targ].get_name() + " is", "protected by it's Bubble!")
+            poke_func.show_ability(P, 'Water Bubble', eturn)
+            damage /= 2
+        if eff == 2 and pok[targ].get_ability() == 'Filter':
             damage *= .75
-        if pokes.ability == 'Rivalry' and pok[targ] == pokee:
+        if pokes.get_ability() == 'Rivalry' and pok[targ] == pokee:
             if pokes.gen == pokee.gen:
                 damage *= 1.25
             elif pokes.gen != 2 and pokee.gen != 2:
                 damage *= .75
+        if pokes.get_ability() == 'Tough Claws' and self.is_contact():
+            damage *= 1.3
+        if pokes.get_ability() == 'Mega Launcher' and self.name in ['Dark Pulse','Water Pulse','Aura Sphere','Dragon Pulse']:
+            damage *= 1.5
         #fixed damage attacks
-        if self.sec == '4' and damage > 0:
+        if (pokee.get_ability() == 'Puppet' or self.sec == '4') and damage > 0:
             damage = pokee.ch
             eff = 3
             if pok[targ].endure == False:
@@ -1231,7 +1511,10 @@ class Move:
         if self.name == 'Metal Burst':
             damage = int(1.5*(pokes.damage_taken))
             eff = 3
-        if self.name == 'Night Shade' and damage > 0:
+        if self.name == 'Final Gambit' and damage > 0:
+            damage = pokes.ch
+            eff = 3
+        if self.name in ['Night Shade','Seismic Toss'] and damage > 0:
             damage = pokes.lvl
             eff = 3
         if self.name == 'Sonic Boom' and damage > 0:
@@ -1239,9 +1522,6 @@ class Move:
             eff = 3
         if self.name == 'Dragon Rage' and damage > 0:
             damage = 40
-            eff = 3
-        if self.name == 'Seismic Toss' and damage > 0:
-            damage = pokes.lvl
             eff = 3
         if self.name == 'Endeavor' and damage > 0:
             damage = pokee.ch-pokes.ch
@@ -1258,6 +1538,30 @@ class Move:
                 pokes.ch = pokes.hp
             if pokee.ch > pokee.hp:
                 pokee.ch = pokee.hp
+        if self.name == 'Power Split':
+            aktot = int((pokes.ak + pokee.ak) / 2)
+            saktot = int((pokes.sak + pokee.sak) / 2)
+            pokes.stat_swap = [None,aktot > pokes.ak,saktot > pokes.sak,None,None,None]
+            pokee.stat_swap = [None,aktot > pokee.ak,saktot > pokee.sak,None,None,None]
+            pokes.ak = aktot
+            pokes.sak = saktot
+            pokee.ak = aktot
+            pokee.sak = saktot
+            poke_func.new_battle_txt(P)
+            poke_func.battle_write(P,pokes.get_name() + " shared its", "power with the target!")
+            P.clock.tick(P.bat_spd)
+        if self.name == 'Guard Split':
+            dftot = int((pokes.df + pokee.df) / 2)
+            sdftot = int((pokes.sdf + pokee.sdf) / 2)
+            pokes.stat_swap = [None,None,None,dftot > pokes.df,sdftot > pokes.sdf,None]
+            pokee.stat_swap = [None,None,None,dftot > pokee.df,sdftot > pokee.sdf,None]
+            pokes.df = dftot
+            pokes.sdf = sdftot
+            pokee.df = dftot
+            pokee.sdf = sdftot
+            poke_func.new_battle_txt(P)
+            poke_func.battle_write(P,pokes.get_name() + " shared its", "guard with the target!")
+            P.clock.tick(P.bat_spd)
         if self.name == 'Yawn':
             pok[targ].yawn = 1
             poke_func.new_battle_txt(P)
@@ -1276,9 +1580,9 @@ class Move:
             elif pokes.type[1] != None and pokes.type[0] == 'Flying':
                 pokes.type[0] = None
                 pokes.roost = 1
-        if self.type == 'Water' and pok[targ].ability == 'Water Absorb' and targ == 1:
+        if ((self.type == 'Electric' and pok[targ].get_ability() == 'Volt Absorb') or (self.type == 'Water' and pok[targ].get_ability() == 'Water Absorb')) and targ == 1:
             damage = -(pok[targ].hp/4)
-        if pok[targ].ch == pok[targ].hp and pok[targ].ability == 'Sturdy' and damage > pok[targ].ch:
+        if pok[targ].ch == pok[targ].hp and pok[targ].get_ability() == 'Sturdy' and damage > pok[targ].ch:
             damage = pok[targ].ch - 1
             message.append([2,[pok[targ].get_name()+" endured", "the hit!"],'Sturdy',eturn])
         if self.name == 'False Swipe' and pok[targ].ch-damage < 1 and damage > 0:
@@ -1298,8 +1602,11 @@ class Move:
                 mod = 1
             damage = -(pokes.hp*mod)
             pokes.stockpile = [0,0,0]
-        if self.name in ['Recover','Soft-Boiled','Heal Pulse']:
-            damage = -(pokes.hp/2)
+        if self.name in ['Recover','Soft-Boiled','Heal Pulse','Slack Off']:
+            if pokes.ability == 'Mega Launcher' and self.name == 'Heal Pulse':
+                damage = -(pokes.hp/1.3)
+            else:
+                damage = -(pokes.hp/2)
         if self.name == 'Rejuvenate':
             damage = -(pokes.hp-pokes.ch)
         if self.name == 'Synthesis':
@@ -1310,11 +1617,34 @@ class Move:
                 elif P.battle_weather[0] != 'Windy':
                     mod = 4
             damage = -(pokes.hp/mod)
+        if self.name == 'Moonlight':
+            mod = 2
+            if P.battle_weather != None:
+                if P.battle_weather[0] == 'Sunny':
+                    mod = 1.5
+                elif P.battle_weather[0] != 'Windy':
+                    mod = 4
+            if (poke_func.get_time() > 19 or poke_func.get_time() < 6):
+                mod /= 2
+            damage = -(pokes.hp/mod)
+        if self.name == 'Morning Sun':
+            mod = 2
+            if P.battle_weather != None:
+                if P.battle_weather[0] == 'Sunny':
+                    mod = 1.5
+                elif P.battle_weather[0] != 'Windy':
+                    mod = 4
+            if (poke_func.get_time() > 19 or poke_func.get_time() < 6):
+                mod /= 2
+            damage = -(pokes.hp/mod)
         if self.name == 'Belly Drum':
             damage = pokes.hp/2
             pokes.bellydrum = True
             pokes.akm = 6
             message.append([7,pok[targ].get_name()+' cut its','HP and maximized its attack!'])
+        if self.name == 'Curse' and 'Ghost' in pokes.type:
+            damage = pokes.hp/2
+            pokes.bellydrum = True
         print('power'+str(damage))
         #take damage
         # if damage < 1 and damage > 0:
@@ -1325,15 +1655,21 @@ class Move:
             pok[targ].status = None
             message.append([7,pok[targ].get_name() + " thawed", "out!"])
         if damage < 0:
-            if P.tourney_battle:
+            if P.tourney_battle or pokes.legendary:
                 pok[targ].ch -= int(damage/4)
             else:
                 pok[targ].ch -= int(damage)
             if pok[targ].ch > pok[targ].hp:
                 pok[targ].ch = pok[targ].hp
+        elif self.name != 'Psywave' and self.name != 'Night Shade' and self.name != 'Super Fang' and self.name != 'Final Gambit' and self.name != 'Seismic Toss':
+            if not pok[targ].player and ((P.enemy_buffs[1] > 0 and self.cat == '1') or (P.enemy_buffs[2] > 0 and self.cat == '0')):
+                damage /= 2
+            elif pok[targ].player and ((P.player_buffs[1] > 0 and self.cat == '1') or (P.player_buffs[2] > 0 and self.cat == '0')):
+                damage /= 2
+            pok[targ].take_damage(P,damage)
         else:
             pok[targ].take_damage(P,damage)
-        if pokee.ability == 'Cute Charm' and pok[targ].ch != 0 and self.is_contact() and random.random() < 0.3 and pokee.gen != pokes.gen and pokes.ability != 'Oblivious' and pokes.gen != 2 and pokee.gen != 2 and pokes.inf == False:
+        if pokee.get_ability() == 'Cute Charm' and pok[targ].ch != 0 and self.is_contact() and random.random() < 0.3 and pokee.gen != pokes.gen and pokes.get_ability() != 'Oblivious' and pokes.gen != 2 and pokee.gen != 2 and pokes.inf == False:
             message.append([8,pokes,eturn])
         if pok[targ].ch == 0:
             if self.name == 'Fell Stinger':
@@ -1342,7 +1678,7 @@ class Move:
                         pokes.akm += 1
                     elif [3,pokes.get_name(),'attack'] not in message:
                         message.append([3,pokes.get_name(),'attack'])
-            if pokes.ability == 'Moxie':
+            if pokes.get_ability() == 'Moxie':
                 if pokes.akm < 6:
                     message.append([9, pokes, abs(eturn - 1)])
                 elif [3,pokes.get_name(),'attack'] not in message:
@@ -1351,24 +1687,30 @@ class Move:
             pok[targ].bide[1] += damage
         if self.name == 'Struggle':
             recoil = int(pok[0].hp/4)
-        elif self.name in ['Head Smash'] and pokes.ability != 'Rock Head':
+        elif self.name in ['Head Smash'] and pokes.get_ability() != 'Rock Head':
             recoil = int(damage/2)
             if recoil == 0:
                 recoil = 1
-        elif self.name in ['Wood Hammer','Double-Edge','Volt Tackle','Brave Bird'] and pokes.ability != 'Rock Head':
+        elif self.name in ['Wood Hammer','Double-Edge','Volt Tackle','Brave Bird','Flare Blitz'] and pokes.get_ability() != 'Rock Head':
             recoil = int(damage/3)
             if recoil == 0:
                 recoil = 1
-        elif self.name in ['Wild Charge','Submission','Take Down'] and pokes.ability != 'Rock Head':
+        elif self.name in ['Wild Charge','Submission','Take Down'] and pokes.get_ability() != 'Rock Head':
             recoil = int(damage/4)
             if recoil == 0:
                 recoil = 1
-        elif self.name == 'Explosion' or self.name == 'Self-Destruct':
+        elif (self.name == 'Final Gambit' and damage > 0) or (self.name in ['Explosion','Self-Destruct']):
             recoil = int(pokes.hp)
             pokes.explode = True
         else:
             recoil = 0
-        if self.name in ['Horn Leech','Absorb','Dream Eater','Leech Life','Mega Drain','Giga Drain','Drain Punch']:
+        if self.name == 'Strength Sap':
+            ss_mod = modifier(pokee.akm)
+            ss_heal = pokee.ak*ss_mod
+            if ss_heal > pokes.hp-pokes.ch:
+                ss_heal = pokes.hp-pokes.ch
+            message.append([10,pokes,ss_heal])
+        if self.name in ['Horn Leech','Absorb','Dream Eater','Leech Life','Mega Drain','Giga Drain','Drain Punch','Parabolic Charge']:
             drain = damage/2
         elif self.name == 'Draining Kiss':
             drain = damage*0.75
@@ -1376,7 +1718,7 @@ class Move:
             drain = 0
         if pokes.item == 'Shell Bell':
             drain += damage/8
-        if P.tourney_battle:
+        if P.tourney_battle or pokes.legendary:
             drain /= 4
         if drain > 0 and drain < 1:
             drain = 1
@@ -1384,22 +1726,22 @@ class Move:
             drain = int(drain)
         if pokes.ch + drain > pokes.hp:
             drain = int(pokes.hp-pokes.ch)
-        if self.is_contact() and (pokee.ability == 'Rough Skin' or pokee.ability == 'Iron Barbs'):
+        if self.is_contact() and (pokee.get_ability() == 'Rough Skin' or pokee.get_ability() == 'Iron Barbs'):
             roughskin = int(pokes.hp/8)
             if pokes.ch - roughskin < 0:
                 roughskin = pokes.ch
             numr = 0
-            if pokee.ability == 'Iron Barbs':
+            if pokee.get_ability() == 'Iron Barbs':
                 numr = 1
             message.append([5,roughskin,pokes.get_name(),numr])
         if pokes.ch - recoil < 0:
             recoil = pokes.ch
         ran = random.random()
         repeat = 0
-        if self.name == 'Twineedle' or self.name == 'Double Kick' or self.name == 'Double Hit' or self.name == 'Dual Chop' or self.name == 'Gear Grind':
+        if self.name == 'Twineedle' or self.name == 'Double Kick' or self.name == 'Double Hit' or self.name == 'Dual Chop' or self.name == 'Gear Grind' or self.name == 'Bonemerang':
             repeat = 1
         if self.sec == '2':
-            if pokes.ability == 'Skill Link':
+            if pokes.get_ability() == 'Skill Link':
                 repeat = 4
             elif ran <= .33:
                 repeat = 1
@@ -1409,7 +1751,7 @@ class Move:
                 repeat = 3
             else:
                 repeat = 4
-        if repeat == 0 and pokes.ability == 'Parental Bond' and self.cat != '2':
+        if repeat == 0 and pokes.get_ability() == 'Parental Bond' and self.cat != '2':
             repeat = 1
             pokes.child_hit = True
         return [eff,crit,recoil,message,repeat,drain]
@@ -1426,7 +1768,10 @@ class Move:
                     day_night = '_night'
                 else:
                     day_night = '_day'
-            back = poke_func.load("p/terrain/"+P.habitat+day_night+".png")
+            if P.fishing and P.loc in ['echo_cave','forbidden_8']:
+                back = poke_func.load("p/terrain/"+P.habitat+day_night+"_fishing.png")
+            else:
+                back = poke_func.load("p/terrain/"+P.habitat+day_night+".png")
             plate = poke_func.load("p/terrain/enemy_"+P.habitat+day_night+".png")
             plats = poke_func.load("p/terrain/self_"+P.habitat+day_night+".png")
         else:
@@ -1565,7 +1910,7 @@ class Move:
             a += 1
             poke_func.update_screen(P)
             P.clock.tick(P.ani_spd)
-                          
+
     def use_bide(self,P,pokes,pokee,eturn) -> list:
         if P.ani_on:
             self.animate(P,pokes,pokee,eturn)
@@ -1577,13 +1922,14 @@ class Move:
         return [3,False,0,[],0,0]
 
     def hurt_cfs(self,P,pokes,pokee) -> list:
+        poke_func.cancelled(pokes)
         akm = modifier(pokes.akm)
         dfm = modifier(pokes.dfm)
         ak = pokes.ak
-        if pokes.ability == 'Guts' and pokes.status != None:
+        if pokes.get_ability() == 'Guts' and pokes.status != None:
             ak *= 1.5
-        damage = int((((2*pokes.lvl/5)*40*(ak*akm)/(pokes.df*dfm)/50)+2))
-        if P.tourney_battle and pokes.bellydrum == False and pokes.explode == False:
+        damage = int((((2*pokes.lvl/5)*40*(ak*akm)/(pokes.get_df()*dfm)/50)+2))
+        if (P.tourney_battle or pokes.legendary) and pokes.bellydrum == False and pokes.explode == False:
             damage /= 4
         if damage > 0 and damage < 1:
             damage = 1
@@ -1619,14 +1965,14 @@ class Move:
     def effective(self, P, poke, user, eturn) -> float:
         eff = 1.0
         if self.type == 'Normal':
-            if 'Ghost' in poke.type and poke.idf == False and self.name != 'Struggle' and user.ability != 'Scrappy':
+            if 'Ghost' in poke.type and poke.idf == False and self.name != 'Struggle' and user.get_ability() != 'Scrappy':
                 eff *= 0
             if 'Steel' in poke.type:
                 eff *= 0.5
             if 'Rock' in poke.type:
                 eff *= 0.5
         elif self.type == 'Fighting':
-            if 'Ghost' in poke.type and user.ability != 'Scrappy':
+            if 'Ghost' in poke.type and user.get_ability() != 'Scrappy':
                 eff *= 0
             if 'Steel' in poke.type:
                 eff *= 2
@@ -1677,8 +2023,8 @@ class Move:
             if 'Ghost' in poke.type:
                 eff *= 0.5
         elif self.type == 'Ground':
-            if 'Flying' in poke.type or poke.ability == 'Levitate' or poke.magnet_rise > 0:
-                if poke.ability == 'Levitate':
+            if 'Flying' in poke.type or poke.get_ability() == 'Levitate' or poke.magnet_rise > 0:
+                if poke.get_ability() == 'Levitate':
                     poke_func.show_ability(P, 'Levitate', eturn)
                 eff *= 0
             if 'Electric' in poke.type:
@@ -1701,7 +2047,12 @@ class Move:
             if 'Fire' in poke.type:
                 eff *= 2
             if 'Flying' in poke.type:
-                eff *= 2
+                if P.battle_weather != None and P.battle_weather[0] == 'Windy':
+                    poke_func.new_battle_txt(P)
+                    poke_func.battle_write(P,"The mysterious strong winds", "weakened the attack!")
+                    P.clock.tick(P.bat_spd)
+                else:
+                    eff *= 2
             if 'Ice' in poke.type:
                 eff *= 2
             if 'Fighting' in poke.type:
@@ -1767,7 +2118,7 @@ class Move:
             if 'Dragon' in poke.type:
                 eff *= 0.5
             if 'Fire' in poke.type:
-                if poke.ability == 'Flash Fire':
+                if poke.get_ability() == 'Flash Fire':
                     eff *= 0
                     if poke.ff == 0:
                         poke.ff = 1
@@ -1781,15 +2132,15 @@ class Move:
             if 'Water' in poke.type:
                 eff *= 0.5
         elif self.type == 'Water':
-            if poke.ability == 'Storm Drain' or poke.ability == 'Water Absorb':
-                if poke.ability == 'Water Absorb':
+            if poke.get_ability() == 'Storm Drain' or poke.get_ability() == 'Water Absorb':
+                if poke.get_ability() == 'Water Absorb':
                     poke_func.new_battle_txt(P)
                     if poke.ch < poke.hp:
                         poke_func.battle_write(P,poke.get_name()+" had its","HP restored!")
                     else:
                         poke_func.battle_write(P,poke.get_name()+" was","unaffected!")
                     poke_func.show_ability(P,'Water Absorb',eturn)
-                elif poke.ability == 'Storm Drain':
+                elif poke.get_ability() == 'Storm Drain':
                     poke_func.show_ability(P, 'Storm Drain', eturn)
                 eff *= 0
             if 'Fire' in poke.type:
@@ -1826,14 +2177,26 @@ class Move:
             if 'Steel' in poke.type:
                 eff *= 0.5
         elif self.type == 'Electric':
-            if 'Ground' in poke.type or poke.ability == 'Motor Drive' or poke.ability == 'Lightning Rod':
-                if poke.ability == 'Motor Drive':
+            if 'Ground' in poke.type or poke.get_ability() == 'Motor Drive' or poke.get_ability() == 'Lightning Rod' or poke.get_ability() == 'Volt Absorb':
+                if poke.get_ability() == 'Volt Absorb':
+                    poke_func.new_battle_txt(P)
+                    if poke.ch < poke.hp:
+                        poke_func.battle_write(P,poke.get_name()+" had its","HP restored!")
+                    else:
+                        poke_func.battle_write(P,poke.get_name()+" was","unaffected!")
+                    poke_func.show_ability(P,'Volt Absorb',eturn)
+                elif poke.get_ability() == 'Motor Drive':
                     poke_func.show_ability(P,'Motor Drive',eturn)
-                if poke.ability == 'Lightning Rod':
+                elif poke.get_ability() == 'Lightning Rod':
                     poke_func.show_ability(P, 'Lightning Rod', eturn)
                 eff *= 0
             if 'Flying' in poke.type:
-                eff *= 2
+                if P.battle_weather != None and P.battle_weather[0] == 'Windy':
+                    poke_func.new_battle_txt(P)
+                    poke_func.battle_write(P,"The mysterious strong winds", "weakened the attack!")
+                    P.clock.tick(P.bat_spd)
+                else:
+                    eff *= 2
             if 'Water' in poke.type:
                 eff *= 2
             if 'Dragon' in poke.type:
@@ -1857,7 +2220,12 @@ class Move:
             if 'Dragon' in poke.type:
                 eff *= 2
             if 'Flying' in poke.type:
-                eff *= 2
+                if P.battle_weather != None and P.battle_weather[0] == 'Windy':
+                    poke_func.new_battle_txt(P)
+                    poke_func.battle_write(P,"The mysterious strong winds", "weakened the attack!")
+                    P.clock.tick(P.bat_spd)
+                else:
+                    eff *= 2
             if 'Grass' in poke.type:
                 eff *= 2
             if 'Ground' in poke.type:
@@ -1901,7 +2269,7 @@ class Move:
                 eff *= 0.5
             if 'Steel' in poke.type:
                 eff *= 0.5
-        if poke.ability == 'Soundproof' and self.in_soundproof():
+        if poke.get_ability() == 'Soundproof' and self.in_soundproof():
             eff = 0
         if P.tourney_battle:
             if eff == 0.25:
@@ -1975,7 +2343,7 @@ class Move:
             if 'Ghost' in poke.type:
                 eff *= 0.5
         elif self.type == 'Ground':
-            if 'Flying' in poke.type or poke.ability == 'Levitate' or poke.magnet_rise > 0:
+            if 'Flying' in poke.type or poke.get_ability() == 'Levitate' or poke.magnet_rise > 0:
                 eff *= 0
             if 'Electric' in poke.type:
                 eff *= 2
@@ -1996,7 +2364,7 @@ class Move:
                 eff *= 2
             if 'Fire' in poke.type:
                 eff *= 2
-            if 'Flying' in poke.type:
+            if 'Flying' in poke.type and not (P.battle_weather != None and P.battle_weather[0] == 'Windy'):
                 eff *= 2
             if 'Ice' in poke.type:
                 eff *= 2
@@ -2063,7 +2431,7 @@ class Move:
             if 'Dragon' in poke.type:
                 eff *= 0.5
             if 'Fire' in poke.type:
-                if poke.ability == 'Flash Fire':
+                if poke.get_ability() == 'Flash Fire':
                     eff *= 0
                 else:
                     eff *= 0.5
@@ -2072,7 +2440,7 @@ class Move:
             if 'Water' in poke.type:
                 eff *= 0.5
         elif self.type == 'Water':
-            if poke.ability == 'Storm Drain' or poke.ability == 'Water Absorb':
+            if poke.get_ability() == 'Storm Drain' or poke.get_ability() == 'Water Absorb':
                 eff *= 0
             if 'Fire' in poke.type:
                 eff *= 2
@@ -2108,9 +2476,9 @@ class Move:
             if 'Steel' in poke.type:
                 eff *= 0.5
         elif self.type == 'Electric':
-            if 'Ground' in poke.type or poke.ability == 'Motor Drive':
+            if 'Ground' in poke.type or poke.get_ability() == 'Motor Drive' or poke.get_ability() == 'Lightning Rod' or poke.get_ability() == 'Volt Absorb':
                 eff *= 0
-            if 'Flying' in poke.type:
+            if 'Flying' in poke.type and not (P.battle_weather != None and P.battle_weather[0] == 'Windy'):
                 eff *= 2
             if 'Water' in poke.type:
                 eff *= 2
@@ -2134,7 +2502,7 @@ class Move:
         elif self.type == 'Ice':
             if 'Dragon' in poke.type:
                 eff *= 2
-            if 'Flying' in poke.type:
+            if 'Flying' in poke.type and not (P.battle_weather != None and P.battle_weather[0] == 'Windy'):
                 eff *= 2
             if 'Grass' in poke.type:
                 eff *= 2
@@ -2179,7 +2547,7 @@ class Move:
                 eff *= 0.5
             if 'Steel' in poke.type:
                 eff *= 0.5
-        if poke.ability == 'Soundproof' and self.in_soundproof():
+        if poke.get_ability() == 'Soundproof' and self.in_soundproof():
             eff = 0
         if P.tourney_battle:
             if eff == 0.25:

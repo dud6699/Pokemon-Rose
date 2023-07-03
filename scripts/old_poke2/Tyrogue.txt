@@ -1,0 +1,11 @@
+['Guts','Steadfast']
+[.7,.7,.7,.7,.7,.7]
+['Fighting',None]
+[20,'Hitmontop','Rolling Kick']
+{1:['Tackle','Bulk Up','Fake Out','Foresight']}
+75
+21
+28
+931
+[]
+['Scuffle','Tyrogue becomes stressed out if it does not', 'get to train every day. When raising this', 'Pokemon, the Trainer must establish and', 'uphold various training methods.'] 

@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+0
+5
+['The user restores', 'its own HP. The', 'amount of HP', 'regained varies with', 'the weather.']
+0
+0

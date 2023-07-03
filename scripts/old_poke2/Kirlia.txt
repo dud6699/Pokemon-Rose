@@ -1,0 +1,11 @@
+['Synchronize','Trace']
+[.76,.7,1.3,.7,1.1,1]
+['Psychic','Fairy']
+[30,'Gardevoir']
+{1:['Growl','Confusion','Double Team','Teleport'],4:'Confusion',6:'Double Team',9:'Teleport',11:'Disarming Voice',14:'Lucky Chant',17:'Magical Leaf',19:'Heal Pulse',23:'Draining Kiss',26:'Calm Mind',30:'Psychic',33:'Imprison',37:'Future Sight',40:'Charm',44:'Hypnosis',47:'Dream Eater',51:'Stored Power'}
+120
+20.2
+31
+254
+['route_6']
+['Emotion','It is said that a Kirlia that is exposed to', 'the positive emotions of its Trainer grows', 'beautiful. This Pokemon controls', 'psychokinetic powers with its highly', 'developed brain.'] 

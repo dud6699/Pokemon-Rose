@@ -1,0 +1,11 @@
+['Clear Body']
+[1,1,1,3,3,1]
+['Rock','Fairy']
+[]
+{1:['Tackle','Harden'],5:'Rock Throw',8:'Sharpen',12:'Smack Down',18:'Reflect',21:'Stealth Rock',27:'Guard Split',31:'Ancient Power',35:'Flail',40:'Skill Swap',46:'Power Gem',49:'Stone Edge',50:'Moonblast',60:'Light Screen',70:'Safeguard'}
+60
+5.7
+12
+79
+['route_3']
+['Jewel','Born from temperatures and pressures deep', 'underground, it fires beams from the stone', 'in its head.']

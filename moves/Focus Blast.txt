@@ -1,0 +1,10 @@
+Fighting
+1
+120
+.7
+{.1:['SDD']}
+1
+5
+['The user heightens', 'its mental focus and', 'unleashes its power.', 'This may also lower', 'the target\'s Sp.', 'Def.']
+0
+0

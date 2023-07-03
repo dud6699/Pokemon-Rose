@@ -6,6 +6,6 @@
 60
 60
 51
-113
-['route_5b']
+118
+['echo_cavef','route_5b','route_6f']
 ['Pincer','Kingler has an enormous, oversized claw. It', 'waves this huge claw in the air to', 'communicate with others. However, because', 'the claw is so heavy, the Pokemon quickly', 'tires.'] 

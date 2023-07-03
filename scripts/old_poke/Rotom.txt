@@ -1,0 +1,11 @@
+['Levitate']
+[1,1,1.9,1.54,1.54,1.82]
+['Electric','Ghost']
+[]
+{1:['Discharge','Charge','Trick','Astonish','Thunder Wave','Thunder Shock','Confuse Ray'],8:'Uproar',15:'Double Team',22:'Shock Wave',29:'Ominous Wind',36:'Substitute',43:'Electro Ball',50:'Hex',57:'Charge',64:'Discharge'}
+45
+.3
+12
+188
+[]
+['Plasma','Its body is composed of plasma. It is known', 'to infiltrate electronic devices and wreak', 'havoc.'] 

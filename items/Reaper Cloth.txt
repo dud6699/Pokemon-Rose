@@ -1,0 +1,3 @@
+['Evo','Item']
+['A cloth imbued with', 'horrifyingly strong', 'spiritual energy.', 'It\'s loved by a', 'certain Pokemon.']
+6400

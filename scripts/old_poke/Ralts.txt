@@ -1,0 +1,11 @@
+['Synchronize','Trace']
+[.56,.5,.9,.5,.7,.8]
+['Psychic','Fairy']
+[20,'Kirlia']
+{1:['Growl'],4:'Confusion',6:'Double Team',9:'Teleport',11:'Disarming Voice',14:'Lucky Chant',17:'Magical Leaf',19:'Heal Pulse',22:'Draining Kiss',24:'Calm Mind',27:'Psychic',29:'Imprison',32:'Future Sight',34:'Charm',37:'Hypnosis',39:'Dream Eater',42:'Stored Power'}
+235
+6.6
+16
+228
+['route_6']
+['Feeling','Ralts senses the emotions of people using', 'the horns on its head. This Pokemon rarely', 'appears before people. But when it does, it', 'draws closer if it senses that the person', 'has a positive disposition.'] 

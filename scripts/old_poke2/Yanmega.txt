@@ -1,0 +1,11 @@
+['Speed Boost','Tinted Lens']
+[1.72,1.52,2.32,1.72,1.12,1.9]
+['Bug','Flying']
+[]
+{1:['Bug Buzz','Air Slash','Night Slash','Bug Bite','Tackle','Foresight','Quick Attack','Double Team'],6:'Quick Attack',11:'Double Team',14:'Sonic Boom',17:'Detect',22:'Supersonic',27:'Uproar',30:'Pursuit',33:'Ancient Power',38:'Feint',43:'Slash',46:'Screech',49:'U-turn',54:'Air Slash',57:'Bug Buzz'}
+30
+51.5
+75
+250
+['route_6']
+['Ogre Darner','This six-legged Pokemon is easily capable', 'of transporting an adult in flight. The', 'wings on its tail help it stay balanced.'] 

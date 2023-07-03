@@ -1,0 +1,11 @@
+['Hustle','Serene']
+[1.1,.8,1.6,1.7,2.1,.8]
+['Fairy','Flying']
+['Shiny Stone','Togekiss']
+{1:['Magical Leaf','Growl','Charm','Metronome','Sweet Kiss'],5:'Metronome',9:'Sweet Kiss',13:'Yawn',14:'Fairy Wind',17:'Encore',21:'Echoed Voice',25:'Bestow',29:'Wish',33:'Ancient Power',37:'Safeguard',41:'Baton Pass',45:'Double-Edge',49:'Last Resort',53:'Dazzling Gleam'}
+75
+3.2
+24
+936
+[]
+['Happiness','Togetic is said to be a Pokemon that brings', 'good fortune. When the Pokemon spots', 'someone who is pure of heart, it is said to', 'appear and share its happiness with that', 'person.'] 

@@ -3,6 +3,8 @@ Adaptability
 Aerilate
 Arena Trap
 Big Pecks
+Blaze
+Chlorophyll
 Clear Body
 Compound Eyes
 Cute Charm
@@ -11,6 +13,8 @@ Damp
 Dodge
 Early Bird
 Effect Spore
+Emergency Exit
+Endless Hunger
 Filter
 Flame Body
 Flash Fire
@@ -34,6 +38,9 @@ Lightning Rod
 Limber
 Magic Bounce
 Magnet Pull
+Marvel Scale
+Mega Launcher
+Merciless
 Minus
 Motor Drive
 (multistrike)
@@ -42,13 +49,16 @@ Natural Cure
 No Guard
 Normalize
 Oblivious
+Overgrow
 Own Tempo
 Parental Bond
 Plus
 Poison Point
 Prankster
+Pressure
 Queenly Majesty
 Quick Feet
+Ranged
 Reckless
 Rivalry
 Rock Head
@@ -67,9 +77,11 @@ Sniper
 Stall
 Steadfast
 Storm Drain
+Stun
 Soundproof
 (Perish Song, Heal Bell)
 Static
+Steelworker
 Sturdy
 Super Luck
 Swarm
@@ -77,6 +89,13 @@ Swift Swim
 Tangled Feet
 Technician
 Thick Fat
+Torrent
+Tough Claws
+Trace
+Volt Absorb
+(multistrike)
 Water Absorb
 (multistrike)
+Water Bubble
 Weak Armor
+Wimp Out

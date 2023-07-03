@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+0
+30
+['The user', 'concentrates', 'intensely. The', 'attack on the next', 'turn always results', 'in a critical hit.']
+0
+0

@@ -8,9 +8,13 @@ message:
 7 - Flat Message
 8 - Cute Charm
 9 - Moxie
+10 - Strength Sap
 
 pyinstaller https://www.youtube.com/watch?v=lTxaran0Cig
+pyinstaller pokemon.py --onefile --windowed --icon=game_icon.ico?
 pyinstaller pokemon.py --onefile --noconsole --icon=game_icon.ico
+
+lines: ~33000
 
 Prog:
 0 - Main Story
@@ -115,7 +119,59 @@ reminder/eusine text changed to thank player
 	96: manaphy gives mystic water
 	97: latias leave
 	98: player can move
-	99: player left route 4 (exp in route 4)
+	99: player left route 4 (exp in route 4, rival in route 5)
+	100: rival move
+	101: rival battle
+	102: rival left
+	103: talk to mairin
+	104: player move/turn around
+	105: pan cam/fight mairin
+	106: pan cam player leave
+	107: player leave gym mairin in house
+	108: see celebi in forbidden_2
+	109: celebi left/player can move
+	110: celebi turn
+	111: celebi disappeared to left
+	112: celebi move
+	113: celebi left
+	114: celebi turn
+	115: celebi disappear to top
+	116: celebi move
+	117: celebi left
+	118-120: repeat forest
+	121: fought spooky wobb
+	122: sci walk out
+	123: sci talk give repel
+	124: sci move back
+	125: sci gone
+	126: player move up
+	127: move camera/grunt turn around talk
+	128: ariana move down talk
+	129: ariana move down fight
+	130: ariana/grunt leave grunt walk down talk
+	131: grunt leave celebi move down give stone
+	132: celebi left
+	133: player free
+	134: see celebi
+	135: celebi disappear/ player free
+	136: enter cascata
+	137: talk wallace
+	138: beat wallace/wallace leave
+	139: wallace gone
+	140: talk to siebold
+	141: move to field bottom
+	142: cam pan/fight siebold
+	143: win against siebold/siebold move aside
+	144: cam pan
+	145: left gym room/siebold gone
+	146: proton talking in route 6
+	147: wallace talked/player can move
+	148: tornadus turn around
+	149: beat tornadus
+	150: lisia talks to player
+	151: wallace talks to player
+	152: lisia talks to player
+	153: both left/player can move
 1 - Pineapple Oddish
 	0: man in house
 	1: pineapple moving
@@ -164,7 +220,7 @@ reminder/eusine text changed to thank player
 	23 - route 3 fisher		curt (shellder: 22/100, krabby: 23/150, psyduck: 24/150)
 	24 - route 3 triathelete	ethan (ponyta: 23/150,pidgeotto: 23/250,seviper: 23/150)
 	25 - pia_gym lass		sophie (jigglypuff: 25/300, lopunny: 25/250) 
-	26 - pia_gym youngster		lucas (loudred: 25/200, zangoose: 25/150)
+	26 - pia_gym youngster		noah (loudred: 25/200, zangoose: 25/150)
 	27 - pia_gym gentleman		anderson (dunsparce:24/100, pidgeotto: 24/300, noctowl:25/150)
 	28 - pia_gym preschoolerg	ellie (happiny:24/300, azurill:24/300, igglybuff:24/300, munchlax:24/300)
 	29 - mirror_cave hex		scarlett (misdreavus:26 mightyena:27 hypno:28)
@@ -177,7 +233,39 @@ reminder/eusine text changed to thank player
 	36 - route 5 bug catcher	ethan (joltik:32/400, joltik:32/400, spinarak:32/400, ariados:34/300)
 	37 - route 5 lass		emma (vulpix:32/400, furret:33/300, floatzel:34/300)
 	38 - route 5 beauty		aria (bellossom:34/300, roserade:34/300) 
-
+	39 - verde_gym aroma		charlotte (Cottonee:34/300, Roselia:34/400, Maractus:35/400)
+	40 - verde_gym pokefan		liam (phantump:34/400, Amoonguss:34/300, Shiftry:35/300)
+	41 - verde_gym gentle		jackson (Lombre:35/400, Victreebel:35/400)
+	42 - verde_gym toddler boy	mateo (seedot:35/400, oddish:35/400, budew:35/400, lotad:35/400, cottonee:35/400, Foongus:35/400)(eviolites)
+	43 - verde_gym bug catcher	wesley (sewaddle:34/400, sewaddle:34/400, swadloon:35/400)
+	44 - verde_gym scientist	madison (Chespin:34/400, Gloom:34/300, Bellossom:35/400)
+	45 - verde_gym scientist	michael (Bulbasaur:34/400, Gloom:34/300, Vileplume:35/400)
+	46 - forbidden psychic		herbert (Hypno:34/300,Mr Mime:34/400,Kadabra:34/300)
+	47 - forbidden rocketf		grunt (Ariados:35/0/(spd,spd,spd), Seviper:36/0/(ak,ak,ak))
+	48 - forbidden rocketm		grunt (Mightyena:35/0/(hp,hp,hp), Zangoose:36/0/(ak,ak,ak))
+	49 - forbidden rocketm		grunt (Dusclops:36/0/(hp,hp,hp), Golbat:36/0/(ak,ak,ak) Victreebel:37/0/(spd,spd,spd))
+	50 - forbidden hex		isabella (Golett:36/400, Spiritomb:36/300 Haunter:38/300)
+	51 - forbidden scif		olivia (Togedemaru:38/400, Klinklang:39/300 Escavalier:40/400)
+	52 - forbidden psychic		eli (M_Gengar:50/200, M_Alakazam:50/200, Dusknoir:50/400/(ak,ak,ak,spd,spd))
+	53 - route 6 bug catcher	ian (Galvantula:42/200(spd,spd,spd), Crustle:42/300/(hp,hp,hp), Leavanny:43/400/(ak,ak,ak)
+	54 - cascata_gym 12 sailor	finn (Kingler:43/200, Ludicolo:43/200, Floatzel:44/400)
+	55 - cascata_gym 13 fisher	adam (Tentacruel:45/200, Gyarados:45/200)
+	56 - cascata_gym 25 rich boy	damian (Starmie:43/0/(sa,sa,sa), Crawdaunt:44/0/(ak,ak,ak), Golduck:44/0/(spd,spd,spd)
+	57 - cascata_gym 31 acem	jacob (Huntail:44/300/, Barbaracle:44/400, Jellicent_m:45/300)
+	58 - cascata_gym 32 acef	julia (Gorebyss:44/300/, Vaporeon:44/400, Jellicent_f:45/300)
+	59 - route 6 two rockets	grunt (Seviper:45/0/(ak,ak), Beedrill:45/0/(spd,spd), Victreebel:45/0/(sdf,sdf))(Zangoose:45/0/(ak,ak), Mightyena:45/0/(ak,ak),Toxicroak:45/0/(ak,ak))(Snorlax:48/0/(hp,hp,hp))
+	60 - sunken_cave preschoolerg	lucy (Clefairy:45/300, Jigglypuff:45/300, Togetic:45/300)
+	61 - sunken_cave hiker		wyatt (Carbink:45/200, Seismitoad:45/200, Steelix:46/100)
+	62 - sunken_cave scientist	dillon (Magnezone:46/200, Quagsire_s:47/50)
+	63 - route 6 triathelete	chase (Electrode:46/200, Hitmontop:46/200, Rapidash:46/200, Jolteon:46/300)
+	64 - route 6 aroma		iris (Whimsicott:47/200/(sdf,sdf,sdf), Ribombee:47/200/(sdf,sdf,sdf), Leafeon:47/200/(sdf,sdf,sdf))
+	65 - route 6 bug catcher	max (Pinsir:48/300, Accelgor:48/300, Araquanid:48/300)
+	66 - route 6 fisherman		dean (Kingler:50/0, Octillery:50/0, Kingdra:50/0)
+	67 - route 6 fisherman		tucker (Milotic:48/400, Sharpedo:48/400)
+	68 - route 6 fisherman		david (Golisopod:55/300,Whiscash:55:300,clawitzer:55/300,malimar:55/300,kingdra:55/300,lapras:55/400)
+	69 - route 6 hiker		brooks (Crustle:48/300, Golurk:48/300, Aggron:50/300)		
+	70 - route 6 rocketf		grunt (Vileplume:50/200/hp3, Yanmega:50/300/spd3, Honchkrow:50/200/ak3 )
+	71 - route 6 rocketm		grunt (Magneton:50/200/hp3, Toxicroak:50/200/ak3, Golem:50/200/spd3, Malamar:50/200/hp3)
 6 - Items
 	echo_cave:
 	0 - voltorb bot left
@@ -207,13 +295,27 @@ reminder/eusine text changed to thank player
 	27 - (10) expired candy
 	32 - (14) old candy
 	34 - (13) lum berry
+	53 - (15) tiny mushroom
+	54 - (16) green petal
+	55 - (17) normal gem
+	56 - (18) expired candy
+	67 - (20) cheri berry
 	house_2:
 	18 - (1) tiny mushroom
 	24 - (3) tiny mushroom
 	33 - (5) poffin
+	65 - (6) heart scale
+	66 - (7) brown petal
+	82 - (9) heart scale
 	house_3:
 	49 - (3) tiny mushroom
 	50 - (4) expired candy
+	59 - (8) ghost gem
+	60 - (5) expired candy
+	62 - (6) rare candy
+	79 - (9) flying gem
+	80 - (10) steel gem
+	81 - (12) tiny mushroom
 	scarab_l:
 	19 - foongus
 	20 - tiny mushroom
@@ -245,10 +347,31 @@ reminder/eusine text changed to thank player
 	47 - tm69 rock polish
 	48 - luxury ball
 	route_5:
-	51 - petal 
+	51 - red petal 
 	52 - heart scale
-	
-#last: 51
+	forbidden_2:
+	57 - dusk stone
+	forbidden_3:
+	58 - blue petal
+	ombra:
+	61 - tm95 snarl
+	forbidden_8:
+	63 - tm12 taunt
+	route_6:
+	64 - sun stone bot
+	75 - shiny candy right
+	76 - tm05 roar left
+	77 - blue petal top mid
+	78 - tm22 solar beam top
+	sunken_cave:
+	68 - barbar top left
+	69 - barbar bot left
+	70 - barbar bot mid
+	71 - barbar bot right
+	72 - barbar mid top
+	73 - barbar mid bot
+	74 - tm39 rock tomb
+#last: 82
 7 - Locations
 	0 - south am
 	1 - north am
@@ -265,9 +388,20 @@ reminder/eusine text changed to thank player
 	12 - mirror cave
 	13 - route 4
 	14 - isola
+	15 - route 5
+	16 - verde
+	17 - forbidden_1
+	18 - ombra
+	19 - forbidden_2
+	20 - route 6
+	21 - cascata
+	22 - sunken cave
+	23 - silfide
 8 - Jobs
-	0 - Research [lvl,exp,[time,time,time]]
-	1 - Nursing  [lvl,exp,[poke,poke,poke]]
+	0 - Research [lvl,exp,day]
+	1 - Nursing  [lvl,exp,poke]
+	2 - Gardening [lvl,exp,day]
+	3 - Baking [lvl,exp,day]
 9 - candyman
 	0 - no candy man
 	1 - yes
@@ -295,16 +429,34 @@ reminder/eusine text changed to thank player
 	19 - [0,0,0,0] route 5 bot
 	20 - [0,1,0,0] route 5 top
 	21 - [0,0,0,1] route 5 right
+	22 - [0,0,0,0] forbidden 1 mid
+	23 - [0,0,0,0] forbidden 2 bot
+	24 - [0,0,0,0] forbidden 3 mid
+	25 - [0,0,0,0] forbidden 4 top
+	26 - [0,0,0,0] forbidden 4 right
+	27 - [0,0,0,0] forbidden 4 left
+	28 - [0,0,0,0] forbidden 4 bot
+	29 - [0,0,0,0] forbidden 8 top
+	30 - [0,0,0,0] forbidden 8 right
+	31 - [0,0,0,0] forbidden 8 left
+	32 - [0,0,0,0] forbidden 8 bot
+	33 - [0,0,0,0] route 6 left
+	34 - [0,0,0,0] route 6 bot
 11 - market
 	0 - maractus (money given > 10000? give)
 	1 - berry seller ([date,[shop],{stock}])
-	2 - ball roulette([date])
+	2 - ball roulette([date,ball])
 	3 - free water ([date])
 	4 - mushroom collector ([small,large])
 	5 - pinap man ([date])
 	6 - massager ([date])
 	7 - seedot man ([date,[shop],{stock}])
-12 - trades
+	8 - petal lass ([date,[petals])
+	9 - repel man ([steps,prog,date])
+	10 - festival date
+	11 - dessert clerk (date,[shop],{stock})
+	12 - fishing man ([caught_fish,date])
+12 - memo pad
 	0: heracross
 		0 - kid in fiore left house
 		1 - likes karrablast
@@ -320,7 +472,49 @@ reminder/eusine text changed to thank player
 		4 - wants to trade 2nd
 		5 - traded 2nd evo
 	2: clamperl
-		0 - 
+		0 - kid in isola
+		1 - asks for loudred
+		2 - traded
+	3: rotom (- if given water, + if not)
+		0 - musician playing
+		1 - talked to lady
+		2 - gave key
+		3 - unlocked shed
+	4: isola
+		0 - not talked
+		1 - talked to lady	
+	5: spiritomb
+		0 - not talked
+		1 - entered the room
+		2 - read the note
+		3 - keystone received from sci
+		4 - used in house
+		5 - spiritomb appeared
+		6 - won fight	
+	6: ferro/klink
+		0 - not talked
+		1 - asks for abra
+		2 - gave abra
+		3 - left house
+		4 - asks for kadabra
+		5 - gave kadabra
+	7: lady n kid (route 6)
+		0 - lady in bot right
+		1 - talked to mom, kid and rocket top right
+		2 - beat rocket, kid with mom
+		3 - talked to mom, got pearl string
+		4 - talked to kid, mom and rocket top left
+		5 - beat rocket, mom with kid
+		6 - talked to kid, got dawn stone
+	8: hawlucha
+		0 - gentlemen in house
+		1 - asks for delcatty
+		2 - traded
+	9: leafeon/glaceon
+		0 - scientist in mossy rock
+		1 - asks for leafeon
+		2 - traded/asks for glaceon
+		3 - traded
 13 - birthday
 	None/[Date,prog]
 		0 - not entered pc
@@ -332,36 +526,50 @@ reminder/eusine text changed to thank player
 		0 - no mega
 		1 - mega unlocked
 		2 - one mega complete
-	1 - Beedrill
+		3 - second mega unlocked
+		4 - second mega complete
+		5 - unlock infinite mega/assistant quest started
+		6 - talked to assistant/need Mega Beedrill
+		7 - need Mega Kangaskhan
+		8 - need Mega Slowbro
+		9 - need Mega Gyarados
+		10 - need Mega Absol
+		11 - complete, can mega revert
+	1 - Beedrill (one shot metapod)
 		0 - not started
 		1 - beedril moves
 		2 - battle metapod
 		3 - successful battle
-	2 - Aggron
-	3 - Manectric
+	2 - Aggron (beat in 3 turns)
+		0 - not started
+		1 - won battle
+	3 - Manectric (beat 3 manectric)
 		0 - not started
 		1 - first battle
 		2 - second battle
 		3 - third battle
 		4 - won all three
-	4 - Heracross
+	4 - Heracross (tourney fight)
 		0 - not started
 		1 - move forward/battle
 		2 - won battle
-	5 - Pinsir
+	5 - Pinsir (tourney fight)
 		0 - not started
 		1 - move forward/battle
 		2 - won battle
-	6 - Lopunny
+	6 - Lopunny (survive 5 turns?)
 		0 - not started
 		1 - player move forward/battle
 		2 - won battle
-	7 - Slowbro
-	8 - Steelix
+	7 - Slowbro (Contact moves fail)
+		0 - not started
+		1 - player battle
+		2 - won battle
+	8 - Steelix (beat sleeping steelix)
 		0 - not started
 		1 - move forward/battle
 		2 - won battle
-	9 - Sableye
+	9 - Sableye (find and beat sableye)
 		0 - not started
 		1 - failed left
 		2 - failed bot left
@@ -369,14 +577,102 @@ reminder/eusine text changed to thank player
 		4 - failed right
 		5 - failed top right
 		6 - success
-	10 - Kangaskhan
+	10 - Kangaskhan (win without baby dying)
 		0 - not started
 		1 - move forward/battle
 		2 - won battle
+	11 - Scizor (flinch passive)
+		0 - not started
+		1 - move forward/battle
+		2 - won battle
+	12 - Gengar (find and beat gengar)
+		0 - gengar roaming in ff3
+		1 - gengar spotted
+		2 - won battle
+	13 - Banette (find correct banette and beat)
+		0 - not started
+		1 - banettes out
+		2 - won battle
+	14 - Alakazam (won't attack until hit)
+		0 - not started
+		1 - move forward/battle
+		2 - won battle
+	15 - Mawile (approach from back)
+		0 - face up
+		1 - face down
+		2 - face left
+		3 - won battle
+	16 - Gallade (day)
+		0 - in cave
+		1 - left cave
+		2 - won battle
+	17 - Gardevoir (night)
+		0 - in cave
+		1 - left cave
+		2 - won battle
+	18 - Gyarados (fish)
+		0 - in water
+		1 - caught
+	19 - Sharpedo (fish)
+		0 - in water
+		1 - caught
+	20 - Audino (don't kill in 5 turns)
 16 - fisher dude
 	0 - guy in isola
 	1 - talk wants seedot
 	2 - got seedot
+17 - verde gym
+	0 - mirrors 
+	1 - holes
+	2 - light on
+18 - forbidden forest side
+	0 - verde
+	1 - ombra d
+	2 - ombra u
+	2 - water city
+19 - alolan marowak
+	0 - not talked
+	1 - can light
+	2 - correctly lit
+	3 - left
+	4 - beaten marowak
+	list:
+		0 - unlit
+		1-5 - lit order
+20 - journal entries
+	0 - Guide to Pokemon Training
+	1 - History of Alto Mare
+	2 - Wonders of Evolution 3
+	3 - Legends of Alto Mare 3
+	4 - Guide to Pokemon Friendship
+	5 - Guide to Berries
+	6 - Wonders of Evolution 2
+	7 - Legends of Alto Mare 4
+	8 - Legends of Alto Mare 5
+	9 - Wonders of Evolution 9
+	10 - Oddish: The Weed Pokemon
+	11 - Wonders of Evolution 1
+	12 - Wonders of Evolution 4
+	13 - Guide to Pokemon Candies
+	14 - Guide to Colored Petals
+	15 - Guide to Regional Variants
+	16 - Wonders of Evolution 7
+	17 - Wonders of Evolution 6
+	18 - Guide to Fishing
+	19 - Legends of Alto Mare 1
+	20 - Legends of Alto Mare 2
+	21 - Wobbuffet: The Patient Pokemon
+	22 - Guide to Nocturnal Pokemon
+	23 - Gigalith: The Compressed Pokemon
+	24 - Guide to Shiny Pokemon
+	25 - Rotom: The Plasma Pokemon
+	26 - Wonders of Evolution 12
+	27 - Wonders of Evolution 8
+21 - cascata gym
+	0 - floor 1
+	1 - floor 2
+	2 - floor 3
+	3 - basement
 
 Channels:
 	0 - bg effects
@@ -391,9 +687,13 @@ pianura: nursery, cooking
 
 isola: race
 verde: gardening, tourney 
-ghost: nursing
-water: cooking, research
-fairy: beauty, mining
+ghost: research
+water: cooking, mining
+fairy: beauty, nursing
+
+icy vill: beauty contest, race
+fighting town: tourney, gardening, nursing
+lava town: mining, research, cooking
 
 
 wonders of evolution:
@@ -401,22 +701,79 @@ wonders of evolution:
 	2 - Special Items (Metal Coat)
 	3 - Trade Evo
 	4 - Friendship Evo
+	5 - Time Evo?
+	6 - Eevee
 	7 - Slowpoke
+	8 - Gender Evo
 	9 - Karrablast Shelmet
+	10 - Move Evo?
+	12 - Mega
+evo by move
+mega
+	inkay
 
 legends of alto mare:
-	1 - Latias/Latios?
-	2 - Manaphy/Celebi/Victini?
+	1 - Latias/Latios
+	2 - Manaphy/Celebi/Victini
 	3 - Forces of Nature
 	4 - Diancie
+	5 - Mewtwo
+	6 - Rayquaza?
+	regis	
+
+guides:
+	regional variants
+	petals
+	berries
+	candies
+	training
+	friendship
+	fishing
+	nocturnal pokemon
+	shiny pokemon
+
+misc:
+	oddish
+	wobbuffet
+	gigalith
+	rotom
+
 
 food:
 jello-psychic
 sundae-ice
+cupcake-fairy
+lava cake-fire
+coffee-dark
+cinnamon roll-ground
 
+taiyaki-water
+fruit salad-grass
+cottoncandy-ghost
+donut-normal
+sponge cake-flying
+gummy worms-bug
 
+licorice?-poison
+cookie-rock
+pie-fighting
+jawbreaker?-steel
+lemonpie?-electric
+chocolate-dragon
+
+poffins
+oran - blue
+cheri - red
+rawst - green
+sitrus - yellow
+pecha - pink
+pmatre? bluk - purple
+
+tms use sun&moon gen
 30 lines per text 11 lines after "the foe poke"
 menu icons: Arial Regular, 18pt
 Foam size: 8 move up 5px color:#a5edfd Blur: 2
-box font: MS Gothic Regular
+box font: MS Gothic Regular size 48 and stretch a bit
+
+
 shadows: 30% gauss blur: 10px half px under

@@ -6,6 +6,6 @@
 45
 305
 256
-903
+129
 []
 ['Atrocious','Although it obeys its instinctive drive to', 'destroy everything within its reach, it', 'will respond to orders from a Trainer it', 'truly trusts.'] 

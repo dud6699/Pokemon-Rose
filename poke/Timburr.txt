@@ -6,6 +6,6 @@
 180
 12.5
 24
-132
+146
 ['route_4']
 ['Muscular','Always carrying squared logs, they help out', 'with construction. As they grow, they carry', 'bigger logs.']

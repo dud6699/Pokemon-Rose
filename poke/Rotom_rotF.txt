@@ -1,0 +1,11 @@
+['Levitate']
+[1,1.3,2.1,2.14,2.14,1.72]
+['Electric','Flying']
+[]
+{1:['Discharge','Charge','Trick','Astonish','Thunder Wave','Thunder Shock','Confuse Ray'],8:'Uproar',15:'Double Team',22:'Shock Wave',29:'Ominous Wind',36:'Substitute',43:'Electro Ball',50:'Hex',57:'Charge',64:'Discharge'}
+45
+.3
+12
+211
+[]
+['Plasma','In this form, Rotom applies its new power', 'over wind to its love of pranks. It will', 'happily blow away any important documents', 'it can find.'] 

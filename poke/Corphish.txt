@@ -6,6 +6,6 @@
 205
 11.5
 24
-114
-['route_3b','route_5b']
+119
+['route_3b','route_4f','route_5b']
 ['Ruffian','Corphish catches prey with its sharp claws.', 'It has no likes or dislikes when it comes', 'to food. It will eat anything. This Pokemon', 'has no trouble living in filthy water.'] 

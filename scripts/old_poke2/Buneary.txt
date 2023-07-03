@@ -1,0 +1,11 @@
+['Run Away','Klutz']
+[1.1,1.32,.88,.88,1.12,1.7]
+['Normal',None]
+['friend','Lopunny','Return']
+{1:['Frustration','Defense Curl','Splash','Pound','Foresight'],6:'Endure',13:'Baby-Doll Eyes',16:'Quick Attack',23:'Jump Kick',26:'Baton Pass',33:'Agility',36:'Dizzy Punch',43:'Sucker Punch',46:'Charm',50:'Entrainment',56:'Bounce',63:'Healing Wish'}
+190
+5.5
+16
+114
+['route_3']
+['Rabbit','Its arms and legs are weak, but when it', 'rolls its ears up tight and then unleashes', 'them with its full force, it can smash', 'boulders to dust.'] 

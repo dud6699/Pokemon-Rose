@@ -1,0 +1,11 @@
+['Keen Eye','Skill Link']
+[1.1,1.7,.8,1,1,1.5]
+['Normal','Flying']
+[28,'Toucannon','Beak Blast']
+{1:['Rock Blast','Peck','Growl','Echoed Voice','Rock Smash'],3:'Growl',7:'Echoed Voice',9:'Rock Smash',13:'Supersonic',16:'Pluck',21:'Roost',24:'Fury Attack',29:'Screech',32:'Drill Peck',37:'Bullet Seed',40:'Feather Dance',45:'Hyper Voice'}
+120
+14.8
+24
+163
+['route_5']
+['Bugle Beak','By bending its beak, it can produce a', 'variety of calls and brand itself a noisy', 'nuisance for its neighbors.'] 

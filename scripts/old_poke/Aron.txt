@@ -1,0 +1,11 @@
+['Sturdy','Rock Head']
+[1,1.4,.8,2,.8,.6]
+['Steel','Rock']
+[32,'Lairon']
+{1:['Tackle','Harden'],4:'Mud-Slap',7:'Headbutt',10:'Metal Claw',13:'Rock Tomb',16:'Protect',19:'Roar',22:'Iron Head',25:'Rock Slide',28:'Take Down',31:'Metal Sound',34:'Iron Tail',37:'Iron Defense',40:'Double-Edge',43:'Autotomize',46:'Heavy Slam',49:'Metal Burst'}
+180
+60
+16
+56
+['echo_cave','mirror_cave']
+['Iron Armor','This Pokemon has a body of steel. To make', 'its body, Aron feeds on iron ore that it', 'digs from mountains. Occasionally, it', 'causes major trouble by eating bridges and', 'rails.']

@@ -1,0 +1,11 @@
+['Regenerator']
+[1.58,2,2.2,1.6,1.8,2.42]
+['Flying',None]
+['Reveal Glass','Tornadus']
+{1:['Thrash','Hammer Arm','Hurricane','Uproar','Astonish','Gust','Swagger'],7:'Bite',13:'Revenge',19:'Air Cutter',25:'Extrasensory',31:'Agility',37:'Air Slash',43:'Crunch',49:'Tailwind',55:'Rain Dance',61:'Hurricane',67:'Dark Pulse',73:'Hammer Arm',79:'Thrash'}
+3
+63
+55
+-1
+[]
+['Cyclone','Tornadus expels massive energy from its', 'tail, causing severe storms. Its power is', 'great enough to blow houses away.'] 

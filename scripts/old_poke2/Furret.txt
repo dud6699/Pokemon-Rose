@@ -1,0 +1,7 @@
+['Run Away','Keen Eye']
+[1.7,1.42,.9,1.28,1.1,1.8]
+['Normal',None]
+[]
+{1:['Agility','Coil','Scratch','Foresight','Defense Curl','Quick Attack'],4:'Defense Curl',7:'Quick Attack',13:'Fury Swipes',17:'Focus Energy',21:'Sand Attack',28:'Slam',32:'Rest',36:'Sucker Punch',42:'Amnesia',46:'Baton Pass',50:'Me First',56:'Hyper Voice'}
+90
+32.5

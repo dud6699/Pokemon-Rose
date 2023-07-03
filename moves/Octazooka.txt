@@ -1,0 +1,10 @@
+Water
+1
+65
+85
+{.5:['AcD']}
+1
+10
+['The user attacks by', 'spraying ink in the', 'target\'s face or', 'eyes. This may also', 'lower the target\'s', 'accuracy.']
+0
+0

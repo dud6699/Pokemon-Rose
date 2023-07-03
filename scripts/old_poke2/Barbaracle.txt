@@ -1,0 +1,11 @@
+['Tough Claws','Sniper']
+[1.44,2.1,1.08,2.3,1.72,1.36]
+['Rock','Water']
+[]
+{1:['Skull Bash','Stone Edge','Shell Smash','Scratch','Sand Attack','Water Gun'],4:'Water Gun',7:'Withdraw',10:'Fury Swipes',13:'Slash',18:'Mud-Slap',20:'Clamp',24:'Rock Polish',28:'Ancient Power',32:'Hone Claws',37:'Fury Cutter',44:'Night Slash',48:'Razor Shell',55:'Cross Chop',60:'Stone Edge',65:'Skull Bash'}
+45
+96
+51
+174
+[]
+['Collective','Barbaracle\'s legs and hands have minds of', 'their own, and they will move', 'independently. But they usually follow the', 'head\'s orders.'] 

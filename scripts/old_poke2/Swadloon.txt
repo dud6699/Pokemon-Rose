@@ -1,0 +1,7 @@
+['Leaf Guard','Chlorophyll']
+[1.1,1.26,1,1.8,1.6,.84]
+['Bug','Grass']
+['Friend','Leavanny','Slash']
+{1:['Protect','Grass Whistle','Tackle','String Shot','Bug Bite','Razor Leaf']}
+120
+7.3

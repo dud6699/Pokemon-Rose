@@ -6,6 +6,6 @@
 45
 100
 87
-138
+152
 []
 ['Parent','Kangaskhan\'s strength derives from the', 'mother\'s happiness about her child\'s', 'growth. Watching it grow up keeps her', 'spirits high.'] 

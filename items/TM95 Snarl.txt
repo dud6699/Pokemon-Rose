@@ -1,0 +1,3 @@
+['Snarl','TM']
+['The user yells as if', 'it\'s ranting about', 'something, which', 'lowers the Sp. Atk', 'stats of opposing', 'Pokemon.']
+-1

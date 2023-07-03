@@ -1,0 +1,11 @@
+['Insomnia','Keen Eye']
+[2,1,1.72,1,1.92,1.4]
+['Normal','Flying']
+[]
+{1:['Dream Eater','Sky Attack','Tackle','Growl','Foresight','Hypnosis'],4:'Hypnosis',7:'Peck',10:'Confusion',13:'Echoed Voice',16:'Zen Headbutt',19:'Psycho Shift',23:'Extrasensory',27:'Take Down',31:'Reflect',35:'Air Slash',39:'Uproar',43:'Roost',47:'Moonblast',51:'Synchronoise',55:'Dream Eater'}
+90
+40.8
+63
+84
+[]
+['Owl','Noctowl never fails at catching prey in', 'darkness. This Pokemon owes its success to', 'its superior vision that allows it to see', 'in minimal light, and to its soft, supple', 'wings that make no sound in flight.']

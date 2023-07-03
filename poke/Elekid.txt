@@ -5,3 +5,7 @@
 {1:['Quick Attack','Leer'],5:'Thunder Shock',8:'Low Kick',12:'Swift',15:'Shock Wave',19:'Thunder Wave',22:'Electro Ball',26:'Light Screen',29:'Thunder Punch',33:'Discharge',36:'Screech',40:'Thunderbolt',43:'Thunder'}
 45
 23.5
+24
+941
+[]
+['Electric','Elekid stores electricity in its body. If', 'it touches metal and accidentally', 'discharges all its built-up electricity,', 'this Pokemon begins swinging its arms in', 'circles to recharge itself.']

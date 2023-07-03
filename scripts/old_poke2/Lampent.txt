@@ -1,0 +1,11 @@
+['Flash Fire','Flame Body']
+[1.2,0.8,1.9,1.2,1.2,1.1]
+['Ghost','Fire']
+[36,'Chandelure']
+{1:['Ember','Astonish'],3:'Minimize',5:'Smog',7:'Fire Spin',10:'Confuse Ray',13:'Night Shade',16:'Will-O-Wisp',20:'Flame Burst',24:'Imprison',28:'Hex',33:'Memento',37:'Inferno',42:'Curse',47:'Shadow Ball'}
+90
+13
+24
+11
+[]
+['Lamp','The spirits it absorbs fuel its baleful', 'fire. It hangs around hospitals waiting for', 'people to pass on.']

@@ -18,18 +18,18 @@ astrid absol dark
 gym leaders
 colress(steel) Magnemite - Klink - Ferrothorn - M_Mawile
 cheryl(normal) Noctowl - Delcatty - Wigglytuff - Chansey - M_Audino
-mairin(grass?) M_sceptile?
-siebold(water) M_blastoise?
-lisia(fairy)(flying) M_altaria
+mairin(grass) Whimsicott (3hp,2df) Leavanny (3ak,2spd) Vileplume (3sdf,2sak)/Bellossom (3spd,2sak) Roserade (3sak,2spd) Quilladin (3hp,2df) M_Venasaur (3hp,2sdf)
+siebold(water) M_slowbro (3hp,2df) Toxapex (3hp,2sdf) Seismitoad (1hp,2df,2sdf) Slowking (2sak,3hp) Clawitzer (3sak,2spd) M_blastoise (3sak,2hp)
+lisia(fairy) M_altaria
 riley(fighting) M_lucario
 alain(fire) M_Charizard_X M_Charizard_Y
 zinnia(dragon) M_Salamence
 
 elite four
-wallace - milotic - M_gyarados - keldeo
-cynthia - M_gengar? - M_garchomp - terrakion
-steven - M_aggron - M_metagross - cobalion
-diantha - M_gallade - M_gardevoir - virizion
+wallace - milotic - M_gyarados - keldeo (water city)
+cynthia - M_gengar? - M_garchomp - terrakion (alto mare)
+steven - M_aggron - M_metagross - cobalion (egida)
+diantha - M_gallade - M_gardevoir - virizion (fairy city)
 
 champion 
 gladion - M_Steelix - umbreon? - zoroark? - lycanroc? - M_absol - sivally

@@ -1,0 +1,11 @@
+['Inner Focus']
+[1.5,1.6,1.3,1.4,1.5,1.8]
+['Poison','Flying']
+['friend','Crobat','Cross Poison']
+{1:['Screech','Absorb','Supersonic','Astonish','Bite'],5:'Supersonic',7:'Astonish',11:'Bite',13:'Wing Attack',17:'Confuse Ray',19:'Air Cutter',24:'Swift',27:'Poison Fang',32:'Mean Look',35:'Leech Life',40:'Haze',43:'Venoshock',48:'Air Slash',51:'Quick Guard'}
+90
+55
+63
+52
+['mirror_cave']
+['Bat','Golbat bites down on prey with its four', 'fangs and drinks the victim\'s blood. It', 'becomes active on inky dark moonless', 'nights, flying around to attack people and', 'Pokemon.']

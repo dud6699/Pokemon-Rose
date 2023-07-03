@@ -1,0 +1,11 @@
+['Insomnia','Frisk','*Puppet']
+[1.28,2.3,1.66,1.3,1.26,1.3]
+['Ghost',None]
+['Mega','Mega_Banette']
+{1:['Phantom Force','Knock Off','Screech','Night Shade','Spite'],4:'Screech',7:'Night Shade',10:'Spite',13:'Shadow Sneak',16:'Will-O-Wisp',19:'Feint Attack',22:'Hex',26:'Curse',30:'Shadow Ball',34:'Embargo',40:'Sucker Punch',46:'Snatch',52:'Grudge',58:'Trick',64:'Phantom Force'}
+45
+12.5
+43
+186
+[]
+['Marionette','Banette generates energy for laying strong', 'curses by sticking pins into its own body.', 'This Pokemon was originally a pitiful plush', 'doll that was thrown away.'] 

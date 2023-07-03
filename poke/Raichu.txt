@@ -1,0 +1,11 @@
+['Static']
+[1.2,1.8,1.8,1.1,1.6,2.2]
+['Electric',None]
+[]
+{1:['Thunder Shock','Tail Whip','Quick Attack','Thunderbolt']}
+75
+30
+31
+940
+[]
+['Mouse','If the electrical sacs become excessively', 'charged, Raichu plants its tail in the', 'ground and discharges. Scorched patches of', 'ground will be found near this Pokemon\'s', 'nest.'] 

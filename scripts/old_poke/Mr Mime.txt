@@ -1,0 +1,11 @@
+['Soundproof','Filter']
+[.8,.9,2,1.3,2.4,1.8]
+['Psychic','Fairy']
+[]
+{1:['Misty Terrain','Magical Leaf','Quick Guard','Power Swap','Guard Swap','Barrier','Pound','Confusion'],4:'Copycat',8:'Meditate',11:'Double Slap',15:['Mimic','Psywave'],18:'Encore',22:['Light Screen','Reflect'],25:'Psybeam',29:'Substitute',32:'Recycle',36:'Trick',39:'Psychic',43:'Role Play',46:'Baton Pass',50:'Safeguard'}
+45
+54.5
+51
+908
+[]
+['Barrier','Mr. Mime is a master of pantomime. Its', 'gestures and motions convince watchers that', 'something unseeable actually exists. Once', 'the watchers are convinced, the unseeable', 'thing exists as if it were real.'] 

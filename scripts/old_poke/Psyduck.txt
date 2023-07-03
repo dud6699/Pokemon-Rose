@@ -1,0 +1,11 @@
+['Cloud Nine','Damp']
+[1,1.04,1.3,.96,1,1.1]
+['Water',None]
+[33,'Golduck']
+{1:['Water Sport','Scratch'],4:'Tail Whip',7:'Water Gun',10:'Confusion',13:'Fury Swipes',16:'Water Pulse',19:'Disable',22:'Screech',25:'Zen Headbutt',28:'Aqua Tail',31:'Soak',34:'Psych Up',37:'Amnesia',40:'Hydro Pump',43:'Wonder Room'}
+190
+19.6
+31
+75
+['vigore','route_3','route_3b']
+['Duck','If it uses its mysterious power, Psyduck', 'can\'t remember having done so. It', 'apparently can\'t form a memory of such an', 'event because it goes into an altered state', 'that is much like deep sleep.']

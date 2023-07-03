@@ -1,0 +1,11 @@
+['Poison Point','Rivalry']
+[1.1,.92,.8,1.04,.8,.82]
+['Poison',None]
+[16,'Nidorina']
+{1:['Growl','Scratch'],7:'Tail Whip',9:'Double Kick',13:'Poison Sting',19:'Fury Swipes',21:'Bite',25:'Taunt',31:'Toxic Spikes',33:'Flatter',37:'Crunch',43:'Captivate',45:'Poison Fang'}
+235
+7
+16
+43
+['route_2','route_3']
+['Poison Pin','Nidoran has barbs that secrete a powerful', 'poison. They are thought to have developed', 'as protection for this small-bodied', 'Pokemon. When enraged, it releases a', 'horrible toxin from its horn.']

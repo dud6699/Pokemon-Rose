@@ -1,0 +1,3 @@
+['Evo','Item']
+['A peculiar stone', 'that can make', 'certain species of', 'Pokemon evolve. It', 'has a distinct', 'thunderbolt pattern.']
+9600

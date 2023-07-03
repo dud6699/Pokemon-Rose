@@ -1,0 +1,11 @@
+['Synchronize']
+[1.3,1.3,2.6,1.2,1.9,2.2]
+['Psychic',None]
+[]
+{1:['Confusion','Tackle','Tail Whip'],5:'Sand Attack',9:'Baby-Doll Eyes',13:'Quick Attack',17:'Swift',20:'Psybeam',25:'Future Sight',29:'Psych Up',33:'Morning Sun',37:'Psychic',41:'Last Resort',45:'Power Swap'}
+45
+26.5
+35
+206
+[]
+['Sun','Espeon is extremely loyal to any Trainer it', 'considers to be worthy. It is said that', 'this Pokemon developed its precognitive', 'powers to protect its Trainer from harm.'] 

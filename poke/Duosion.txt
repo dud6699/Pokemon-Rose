@@ -1,0 +1,11 @@
+['Overcoat','Magic Guard']
+[1.3,.8,2.5,1,1.2,.6]
+['Psychic',None]
+[41,'Reuniclus','Dizzy Punch']
+{1:['Psywave','Reflect','Rollout','Snatch'],3:'Reflect',7:'Rollout',10:'Snatch',14:'Hidden Power',16:'Light Screen',19:'Charm',24:'Recover',25:'Psyshock',28:'Endeavor',31:'Future Sight',34:'Pain Split',39:'Psychic',43:'Skill Swap',50:'Heal Block',53:'Wonder Room'}
+100
+8
+24
+204
+['forbidden']
+['Mitosis','Since they have two divided brains, at', 'times they suddenly try to take two', 'different actions at once.'] 

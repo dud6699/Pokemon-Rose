@@ -1,0 +1,11 @@
+['Levitate']
+[1.5,1,1.9,1.6,1.8,1.3]
+['Psychic',None]
+[]
+{1:['Healing Wish','Synchronoise','Wrap','Growl','Astonish','Confusion'],4:'Growl',7:'Astonish',10:'Confusion',13:'Yawn',16:'Psywave',19:'Take Down',22:'Extrasensory',27:'Heal Bell',32:'Uproar',37:'Safeguard',42:'Double-Edge',47:'Heal Pulse',52:'Synchronoise',57:'Healing Wish'}
+45
+1
+24
+917
+[]
+['Wind Chime','In high winds, Chimecho cries as it hangs', 'from a tree branch or the eaves of a', 'building using a suction cup on its head.', 'This Pokemon plucks berries with its long', 'tail and eats them.']

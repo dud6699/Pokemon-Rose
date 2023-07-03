@@ -1,0 +1,11 @@
+['Soundproof']
+[2.08,1.82,1.82,1.26,1.46,1.36]
+['Normal',None]
+[]
+{1:['Crunch','Bite','Boomburst','Ice Fang','Fire Fang','Thunder Fang','Pound','Echoed Voice','Astonish','Howl'],4:'Echoed Voice',9:'Astonish',11:'Howl',15:'Screech',18:'Supersonic',23:'Stomp',27:'Uproar',32:'Roar',36:'Rest',42:'Sleep Talk',47:'Hyper Voice',53:'Synchronoise',58:'Boomburst',64:'Hyper Beam'}
+45
+84
+59
+62
+[]
+['Loud Noise','Exploud communicates its feelings to the', 'others by emitting whistle-like sounds from', 'the tubes on its body. This Pokemon only', 'raises its voice when it is in battle.']

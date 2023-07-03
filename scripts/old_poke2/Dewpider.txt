@@ -1,0 +1,11 @@
+['Water Bubble']
+[.76,.8,.8,1.04,1.44,.54]
+['Water','Bug']
+[22,'Araquanid']
+{1:['Water Sport','Bubble'],5:'Infestation',8:'Spider Web',13:'Bug Bite',16:'Bubble Beam',21:'Bite',24:'Aqua Ring',29:'Leech Life',32:'Crunch',37:'Lunge',40:'Mirror Coat',45:'Liquidation',48:'Entrainment'}
+200
+4
+12
+247
+['route_6']
+['Water Bubble','It crawls onto the land in search of food.', 'Its water bubble allows it to breathe and', 'protects its soft head.'] 

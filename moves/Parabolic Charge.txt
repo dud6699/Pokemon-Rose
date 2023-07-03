@@ -1,0 +1,10 @@
+Electric
+1
+65
+1
+{}
+1
+20
+['The user attacks', 'everything around', 'it. The user\'s HP is', 'restored by half the', 'damage taken by', 'those hit.']
+0
+0

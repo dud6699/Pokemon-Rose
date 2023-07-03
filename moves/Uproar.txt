@@ -5,6 +5,6 @@ Normal
 {}
 1
 10
-['The user attacks in', 'an uproar for three', 'turns. During that', 'time, no Pokémon can', 'fall asleep.']
+['The user attacks in', 'an uproar for three', 'turns. During that', 'time, no Pokemon can', 'fall asleep.']
 0
 0

@@ -1,0 +1,11 @@
+['Flame Body']
+[.9,1.5,1.4,.74,1.1,1.66]
+['Fire',None]
+[30,'Magmar']
+{1:['Smog','Leer'],5:'Ember',8:'Smokescreen',12:'Feint Attack',15:'Fire Spin',19:'Clear Smog',22:'Flame Burst',26:'Confuse Ray',29:'Fire Punch',33:'Lava Plume',36:'Sunny Day',40:'Flamethrower',43:'Fire Blast'}
+45
+21.4
+28
+944
+[]
+['Live Coal','Magby\'s state of health is determined by', 'observing the fire it breathes. If the', 'Pokemon is spouting yellow flames, it is in', 'good health. When it is fatigued, black', 'smoke will be mixed in with the flames.'] 

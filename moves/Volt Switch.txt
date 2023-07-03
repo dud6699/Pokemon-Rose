@@ -1,0 +1,10 @@
+Electric
+1
+70
+1
+{}
+1
+20
+['After making its', 'attack, the user', 'rushes back to', 'switch places with a', 'party Pokemon in', 'waiting.']
+0
+0

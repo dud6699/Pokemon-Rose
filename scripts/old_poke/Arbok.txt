@@ -1,0 +1,11 @@
+['Intimidate','Shed Skin']
+[1.2,1.9,1.3,1.38,1.58,1.6]
+['Poison',None]
+[]
+{1:['Crunch','Ice Fang','Thunder Fang','Fire Fang','Wrap','Leer','Poison Sting','Bite','Poison Fang'],4:'Poison Sting',9:'Bite',12:'Glare',17:'Screech',20:'Acid',27:['Stockpile','Swallow','Spit Up'],32:'Acid Spray',39:'Mud Bomb',44:'Gastro Acid',48:'Belch',51:'Poison Fang',56:'Coil',63:'Gunk Shot'}
+90
+65
+138
+195
+['route_6']
+['Cobra','This Pokemon is terrifically strong in', 'order to constrict things with its body. It', 'can even flatten steel oil drums. Once', 'Arbok wraps its body around its foe,', 'escaping its embrace is impossible.'] 

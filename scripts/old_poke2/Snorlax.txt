@@ -1,0 +1,11 @@
+['Immunity','Thick Fat']
+[3.2,2.2,1.3,1.3,2.2,.6]
+['Normal',None]
+[]
+{1:['Tackle'],4:'Defense Curl',9:'Amnesia',12:'Lick',17:'Chip Away',20:'Yawn',25:'Body Slam',28:'Rest',28:'Snore',33:'Sleep Talk',35:'Giga Impact',36:'Rollout',41:'Block',44:'Belly Drum',49:'Crunch',50:'Heavy Slam',57:'High Horsepower'}
+24
+460
+83
+919
+[]
+['Sleeping','Snorlax\'s typical day consists of nothing', 'more than eating and sleeping. It is such a', 'docile Pokemon that there are children who', 'use its expansive belly as a place to play.'] 

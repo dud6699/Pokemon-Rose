@@ -1,0 +1,10 @@
+Psychic
+2
+---
+100
+{}
+0
+20
+['A special move for', 'instantly escaping', 'from wild Pokemon.']
+-6
+0

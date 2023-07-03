@@ -1,0 +1,11 @@
+['Keen Eye','Skill Link']
+[1.6,2.4,1.5,1.5,1.5,1.2]
+['Normal','Flying']
+[]
+{1:['Beak Blast','Rock Blast','Peck','Growl','Echoed Voice','Rock Smash'],3:'Growl',7:'Echoed Voice',9:'Rock Smash',13:'Supersonic',16:'Pluck',21:'Roost',24:'Fury Attack',28:'Beak Blast',30:'Screech',34:'Drill Peck',40:'Bullet Seed',44:'Feather Dance',50:'Hyper Voice'}
+45
+26
+43
+144
+['route_5']
+['Cannon','Within its beak, its internal gas ignites,', 'explosively launching seeds with enough', 'power to pulverize boulders.'] 

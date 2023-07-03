@@ -1,0 +1,11 @@
+['Swarm','Shed Skin']
+[1,1.5,.8,.9,.9,1.2]
+['Bug',None]
+[30,'Escavalier']
+{1:['Peck'],4:'Leer',8:'Endure',13:'Fury Cutter',16:'Fury Attack',20:'Headbutt',25:'False Swipe',28:'Bug Buzz',32:'Slash',37:'Take Down',40:'Scary Face',44:'X-Scissor',49:'Flail',52:'Swords Dance',56:'Double-Edge'}
+200
+5.9
+20
+85
+['scarab_l']
+['Clamping','When they feel threatened, they spit an', 'acidic liquid to drive attackers away. The', 'presence of a Shelmet will cause this', 'Pokemon to evolve.']

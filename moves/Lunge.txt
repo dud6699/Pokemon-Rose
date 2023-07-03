@@ -1,0 +1,10 @@
+Bug
+0
+80
+1
+{1:['AD']}
+1
+15
+['The user makes a', 'lunge at the target,', 'attacking with full', 'force. This also', 'lowers the target\'s', 'Attack stat.']
+0
+0

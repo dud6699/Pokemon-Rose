@@ -1,0 +1,11 @@
+['Vital Spirit','Anger Point']
+[.8,1.6,.7,.7,.9,1.4]
+['Fighting',None]
+[28,'Primeape','Rage']
+{1:['Covet','Scratch','Low Kick','Leer','Focus Energy'],5:'Fury Swipes',8:'Karate Chop',12:'Pursuit',15:'Seismic Toss',19:'Swagger',22:'Cross Chop',26:'Assurance',29:'Punishment',33:'Thrash',36:'Close Combat',40:'Screech',43:'Stomping Tantrum',47:'Outrage',50:'Final Gambit'}
+190
+28
+20
+221
+['route_6']
+['Pig Monkey','When Mankey starts shaking, it\'s a sure', 'sign that it is becoming angry. However,', 'because it goes into a towering rage almost', 'instantly, it is impossible for anyone to', 'flee its wrath.'] 

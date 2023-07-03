@@ -1,0 +1,7 @@
+['Overgrow']
+[1.22,1.56,1.12,1.9,1.16,1.14]
+['Grass',None]
+[36,'Chesnaught','Spiky Shield']
+{1:['Needle Arm','Growl','Vine Whip'],5:'Vine Whip',8:'Rollout',11:'Bite',15:'Leech Seed',19:'Pin Missile',29:'Take Down',35:'Seed Bomb',39:'Mud Shot',44:'Bulk Up',48:'Body Slam',52:'Pain Split',56:'Wood Hammer'}
+45
+29

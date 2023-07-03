@@ -1,0 +1,11 @@
+['Swarm']
+[1.3,1.8,.9,.8,1.6,1.5]
+['Bug','Poison']
+['Mega','Mega_Beedrill']
+{1:['Twineedle'],11:'Fury Attack',14:'Rage',17:'Pursuit',20:'Focus Energy',23:'Venoshock',26:'Assurance',29:'Toxic Spikes',32:'Pin Missile',35:'Poison Jab',38:'Agility',41:'Endeavor',44:'Fell Stinger'}
+45
+29.5
+39
+18
+['scarab_r']
+['Poison Bee','Beedrill is extremely territorial. No one', 'should ever approach its nest. This is for', 'their own safety. If angered, they will', 'attack in a furious swarm.']

@@ -1,0 +1,10 @@
+Normal
+2
+---
+100
+{}
+1
+15
+['The user reflects', 'the target\'s type,', 'making it the same', 'type as the target.']
+0
+0

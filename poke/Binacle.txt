@@ -6,6 +6,6 @@
 120
 31
 20
-151
+171
 ['route_5b']
 ['Two-Handed','They stretch and then contract, yanking', 'their rocks along with them in bold hops.', 'They eat seaweed that washes up on the', 'shoreline.'] 

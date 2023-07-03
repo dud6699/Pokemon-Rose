@@ -1,0 +1,10 @@
+Grass
+2
+---
+1
+{1:['AD']}
+1
+10
+['The user restores', 'its HP by the same', 'amount as the', 'target\'s Attack', 'stat after lowering', 'it.']
+0
+0

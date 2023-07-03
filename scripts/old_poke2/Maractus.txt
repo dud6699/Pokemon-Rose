@@ -1,0 +1,11 @@
+['Water Absorb','Chlorophyll','*Storm Drain']
+[1.5,1.72,2.12,1.34,1.34,1.2]
+['Grass',None]
+[]
+{1:['Spiky Shield','Cotton Guard','Peck','Absorb'],3:'Sweet Scent',6:'Growth',10:'Pin Missile',13:'Mega Drain',15:'Synthesis',18:'Cotton Spore',22:'Needle Arm',26:'Giga Drain',29:'Acupressure',33:'Ingrain',38:'Petal Dance',42:'Sucker Punch',45:'Sunny Day',48:'Petal Blizzard',50:'Solar Beam',55:'Cotton Guard',57:'Drain Punch'}
+255
+28
+39
+900
+[]
+['Cactus','It uses an up-tempo song and dance to drive', 'away the bird Pokemon that prey on its', 'flower seeds.'] 

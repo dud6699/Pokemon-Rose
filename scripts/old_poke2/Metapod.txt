@@ -1,0 +1,11 @@
+['Shed Skin']
+[1,0.4,0.5,1.1,0.5,0.6]
+['Bug',None]
+[10,'Butterfree','Gust']
+{1:['Harden']}
+120
+9.9
+28
+14
+['route_3','scarab_l']
+['Cocoon','The shell covering this Pokemon\'s body is', 'as hard as an iron slab. Metapod does not', 'move very much. It stays still because it', 'is preparing its soft innards for evolution', 'inside the hard shell.']

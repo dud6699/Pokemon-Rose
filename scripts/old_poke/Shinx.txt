@@ -1,0 +1,7 @@
+['Intimidate','Rivalry']
+[0.9,1.3,0.88,0.8,0.88,1.1]
+["Electric",None]
+[18,'Luxio']
+{1:['Tackle'],5:'Leer',9:'Spark',11:'Baby-Doll Eyes',13:'Charge',17:'Bite',21:'Roar',25:'Swagger',29:'Thunder Fang',33:'Crunch',37:'Scary Face',41:'Discharge',45:'Wild Charge'}
+235
+9.5

@@ -6,6 +6,6 @@
 225
 6.5
 16
-112
-['route_3b','route_5b']
+117
+['echo_cavef','route_3b','route_5b','route_6f']
 ['River Crab','Krabby live on beaches, burrowed inside', 'holes dug into the sand. On sandy beaches', 'with little in the way of food, these', 'Pokemon can be seen squabbling with each', 'other over territory.'] 

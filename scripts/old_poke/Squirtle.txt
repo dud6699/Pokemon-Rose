@@ -1,0 +1,11 @@
+['Torrent']
+[.88,.96,1,1.3,1.28,.86]
+['Water',None]
+[16,'Wartortle']
+{1:['Tackle'],4:'Tail Whip',7:'Water Gun',10:'Withdraw',13:'Bubble',16:'Bite',19:'Rapid Spin',22:'Protect',25:'Water Pulse',28:'Aqua Tail',31:'Skull Bash',34:'Iron Defense',37:'Rain Dance',40:'Hydro Pump'}
+45
+9
+20
+966
+[]
+['Tiny Turtle','Squirtle\'s shell is not merely used for', 'protection. The shell\'s rounded shape and', 'the grooves on its surface help minimize', 'resistance in water, enabling this Pokemon', 'to swim at high speeds.'] 

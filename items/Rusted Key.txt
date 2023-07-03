@@ -1,0 +1,3 @@
+['Misc','Key']
+['An old key given to', 'you by a musician in', 'Verde City.']
+-1

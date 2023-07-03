@@ -1,0 +1,11 @@
+['Swift Swim','Rain Dish']
+[1.2,1,1.2,1,1.4,1]
+['Water','Grass']
+['Water Stone','Ludicolo']
+{1:['Astonish'],3:'Growl',6:'Absorb',9:'Bubble',12:'Fury Swipes',16:'Fake Out',20:'Water Sport',24:'Bubble Beam',28:'Nature Power',32:'Uproar',36:'Knock Off',40:'Zen Headbutt',44:'Hydro Pump'}
+120
+32.5
+47
+98
+['scarab_r','route_3']
+['Jolly','Lombre\'s entire body is covered by a', 'slippery, slimy film. It feels horribly', 'unpleasant to be touched by this Pokemon\'s', 'hands. Lombre is often mistaken for a human', 'child.'] 

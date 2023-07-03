@@ -1,0 +1,11 @@
+['Effect Spore']
+[2.28,1.7,1.7,1.4,1.6,.6]
+['Grass','Poison']
+[]
+{1:['Absorb','Growth','Astonish','Bide'],6:'Growth',8:'Astonish',12:'Bide',15:'Mega Drain',18:'Ingrain',20:'Feint Attack',24:'Sweet Scent',28:'Giga Drain',32:'Toxic',35:'Synthesis',43:'Clear Smog',49:'Solar Beam',54:'Sludge Bomb',62:'Spore'}
+75
+10.5
+24
+91
+[]
+['Mushroom','It lures prey close by dancing and waving', 'its arm caps, which resemble Poke Balls, in', 'a swaying motion.']

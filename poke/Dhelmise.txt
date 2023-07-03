@@ -1,0 +1,11 @@
+['Steelworker']
+[1.4,2.62,1.72,2,1.8,.8]
+['Ghost','Grass']
+[]
+{1:['Switcheroo','Absorb','Growth','Rapid Spin','Astonish'],5:'Mega Drain',9:'Wrap',14:'Gyro Ball',18:'Metal Sound',23:'Giga Drain',27:'Whirlpool',32:'Anchor Shot',36:'Shadow Ball',41:'Energy Ball',45:'Slam',50:'Heavy Slam',54:'Phantom Force',59:'Power Whip'}
+25
+210
+154
+216
+['forbiddenf']
+['Sea Creeper','The soul of seaweed adrift in the waves', 'became reborn as this Pokemon. It maintains', 'itself with new infusions of seabed', 'detritus and seaweed.'] 

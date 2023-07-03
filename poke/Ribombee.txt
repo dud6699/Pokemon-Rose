@@ -1,0 +1,11 @@
+['Honey Gather','Shield Dust']
+[1.2,1.1,1.9,1.2,1.4,2.48]
+['Bug','Fairy']
+[]
+{1:['Pollen Puff','Absorb','Fairy Wind','Stun Spore','Struggle Bug'],4:'Fairy Wind',7:'Stun Spore',10:'Struggle Bug',13:'Silver Wind',16:'Draining Kiss',21:'Sweet Scent',28:'Bug Buzz',35:'Dazzling Gleam',42:'Aromatherapy',49:'Quiver Dance'}
+75
+.5
+8
+272
+['route_6']
+['Bee Fly','Rain makes pollen damp, so Ribombee hates', 'rain. When it sees ominous clouds, it finds', 'a hollow in a tree, where it waits stock-','still.'] 

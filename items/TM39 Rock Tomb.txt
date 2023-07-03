@@ -1,0 +1,3 @@
+['Rock Tomb','TM']
+['Boulders are hurled', 'at the target. This', 'also lowers the', 'target\'s Speed stat', 'by preventing its', 'movement.']
+-1

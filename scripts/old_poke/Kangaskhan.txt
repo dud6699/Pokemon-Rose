@@ -1,0 +1,11 @@
+['Early Bird','Scrappy']
+[2.1,1.9,.8,1.6,1.6,1.8]
+['Normal',None]
+['Mega','Mega_Kangaskhan']
+{1:['Comet Punch','Leer'],7:'Fake Out',10:'Tail Whip',13:'Bite',19:'Double Hit',22:'Rage',25:'Mega Punch',31:'Chip Away',34:'Dizzy Punch',37:'Crunch',43:'Endure',46:'Outrage',49:'Sucker Punch',50:'Reversal'}
+45
+80
+87
+137
+['route_4']
+['Parent','If you come across a young Kangaskhan', 'playing by itself, you must never disturb', 'it or attempt to catch it. The baby', 'Pokemon\'s parent is sure to be in the area,', 'and it will get violently enraged at you.'] 

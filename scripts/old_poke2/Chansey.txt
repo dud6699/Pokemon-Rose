@@ -1,0 +1,11 @@
+['Natural Cure','Serene Grace']
+[5,.1,.7,.1,2.1,1]
+['Normal',None]
+['friend','Blissey']
+{1:['Defense Curl','Double-Edge','Growl','Pound'],5:'Tail Whip',9:'Refresh',12:'Double Slap',16:'Soft-Boiled',20:'Bestow',23:'Minimize',27:'Take Down',31:'Sing',35:'Fling',39:'Heal Pulse',44:'Egg Bomb',50:'Light Screen',57:'Healing Wish',65:'Double-Edge'}
+30
+34.6
+46
+924
+[]
+['Egg','Chansey lays nutritionally excellent eggs', 'on an everyday basis. The eggs are so', 'delicious, they are easily and eagerly', 'devoured by even those people who have lost', 'their appetite.'] 

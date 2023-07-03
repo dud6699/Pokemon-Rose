@@ -1,0 +1,11 @@
+['Illuminate','Effect Spore']
+[.8,.7,1.3,1.1,1.5,.3]
+['Grass','Fairy']
+[24,'Shiinotic']
+{1:['Absorb'],4:'Astonish',8:'Flash',11:'Moonlight',15:'Mega Drain',18:'Sleep Powder',22:'Ingrain',25:'Confuse Ray',29:'Giga Drain',32:'Strength Sap',36:'Spore',39:'Moonblast',43:'Dream Eater',46:'Leech Seed'}
+190
+1.5
+8
+273
+['route_6']
+['Illuminating','It scatters its shining spores around', 'itself. Even though they\'re dangerous,', 'nighttime tours of forests where Morelull', 'live are popular.'] 

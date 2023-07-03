@@ -1,0 +1,11 @@
+['Swift Swim','Rain Dish']
+[1.6,1.4,1.8,1.4,2,1.4]
+['Water','Grass']
+[]
+{1:['Astonish','Growl','Mega Drain','Nature Power']}
+45
+55
+59
+99
+[]
+['Carefree','Ludicolo begins dancing as soon as it hears', 'cheerful, festive music. This Pokemon is', 'said to appear when it hears the singing of', 'children on hiking outings.'] 

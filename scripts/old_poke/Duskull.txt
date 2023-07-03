@@ -1,0 +1,11 @@
+['Levitate']
+[.4,.8,.6,1.8,1.8,.5]
+['Ghost',None]
+[37,'Dusclops','Shadow Punch']
+{1:['Leer','Night Shade'],6:'Disable',9:'Astonish',14:'Foresight',17:'Shadow Sneak',22:'Pursuit',25:'Will-O-Wisp',30:'Confuse Ray',33:'Curse',38:'Hex',41:'Shadow Ball',46:'Mean Look',49:'Payback',54:'Future Sight'}
+190
+15
+31
+166
+['forbidden']
+['Requiem','Duskull can pass through any wall no matter', 'how thick it may be. Once this Pokemon', 'chooses a target, it will doggedly pursue', 'the intended victim until the break of', 'dawn.'] 

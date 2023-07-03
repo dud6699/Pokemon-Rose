@@ -1,0 +1,11 @@
+['Cute Charm','Magic Guard']
+[1.9,1.4,1.7,1.46,1.8,1.2]
+['Fairy',None]
+[]
+{1:['Disarming Voice','Sing','Double Slap','Minimize','Metronome']}
+25
+40
+51
+922
+[]
+['Fairy','Clefable moves by skipping lightly as if it', 'were flying using its wings. Its bouncy', 'step even lets it walk on water. It is', 'known to take strolls on lakes on quiet,', 'moonlit nights.'] 

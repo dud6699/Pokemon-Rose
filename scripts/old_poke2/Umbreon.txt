@@ -1,0 +1,11 @@
+['Synchronize']
+[1.9,1.3,1.2,2.2,2.6,1.3]
+['Dark',None]
+[]
+{1:['Pursuit','Tackle','Tail Whip'],5:'Sand Attack',9:'Baby-Doll Eyes',13:'Quick Attack',17:'Confuse Ray',20:'Feint Attack',25:'Assurance',29:'Screech',33:'Moonlight',37:'Mean Look',41:'Last Resort',45:'Dark Pulse'}
+45
+27
+39
+232
+[]
+['Moonlight','Umbreon evolved as a result of exposure to', 'the moon\'s waves. It hides silently in', 'darkness and waits for its foes to make a', 'move. The rings on its body glow when it', 'leaps to attack.'] 

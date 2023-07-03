@@ -1,0 +1,11 @@
+['Pressure']
+[1,1.84,1.84,2.16,2.16,.7]
+['Ghost','Dark']
+[]
+{1:['Curse','Pursuit','Confuse Ray','Spite','Shadow Sneak'],7:'Feint Attack',13:'Hypnosis',19:'Dream Eater',25:'Ominous Wind',31:'Sucker Punch',37:'Nasty Plot',43:'Memento',49:'Dark Pulse'}
+100
+108
+39
+192
+[]
+['Forbidden','A Pokemon that was formed by 108 spirits.', 'It is bound to a fissure in an Odd', 'Keystone.'] 

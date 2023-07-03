@@ -6,6 +6,6 @@
 255
 52.5
 16
-139
+159
 []
 ['Bivalve','Clamperl grows while being protected by its', 'rock-hard shell. When its body becomes too', 'large to fit inside the shell, it is sure', 'evidence that this Pokemon is getting close', 'to evolution.'] 

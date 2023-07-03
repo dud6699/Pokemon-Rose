@@ -1,0 +1,11 @@
+['Shadow Tag']
+[1.2,1.3,3.4,1.6,1.9,2.6]
+['Ghost','Poison']
+['Mega','Mega_Gengar']
+{1:['Shadow Punch','Hypnosis','Lick','Spite'],5:'Spite',8:'Mean Look',12:'Curse',15:'Night Shade',19:'Confuse Ray',22:'Sucker Punch',28:'Payback',33:'Shadow Ball',39:'Dream Eater',44:'Dark Pulse',50:'Destiny Bond',55:'Hex',61:'Nightmare'}
+45
+40.5
+55
+184
+[]
+['Shadow','It tries to take the lives of anyone and', 'everyone. It will even try to curse the', 'Trainer who is its master!'] 

@@ -5,3 +5,7 @@
 {1:['Electric Terrain','Ion Deluge','Fire Punch','Quick Attack','Leer','Thunder Shock','Low Kick'],5:'Thunder Shock',8:'Low Kick',12:'Swift',15:'Shock Wave',19:'Thunder Wave',22:'Electro Ball',26:'Light Screen',29:'Thunder Punch',36:'Discharge',42:'Screech',49:'Thunderbolt',55:'Thunder',62:'Giga Impact',65:'Electric Terrain'}
 30
 138.6
+71
+943
+[]
+['Thunderbolt','It pushes the tips of its two tails against', 'the foe, then lets loose with over 20,000', 'volts of power.']

@@ -1,0 +1,7 @@
+['Hyper Cutter','Arena Trap']
+[0.9,2,0.9,0.9,0.9,0.2]
+["Ground",None]
+[35,'Vibrava']
+{1:['Sand Attack','Bite','Feint Attack','Bide'],5:'Mud-Slap',8:'Bulldoze',12:'Sand Tomb',15:'Rock Slide',19:'Dig',22:'Crunch',26:'Earth Power',29:'Feint',33:'Earthquake',36:'Sandstorm',40:'Superpower',43:'Hyper Beam',47:'Fissure'}
+255
+15

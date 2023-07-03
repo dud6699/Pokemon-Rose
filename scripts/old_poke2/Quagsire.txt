@@ -1,0 +1,11 @@
+['Damp','Water Absorb']
+[1.9,1.7,1.3,1.7,1.3,.7]
+['Water',None]
+[]
+{1:['Water Gun','Tail Whip','Mud Sport'],5:'Mud Sport',9:'Mud Shot',15:'Slam',19:'Mud Bomb',24:'Amnesia',31:'Yawn',36:'Earthquake',41:'Rain Dance',48:['Mist','Haze'],53:'Muddy Water'}
+90
+75
+55
+240
+['echo_cavef','sunken_cave']
+['Water Fish','Quagsire hunts for food by leaving its', 'mouth wide open in water and waiting for', 'its prey to blunder in unaware. Because the', 'Pokemon does not move, it does not get very', 'hungry.'] 

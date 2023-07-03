@@ -1,0 +1,10 @@
+Dragon
+0
+60
+.9
+{}
+1
+10
+['The target is', 'knocked away, and a', 'different Pokemon is', 'dragged out. In the', 'wild, this ends the', 'battle.']
+-6
+0

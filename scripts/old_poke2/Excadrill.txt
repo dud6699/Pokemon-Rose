@@ -1,0 +1,11 @@
+['Sand Rush','Sand Force']
+[2.2,2.7,1,1.2,1.3,1.76]
+['Ground','Steel']
+[]
+{1:['Horn Drill','Scratch','Mud Sport','Rapid Spin','Mud-Slap'],5:'Rapid Spin',8:'Mud-Slap',12:'Fury Swipes',15:'Metal Claw',19:'Dig',22:'Hone Claws',26:'Slash',29:'Rock Slide',36:'Earthquake',42:'Swords Dance',49:'Sandstorm',55:'Drill Run',62:'Fissure'}
+60
+40.4
+28
+244
+['sunken_cave']
+['Subterrene','More than 300 feet below the surface, they', 'build mazelike nests. Their activity can be', 'destructive to subway tunnels.'] 

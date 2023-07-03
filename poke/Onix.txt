@@ -6,6 +6,6 @@
 45
 210
 346
-122
+136
 ['mirror_cave']
 ['Rock Snake','Onix has a magnet in its brain. It acts as', 'a compass so that this Pokemon does not', 'lose direction while it is tunneling. As it', 'grows older, its body becomes increasingly', 'rounder and smoother.'] 

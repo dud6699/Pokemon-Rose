@@ -1,0 +1,11 @@
+['Limber','Unburden']
+[1.56,1.84,1.48,1.5,1.26,2.36]
+['Fighting','Flying']
+[]
+{1:['Detect','Tackle','Hone Claws'],4:'Karate Chop',8:'Wing Attack',12:'Roost',16:'Aerial Ace',20:'Encore',24:'Fling',28:'Flying Press',32:'Bounce',36:'Endeavor',40:'Feather Dance',44:'High Jump Kick',48:'Sky Attack',55:'Sky Drop',60:'Swords Dance'}
+100
+21.5
+31
+278
+[]
+['Wrestling','Although its body is small, its proficient', 'fighting skills enable it to keep up with', 'big bruisers like Machamp and Hariyama.'] 

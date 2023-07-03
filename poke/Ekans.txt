@@ -1,0 +1,11 @@
+['Intimidate','Shed Skin']
+[.7,1.2,.8,.88,1.08,1.1]
+['Poison',None]
+[22,'Arbok','Crunch']
+{1:['Wrap','Leer'],4:'Poison Sting',9:'Bite',12:'Glare',17:'Screech',20:'Acid',25:['Stockpile','Swallow','Spit Up'],28:'Acid Spray',33:'Mud Bomb',36:'Gastro Acid',38:'Belch',41:'Poison Fang',44:'Coil',49:'Gunk Shot'}
+255
+6.9
+79
+219
+['route_6']
+['Snake','Ekans curls itself up in a spiral while it', 'rests. Assuming this position allows it to', 'quickly respond to a threat from any', 'direction with a glare from its upraised', 'head.'] 

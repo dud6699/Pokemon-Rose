@@ -1,0 +1,11 @@
+['Chlorophyll','Leaf Guard']
+[1.3,1.1,2,2.3,.8,1.2]
+['Grass',None]
+['move','Tangrowth']
+{1:['Ingrain','Constrict'],4:'Sleep Powder',7:'Vine Whip',10:'Absorb',14:'Poison Powder',17:'Bind',20:'Growth',23:'Mega Drain',27:'Knock Off',30:'Stun Spore',33:'Natural Gift',36:'Giga Drain',38:'Ancient Power',41:'Slam',44:'Tickle',46:'Wring Out',48:'Grassy Terrain',50:'Power Whip'}
+45
+35
+39
+267
+['route_6']
+['Vine','Tangela\'s vines snap off easily if they are', 'grabbed. This happens without pain,', 'allowing it to make a quick getaway. The', 'lost vines are replaced by newly grown', 'vines the very next day.'] 

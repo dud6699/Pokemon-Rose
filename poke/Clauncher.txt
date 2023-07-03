@@ -1,0 +1,11 @@
+['Mega Launcher']
+[1,1.06,1.16,1.24,1.26,.88]
+['Water',None]
+[37,'Clawitzer','Aura Sphere']
+{1:['Splash','Water Gun'],7:'Water Sport',9:'Vice Grip',12:'Bubble',16:'Flail',20:'Bubble Beam',25:'Swords Dance',30:'Crabhammer',34:'Water Pulse',39:'Smack Down',43:'Aqua Jet',48:'Muddy Water'}
+225
+8.3
+20
+157
+['route_4f']
+['Water Gun','Through controlled expulsions of internal', 'gas, it can expel water like a pistol shot.', 'At close distances, it can shatter rock.'] 

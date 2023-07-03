@@ -1,0 +1,11 @@
+['Rough Skin']
+[.9,1.8,1.3,.4,.4,1.3]
+['Water','Dark']
+[30,'Sharpedo','Slash']
+{1:['Leer','Bite'],4:'Rage',8:'Focus Energy',11:'Aqua Jet',15:'Assurance',18:'Screech',22:'Swagger',25:'Ice Fang',29:'Scary Face',32:'Poison Fang',36:'Crunch',39:'Agility',43:'Take Down'}
+225
+20.8
+31
+261
+['route_6f']
+['Savage','Carvanha\'s strongly developed jaws and its', 'sharply pointed fangs pack the destructive', 'power to rip out boat hulls. Many boats', 'have been attacked and sunk by this', 'Pokemon.'] 

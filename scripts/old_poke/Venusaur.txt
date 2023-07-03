@@ -1,0 +1,7 @@
+['Overgrow']
+[1.6,1.64,2,1.66,2,1.6]
+['Grass','Poison']
+['Mega','Mega_Venusaur']
+{1:['Petal Dance','Tackle','Growl','Leech Seed','Vine Whip'],3:'Growl',7:'Leech Seed',9:'Vine Whip',13:['Poison Powder','Sleep Powder'],15:'Take Down',20:'Razor Leaf',23:'Sweet Scent',28:'Growth',31:'Double-Edge',39:'Worry Seed',45:'Synthesis',50:'Petal Blizzard',53:'Solar Beam'}
+45
+100

@@ -1,0 +1,11 @@
+['Insomnia','Frisk']
+[.88,1.5,1.26,.7,.66,.9]
+['Ghost',None]
+[37,'Banette']
+{1:['Knock Off'],4:'Screech',7:'Night Shade',10:'Spite',13:'Shadow Sneak',16:'Will-O-Wisp',19:'Feint Attack',22:'Hex',26:'Curse',30:'Shadow Ball',34:'Embargo',38:'Sucker Punch',42:'Snatch',46:'Grudge',50:'Trick',54:'Phantom Force'}
+225
+2.3
+24
+185
+['forbidden']
+['Puppet','Shuppet is attracted by feelings of', 'jealousy and vindictiveness. If someone', 'develops strong feelings of vengeance, this', 'Pokemon will appear in a swarm and line up', 'beneath the eaves of that person\'s home.'] 

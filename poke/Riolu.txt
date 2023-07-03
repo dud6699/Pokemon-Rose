@@ -1,0 +1,11 @@
+['Steadfast','Inner Focus']
+[.8,1.4,.7,.8,.8,1.2]
+['Fighting',None]
+['friend','Lucario','Aura Sphere']
+{1:['Foresight','Quick Attack','Endure'],6:'Counter',11:'Feint',15:'Force Palm',19:'Copycat',24:'Screech',29:'Reversal',47:'Nasty Plot',50:'Final Gambit'}
+75
+20.2
+28
+947
+[]
+['Emanation','It uses the shapes of auras, which change', 'according to emotion, to communicate with', 'others.'] 

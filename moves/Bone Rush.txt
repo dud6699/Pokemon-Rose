@@ -1,0 +1,10 @@
+Ground
+0
+25
+.9
+{}
+1
+10
+['The user strikes the', 'target with a hard', 'bone two to five', 'times in a row.']
+0
+2

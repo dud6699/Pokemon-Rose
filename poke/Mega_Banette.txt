@@ -1,0 +1,11 @@
+['Prankster']
+[1.28,3.3,1.86,1.5,1.66,1.5]
+['Ghost',None]
+[]
+{1:['Phantom Force','Knock Off','Screech','Night Shade','Spite'],4:'Screech',7:'Night Shade',10:'Spite',13:'Shadow Sneak',16:'Will-O-Wisp',19:'Feint Attack',22:'Hex',26:'Curse',30:'Shadow Ball',34:'Embargo',40:'Sucker Punch',46:'Snatch',52:'Grudge',58:'Trick',64:'Phantom Force'}
+45
+13
+47
+187
+[]
+['Marionette','Extraordinary energy amplifies its cursing', 'power to such an extent that it can\'t help', 'but curse its own Trainer.'] 

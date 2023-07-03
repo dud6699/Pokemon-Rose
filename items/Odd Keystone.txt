@@ -1,0 +1,3 @@
+['Misc','Key']
+['A vital item that is', 'needed to keep a', 'stone tower from', 'collapsing. Voices', 'can be heard from it', 'occasionally.']
+-1

@@ -1,0 +1,3 @@
+['Evo','Item']
+['An item to be held', 'by a Pokemon. When', 'the holder inflicts', 'damage, the target', 'may also flinch.']
+9600

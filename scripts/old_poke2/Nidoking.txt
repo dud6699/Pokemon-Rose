@@ -1,0 +1,11 @@
+['Poison Point','Rivalry']
+[1.62,2.04,1.7,1.54,1.5,1.7]
+['Poison','Ground']
+[]
+{1:['Megahorn','Peck','Focus Energy','Double Kick','Poison Sting'],23:'Chip Away',35:'Thrash',43:'Earth Power',58:'Megahorn'}
+45
+62
+55
+42
+[]
+['Drill','Nidoking\'s thick tail packs enormously', 'destructive power. With one swing, it can', 'topple a metal transmission tower. Once', 'this Pokemon goes on a rampage, there is no', 'stopping it.']

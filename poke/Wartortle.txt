@@ -1,0 +1,11 @@
+['Torrent']
+[1.18,1.26,1.3,1.6,1.6,1.36]
+['Water',None]
+[36,'Blastoise']
+{1:['Tackle','Tail Whip','Water Gun'],4:'Tail Whip',7:'Water Gun',10:'Withdraw',13:'Bubble',17:'Bite',21:'Rapid Spin',25:'Protect',29:'Water Pulse',33:'Aqua Tail',37:'Skull Bash',41:'Iron Defense',45:'Rain Dance',49:'Hydro Pump'}
+45
+22.5
+39
+967
+[]
+['Turtle','Its tail is large and covered with a rich,', 'thick fur. The tail becomes increasingly', 'deeper in color as Wartortle ages. The', 'scratches on its shell are evidence of this', 'Pokemon\'s toughness as a battler.'] 

@@ -1,0 +1,7 @@
+['Swarm','Chlorophyll']
+[.9,1.06,.8,1.4,1.2,.84]
+['Bug','Grass']
+[20,'Swadloon','Protect']
+{1:['Tackle','String Shot'],8:'Bug Bite',15:'Razor Leaf',22:'Struggle Bug',29:'Endure',31:'Sticky Web',36:'Bug Buzz',43:'Flail'}
+255
+2.5

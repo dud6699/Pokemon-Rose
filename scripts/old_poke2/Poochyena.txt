@@ -1,0 +1,11 @@
+['Run Away', 'Quick Feet']
+[.7,1.1,.6,.7,.6,.7]
+['Dark',None]
+[18,'Mightyena','Snarl']
+{1:['Tackle'],4:'Howl',7:'Sand Attack',10:'Bite',13:'Odor Sleuth',16:'Roar',19:'Swagger',22:'Assurance',25:'Scary Face',28:'Embargo',31:'Taunt',34:'Crunch',37:'Yawn',40:'Take Down',43:'Sucker Punch',46:'Play Rough'}
+255
+13.6
+20
+26
+['square_1','route_1']
+['Bite','At first sight, Poochyena takes a bite at', 'anything that moves. This Pokemon chases', 'after prey until the victim becomes', 'exhausted. However, it may turn tail if the', 'prey strikes back.']

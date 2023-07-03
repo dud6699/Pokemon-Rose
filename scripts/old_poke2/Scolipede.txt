@@ -1,0 +1,7 @@
+['Poison Point','Swarm']
+[1.2,2.1,1.1,1.78,1.38,2.24]
+['Bug','Poison']
+[]
+{1:['Baton Pass','Iron Defense','Defense Curl','Rollout'],5:'Poison Sting',8:'Screech',12:'Pursuit',15:'Protect',19:'Poison Tail',23:'Bug Bite',28:'Venoshock',33:'Agility',39:'Steamroller',44:'Toxic',47:'Venom Drench',50:'Rock Climb',55:'Double-Edge',65:'Megahorn'}
+45
+200.5

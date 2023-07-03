@@ -1,0 +1,11 @@
+['Inner Focus']
+[.8,.9,.6,.7,.8,1.1]
+['Poison','Flying']
+[22,'Golbat']
+{1:['Absorb'],5:'Supersonic',7:'Astonish',11:'Bite',13:'Wing Attack',17:'Confuse Ray',19:'Air Cutter', 23:'Swift',25:'Poison Fang',29:'Mean Look',31:'Leech Life',35:'Haze',37:'Venoshock',41:'Air Slash',43:'Quick Guard'}
+255
+7.5
+31
+51
+['echo_cave','mirror_cave']
+['Bat','Zubat avoids sunlight because exposure', 'causes it to become unhealthy. During the', 'daytime, it stays in caves or under the', 'eaves of old houses, sleeping while hanging', 'upside down.']

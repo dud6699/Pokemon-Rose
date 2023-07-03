@@ -1,0 +1,11 @@
+['Guts','Sheer Force']
+[2.1,2.8,1.1,1.9,1.3,.9]
+['Fighting',None]
+[]
+{1:['Pound','Leer','Focus Energy','Bide'],4:'Focus Energy',8:'Bide',12:'Low Kick',16:'Rock Throw',20:'Wake-Up Slap',24:'Chip Away',29:'Bulk Up',33:'Rock Slide',37:'Dynamic Punch',41:'Scary Face',45:'Hammer Arm',49:'Stone Edge',53:'Focus Punch',57:'Superpower'}
+45
+87
+55
+134
+[]
+['Muscular','Rather than rely on force, they master', 'moves that utilize the centrifugal force of', 'spinning concrete.']

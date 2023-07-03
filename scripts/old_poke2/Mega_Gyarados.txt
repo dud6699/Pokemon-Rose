@@ -1,0 +1,11 @@
+['Mold Breaker']
+[1.9,3.1,1.4,2.18,2.6,1.62]
+['Water','Dark']
+[]
+{1:['Bite','Thrash'],21:'Leer',24:'Twister',27:'Ice Fang',30:'Aqua Tail',33:'Scary Face',36:'Dragon Rage',39:'Crunch',42:'Hydro Pump',45:'Dragon Dance',51:'Rain Dance',54:'Hyper Beam'}
+45
+305
+256
+131
+[]
+['Atrocious','Although it obeys its instinctive drive to', 'destroy everything within its reach, it', 'will respond to orders from a Trainer it', 'truly trusts.'] 

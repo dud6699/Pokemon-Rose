@@ -1,0 +1,7 @@
+['Swarm','Chlorophyll']
+[1.5,2.06,1.4,1.6,1.6,1.84]
+['Bug','Grass']
+[]
+{1:['Slash','False Swipe','Tackle','String Shot','Bug Bite','Razor Leaf'],8:'Bug Bite',15:'Razor Leaf',22:'Struggle Bug',29:'Fell Stinger',32:'Grass Whistle',36:'Leaf Blade',39:'X-Scissor',43:'Entrainment',46:'Swords Dance',50:'Leaf Storm'}
+45
+20.5

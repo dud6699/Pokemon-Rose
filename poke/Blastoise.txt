@@ -1,0 +1,11 @@
+['Torrent']
+[1.58,1.66,1.7,2,2.1,1.56]
+['Water',None]
+['Mega','Mega_Blastoise']
+{1:['Flash Cannon','Tackle','Tail Whip','Water Gun','Withdraw'],4:'Tail Whip',7:'Water Gun',10:'Withdraw',13:'Bubble',17:'Bite',21:'Rapid Spin',25:'Protect',29:'Water Pulse',33:'Aqua Tail',40:'Skull Bash',47:'Iron Defense',54:'Rain Dance',60:'Hydro Pump'}
+45
+85.5
+63
+968
+[]
+['Shellfish','Blastoise has water spouts that protrude', 'from its shell. The water spouts are very', 'accurate. They can shoot bullets of water', 'with enough accuracy to strike empty cans', 'from a distance of over 160 feet.'] 

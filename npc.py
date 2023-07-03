@@ -8,7 +8,7 @@ import random
 from pygame.locals import*
 
 class NPC:
-    def __init__(self,P,type,name,xy,motion,text,lose_text = None, trainer = False,vision = [0,0,0,0],team = None,tid = 0,spd = 2,tim = None,curr = None,extra_walk = None,loc = None):
+    def __init__(self,P,type,name,xy,motion,text,lose_text = None, trainer = False,vision = [0,0,0,0],team = None,tid = 0,spd = 2,tim = None,curr = None,extra_walk = None,loc = None, y_offset = 0,stationary = False):
         self.P = P
         self.trainer = trainer
         self.tid = tid
@@ -31,14 +31,24 @@ class NPC:
         self.r = pygame.transform.scale(poke_func.load("p/spr/"+self.type+gender+"_r1.png"),(54,64))
         self.d = pygame.transform.scale(poke_func.load("p/spr/"+self.type+gender+"_d1.png"),(54,64))
         self.l = pygame.transform.scale(poke_func.load("p/spr/"+self.type+gender+"_l1.png"),(54,64))
-        self.u2 = pygame.transform.scale(poke_func.load("p/spr/"+self.type+gender+"_u2.png"),(54,64))
-        self.u3 = pygame.transform.scale(poke_func.load("p/spr/"+self.type+gender+"_u3.png"),(54,64))
-        self.r2 = pygame.transform.scale(poke_func.load("p/spr/"+self.type+gender+"_r2.png"),(54,64))
-        self.r3 = pygame.transform.scale(poke_func.load("p/spr/"+self.type+gender+"_r3.png"),(54,64))
-        self.d2 = pygame.transform.scale(poke_func.load("p/spr/"+self.type+gender+"_d2.png"),(54,64))
-        self.d3 = pygame.transform.scale(poke_func.load("p/spr/"+self.type+gender+"_d3.png"),(54,64))
-        self.l2 = pygame.transform.scale(poke_func.load("p/spr/"+self.type+gender+"_l2.png"),(54,64))
-        self.l3 = pygame.transform.scale(poke_func.load("p/spr/"+self.type+gender+"_l3.png"),(54,64))
+        if stationary:
+            self.u2 = self.u
+            self.u3 = self.u
+            self.r2 = self.r
+            self.r3 = self.r
+            self.d2 = self.d
+            self.d3 = self.d
+            self.l2 = self.l
+            self.l3 = self.l
+        else:
+            self.u2 = pygame.transform.scale(poke_func.load("p/spr/"+self.type+gender+"_u2.png"),(54,64))
+            self.u3 = pygame.transform.scale(poke_func.load("p/spr/"+self.type+gender+"_u3.png"),(54,64))
+            self.r2 = pygame.transform.scale(poke_func.load("p/spr/"+self.type+gender+"_r2.png"),(54,64))
+            self.r3 = pygame.transform.scale(poke_func.load("p/spr/"+self.type+gender+"_r3.png"),(54,64))
+            self.d2 = pygame.transform.scale(poke_func.load("p/spr/"+self.type+gender+"_d2.png"),(54,64))
+            self.d3 = pygame.transform.scale(poke_func.load("p/spr/"+self.type+gender+"_d3.png"),(54,64))
+            self.l2 = pygame.transform.scale(poke_func.load("p/spr/"+self.type+gender+"_l2.png"),(54,64))
+            self.l3 = pygame.transform.scale(poke_func.load("p/spr/"+self.type+gender+"_l3.png"),(54,64))
         self.rect = (P.px+1300,P.py-1350,50,40)
         self.turn = False
         self.trainer_walk = extra_walk
@@ -49,6 +59,7 @@ class NPC:
         self.p = self.u
         self.x = xy[0]
         self.y = xy[1]
+        self.yd = 0
         self.bx = self.x
         self.by = self.y
         self.blx = 50
@@ -92,20 +103,27 @@ class NPC:
         self.extra_walk = None
         if loc == None or P.save_data.loc == loc:
             self.check_in()
+        self.y_offset = y_offset
+
+    def set_motion(self,motion):
+        self.motion = motion
+        self.curr = 0
+        self.tim = motion[self.curr][1]
 
     def get_rect(self):
         return (self.P.px+self.bx+self.xmod,self.P.py+self.by+self.ymod,self.blx,self.bly)
 
     def blit(self,temppx,temppy,mod,modx):
+        mod += self.y_offset
         if self.type == 'Professor':
             mod -= 1
-        self.P.surface.blit(self.P.char_shad,(temppx+self.x+modx,temppy+self.y+13+mod))
+        poke_func.blit_img(self.P,self.P.char_shad,(temppx+self.x+modx,temppy+self.y+13+mod))
         if self.type == 'Manaphy' and self.face() == 'r':
-            self.P.surface.blit(self.p,(temppx+self.x-12+modx,temppy+self.y-12+mod))
+            poke_func.blit_img(self.P,self.p,(temppx+self.x-12+modx,temppy+self.y-12+mod))
         elif self.type == 'Manaphy' and self.face() == 'l':
-            self.P.surface.blit(self.p,(temppx+self.x+8+modx,temppy+self.y-12+mod))
+            poke_func.blit_img(self.P,self.p,(temppx+self.x+8+modx,temppy+self.y-12+mod))
         else:
-            self.P.surface.blit(self.p,(temppx+self.x-2+modx,temppy+self.y-12+mod))
+            poke_func.blit_img(self.P,self.p,(temppx+self.x-2+modx,temppy+self.y-12+mod))
 
     def face(self):
         if self.p == self.r or self.p == self.r2 or self.p == self.r3:
@@ -123,8 +141,8 @@ class NPC:
     def y_dist(self):
         return 275-self.P.py-self.y
 
-    def trainer_check(self,rects = []):
-        if self.trainer == False:
+    def trainer_check(self,rects = [],not_trainer = True):
+        if self.trainer == False and not_trainer:
             return False
         if self.trainer_walk == None and (self.P.px-25)%50 == 0 and (self.P.py-25)%50 == 0 and self.x % 50 == 0 and self.y % 50 == 0:
             if self.face() == 'd' and self.y_dist() <= self.vision[1] and self.y_dist() >= 50 and self.x_dist() == 0 and self.check_trainer('d',rects):
@@ -160,6 +178,7 @@ class NPC:
             else:
                 self.curr += 1
             self.tim = self.motion[self.curr][1]
+
 
     def npc_move(self,dir = None):
         # if (self.movex == 1 or self.mr != 0):
@@ -289,11 +308,13 @@ class NPC:
                         temp_curr += 1
                         if temp_curr >= len(self.motion):
                             temp_curr = 0
+                        temp_tim = self.motion[temp_curr][1]
             else:
                 self.x += 50
                 self.bx = self.x
             self.curr = temp_curr
             self.tim = temp_tim
+            print(self.curr,self.tim)
 
     def write(self):
         c = 0
@@ -340,104 +361,116 @@ class NPC:
                 return tup[0]-self.bx >= 100 or tup[0]-self.bx < 50 or tup[1] <= self.by-50 or tup[1] >= self.by+50
         return True
 
-    def move(self,temppx = None, temppy = None,rects = [],cam_mod = 0,cam_modx = 0):
-        if self.x % 50 == 0 and self.y % 50 == 0:
-            self.reset_box()
-        self.in_front = False
-        if self.tim == 0:
-            self.check_time()
-        if self.trainer_walk != None:
-            if self.trainer_walk[2] > 0:
-                mod = 0
-                if self.trainer_walk[2] > 15:
-                    mod = 10*(self.trainer_walk[2]-15)
-                self.P.surface.blit(self.P.exclaim,(self.P.px+self.x,self.P.py+self.y-60+mod))
-                self.trainer_walk[2] -= 1
-            else:
-                self.npc_move(self.trainer_walk[0])
-                if self.trainer_walk[1] <= 5 and self.turn:
-                    if self.trainer_walk[0] == 'u':
-                        self.P.p = self.P.d1
-                    elif self.trainer_walk[0] == 'd':
-                        self.P.p = self.P.u1
-                    elif self.trainer_walk[0] == 'r':
-                        self.P.p = self.P.l1
-                    else:
-                        self.P.p = self.P.r1
-                if self.trainer_walk[1] == 0:
-                    self.turn = True
-                    self.trainer_walk = None
-                    if self.trainer:
-                        self.in_front = True
-        elif self.motion[self.curr][0] == 'l':
-            self.p = self.l
-            self.tim -= 1
-            self.check_time()
-        elif self.motion[self.curr][0] == 'r':
-            self.p = self.r
-            self.tim -= 1
-            self.check_time()
-        elif self.motion[self.curr][0] == 'u':
-            self.p = self.u
-            self.tim -= 1
-            self.check_time()
-        elif self.motion[self.curr][0] == 'd':
-            self.p = self.d
-            self.tim -= 1
-            self.check_time()
-        elif self.motion[self.curr][0] == 'ml':
-            if self.x % 50 == 0 and self.y % 50 == 0:
-                self.p = self.l
-            if (375-self.P.px-self.bx <= -100 or 375-self.P.px-self.bx > -50 or 275-self.P.py <= self.by-50 or 275-self.P.py >= self.by+50) and self.check_rects('l',rects):
-                if self.x%50 == 0:
-                    self.blx += 50
-                    self.xmod = -50
-                self.npc_move('l')
-                #if self.x%50 == 0:
-                #    self.reset_box()
-                self.tim -= 1
-                self.check_time()
-        elif self.motion[self.curr][0] == 'mr':
-            if self.x % 50 == 0 and self.y % 50 == 0:
-                self.p = self.r
-            if (375-self.P.px-self.bx >= 100 or 375-self.P.px-self.bx < 50 or 275-self.P.py <= self.by-50 or 275-self.P.py >= self.by+50) and self.check_rects('r',rects):
-                if self.x%50 == 0:
-                    self.blx += 50
-                self.npc_move('r')
-                #if self.x%50 == 0:
-                #    self.reset_box()
-                self.tim -= 1
-                self.check_time()
-        elif self.motion[self.curr][0] == 'mu':
-            if self.x % 50 == 0 and self.y % 50 == 0:
-                self.p = self.u
-            if (275-self.P.py-self.by <= -100 or 275-self.P.py-self.by > -50 or 375-self.P.px <= self.x-50 or 375-self.P.px >= self.x+50) and self.check_rects('u',rects):
-                if self.y%50 == 0:
-                    self.bly += 50
-                    self.ymod = -50
-                self.npc_move('u')
-                #if self.y%50 == 0:
-                #    self.reset_box()
-                self.tim -= 1
-                self.check_time()
-        elif self.motion[self.curr][0] == 'md':
-            if self.x % 50 == 0 and self.y % 50 == 0:
-                self.p = self.d
-            if (275-self.P.py-self.by >= 100 or 275-self.P.py-self.by < 50 or 375-self.P.px <= self.x-50 or 375-self.P.px >= self.x+50) and self.check_rects('d',rects):
-                if self.y%50 == 0:
-                    self.bly += 50
-                self.npc_move('d')
-                #if self.y%50 == 0:
-                #    self.reset_box()
-                self.tim -= 1
-                self.check_time()
-    #print(375-self.P.px-self.bx)
-        #print(self.y)
-        if self.tempp != None:
-            self.p = self.tempp
+    def skip_move(self):
+        while self.x%50 != 0 or self.y%50 != 0:
+            self.move(blit = False)
+        self.reset_box()
+
+    def move(self,temppx = None, temppy = None,rects = [],cam_mod = 0,cam_modx = 0,blit = True,mov = False):
         if temppx == None and temppy == None:
-            temppx = self.P.px
-            temppy = self.P.py
-        self.blit(temppx,temppy,cam_mod,cam_modx)
-        self.tempp = None
+            self.yd = self.y_dist()
+        if (self.yd > 0 and temppx == None and temppy == None) or (self.yd <= 0 and temppx != None and temppy != None) or mov:
+            if self.x % 50 == 0 and self.y % 50 == 0:
+                self.reset_box()
+            self.in_front = False
+            if self.tim == 0:
+                self.check_time()
+            if self.trainer_walk != None:
+                if self.trainer_walk[2] > 0:
+                    mod = 0
+                    if self.trainer_walk[2] > 15:
+                        mod = 10*(self.trainer_walk[2]-15)
+                    poke_func.blit_img(self.P,self.P.exclaim,(self.P.px+self.x,self.P.py+self.y-60+mod))
+                    self.trainer_walk[2] -= 1
+                else:
+                    self.npc_move(self.trainer_walk[0])
+                    if self.trainer_walk[1] <= 5 and self.turn:
+                        if self.trainer_walk[0] == 'u':
+                            self.P.p = self.P.d1
+                        elif self.trainer_walk[0] == 'd':
+                            self.P.p = self.P.u1
+                        elif self.trainer_walk[0] == 'r':
+                            self.P.p = self.P.l1
+                        else:
+                            self.P.p = self.P.r1
+                    if self.trainer_walk[1] == 0:
+                        self.turn = True
+                        self.trainer_walk = None
+                        if self.trainer:
+                            self.in_front = True
+            elif self.motion[self.curr][0] == 'l':
+                self.p = self.l
+                self.tim -= 1
+                self.check_time()
+            elif self.motion[self.curr][0] == 'r':
+                self.p = self.r
+                self.tim -= 1
+                self.check_time()
+            elif self.motion[self.curr][0] == 'u':
+                self.p = self.u
+                self.tim -= 1
+                self.check_time()
+            elif self.motion[self.curr][0] == 'd':
+                self.p = self.d
+                self.tim -= 1
+                self.check_time()
+            elif self.motion[self.curr][0] == 'ml':
+                if self.x % 50 == 0 and self.y % 50 == 0:
+                    self.p = self.l
+                if (375-self.P.px-self.bx <= -100 or 375-self.P.px-self.bx > -50 or 275-self.P.py <= self.by-50 or 275-self.P.py >= self.by+50) and self.check_rects('l',rects):
+                    if self.x%50 == 0:
+                        self.blx += 50
+                        self.xmod = -50
+                    self.npc_move('l')
+                    #if self.x%50 == 0:
+                    #    self.reset_box()
+                    self.tim -= 1
+                    self.check_time()
+            elif self.motion[self.curr][0] == 'mr':
+                if self.x % 50 == 0 and self.y % 50 == 0:
+                    self.p = self.r
+                if (375-self.P.px-self.bx >= 100 or 375-self.P.px-self.bx < 50 or 275-self.P.py <= self.by-50 or 275-self.P.py >= self.by+50) and self.check_rects('r',rects):
+                    if self.x%50 == 0:
+                        self.blx += 50
+                    self.npc_move('r')
+                    #if self.x%50 == 0:
+                    #    self.reset_box()
+                    self.tim -= 1
+                    self.check_time()
+            elif self.motion[self.curr][0] == 'mu':
+                if self.x % 50 == 0 and self.y % 50 == 0:
+                    self.p = self.u
+                if (275-self.P.py-self.by <= -100 or 275-self.P.py-self.by > -50 or 375-self.P.px <= self.x-50 or 375-self.P.px >= self.x+50) and self.check_rects('u',rects):
+                    if self.y%50 == 0:
+                        self.bly += 50
+                        self.ymod = -50
+                    self.npc_move('u')
+                    #if self.y%50 == 0:
+                    #    self.reset_box()
+                    self.tim -= 1
+                    self.check_time()
+            elif self.motion[self.curr][0] == 'md':
+                if self.x % 50 == 0 and self.y % 50 == 0:
+                    self.p = self.d
+                if (275-self.P.py-self.by >= 100 or 275-self.P.py-self.by < 50 or 375-self.P.px <= self.x-50 or 375-self.P.px >= self.x+50) and self.check_rects('d',rects):
+                    if self.y%50 == 0:
+                        self.bly += 50
+                    self.npc_move('d')
+                    #if self.y%50 == 0:
+                    #    self.reset_box()
+                    self.tim -= 1
+                    self.check_time()
+        #print(375-self.P.px-self.bx)
+            #print(self.y)
+            if self.tempp != None:
+                self.p = self.tempp
+            if temppx == None and temppy == None:
+                temppx = self.P.px
+                temppy = self.P.py
+            if blit:
+                self.blit(temppx,temppy,cam_mod,cam_modx)
+            self.tempp = None
+            return True
+        else:
+            return False
 

@@ -1,0 +1,11 @@
+['Chlorophyll','Leaf Guard']
+[2,2,2.2,2.5,1,1]
+['Grass',None]
+[]
+{1:['Block','Ingrain','Constrict'],4:'Sleep Powder',7:'Vine Whip',10:'Absorb',14:'Poison Powder',17:'Bind',20:'Growth',23:'Mega Drain',27:'Knock Off',30:'Stun Spore',33:'Natural Gift',36:'Giga Drain',40:'Ancient Power',43:'Slam',46:'Tickle',49:'Wring Out',50:'Grassy Terrain',53:'Power Whip',56:'Block'}
+30
+128.6
+79
+268
+['route_6']
+['Vine','It ensnares prey by extending arms made of', 'vines. Losing arms to predators does not', 'trouble it.'] 

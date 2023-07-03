@@ -1,0 +1,11 @@
+['Guts','No Guard']
+[1.8,2.6,1.3,1.6,1.9,1.1]
+['Fighting',None]
+[]
+{1:['Strength','Counter','Low Kick','Leer','Focus Energy','Karate Chop'],3:'Focus Energy',7:'Karate Chop',9:'Foresight',13:'Low Sweep',15:'Seismic Toss',19:'Revenge',21:'Knock Off',25:'Vital Throw',27:'Wake-Up Slap',33:'Dual Chop',37:'Submission',43:'Bulk Up',47:'Cross Chop',53:'Scary Face',57:'Dynamic Punch'}
+45
+130
+63
+48
+[]
+['Superpower','Machamp is known as the Pokemon that has', 'mastered every kind of martial arts. If it', 'grabs hold of the foe with its four arms,', 'the battle is all but over. The hapless foe', 'is thrown far over the horizon.']

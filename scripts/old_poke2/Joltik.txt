@@ -1,0 +1,11 @@
+['Compound Eyes','Unnerve']
+[1,.94,1.14,1,1,1.3]
+['Bug','Electric']
+[36,'Galvantula','Sticky Web']
+{1:['String Shot','Absorb','Spider Web'],4:'Thunder Wave',7:'Screech',12:'Fury Cutter',15:'Electroweb',18:'Bug Bite',23:'Gastro Acid',26:'Slash',29:'Electro Ball',34:'Signal Beam',37:'Agility',40:'Sucker Punch',45:'Discharge',48:'Bug Buzz'}
+190
+0.6
+4
+28
+['square_1','route_3']
+['Attaching','They attach themselves to large-bodied', 'Pokemon and absorb static electricity,', 'which they store in an electric pouch.']

@@ -1,0 +1,11 @@
+['Water Absorb']
+[1.9,2.1,1.4,1.9,1.8,1.5]
+['Water','Fighting']
+[]
+{1:['Water Sport','Bubble','Hypnosis','Submission','Circle Throw','Bubble Beam',],5:'Bubble',8:'Hypnosis',11:'Aqua Jet',15:'Double Slap',18:'Rain Dance',21:'Body Slam',27:'Bubble Beam',32:'Mud Bomb',37:'Belly Drum',42:'Liquidation',46:'Wake-Up Slap',50:'Dynamic Punch',53:'Mind Reader',58:'Hydro Pump',63:'Close Combat'}
+45
+54
+51
+9
+[]
+['Tadpole','Poliwrath\'s highly developed, brawny', 'muscles never grow fatigued, however much', 'it exercises. It is so tirelessly strong,', 'this Pokemon can swim back and forth across', 'the ocean without effort.']

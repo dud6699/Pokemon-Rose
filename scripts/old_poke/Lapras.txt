@@ -1,0 +1,11 @@
+['Water Absorb','Shell Armor']
+[2.6,1.7,1.7,1.6,1.9,1.2]
+['Water','Ice']
+[]
+{1:['Sing','Growl','Water Gun'],4:'Mist',7:'Confuse Ray',10:'Ice Shard',14:'Water Pulse',18:'Body Slam',22:'Rain Dance',27:'Perish Song',32:'Ice Beam',37:'Brine',43:'Safeguard',47:'Hydro Pump',50:'Sheer Cold'}
+45
+220
+98
+988
+[]
+['category','People have driven Lapras almost to the', 'point of extinction. In the evenings, this', 'Pokemon is said to sing plaintively as it', 'seeks what few others of its kind still', 'remain.'] 

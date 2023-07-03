@@ -1,0 +1,3 @@
+['Held','Item']
+['An item to be held', 'by a Pokemon. It\'s', 'an egg filled with', 'happiness that earns', 'extra Exp. Points in', 'battle.']
+10000

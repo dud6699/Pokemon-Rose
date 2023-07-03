@@ -1,0 +1,3 @@
+['Mega Stone','Key']
+['One of a variety of', 'mysterious Mega', 'Stones. Colress can', 'use this stone to', 'Mega Evolve Banette.']
+-1

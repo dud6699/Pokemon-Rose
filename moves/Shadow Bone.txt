@@ -1,0 +1,10 @@
+Ghost
+0
+85
+1
+{0.2:['DD']}
+1
+10
+['The user attacks by', 'beating the target', 'with a bone that', 'contains a spirit.', 'This may lower the', 'target\'s Defense.']
+0
+0

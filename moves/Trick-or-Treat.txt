@@ -1,0 +1,10 @@
+Ghost
+2
+---
+1
+{}
+1
+20
+['The user takes the', 'target trick-or-','treating. This adds', 'Ghost type to the', 'target\'s type.']
+0
+0

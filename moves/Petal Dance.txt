@@ -7,4 +7,4 @@ Grass
 10
 ['The user attacks the', 'target by scattering', 'petals for two to', 'three turns. The', 'user then becomes', 'confused.']
 0
-0
+6

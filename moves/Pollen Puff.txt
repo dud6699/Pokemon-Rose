@@ -1,0 +1,10 @@
+Bug
+1
+90
+0
+{}
+1
+15
+['The user attacks the', 'enemy with a pollen', 'puff that explodes.']
+0
+0

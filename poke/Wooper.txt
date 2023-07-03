@@ -1,0 +1,11 @@
+['Damp','Water Absorb']
+[1.1,.9,.5,.9,.5,.3]
+['Water',None]
+[20,'Quagsire']
+{1:['Water Gun','Tail Whip'],5:'Mud Sport',9:'Mud Shot',15:'Slam',19:'Mud Bomb',23:'Amnesia',29:'Yawn',33:'Earthquake',37:'Rain Dance',43:['Mist','Haze'],47:'Muddy Water'}
+255
+8.5
+16
+239
+['echo_cavef','sunken_cave']
+['Water Fish','Wooper usually lives in water. However, it', 'occasionally comes out onto land in search', 'of food. On land, it coats its body with a', 'gooey, toxic film.'] 

@@ -1,0 +1,11 @@
+['Insomnia','Forewarn']
+[1.2,.96,.86,.9,1.8,.84]
+['Psychic',None]
+[26,'Hypno']
+{1:['Hypnosis','Pound'],5:'Disable',9:'Confusion',13:'Headbutt',17:'Poison Gas',21:'Meditate',25:'Psybeam',29:'Wake-Up Slap',33:'Psych Up',37:'Synchronoise',41:'Zen Headbutt',45:'Swagger',49:'Psychic',53:'Nasty Plot',57:'Psyshock',61:'Future Sight'}
+190
+32.4
+39
+77
+['route_3','forbidden']
+['Hypnosis','If your nose becomes itchy while you are', 'sleeping, it\'s a sure sign that one of', 'these Pokemon is standing above your pillow', 'and trying to eat you dream through your', 'nostrils.']

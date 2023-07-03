@@ -1,0 +1,11 @@
+['Compound Eyes','Unnerve']
+[1.4,1.44,1.94,1.2,1.2,2.16]
+['Bug','Electric']
+[]
+{1:['Sticky Web','String Shot','Absorb','Spider Web','Thunder Wave'],4:'Thunder Wave',7:'Screech',12:'Fury Cutter',15:'Electroweb',18:'Bug Bite',23:'Gastro Acid',26:'Slash',29:'Electro Ball',34:'Signal Beam',40:'Agility',46:'Sucker Punch',54:'Discharge',60:'Bug Buzz'}
+75
+14.3
+31
+29
+[]
+['EleSpider','They employ an electrically charged web to', 'trap their prey. While it is immobilized', 'by shock, they leisurely consume it.']

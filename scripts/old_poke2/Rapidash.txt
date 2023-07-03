@@ -1,0 +1,11 @@
+['Run Away','Flash Fire']
+[1.3,2,1.6,1.4,1.6,2.1]
+['Fire',None]
+[]
+{1:['Fury Attack','Poison Jab','Megahorn','Growl','Quick Attack','Tail Whip','Ember'],4:'Tail Whip',9:'Ember',13:'Flame Wheel',17:'Stomp',21:'Flame Wheel',17:'Stomp',21:'Flame Charge',25:'Fire Spin',29:'Take Down',33:'Inferno',37:'Agility',41:'Fire Blast',45:'Bounce',49:'Flare Blitz'}
+60
+95
+67
+118
+[]
+['Fire Horse','Rapidash usually can be seen casually', 'cantering in the fields and plains.', 'However, when this Pokemon turns serious,', 'its fiery manes flare and blaze as it', 'gallops its way up to 150 mph.'] 

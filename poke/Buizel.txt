@@ -6,6 +6,6 @@
 190
 29.5
 28
-147
+167
 ['route_5']
 ['Sea Weasel','It inflates the flotation sac around its', 'neck and pokes its head out of the water to', 'see what is going on.'] 

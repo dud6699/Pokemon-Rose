@@ -1,0 +1,11 @@
+['Swift Swim','Rain Dish']
+[.8,.6,.8,.6,1,.6]
+['Water','Grass']
+[14,'Lombre']
+{1:['Astonish'],3:'Growl',6:'Absorb',9:'Bubble',12:'Natural Gift',15:'Mist',18:'Mega Drain',21:'Bubble Beam',24:'Nature Power',27:'Rain Dance',30:'Giga Drain',33:'Zen Headbutt',36:'Energy Ball'}
+255
+2.6
+20
+97
+['scarab_r','route_3']
+['Water Weed','Lotad live in ponds and lakes, where they', 'float on the surface. It grows weak if its', 'broad leaf dies. On rare occasions, this', 'Pokemon travels on land in search of clean', 'water.'] 

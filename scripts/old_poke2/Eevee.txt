@@ -1,0 +1,11 @@
+['Run Away','Adaptability']
+[1.1,1.1,.9,1,1.3,1.1]
+['Normal',None]
+[1,'Toby','Racism']
+{1:['Covet','Growl','Tackle','Tail Whip'],5:'Sand Attack',9:'Baby-Doll Eyes',13:'Quick Attack',17:['Bite','Swift'],20:'Refresh',25:'Take Down',29:'Charm',33:'Baton Pass',37:'Double-Edge',41:'Last Resort',45:'Trump Card'}
+45
+6.5
+12
+227
+['route_6']
+['Evolution','Eevee has an unstable genetic makeup that', 'suddenly mutates due to the environment in', 'which it lives. Radiation from various', 'stones causes this Pokemon to evolve.'] 

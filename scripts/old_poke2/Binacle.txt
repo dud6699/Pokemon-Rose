@@ -1,0 +1,11 @@
+['Tough Claws','Sniper']
+[.84,1.04,.78,1.34,1.12,1]
+['Rock','Water']
+[39,'Barbaracle']
+{1:['Shell Smash','Scratch','Sand Attack'],4:'Water Gun',7:'Withdraw',10:'Fury Swipes',13:'Slash',18:'Mud-Slap',20:'Clamp',24:'Rock Polish',28:'Ancient Power',32:'Hone Claws',37:'Fury Cutter',41:'Night Slash',45:'Razor Shell',49:'Cross Chop'}
+120
+31
+20
+173
+['route_5b']
+['Two-Handed','They stretch and then contract, yanking', 'their rocks along with them in bold hops.', 'They eat seaweed that washes up on the', 'shoreline.'] 

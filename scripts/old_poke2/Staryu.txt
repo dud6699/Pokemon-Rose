@@ -1,0 +1,11 @@
+['Illuminate','Natural Cure']
+[.6,.9,1.4,1.1,1.1,1.7]
+['Water',None]
+['Water Stone','Starmie']
+{1:['Tackle','Harden'],4:'Water Gun',7:'Rapid Spin',10:'Recover',13:'Psywave',16:'Swift',18:'Bubble Beam',22:'Camouflage',24:'Gyro Ball',28:'Brine',31:'Minimize',35:'Reflect Type',37:'Power Gem',40:'Confuse Ray',42:'Psychic',46:'Light Screen',49:'Cosmic Power',53:'Hydro Pump'}
+225
+34.5
+31
+132
+['route_3f']
+['Star Shape','Staryu\'s center section has an organ called', 'the core that shines bright red. If you go', 'to a beach toward the end of summer, the', 'glowing cores of these Pokemon look like', 'the stars in the sky.'] 

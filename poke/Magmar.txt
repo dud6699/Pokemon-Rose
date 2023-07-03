@@ -1,0 +1,11 @@
+['Flame Body']
+[1.3,1.9,2,1.14,1.7,1.86]
+['Fire',None]
+['Magmarizer','Magmortar']
+{1:['Smog','Leer','Ember'],5:'Ember',8:'Smokescreen',12:'Feint Attack',15:'Fire Spin',19:'Clear Smog',22:'Flame Burst',26:'Confuse Ray',29:'Fire Punch',36:'Lava Plume',42:'Sunny Day',49:'Flamethrower',55:'Fire Blast'}
+45
+44.5
+51
+945
+[]
+['Spitfire','In battle, Magmar blows out intensely hot', 'flames from all over its body to intimidate', 'its opponent. This Pokemon\'s fiery bursts', 'create heat waves that ignite grass and', 'trees in its surroundings.'] 

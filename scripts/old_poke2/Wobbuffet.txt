@@ -1,0 +1,11 @@
+['Shadow Tag']
+[3.8,.66,.66,1.16,1.16,.66]
+['Psychic',None]
+[]
+{1:['Counter','Mirror Coat','Safeguard','Destiny Bond']}
+45
+28.5
+51
+912
+[]
+['Patient','If two or more Wobbuffet meet, they will', 'turn competitive and try to outdo each', 'other\'s endurance. However, they may try to', 'see which one can endure the longest', 'without food.'] 

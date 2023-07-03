@@ -1,0 +1,11 @@
+['Clear Body','Liquid Ooze']
+[.8,.8,1,.7,2,1.4]
+['Water','Poison']
+[30,'Tentacruel']
+{1:['Poison Sting'],4:'Supersonic',7:'Constrict',10:'Acid',13:'Toxic Spikes',16:'Water Pulse',19:'Wrap',22:'Acid Spray',25:'Bubble Beam',28:'Barrier',31:'Poison Jab',34:'Brine',37:'Screech',40:'Hex',43:'Sludge Wave',46:'Hydro Pump',49:'Wring Out'}
+190
+45.5
+35
+959
+[]
+['Jellyfish','Tentacool absorbs sunlight and refracts it', 'using water inside its body to convert it', 'into beam energy. This Pokemon shoots beams', 'from the small round organ above its eyes.'] 

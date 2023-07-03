@@ -6,6 +6,6 @@
 25
 400
 362
-123
+137
 []
 ['Iron Snake','Steelix lives even further underground than' ,'Onix. This Pokemon is known to dig toward the earth\'s', 'core. There are records of this Pokemon', 'reaching a depth of over six-tenths of a', 'mile underground.'] 

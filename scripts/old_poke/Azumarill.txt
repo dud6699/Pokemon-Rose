@@ -1,0 +1,11 @@
+['Thick Fat','Huge Power']
+[2,1,1.2,1.6,1.6,1]
+['Water','Fairy']
+[]
+{1:['Tackle','Tail Whip','Water Gun','Water Sport'],2:'Tail Whip',5:'Water Sport',7:'Bubble',10:['Defense Curl','Rollout'],13:'Bubble Beam',16:'Baby-Doll Eyes',21:'Aqua Tail',25:'Play Rough',31:'Aqua Ring',35:'Rain Dance',42:'Double-Edge',46:'Superpower',55:'Hydro Pump'}
+75
+28.5
+31
+915
+[]
+['Aqua Rabbit','Azumarill can make balloons out of air. It', 'makes these air balloons if it spots a', 'drowning Pokemon. The air balloons enable', 'the Pokemon in trouble to breathe.'] 

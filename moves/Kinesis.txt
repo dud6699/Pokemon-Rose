@@ -1,0 +1,10 @@
+Psychic
+2
+---
+.8
+{1:['AcD']}
+1
+15
+['The user distracts', 'the target by', 'bending a spoon.', 'This lowers the', 'target\'s accuracy.']
+0
+0

@@ -1,0 +1,11 @@
+['Flash Fire']
+[1.3,2.6,1.9,1.2,2.2,1.3]
+['Fire',None]
+[]
+{1:['Ember','Tackle','Tail Whip'],5:'Sand Attack',9:'Baby-Doll Eyes',13:'Quick Attack',17:'Bite',20:'Fire Fang',25:'Fire Spin',29:'Scary Face',33:'Smog',37:'Lava Plume',41:'Last Resort',45:'Flare Blitz'}
+45
+25
+35
+205
+[]
+['Flame','Flareon\'s fluffy fur has a functional', 'purpose: releasing heat into the air so', 'that its body does not get excessively hot.', 'This Pokemon\'s body temperature can rise to', 'a maximum of 1,650 degrees Fahrenheit.'] 

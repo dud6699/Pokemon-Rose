@@ -1,0 +1,11 @@
+['Oblivious','Anticipation']
+[1,.96,.92,.86,.82,1.2]
+['Water','Ground']
+[30,'Whiscash','Thrash']
+{1:['Mud-Slap'],6:['Mud Sport','Water Sport'],9:'Water Gun',13:'Mud Bomb',15:'Amnesia',17:'Water Pulse',20:'Magnitude',25:['Rest','Snore'],28:'Aqua Tail',32:'Earthquake',35:'Muddy Water',39:'Future Sight',44:'Fissure'}
+190
+1.9
+16
+981
+[]
+['Whiskers','Barboach\'s sensitive whiskers serve as a', 'superb radar system. This Pokemon hides in', 'mud, leaving only its two whiskers exposed', 'while it waits for prey to come along.'] 

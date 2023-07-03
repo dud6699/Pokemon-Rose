@@ -6,6 +6,6 @@
 60
 95
 67
-111
+116
 []
 ['Fire Horse','Rapidash usually can be seen casually', 'cantering in the fields and plains.', 'However, when this Pokemon turns serious,', 'its fiery manes flare and blaze as it', 'gallops its way up to 150 mph.'] 

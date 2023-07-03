@@ -1,0 +1,10 @@
+Fire
+1
+95
+.9
+{.1:['Brn']}
+1
+10
+['The user attacks by', 'exhaling hot breath', 'on the opposing', 'Pokemon. This may', 'also leave those', 'Pokemon with a burn.']
+0
+0

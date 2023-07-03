@@ -1,0 +1,11 @@
+['Shell Armor','Skill Link']
+[.6,1.3,.9,2,.5,.8]
+['Water',None]
+['Water Stone','Cloyster']
+{1:['Tackle','Water Gun'],4:'Withdraw',8:'Supersonic',13:'Icicle Spear',16:'Protect',20:'Leer',25:'Clamp',28:'Ice Shard',32:'Razor Shell',37:'Aurora Beam',40:'Whirlpool',44:'Brine',49:'Iron Defense',52:'Ice Beam',56:'Shell Smash',61:'Hydro Pump'}
+190
+4
+12
+123
+['echo_cavef','route_3b']
+['Bivalve','At night, this Pokemon uses its broad', 'tongue to burrow a hole in the seafloor', 'sand and then sleep in it. While it is', 'sleeping, Shellder closes its shell, but', 'leaves its tongue hanging out.'] 

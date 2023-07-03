@@ -1,0 +1,11 @@
+['Magnet Pull','Sturdy']
+[1.4,1.4,2.3,1.8,2.6,1.2]
+['Electric','Steel']
+[]
+{1:['Barrier','Electric Terrain','Mirror Coat','Supersonic','Tackle','Thunder Shock','Thunder Wave','Tri Attack','Zap Cannon'],5:'Thunder Shock',7:'Thunder Wave',11:'Magnet Bomb',13:'Light Screen',17:'Sonic Boom',19:'Spark',23:'Mirror Shot',25:'Metal Sound',29:'Electro Ball',33:'Flash Cannon',39:'Screech',43:'Discharge',49:'Lock-On',53:'Magnet Rise',59:'Gyro Ball',63:'Zap Cannon'}
+30
+180
+47
+74
+[]
+['Magnet Area','Sometimes the magnetism emitted by', 'Magnezone is too strong, making them', 'attract each other so they cannot move.']

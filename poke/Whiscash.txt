@@ -1,0 +1,11 @@
+['Oblivious','Anticipation']
+[2.2,1.56,1.52,1.46,1.42,1.2]
+['Water','Ground']
+[]
+{1:['Thrash','Belch','Zen Headbutt','Tickle','Mud-Slap','Mud Sport','Water Sport','Water Gun'],6:['Mud Sport','Water Sport'],9:'Water Gun',13:'Mud Bomb',15:'Amnesia',17:'Water Pulse',20:'Magnitude',25:['Rest','Snore'],28:'Aqua Tail',34:'Earthquake',39:'Muddy Water',45:'Future Sight',52:'Fissure'}
+75
+23.6
+35
+135
+['route_3f']
+['Whiskers','Whiscash is extremely territorial. Just one', 'of these Pokemon will claim a large pond as', 'its exclusive territory. If a foe', 'approaches it, it thrashes about and', 'triggers a massive earthquake.'] 

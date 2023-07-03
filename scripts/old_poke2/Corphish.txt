@@ -1,0 +1,11 @@
+['Hyper Cutter','Shell Armor']
+[.86,1.6,1,1.3,.7,.7]
+['Water',None]
+[30,'Crawdaunt','Swift']
+{1:['Bubble'],5:'Harden',7:'Vice Grip',10:'Leer',14:'Bubble Beam',17:'Protect',20:'Double Hit',23:'Knock Off',26:'Night Slash',31:'Razor Shell',34:'Taunt',37:'Swords Dance',49:'Crunch',43:'Crabhammer',48:'Guillotine'}
+205
+11.5
+24
+121
+['route_3b','route_4f','route_5b']
+['Ruffian','Corphish catches prey with its sharp claws.', 'It has no likes or dislikes when it comes', 'to food. It will eat anything. This Pokemon', 'has no trouble living in filthy water.'] 

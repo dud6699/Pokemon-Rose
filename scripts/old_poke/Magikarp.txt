@@ -1,0 +1,11 @@
+['Swift Swim']
+[.4,.2,.3,1.1,.4,1.6]
+['Water',None]
+[20,'Gyarados','Bite']
+{1:['Splash'],15:'Tackle',30:'Flail'}
+255
+10
+35
+901
+[]
+['Fish','Magikarp is a pathetic excuse for a Pokemon', 'that is only capable of flopping and', 'splashing. This behavior prompted', 'scientists to undertake research into it.'] 

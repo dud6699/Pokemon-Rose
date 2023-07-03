@@ -1,0 +1,10 @@
+Psychic
+2
+---
+100
+{}
+1
+15
+['The user makes the', 'target float with', 'its psychic power.', 'The target is easier', 'to hit for three', 'turns.']
+0
+0

@@ -1,0 +1,11 @@
+['Sniper','Swift Swim']
+[0.6,.8,1.4,1.4,0.5,1.2]
+['Water',None]
+[32,'Seadra']
+{1:['Bubble'],5:'Smokescreen',9:'Leer',13:'Water Gun',17:'Twister',21:'Bubble Beam',26:'Focus Energy',31:'Brine',36:'Agility',41:'Dragon Pulse',46:'Dragon Dance',52:'Hydro Pump'}
+225
+8
+16
+985
+[]
+['Dragon','Horsea eats small insects and moss off of', 'rocks. If the ocean current turns fast,', 'this Pokemon anchors itself by wrapping its', 'tail around rocks or coral to prevent being', 'washed away.']

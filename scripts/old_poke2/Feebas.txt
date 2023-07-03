@@ -1,0 +1,11 @@
+['Swift Swim','Oblivious']
+[.4,.3,.2,.4,1.1,1.6]
+['Water',None]
+['Prism Scale','Milotic','Water Pulse']
+{1:['Splash'],15:'Tackle',30:'Flail'}
+255
+7.4
+24
+259
+['route_6f']
+['Fish','While Feebas\'s body is in tatters, it has a', 'hardy and tenacious life force that enables', 'it to live anywhere. However, this Pokemon', 'is also slow and dimwitted, making it an', 'easy catch.'] 

@@ -6,6 +6,6 @@
 60
 132.5
 59
-117
-[]
+122
+['echo_cavef']
 ['Bivalve','Cloyster is capable of swimming in the sea.', 'It does so by swallowing water, then', 'jetting it out toward the rear. This', 'Pokemon shoots spikes from its shell using', 'the same system.'] 

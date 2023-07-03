@@ -1,0 +1,11 @@
+['Healer','Regenerator']
+[2.06,1.2,1.2,1.72,1.72,1]
+['Normal',None]
+['Mega','Mega_Audino']
+{1:['Last Resort','Hyper Voice','Misty Terrain','Play Nice','Pound','Growl'],5:'Baby-Doll Eyes',9:'Refresh',13:'Disarming Voice',17:'Double Slap',21:'Attract',25:'Secret Power',29:'Entrainment',33:'Take Down',37:'Heal Pulse',41:'Dazzling Gleam',45:'Simple Beam',49:'Double-Edge',53:'Hyper Voice',57:'Last Resort'}
+255
+31
+46
+952
+[]
+['Healer','It touches others with the feelers on its', 'ears, using the sound of their heartbeats', 'to tell how they are feeling.'] 

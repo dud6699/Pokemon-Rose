@@ -6,6 +6,6 @@
 25
 740
 413
-124
+138
 []
 ['Iron Snake','Tempered underground under high pressure', 'and heat, its body is harder than any', 'metal.'] 

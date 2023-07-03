@@ -6,6 +6,6 @@
 45
 80
 87
-137
+151
 ['route_4']
 ['Parent','If you come across a young Kangaskhan', 'playing by itself, you must never disturb', 'it or attempt to catch it. The baby', 'Pokemon\'s parent is sure to be in the area,', 'and it will get violently enraged at you.'] 

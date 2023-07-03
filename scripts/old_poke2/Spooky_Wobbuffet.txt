@@ -1,0 +1,11 @@
+['Endless Hunger']
+[3.8,.66,1,.8,.8,.66]
+['Psychic','Ghost']
+[]
+{1:['Astonish','Confusion','Tail Whip','Teleport'],5:'Hypnosis',8:'Night Shade',12:'Cosmic Power',16:'Night Shade',20:'Feint Attack',24:'Shadow Sneak',26:'Power Split',32:'Guard Split',38:'Extrasensory',42:'Nightmare',48:'Shadow Ball',54:'Dream Eater',60:'Shadow Force',65:'Destiny Bond'}
+60
+28.5
+51
+191
+[]
+['Abyss','The mouth of this mysterious Pokemon is', 'said to lead to another dimension, which it', 'occasionally uses to devour all manner of', 'special attacks.'] 

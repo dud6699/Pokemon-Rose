@@ -1,0 +1,11 @@
+['Cute Charm','Competitive']
+[2.8,1.4,1.7,.9,1,.9]
+['Normal','Fairy']
+[]
+{1:['Double-Edge','Play Rough','Sing','Defense Curl','Disable','Double Slap']}
+50
+12
+42
+906
+[]
+['Balloon','Wigglytuff\'s body is very flexible. By', 'inhaling deeply, this Pokemon can inflate', 'itself seemingly without end. Once', 'inflated, Wigglytuff bounces along lightly', 'like a balloon.'] 

@@ -1,0 +1,11 @@
+['Insomnia','Forewarn']
+[1.7,1.46,1.46,1.4,2.3,1.34]
+['Psychic',None]
+[]
+{1:['Confusion','Disable','Future Sight','Hypnosis','Nasty Plot','Nightmare','Pound','Switcheroo'],5:'Disable',9:'Confusion',13:'Headbutt',17:'Poison Gas',21:'Meditate',25:'Psybeam',29:'Wake-Up Slap',33:'Psych Up',37:'Synchronoise',41:'Zen Headbutt',45:'Swagger',49:'Psychic',53:'Nasty Plot',57:'Psyshock',61:'Future Sight'}
+75
+75.6
+63
+78
+['forbidden']
+['Hypnosis','Hypno holds a pendulum in its hand. The', 'arcing movement and glitter of the pendulum', 'lull the foe into a deep state of hypnosis.', 'While this Pokemon searches for prey, it', 'polishes the pendulum.']

@@ -6,6 +6,6 @@
 75
 19.9
 46
-136
+150
 []
 ['Fox','Ninetales casts a sinister light from its', 'bright red eyes to gain total control over', 'its foe\'s mind. This Pokemon is said to', 'live for one thousand years.'] 

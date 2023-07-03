@@ -1,0 +1,11 @@
+['Shed Skin']
+[.9,.5,.5,1,.5,.7]
+['Bug','Poison']
+[10,'Beedrill','Twineedle']
+{1:['Harden']}
+120
+10
+24
+17
+['route_2','scarab_r']
+['Cocoon','Kakuna remains virtually immobile as it', 'clings to a tree. However, on the inside,', 'it is extremely busy as it prepares for its', 'coming evolution. This is evident from how', 'hot the shell becomes to the touch.']

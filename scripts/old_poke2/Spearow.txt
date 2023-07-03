@@ -1,0 +1,11 @@
+['Keen Eye']
+[0.8,1.2,0.62,0.6,0.62,1.4]
+['Normal','Flying']
+[20,'Fearow']
+{1:['Peck'],2:'Growl',4:'Leer',8:'Pursuit',11:'Fury Attack',15:'Aerial Ace',18:'Mirror Move',22:'Assurance',25:'Agility',29:'Focus Energy',32:'Roost',36:'Drill Peck'}
+255
+2
+12
+49
+['route_2','vigore','route_4']
+['Tiny Bird','Spearow has a very loud cry that can be', 'heard over half a mile away. If its high,', 'keening cry is heard echoing all around, it', 'is a sign that they are warning each other', 'of danger.']

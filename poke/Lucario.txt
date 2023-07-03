@@ -1,0 +1,11 @@
+['Steadfast','Inner Focus']
+[1.4,2.2,2.3,1.4,1.4,1.8]
+['Fighting','Steel']
+['Mega','Mega_Lucario']
+{1:['Aura Sphere','Laser Focus','Foresight','Quick Attack','Detect','Metal Claw'],6:'Counter',11:'Feint',15:'Power-Up Punch',19:'Swords Dance',24:'Metal Sound',29:'Bone Rush',33:'Quick Guard',37:'Me First',42:'Work Up',47:'Calm Mind',51:'Heal Pulse',55:'Close Combat',60:'Dragon Pulse',65:'Extreme Speed'}
+45
+54
+47
+948
+[]
+['Aura','By catching the aura emanating from others,', 'it can read their thoughts and movements.'] 

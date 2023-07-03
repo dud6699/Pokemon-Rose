@@ -1,0 +1,11 @@
+['Water Absorb']
+[2.6,1.3,2.2,1.2,1.9,1.3]
+['Water',None]
+[]
+{1:['Water Gun','Tackle','Tail Whip'],5:'Sand Attack',9:'Baby-Doll Eyes',13:'Quick Attack',17:'Water Pulse',20:'Aurora Beam',25:'Aqua Ring',29:'Acid Armor',33:'Haze',37:'Muddy Water',41:'Last Resort',45:'Hydro Pump'}
+45
+29
+39
+228
+[]
+['Bubble Jet','Vaporeon underwent a spontaneous mutation', 'and grew fins and gills that allow it to', 'live underwater. This Pokemon has the', 'ability to freely control water.'] 

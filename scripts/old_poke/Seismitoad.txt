@@ -1,0 +1,11 @@
+['Swift Swim','Poison Touch']
+[2.1,1.9,1.7,1.5,1.5,1.48]
+['Water','Ground']
+[]
+{1:['Acid','Bubble','Growl','Supersonic','Round'],5:'Supersonic',9:'Round',12:'Bubble Beam',16:'Mud Shot',20:'Aqua Ring',23:'Uproar',28:'Muddy Water',33:'Rain Dance',39:'Flail',44:'Drain Punch',49:'Echoed Voice',53:'Hydro Pump',59:'Hyper Voice'}
+45
+62
+59
+965
+[]
+['Vibration','It increases the power of its punches by', 'vibrating the bumps on its fists. It can', 'turn a boulder to rubble with one punch.'] 

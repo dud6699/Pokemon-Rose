@@ -1,0 +1,11 @@
+['Plus','Minus']
+[1.2,1.6,1.4,1.9,1.7,1]
+['Steel',None]
+[49,'Klinklang']
+{1:['Vice Grip','Charge','Thunder Shock','Gear Grind'],6:'Charge',11:'Thunder Shock',16:'Gear Grind',21:'Bind',26:'Charge Beam',31:'Autotomize',36:'Mirror Shot',40:'Screech',44:'Discharge',48:'Metal Sound',52:'Shift Gear',56:'Lock-On',60:'Zap Cannon',64:'Hyper Beam'}
+60
+51
+24
+174
+[]
+['Gear','By changing the direction in which it', 'rotates, it communicates its feelings to', 'others. When angry, it rotates faster.'] 

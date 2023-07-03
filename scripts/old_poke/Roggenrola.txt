@@ -1,0 +1,11 @@
+['Sturdy','Weak Armor']
+[1.1,1.5,0.5,1.7,0.5,0.3]
+['Rock',None]
+[25,'Boldore','Power Gem']
+{1:['Tackle'],4:'Harden',7:'Sand Attack',10:'Headbutt',14:'Rock Blast',17:'Mud-Slap',20:'Iron Defense',23:'Smack Down',27:'Rock Slide',30:'Stealth Rock',33:'Sandstorm',36:'Stone Edge',40:'Explosion'}
+255
+18
+16
+211
+['sunken_cave']
+['Mantle','They were discovered a hundred years ago in', 'an earthquake fissure. Inside each one is', 'an energy core.']

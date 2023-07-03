@@ -1,0 +1,10 @@
+Psychic
+0
+70
+1
+{}
+1
+20
+['The user tears at', 'the target with', 'blades formed by', 'psychic power.', 'Critical hits land', 'more easily.']
+0
+1

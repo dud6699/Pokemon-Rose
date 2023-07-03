@@ -1,0 +1,11 @@
+['Natural Cure','Poison Point']
+[1.2,1.4,2.5,1.3,2.1,1.8]
+['Grass','Poison']
+[]
+{1:['Venom Drench','Grassy Terrain','Weather Ball','Poison Sting','Mega Drain','Magical Leaf','Sweet Scent']}
+75
+14.5
+35
+930
+[]
+['Bouquet','With the movements of a dancer, it strikes', 'with whips that are densely lined with', 'poison thorns.'] 

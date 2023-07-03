@@ -7,4 +7,4 @@ Target (self,enemy)
 PP
 ['Description (20 p line, 6 total)']
 Priority
-Secondary (None, High Crit, Repeat(2-5), two turn, one-hit, recharge)
+Secondary (None, High Crit, Repeat(2-5), two turn, one-hit, recharge, multi/confuse,)

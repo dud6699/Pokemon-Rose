@@ -1,0 +1,10 @@
+Ghost
+0
+120
+1
+{}
+1
+5
+['The user disappears,', 'then strikes the', 'target on the next', 'turn. This move hits', 'even if the target', 'protects itself.']
+0
+3

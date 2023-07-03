@@ -1,0 +1,11 @@
+['Overcoat','Magic Guard']
+[2.2,1.3,2.5,1.5,1.7,.6]
+['Psychic',None]
+[]
+{1:['Dizzy Punch','Psywave','Reflect','Rollout','Snatch'],3:'Reflect',7:'Rollout',10:'Snatch',14:'Hidden Power',16:'Light Screen',19:'Charm',24:'Recover',25:'Psyshock',28:'Endeavor',31:'Future Sight',34:'Pain Split',39:'Psychic',45:'Skill Swap',54:'Heal Block',59:'Wonder Room'}
+50
+20.1
+39
+205
+[]
+['Multiplying','They use psychic power to control their', 'arms, which are made of a special liquid.', 'They can crush boulders psychically.'] 

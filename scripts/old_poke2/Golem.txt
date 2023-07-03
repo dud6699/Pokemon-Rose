@@ -1,0 +1,11 @@
+['Rock Head','Sturdy']
+[1.6,2.4,1.1,2.6,1.3,.9]
+['Rock','Ground']
+[]
+{1:['Heavy Slam','Tackle','Defense Curl','Mud Sport','Rock Polish'],4:'Mud Sport',6:'Rock Polish',10:'Steamroller',12:'Magnitude',16:'Rock Throw',18:'Smack Down',22:'Bulldoze',24:'Self-Destruct',30:'Stealth Rock',34:'Rock Blast',40:'Earthquake',44:'Explosion',50:'Double-Edge',54:'Stone Edge',60:'Heavy Slam'}
+45
+300
+55
+147
+[]
+['Megaton','Golem live up on mountains. If there is a', 'large earthquake, these Pokemon will come', 'rolling down off the mountains to the', 'foothills below.'] 

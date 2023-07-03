@@ -1,0 +1,11 @@
+['Swift Swim']
+[1.1,1.68,2.24,2.1,1.5,1.04]
+['Water',None]
+[]
+{1:['Whirlpool','Confusion'],5:'Water Sport',9:'Agility',11:'Draining Kiss',14:'Water Pulse',16:'Amnesia',19:'Aqua Ring',23:'Captivate',26:'Dive',29:'Baton Pass',34:'Psychic',39:'Aqua Tail',45:'Coil',50:'Hydro Pump'}
+60
+22.6
+71
+163
+[]
+['South Sea','Although Gorebyss is the very picture of', 'elegance and beauty while swimming, it is', 'also cruel. This Pokemon inserts its thin', 'mouth into its prey\'s bodies and drains', 'them of its body fluids.'] 

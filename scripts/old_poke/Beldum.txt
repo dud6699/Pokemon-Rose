@@ -1,0 +1,7 @@
+['Clear Body']
+[.8,1.1,.7,1.6,1.2,.6]
+['Steel','Psychic']
+[20,'Metang','Confusion','Metal Claw']
+{1:['Take Down']}
+3
+95.2

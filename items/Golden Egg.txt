@@ -1,0 +1,3 @@
+['Held','Item']
+['An item to be held', 'by a Pokemon. It\'s', 'a golden egg that', 'earns a lot of extra', 'Exp. Points in', 'battle.']
+-1

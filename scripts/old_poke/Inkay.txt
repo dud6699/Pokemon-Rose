@@ -1,0 +1,11 @@
+['Contrary','Suction Cups']
+[1.06,1.08,.74,1.06,.92,.9]
+['Dark','Psychic']
+[30,'Malamar']
+{1:['Tackle','Peck','Constrict'],4:'Reflect',8:'Foul Play',12:'Swagger',13:'Psywave',15:'Topsy-Turvy',18:'Hypnosis',21:'Psybeam',23:'Switcheroo',27:'Payback',31:'Light Screen',35:'Pluck',39:'Psycho Cut',43:'Slash',46:'Night Slash',48:'Superpower'}
+190
+3.5
+16
+983
+[]
+['Revolving','Opponents who stare at the flashing of the', 'light-emitting spots on its body become', 'dazed and lose their will to fight.'] 

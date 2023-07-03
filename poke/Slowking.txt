@@ -6,6 +6,6 @@
 70
 79.5
 79
-121
+126
 []
 ['Royal','Slowking undertakes research every day in', 'an effort to solve the mysteries of the', 'world. However, this Pokemon apparently', 'forgets everything it has learned if the', 'Shellder on its head comes off.'] 

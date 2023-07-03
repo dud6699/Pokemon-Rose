@@ -1,4 +1,4 @@
-['Oblivious','Own Tempo']
+['Oblivious','Own Tempo','*Ranged']
 [1.9,1.5,2,2.2,1.6,.6]
 ['Water','Psychic']
 ['Mega','Mega_Slowbro']
@@ -6,6 +6,6 @@
 75
 78.5
 63
-119
+124
 []
 ['Hermit Crab','Slowbro\'s tail has a Shellder firmly', 'attached with a bite. As a result, the tail', 'can\'t be used for fishing anymore. This', 'causes Slowbro to grudgingly swim and catch', 'prey instead.'] 

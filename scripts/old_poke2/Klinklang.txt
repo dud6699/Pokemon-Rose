@@ -1,0 +1,11 @@
+['Plus','Minus']
+[1.2,2,1.4,2.3,1.7,1.8]
+['Steel',None]
+[]
+{1:['Gear Grind','Vice Grip','Charge','Thunder Shock','Gear Grind'],6:'Charge',11:'Thunder Shock',16:'Gear Grind',21:'Bind',25:'Charge Beam',31:'Autotomize',36:'Mirror Shot',40:'Screech',44:'Discharge',48:'Metal Sound',54:'Shift Gear',60:'Lock-On',66:'Zap Cannon',72:'Hyper Beam'}
+30
+81
+24
+197
+[]
+['Gear','Its red core functions as an energy tank.', 'It fires the charged energy through its', 'spikes into an area.'] 

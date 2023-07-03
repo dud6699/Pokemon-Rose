@@ -1,0 +1,11 @@
+['Magic Bounce']
+[1.3,3,2.3,1.2,1.2,2.3]
+['Dark',None]
+[]
+{1:['Perish Song','Future Sight','Scratch','Feint','Leer','Quick Attack'],4:'Leer',7:'Quick Attack',10:'Pursuit',13:'Taunt',16:'Bite',19:'Double Team',22:'Slash',25:'Swords Dance',29:'Night Slash',33:'Detect',37:'Psycho Cut',41:'Me First',45:'Sucker Punch',49:'Razor Wind',53:'Future Sight',57:'Perish Song'}
+30
+49
+47
+973
+[]
+['Disaster','When this Pokemon whips the winglike fur on', 'its back as though beating its wings, it', 'sends an intimidating aura flying at its', 'opponents.'] 

@@ -1,0 +1,11 @@
+['Swift Swim','Hydration']
+[1,1,1,.8,.8,1.28]
+['Water',None]
+[25,'Palpitoad']
+{1:['Bubble','Growl'],5:'Supersonic',9:'Round',12:'Bubble Beam',16:'Mud Shot',20:'Aqua Ring',23:'Uproar',27:'Muddy Water',31:'Rain Dance',34:'Flail',38:'Echoed Voice',42:'Hydro Pump',45:'Hyper Voice'}
+255
+4.5
+20
+963
+[]
+['Tadpole','By vibrating its cheeks, it emits sound', 'waves imperceptible to humans and warns', 'others of danger.'] 

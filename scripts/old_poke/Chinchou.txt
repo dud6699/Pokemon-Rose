@@ -1,0 +1,11 @@
+['Volt Absorb','Illuminate']
+[1.5,.76,.76,1.12,1.12,1.34]
+['Water','Electric']
+[27,'Lanturn','Stockpile','Swallow','Spit Up']
+{1:['Bubble','Supersonic'],6:'Thunder Wave',9:'Electro Ball',12:'Water Gun',17:'Confuse Ray',20:'Bubble Beam',23:'Spark',28:'Signal Beam',31:'Flail',34:'Discharge',39:'Take Down',42:'Aqua Ring',45:'Hydro Pump',47:'Ion Deluge',50:'Charge'}
+190
+12
+20
+977
+[]
+['Angler','Chinchou\'s two antennas are filled with', 'cells that generate strong electricity.', 'This Pokemon\'s cells create so much', 'electrical power, it even makes itself', 'tingle slightly.'] 

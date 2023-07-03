@@ -1,0 +1,3 @@
+['Ball','Ball']
+['A Poke Ball that is', 'better than usual at', 'catching very heavy', 'Pokemon.']
+300

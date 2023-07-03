@@ -1,0 +1,10 @@
+Normal
+0
+70
+1
+{}
+1
+5
+['The user gets', 'revenge for an ally.', 'If an ally fainted', 'the previous turn,', 'this move becomes', 'more powerful.']
+0
+0

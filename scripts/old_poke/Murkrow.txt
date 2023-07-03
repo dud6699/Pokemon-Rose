@@ -1,0 +1,11 @@
+['Insomnia','Super Luck']
+[1.2,1.7,1.7,.84,.84,1.82]
+['Dark','Flying']
+['Dusk Stone','Honchkrow']
+{1:['Peck','Astonish'],5:'Pursuit',11:'Haze',15:'Wing Attack',21:'Night Shade',25:'Assurance',31:'Taunt',35:'Feint Attack',41:'Mean Look',45:'Foul Play',50:'Tailwind',55:'Sucker Punch',61:'Torment',65:'Roost'}
+30
+2.1
+20
+88
+['scarab_l','forbidden']
+['Darkness','Murkrow was feared and loathed as the', 'alleged bearer of ill fortune. This Pokemon','shows strong interest in anything that', 'sparkles or glitters. It will even try to', 'steal rings from women.'] 

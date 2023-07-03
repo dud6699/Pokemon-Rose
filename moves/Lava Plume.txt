@@ -1,0 +1,10 @@
+Fire
+1
+80
+1
+{.3:['Brn']}
+1
+15
+['The user torches', 'everything around it', 'with an inferno of', 'scarlet flames. This', 'may also leave those', 'hit with a burn.']
+0
+0
