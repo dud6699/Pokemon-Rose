@@ -1,6 +1,4 @@
 Battle
 Finaltest
-Sairo334
-BalanceBoi
+Balance
 MemoTest
-Auranina

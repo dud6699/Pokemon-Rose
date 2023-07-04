@@ -1,11 +1,9 @@
 # Pokemon Rose
- pygame Pokemon fangame
+pygame Pokemon fangame
 
+Double-click pokemon.exe to run
 
-Double-click pokemon.py to run
-Requires pygame
-
-Controls:
+Default Controls:
 Arrow Keys to move
 Z to interact/progress text
 X to go back/run
