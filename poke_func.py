@@ -4905,7 +4905,11 @@ def evo_check(P) -> None:
                             evo = True
                             break
                 elif x.code_nos() == 'Eevee':
-                    if x.friend >= 300:
+                    if P.loc == 'mossy':
+                        evo = True
+                        x.evo[1] = 'Leafeon'
+                        x.evo[2] = 'Razor Leaf'
+                    elif x.friend >= 300:
                         evo = True
                         if (x.m1 and moves.Move(x.m1).type == 'Fairy') or (x.m2 and moves.Move(x.m2).type == 'Fairy') or (x.m3 and moves.Move(x.m3).type == 'Fairy') or (x.m4 and moves.Move(x.m4).type == 'Fairy'):
                             x.evo[1] = 'Sylveon'
@@ -9253,7 +9257,7 @@ def team(P) -> None:
         if a == 2:
             P.surface.set_clip(Rect(0,0,800,600))
             new_txt(P)
-            write(P,"Choose a Pokemon.")
+            write(P,"Choose a Pokemon.",spd_mult = 10)
             P.surface.set_clip(Rect(0,0,800,450))
         a += 1
         P.clock.tick(P.ani_spd)
@@ -11188,7 +11192,7 @@ def new_save(P) -> None:
     new_w.write("r\n")
     new_w.write("['cruise_1','pc_am']\n")
     #update trainer
-    new_w.write("[0,0,0,0,0,[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],0,[[-1,0,None],[-1,0,None],[-1,0,None],[-1,0,None],[-1,0,None],[-1,0,None],[-1,0,None],[-1,0,None]],0,"+str(save.get_trees())+",[0,[None,[],{}],[None,None],None,[0,0],None,None,[None,[],{}],[None,[]],[0,0,None],None,[None,[],{}],[0,None]],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],None,None,[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],0,[[3,1,0,0,0,1,1,1,2,2,2,3,3,3,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0]],0,[0,[0,0,0,0,0]],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0],0]\n") #80 trainers 80 items 40 interacts 40 journals
+    new_w.write("[0,0,0,0,0,[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],0,[[-1,0,None],[-1,0,None],[-1,0,None],[-1,0,None],[-1,0,None],[-1,0,None],[-1,0,None],[-1,0,None]],0,"+str(save.get_trees())+",[0,[None,[],{}],[None,None],None,[0,0],None,None,[None,[],{}],[None,[]],[0,0,None],None,[None,[],{}],[0,None]],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],None,None,[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],0,[[3,1,0,0,0,1,1,1,2,2,2,3,3,3,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0]],0,[0,[0,0,0,0,0]],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0],0]\n") #80 trainers 150 items 40 interacts 40 journals
     new_w.write("[]\n")
     new_w.write("1500\n")
     new_w.write("[[],[],[],[],[]]\n")
@@ -11883,10 +11887,10 @@ def new_battle_txt(P) -> None:
     P.surface.blit(back,(0,460))
     P.surface.blit(P.battlebox,(0,460))
 
-def write(P, one: str, two: str = "", three: str = "",garden = False) -> None:
+def write(P, one: str, two: str = "", three: str = "",garden = False,spd_mult = 1) -> None:
     set_channel_volume(P,P.sfx_vol,2)
     pygame.mixer.Channel(2).play(P.txt_sound)
-    spd = P.txt_spd
+    spd = P.txt_spd*spd_mult
     if garden:
         spd = 300
     spd = write_h(P,spd, one, 460,garden)

@@ -9696,7 +9696,8 @@ def route_5_p(P,temppx,temppy,move):
         draw_grass(P,P.r5_bug.x,P.r5_bug.y,-1275,775,600,200,[P.px,P.py])
     P.r5_lass.move()
     P.r5_beauty.move()
-    P.r5_sci.move()
+    if P.r5_sci:
+        P.r5_sci.move()
     #rects start
     r1 = (P.px+2750,P.py-100,50,690)
     r2 = (P.px+2250,P.py-150,500,40)
@@ -15775,7 +15776,7 @@ def power_plant_b_p(P,temppx,temppy,move):
     if P.ppb_eusine:
         P.ppb_eusine.move(temppx,temppy)
     if P.ppb_rocket2:
-        P.ppb_rocket2.move()
+        P.ppb_rocket2.move(temppx,temppy)
     if P.ppb_rocket1:
         P.ppb_rocket1.move(temppx,temppy)
         P.ppb_colress.move(temppx,temppy)

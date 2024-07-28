@@ -11,8 +11,13 @@ message:
 10 - Strength Sap
 
 pyinstaller https://www.youtube.com/watch?v=lTxaran0Cig
-pyinstaller pokemon.py --onefile --windowed --icon=game_icon.ico?
-pyinstaller pokemon.py --onefile --noconsole --icon=game_icon.ico
+pyinstaller pokemon.py --onefile --clean -w --icon=game_icon.ico
+pyinstaller pokemon.py --onefile -w --icon=game_icon.ico (use this one)
+
+switch to nuitka testing (doesn't work)
+python -m nuitka --disable-console --windows-icon-from-ico=game_icon.ico --onefile pokemon.py
+copy .exe to build_folder, add folders and README
+--standalone?
 
 lines: ~33000
 

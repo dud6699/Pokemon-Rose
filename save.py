@@ -95,6 +95,10 @@ class Save:
             self.prog[11].append([None,[],{}])
         if len(self.prog[11]) == 12:
             self.prog[11].append([0,None])
+        #v1.2.6
+        if len(self.prog[6]) < 150:
+            for i in range(150-len(self.prog[6])):
+                self.prog[6].append(0)
         #fix pokedex
         to_del = []
         for pok in self.pokedex:

@@ -1,14 +1,20 @@
-1.2.4
+1.2.6
+main objective update
 baking (testing)
 npcs in no transition areas
 clamperl in house
 bug die after using item
+clearer highlight in pokemon menu
+remove txt delay in pokemon menu
+confusion during sleep (par?)
+absorb overkill damage
 
 #everytime:
 reset professor
 update get_indoors()
 disable check ability?
 
+glaceon
 sandstorm
 jobs:	research(colress)(mega evo, soul dew, fossils), blue 
 nursery(cheryl)(baby pokemon), pale
