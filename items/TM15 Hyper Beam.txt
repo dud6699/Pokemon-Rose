@@ -1,0 +1,3 @@
+['Hyper Beam','TM']
+['The target is attacked with a powerful beam. The user can\'t move on the next turn.']
+-1

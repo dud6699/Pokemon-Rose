@@ -1,0 +1,11 @@
+['Inner Focus','Keen Eye','*Pickpocket']
+[1.1,1.9,.7,1.1,1.5,2.3]
+['Dark','Ice']
+[1,'Weavile']
+{1:['Scratch','Leer','Taunt'],8:'Quick Attack',10:'Feint Attack',14:'Icy Wind',16:'Fury Swipes',20:'Agility',22:'Metal Claw',25:'Hone Claws',28:'Beat Up',32:'Screech',35:'Slash',40:'Snatch',44:'Punishment',47:'Ice Shard'}
+60
+28
+35
+296
+['snow_o']
+['Sharp Claw','Sneasel scales trees by punching its hooked claws into the bark. This Pokemon seeks out unguarded nests and steals eggs for food while the parents are away.'] 

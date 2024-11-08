@@ -1,0 +1,11 @@
+['Pressure','*Pickpocket']
+[1.4,2.4,.9,1.3,1.7,2.5]
+['Dark','Ice']
+[]
+{1:['Embargo','Revenge','Assurance','Scratch','Leer','Taunt','Quick Attack'],8:'Quick Attack',10:'Feint Attack',14:'Icy Wind',16:'Fury Swipes',20:'Nasty Plot',22:'Metal Claw',25:'Hone Claws',28:'Fling',32:'Screech',35:'Night Slash',40:'Snatch',44:'Punishment',47:'Dark Pulse'}
+45
+34
+43
+297
+[]
+['Sharp Claw','It lives in snowy regions. It carves patterns in trees with its claws as a signal to others.'] 

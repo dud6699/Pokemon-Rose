@@ -1,4 +1,4 @@
-message:
+sourcmessage:
 1 - (Poison Point,Static)
 2 - ([message],ability,turn)
 3 - Stat Cap
@@ -14,12 +14,23 @@ pyinstaller https://www.youtube.com/watch?v=lTxaran0Cig
 pyinstaller pokemon.py --onefile --clean -w --icon=game_icon.ico
 pyinstaller pokemon.py --onefile -w --icon=game_icon.ico (use this one)
 
+cd D:pyinstall_poke/Pokemon-Rose-Builds
+git lfs track "*.zip"    ?
+git add Pokemon_Rose[version].zip
+git commit -m "build [version]"
+git push
+
 switch to nuitka testing (doesn't work)
 python -m nuitka --disable-console --windows-icon-from-ico=game_icon.ico --onefile pokemon.py
 copy .exe to build_folder, add folders and README
 --standalone?
 
-lines: ~33000
+free git lfs space https://support.github.com/
+Search: "remove git lfs file" use Virtual Agent, give file SHA from commits
+To check storage, github settings - Billing and plans - Plans and usage - Git LFS Data
+
+
+lines: ~44000
 
 Prog:
 0 - Main Story
@@ -177,6 +188,14 @@ reminder/eusine text changed to thank player
 	151: wallace talks to player
 	152: lisia talks to player
 	153: both left/player can move
+	154: talk to lisia at gym
+	155: move to field bottom
+	156: cam pan/fight lisia
+	157: win against lisia/lisia move aside
+	158: player leave gym/lisia at theater
+	159: fought diantha/diantha left
+	160: beat gigalith/latias in snowscape
+	161: latias move
 1 - Pineapple Oddish
 	0: man in house
 	1: pineapple moving
@@ -202,7 +221,7 @@ reminder/eusine text changed to thank player
 	0 - route 1 youngster 		timmy (Bellsprout:7)
 	1 - route 1 lass 		amy (Oddish:6,Skitty:6)
 	2 - route 1 bug catcher 	robb (Weedle:5,Caterpie:5,Scyther:6)
-	3 - route 1 gentleman 		noland (Nidorino:16,Nidorina:16)
+	3 - route 1 gentleman 		joey (Nidorino:16,Nidorina:16)
 	4 - route 2 battle girl 	ayla (Machop:9,Timburr:9)
 	5 - route 2 hiker 		robby (Spearow:7,Aron:8,Trapinch:10)
 	6 - echo cave preschoolerb 	carlos (Whismur:8,Whismur:9,Whismur:10)
@@ -218,7 +237,7 @@ reminder/eusine text changed to thank player
 	16 - scarab l psychic		hugo (Drowzee:18/100,Chimecho:19/150)
 	17 - scarab l rich boy		leonard (Electrike:17/100,Nidorino:17/50,Luxio:18/50)
 	18 - scarab l acef		jesse (skitty:17/150, dunsparce:17/50, zubat:17/100, nuzleaf:18/100, heracross:18/50)
-	19 - scarab r beauty		lucille	(psyduck:19/100, nidorina:19/100, maractus:19/150)
+	19 - scarab r beauty		lucille	(psyduck:19/100, Nidorina:19/100, maractus:19/150)
 	20 - scarab l acem		james (mightyena:19/100, furret:19/100, murkrow:19/100, lombre:20/150, pinsir:20/100)
 	21 - route 3 battle girl	harper (machop: 21/150, nuzleaf: 21/200, zangoose: 21/120)
 	22 - route 3 fisher		santiago (magikarp: 19/50, magikarp: 20/50, magikarp: 21/50, magikarp: 22/50, magikarp: 23/400, gyarados: 24/100)
@@ -233,7 +252,7 @@ reminder/eusine text changed to thank player
 	31 - route 4 expertm		owen (machoke:31/300 hitmonlee:31/300)
 	32 - route 4 battle girl	lily (gurdurr:32/300 hitmonchan:32/400)
 	33 - route 4 fisher		richard (kingler:30/300, crawdaunt:30/300, cloyster:32/300)
-	34 - route 4 expertf		stella (ferrothorn:40/400, scizor:40/400, steelix:40/400)
+	34 - route 4 expertf		sarah (ferrothorn:40/400, scizor:40/400, steelix:40/400)
 	35 - route 5 psychic		lucas (mismagius:34/350, wobbuffet:35/400)
 	36 - route 5 bug catcher	ethan (joltik:32/400, joltik:32/400, spinarak:32/400, ariados:34/300)
 	37 - route 5 lass		emma (vulpix:32/400, furret:33/300, floatzel:34/300)
@@ -242,7 +261,7 @@ reminder/eusine text changed to thank player
 	40 - verde_gym pokefan		liam (phantump:34/400, Amoonguss:34/300, Shiftry:35/300)
 	41 - verde_gym gentle		jackson (Lombre:35/400, Victreebel:35/400)
 	42 - verde_gym toddler boy	mateo (seedot:35/400, oddish:35/400, budew:35/400, lotad:35/400, cottonee:35/400, Foongus:35/400)(eviolites)
-	43 - verde_gym bug catcher	wesley (sewaddle:34/400, sewaddle:34/400, swadloon:35/400)
+	43 - verde_gym bug catcher	eli (sewaddle:34/400, sewaddle:34/400, swadloon:35/400)
 	44 - verde_gym scientist	madison (Chespin:34/400, Gloom:34/300, Bellossom:35/400)
 	45 - verde_gym scientist	michael (Bulbasaur:34/400, Gloom:34/300, Vileplume:35/400)
 	46 - forbidden psychic		herbert (Hypno:34/300,Mr Mime:34/400,Kadabra:34/300)
@@ -251,7 +270,7 @@ reminder/eusine text changed to thank player
 	49 - forbidden rocketm		grunt (Dusclops:36/0/(hp,hp,hp), Golbat:36/0/(ak,ak,ak) Victreebel:37/0/(spd,spd,spd))
 	50 - forbidden hex		isabella (Golett:36/400, Spiritomb:36/300 Haunter:38/300)
 	51 - forbidden scif		olivia (Togedemaru:38/400, Klinklang:39/300 Escavalier:40/400)
-	52 - forbidden psychic		eli (M_Gengar:50/200, M_Alakazam:50/200, Dusknoir:50/400/(ak,ak,ak,spd,spd))
+	52 - forbidden psychic		issac (M_Gengar:50/200, M_Alakazam:50/200, Dusknoir:50/400/(ak,ak,ak,spd,spd))
 	53 - route 6 bug catcher	ian (Galvantula:42/200(spd,spd,spd), Crustle:42/300/(hp,hp,hp), Leavanny:43/400/(ak,ak,ak)
 	54 - cascata_gym 12 sailor	finn (Kingler:43/200, Ludicolo:43/200, Floatzel:44/400)
 	55 - cascata_gym 13 fisher	adam (Tentacruel:45/200, Gyarados:45/200)
@@ -260,17 +279,28 @@ reminder/eusine text changed to thank player
 	58 - cascata_gym 32 acef	julia (Gorebyss:44/300/, Vaporeon:44/400, Jellicent_f:45/300)
 	59 - route 6 two rockets	grunt (Seviper:45/0/(ak,ak), Beedrill:45/0/(spd,spd), Victreebel:45/0/(sdf,sdf))(Zangoose:45/0/(ak,ak), Mightyena:45/0/(ak,ak),Toxicroak:45/0/(ak,ak))(Snorlax:48/0/(hp,hp,hp))
 	60 - sunken_cave preschoolerg	lucy (Clefairy:45/300, Jigglypuff:45/300, Togetic:45/300)
-	61 - sunken_cave hiker		wyatt (Carbink:45/200, Seismitoad:45/200, Steelix:46/100)
-	62 - sunken_cave scientist	dillon (Magnezone:46/200, Quagsire_s:47/50)
-	63 - route 6 triathelete	chase (Electrode:46/200, Hitmontop:46/200, Rapidash:46/200, Jolteon:46/300)
-	64 - route 6 aroma		iris (Whimsicott:47/200/(sdf,sdf,sdf), Ribombee:47/200/(sdf,sdf,sdf), Leafeon:47/200/(sdf,sdf,sdf))
-	65 - route 6 bug catcher	max (Pinsir:48/300, Accelgor:48/300, Araquanid:48/300)
-	66 - route 6 fisherman		dean (Kingler:50/0, Octillery:50/0, Kingdra:50/0)
-	67 - route 6 fisherman		tucker (Milotic:48/400, Sharpedo:48/400)
+	61 - sunken_cave hiker		wyatt (Carbink:45/200, Seismitoad:45/200, Steelix:47/100)
+	62 - sunken_cave scientist	dillon (Magnezone:47/200, Quagsire_s:48/50)
+	63 - route 6 triathelete	chase (Electrode:47/200, Hitmontop:47/200, Rapidash:47/200, Jolteon:47/300)
+	64 - route 6 aroma		iris (Whimsicott:48/200/(sdf,sdf,sdf), Ribombee:48/200/(sdf,sdf,sdf), Leafeon:48/200/(sdf,sdf,sdf))
+	65 - route 6 bug catcher	max (Pinsir:50/300, Accelgor:50/300, Araquanid:50/300)
+	66 - route 6 fisherman		dean (Kingler:52/0, Octillery:52/0, Kingdra:52/0)
+	67 - route 6 fisherman		tucker (Milotic:50/400, Sharpedo:50/400)
 	68 - route 6 fisherman		david (Golisopod:55/300,Whiscash:55:300,clawitzer:55/300,malimar:55/300,kingdra:55/300,lapras:55/400)
-	69 - route 6 hiker		brooks (Crustle:48/300, Golurk:48/300, Aggron:50/300)		
-	70 - route 6 rocketf		grunt (Vileplume:50/200/hp3, Yanmega:50/300/spd3, Honchkrow:50/200/ak3 )
-	71 - route 6 rocketm		grunt (Magneton:50/200/hp3, Toxicroak:50/200/ak3, Golem:50/200/spd3, Malamar:50/200/hp3)
+	69 - route 6 hiker		brooks (Crustle:51/300, Golurk:51/300, Aggron:52/300)		
+	70 - route 6 rocketf		grunt (Vileplume:52/200/hp3, Yanmega:52/300/spd3, Honchkrow:52/200/ak3 )
+	71 - route 6 rocketm		grunt (Magneton:52/200/hp3, Toxicroak:52/200/ak3, Golem:52/200/spd3, Malamar:52/200/hp3)
+	72 - silfide_gym acem		henry (Shiinotic:54/300/hp3, Azumarill:55/400/ak3)	
+	73 - silfide_gym acef		myra (Dedenne:53/300/spd3, Ribombee:53/300/sak3, Wigglytuff:54/400/hp3)
+	74 - silfide_gym acem		layla (Carbink:54/300/df3, Gardevoir:55/300/sak3)
+	75 - silfide_gym acef		mason (Whimsicott:53/300/sdf3, Mr. Mime:53/300/spd/df2, Mawile:54/300/ak3)
+	76 - snowscape young		sean (Crawdaunt:53/300/df3, Raichu:53/300/sdf3, Vanilluxe:53/300/sak3)
+	77 - snowscape battlegirl	ava (Primeape:54/300/ak3, Hitmonchan:54/300/ak3, Crabominable:55/400/ak3)
+	78 - snowscape hiker		theo (Golem:56/400/ak3, Mamoswine:56/300/hp3)
+	79 - route 3 hex		chloe (Roserade:30/400, Togekiss:30/400)
+	80 - snowscape expm		wesley (Crawdaunt:65/400/ak3df2, Shiftry:65/400/spd3/hp2, Bisharp:65/400/df3/ak2, Weavile:65/400/spd3/ak2)
+	81 - snowscape aroma		mia (Masquerain:55/300/spd3,Shiinotic:55/300/hp3,A_Ninetales:55/400/sak3)
+	82 - snowscape acef		stella (Delcatty:55/300/spd3,Nidoqueen:55/300/hp3,Glaceon:55/300/hp3,Froslass:56/400/)
 6 - Items
 	echo_cave:
 	0 - voltorb bot left
@@ -376,7 +406,12 @@ reminder/eusine text changed to thank player
 	72 - barbar mid top
 	73 - barbar mid bot
 	74 - tm39 rock tomb
-#last: 82
+	snowscape:
+	83 - ability capsule
+	84 - tm46 thief
+	85 - shiny candy
+	86 - ice stone
+#last: 86
 7 - Locations
 	0 - south am
 	1 - north am
@@ -402,11 +437,16 @@ reminder/eusine text changed to thank player
 	21 - cascata
 	22 - sunken cave
 	23 - silfide
+	24 - snowscape mountain
+	25 - nevoso town
+	*26 - Route 7
+	*27 - Forza City
 8 - Jobs
-	0 - Research [lvl,exp,day]
-	1 - Nursing  [lvl,exp,poke]
-	2 - Gardening [lvl,exp,day]
+	0 - Research [lvl,exp,day] exp:(14/20, 25/30, ) money:(110-200x,115-250x, 0.4-1.6 0.3-1.1)
+	1 - Nursing  [lvl,exp,poke,day] exp:(11.25-18.75, 17.5-28.75) money (800-1940, 1200-5670)
+	2 - Gardening [lvl,exp,day] exp: (10, 20, ) money:(80-170x, 85-220x, )
 	3 - Baking [lvl,exp,day]
+	4 - Theater [lvl,exp,day] exp: (10, 20, ) money:(80-170x, 85-220x, )
 9 - candyman
 	0 - no candy man
 	1 - yes
@@ -461,6 +501,7 @@ reminder/eusine text changed to thank player
 	10 - festival date
 	11 - dessert clerk (date,[shop],{stock})
 	12 - fishing man ([caught_fish,date])
+	13 - ticket lady ([date])
 12 - memo pad
 	0: heracross
 		0 - kid in fiore left house
@@ -525,7 +566,10 @@ reminder/eusine text changed to thank player
 		0 - not entered pc
 		
 14 - nursery
-	None/[Poke/Date]
+	0 - pianura
+	1 - silfide
+	2 - third city
+		None/[Poke,Date,random]
 15 - mega pokemon
 	0 - mega progress
 		0 - no mega
@@ -678,6 +722,16 @@ reminder/eusine text changed to thank player
 	1 - floor 2
 	2 - floor 3
 	3 - basement
+22 - silfide gym
+	0 - pink
+	1 - green
+	2 - red
+	3 - blue
+
+talentdex
+pokestar Tablet
+
+[[code,poke_list,stats,old_list],[],[]]
 
 Channels:
 	0 - bg effects

@@ -1,0 +1,11 @@
+['Snow Warning','*Soundproof']
+[1.8,1.84,1.84,1.5,1.7,1.2]
+['Grass','Ice']
+['Mega','Mega_Abomasnow']
+{1:['Ice Punch','Powder Snow','Leer','Razor Leaf','Icy Wind'],5:'Razor Leaf',9:'Icy Wind',13:'Grass Whistle',17:'Swagger',21:'Mist',26:'Ice Shard',31:'Ingrain',36:'Wood Hammer',47:'Blizzard',58:'Sheer Cold'}
+60
+135.5
+87
+292
+['snow_o']
+['Frost Tree','It blankets wide areas in snow by whipping up blizzards. It is also known as "The Ice Monster."'] 

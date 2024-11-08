@@ -2,7 +2,7 @@
 [1.8,2,1.8,1.2,1.2,1.6]
 ['Grass','Dark']
 []
-{1:['Razor Leaf','Feint Attack','Whirlwind','Nasty Plot'],20:'Leaf Tornado',32:'Hurricane',44:'Leaf Storm'}
+{1:['Razor Leaf','Feint Attack','Whirlwind','Nasty Plot'],20:'Leaf Tornado',32:'Hurricane',44:'Leaf Storm',52:'Night Slash'}
 45
 59.6
 51

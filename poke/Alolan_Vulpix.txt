@@ -1,0 +1,11 @@
+['Snow Cloak','*Snow Warning']
+[0.76,.82,1,.8,1.3,1.3]
+['Ice',None]
+['Ice Stone','Alolan_Ninetales','Dazzling Gleam']
+{1:['Powder Snow'],4:'Tail Whip',7:'Roar',9:'Baby-Doll Eyes',10:'Ice Shard',12:'Confuse Ray',15:'Icy Wind',18:'Payback',20:'Mist',23:'Feint Attack',26:'Hex',28:'Aurora Beam',31:'Extrasensory',34:'Safeguard',36:'Ice Beam',39:'Imprison',42:'Blizzard',44:'Grudge',47:'Captivate',50:'Sheer Cold'}
+190
+9.9
+24
+294
+['snow_o']
+['Fox','If you carelessly approach it because it\'s cute, the boss of the pack, Ninetales, will appear and freeze you.'] 

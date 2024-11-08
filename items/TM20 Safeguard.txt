@@ -1,0 +1,3 @@
+['Safeguard','TM']
+['The user creates a protective field that prevents status conditions for five turns.']
+-1

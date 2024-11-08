@@ -5,6 +5,6 @@ Psychic
 {}
 0
 10
-['The user emits a', 'healing pulse that', 'restores the', 'user\’s HP by up to', 'half of its max HP.']
+['The user emits a', 'healing pulse that', 'restores the', 'user\'s HP by up to', 'half of its max HP.']
 0
 0

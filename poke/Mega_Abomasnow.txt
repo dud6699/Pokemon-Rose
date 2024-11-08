@@ -1,0 +1,11 @@
+['Snow Warning']
+[1.8,2.64,2.64,2.1,2.1,0.6]
+['Grass','Ice']
+[]
+{1:['Ice Punch','Powder Snow','Leer','Razor Leaf','Icy Wind'],5:'Razor Leaf',9:'Icy Wind',13:'Grass Whistle',17:'Swagger',21:'Mist',26:'Ice Shard',31:'Ingrain',36:'Wood Hammer',47:'Blizzard',58:'Sheer Cold'}
+60
+185
+106
+293
+[]
+['Frost Tree','A powerful Pokemon that can split huge boulders with ease. Dislikes associating with others and chooses to live quietly deep within the mountains, playing with the snow.'] 

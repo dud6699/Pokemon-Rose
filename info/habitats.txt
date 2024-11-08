@@ -18,7 +18,12 @@ Route 6 (p1) - Eevee 25%, Ekans/Arbok 20%, Mankey/Primeape 15%, Cottonee 20%, Cr
 Sunken Cave - Roggenrola/Boldore 20%, Geodude/Graveler 20%, Wooper/Quagsire 20%, Mawile 20%, Drilbur/Excadrill 13%, Gligar 7%, Barbaracle (40-46)
 Route 6 (p2) - Eevee 25%, Surskit/Masquerain 20%, Yanma/Yanmega 15%, Timburr/Gurdurr/Conkeldurr 15%, Ralts/Kirlia/Gardevoir 15%, Dewpider/Araquanid 10% (42-49)
 Route 6 (p3) - Tangela/Tangrowth 20%, Mankey/Primeape 20%, Cutiefly/Ribombee/Morelull/Shiinotic 20%, Dedenne 15%, Audino 15%, Fomantis/Lurantis 10% (45-52)
-Route 6 (mr) - Eevee 15%, Tangela/ 15%, Mankey/ 15%, Cutiefly//Morellul// 15%, Dedenne 10%, Audino 10%, Fomantis/ 10%, Ralts// 10%
+Route 6 (mr) - Eevee 15%, Tangela/ 15%, Mankey/ 15%, Cutiefly//Morellul// 15%, Dedenne 10%, Audino 10%, Fomantis/ 10%, Ralts// 10% (45-52)+maxmod
+Snowscape(top) - Swinub// 25%, Vanillite// 20%, Cubchoo/ 20%, A_Sandshrew 15%, Cryogonal 13%, Icy_Gigalith 7% (46-54)
+Snowscape(out) - Snover/ 25%, Hoothoot/ 20%, Ralts// 20%, A_Vulpix 15%, Sneasel 13%, Pawniard/ 7% (46-54)
+Snowscape(bot) - Snorunt/ 30%, Swinub// 25%, Cubchoo/ 20%, Cryogonal 15%, Pawniard/ 10%	(48-56)
+Snowscape(dry) - crabrawler 	(48-56)
+Route 7 - pidgey		(49-57)
 
 Fishing Spots:
 echo cave - wooper 40%, krabby 40%, shellder 20% (20-40)| kingler 20%, chinchou 20%, tympole 40%, Quagsire 20% (30-45)| cloyster 15%, Lanturn 20% Palpitoad/30%, wimpod/ 35%
@@ -26,7 +31,7 @@ route 3 - magikarp 50%, remoraid 30%, staryu 20% (15-40)| octillery 30%, marieni
 route 4 -  magikarp 50%,  corphish 25%, tenta 25% (15-40)| tentacruel 20%, crawdaunt 20%, wailmer 60% (35-45)| wailord 25%, gyarados 25%, clauncher/ 50% (40-max)
 forbidden forest - tentacool 50%, frillishes 50% (20-40)|  jelli 40%, tentacruel 30%, chinchou 30% (30-50)| Lanturn 20%, dhelmise 30%, inkay/ 50% (40-max)
 route 6 -  feebas 50%, krabby 30%, carvanha 20% (15-40)| remoraid/octillery 60%, kingler 20%, sharpedo 20% (30-50)| Sharpedo 20%, Milotic 15%, Horsea/Seadra/Kingdra 65 (40-max)
-route after fighting - feeb staryu, shellder, corhpish | wailmer, crawd, starmie  | milotic cloyster wailord, lapras
+route before fighting - feeb staryu, shellder, corphish | wailmer, crawd, starmie  | milotic cloyster wailord, lapras
 victory road - wooper skrelp || dratini
 
 special evo: starmie, milotic, cloyster, kingdra
@@ -34,8 +39,8 @@ items: (150%) water/ice/rock gem 60%, pearl 30%, damp/icy/smooth rock/light clay
 (100%) rare/shiny candy 40%, big pearl 20%, splash/ice/stone plate 10%, mystic water/nm ice/hard stone 10%, oval stone, deep sea scale/tooth, prism scale, dragon scale 20%
 (50%) tms (94surf,98waterfall,18raindance)(50%) heart scale 25%,pearl string 10%, myth candy 3%,  water stone 7%, shell bell/kingsrock 5%
 
-possible: horsea,  staryu, remoraid(need), wailmer, feebas, finneon, clauncher, tentacool, lapras, chinchou, 
-wooper, carvanha, barboach, skrelp, wimpod, shellder, krabby, corphish
+possible:   finneon, clamperl
+
 
 pokemon:
 #4
@@ -66,6 +71,8 @@ remoraid:	r3(f), r4(f), r6(f)
 seedot:		r3(1), scarab_l
     nuzleaf:	scarab_l
 murkrow:	scarab_l, ff1
+hoothoot:	scarab_l, ss(o)
+    noctowl:	ss(o)
 lotad:		scarab_r, r3(2)
     lombre:	scarab_r, r3(2)
 misdreavus:	scarab_r, ff1
@@ -106,6 +113,17 @@ timburr:	r4, r6
     conkeldurr:	r6
 mankey:		r6 (p1,p3)
     primeape:	r6 (p1,p3)
+ralts:		r6, ss(o)
+    kirlia:	r6, ss(o)
+    gardevoir:	r6, ss(o)
+swinub:		ss(1,2)
+    piloswine:	ss(1,2)
+    mamoswine:	ss(1,2)
+cubchoo:	ss(1,2)
+    beartic:	ss(1,2)
+cryogonal:	ss(1,2)
+pawniard:	ss(o,2)
+    bisharp:	ss(o,2)
 
 #1
 kangaskhan: 	r4
@@ -113,7 +131,6 @@ vulpix:		r4
 golett:		mirror
 onix:		mirror
 noibat: 	echo
-hoothoot:	scarab_l
 magnemite: 	vigore
 electrike: 	vigore
 togedemaru: 	vigore
@@ -190,11 +207,19 @@ surskit:	r6
     masquerain:	r6
 yanma:		r6
     yanmega:	r6
-ralts:		r6
-    kirlia:	r6
-    gardevoir:	r6
 dewpider:	r6
     araquanid:	r6
+vanillite:	ss(1)
+    vanillish:	ss(1)
+    vanilluxe:	ss(1)
+a_sandshrew:	ss(1)
+icy_gigalith:	ss(1)
+snover:		ss(o)
+a_vulpix:	ss(o)
+sneasel:	ss(o)
+snorunt:	ss(2)
+    glalie:	ss(2)
+
 
 #rare
 zangoose:	scarab_l
@@ -213,6 +238,15 @@ eevee:		r6
 #special:
 pineapple_oddish:	fiore
 spooky_wobbuffet:	ff1
+alolan_marowak: 	ombra
+spiritomb: 		ombra
+hawlucha:		r6
 
 voltorb:
 geodude:
+
+Need habitat: Larvesta, Salazzle?, Darmanitan?, Turtonator, Trapinch, Maractus, Lapras, Sandile, Klink, Ferroseed, Heracross, Chespin, Clamperl, Sewaddle, Voltorb, Geodude, Sentret, Shinx, Venipede | Mega: Absol, Beldum, Bulbasaur, Squirtle | Legendary: Tornadus_T, Thundurus_T, Celebi, Rayquaza
+
+Need:  Treeko, Torchic, Mudkip, Cyndaquil?, Oshawott? sandslash exeggutor hoppip skarmory phanpy breloom drapion zoroark emolga eeleektross haxorus bisharp hydriegon volcarona heliolisk goomy turtinator kommoo 
+
+Nice: raticate parasect rhydon pineco porygon hariyama torkoal cacturne pachirisu cherubi shellos driftblim lumineon purrloin blitzle petilil darmanitan cryogonal mienshao braviary durant pangoro aegislash meowstic 

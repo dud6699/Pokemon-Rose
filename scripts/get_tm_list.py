@@ -1,5 +1,7 @@
 import os
 
+#fill tm_list_text.txt with text from bulbapedia to get list of pokemon that learn the TM
+#double check only in gen vii
 def get_tm_list(text):
     names = []
     pick_next = False
@@ -9,20 +11,20 @@ def get_tm_list(text):
             for word in line.split():
                 if word == "Alolan":
                     names[-1] = "Alolan_"+names[-1]
-                elif word == "Galarian":
+                elif word in ["Galarian","Hisuian","Paldean"]:
                     del names[-1]
                 elif word == "Male" and names[-1] == 'Meowstic':
                     names[-1] = "Meowstic_M"
                 elif word == "Female" and names[-1] == 'Meowstic':
                     names[-1] = "Meowstic_F"
-                elif word.isdigit() and len(word) == 3 and int(word) < 808:
+                elif word.isdigit() and len(word) == 4 and int(word) < 808:
                     if int(word) == 29:
                         names.append("Nidoran_F")
                     elif int(word) == 32:
                         names.append("Nidoran_M")
                     elif int(word) == 669:
                         names.append("Flabebe")
-                    elif int(word) in [186,413,414,412,741]:
+                    elif int(word) in [186,412,413,414,741]: #politoed burmy wormadam mothim oricorio
                         pass
                     else:
                         pick_next = True

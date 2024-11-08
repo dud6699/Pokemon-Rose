@@ -1,0 +1,11 @@
+['Oblivious','Snow Cloak']
+[2,2,1.2,1.6,1.2,1]
+['Ice','Ground']
+['move','Mamoswine']
+{1:['Fury Attack','Ancient Power','Peck','Mud Sport','Odor Sleuth','Powder Snow'],5:'Mud Sport',8:'Powder Snow',11:'Mud-Slap',14:'Endure',18:'Mud Bomb',21:'Icy Wind',24:'Ice Fang',28:'Take Down',37:'Mist',41:'Thrash',46:'Earthquake',52:'Blizzard',58:'Amnesia'}
+75
+55.8
+43
+281
+['snow']
+['Swine','Piloswine is covered by a thick coat of long hair that enables it to endure the freezing cold. This Pokemon uses its tusks to dig up food that has been buried under ice.'] 

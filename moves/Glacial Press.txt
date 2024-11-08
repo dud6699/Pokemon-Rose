@@ -1,0 +1,10 @@
+Ice
+0
+???
+1
+{}
+1
+10
+['The user slams its icy body into the target. The more the user outweighs the target, the greater the move\'s power.']
+0
+0

@@ -7,5 +7,5 @@
 48.4
 63
 255
-['route_6']
+['route_6','snowscape_o']
 ['Embrace','Gardevoir has the ability to read the', 'future. If it senses impending danger to', 'its Trainer, this Pokemon is said to', 'unleash its psychokinetic energy at full', 'power.'] 

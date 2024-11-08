@@ -1,0 +1,10 @@
+Ice
+0
+30
+0.9
+{}
+1
+20
+['The user continually rolls into the target over five turns. It becomes stronger each time it hits.']
+0
+0

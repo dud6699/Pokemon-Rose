@@ -1,0 +1,10 @@
+Ice
+1
+70
+1
+{0.1:['Frz']}
+1
+20
+['The user rapidly cools the target and may leave it frozen. This move is super effective on Water types.']
+0
+0

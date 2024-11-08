@@ -1,0 +1,11 @@
+['Inner Focus','Ice Body','*Moody']
+[1,1,1,1,1,1]
+['Ice',None]
+[42,'Glalie','Freeze-Dry']
+{1:['Powder Snow','Leer'],5:'Double Team',10:'Ice Shard',14:'Icy Wind',19:'Bite',23:'Ice Fang',28:'Headbutt',32:'Protect',37:'Frost Breath',41:'Crunch',46:'Blizzard',50:'Hail'}
+190
+16.8
+28
+307
+['snow']
+['Snow Hat','Snorunt live in regions with heavy snowfall. In seasons without snow, such as spring and summer, this Pokemon steals away to live quietly among stalactites and stalagmites deep in caverns.'] 

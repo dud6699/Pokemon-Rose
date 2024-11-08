@@ -1,0 +1,3 @@
+['Swords Dance','TM']
+['A frenetic dance to uplift the fighting spirit. This sharply raises the user\'s Attack stat.']
+-1

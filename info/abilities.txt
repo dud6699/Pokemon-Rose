@@ -4,6 +4,7 @@ Aerilate
 Arena Trap
 Big Pecks
 Blaze
+Cheek Pouch
 Chlorophyll
 Clear Body
 Compound Eyes
@@ -52,6 +53,7 @@ Oblivious
 Overgrow
 Own Tempo
 Parental Bond
+Pixilate
 Plus
 Poison Point
 Prankster
@@ -60,8 +62,10 @@ Queenly Majesty
 Quick Feet
 Ranged
 Reckless
+Refrigerate
 Rivalry
 Rock Head
+Rock Solid
 Rough Skin
 Run Away
 Scrappy
@@ -74,15 +78,18 @@ Shell Armor
 Shield Dust
 Skill Link
 Sniper
+Snow Cloak
+Snow Warning
+Soundproof
+(Perish Song, Heal Bell)
 Stall
 Steadfast
 Storm Drain
 Stun
-Soundproof
-(Perish Song, Heal Bell)
 Static
 Steelworker
 Sturdy
+Snow Warning
 Super Luck
 Swarm
 Swift Swim

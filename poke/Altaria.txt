@@ -1,0 +1,11 @@
+['Natural Cure']
+[1.5,1.4,1.4,1.8,2.1,1.6]
+['Dragon','Flying']
+['Mega','Mega_Altaria']
+{1:['Dragon Breath','Sky Attack','Pluck','Peck','Growl','Astonish','Sing'],3:'Astonish',5:'Sing',7:'Fury Attack',9:'Safeguard',11:'Disarming Voice',14:'Mist',17:'Round',20:'Natural Gift',23:'Take Down',26:'Refresh',30:'Dragon Dance',34:'Cotton Guard',40:'Dragon Pulse',46:'Perish Song',52:'Moonblast',59:'Sky Attack'}
+45
+20.6
+43
+902
+[]
+['Humming','Altaria dances and wheels through the sky among billowing, cotton-like clouds. By singing melodies in its crystal-clear voice, this Pokemon makes its listeners experience dreamy wonderment.'] 

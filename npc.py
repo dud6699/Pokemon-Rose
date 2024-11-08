@@ -56,7 +56,6 @@ class NPC:
             self.turn = True
         self.in_front = False
         self.tempp = None
-        self.p = self.u
         self.x = xy[0]
         self.y = xy[1]
         self.yd = 0
@@ -100,6 +99,24 @@ class NPC:
                 if self.trainer_walk[1] == 0:
                     self.trainer_walk = None
                     self.turn = True
+        if extra_walk == None:
+            if self.motion[self.curr][0] in ['mr','r']:
+                self.p = self.r
+            elif self.motion[self.curr][0] in ['ml','l']:
+                self.p = self.l
+            elif self.motion[self.curr][0] in ['md','d']:
+                self.p = self.d
+            else:
+                self.p = self.u
+        else:
+            if extra_walk[0] == 'r':
+                self.p = self.r
+            elif extra_walk[0] == 'l':
+                self.p = self.l
+            elif extra_walk[0] == 'd':
+                self.p = self.d
+            else:
+                self.p = self.u
         self.extra_walk = None
         if loc == None or P.save_data.loc == loc:
             self.check_in()
@@ -310,32 +327,35 @@ class NPC:
                             temp_curr = 0
                         temp_tim = self.motion[temp_curr][1]
             else:
-                self.x += 50
+                if self.type == 'Ace Trainerf' and self.name == 'Stella':
+                    self.x -= 50
+                else:
+                    self.x += 50
                 self.bx = self.x
             self.curr = temp_curr
             self.tim = temp_tim
             print(self.curr,self.tim)
 
     def write(self):
-        c = 0
-        while len(self.text) > c:
-            poke_func.new_txt(self.P)
-            poke_func.write(self.P,self.text[c],self.text[c+1],self.text[c+2])
-            poke_func.cont(self.P)
-            c += 3
+        if len(self.text[0]) > 30 or len(self.text) == 1:
+            for t in self.text:
+                poke_func.txt(self.P,t)
+        else:
+            c = 0
+            while len(self.text) > c:
+                poke_func.txt(self.P,self.text[c],self.text[c+1],self.text[c+2])
+                c += 3
 
     def lose_write(self):
-        poke_func.new_txt(self.P)
-        poke_func.write(self.P,self.lose_text[0],self.lose_text[1],self.lose_text[2])
-        poke_func.cont(self.P)
-        if len(self.lose_text) > 3:
-            poke_func.new_txt(self.P)
-            poke_func.write(self.P,self.lose_text[3],self.lose_text[4],self.lose_text[5])
-            poke_func.cont(self.P)
-        if len(self.lose_text) > 6:
-            poke_func.new_txt(self.P)
-            poke_func.write(self.P,self.lose_text[6],self.lose_text[7],self.lose_text[8])
-            poke_func.cont(self.P)
+        if len(self.lose_text[0]) > 30 or len(self.lose_text) == 1:
+            for t in self.lose_text:
+                poke_func.txt(self.P,t)
+        else:
+            poke_func.txt(self.P,self.lose_text[0],self.lose_text[1],self.lose_text[2])
+            if len(self.lose_text) > 3:
+                poke_func.txt(self.P,self.lose_text[3],self.lose_text[4],self.lose_text[5])
+            if len(self.lose_text) > 6:
+                poke_func.txt(self.P,self.lose_text[6],self.lose_text[7],self.lose_text[8])
 
     def check_trainer(self,dir,rects):
         for tup in rects:
@@ -363,7 +383,7 @@ class NPC:
 
     def skip_move(self):
         while self.x%50 != 0 or self.y%50 != 0:
-            self.move(blit = False)
+            self.move(blit = False,mov=True)
         self.reset_box()
 
     def move(self,temppx = None, temppy = None,rects = [],cam_mod = 0,cam_modx = 0,blit = True,mov = False):

@@ -1,0 +1,3 @@
+['False Swipe','TM']
+['A restrained attack that prevents the target from fainting. The target is left with at least 1 HP.']
+-1

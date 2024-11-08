@@ -1,0 +1,11 @@
+['Snow Cloak','Slush Rush']
+[1.1,1.4,1.2,0.8,0.8,0.8]
+['Ice',None]
+[37,'Beartic','Icicle Crash']
+{1:['Growl'],5:'Powder Snow',9:'Bide',13:'Icy Wind',15:'Play Nice',17:'Fury Swipes',21:'Brine',25:'Endure',29:'Charm',33:'Slash',36:'Flail',41:'Rest',45:'Blizzard',49:'Hail',53:'Thrash',57:'Sheer Cold'}
+120
+8.5
+20
+286
+['snow']
+['Chill','Its nose is always running. It sniffs the snot back up because the mucus provides the raw material for its moves.'] 

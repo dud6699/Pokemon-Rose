@@ -1,19 +1,19 @@
-35 normal 6(7) starters 4(6) legendary
+35 normal 6(7) starters 4(6) legendary total 48
 
-route 1 (beedrill) 1/35
-route 2 (none) 1/35
-echoing cave (aggron) 2/35
-hydro dam (manectric) 3/35
-scarab woods l (pinsir) 4/35
-scarab woods r (heracross) 5/35
-route 3 (p2) (slowbro, lopunny) 7/35
-cave of mirrors (sableye, steelix) 9/35
-route 4 (gyarados,kangaskhan) 11/35
-route 5 scizor 12/35
-forbidden forest (p1) gengar banette 14/35
-forbidden forest (p2) alakazam 15/35
-sunken cave (mawile,gardevoir,gallade) 18/35
-route 6 (sharpedo,audinite) 20/35
+route 1 (beedrill) 1/36
+route 2 (none) 1/36
+echoing cave (aggron) 2/36
+hydro dam (manectric) 3/36
+scarab woods l (pinsir) 4/36
+scarab woods r (heracross) 5/36
+route 3 (p2) (slowbro, lopunny) 7/36
+cave of mirrors (sableye, steelix) 9/36
+route 4 (gyarados,kangaskhan) 11/36
+route 5 (scizor) 12/36
+forbidden forest (p1) (gengar, banette) 14/36
+forbidden forest (p2) (alakazam) 15/36
+sunken cave (mawile,gardevoir,gallade) 18/36
+route 6 (sharpedo,audino) 20/36
 
 victory road (charizard xy, blastoise, venasaur, swampert, sceptile, blaziken) 6(7)
 

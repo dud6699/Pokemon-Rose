@@ -5,6 +5,6 @@ Normal
 {}
 0
 25
-['The user creates a', 'protective field', 'that prevents status', 'conditions for five', 'turns.']
+['The user creates a protective field that prevents status conditions for five turns.']
 0
 0

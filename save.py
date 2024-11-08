@@ -32,6 +32,11 @@ class Save:
         # else:
         #     self.register = [None,None,None,None]
         self.pokedex = ast.literal_eval(data[13][:-1])
+        #v1.2.9
+        if len(data) == 14:
+            self.pokestar = [[],[],[]]
+        else:
+            self.pokestar = ast.literal_eval(data[14][:-1])
         self.fix_old_files()
         self.start_time = datetime.datetime.now()
         #
@@ -99,6 +104,27 @@ class Save:
         if len(self.prog[6]) < 150:
             for i in range(150-len(self.prog[6])):
                 self.prog[6].append(0)
+        #v1.2.7
+        if len(self.prog) == 22:
+            self.prog.append([0,0,0,0])
+        elif self.prog[22] == 0:
+            self.prog[22] = [0,0,0,0]
+        #v1.2.8
+        if type(self.prog[14]) != list or (len(self.prog[14]) == 3 and type(self.prog[14][2]) == float):
+            if self.prog[14] != None:
+                new_format = [self.prog[14][0][0],self.prog[14][0][1],self.prog[14][1],self.prog[14][2]]
+                self.prog[14] = [new_format,None,None]
+            else:
+                self.prog[14] = [None,None,None]
+        if len(self.prog[8][1]) == 3:
+            self.prog[8][1].append(None)
+        #v1.2.9
+        if len(self.prog[11]) == 13:
+            self.prog[11].append(None)
+        #v1.3.1
+        if len(self.prog[5]) < 120:
+            for i in range(40):
+                self.prog[5].append(0)
         #fix pokedex
         to_del = []
         for pok in self.pokedex:
@@ -118,3 +144,26 @@ class Save:
 
 def get_trees():
     return [[0,0,0,0],[0,0,1,0],[0,0,1,0],[0,0,0,1],[0,1,0,0],[0,0,1,0],[0,0,0,1],[0,0,0,0],[0,1,0,0],[1,0,0,0],[0,0,1,0],[1,0,0,0],[0,0,0,0],[0,1,0,0],[1,0,0,0],[0,0,0,1],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,1,0,0],[0,0,0,1],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
+
+
+def get_prog():
+    result = [0,0,0,0,0]
+    result.append([0]*120) # 120 trainers
+    result.append([0]*150) # 150 items
+    result.append(0)
+    result.append([[-1,0,None],[-1,0,None,None],[-1,0,None],[-1,0,None],[-1,0,None],[-1,0,None],[-1,0,None],[-1,0,None]])
+    result.append(0)
+    result.append(get_trees())
+    result.append([0,[None,[],{}],[None,None],None,[0,0],None,None,[None,[],{}],[None,[]],[0,0,None],None,[None,[],{}],[0,None],None]) # market
+    result.append([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]) # memo
+    result.append(None)
+    result.append([None,None,None]) # nursery
+    result.append([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]) # mega
+    result.append(0)
+    result.append([[3,1,0,0,0,1,1,1,2,2,2,3,3,3,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0]])
+    result.append(0)
+    result.append([0,[0,0,0,0,0]])
+    result.append([0]*40) # 40 journals
+    result.append([0,0,0,0])
+    result.append([0,0,0,0])
+    return str(result)

@@ -1,0 +1,11 @@
+['Oblivious','Snow Cloak']
+[1,1,.6,.8,.6,1]
+['Ice','Ground']
+[33,'Piloswine','Fury Attack']
+{1:['Tackle','Odor Sleuth'],5:'Mud Sport',8:'Powder Snow',11:'Mud-Slap',14:'Endure',18:'Mud Bomb',21:'Icy Wind',24:'Ice Shard',28:'Take Down',35:'Mist',37:'Earthquake',40:'Flail',44:'Blizzard',48:'Amnesia'}
+225
+6.5
+16
+280
+['snow']
+['Pig','Swinub roots for food by rubbing its snout against the ground. Its favorite food is a mushroom that grows under the cover of dead grass. This Pokemon occasionally roots out hot springs.'] 

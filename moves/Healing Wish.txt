@@ -5,6 +5,6 @@ Psychic
 {}
 0
 10
-['The user faints. In', 'return, the Pokémon', 'taking its place', 'will have its HP', 'restored and status', 'conditions cured.']
+['The user faints. In', 'return, the Pokemon', 'taking its place', 'will have its HP', 'restored and status', 'conditions cured.']
 0
 0

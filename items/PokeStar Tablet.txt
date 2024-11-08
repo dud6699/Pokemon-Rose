@@ -1,0 +1,3 @@
+['Use','Key']
+['A device that lets you register and manage Pokemon to participate in PokeStar events.']
+-1

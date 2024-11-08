@@ -1,0 +1,11 @@
+['Snow Cloak','*Snow Warning']
+[1.46,1.34,1.62,1.5,2,2.18]
+['Ice','Fairy']
+['Ice Stone','Alolan_Ninetales','Dazzling Gleam']
+{1:['Dazzling Gleam','Imprison','Nasty Plot','Ice Beam','Ice Shard','Confuse Ray','Safeguard']}
+75
+19.9
+43
+295
+[]
+['Fox','The reason it guides people all the way down to the mountain\'s base is that it wants them to hurry up and leave.'] 

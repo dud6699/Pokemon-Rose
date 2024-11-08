@@ -1,0 +1,3 @@
+['Confide','TM']
+['The user tells the target a secret, and the target loses its concentration. This lowers the target\'s Sp. Atk stat.']
+-1

@@ -8,7 +8,7 @@ looker (poison)- growlithe, croagunk
 
 buck (ground gym) - *claydol, dusknoir, shuckle, umbreon, torkoal
 N
-cheryl (normal gym) - wobbuffet, drifblim, hariyama, wailord, *blissey
+
 curtis/yancy
 
 dark psychic grass rock
@@ -20,7 +20,7 @@ colress(steel) Magnemite - Klink - Ferrothorn - M_Mawile
 cheryl(normal) Noctowl - Delcatty - Wigglytuff - Chansey - M_Audino
 mairin(grass) Whimsicott (3hp,2df) Leavanny (3ak,2spd) Vileplume (3sdf,2sak)/Bellossom (3spd,2sak) Roserade (3sak,2spd) Quilladin (3hp,2df) M_Venasaur (3hp,2sdf)
 siebold(water) M_slowbro (3hp,2df) Toxapex (3hp,2sdf) Seismitoad (1hp,2df,2sdf) Slowking (2sak,3hp) Clawitzer (3sak,2spd) M_blastoise (3sak,2hp)
-lisia(fairy) M_altaria
+lisia(fairy) Sylveon (2hp,3spd), Togekiss (3sak,2spd), Dedenne (2df,3hp), Azumarill (3ak,2hp) Clefable (3hp,2df) M_altaria (3hp,2sdf)
 riley(fighting) M_lucario
 alain(fire) M_Charizard_X M_Charizard_Y
 zinnia(dragon) M_Salamence

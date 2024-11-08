@@ -1,32 +1,71 @@
-1.2.6
-main objective update
-baking (testing)
+1.3.1
+Quests:
+Dream Eater
+porygon
+razor fang
+
+new poke
+hidden ability capsule?
+kings rock?
+rotom fridge
+electrizer/magmarizer
+sliggoo rain
+malamar
+
+bug no music next to healer on guitar festival day
+change snorunt/crabrawler dex
+use berries in battle doesn't decrease count?
+flying press ai
+wallace music change
+show poison dmg on finishing move
+trade poke with one in exchange
+reword research game
+safeguard
+force mega stone holding
+leech seed carry over to next fight if switched out?
 npcs in no transition areas
-clamperl in house
 bug die after using item
 clearer highlight in pokemon menu
 remove txt delay in pokemon menu
-confusion during sleep (par?)
-absorb overkill damage
+victory road regional variant fishing (chingling, solosis(bubble/drizzle), arbok, misdreavus(kelp), eelektross
+check map (later)
+ion deluge end of turn
+
 
 #everytime:
+set Poke.debug to False
 reset professor
+
+set_mixer_volume indoor locations
+main objective update
+update get_location()
 update get_indoors()
 disable check ability?
+make sure hard trainer battles have same pokemon after losing
+
+playtesting notes:
+research game explanation confusing
+mega evolution confusing
+
+#Not in game
+rototiller
+helping hand
+wide guard
+oricorio
+telepathy
 
 glaceon
 sandstorm
-jobs:	research(colress)(mega evo, soul dew, fossils), blue 
-nursery(cheryl)(baby pokemon), pale
-gardening(marian)(stat boost petal?/berries/shrooms/balm shroom?), green
-cooking(siebold)(friendship food), orange
-beauty contest(lisia)(heart scales), pink	beauty tracker
-tourney(riley)(BP for battle items(focus sash....candy?), dark red	rope
-mining(alain)(gems, nuggets/bones/misc items, plates, stones), candy?, brown		
-(water race?) bounty(finding criminals)(zinnia)(ability capsules), 	more shiny/ more encounter
+jobs:	research(colress)(mega evo, soul dew, fossils), blue egida/ombra/nevoso
+nursery(cheryl)(baby pokemon), pale pianura/silfide/farmland
+gardening(marian)(stat boost petal?/berries/shrooms/balm shroom?), green verde/fiore/forza
+cooking(siebold)(friendship food), orange cascata/farmland/pianura
+theater(lisia)(heart scales), pink	beauty tracker	silfide/cenere/alto mare
+tourney(riley)(BP for battle items(focus sash....candy?), dark red	rope	forza/verde/alto mare
+mining(alain)(gems, nuggets/bones/misc items, plates, stones), candy?, brown	cenere/egida/cascata
+(water race?) bounty(finding criminals)(zinnia)(ability capsules), light blue	more shiny/ more encounter	alto mare/isola/nevoso
 trade evoitems buyable
 ability capsules
-set gender of trainer pokemon
 music fade
 colress/professor/girl spr size
 change candy price
@@ -43,11 +82,6 @@ in battle order
 clear body with fainting
 update bide with other effects
 wrap not proc when dead?
-no rototiller
-no helping hand
-no wide guard
-no oricorio
-no telepathy
 update pokedex number every time in profile
 redundant pcx/pcy
 comet punch not effective
@@ -111,6 +145,9 @@ fisherman (sun)
 
 make shops set when load file icy/smooth rock
 
+5th gym:
+free ticket (sun)
+
 potion roulette
 
 berry list
@@ -132,7 +169,6 @@ aqua ring
 disable
 mud sport
 soak
-psych up
 bounce
 heal block
 hail
@@ -144,12 +180,12 @@ water sport
 memento
 imprison
 sleep talk
-last resort
 dive
 stomping tantrum
 weather ball
 insomnia
 healing wish
+aurora veil
 Lucky Chant
 retalitate
 Moonlight
@@ -238,17 +274,17 @@ regenerator
 competitive
 anticipation
 snowcloak
-water bubble
+water bubble (ability swap)
 regenerator
 overcoat
 illuminate
 speed boost
 tinted lens
-pixilate
 liquid ooze
 prankster dark poke
 synchronize
 cursed body
+leaf guard
 
 need other stuff:
 sand force
@@ -259,5 +295,5 @@ pickup
 infiltrator
 unnerve
 sand stream
-leaf guard
+
 immunity/insomnia... with ability changing

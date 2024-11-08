@@ -1,0 +1,11 @@
+['Hyper Cutter','Iron Fist','*Anger Point']
+[.94,1.64,.84,1.14,.94,1.26]
+['Fighting',None]
+['Ice Stone','Crabominable','Ice Punch']
+{1:['Bubble'],5:'Rock Smash',9:'Leer',13:'Pursuit',17:'Bubble Beam',22:'Power-Up Punch',25:'Dizzy Punch',29:'Payback',33:'Reversal',37:'Crabhammer',42:'Iron Defense',45:'Dynamic Punch',49:'Close Combat'}
+225
+7
+24
+310
+['snowscape']
+['Boxing','Its hard pincers are well suited to both offense and defense. Fights between two Crabrawler are like boxing matches.'] 

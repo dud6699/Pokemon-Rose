@@ -1,0 +1,11 @@
+['Levitate']
+[1.6,1,1.9,1,2.7,2.1]
+['Ice',None]
+[]
+{1:['Sheer Cold','Night Slash','Bind','Ice Shard','Sharpen','Rapid Spin'],5:'Icy Wind',9:['Mist','Haze'],13:'Aurora Beam',17:'Acid Armor',21:'Ancient Power',25:'Ice Beam',29:'Light Screen',33:'Reflect',37:'Slash',41:'Confuse Ray',45:'Recover',49:'Freeze-Dry',50:'Solar Beam',53:'Night Slash',57:'Sheer Cold'}
+25
+148
+43
+290
+['snow']
+['Crystallizing','They are born in snow clouds. They use chains made of ice crystals to capture prey.'] 

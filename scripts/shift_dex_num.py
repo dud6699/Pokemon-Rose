@@ -1,5 +1,6 @@
 import os
 
+#shift dex numbers from start to stop by the amount given. Run in poke folder.
 #start including stop including amount int
 def shift_num(start,stop,amount,up = True):
     count = 0

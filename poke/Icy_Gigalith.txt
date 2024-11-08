@@ -1,0 +1,11 @@
+['Solid Rock']
+[2,2.1,1.4,3,1.5,1.1]
+['Ice','Rock']
+[]
+{1:['Blizzard','Glacial Press','Tackle'],4:'Icy Wind',7:'Harden',10:'Icicle Spear',14:'Rock Blast',17:'Mist',20:'Avalanche',23:'Iron Defense',26:'Rock Slide',30:'Curse',36:'Icicle Crash',40:'Double-Edge',46:'Hail',50:'Stone Edge',55:'Glacial Press',60:'Recover',64:'Sheer Cold'}
+55
+340
+92
+279
+['snow']
+['Frozen Core','When a Roggenrola accidentally stumbles into Snowscape Ridge, it ends up freezing over. It then subconsiously evolves into this Gigalith variation by absorbing the surrounding environment.']

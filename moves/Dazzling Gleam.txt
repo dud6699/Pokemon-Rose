@@ -5,6 +5,6 @@ Fairy
 {}
 1
 10
-['The user damages the', 'opposing Pokemon by', 'emitting a powerful', 'flash.']
+['The user damages the opposing Pokemon by emitting a powerful flash.']
 0
 0

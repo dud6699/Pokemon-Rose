@@ -162,6 +162,14 @@ class cut_tree:
     def y_dist(self):
         return 275-self.P.py-self.y
 
+def in_terrain(P,terrain,poke = None):
+    if poke == None:
+        if P.battle_terrain != None and P.battle_terrain[0] == terrain:
+            return True
+    elif P.battle_terrain != None and P.battle_terrain[0] == terrain and poke.grounded():
+        return True
+    return False
+
 def exit_forbidden(P):
     if P.prog[18] == 0:
         P.px = -725
@@ -269,6 +277,23 @@ def blit_rain(P,rain):
     P.surface.blit(P.rain_img,(-200+x,-600+y))
     P.surface.blit(P.rain_img,(-1000+x,-600+y))
 
+def blit_hail(P,hail):
+    x = 0
+    y = 0
+    if hail < 20 and hail >= 0:
+        x -= 200
+        y -= 600
+    if hail < 20:
+        x += 200
+        y += 600
+    hail = hail%20
+    y += hail*30
+    x += hail*10
+    P.surface.blit(P.hail_img,(0+x,0+y))
+    P.surface.blit(P.hail_img,(-800+x,0+y))
+    P.surface.blit(P.hail_img,(-200+x,-600+y))
+    P.surface.blit(P.hail_img,(-1000+x,-600+y))
+
 def blit_wind(P,wind):
     x = 0
     y = 0
@@ -318,7 +343,7 @@ def print_box(P,l,off):
                 P.surface.blit(l[x][y].icon,(20+70*y+off,160+70*x))
                 if l[x][y].item != None:
                     P.surface.blit(P.item_box,(60+70*y+off,210+70*x))
-                if l[x][y].nurse:
+                if l[x][y].nurse != 0:
                     P.surface.blit(P.nurse_box,(25+70*y+off,208+70*x))
 
 def type_eff(type1, type2) -> float:
@@ -446,8 +471,82 @@ def new_day(old):
         return True
     return False
 
+def get_theater_tm(P):
+    txt(P,"Congratulations, your theater","skill leveled up!")
+    txt(P,"Your Pokemon's acting skills will now level up a little faster.")
+    if P.prog[8][4][0] == 2:
+        item = "TM100 Confide"
+    elif P.prog[8][4][0] == 3:
+        item = "TM49 Echoed Voice"
+    elif P.prog[8][4][0] == 4:
+        item = "TM20 Safeguard"
+    elif P.prog[8][4][0] == 5:
+        item = "TM54 False Swipe"
+    elif P.prog[8][4][0] == 6:
+        item = "TM77 Psych Up"
+    elif P.prog[8][4][0] == 7:
+        item = "TM17 Protect"
+    elif P.prog[8][4][0] == 8:
+        item = "TM68 Giga Impact"
+    elif P.prog[8][4][0] == 9:
+        item = "TM15 Hyper Beam"
+    else:
+        item = "TM75 Swords Dance"
+    txt(P,"Take this "+item+". It may help you with future performances!")
+    txt(P,"You received "+item+"!")
+    add_item(P,item,1)
+
+
+def get_baby_poke(P):
+    if P.prog[8][1][0] == 10 and P.prog[8][1][1] != 100:
+        txt(P,"We've got a Pokemon here for you as thanks for all your help!")
+        rand = random.random()
+        if rand < 0.5:
+            gift = random.choice([poke.Poke('Togepi',[1,random.randint(0,1),787,"Growl",-1,"Charm",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Budew',[1,random.randint(0,1),787,"Absorb",-1,None,None,None,None,None,None,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Pichu',[1,random.randint(0,1),787,"Thunder Shock",-1,"Charm",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Smoochum',[1,random.randint(0,1),787,"Pound",-1,None,None,None,None,None,None,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Mantyke',[1,random.randint(0,1),787,"Tackle",-1,"Bubble",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability'])])
+        elif rand < 0.55:
+            gift = poke.Poke('Riolu',[1,random.randint(0,1),787,"Foresight",-1,"Quick Attack",-1,"Endure",-1,None,None,None,None,0,"Nest Ball",0,'Ability'])
+        elif rand < 0.7:
+            gift = random.choice([poke.Poke('Magby',[1,random.randint(0,1),787,"Smog",-1,"Leer",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Elekid',[1,random.randint(0,1),787,"Quick Attack",-1,"Leer",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability'])])
+        elif rand < 0.9:
+            gift = poke.Poke('Tyrogue',[1,random.randint(0,1),787,"Tackle",-1,"Bulk Up",-1,"Fake Out",-1,"Foresight",-1,None,None,0,"Nest Ball",0,'Ability'])
+        else:
+            gift = random.choice([poke.Poke('Munchlax',[1,random.randint(0,1),787,"Tackle",-1,"Last Resort",-1,"Lick",-1,"Metronome",-1,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Chingling',[1,random.randint(0,1),787,"Wrap",-1,None,None,None,None,None,None,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Azurill',[1,random.randint(0,1),787,"Splash",-1,"Water Gun",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Wynaut',[1,random.randint(0,1),787,"Splash",-1,"Charm",-1,"Encore",-1,None,None,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Bonsly',[1,random.randint(0,1),787,"Fake Tears",-1,"Copycat",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Mime Jr',[1,random.randint(0,1),787,"Barrier",-1,"Confusion",-1,"Pound",-1,"Tickle",-1,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Igglybuff',[1,random.randint(0,1),787,"Sing",-1,"Charm",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Cleffa',[1,random.randint(0,1),787,"Pound",-1,"Charm",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Happiny',[1,random.randint(0,1),787,"Pound",-1,"Charm",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability'])])
+        txt(P,"You received "+gift.name+"!")
+    else:
+        txt(P,"Your nursing skill leveled up!")
+        txt(P,"The bonus your nursing Pokemon","receive will be a little","higher than before!")
+        if P.prog[8][1][0] == 2:
+            gift = poke.Poke('Igglybuff',[1,random.randint(0,1),787,"Sing",-1,"Charm",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability'])
+        elif P.prog[8][1][0] == 3:
+            gift = poke.Poke('Mime Jr',[1,random.randint(0,1),787,"Barrier",-1,"Confusion",-1,"Pound",-1,"Tickle",-1,None,None,0,"Nest Ball",0,'Ability'])
+        elif P.prog[8][1][0] == 4:
+            gift = poke.Poke('Bonsly',[1,random.randint(0,1),787,"Fake Tears",-1,"Copycat",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability'])
+        elif P.prog[8][1][0] == 5:
+            gift = poke.Poke('Wynaut',[1,random.randint(0,1),787,"Splash",-1,"Charm",-1,"Encore",-1,None,None,None,None,0,"Nest Ball",0,'Ability'])
+        elif P.prog[8][1][0] == 6:
+            gift = poke.Poke('Azurill',[1,random.randint(0,1),787,"Splash",-1,"Water Gun",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability'])
+        elif P.prog[8][1][0] == 7:
+            gift = poke.Poke('Chingling',[1,random.randint(0,1),787,"Wrap",-1,None,None,None,None,None,None,None,None,0,"Nest Ball",0,'Ability'])
+        elif P.prog[8][1][0] == 8:
+            gift = poke.Poke('Munchlax',[1,random.randint(0,1),787,"Tackle",-1,"Last Resort",-1,"Lick",-1,"Metronome",-1,None,None,0,"Nest Ball",0,'Ability'])
+        elif P.prog[8][1][0] == 9:
+            gift = poke.Poke('Cleffa',[1,random.randint(0,1),787,"Pound",-1,"Charm",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability'])
+        else:
+            gift = poke.Poke('Happiny',[1,random.randint(0,1),787,"Pound",-1,"Charm",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability'])
+        txt(P,"Take this gift to commemorate","your improvement!")
+        txt(P,"You received "+gift.name+"!")
+        if P.prog[8][1][0] == 10:
+            txt(P,"You've maxed out your nursing skill, but you can still earn new Pokemon when you work.")
+            txt(P,"We still have quite a few rare Pokemon you haven't seen yet!")
+    if has_shiny(gift) and random.random() < 0.012:
+        gift.code += '_S'
+        gift.reload_icon()
+    get_poke(P,gift,False)
+
+
+
 def gain_skill(P,skill,amount,lvl = False):
-    mod = 0.25 + ((P.prog[8][skill][0]-1)*0.15)
+    mod = 0.2 + ((P.prog[8][skill][0]-1)*0.1)
     if P.prog[8][skill][0] != 10:
         P.prog[8][skill][1] += int(amount/mod)
         # max = True
@@ -460,6 +559,8 @@ def gain_skill(P,skill,amount,lvl = False):
             P.prog[8][skill][0] += 1
             if P.prog[8][skill][0] == 10:
                 P.prog[8][skill][1] = 100
+                if skill == 1:
+                    P.prog[8][skill][1] += amount
                 lvl = True
             else:
                 P.prog[8][skill][1] = 0
@@ -532,7 +633,7 @@ def baking_game(P,berry,mash,cook,message):
     def quit():
         new_txt(P)
         write(P,"Are you sure you want to","leave? You'll lose all your","progress.")
-        if not choice(P,reverse = True):
+        if choice(P,reverse = True):
             fade_out(P)
             return [-1,0]
     P.surface.blit(back,(0,0))
@@ -876,7 +977,7 @@ def research_game(P,gem_count,points,loc = 0):
     icons = []
     lenses = []
     for type in type_list:
-        icons.append(load("p/"+type+"_ico.png"))
+        icons.append(load("p/ui/"+type+"_ico.png"))
     for type in type_list:
         lenses.append(load("p/research/"+type+"_lens.png"))
     gem0 = load("p/research/Gem_0.png")
@@ -1025,7 +1126,7 @@ def research_game(P,gem_count,points,loc = 0):
                     if y1 == 0 and y2 == 0:
                         new_txt(P)
                         write(P,"Are you sure you want to","leave? You'll lose all your","current progress.")
-                        if not choice(P,reverse = True):
+                        if choice(P,reverse = True):
                             gem_count = 1
                             points = [-1,False]
                             end = False
@@ -1132,7 +1233,7 @@ def research_game(P,gem_count,points,loc = 0):
         return points
 
 def get_indoors(P):
-    return P.loc in ['cascata_bakery','cascata_mine','rotom_shed','ombra_lab','pianura_nursery','pianura_bakery','fiore_garden','verde_garden',"egida_mine","egida_lab","cruise_1","cruise_2"] or P.loc[:3] == "pc_" or get_location(P)[-3:] == 'Gym' or P.loc[:7] == "house_1" or P.loc[:8] in ["house_21","house_22"] or P.loc[:7] == "house_3" or get_location(P) == 'Power Plant'
+    return P.loc in ['rotom_shed',"cruise_1","cruise_2"] or P.loc[-3:] == 'lab' or P.loc[-4:] == 'mine' or P.loc[-6:] in ['garden','bakery'] or P.loc[-7:] in ['nursery','theater'] or P.loc[:3] == "pc_" or get_location(P)[-3:] == 'Gym' or P.loc[:7] == "house_1" or P.loc[:8] in ["house_21","house_22"] or P.loc[:7] == "house_3" or get_location(P) == 'Power Plant'
 
 
 def get_location(P,map = False,location = None):
@@ -1146,7 +1247,7 @@ def get_location(P,map = False,location = None):
         return 'Echo Cave'
     elif location == "vigore":
         return 'Vigore Dam'
-    elif location in ["cruise_1","cruise_2","dock_1","am_square","square_1"]:
+    elif location in ["cruise_1","cruise_2","dock_1","am_square","square_1","am_theater"]:
         if map:
             return 'South Alto Mare'
         return 'Alto Mare'
@@ -1184,8 +1285,13 @@ def get_location(P,map = False,location = None):
             return 'Cascata City'
         else:
             return 'Cascata Gym'
-    elif location in ['silfide','pc_silfide']:
+    elif location in ['silfide','pc_silfide','silfide_nursery','silfide_theater']:
         return 'Silfide City'
+    elif location[:11] in ['silfide_gym']:
+        if map:
+            return 'Silfide City'
+        else:
+            return 'Silfide Gym'
     elif location[:9] == 'forbidden' or location == 'rotom_shed':
         return 'Forbidden Forest'
     elif location in ['ombra','pc_ombra','ombra_lab']:
@@ -1194,6 +1300,8 @@ def get_location(P,map = False,location = None):
         return 'Scarab Woods'
     elif location in ['fiore','pc_fiore','fiore_garden']:
         return 'Fiore Town'
+    elif location in ['nevoso','pc_nevoso','nevoso_lab']:
+        return 'Nevoso Town'
     elif location in ['pianura','pc_pianura','pianura_nursery','pianura_bakery']:
         return 'Pianura City'
     elif location in ['pia_gym'] or location[:7] == "pia_gym":
@@ -1211,6 +1319,8 @@ def get_location(P,map = False,location = None):
         return 'Route 6'
     elif location in ['sunken_cave','ralts_cave']:
         return 'Sunken Cave'
+    elif location[:4] == "snow":
+        return 'Snowscape Ridge'
     elif location[:7] == "house_1":
         if int(location[8:]) == 1:
             if map:
@@ -1251,6 +1361,8 @@ def get_location(P,map = False,location = None):
             return 'Route 6'
         elif int(location[8:]) <= 12:
             return 'Silfide City'
+        elif int(location[8:]) <= 15:
+            return 'Nevoso Town'
     return 'Nameless'
 
 def set_location(P):
@@ -1442,7 +1554,7 @@ def open_cpu(P) -> None:
                     l.append(y)
             while len(l) < 6:
                 l.append(0)
-            self.pokes[0] = l             
+            self.pokes[0] = l
     pok = 0
     back = load("p/am/cpu_hud.png")
     box1 = load("p/am/box_1.png")
@@ -1451,7 +1563,7 @@ def open_cpu(P) -> None:
     box4 = load("p/am/box_4.png")
     arrow = load("p/pointer.png")
     txtbox = load("p/one_line_txt.png")
-    cbox = load("p/5_box.png")
+    cbox = load("p/ui/5_box.png")
     guides = load("p/box_guides.png")
     party = load("p/am/party_box.png")
     move = P.font.render("Move",True,(0,0,0))
@@ -1526,18 +1638,18 @@ def open_cpu(P) -> None:
             else:
                 it = P.font_s.render(pok.item,True,(255,255,255))
                 itp = P.font_s.size(pok.item)[0]
-            ball = pygame.transform.scale(load("p/"+pok.ball+".png"),(30,30))
+            ball = pygame.transform.scale(load("p/ui/"+pok.ball+".png"),(30,30))
             full = pygame.transform.scale(load("p/poke/"+pok.code+"_full.png"),(250,250))
             if pok.gen == 0:
-                gen_i = load("p/boy_ico.png")
+                gen_i = load("p/ui/boy_ico.png")
             if pok.gen == 1:
-                gen_i = load("p/girl_ico.png")
+                gen_i = load("p/ui/girl_ico.png")
             if pok.gen == 2:
                 gen_i = load("p/blank.png")
-            type1 = load("p/"+pok.type[0]+"_ico.png")
+            type1 = load("p/ui/"+pok.type[0]+"_ico.png")
             P.surface.blit(guides,(450,20))
             if pok.type[1] != None:
-                type2 = load("p/"+pok.type[1]+"_ico.png")
+                type2 = load("p/ui/"+pok.type[1]+"_ico.png")
                 P.surface.blit(type1,(560,30))
                 P.surface.blit(type2,(680,30))
             else:
@@ -1549,7 +1661,7 @@ def open_cpu(P) -> None:
             P.surface.blit(name,(60,15))
             if pok.code[:5] == 'Mega_':
                 P.surface.blit(mega,(65+name_size,25))
-            if pok.nurse:
+            if pok.nurse != 0:
                 P.surface.blit(nurse,(65+name_size,25))
             P.surface.blit(gen_i,(360,15))
             P.surface.blit(full,(540,155))
@@ -1559,37 +1671,37 @@ def open_cpu(P) -> None:
                 P.surface.blit(pbox.pokes[0][0].icon,(140,625-abs(py)))
                 if pbox.pokes[0][0].item != None:
                     P.surface.blit(P.item_box,(180,675-abs(py)))
-                if pbox.pokes[0][0].nurse:
+                if pbox.pokes[0][0].nurse != 0:
                     P.surface.blit(P.nurse_box,(145,673-abs(py)))
             if pbox.pokes[0][1] != 0:
                 P.surface.blit(pbox.pokes[0][1].icon,(250,655-abs(py)))
                 if pbox.pokes[0][1].item != None:
                     P.surface.blit(P.item_box,(290,705-abs(py)))
-                if pbox.pokes[0][1].nurse:
+                if pbox.pokes[0][1].nurse != 0:
                     P.surface.blit(P.nurse_box,(255,703-abs(py)))
             if pbox.pokes[0][2] != 0:
                 P.surface.blit(pbox.pokes[0][2].icon,(140,725-abs(py)))
                 if pbox.pokes[0][2].item != None:
                     P.surface.blit(P.item_box,(180,775-abs(py)))
-                if pbox.pokes[0][2].nurse:
+                if pbox.pokes[0][2].nurse != 0:
                     P.surface.blit(P.nurse_box,(145,773-abs(py)))
             if pbox.pokes[0][3] != 0:
                 P.surface.blit(pbox.pokes[0][3].icon,(250,755-abs(py)))
                 if pbox.pokes[0][3].item != None:
                     P.surface.blit(P.item_box,(290,805-abs(py)))
-                if pbox.pokes[0][3].nurse:
+                if pbox.pokes[0][3].nurse != 0:
                     P.surface.blit(P.nurse_box,(255,803-abs(py)))
             if pbox.pokes[0][4] != 0:
                 P.surface.blit(pbox.pokes[0][4].icon,(140,825-abs(py)))
                 if pbox.pokes[0][4].item != None:
                     P.surface.blit(P.item_box,(180,875-abs(py)))
-                if pbox.pokes[0][4].nurse:
+                if pbox.pokes[0][4].nurse != 0:
                     P.surface.blit(P.nurse_box,(145,873-abs(py)))
             if pbox.pokes[0][5] != 0:
                 P.surface.blit(pbox.pokes[0][5].icon,(250,855-abs(py)))
                 if pbox.pokes[0][5].item != None:
                     P.surface.blit(P.item_box,(290,905-abs(py)))
-                if pbox.pokes[0][5].nurse:
+                if pbox.pokes[0][5].nurse != 0:
                     P.surface.blit(P.nurse_box,(255,903-abs(py)))
         if a_pos == 2:
             P.surface.blit(txtbox,(0,530))
@@ -1606,25 +1718,25 @@ def open_cpu(P) -> None:
                 P.surface.blit(spoke.icon,(200,65))
                 if spoke.item != None:
                     P.surface.blit(P.item_box,(240,115))
-                if spoke.nurse:
+                if spoke.nurse != 0:
                     P.surface.blit(P.nurse_box,(205,113))
             if a_pos == 1 and py>= 0:
                 P.surface.blit(spoke.icon,(20+a_x,130+a_y))
                 if spoke.item != None:
                     P.surface.blit(P.item_box,(60+a_x,180+a_y))
-                if spoke.nurse:
+                if spoke.nurse != 0:
                     P.surface.blit(P.nurse_box,(25+a_x,178+a_y))
             if a_pos == 3 or (a_pos == 4 and py > 0 and py < 420):
                 P.surface.blit(spoke.icon,(200,505))
                 if spoke.item != None:
                     P.surface.blit(P.item_box,(240,555))
-                if spoke.nurse:
+                if spoke.nurse != 0:
                     P.surface.blit(P.nurse_box,(205,553))
             if (a_pos == 4 and py == 420) or py < 0 or (a_pos == 2 and py == 420):
                 P.surface.blit(spoke.icon,(140+p_x,175+p_y))
                 if spoke.item != None:
                     P.surface.blit(P.item_box,(180+p_x,235+p_y))
-                if spoke.nurse:
+                if spoke.nurse != 0:
                     P.surface.blit(P.nurse_box,(145+p_x,233+p_y))
         if a_pos == 0:
             P.surface.blit(arrow,(220+ax,55+ay))
@@ -1725,11 +1837,17 @@ def open_cpu(P) -> None:
                         a_pos = 2
                 elif a_pos == 4 and pp != -1:
                     if select == 1:
-                        if pbox.pokes[0][pp] != 0:
-                            tbox.pokes[int(ty/70)][int(tx/70)] = pbox.pokes[0][pp]
-                        pbox.pokes[0][pp] = spoke
-                        pbox.shift_party()
-                        select = 0
+                        if party_alive(P,pbox.to_party()) == 1 and pok.status == 'Faint' and pbox.pokes[0][pp] != 0 and pbox.pokes[0][pp].status != 'Faint' and ty != 0 and py == 420:
+                            P.surface.blit(txtbox,(0,530))
+                            write(P,"","","That's your last Pokemon!")
+                            cont(P)
+                            a_pos = 4
+                        else:
+                            if pbox.pokes[0][pp] != 0:
+                                tbox.pokes[int(ty/70)][int(tx/70)] = pbox.pokes[0][pp]
+                            pbox.pokes[0][pp] = spoke
+                            pbox.shift_party()
+                            select = 0
                     elif pok != 0:
                         txt0 = P.font.render(pok.name + " is selected.",True,(0,0,0))
                         t = P.surface.copy()
@@ -1741,11 +1859,11 @@ def open_cpu(P) -> None:
                         else:
                             a_pos = 1
                     if ary == 420:
-                        if pbox.pokes[0][1] == 0 and py == 420:
+                        if party_alive(P,pbox.to_party()) == 1 and pok.status != 'Faint' and py == 420:
                             P.surface.blit(txtbox,(0,530))
                             write(P,"","","That's your last Pokemon!")
                             cont(P)
-                        elif pok.nurse or pok.code[:5] == "Mega_" or pok.code[:10] == 'Pineapple_' or pok.code[:7] == 'Spooky_' or pok.code[:5] == 'Rotom':
+                        elif pok.nurse != 0 or pok.code[:5] == "Mega_" or pok.code[:10] == 'Pineapple_' or pok.code[:7] == 'Spooky_' or pok.code[:4] == 'Icy_' or pok.code[:5] == 'Rotom':
                             P.surface.blit(txtbox,(0,530))
                             write(P,"","","You can't release "+pok.name+"!")
                             cont(P)
@@ -1753,7 +1871,7 @@ def open_cpu(P) -> None:
                             P.surface.blit(t,(0,0))
                             new_txt(P)
                             write(P,"Release this Pokemon?")
-                            if not choice(P,reverse = True):
+                            if choice(P,reverse = True):
                                 txt(P,pok.name+" was released.")
                                 txt(P,"Bye-bye, "+pok.name+"!")
                                 if py == 0:
@@ -1800,7 +1918,7 @@ def open_cpu(P) -> None:
                         else:
                             a_pos = 1
                     if ary == 270:
-                        if pbox.pokes[0][1] == 0 and py == 420:
+                        if party_alive(P,pbox.to_party()) == 1 and pok.status != 'Faint' and py == 420:
                             P.surface.blit(txtbox,(0,530))
                             write(P,"","","That's your last Pokemon!")
                             cont(P)
@@ -1897,11 +2015,11 @@ def open_cpu(P) -> None:
 def mart_sell(P, candy = False) -> None:
     box = load("p/bag_box.png")
     back = load("p/bag.png")
-    i = load("p/item_ico.png")
-    m = load("p/med_ico.png")
-    b = load("p/balls_ico.png")
-    t = load("p/tm_ico.png")
-    k = load("p/key_ico.png")
+    i = load("p/ui/item_ico.png")
+    m = load("p/ui/med_ico.png")
+    b = load("p/ui/balls_ico.png")
+    t = load("p/ui/tm_ico.png")
+    k = load("p/ui/key_ico.png")
     high = load("p/bag_high.png")
     sell_mod = 2
     if candy:
@@ -2068,9 +2186,13 @@ def poke_mart(P,back,candy = False,custom_shop = None, stock = None,price_mod = 
         shop = ['Poke Ball']
         if P.prog[0] >= 86:
             shop.append("Great Ball")
+        if P.prog[0] >= 158:
+            shop.append("Ultra Ball")
         shop.append('Potion')
         if P.prog[0] >= 48:
             shop.append("Super Potion")
+        if P.prog[0] >= 144:
+            shop.append("Hyper Potion")
         #if P.prog[0] >= 106:
             #shop.append("Revive")
         shop.append('Quit')
@@ -2285,6 +2407,10 @@ def update_locs(P):
         P.prog[7] += 1
     elif P.prog[7] == 22 and P.loc == 'silfide':
         P.prog[7] += 1
+    elif P.prog[7] == 23 and P.loc == 'snow_o1':
+        P.prog[7] += 1
+    elif P.prog[7] == 24 and P.loc == 'nevoso':
+        P.prog[7] += 1
 
 
 def get_gondo(P,loc):
@@ -2338,6 +2464,11 @@ def get_gondo(P,loc):
         P.px = -2125
         P.py = -1325
         P.p = P.l1
+    if loc == 'Nevoso Town':
+        P.loc = 'nevoso'
+        P.px = -1425
+        P.py = -1025
+        P.p = P.l1
 
 def gondolier(P):
     loc = get_location(P,True)
@@ -2375,12 +2506,16 @@ def gondo_locs(P):
         list.append("Cascata City")
     if P.prog[7] >= 23:
         list.append("Silfide City")
+    if P.prog[7] >= 25:
+        list.append("Nevoso Town")
     return list
 
 def open_map(P,from_bag = False) -> None:
-    pmap = load("p/map_1.png")
+    pmap = load("p/ui/map_1.png")
     if P.prog[7] >= 14:
-        pmap = load("p/map_2.png")
+        pmap = load("p/ui/map_2.png")
+    if P.prog[7] >= 24:
+        pmap = load("p/ui/map_3.png")
     amn = load("p/am_n_mico.png")
     ams = load("p/am_s_mico.png")
     city_high = load("p/city_high.png")
@@ -2474,40 +2609,56 @@ def open_map(P,from_bag = False) -> None:
     elif loc == 'Silfide City':
         pox = 416
         poy = 57
+    elif loc == 'Snowscape Ridge':
+        pox = 303
+        poy = 57
+    elif loc == 'Nevoso Town':
+        pox = 263
+        poy = 52
+    elif loc == 'Forza City':
+        pox = 272
+        poy = 140
     P.surface.blit(pmap,(0,0))
-    if P.prog[7] < 3:
-        P.surface.blit(city_cover,(397,455))
-    if P.prog[7] < 11:
-        P.surface.blit(city_cover,(584,448))
-    if P.prog[7] < 16:
-        P.surface.blit(city_cover,(641,249))
-    if P.prog[7] < 21:
-        P.surface.blit(city_cover,(505,236))
-    if P.prog[7] < 23:
-        P.surface.blit(city_cover,(417,96))
-    if P.prog[7] < 9:
-        P.surface.blit(town_cover,(491,496))
-    if P.prog[7] < 14:
-        P.surface.blit(town_cover,(703,332))
-    if P.prog[7] < 18:
-        P.surface.blit(town_cover,(563,212))
-    if P.prog[7] < 5:
-        P.surface.blit(land_cover,(354,411))
-    if P.prog[7] < 6:
-        P.surface.blit(land_cover,(383,388))
-    if P.prog[7] < 12:
-        P.surface.blit(land_cover,(627,433))
-    if P.prog[7] < 22:
-        P.surface.blit(land_cover,(467,228))
-    if P.prog[7] < 1:
-        P.surface.blit(half_cover,(296,536))
-
+    def refresh():
+        if P.prog[7] < 3:
+            P.surface.blit(city_cover,(397,455))
+        if P.prog[7] < 11:
+            P.surface.blit(city_cover,(584,448))
+        if P.prog[7] < 16:
+            P.surface.blit(city_cover,(641,249))
+        if P.prog[7] < 21:
+            P.surface.blit(city_cover,(505,236))
+        if P.prog[7] < 23:
+            P.surface.blit(city_cover,(417,96))
+        if P.prog[7] < 27:
+            P.surface.blit(city_cover,(273,179))
+        if P.prog[7] < 9:
+            P.surface.blit(town_cover,(491,496))
+        if P.prog[7] < 14:
+            P.surface.blit(town_cover,(703,332))
+        if P.prog[7] < 18:
+            P.surface.blit(town_cover,(563,212))
+        if P.prog[7] < 25:
+            P.surface.blit(town_cover,(266,94))
+        if P.prog[7] < 5:
+            P.surface.blit(land_cover,(354,411))
+        if P.prog[7] < 6:
+            P.surface.blit(land_cover,(383,388))
+        if P.prog[7] < 12:
+            P.surface.blit(land_cover,(627,433))
+        if P.prog[7] < 22:
+            P.surface.blit(land_cover,(467,228))
+        if P.prog[7] < 24:
+            P.surface.blit(land_cover,(309,101))
+        if P.prog[7] < 1:
+            P.surface.blit(half_cover,(296,536))
+    refresh()
     P.surface.blit(pointer,(pox,poy))
     fade_in(P)
     end = True
     a = 0
     while end:
-        #print(pox,poy)
+        print(pox,poy)
         P.surface.blit(pmap,(0,0))
         if 275 < pox < 315 and 470 < poy < 500 and P.prog[7] >= 1:
             P.surface.blit(amn,(296,536))
@@ -2535,6 +2686,10 @@ def open_map(P,from_bag = False) -> None:
             if P.prog[7] >= 23:
                 P.surface.blit(city_high,(417,96))
                 l = "Silfide City"
+        elif 247 < pox < 287 and 120 < poy < 160:
+            if P.prog[7] >= 23:
+                P.surface.blit(city_high,(273,179))
+                l = "Forza City"
         elif 475 < pox < 505 and 440 < poy < 470:
             if P.prog[7] >= 9:
                 P.surface.blit(town_high,(491,496))
@@ -2547,25 +2702,31 @@ def open_map(P,from_bag = False) -> None:
             if P.prog[7] >= 18:
                 P.surface.blit(town_high,(563,212))
                 l = "Ombra Town"
-        elif 605 < pox < 635 and 375 < poy < 405:
-            if P.prog[7] >= 12:
-                P.surface.blit(land_high,(627,433))
-                l = "Mirror Cave"
+        elif 248 < pox < 278 and 37 < poy < 67:
+            if P.prog[7] >= 25:
+                P.surface.blit(town_high,(266,94))
+                l = "Nevoso Town"
         elif 330 < pox < 360 and 350 < poy < 380:
             if P.prog[7] >= 5:
                 P.surface.blit(land_high,(354,411))
                 l = "Echo Cave"
+        elif 605 < pox < 635 and 375 < poy < 405 and P.prog[7] >= 12:
+            P.surface.blit(land_high,(627,433))
+            l = "Mirror Cave"
         elif 360 < pox < 390 and 330 < poy < 360 and P.prog[7] >= 6:
             P.surface.blit(land_high,(383,388))
             l = "Vigore Dam"
         elif 440 < pox < 470 and 170 < poy < 200 and P.prog[7] >= 22:
             P.surface.blit(land_high,(467,228))
             l = "Sunken Cave"
+        elif 282 < pox < 312 and 43 < poy < 73 and P.prog[7] >= 24:
+            P.surface.blit(land_high,(309,101))
+            l = "Snowscape Ridge"
         elif 295 < pox < 395 and 415 < poy < 490 and abs((0.75*(pox-295)) - ((600-poy)-110)) < 20 and P.prog[7] >= 2:
             l = "Route 1"
         elif 345 < pox < 395 and 365 < poy < 415 and abs((-1*(pox-390)) - ((600-poy)-185)) < 20 and P.prog[7] >= 4:
             l = "Route 2"
-        elif 395 < pox < 575 and 425 < poy > 400 and abs((0.14*(pox-575)) - ((600-poy)-200)) < 20 and P.prog[7] >= 7:
+        elif 395 < pox < 575 and 400 < poy < 425 and abs((0.14*(pox-575)) - ((600-poy)-200)) < 20 and P.prog[7] >= 7:
             l = "Route 3"
         elif 620 < pox < 700 and 290 < poy < 390 and abs((1.25*(pox-620)) - ((600-poy)-210)) < 20 and P.prog[7] >= 13:
             l = "Route 4"
@@ -2583,32 +2744,7 @@ def open_map(P,from_bag = False) -> None:
             l = "Forbidden Forest"
         else:
             l = ""
-        if P.prog[7] < 3:
-            P.surface.blit(city_cover,(397,455))
-        if P.prog[7] < 11:
-            P.surface.blit(city_cover,(584,448))
-        if P.prog[7] < 16:
-            P.surface.blit(city_cover,(641,249))
-        if P.prog[7] < 21:
-            P.surface.blit(city_cover,(505,236))
-        if P.prog[7] < 23:
-            P.surface.blit(city_cover,(417,96))
-        if P.prog[7] < 9:
-            P.surface.blit(town_cover,(491,496))
-        if P.prog[7] < 14:
-            P.surface.blit(town_cover,(703,332))
-        if P.prog[7] < 18:
-            P.surface.blit(town_cover,(563,212))
-        if P.prog[7] < 5:
-            P.surface.blit(land_cover,(354,411))
-        if P.prog[7] < 6:
-            P.surface.blit(land_cover,(383,388))
-        if P.prog[7] < 12:
-            P.surface.blit(land_cover,(627,433))
-        if P.prog[7] < 22:
-            P.surface.blit(land_cover,(467,228))
-        if P.prog[7] < 1:
-            P.surface.blit(half_cover,(296,536))
+        refresh()
         if l == loc:
             if l == 'Scarab Woods':
                 if (pox > 490 and P.loc == 'scarab_l') or (pox < 490 and P.loc == 'scarab_r'):
@@ -2722,7 +2858,7 @@ def draw_waves(P,wx,wy):
         b += 400
     blit_img(P,P.wave,(P.px+a+x,P.py+b+y))
 
-def draw_grass(P,px,py,x,y,w,h,temp = None,ignore = [],modx = 0,mody = 0,dark = False):
+def draw_grass(P,px,py,x,y,w,h,temp = None,ignore = [],modx = 0,mody = 0,dark = False,snow = False):
     a = x
     b = y
     if temp != None:
@@ -2730,20 +2866,20 @@ def draw_grass(P,px,py,x,y,w,h,temp = None,ignore = [],modx = 0,mody = 0,dark = 
         temppy = py
         px = 375-px
         py = 275-py
+    if dark:
+        grass = P.dark_grass
+    elif snow:
+        grass = P.snow_grass
+    else:
+        grass = P.grass
     while b > (y-h):
         while a > (x-w):
             if (py-b) < 50 and (py-b) >= 0 and (a,b) not in ignore:
                 if((px-a < 50) and (px-a > -50)):
                     if temp != None:
-                        if dark:
-                            P.surface.blit(P.dark_grass,(px-a+temppx+temp[0]+modx,py-b+temppy+temp[1]-10+mody))
-                        else:
-                            P.surface.blit(P.grass,(px-a+temppx+temp[0]+modx,py-b+temppy+temp[1]-10+mody))
+                        P.surface.blit(grass,(px-a+temppx+temp[0]+modx,py-b+temppy+temp[1]-10+mody))
                     else:
-                        if dark:
-                            P.surface.blit(P.dark_grass,(px-a+375+modx,py-b+265+mody))
-                        else:
-                            P.surface.blit(P.grass,(px-a+375+modx,py-b+265+mody))
+                        P.surface.blit(grass,(px-a+375+modx,py-b+265+mody))
             a -= 50
         a = x
         b -= 50
@@ -2796,7 +2932,7 @@ def set_sky(P):
     if P.prog[0] >= 145 and P.prog[0] <= 148 and P.py >= 2275:
         a += (min(P.py,2775)-2275)/(4 + (a/20))
     trans = pygame.Surface((800,600))
-    if P.loc in ['verde_gym']:
+    if P.loc in ['verde_gym','silfide_gym']:
         a /= 1.5
     if P.loc[:9] == 'forbidden' or P.loc == 'ombra' or P.loc in ["house_3_5","house_3_6","house_3_7","house_3_8"] or P.loc == 'rotom_shed':
         a = 160
@@ -2948,31 +3084,32 @@ def heal_party(P):
     for x in P.party:
         x.heal()        
 
-def use_hs(P,poke):
-    back = load("p/hs_back.png")
+def use_hs(P,poke,pokestar = False):
+    back = load("p/ui/hs_back.png")
     if poke.code[-2:] == '_S':
-        back = load("p/hs_back_S.png")
+        back = load("p/ui/hs_back_S.png")
     front = load("p/hs_front.png")
-    ball = pygame.transform.scale(load("p/"+poke.ball+".png"),(30,30))
+    ball = pygame.transform.scale(load("p/ui/"+poke.ball+".png"),(30,30))
     box = load("p/hs_move.png")
     name = P.font.render(poke.name,True,(255,255,255))
     name_size = P.font.size(poke.name)[0]
     mega = pygame.transform.scale(load("p/mega_symbol.png"),(30,30))
     nurse = pygame.transform.scale(load("p/nurse_icon.png"),(30,30))
+    exp_back = load("p/ui/hs_exp.png")
     exp = load("p/summ_exp.png")
     high = load("p/high_move.png")
     desc = load("p/move_desc.png")
     use = False
     if poke.gen == 0:
-        gen_i = load("p/boy_ico.png")
+        gen_i = load("p/ui/boy_ico.png")
     if poke.gen == 1:
-        gen_i = load("p/girl_ico.png")
+        gen_i = load("p/ui/girl_ico.png")
     if poke.gen == 2:
         gen_i = load("p/blank.png")
     lvl = P.font.render("Lv."+str(poke.lvl),True,(255,255,255))
-    type1 = load("p/"+poke.type[0]+"_ico.png")
+    type1 = load("p/ui/"+poke.type[0]+"_ico.png")
     if poke.type[1] != None:
-        type2 = load("p/"+poke.type[1]+"_ico.png")
+        type2 = load("p/ui/"+poke.type[1]+"_ico.png")
     move_list = []
     for l in poke.moveset:
         if l == 1:
@@ -2992,25 +3129,35 @@ def use_hs(P,poke):
     end = True
     while end:
         P.surface.blit(back,(0,0))
-        if poke.lvl != 100:
-            P.surface.fill((0,0,255), Rect(64,110,int(320*(poke.exp/poke.get_exp())),10))
+        if not pokestar:
+            P.surface.blit(exp_back,(38,107))
+            if poke.lvl != 100:
+                P.surface.fill((0,0,255), Rect(64,110,int(320*(poke.exp/poke.get_exp())),10))
+            else:
+                P.surface.fill((0,0,255), Rect(64,110,320,10))
+            P.surface.blit(exp,(10,105))
+            P.surface.blit(lvl,(20,50))
+            P.surface.blit(type1,(170,55))
+            if poke.type[1] != None:
+                P.surface.blit(type2,(280,55))
         else:
-            P.surface.fill((0,0,255), Rect(64,110,320,10))
-        P.surface.blit(exp,(10,105))
+            if poke.type[1] != None:
+                P.surface.blit(type1,(90,55))
+                P.surface.blit(type2,(210,55))
+            else:
+                P.surface.blit(type1,(150,55))
         P.surface.blit(ball,(18,18))
         P.surface.blit(name,(60,10))
         if poke.code[:5] == 'Mega_':
             P.surface.blit(mega,(65+name_size,20))
-        if poke.nurse:
+        if poke.nurse != 0:
             P.surface.blit(nurse,(65+name_size,20))
         P.surface.blit(gen_i,(350,10))
-        P.surface.blit(lvl,(20,50))
+
         # P.surface.blit(m4,(430,400))
         # P.surface.blit(mt4,(425,440))
         # P.surface.blit(mp4,(550,435))
-        P.surface.blit(type1,(170,55))
-        if poke.type[1] != None:
-            P.surface.blit(type2,(280,55))
+
         y = 0
         if scroll <= 200:
             s = 0
@@ -3023,7 +3170,7 @@ def use_hs(P,poke):
             s = scroll-200
         for mve in move_list:
             text = P.font.render(str(mve),True,(0,0,0))
-            type3 = pygame.image.load("p/"+moves.Move(mve).type+"_ico.png")
+            type3 = pygame.image.load("p/ui/"+moves.Move(mve).type+"_ico.png")
             pp = P.font.render("PP "+str(moves.Move(mve).pp),True,(0,0,0))
             P.surface.blit(box,(410,50-s+y))
             P.surface.blit(text,(430,50-s+y))
@@ -3038,11 +3185,11 @@ def use_hs(P,poke):
         P.surface.blit(front,(400,0))
         P.surface.blit(desc,(5,130))
         if curr.cat == '0':
-            cat_ico = pygame.image.load("p/phy_ico.png")
+            cat_ico = pygame.image.load("p/ui/phy_ico.png")
         elif curr.cat == '1':
-            cat_ico = pygame.image.load("p/spe_ico.png")
+            cat_ico = pygame.image.load("p/ui/spe_ico.png")
         else:
-            cat_ico = pygame.image.load("p/sta_ico.png")
+            cat_ico = pygame.image.load("p/ui/sta_ico.png")
         cat = P.font.render("Category",True,(0,0,0))
         power = P.font.render("Power     "+curr.pow,True,(0,0,0))
         if int(float(curr.acc)*100) > 100:
@@ -3066,7 +3213,7 @@ def use_hs(P,poke):
                     new_txt(P)
                     write(P,'Teach ' + curr.name+"?")
                     if choice(P):
-                        res = poke.learn(P,curr,False)
+                        res = poke.learn(P,curr,False,pokestar)
                         if res == True:
                             use = True
                             end = False
@@ -3129,12 +3276,14 @@ def wild_grass(P,x,y,w,h,pmod = 1,ignore = [],all = False) -> bool:
             P.grass_prob += 0.002
     return False
 
-def party_fainted(P):
-    all_dead = True
-    for x in P.party:
+def party_alive(P, party = None):
+    count = 0
+    if party == None:
+        party = P.party
+    for x in party:
         if x.status != 'Faint':
-            all_dead = False
-    return all_dead
+            count += 1
+    return count
 
 def reset_move_stat(P,poke):
     if poke.status in ['Slp','Frz'] or poke.flinch:
@@ -3190,8 +3339,8 @@ def blit_infobox(P,pokes,pokee):
     pokeelvl = P.font_s.render("Lv."+str(pokee.lvl),True,(255,255,255))
     mega = pygame.transform.scale(load("p/mega_symbol.png"),(30,30))
     nurse = pygame.transform.scale(load("p/nurse_icon.png"),(30,30))
-    boy = load("p/boy_ico.png")
-    girl = load("p/girl_ico.png")
+    boy = load("p/ui/boy_ico.png")
+    girl = load("p/ui/girl_ico.png")
     expbar = load("p/summ_exp.png")
     infoboxs = load("p/battle_info_boxs.png")
     if pokes.code[-2:] == '_S':
@@ -3207,15 +3356,8 @@ def blit_infobox(P,pokes,pokee):
     P.surface.blit(pokesname,(900-P.infospos,315))
     if pokes.code[:5] == 'Mega_':
         P.surface.blit(mega,(905-P.infospos+sname_size,317))
-    if pokes.nurse:
+    if pokes.nurse != 0:
         P.surface.blit(nurse,(905-P.infospos+sname_size,317))
-    P.surface.blit(pokeslvl,(830-P.infospos,380))
-    P.surface.fill((255,255,255),Rect(850-P.infospos,425,350,10))
-    if pokes.lvl != 100:
-        P.surface.fill((0,0,255), Rect(874-P.infospos,425,int(320*(pokes.exp/pokes.get_exp())),10))
-    else:
-        P.surface.fill((0,0,255), Rect(874-P.infospos,425,320,10))
-    P.surface.blit(expbar,(820-P.infospos,420))
     P.surface.blit(infoboxe,(-400+P.infoepos,100))
     if pokee.gen == 0:
         P.surface.blit(boy,(-395+P.infoepos,110))
@@ -3227,14 +3369,23 @@ def blit_infobox(P,pokes,pokee):
         ename_size += 30
     if pokee.code_nos() in P.save_data.pokedex and P.save_data.pokedex[pokee.code_nos()][0] == 1:
         P.surface.blit(P.caught_icon,(-340+P.infoepos+ename_size,120))
-    P.surface.blit(pokeelvl,(-390+P.infoepos,155))
+    if P.pokestar_battle == 0:
+        P.surface.blit(pokeslvl,(830-P.infospos,380))
+        P.surface.fill((255,255,255),Rect(850-P.infospos,425,350,10))
+        if pokes.lvl != 100:
+            P.surface.fill((0,0,255), Rect(874-P.infospos,425,int(320*(pokes.exp/pokes.get_exp())),10))
+        else:
+            P.surface.fill((0,0,255), Rect(874-P.infospos,425,320,10))
+        P.surface.blit(expbar,(820-P.infospos,420))
+        P.surface.blit(pokeelvl,(-390+P.infoepos,155))
+
 
 def blit_stat(P,pokes,pokee):
     xmod = 0
     if pokes.status != None:
-        if pokes.code[:5] == 'Mega_' or pokes.nurse:
+        if pokes.code[:5] == 'Mega_' or pokes.nurse != 0:
             xmod += 30
-        sta = load("p/"+pokes.status+"_ico.png")
+        sta = load("p/ui/"+pokes.status+"_ico.png")
         sta = pygame.transform.scale(sta,(50,20))
         szn = P.font_s.size(pokes.name)
         P.surface.blit(sta,(910-P.infospos+szn[0]+xmod,322))
@@ -3243,7 +3394,7 @@ def blit_stat(P,pokes,pokee):
             xmod += 30
         if pokee.code_nos() in P.save_data.pokedex and P.save_data.pokedex[pokee.code_nos()][0] == 1:
             xmod += 40
-        sta = load("p/"+pokee.status+"_ico.png")
+        sta = load("p/ui/"+pokee.status+"_ico.png")
         sta = pygame.transform.scale(sta,(50,20))
         szn = P.font_s.size(pokee.name)
         P.surface.blit(sta,(-340+P.infoepos+szn[0]+xmod,122))
@@ -3325,6 +3476,21 @@ def battle_music_loop(P):
             pygame.mixer.music.load(P.song)
             pygame.mixer.music.play(-1)
             end = False
+        if P.song == "music/lisia_battle.wav" and (pygame.mixer.music.get_pos() > 8850 or pygame.mixer.music.get_busy() == False):
+            P.song = "music/lisia_battle_loop.wav"
+            pygame.mixer.music.load(P.song)
+            pygame.mixer.music.play(-1)
+            end = False
+        if P.song == "music/theater_battle.wav" and (pygame.mixer.music.get_pos() > 3450 or pygame.mixer.music.get_busy() == False):
+            P.song = "music/theater_battle_loop.wav"
+            pygame.mixer.music.load(P.song)
+            pygame.mixer.music.play(-1)
+            end = False
+        if P.song == "music/diantha_battle.wav" and (pygame.mixer.music.get_pos() > 10425 or pygame.mixer.music.get_busy() == False):
+            P.song = "music/diantha_battle_loop.wav"
+            pygame.mixer.music.load(P.song)
+            pygame.mixer.music.play(-1)
+            end = False
 
 
 def trainer_cutin(P,trainer):
@@ -3349,6 +3515,8 @@ def trainer_cutin(P,trainer):
                 P.clock.tick(P.bat_spd/2)
                 new_battle_txt(P)
                 battle_write(P,"This Mega Pokemon is coming","out at full power!")
+            elif trainer == 'Lisia':
+                battle_write(P,"Alright, it's time for the finale of this battle!")
             elif trainer == 'Grunt':
                 battle_write(P,"You're pretty strong, but I'm","about to squish you flat!")
             P.clock.tick(P.bat_spd/2)
@@ -3375,6 +3543,47 @@ def last_poke(party):
     return True
 
 def battle(P,opp,no_pc = False) -> None:
+    def battle_fade_out():
+        pokes.reset_stats()
+        battle_end_process(P)
+        fade_out(P,P.song)
+        evo_check(P)
+    def check_fainted():
+        nonlocal high,oboxl,mvnum,throws,ballsp,ballx,bally,fainteds,opp_ball,showbar,throwe,balle,faintede
+        has_fainted = False
+        if pokes.status == 'Faint' or pokes.exit:
+            oboxl[high] = obox
+            high = 0
+            oboxl[0] = hobox
+            mvnum = 0
+            throws = -60
+            ballsp = balls.get_rect()
+            ballx = 0
+            bally = 0
+            fainteds = 1
+            has_fainted = True
+        if pokee.status == 'Faint' or pokee.exit:
+            all_dead = True
+            for x in opp:
+                if type(x) != str:
+                    if x.status != 'Faint':
+                        all_dead = False
+            if all_dead == False:
+                opp_ball = []
+                for x in opp:
+                    if type(x) != str:
+                        if x.status != 'Faint':
+                            opp_ball.append(poke_ico)
+                        else:
+                            opp_ball.append(poke_icof)
+                while 0 < 6-len(opp_ball):
+                    opp_ball.append(poke_icoe)
+                showbar = 1
+            throwe = -45
+            balle = balle1
+            faintede = 1
+            has_fainted = True
+        return has_fainted
     P.end_battle = 0
     P.battle_weather = None
     P.battle_terrain = None
@@ -3383,6 +3592,8 @@ def battle(P,opp,no_pc = False) -> None:
         P.battle_weather = ['Rain',-1]
     if P.prog[0] == 148:
         P.battle_weather = ['Windy',-1]
+    if P.prog[22][0] == 0 and P.loc in ['silfide_gymb','silfide_gym1']:
+        P.battle_terrain = ['Misty',-1,load("p/terrain/Misty_Terrain.png")]
     terrain_print = 0
     weather_print = 0
     #spikes toxic stealth sticky
@@ -3395,6 +3606,7 @@ def battle(P,opp,no_pc = False) -> None:
     P.grass_prob = 0.01
     P.turn_count = 0
     P.opponent = opp
+    print_options = True
     battle_type = 0
     if len(opp) > 1:
         #0 = wild, 1 = trainer
@@ -3436,7 +3648,7 @@ def battle(P,opp,no_pc = False) -> None:
     run = P.font.render("RUN",True,(0,0,0))
     if P.habitat != None:
         day_night = ""
-        if P.habitat in ['grass','forest','dock','road','path','beach','mount_grass','mount']:
+        if P.habitat in ['grass','forest','dock','road','path','beach','mount_grass','mount','snow','snow_grass']:
             if ((get_time() > 19 or get_time() < 6) or P.lighting == 'Night') and P.lighting != 'Day':
                 day_night = '_night'
             else:
@@ -3455,7 +3667,7 @@ def battle(P,opp,no_pc = False) -> None:
         try:
             trainame = opp[0][:opp[0].index(' ')]
         except:
-            if opp[0] in ['Steven','Wallace']:
+            if opp[0] in ['Steven','Wallace','Diantha']:
                 trainame = opp[0]
         if trainame == 'Leader':
             trainame = opp[0][7:]
@@ -3496,9 +3708,9 @@ def battle(P,opp,no_pc = False) -> None:
     box = load("p/battle_box.png")
     bare = load("p/team_list_bare.png")
     bars = load("p/team_list_bars.png")
-    poke_ico = load("p/battle_poke_ico.png")
-    poke_icof = load("p/battle_poke_icof.png")
-    poke_icoe = load("p/battle_poke_icoe.png")
+    poke_ico = load("p/ui/battle_poke_ico.png")
+    poke_icof = load("p/ui/battle_poke_icof.png")
+    poke_icoe = load("p/ui/battle_poke_icoe.png")
     cbox = load("p/battle_cbox.png")
     obox = load("p/battle_obox.png")
     hobox = load("p/battle_obox_high.png")
@@ -3520,9 +3732,14 @@ def battle(P,opp,no_pc = False) -> None:
         pokemone = load("p/poke/"+pokee.code+"_bfw.png")
     else:
         pokee = opp[0]
-        if battle_type == 0 and P.legendary_battle == False and P.tourney_battle == False and has_shiny(pokee) and random.random() < 0.015:
+        if battle_type == 0 and P.legendary_battle == False and P.tourney_battle == False and P.pokestar_battle == 0 and has_shiny(pokee) and random.random() < 0.012:
             pokee.code += '_S'
+            pokee.reload_icon()
         loc = P.loc
+        if P.loc[:6] == 'snow_o':
+            loc = 'snow_o'
+        elif P.loc[:4] == 'snow':
+            loc = 'snow'
         if P.loc == 'route_3' and P.habitat[:5] == 'beach':
             loc = "route_3b"
         if P.loc == 'route_5' and P.habitat[:5] == 'beach':
@@ -3533,7 +3750,6 @@ def battle(P,opp,no_pc = False) -> None:
             loc += 'f'
         if loc == 'mossy':
             loc = "route_6"
-        print(loc)
         if pokee.code_nos() not in P.save_data.pokedex:
             P.save_data.pokedex[pokee.code_nos()] = [0,[loc]]
         elif loc not in P.save_data.pokedex[pokee.code_nos()][1]:
@@ -3614,6 +3830,8 @@ def battle(P,opp,no_pc = False) -> None:
     new_battle_txt(P)
     if P.legendary_battle:
         battle_write(P,f"{pokee.name} appeared!")
+    elif P.pokestar_battle != 0:
+        battle_write(P,"The curtains rise as " + pokee.name + " enters the stage!")
     elif battle_type == 1:
         battle_write(P,opp[0]+" would", "like to battle!")
     else:
@@ -3630,6 +3848,7 @@ def battle(P,opp,no_pc = False) -> None:
     ballx2 = 0
     bally2 = 0
     tourney_print = False
+    theater_print = -1
     sizee = 50
     sizes = 50
     whitepokemone = load("p/poke/"+pokee.code+"_bfw.png")
@@ -3723,7 +3942,7 @@ def battle(P,opp,no_pc = False) -> None:
                 P.surface.blit(pokemone,(600-(sizee/2),255-sizee-abs(P.poke_m[0])))
             elif throws2 <= 80:
                 P.surface.blit(pokemone,(600-(sizee/2),110-(sizee/2)-abs(P.poke_m[0])))
-        move_back = P.surface.copy()
+        P.move_back = P.surface.copy()
         blit_stat(P,pokes,pokee)
         if P.infoepos <= 236:
             P.infoeposx = 0
@@ -3761,30 +3980,45 @@ def battle(P,opp,no_pc = False) -> None:
             P.surface.blit(balls2,(-55+ballx2+ballsp2[0],240+bally2+ballsp2[1]))
         #start of turn
         if P.infospos == 400 and throws == 50 and throwe == 70 and ((throws2 >= 65 and battle_type == 1) or (throws2 == 280 and battle_type == 0)) and pokes.status != 'Faint':
+            if P.pokestar_battle != 0:
+                if P.turn_count == 0 and P.pokestar_score[2] == 0:
+                    P.pokestar_score[0] = pokee.ch
+                    P.pokestar_score[2] += 1
+                if P.turn_count == 1 and P.pokestar_score[2] == 1:
+                    P.pokestar_score[0] -= pokee.ch
+                    P.pokestar_score[2] += 1
+                if P.turn_count == 5 and P.pokestar_score[2] == 2:
+                    P.pokestar_score[1] = pokee.ch
+                    P.pokestar_score[2] += 1
+                if P.turn_count == 6:
+                    P.pokestar_score[1] = (P.pokestar_score[1]-pokee.ch)/pokee.hp
+                    P.pokestar_score[2] += 1
+                    P.turn_count += 1
+                    battle_txt(P,"And that's end of the show!")
+                    P.surface.set_clip((0,0,800,600))
+                    battle_fade_out()
+                    return
             if pokee.ball == 'Nursery Ball' and pokee.code_nos() in ['Metapod','Aggron'] and P.turn_count == 3:
                 P.turn_count += 1
                 P.surface.set_clip((0,0,800,600))
-                pokes.reset_stats()
-                fade_out(P)
+                battle_fade_out()
                 return
             if pokee.ball == 'Nursery Ball' and pokee.code_nos() in ['Audino'] and P.turn_count == 5:
                 P.turn_count += 1
                 P.surface.set_clip((0,0,800,600))
-                pokes.reset_stats()
-                fade_out(P)
+                battle_fade_out()
                 return
             if pokee.get_ability() == 'Dodge' and P.turn_count == 5:
                 P.surface.set_clip((0,0,800,600))
-                pokes.reset_stats()
-                fade_out(P)
+                battle_fade_out()
                 return
             pokes.damage_taken = 0
             pokee.damage_taken = 0
             if turns1 == 1:
-                first_turn(P,pokes,pokee,1,move_back,opp)
+                first_turn(P,pokes,pokee,1,opp)
                 turns1 = 0
             if turne1 == 1:
-                first_turn(P,pokee,pokes,0,move_back,opp)
+                first_turn(P,pokee,pokes,0,opp)
                 turne1 = 0
             P.surface.set_clip((0,0,800,600))
             P.surface.blit(box,(0,460))
@@ -3796,7 +4030,9 @@ def battle(P,opp,no_pc = False) -> None:
             P.surface.set_clip((0,0,800,460))
         #player fainted
         if throws == -15 and fainteds == 1:
-            all_dead = party_fainted(P)
+            all_dead = False
+            if party_alive(P) == 0:
+                all_dead = True
             opp_dead = True
             for x in opp:
                 if type(x) != str and x.status != 'Faint':
@@ -3820,14 +4056,12 @@ def battle(P,opp,no_pc = False) -> None:
                             battle_write(P,"Choose next Pokemon?")
                         new = choose_nxtpoke(P,pokes,battle_type,True,pokee)
                     if new == 1:
-                        pokes.reset_stats()
-                        fade_out(P)
-                        evo_check(P)
-                        return 0
+                        battle_fade_out()
+                        return
                     click = 0
                     fainteds = 0
             else:
-                if not (pokee.code == 'Kangaskhan' and P.legendary_battle):
+                if not (pokee.code == 'Kangaskhan' and P.legendary_battle) and P.pokestar_battle == 0:
                     new_battle_txt(P)
                     battle_write(P,P.save_data.name + " is out of","Pokemon!")
                     P.clock.tick(P.bat_spd)
@@ -3849,12 +4083,12 @@ def battle(P,opp,no_pc = False) -> None:
                     new_battle_txt(P)
                     battle_write(P,P.save_data.name + " blacked out!")
                     P.clock.tick(P.bat_spd)
-                fade_out(P,P.song)
-                evo_check(P)
                 P.double_money = False
                 if no_pc:
-                    return 0
+                    battle_fade_out()
+                    return
                 else:
+                    fade_out(P,P.song)
                     print_blackout(P)
                     P.px = 125
                     P.py = -125
@@ -3881,7 +4115,7 @@ def battle(P,opp,no_pc = False) -> None:
                                 if pokee.drag:
                                     new_battle_txt(P)
                                     battle_write(P,newe.get_name() + " was", "dragged out!")
-                            else:
+                            elif party_alive(P) > 1:
                                 new_battle_txt(P)
                                 battle_write(P,opp[0] + " is about", "to send in " + newe.name + '!')
                                 P.clock.tick(P.bat_spd)
@@ -3914,7 +4148,6 @@ def battle(P,opp,no_pc = False) -> None:
                         break
             if (all_dead):
                 temp = pokes.copy()
-                pokes.reset_stats()
                 if temp.status != pokes.status and pokes.get_ability() == 'Natural Cure':
                     new_battle_txt(P)
                     battle_write(P,pokes.get_name() + " cured", "itself of status effects!")
@@ -3927,17 +4160,41 @@ def battle(P,opp,no_pc = False) -> None:
                     battle_write(P,opp[0] + " paid $" + str(calc_prize(P,opp)), "as the prize money!")
                     P.clock.tick(P.bat_spd)
                     P.save_data.money += calc_prize(P,opp)
-                fade_out(P,P.song)
-                evo_check(P)
                 P.double_money = False
+                battle_fade_out()
                 return 0
         #top part battle
         if P.infospos == 400 and throws == 50 and throwe == 70 and ((throws2 >= 65 and battle_type == 1) or (throws2 == 280 and battle_type == 0)):
+            if not print_options and pokes.status != 'Faint' and pokee.status != 'Faint':
+                print_options = True
             if P.turn_count == 0 and P.tourney_battle and tourney_print == False:
-                new_battle_txt(P)
-                battle_write(P,"The battle is looking intense!")
-                P.clock.tick(P.bat_spd)
+                battle_txt(P,"The battle is looking intense!")
                 tourney_print = True
+            if P.pokestar_battle != 0:
+                if P.turn_count == 0 and theater_print == -1:
+                    if P.pokestar_battle in [1,2]:
+                        battle_txt(P,"The villain starts the scene with a dramatic entrance.",auto = False)
+                        battle_txt(P,"Make sure you don't interrupt them with an attack!",auto = False)
+                    theater_print += 1
+                if P.turn_count == 1 and theater_print == 0:
+                    battle_txt(P,"It's time to get the battle started!",auto = False)
+                    battle_txt(P,"Take a few turns to exchange moves, but don't hit too hard!",auto = False)
+                    theater_print += 1
+                if P.turn_count == 4 and theater_print == 1:
+                    if P.pokestar_battle == 1:
+                        battle_txt(P,"The villain is about to use a powerful attack!",auto = False)
+                        battle_txt(P,"Make sure it doesn't take you out!",auto = False)
+                    elif P.pokestar_battle == 2:
+                        battle_txt(P,"The final exchange is coming up soon!",auto = False)
+                        battle_txt(P,"Get ready to launch a powerful attack next turn!",auto = False)
+                    theater_print += 1
+                if P.turn_count == 5 and theater_print == 2:
+                    if P.pokestar_battle == 1:
+                        battle_txt(P,"It's time to counter with your own finishing move!",auto = False)
+                    elif P.pokestar_battle == 2:
+                        battle_txt(P,"It's time for you to use your finishing move!",auto = False)
+                    battle_txt(P,"Hit them with the strongest move you've got!",auto = False)
+                    theater_print += 1
             if weather_print == P.turn_count:
                 if P.battle_weather != None and P.battle_weather[0] == 'Rain':
                     P.battle_weather[1] -= 1
@@ -3964,6 +4221,51 @@ def battle(P,opp,no_pc = False) -> None:
                                     rain_val = -20
                         else:
                             P.clock.tick(P.bat_spd)
+                elif P.battle_weather != None and P.battle_weather[0] == 'Hail':
+                    P.battle_weather[1] -= 1
+                    if P.battle_weather[1] > 10:
+                        P.battle_weather[1] -= 10
+                    else:
+                        new_battle_txt(P)
+                        if P.battle_weather[1] == 0:
+                            battle_write(P,"The hail stopped.")
+                            P.clock.tick(P.bat_spd)
+                            P.battle_weather = None
+                        elif weather_print == 0:
+                            battle_write(P,"It is hailing!")
+                        else:
+                            battle_write(P,"Hail continues to fall.")
+                        if P.battle_weather != None:
+                            if P.ani_on:
+                                hail_temp = P.surface.copy()
+                                hail_val = 0
+                                for r in range(60):
+                                    P.surface.blit(hail_temp,(0,0))
+                                    blit_hail(P,hail_val)
+                                    update_screen(P)
+                                    P.clock.tick(P.ani_spd)
+                                    hail_val += 1
+                                    if hail_val == 40:
+                                        hail_val = -20
+                            if weather_print != 0:
+                                if 'Ice' not in pokes.type and pokes.ability not in ['Ice Body','Snow Cloak','Magic Guard','Overcoat']:
+                                    battle_txt(P,pokes.get_name()+" is buffeted by the hail!")
+                                    tempp = pokes
+                                    tempp.take_damage(P,int(tempp.hp/16),dot = True)
+                                    hp_change(P,pokes,pokee,tempp,pokee)
+                                    if pokes.ch == 0:
+                                        poke_faint(P,pokes)
+                                if 'Ice' not in pokee.type and pokee.ability not in ['Ice Body','Snow Cloak','Magic Guard','Overcoat']:
+                                    battle_txt(P,pokee.get_name()+" is buffeted by the hail!")
+                                    tempe = pokee
+                                    tempe.take_damage(P,int(tempe.hp/16),dot = True)
+                                    hp_change(P,pokes,pokee,pokes,tempe)
+                                    if pokee.ch == 0:
+                                        poke_faint(P,pokee)
+                                if check_fainted():
+                                    print_options = False
+                            else:
+                                P.clock.tick(P.bat_spd)
                 elif P.battle_weather != None and P.battle_weather[0] == 'Sunny':
                     P.battle_weather[1] -= 1
                     new_battle_txt(P)
@@ -4008,7 +4310,7 @@ def battle(P,opp,no_pc = False) -> None:
                             P.clock.tick(P.bat_spd)
                 weather_print += 1
             if terrain_print == P.turn_count:
-                if P.battle_terrain != None and P.battle_terrain[0] == 'Electric':
+                if in_terrain(P,'Electric'):
                     P.battle_terrain[1] -= 1
                     new_battle_txt(P)
                     if P.battle_terrain[1] == 0:
@@ -4016,6 +4318,18 @@ def battle(P,opp,no_pc = False) -> None:
                         P.battle_terrain = None
                     else:
                         battle_write(P,"An electric current is running","across the battlefield!")
+                    P.clock.tick(P.bat_spd)
+                if in_terrain(P,'Misty'):
+                    P.battle_terrain[1] -= 1
+                    new_battle_txt(P)
+                    if P.battle_terrain[1] == 0:
+                        battle_write(P,"The mist disappeared from the battlefield!")
+                        P.battle_terrain = None
+                    else:
+                        if P.prog[22][0] == 0 and P.loc in ['silfide_gymb','silfide_gym1'] and P.turn_count == 0:
+                            battle_write(P,"The orb caused mist to swirl around the battlefield!")
+                        else:
+                            battle_write(P,"Mist swirled around the battlefield!")
                     P.clock.tick(P.bat_spd)
                 terrain_print += 1
             if turn == 1:
@@ -4026,7 +4340,7 @@ def battle(P,opp,no_pc = False) -> None:
                     battle_write(P,pokee.get_name() +" is out of", "moves!")
                     P.clock.tick(P.bat_spd)
                 eff = oppswcmv.cast(P,pokee,pokes,choose)
-                battle_move_use(P,origs,orige,pokes,pokee,move_back,eff,1)
+                battle_move_use(P,origs,orige,pokes,pokee,eff,1)
                 count = eff[4]
                 if oppswcmv.name == 'Metronome':
                     oppswcmv = moves.Move(P.metronome)
@@ -4036,64 +4350,38 @@ def battle(P,opp,no_pc = False) -> None:
                     if pokes.ch == 0 or pokee.ch == 0:
                         break
                     eff = oppswcmv.use(P,pokee,pokes,1)
-                    battle_move_use(P,origs,orige,pokes,pokee,move_back,eff,x+2)
+                    battle_move_use(P,origs,orige,pokes,pokee,eff,x+2)
                 if count != 0 and pokes.ch != 0 and pokee.ch != 0:
                     new_battle_txt(P)
                     battle_write(P,"Hit " + str(count+1) + " times!")
                     P.clock.tick(P.bat_spd)
                 P.gem_active = False
-                EOT_effects(P,pokes,pokee,0,move_back)
-                EOT_effects(P,pokee,pokes,1,move_back)
-                P.turn_count += 1
+                EOT_effects(P,pokes,pokee,0)
+                EOT_effects(P,pokee,pokes,1)
                 pokes = reset_move_stat(P,pokes)
                 pokee = reset_move_stat(P,pokee)
+                P.turn_count += 1
                 turn_end(P)
                 pokes.check_last(P,battle_type)
                 pokee.check_last(P,battle_type)
-                if pokes.status == 'Faint' or pokes.exit:
-                    oboxl[high] = obox
-                    high = 0
-                    oboxl[0] = hobox
-                    mvnum = 0
-                    throws = -60
-                    ballsp = balls.get_rect()
-                    ballx = 0
-                    bally = 0
-                    fainteds = 1
-                if pokee.status == 'Faint' or pokee.exit:
-                    all_dead = True
-                    for x in opp:
-                        if type(x) != str:
-                            if x.status != 'Faint':
-                                all_dead = False
-                    if all_dead == False:
-                        opp_ball = []
-                        for x in opp:
-                            if type(x) != str:
-                                if x.status != 'Faint':
-                                    opp_ball.append(poke_ico)
-                                else:
-                                    opp_ball.append(poke_icof)
-                        while 0 < 6-len(opp_ball):
-                            opp_ball.append(poke_icoe)
-                        showbar = 1
-                    throwe = -45
-                    balle = balle1
-                    faintede = 1
+                check_fainted()
                 turn = 0
             else:
                 use_move = False
                 if pokes.bide[0] > 0:
-                    use_x(P,pokes,pokee,move_back,moves.Move('Bide'))
+                    use_x(P,pokes,pokee,moves.Move('Bide'))
                     use_move = True
                 elif pokes.charge != None:
-                    use_x(P,pokes,pokee,move_back,moves.Move(pokes.charge))
+                    use_x(P,pokes,pokee,moves.Move(pokes.charge))
                     use_move = True
                 elif pokes.rollcount > 0:
-                    use_x(P,pokes,pokee,move_back,moves.Move('Rollout'))
+                    if pokes.rollcount > 5:
+                        use_x(P,pokes,pokee,moves.Move('Ice Ball'))
+                    else:
+                        use_x(P,pokes,pokee,moves.Move('Rollout'))
                     use_move = True
                 elif pokes.cont_move[1] > 0:
-                    use_x(P,pokes,pokee,move_back,moves.Move(pokes.cont_move[0]))
+                    use_x(P,pokes,pokee,moves.Move(pokes.cont_move[0]))
                     use_move = True
                 if use_move:
                     if end_battle(P,pokes):
@@ -4101,37 +4389,8 @@ def battle(P,opp,no_pc = False) -> None:
                     click = 0
                     pokes.check_last(P,battle_type)
                     pokee.check_last(P,battle_type)
-                    if pokes.status == 'Faint' or pokes.exit:
-                        oboxl[high] = obox
-                        high = 0
-                        oboxl[0] = hobox
-                        mvnum = 0
-                        throws = -60
-                        ballsp = balls.get_rect()
-                        ballx = 0
-                        bally = 0
-                        fainteds = 1
-                    if pokee.status == 'Faint' or pokee.exit:
-                        all_dead = True
-                        for x in opp:
-                            if type(x) != str:
-                                if x.status != 'Faint':
-                                    all_dead = False
-                        if all_dead == False:
-                            opp_ball = []
-                            for x in opp:
-                                if type(x) != str:
-                                    if x.status != 'Faint':
-                                        opp_ball.append(poke_ico)
-                                    else:
-                                        opp_ball.append(poke_icof)
-                            while 0 < 6-len(opp_ball):
-                                opp_ball.append(poke_icoe)
-                            showbar = 1
-                        throwe = -45
-                        balle = balle1
-                        faintede = 1
-                else:
+                    check_fainted()
+                elif print_options:
                     P.surface.set_clip((400,460,400,140))
                     P.surface.blit(box,(0,460))
                     P.surface.blit(oboxl[0],(400,460))
@@ -4151,14 +4410,14 @@ def battle(P,opp,no_pc = False) -> None:
                             if high == 0:
                                 #use struggle
                                 if (pokes.p1 == 0 or pokes.p1 == None or (moves.Move(pokes.m1).cat == '2' and pokes.taunt != 0)) and (pokes.p2 == 0 or pokes.p2 == None or (moves.Move(pokes.m2).cat == '2' and pokes.taunt != 0)) and (pokes.p3 == 0 or pokes.p3 == None or (moves.Move(pokes.m3).cat == '2' and pokes.taunt != 0)) and (pokes.p4 == 0 or pokes.p4 == None or (moves.Move(pokes.m4).cat == '2' and pokes.taunt != 0)):
-                                    use_x(P,pokes,pokee,move_back,strug)
+                                    use_x(P,pokes,pokee,strug)
                                     click = 0
                                     if end_battle(P,pokes):
                                         return 0
                                 #use other moves
                                 else:
                                     #pick move
-                                    pm_ret = pick_move(P,pokes,pokee,mvnum,move_back,pokemone,pokemons,sizes,sizee,a)
+                                    pm_ret = pick_move(P,pokes,pokee,mvnum,pokemone,pokemons,sizes,sizee,a)
                                     if end_battle(P,pokes):
                                         return 0
                                     mvnum = pm_ret[0]
@@ -4166,40 +4425,11 @@ def battle(P,opp,no_pc = False) -> None:
                                     click = 0
                                 pokes.check_last(P,battle_type)
                                 pokee.check_last(P,battle_type)
-                                if pokes.status == 'Faint' or pokes.exit:
-                                    oboxl[high] = obox
-                                    high = 0
-                                    oboxl[0] = hobox
-                                    mvnum = 0
-                                    throws = -60
-                                    ballsp = balls.get_rect()
-                                    ballx = 0
-                                    bally = 0
-                                    fainteds = 1
-                                if pokee.status == 'Faint' or pokee.exit:
-                                    all_dead = True
-                                    for x in opp:
-                                        if type(x) != str:
-                                            if x.status != 'Faint':
-                                                all_dead = False
-                                    if all_dead == False:
-                                        opp_ball = []
-                                        for x in opp:
-                                            if type(x) != str:
-                                                if x.status != 'Faint':
-                                                    opp_ball.append(poke_ico)
-                                                else:
-                                                    opp_ball.append(poke_icof)
-                                        while 0 < 6-len(opp_ball):
-                                            opp_ball.append(poke_icoe)
-                                        showbar = 1
-                                    throwe = -45
-                                    balle = balle1
-                                    faintede = 1
+                                check_fainted()
                                 click = 0
                             #bag
                             if high == 1:
-                                if P.tourney_battle:
+                                if P.tourney_battle or P.pokestar_battle != 0:
                                     new_battle_txt(P)
                                     battle_write(P,"You can't use items!")
                                     cont(P)
@@ -4244,7 +4474,7 @@ def battle(P,opp,no_pc = False) -> None:
                                                 pokes.ch += heal
                                                 if pokes.ch > pokes.hp:
                                                     pokes.ch = pokes.hp
-                                                hp_change(P,ori,pokee,pokes,pokee,move_back)
+                                                hp_change(P,ori,pokee,pokes,pokee)
                                             else:
                                                 heal = item.mod()
                                                 if item.name == 'Sitrus Berry':
@@ -4252,7 +4482,7 @@ def battle(P,opp,no_pc = False) -> None:
                                                 tar.ch += heal
                                                 if tar.ch > tar.hp:
                                                     tar.ch = tar.hp
-                                            use_x(P,pokes,pokee,move_back,1)
+                                            use_x(P,pokes,pokee,1)
                                             if end_battle(P,pokes):
                                                 return 0
                                         if item.type[0] == 'Battle Berry' and (type(item.mod()) == list and tar.status in item.mod()[0]) or ((item.name == 'Lum Berry' or item.name == 'Persim Berry') and tar.cfs > 0):
@@ -4291,7 +4521,7 @@ def battle(P,opp,no_pc = False) -> None:
                                                 tar.cfs = 0
                                             else:
                                                 tar.status = None
-                                            use_x(P,pokes,pokee,move_back,1)
+                                            use_x(P,pokes,pokee,1)
                                             if end_battle(P,pokes):
                                                 return 0
                             #pokemon
@@ -4355,7 +4585,7 @@ def battle(P,opp,no_pc = False) -> None:
                                     if oppswcmv.name == 'Pursuit':
                                         pokee.pursuit = True
                                         eff = oppswcmv.cast(P,pokee,pokes,choose)
-                                        battle_move_use(P,origs,orige,pokes,pokee,move_back,eff)
+                                        battle_move_use(P,origs,orige,pokes,pokee,eff)
                                         pokee.pursuit = False
                                     else:
                                         turn = 1
@@ -4374,57 +4604,35 @@ def battle(P,opp,no_pc = False) -> None:
                                     new_battle_txt(P)
                                     battle_write(P,"There's no running from a", "Trainer battle!")
                                     cont(P)
+                                elif P.pokestar_battle != 0:
+                                    battle_txt(P,"If you leave the show now, you won't get any rewards!")
+                                    new_battle_txt(P)
+                                    battle_write(P,"Are you sure you want to leave?")
+                                    if choice(P):
+                                        P.pokestar_score[2] = -1
+                                        P.surface.set_clip((0,0,800,600))
+                                        battle_fade_out()
+                                        return
                                 elif ((pokee.get_ability() == 'Shadow Tag' and pokes.get_ability() != 'Shadow Tag' and 'Ghost' not in pokes.type) or (pokee.get_ability() == 'Arena Trap' and pokes.get_ability() != 'Levitate' and pokes.magnet_rise == 0 and 'Flying' not in pokes.type) or (pokee.get_ability() == 'Magnet Pull' and 'Steel' in pokes.type) or (pokes.trapped[1] != 0)) and (pokes.get_ability() != 'Run Away' or 'Ghost' in pokes.type):
                                     new_battle_txt(P)
                                     battle_write(P,pokes.name + " is trapped!")
                                     show_ability(P,pokee.ability,0)
                                     cont(P)
                                 elif battle_type == 0:
-                                    if use_x(P,pokes,pokee,move_back,0) == 1:
+                                    if use_x(P,pokes,pokee,0) == 1:
                                         temp = pokes.copy()
-                                        pokes.reset_stats()
                                         if temp.status != pokes.status and pokes.get_ability() == 'Natural Cure':
                                             new_battle_txt(P)
                                             battle_write(P,pokes.name + " cured itself", "of status effects!")
                                             show_ability(P,'Natural Cure',1)
-                                        fade_out(P)
-                                        evo_check(P)
+                                        battle_fade_out()
                                         return 0
                                     if end_battle(P,pokes):
                                         return 0
                                     click = 0
                                     pokes.check_last(P,battle_type)
                                     pokee.check_last(P,battle_type)
-                                    if pokes.status == 'Faint' or pokes.exit:
-                                        oboxl[high] = obox
-                                        high = 0
-                                        oboxl[0] = hobox
-                                        mvnum = 0
-                                        throws = -60
-                                        ballsp = balls.get_rect()
-                                        ballx = 0
-                                        bally = 0
-                                        fainteds = 1
-                                    if pokee.status == 'Faint' or pokee.exit:
-                                        all_dead = True
-                                        for x in opp:
-                                            if type(x) != str:
-                                                if x.status != 'Faint':
-                                                    all_dead = False
-                                        if all_dead == False:
-                                            opp_ball = []
-                                            for x in opp:
-                                                if type(x) != str:
-                                                    if x.status != 'Faint':
-                                                        opp_ball.append(poke_ico)
-                                                    else:
-                                                        opp_ball.append(poke_icof)
-                                            while 0 < 6-len(opp_ball):
-                                                opp_ball.append(poke_icoe)
-                                            showbar = 1
-                                        throwe = -45
-                                        balle = balle1
-                                        faintede = 1
+                                    check_fainted()
                         elif event.key == pygame.key.key_code(P.controls[0]) and high > 1:
                             high -= 2
                             oboxl[high+2] = obox
@@ -4465,6 +4673,9 @@ def battle(P,opp,no_pc = False) -> None:
                 trainer_cut = True
             if newe.code_nos() == "Mega_Blastoise" and opp[0] == "Leader Siebold":
                 ex = trainer_cutin(P,"Siebold")
+                trainer_cut = True
+            if newe.code_nos() == "Mega_Altaria" and opp[0] == "Leader Lisia":
+                ex = trainer_cutin(P,"Lisia")
                 trainer_cut = True
             pokee.reset_stats()
             if pokee.drag:
@@ -4511,13 +4722,11 @@ def battle(P,opp,no_pc = False) -> None:
             get_poke(P,pokee)
             gain_exp(P,pokes,pokee,was_in,battle_type)
             temp = pokes.copy()
-            pokes.reset_stats()
             if temp.status != pokes.status and pokes.get_ability() == 'Natural Cure':
                 new_battle_txt(P)
                 battle_write(P,pokes.name + " cured itself", "of status effects!")
                 show_ability(P,'Natural Cure',1)
-            fade_out(P)
-            evo_check(P)
+            battle_fade_out()
             return 0
         if (throws2 == 61 and battle_type == 1) or (throws2 == 279 and battle_type == 0):
             new_battle_txt(P)
@@ -4540,42 +4749,13 @@ def battle(P,opp,no_pc = False) -> None:
                 else:
                     battle_write(P,"Gah! It was so close, too!")
                 cont(P)
-            use_x(P,pokes,pokee,move_back,1)
+            use_x(P,pokes,pokee,1)
             click = 0
             if end_battle(P,pokes):
                 return 0
             pokes.check_last(P,battle_type)
             pokee.check_last(P,battle_type)
-            if pokes.status == 'Faint' or pokes.exit:
-                oboxl[high] = obox
-                high = 0
-                oboxl[0] = hobox
-                mvnum = 0
-                throws = -60
-                ballsp = balls.get_rect()
-                ballx = 0
-                bally = 0
-                fainteds = 1
-            if pokee.status == 'Faint' or pokee.exit:
-                all_dead = True
-                for x in opp:
-                    if type(x) != str:
-                        if x.status != 'Faint':
-                            all_dead = False
-                if all_dead == False:
-                    opp_ball = []
-                    for x in opp:
-                        if type(x) != str:
-                            if x.status != 'Faint':
-                                opp_ball.append(poke_ico)
-                            else:
-                                opp_ball.append(poke_icof)
-                    while 0 < 6-len(opp_ball):
-                        opp_ball.append(poke_icoe)
-                    showbar = 1
-                throwe = -45
-                balle = balle1
-                faintede = 1
+            check_fainted()
         if throws >= 5 and throws <= 45:
             if throws%5 == 0:
                 balls = pygame.transform.rotate(balls,45)
@@ -4699,7 +4879,7 @@ def get_poke(P,poke,show_pokedex = True) -> None:
         poke.friend = 200
     new_poke = False
     if poke.code_nos() not in P.save_data.pokedex:
-        if poke.nurse:
+        if poke.nurse != 0:
             P.save_data.pokedex[poke.code_nos()] = [0,[]]
         else:
             P.save_data.pokedex[poke.code_nos()] = [1,[]]
@@ -4867,9 +5047,11 @@ def catch_check(P, poke, self_poke, ball) -> bool:
     print(a/255*100)
     return a
 
-def evo_check(P) -> None:
+def evo_check(P,fade = False) -> None:
+    P.future_sight = [0,0,None,None]
+    evo = False
     for y in range(len(P.party)):
-        if y >= len(P.party) or P.party[y].item == "Everstone" or P.party[y].nurse:
+        if P.party[y].item == "Everstone" or P.party[y].nurse != 0:
             pass
         elif P.party[y].evo != [] and type(P.party[y].evo[0]) == str:
             if P.party[y].evo[0] == 'friend' and P.party[y].friend >= 300 and P.party[y] in P.leveled_up and (P.party[y].code_nos() not in ['Chingling'] or get_time() > 19 or get_time() < 6) and (P.party[y].code_nos() not in ['Budew','Riolu'] or (get_time() >= 6 and get_time() <= 19)):
@@ -4877,21 +5059,20 @@ def evo_check(P) -> None:
                 temp = x
                 P.party[y] = poke.Poke(x.evo[1],[x.lvl,x.gen,x.ch,x.m1,x.p1,x.m2,x.p2,x.m3,x.p3,x.m4,x.p4,x.item,x.status,x.exp,x.ball,x.friend,x.ability,True])
                 t = P.surface.copy()
-                evolve(P,temp,P.party[y])
+                evolve(P,temp,P.party[y],fade)
                 P.surface.blit(t,(0,0))
             elif P.party[y].evo[0] == 'move' and P.party[y] in P.leveled_up:
-                if (P.party[y].code_nos() in ['Yanma','Tangela'] and P.party[y].has_move('Ancient Power')) or (P.party[y].code_nos() in ['Mime Jr','Bonsly'] and P.party[y].has_move('Mimic')):
+                if (P.party[y].code_nos() in ['Yanma','Tangela','Piloswine'] and P.party[y].has_move('Ancient Power')) or (P.party[y].code_nos() in ['Mime Jr','Bonsly'] and P.party[y].has_move('Mimic')):
                     x = P.party[y]
                     temp = x
                     P.party[y] = poke.Poke(x.evo[1],[x.lvl,x.gen,x.ch,x.m1,x.p1,x.m2,x.p2,x.m3,x.p3,x.m4,x.p4,x.item,x.status,x.exp,x.ball,x.friend,x.ability,True])
                     t = P.surface.copy()
-                    evolve(P,temp,P.party[y])
+                    evolve(P,temp,P.party[y],fade)
                     P.surface.blit(t,(0,0))
         elif P.party[y].evo != [] and type(P.party[y].evo[0]) == int and P.party[y] in P.leveled_up:
             z = None
             x = P.party[y]
             if x.lvl >= x.evo[0]:
-                evo = False
                 if x.code_nos() == 'Karrablast':
                     for p in range(len(P.party)):
                         if P.party[p].code_nos() == 'Shelmet' and P.party[p].lvl >= 30 and P.party[p].item != 'Everstone':
@@ -4923,12 +5104,23 @@ def evo_check(P) -> None:
                 elif x.code_nos() in ['Happiny','Fomantis']:
                     if get_time() >= 6 and get_time() <= 19 and (x.code_nos() != 'Happiny' or x.item == 'Oval Stone'):
                         evo = True
+                elif x.code_nos() in ['Sneasel']:
+                    if get_time() < 6 and get_time() > 19 and (x.code_nos() != 'Sneasel' or x.item == 'Razor Claw'):
+                        evo = True
                 elif x.code_nos() == 'Slowpoke':
                     for p in range(len(P.party)):
                         if P.party[p].code_nos() == 'Shellder':
                             z = p
                             evo = True
                             break
+                elif x.code_nos() == 'Tyrogue':
+                    if x.df > x.ak:
+                        x.evo[1] = 'Hitmonchan'
+                        x.evo[2] = 'Comet Punch'
+                    elif x.ak > x.df:
+                        x.evo[1] = 'Hitmonlee'
+                        x.evo[2] = 'Double Kick'
+                    evo = True
                 elif x.code_nos() == 'Mantyke':
                     for p in range(len(P.party)):
                         if P.party[p].code_nos() == 'Remoraid':
@@ -4944,17 +5136,18 @@ def evo_check(P) -> None:
                     temp = x
                     P.party[y] = poke.Poke(x.evo[1],[x.lvl,x.gen,x.ch,x.m1,x.p1,x.m2,x.p2,x.m3,x.p3,x.m4,x.p4,x.item,x.status,x.exp,x.ball,x.friend,x.ability,True])
                     t = P.surface.copy()
-                    evolve(P,temp,P.party[y])
+                    evolve(P,temp,P.party[y],fade)
                     P.surface.blit(t,(0,0))
                     if x.code_nos() in ['Karrablast','Shelmet']:
                         x = P.party[z]
                         temp = P.party[z]
                         P.party[z] = poke.Poke(x.evo[1],[x.lvl,x.gen,x.ch,x.m1,x.p1,x.m2,x.p2,x.m3,x.p3,x.m4,x.p4,x.item,x.status,x.exp,x.ball,x.friend,x.ability,True])
                         t = P.surface.copy()
-                        evolve(P,temp,P.party[z])
+                        evolve(P,temp,P.party[z],fade)
                         P.surface.blit(t,(0,0))
                     elif x.code_nos() in ['Slowpoke','Mantyke']:
                         P.party.remove(P.party[z])
+    return evo
     P.leveled_up = []
 
 def blit_alpha(P,img, xy, alp):
@@ -4966,7 +5159,7 @@ def blit_alpha(P,img, xy, alp):
         temp.set_alpha(alp)        
         P.surface.blit(temp, xy)
         
-def evolve(P,pokeo,poken) -> None:
+def evolve(P,pokeo,poken,fade) -> None:
     pygame.mixer.stop()
     set_channel_volume(P,P.sfx_vol,1)
     pygame.mixer.Channel(1).play(pygame.mixer.Sound('music/sfx/evo_click.wav'))
@@ -4982,6 +5175,9 @@ def evolve(P,pokeo,poken) -> None:
     poke_1wi = load("p/poke/"+pokeo.code+"_bfw.png")
     poke_1w = pygame.transform.scale(poke_1wi,(400,400))
     poke_2 = pygame.transform.scale(load("p/poke/"+poken.code+"_bf.png"),(400,400))
+    temp = P.surface.copy()
+    if fade:
+        fade_out(P)
     P.surface.blit(back,(0,0))
     P.surface.blit(poke_1,(200,50))
     fade_in(P)
@@ -5064,12 +5260,16 @@ def evolve(P,pokeo,poken) -> None:
     if poken.ch != 0:
         poken.ch += poken.hp-pokeo.hp
     fade_out(P,P.song)
+    if fade:
+        P.surface.blit(temp,(0,0))
+        fade_in(P)
 
 def turn_end(P):
     if P.echoed[1] == 1:
         P.echoed = [0,0]
     if P.echoed[1] != 0:
         P.echoed[1] -= 1
+    P.ion_deluge = False
     if P.player_buffs[0] > 0:
         P.player_buffs[0] -= 1
         if P.player_buffs[0] == 0:
@@ -5113,7 +5313,7 @@ def cancelled(poke):
     poke.rollcount = 0
     poke.bide = [0,0]
 
-def EOT_effects(P,pokes,pokee,turn,move_back):
+def EOT_effects(P,pokes,pokee,turn):
     op = pokes.copy()
     oe = pokee.copy()
     if pokes.status == None and pokes.yawn == 2:
@@ -5121,9 +5321,13 @@ def EOT_effects(P,pokes,pokee,turn,move_back):
             new_battle_txt(P)
             battle_write(P,pokes.get_name()+" didn't", "fall asleep!")
             show_ability(P,'Insomnia',abs(turn-1))
-        elif P.battle_terrain != None and P.battle_terrain[0] == 'Electric' and pokes.grounded():
+        elif in_terrain(P,'Electric',pokes):
             new_battle_txt(P)
             battle_write(P,pokes.get_name()+" didn't", "fall asleep!")
+            P.clock.tick(P.bat_spd)
+        elif in_terrain(P,'Misty',pokes):
+            new_battle_txt(P)
+            battle_write(P,pokes.get_name()+" surrounds", "itself with a protective mist!")
             P.clock.tick(P.bat_spd)
         else:
             pokes.status = 'Slp'
@@ -5186,6 +5390,14 @@ def EOT_effects(P,pokes,pokee,turn,move_back):
             else:
                 pokes.status = None
             pokes.item = None
+            if pokes.ability == 'Cheek Pouch':
+                show_ability(P,'Cheek Pouch',abs(turn-1))
+                battle_txt(P,pokes.get_name() + "'s HP was", 'restored!')
+                pokes.gain_hp(int(pokes.hp/3))
+                if turn == 0:
+                    hp_change(P,op,oe,pokes,pokee)
+                else:
+                    hp_change(P,oe,op,pokee,pokes)
     P.surface.set_clip((0,0,800,460))
     tempp = pokes.copy()
     tempe = pokee.copy()
@@ -5200,14 +5412,14 @@ def EOT_effects(P,pokes,pokee,turn,move_back):
             new_battle_txt(P)
             battle_write(P,pokes.get_name()+" is hurt by", pokes.trapped[0]+"!")
             P.clock.tick(P.bat_spd)
-            tempp.take_damage(P,int(tempp.hp/8))
+            tempp.take_damage(P,int(tempp.hp/8),dot = True)
             # tempp.ch -= int(tempp.hp/8)
             # if tempp.ch < 0:
             #     tempp.ch = 0
             if turn == 0:
-                hp_change(P,pokes,pokee,tempp,tempe,move_back)
+                hp_change(P,pokes,pokee,tempp,tempe)
             else:
-                hp_change(P,pokee,pokes,tempe,tempp,move_back)
+                hp_change(P,pokee,pokes,tempe,tempp)
             if pokes.ch == 0:
                 poke_faint(P,pokes)
                 pokee.trapped = [None,0]
@@ -5220,11 +5432,11 @@ def EOT_effects(P,pokes,pokee,turn,move_back):
             new_battle_txt(P)
             battle_write(P,pokes.get_name()+" is locked", "in a nightmare!")
             P.clock.tick(P.bat_spd)
-            tempp.take_damage(P,int(tempp.hp/4))
+            tempp.take_damage(P,int(tempp.hp/4),dot = True)
             if turn == 0:
-                hp_change(P,pokes,pokee,tempp,tempe,move_back)
+                hp_change(P,pokes,pokee,tempp,tempe)
             else:
-                hp_change(P,pokee,pokes,tempe,tempp,move_back)
+                hp_change(P,pokee,pokes,tempe,tempp)
             if pokes.ch == 0:
                 poke_faint(P,pokes)
                 pokee.trapped = [None,0]
@@ -5247,9 +5459,9 @@ def EOT_effects(P,pokes,pokee,turn,move_back):
                 else:
                     eff = fs.use(P,tempp,tempe,turn)
                 if turn == 0:
-                    take_damage(P,pokes,pokee,tempp,tempe,move_back,eff)
+                    take_damage(P,pokes,pokee,tempp,tempe,eff,turn)
                 else:
-                    take_damage(P,pokee,pokes,tempe,tempp,move_back,eff)
+                    take_damage(P,pokee,pokes,tempe,tempp,eff,turn)
                 if pokee.ch == 0:
                     poke_faint(P,pokee)
                     pokes.trapped = [None,0]
@@ -5260,27 +5472,27 @@ def EOT_effects(P,pokes,pokee,turn,move_back):
         new_battle_txt(P)
         battle_write(P,pokes.get_name()+" is hurt by", "the curse!")
         P.clock.tick(P.bat_spd)
-        tempp.take_damage(P,int(tempp.hp/4))
+        tempp.take_damage(P,int(tempp.hp/4),dot = True)
         if turn == 0:
-            hp_change(P,pokes,pokee,tempp,tempe,move_back)
+            hp_change(P,pokes,pokee,tempp,tempe)
         else:
-            hp_change(P,pokee,pokes,tempe,tempp,move_back)
+            hp_change(P,pokee,pokes,tempe,tempp)
         if pokes.ch == 0:
             poke_faint(P,pokes)
             pokee.trapped = [None,0]
             P.ion_deluge = False
             return pokes
     if pokes.leech and pokee.status != 'Faint':
-        tempp.take_damage(P,int(tempp.hp/8))
+        tempp.take_damage(P,int(tempp.hp/8),dot = True)
         if turn == 0:
-            hp_change(P,pokes,pokee,tempp,tempe,move_back)
+            hp_change(P,pokes,pokee,tempp,tempe)
         else:
-            hp_change(P,pokee,pokes,tempe,tempp,move_back)
+            hp_change(P,pokee,pokes,tempe,tempp)
         tempe.take_damage(P,-int(tempp.hp/8))
         if turn == 0:
-            hp_change(P,pokes,pokee,tempp,tempe,move_back)
+            hp_change(P,pokes,pokee,tempp,tempe)
         else:
-            hp_change(P,pokee,pokes,tempe,tempp,move_back)
+            hp_change(P,pokee,pokes,tempe,tempp)
         new_battle_txt(P)
         battle_write(P,pokes.get_name()+"'s health'", "is sapped by Leech Seed!")
         P.clock.tick(P.bat_spd)
@@ -5294,19 +5506,19 @@ def EOT_effects(P,pokes,pokee,turn,move_back):
         battle_write(P,pokes.get_name()+" was hurt", "by its burn!")
         P.clock.tick(P.bat_spd)
         # tempp.ch -= int(tempp.hp/16)
-        tempp.take_damage(P,int(tempp.hp/16))
+        tempp.take_damage(P,int(tempp.hp/16),dot = True)
     if pokes.status == 'Psn':
         new_battle_txt(P)
         battle_write(P,pokes.get_name()+" was hurt", "by poison!")
         P.clock.tick(P.bat_spd)
         #tempp.ch -= int(tempp.hp/8)
-        tempp.take_damage(P,int(tempp.hp/8))
+        tempp.take_damage(P,int(tempp.hp/8),dot = True)
     if pokes.status == 'BPs':
         new_battle_txt(P)
         battle_write(P,pokes.get_name()+" was hurt", "by poison!")
         P.clock.tick(P.bat_spd)
         # tempp.ch -= int(tempp.hp*tempp.bps/16)
-        tempp.take_damage(P,int(tempp.hp*tempp.bps/16))
+        tempp.take_damage(P,int(tempp.hp*tempp.bps/16),dot = True)
         pokes.bps += 1
     if pokes.taunt > 0:
         pokes.taunt -= 1
@@ -5317,9 +5529,9 @@ def EOT_effects(P,pokes,pokee,turn,move_back):
     if tempp.ch < 0:
         tempp.ch = 0
     if turn == 0:
-        hp_change(P,pokes,pokee,tempp,tempe,move_back)
+        hp_change(P,pokes,pokee,tempp,tempe)
     else:
-        hp_change(P,pokee,pokes,tempe,tempp,move_back)
+        hp_change(P,pokee,pokes,tempe,tempp)
     P.ion_deluge = False
     if pokes.ch == 0:
         poke_faint(P,pokes)
@@ -5328,7 +5540,9 @@ def EOT_effects(P,pokes,pokee,turn,move_back):
 
 def poke_max(P,poke):
     lvl = 15
-    if P.prog[0] >= 144:
+    if P.prog[0] >= 157:
+        lvl = 60
+    elif P.prog[0] >= 144:
         lvl = 55
     elif P.prog[0] >= 106:
         lvl = 45
@@ -5343,6 +5557,8 @@ def poke_max(P,poke):
     return False
 
 def gain_exp(P,pokes,pokee,was_in,battle_type) -> None:
+    if P.pokestar_battle != 0:
+        return
     expbar = load("p/summ_exp.png")
     hpbar = load('p/team_hp.png')
     infoboxs = load("p/battle_info_boxs.png")
@@ -5357,9 +5573,8 @@ def gain_exp(P,pokes,pokee,was_in,battle_type) -> None:
     if exp == 0:
         exp = 1
     if battle_type == 1:
-        if (pokee.code in ['Golisopod','Whiscash','Clawitzer','Malamar','Kingdra','Lapras'] and pokee.lvl == 48 and P.habitat == 'dock') or (pokee.code in ['Dusknoir'] and pokee.lvl == 52 and pokee.petals == ['ak','ak','ak','spd','spd']) or (pokee.code in ['Mega_Gengar','Mega_Alakazam'] and pokee.lvl == 50) or (pokee.name in ['Scizor','Steelix','Ferrothorn'] and pokee.item == 'Metal Coat' and pokee.lvl == 40) or ((pokee.name == 'Nidorina' or pokee.name == 'Nidorino') and pokee.item == 'Eviolite' and pokee.lvl == 16):
+        if type(P.opponent[0]) == str and P.opponent[0] in ['Expert Wesley','Fisherman David','Psychic Issac','Expert Sarah','Hex Maniac Chloe','Gentleman Joey']:
             exp *= 0.5
-            print("less")
         elif P.legendary_battle == False:
             exp *= 1.3
     if P.fishing != None:
@@ -5474,7 +5689,7 @@ def calc_prize(P,opp) -> int:
             pos += 1
     except:
         pos = None
-    if opp[0][0:pos] in ['Steven','Rocket','Wallace']:
+    if opp[0][0:pos] in ['Steven','Rocket','Wallace','Diantha']:
         return int(20*lvl)
     if opp[0][0:pos] == 'Leader':
         return int(30*lvl)
@@ -5564,6 +5779,25 @@ def start_abilities(P,pokes,pokee,turn, text = True):
         new_battle_txt(P)
         battle_write(P,pokes.name + " is", "exerting its Pressure!")
         show_ability(P,'Pressure',turn)
+    if pokes.get_ability() == 'Snow Warning' and (P.battle_weather == None or P.battle_weather[0] not in ['Hail','Windy']):
+        new_battle_txt(P)
+        battle_write(P,"It started to hail!")
+        if pokes.item == 'Icy Rock':
+            P.battle_weather = ['Hail',20]
+        else:
+            P.battle_weather = ['Hail',17]
+        show_ability(P,'Snow Warning',turn)
+        if P.ani_on:
+            hail_temp = P.surface.copy()
+            hail_val = 0
+            for r in range(60):
+                P.surface.blit(hail_temp,(0,0))
+                blit_hail(P,hail_val)
+                update_screen(P)
+                P.clock.tick(P.ani_spd)
+                hail_val += 1
+                if hail_val == 40:
+                    hail_val = -20
     if pokes.get_ability() == 'Intimidate':
         show_ability(P,'Intimidate',turn)
         if pokee.get_ability() == 'Hyper Cutter':
@@ -5584,6 +5818,9 @@ def start_abilities(P,pokes,pokee,turn, text = True):
                 battle_write(P, pokee.get_name() + "'s attack", "fell!")
                 P.clock.tick(P.bat_spd)
             pokee.akm -= 1
+    if P.loc in ['silfide_gymb','silfide_gym2'] and P.prog[22][1] == 0 and 'Fairy' in pokes.type:
+        battle_txt(P,pokes.get_name() + "'s speed was boosted by the orb's power!")
+        pokes.spdm += 1
     if turn == 1:
         if pokes.get_ability() == 'Forewarn':
             new_battle_txt(P)
@@ -5632,7 +5869,7 @@ def start_abilities(P,pokes,pokee,turn, text = True):
                 battle_write(P,pokes.name + " frisked the foe", "and found " + aan + pokee.item+"!")
                 show_ability(P,'Frisk',turn)
 
-def first_turn(P,pokes,pokee,turn,move_back,opp) -> None:
+def first_turn(P,pokes,pokee,turn,opp) -> None:
     if pokee.inf == True:
         pokee.inf = False
     if pokee.trapped[1] != 0:
@@ -5667,22 +5904,24 @@ def first_turn(P,pokes,pokee,turn,move_back,opp) -> None:
             damage = int(damage*pokes.hp)
             tempp.take_damage(P,damage)
             if turn == 1:
-                hp_change(P,pokes,pokee,tempp,tempe,move_back)
+                hp_change(P,pokes,pokee,tempp,tempe)
             else:
-                hp_change(P,pokee,pokes,tempe,tempp,move_back)
+                hp_change(P,pokee,pokes,tempe,tempp)
             if pokes.ch == 0:
                 poke_faint(P,pokes)
                 pokee.trapped = [None,0]
-        if ((turn == 0 and P.enemy_traps[1] > 0) or (turn == 1 and P.self_traps[1] > 0)) and pokes.can_poison():
-            if (turn == 0 and P.enemy_traps[1] == 1) or (turn == 1 and P.self_traps[1] == 1):
+        if ((turn == 0 and P.enemy_traps[1] > 0) or (turn == 1 and P.self_traps[1] > 0)) and pokes.can_status(P,'Psn','2'):
+            if in_terrain(P,'Misty',pokes):
+                battle_txt(P,pokes.get_name()+" surrounds","itself with a protective mist!")
+            elif pokes.get_ability() == 'Immunity':
                 new_battle_txt(P)
-                battle_write(P,pokes.get_name() + " was", "poisoned!")
-                P.clock.tick(P.bat_spd)
+                battle_txt(P,"It doesn't affect ", pokes.get_name(True) + '!')
+                show_ability(P,"Immunity",turn)
+            elif (turn == 0 and P.enemy_traps[1] == 1) or (turn == 1 and P.self_traps[1] == 1):
+                battle_txt(P,pokes.get_name() + " was", "poisoned!")
                 pokes.status = 'Psn'
             else:
-                new_battle_txt(P)
-                battle_write(P,pokes.get_name() + " was badly", "poisoned!")
-                P.clock.tick(P.bat_spd)
+                battle_txt(P,pokes.get_name() + " was badly", "poisoned!")
                 pokes.status = 'BPs'
         if ((turn == 0 and P.enemy_traps[2] > 0) or (turn == 1 and P.self_traps[2] > 0)):
             tempp = pokes.copy()
@@ -5694,9 +5933,9 @@ def first_turn(P,pokes,pokee,turn,move_back,opp) -> None:
             damage = (0.125*rock_move.eff_no_print(P,pokes)*pokes.hp)
             tempp.take_damage(P,damage)
             if turn == 1:
-                hp_change(P,pokes,pokee,tempp,tempe,move_back)
+                hp_change(P,pokes,pokee,tempp,tempe)
             else:
-                hp_change(P,pokee,pokes,tempe,tempp,move_back)
+                hp_change(P,pokee,pokes,tempe,tempp)
             if pokes.ch == 0:
                 poke_faint(P,pokes)
                 pokee.trapped = [None,0]
@@ -5773,7 +6012,6 @@ def crit_mod(stage) -> float:
         return 0.5
     return 1
 
-
 def modifier(stage) -> float:
     if stage >= 0:
         return 1+(stage*0.5)
@@ -5789,7 +6027,20 @@ def modifier(stage) -> float:
         return 0.29
     return 0.25
 
-def opp_effect(move):
+def pokestar_mod(P,player,value,mod):
+    if P.pokestar_battle != 0:
+        if value < 0 and not player:
+            mod = 1-((1-mod) * (P.pokestar_skills[2]/400))
+        elif value > 0 and player:
+            mod *= 1 + (P.pokestar_skills[2]/400)
+    return mod
+
+def pokestar_gain(P,skill,amount):
+    P.pokestar_skills[skill] = round(P.pokestar_skills[skill]+(amount *(0.7+(0.1*P.prog[8][4][0]))),2)
+    if P.pokestar_skills[skill] > 100:
+        P.pokestar_skills[skill] = 100
+
+def opp_effect(move,status = False):
     #return true if it has an effect that effects the opponent
     if move.eff == {}:
         return False
@@ -5797,6 +6048,8 @@ def opp_effect(move):
         eff = items[0]
         break
     print("effect: " + eff)
+    if status:
+        return eff == "Brn" or eff == "Frz" or eff == "Par" or eff == "Psn" or eff == "BPs" or eff == "Slp"
     return eff == "Trp" or eff == "Inf" or eff == "Brn" or eff == "Frz" or eff == "Par" or eff == "Psn" or eff == "BPs" or eff == "Slp" or eff == "Bnd" or eff == "Cfs" or eff == "Fln" or eff == "AD" or eff == "SAD" or eff == "DD" or eff == "SDD" or eff == "SD" or eff == "AcD" or eff == "EvD" or eff == "Idf" or eff == "CD"
 
 def poke_strength(pokes):
@@ -5821,17 +6074,35 @@ def opp_AI(P,pokee,pokes,moves):
     #0 self buff
     #1 opp buff
     #2 attack
+    #pokestar
+    if P.pokestar_battle in [1,2] and P.turn_count == 0:
+        return 0
+    elif P.pokestar_battle == 1 and P.turn_count == 4:
+        return 3
+    elif P.pokestar_battle == 1:
+        if (2 not in P.pokestar_usage and P.turn_count > 2) or P.turn_count == 5:
+            return 2
+        else:
+            return random.randint(1,2)
+    elif P.pokestar_battle == 2:
+        return random.randint(1,3)
     move_options = {"ss":[],"os":[],"a":[]}
     for move in moves:
-        print(move.cat)
         if move.cat == '2':
             if opp_effect(move):
-                move_options["os"].append(move)
+                if opp_effect(move,True) and pokes.status != None:
+                    pass
+                else:
+                    move_options["os"].append(move)
             else:
                 add = True
                 if move.name == 'Sunny Day' and P.battle_weather != None and P.battle_weather[0] == 'Sunny':
                     add = False
                 elif move.name == 'Rain Dance' and P.battle_weather != None and P.battle_weather[0] == 'Rain':
+                    add = False
+                elif move.name == 'Hail' and P.battle_weather != None and P.battle_weather[0] == 'Hail':
+                    add = False
+                elif P.battle_terrain != None and (move.name == 'Grassy Terrain' and P.battle_terrain == 'Grassy') or (move.name == 'Psychic Terrain' and P.battle_terrain == 'Psychic') or (move.name == 'Electric Terrain' and P.battle_terrain == 'Electric') or (move.name == 'Misty Terrain' and P.battle_terrain == 'Misty'):
                     add = False
                 elif (move.name == 'Swallow' and (pokee.stockpile[0] == 0 or pokee.ch/pokee.hp > 1-(0.2*pokee.stockpile[0]))) or (move.name == 'Stockpile' and pokee.stockpile[0] == 3):
                     add = False
@@ -5843,15 +6114,17 @@ def opp_AI(P,pokee,pokes,moves):
                     add = False
                 elif move.name == 'Attract' and not (pokee.gen != pokes.gen and pokee.gen != 2 and pokes.gen != 2 and pokes.inf == False):
                     add = False
-                elif move.name in ['Rest','Roost','Recover','Synthesis','Moonlight','Morning Sun','Heal Pulse','Slack Off','Softboiled','Milk Drink','Shore Up','Heal Order']:
+                elif move.name in ['Rest','Roost','Recover','Synthesis','Moonlight','Morning Sun','Heal Pulse','Slack Off','Softboiled','Milk Drink','Shore Up','Heal Order'] and pokee.ch == pokee.hp:
                     add = False
                 if add:
                     move_options["ss"].append(move)
         else:
             add = True
-            if move.eff_no_print(P,pokes) == 0:
+            if move.eff_no_print(P,pokes,pokee) == 0:
                 add = False
             elif move.name == 'Spit Up' and pokee.stockpile[0] == 0:
+                add = False
+            elif move.name == 'Last Resort' and sum(pokee.last_resort) < pokee.known_moves()-1:
                 add = False
             elif move.name in ['Snore'] and pokee.status != 'Slp':
                 add = False
@@ -5888,7 +6161,7 @@ def opp_AI(P,pokee,pokes,moves):
         pick = "a"
     print("pick: "+str(pick))
     if pick == "a" and len(move_options[pick]) == 1:
-        if move_options[pick][0].eff_no_print(P,pokes) != 0:
+        if move_options[pick][0].eff_no_print(P,pokes,pokee) != 0:
             final_move = move_options[pick][0]
         else:
             final_move = None
@@ -5897,32 +6170,32 @@ def opp_AI(P,pokee,pokes,moves):
         for move in move_options[pick]:
             try:
                 if move.name == 'Spit Up':
-                    power.append(int(100*pokee.stockpile[0])*move.eff_no_print(P,pokes))
+                    power.append(int(100*pokee.stockpile[0])*move.eff_no_print(P,pokes,pokee))
                 elif move.name in ['Overheat','Draco Meteor','Leaf Storm','Fleur Cannon']:
-                    power.append((int(move.pow)-(70*pokes.ch/pokes.hp))*move.eff_no_print(P,pokes))
+                    power.append((int(move.pow)-(70*pokes.ch/pokes.hp))*move.eff_no_print(P,pokes,pokee))
                 elif move.sec == '3' and not (P.battle_weather != None and P.battle_weather[0] == 'Sunny' and move.name in ['Solar Beam','Solar Blade']):
                     power.append(int(move.pow/2))
                 elif move.name == 'Return':
-                    power.append(int(int(pokee.friend/4)*move.eff_no_print(P,pokes)))
+                    power.append(int(int(pokee.friend/4)*move.eff_no_print(P,pokes,pokee)))
                 elif move.name in ['Self-Destruct','Explosion']:
-                    power.append(40+(int(move.pow)*move.eff_no_print(P,pokes)*((pokee.hp-pokee.ch)/pokee.hp)))
+                    power.append(40+(int(move.pow)*move.eff_no_print(P,pokes,pokee)*((pokee.hp-pokee.ch)/pokee.hp)))
                 elif move.name == 'Fury Cutter':
-                    power.append((int(move.pow)*(pokee.fury_count+1))*move.eff_no_print(P,pokes))
+                    power.append((int(move.pow)*(pokee.fury_count+1))*move.eff_no_print(P,pokes,pokee))
                 elif move.name == 'Flail':
-                    power.append((150*(((pokee.hp-pokee.ch)/pokee.hp)**2))*move.eff_no_print(P,pokes))
+                    power.append((150*(((pokee.hp-pokee.ch)/pokee.hp)**2))*move.eff_no_print(P,pokes,pokee))
                 elif move.name == 'Hex' and pokes.status != None:
-                    power.append(int(move.pow)*move.eff_no_print(P,pokes)*2)
+                    power.append(int(move.pow)*move.eff_no_print(P,pokes,pokee)*2)
                 elif move.sec == '2':
-                    power.append(int(move.pow)*move.eff_no_print(P,pokes)*3)
+                    power.append(int(move.pow)*move.eff_no_print(P,pokes,pokee)*3)
                 elif move.name in ['Fake Out','First Impression']:
                     num = 0
-                    if move.eff_no_print(P,pokes) != 0 and pokee.turn_count == 0:
+                    if move.eff_no_print(P,pokes,pokee) != 0 and pokee.turn_count == 0:
                         num = 200
                     power.append(num)
                 else:
-                    power.append(int(move.pow)*move.eff_no_print(P,pokes)*min(float(move.acc)+max(((pokestot/pokeetot)-1)*0.6,0),1))
+                    power.append(int(move.pow)*move.eff_no_print(P,pokes,pokee)*min(float(move.acc)+max(((pokestot/pokeetot)-1)*0.6,0),1))
             except:
-                power.append(60*move.eff_no_print(P,pokes))
+                power.append(60*move.eff_no_print(P,pokes,pokee))
         print("power: " + str(power))
         if len(power) > 0:
             strongest = max(power)
@@ -5959,7 +6232,7 @@ def opp_AI(P,pokee,pokes,moves):
                 lb = ub
                 if counter < len(move_probs):
                     ub += move_probs[counter]
-            if final_move.eff_no_print(P,pokes) == 0:
+            if final_move.eff_no_print(P,pokes,pokee) == 0:
                 final_move = None
         else:
             final_move = None
@@ -5974,7 +6247,7 @@ def opp_AI(P,pokee,pokes,moves):
             return x
     move_copy = []
     for move in moves:
-        if move.eff_no_print(P,pokes) != 0 or (move.cat == '2' and opp_effect(move) == False):
+        if move.eff_no_print(P,pokes,pokee) != 0 or (move.cat == '2' and opp_effect(move) == False):
             move_copy.append(move)
     print(len(move_copy))
     if len(move_copy) > 0:
@@ -5985,7 +6258,7 @@ def opp_AI(P,pokee,pokes,moves):
                 return x
     return random.randint(0,len(moves)-1)
 
-def use_x(P,pokes,pokee,move_back,movex):
+def use_x(P,pokes,pokee,movex):
     if type(movex) != int and movex.cat != '2':
         pokes.can_sucker = True
     strug = moves.Move('Struggle')
@@ -6009,12 +6282,17 @@ def use_x(P,pokes,pokee,move_back,movex):
     else:
         # choose = random.randint(0,len(move_l)-1)
         choose = opp_AI(P,pokee,pokes,move_l)
+        if P.pokestar_battle != 0:
+            P.pokestar_usage.append(choose)
         print(choose)
         movee = move_l[choose]
     if movee.cat != '2' or pokee.cont_move != [None,0] or pokee.rollcount != 0 or pokee.bide != [0,0] or (pokee.charge != None and pokee.charge != 'Splash'):
         pokee.can_sucker = True
     spds = pokes.get_spd(P)
     spde = pokee.get_spd(P)
+    if P.pokestar_battle != 0 and type(movex) != int and movex.cat == '2':
+        spds *= 1+(P.pokestar_skills[3]/100)
+        print("move sped up "+ str(1+(P.pokestar_skills[3]/100)))
     if movex == 0:
         if random.random()<(pokes.spd/pokee.spd) or pokes.get_ability() == 'Run Away' or 'Ghost' in pokes.type:
             new_battle_txt(P)
@@ -6048,12 +6326,17 @@ def use_x(P,pokes,pokee,move_back,movex):
             spde = 1
             spds = 0
         if spde > spds:
-            opp_move(P,pokes,pokee,movee,move_back,strug,choose)
+            opp_move(P,pokes,pokee,movee,strug,choose)
             opp = 0
             if P.end_battle != 0:
                 return 0
         else:
             opp = 1
+            if P.pokestar_battle != 0:
+                if spde == 0:
+                    pokestar_gain(P,3,1.5)
+                else:
+                    pokestar_gain(P,3,0.7+spds/spde)
         if pokes.status != 'Faint':
             orige = pokee.copy()
             origs = pokes.copy()
@@ -6062,7 +6345,7 @@ def use_x(P,pokes,pokee,move_back,movex):
                 battle_write(P,pokes.name+" is out of moves!")
                 P.clock.tick(P.bat_spd)
             eff = movex.cast(P,pokes,pokee,4,0)
-            battle_move_use(P,origs,orige,pokes,pokee,move_back,eff,1)
+            battle_move_use(P,origs,orige,pokes,pokee,eff,1)
             count = eff[4]
             if movex.name == 'Metronome':
                 movex = moves.Move(P.metronome)
@@ -6070,24 +6353,24 @@ def use_x(P,pokes,pokee,move_back,movex):
                 if pokee.ch == 0 or pokes.ch == 0:
                     break
                 eff = movex.use(P,pokes,pokee,0)
-                battle_move_use(P,origs,orige,pokes,pokee,move_back,eff,x+2)
+                battle_move_use(P,origs,orige,pokes,pokee,eff,x+2)
             if count != 0 and pokes.ch != 0 and pokee.ch != 0:
                 new_battle_txt(P)
                 battle_write(P,"Hit " + str(count+1) + " times!")
                 P.clock.tick(P.bat_spd)
             P.gem_active = False
     if opp == 1 and pokee.status != 'Faint':
-        opp_move(P,pokes,pokee,movee,move_back,strug,choose)
+        opp_move(P,pokes,pokee,movee,strug,choose)
         if P.end_battle != 0:
             return 0
-    EOT_effects(P,pokes,pokee,0,move_back)
-    EOT_effects(P,pokee,pokes,1,move_back)
+    EOT_effects(P,pokes,pokee,0)
+    EOT_effects(P,pokee,pokes,1)
     pokes = reset_move_stat(P,pokes)
     pokee = reset_move_stat(P,pokee)
     turn_end(P)
     return 0
 
-def opp_move(P,pokes,pokee,movee,move_back,strug,choose):
+def opp_move(P,pokes,pokee,movee,strug,choose):
     orige = pokee.copy()
     origs = pokes.copy()
     if movee == strug and pokee.bide == [0,0] and pokee.rollcount == 0 and pokee.charge == False:
@@ -6096,7 +6379,7 @@ def opp_move(P,pokes,pokee,movee,move_back,strug,choose):
         P.clock.tick(P.bat_spd)
     if pokee.bide[0] > 0:
         eff = moves.Move('Bide').cast(P,pokee,pokes,4)
-        battle_move_use(P,origs,orige,pokes,pokee,move_back,eff)
+        battle_move_use(P,origs,orige,pokes,pokee,eff)
     elif pokee.charge != None:
         if pokee.charge == 'Splash':
             pokee.charge = None
@@ -6105,16 +6388,19 @@ def opp_move(P,pokes,pokee,movee,move_back,strug,choose):
             P.clock.tick(P.bat_spd)
         else:
             eff = moves.Move(pokee.charge).cast(P,pokee,pokes,4)
-            battle_move_use(P,origs,orige,pokes,pokee,move_back,eff)
+            battle_move_use(P,origs,orige,pokes,pokee,eff)
     elif pokee.rollcount > 0:
-        eff = moves.Move('Rollout').cast(P,pokee,pokes,4)
-        battle_move_use(P,origs,orige,pokes,pokee,move_back,eff)
+        if pokee.rollcount > 5:
+            eff = moves.Move('Ice Ball').cast(P,pokee,pokes,4)
+        else:
+            eff = moves.Move('Rollout').cast(P,pokee,pokes,4)
+        battle_move_use(P,origs,orige,pokes,pokee,eff)
     elif pokee.cont_move[1] > 0:
         eff = moves.Move(pokee.cont_move[0]).cast(P,pokee,pokes,4)
-        battle_move_use(P,origs,orige,pokes,pokee,move_back,eff)
+        battle_move_use(P,origs,orige,pokes,pokee,eff)
     else:
         eff = movee.cast(P,pokee,pokes,choose)
-        battle_move_use(P,origs,orige,pokes,pokee,move_back,eff,1)
+        battle_move_use(P,origs,orige,pokes,pokee,eff,1)
         count = eff[4]
         if movee.name == 'Metronome':
             movee = moves.Move(P.metronome)
@@ -6122,14 +6408,14 @@ def opp_move(P,pokes,pokee,movee,move_back,strug,choose):
             if pokes.ch == 0 or pokee.ch == 0:
                 break
             eff = movee.use(P,pokee,pokes,1)
-            battle_move_use(P,origs,orige,pokes,pokee,move_back,eff,x+2)
+            battle_move_use(P,origs,orige,pokes,pokee,eff,x+2)
         if count != 0 and pokes.ch != 0 and pokee.ch != 0:
             new_battle_txt(P)
             battle_write(P,"Hit " + str(count+1) + " times!")
             P.clock.tick(P.bat_spd)
         P.gem_active = False
 
-def pick_move(P, pokes, pokee, mvnum, move_back,pokemone,pokemons,sizes,sizee,a) -> list:
+def pick_move(P, pokes, pokee, mvnum,pokemone,pokemons,sizes,sizee,a) -> list:
     P.surface.set_clip((0,0,800,600))
     strug = moves.Move('Struggle')
     back = load("p/battle_box.png")
@@ -6225,7 +6511,7 @@ def pick_move(P, pokes, pokee, mvnum, move_back,pokemone,pokemons,sizes,sizee,a)
                 if (x == 0 and a%100 == 0) or (x == 1 and (a-25) % 100 == 0):
                     if P.poke_m[x] == -1:
                         P.poke_m[x] = 1
-        type_ico = load("p/"+movesl[mv].type+"_ico.png")
+        type_ico = load("p/ui/"+movesl[mv].type+"_ico.png")
         P.surface.blit(P.animate_back,(0,0))
         P.surface.blit(pokemone,(600-(sizee/2),255-sizee-abs(P.poke_m[0])))
         blit_stat(P,pokes,pokee)
@@ -6307,11 +6593,16 @@ def pick_move(P, pokes, pokee, mvnum, move_back,pokemone,pokemons,sizes,sizee,a)
                     else:
                         #choose = random.randint(0,len(move_l)-1)
                         choose = opp_AI(P,pokee,pokes,move_l)
+                        if P.pokestar_battle != 0:
+                            P.pokestar_usage.append(choose)
                         movee = move_l[choose]
                     if movee.cat != '2' or pokee.cont_move != [None,0] or pokee.rollcount != 0 or pokee.bide != [0,0] or (pokee.charge != None and pokee.charge != 'Splash'):
                         pokee.can_sucker = True
                     spds = pokes.get_spd(P)
                     spde = pokee.get_spd(P)
+                    if P.pokestar_battle != 0 and movesl[mv].cat == '2':
+                        spds *= 1+(P.pokestar_skills[3]/100)
+                        print("move sped up "+ str(1+(P.pokestar_skills[3]/100)))
                     priox = movesl[mv].priority
                     prioe = movee.priority
                     if pokes.get_ability() == 'Prankster' and movesl[mv].cat == '2':
@@ -6325,17 +6616,22 @@ def pick_move(P, pokes, pokee, mvnum, move_back,pokemone,pokemons,sizes,sizee,a)
                         spde = 1
                         spds = 0
                     if spde > spds:
-                        opp_move(P,pokes,pokee,movee,move_back,strug,choose)
+                        opp_move(P,pokes,pokee,movee,strug,choose)
                         opp = 0
                         if P.end_battle != 0:
                             return [-1,0]
                     else:
                         opp = 1
+                        if P.pokestar_battle != 0:
+                            if spde == 0:
+                                pokestar_gain(P,3,2)
+                            else:
+                                pokestar_gain(P,3,1+spds/spde)
                     if pokes.status != 'Faint':
                         orige = pokee.copy()
                         origs = pokes.copy()
                         eff = movesl[mv].cast(P,pokes,pokee,mv,0)
-                        battle_move_use(P,origs,orige,pokes,pokee,move_back,eff,1)
+                        battle_move_use(P,origs,orige,pokes,pokee,eff,1)
                         count = eff[4]
                         if movesl[mv].name == 'Metronome':
                             movesl[mv] = moves.Move(P.metronome)
@@ -6345,7 +6641,7 @@ def pick_move(P, pokes, pokee, mvnum, move_back,pokemone,pokemons,sizes,sizee,a)
                             if pokee.ch == 0 or pokes.ch == 0:
                                 break
                             eff = movesl[mv].use(P,pokes,pokee,0)
-                            battle_move_use(P,origs,orige,pokes,pokee,move_back,eff,x+2)
+                            battle_move_use(P,origs,orige,pokes,pokee,eff,x+2)
                         if count != 0 and pokes.ch != 0 and pokee.ch != 0:
                             new_battle_txt(P)
                             battle_write(P,"Hit " + str(count+1) + " times!")
@@ -6375,12 +6671,12 @@ def pick_move(P, pokes, pokee, mvnum, move_back,pokemone,pokemons,sizes,sizee,a)
         P.clock.tick(P.ani_spd)
         update_screen(P)
     if opp == 1 and pokee.status != 'Faint':
-        opp_move(P,pokes,pokee,movee,move_back,strug,choose)
+        opp_move(P,pokes,pokee,movee,strug,choose)
         if P.end_battle != 0:
             return [-1,0]
     P.surface.set_clip((0,0,800,460))
-    EOT_effects(P,pokes,pokee,0,move_back)
-    EOT_effects(P,pokee,pokes,1,move_back)
+    EOT_effects(P,pokes,pokee,0)
+    EOT_effects(P,pokee,pokes,1)
     pokes = reset_move_stat(P,pokes)
     pokee = reset_move_stat(P,pokee)
     P.turn_count += 1
@@ -6393,25 +6689,36 @@ def poke_faint(P,poke) -> None:
             P.future_sight[3] = poke
         elif poke.player and P.future_sight[0] != 0 and P.future_sight[2] == None:
             P.future_sight[2] = poke
-        new_battle_txt(P)
-        battle_write(P,poke.get_name() + " fainted!")
-        P.clock.tick(P.bat_spd)
         poke.status = 'Faint'
-        poke.friend -= int(poke.friend*0.1)
+        if P.pokestar_battle != 0:
+            if poke.player:
+                P.pokestar_score[3] += 2
+            else:
+                P.pokestar_score[3] += 1
+            if P.pokestar_score[3] != 3:
+                battle_txt(P,"And that's end of the show!")
+            if P.pokestar_score[2] == 3 and not poke.player:
+                P.pokestar_score[2] += 1
+                P.pokestar_score[1] = (P.pokestar_score[1]-poke.ch)/poke.hp
+        else:
+            battle_txt(P,poke.get_name() + " fainted!")
+            poke.friend -= int(poke.friend*0.1)
+
         poke.reset_stats()
         if poke.code == 'Kangaskhan_M':
             P.party[1].status = 'Faint'
             P.party[1].ch = 0
 
-def battle_move_draw(P,origs,orige,pokes,pokee,move_back):
+def battle_move_draw(P,origs,orige,pokes,pokee):
     pokemons = pygame.transform.scale(load('p/poke/'+pokes.code+"_bb.png"),(410,410))
-    P.surface.blit(move_back,(0,0))
+    P.surface.blit(P.move_back,(0,0))
     blit_hp(P,origs,orige)
     blit_stat(P,origs,orige)
     P.surface.blit(pokemons, (-5, 75 - abs(P.poke_m[1])))
     update_screen(P)
 
-def hp_change(P,op,oe,poke,pokee,move_back):
+#poke = trainer poke, pokee = opponent poke?
+def hp_change(P,op,oe,poke,pokee):
     if op.ch != poke.ch:
         pok = poke
         o = op
@@ -6427,7 +6734,7 @@ def hp_change(P,op,oe,poke,pokee,move_back):
                 o.ch += 1
             else:
                 end = False
-        battle_move_draw(P,op,oe,poke,pokee,move_back)
+        battle_move_draw(P,op,oe,poke,pokee)
         P.clock.tick(P.ani_spd)
     if pok.item != None and items.Item(pok.item).type[0] == 'Battle Berry' and pok.bugbite:
         if o == op:
@@ -6451,10 +6758,10 @@ def hp_change(P,op,oe,poke,pokee,move_back):
             pok.item = None
             if e.ch > e.hp:
                 e.ch = e.hp
-            if o == op:
-                hp_change(P,o,oe,pok,e,move_back)
-            else:
-                hp_change(P,op,o,e,pok,move_back)
+            # if o == op:
+            hp_change(P,op,oe,poke,pokee)
+            # else:
+            #     hp_change(P,op,o,e,pok)
         else:
             if e.status in items.Item(pok.item).mod()[0] or ((items.Item(pok.item).name == 'Lum Berry' or items.Item(pok.item).name == 'Persim Berry') and e.cfs > 0):
                 new_battle_txt(P)
@@ -6495,41 +6802,51 @@ def hp_change(P,op,oe,poke,pokee,move_back):
                     e.status = None
                     eo.status = None
         pok.item = None
+        o.item = None
         pok.bugbite = False
-    if o.item == 'Sitrus Berry' and o.ch/o.hp < 0.5 and o.ch != 0:
+        if e.ability == 'Cheek Pouch':
+            if o == op:
+                show_ability(P,'Cheek Pouch',0)
+            else:
+                show_ability(P,'Cheek Pouch',1)
+            battle_txt(P,e.get_name() + "'s HP was", 'restored!')
+            e.gain_hp(int(e.hp/3))
+            # if o == op:
+            hp_change(P,op,oe,poke,pokee)
+            # else:
+            #     hp_change(P,op,o,e,pok)
+    if o.item in ['Sitrus Berry','Oran Berry'] and o.ch/o.hp < 0.5 and o.ch != 0:
         new_battle_txt(P)
-        battle_write(P,o.get_name() + " ate its", "Sitrus Berry!")
+        battle_write(P,o.get_name() + " ate its", o.item + "!")
         P.clock.tick(P.bat_spd)
         new_battle_txt(P)
-        battle_write(P,o.get_name() + " restored", "HP using its Sitrus Berry!")
+        battle_write(P,o.get_name() + " restored", "HP using its " + o.item + "!")
         P.clock.tick(P.bat_spd)
-        pok.ch += int(pok.hp/4)
-        if o == op:
-            hp_change(P,o,oe,pok,pokee,move_back)
+        if o.item == 'Sitrus Berry':
+            pok.gain_hp(int(pok.hp/4))
         else:
-            hp_change(P,op,o,poke,pok,move_back)
-        op.item = None
-    elif o.item == 'Oran Berry' and o.ch/o.hp < 0.5 and o.ch != 0:
-        new_battle_txt(P)
-        battle_write(P,o.get_name() + " ate its", "Oran Berry!")
-        P.clock.tick(P.bat_spd)
-        new_battle_txt(P)
-        battle_write(P,o.get_name() + " restored", "HP using its Oran Berry!")
-        P.clock.tick(P.bat_spd)
-        pok.ch += 10
-        if pok.ch > pok.hp:
-            pok.ch = pok.hp
-        if o == op:
-            hp_change(P,o,oe,pok,pokee,move_back)
-        else:
-            hp_change(P,op,o,poke,pok,move_back)
-        op.item = None
+            pok.gain_hp(10)
+        pok.item = None
+        o.item = None
+        # if o == op:
+        hp_change(P,op,oe,poke,pokee)
+        # else:
+        #     hp_change(P,op,o,poke,pok)
+        if pok.ability == 'Cheek Pouch':
+            if o == op:
+                show_ability(P,'Cheek Pouch',1)
+            else:
+                show_ability(P,'Cheek Pouch',0)
+            battle_txt(P,o.get_name() + "'s HP was", 'restored!')
+            pok.gain_hp(int(pok.hp/3))
+            # if o == op:
+            hp_change(P,op,oe,poke,pokee)
+            # else:
+            #     hp_change(P,op,o,poke,pok)
 
-def take_damage(P,op,oe,poke,pokee,move_back,eff):
-    turn = 0
-    if not op.equals(poke):
-        turn = 1
-    hp_change(P,op,oe,poke,pokee,move_back)
+
+def take_damage(P,op,oe,poke,pokee,eff,turn):
+    hp_change(P,op,oe,poke,pokee)
     op.ch = poke.ch
     oe.ch = pokee.ch
     if eff[1] == True:
@@ -6554,12 +6871,12 @@ def take_damage(P,op,oe,poke,pokee,move_back,eff):
             battle_write(P,pokee.get_name() + " was", "damaged by the recoil!")
             P.clock.tick(P.bat_spd)
         if turn == 0:
-            poke.take_damage(P,eff[2])
+            poke.take_damage(P,eff[2],recoil = True)
             #poke.ch -= eff[2]
         else:
-            pokee.take_damage(P,eff[2])
+            pokee.take_damage(P,eff[2],recoil = True)
             #pokee.ch -= eff[2]
-        hp_change(P,op,oe,poke,pokee,move_back)
+        hp_change(P,op,oe,poke,pokee)
         op.ch = poke.ch
         oe.ch = pokee.ch
     for pos,xy in enumerate(eff[3]):
@@ -6576,7 +6893,7 @@ def take_damage(P,op,oe,poke,pokee,move_back,eff):
             else:
                 pokee.take_damage(P,xy[1])
                 # pokee.ch -= xy[1]
-            hp_change(P,op,oe,poke,pokee,move_back)
+            hp_change(P,op,oe,poke,pokee)
             op.ch = poke.ch
             oe.ch = pokee.ch
             del eff[3][pos]
@@ -6591,11 +6908,11 @@ def take_damage(P,op,oe,poke,pokee,move_back,eff):
             poke.ch += eff[5]
         else:
             pokee.ch += eff[5]
-        hp_change(P,op,oe,poke,pokee,move_back)
+        hp_change(P,op,oe,poke,pokee)
         op.ch = poke.ch
         oe.ch = pokee.ch
 
-def give_status_eff(P,poke,orig):
+def give_status_eff(P,poke,orig,pokee,orige,turn):
     if poke.ch == 0:
         return
     if orig.cfs == 0 and poke.cfs > 0 and poke.ch != 0:
@@ -6694,6 +7011,14 @@ def give_status_eff(P,poke,orig):
                 orig.status = None
             poke.item = None
             orig.item = None
+            if poke.ability == 'Cheek Pouch':
+                show_ability(P,'Cheek Pouch',abs(turn-1))
+                battle_txt(P,poke.get_name() + "'s HP was", 'restored!')
+                poke.gain_hp(int(poke.hp/3))
+                if turn == 0:
+                    hp_change(P,orig,orige,poke,pokee)
+                else:
+                    hp_change(P,orige,orig,pokee,poke)
 
 def stat_write(P,name,poke,orig,stat):
     new_battle_txt(P)
@@ -6751,7 +7076,7 @@ def stat_message(P,poke,orig):
         stat_write(P,poke.get_name(),poke.evam,orig.evam,'evasion')
         orig.evam = poke.evam
 
-def battle_move_use(P,origs,orige,poke,pokee,move_back,eff,repeat = 0) -> None:
+def battle_move_use(P,origs,orige,poke,pokee,eff,repeat = 0) -> None:
     P.surface.set_clip((0,0,800,460))
     origs.p1 = poke.p1
     origs.p2 = poke.p2
@@ -6769,28 +7094,28 @@ def battle_move_use(P,origs,orige,poke,pokee,move_back,eff,repeat = 0) -> None:
             if poke.spikyshield[0]:
                 pokee.take_damage(P,xy[1])
                 #pokee.ch -= xy[1]
-                hp_change(P,origs,orige,origs,pokee,move_back)
+                hp_change(P,origs,orige,origs,pokee)
             else:
                 poke.take_damage(P,xy[1])
                 #poke.ch -= xy[1]
-                hp_change(P,origs,orige,poke,orige,move_back)
+                hp_change(P,origs,orige,poke,orige)
                 # origs.ch = poke.ch
             del eff[3][pos]
     if pokee.equals(orige) and poke.equals(origs):
         #return
         pass
     if poke.ch != origs.ch or pokee.explode:
-        take_damage(P,origs,orige,poke,pokee,move_back,eff)
+        take_damage(P,origs,orige,poke,pokee,eff,1)
         # origs.ch = poke.ch
-    give_status_eff(P,poke,origs)
-    give_status_eff(P,pokee,orige)
-    battle_move_draw(P,origs,orige,poke,pokee,move_back)
+    give_status_eff(P,poke,origs,pokee,orige,0)
+    give_status_eff(P,pokee,orige,poke,origs,1)
+    battle_move_draw(P,origs,orige,poke,pokee)
     if pokee.ch != orige.ch or poke.explode:
-        take_damage(P,origs,orige,poke,pokee,move_back,eff)
+        take_damage(P,origs,orige,poke,pokee,eff,0)
         # orige.ch = pokee.ch
-    give_status_eff(P,poke,origs)
-    give_status_eff(P,pokee,orige)
-    battle_move_draw(P,origs,orige,poke,pokee,move_back)
+    give_status_eff(P,poke,origs,pokee,orige,0)
+    give_status_eff(P,pokee,orige,poke,origs,1)
+    battle_move_draw(P,origs,orige,poke,pokee)
     stat_message(P,poke,origs)
     stat_message(P,pokee,orige)
     for pos,xy in enumerate(eff[3]):
@@ -6839,6 +7164,14 @@ def battle_move_use(P,origs,orige,poke,pokee,move_back,eff,repeat = 0) -> None:
                     else:
                         xy[3].status = None
                     xy[3].item = None
+                    if xy[3].ability == 'Cheek Pouch':
+                        turn = 1
+                        if xy[3].equals(poke):
+                            turn = 0
+                        show_ability(P,'Cheek Pouch',abs(turn-1))
+                        battle_txt(P,xy[3].get_name() + "'s HP was", 'restored!')
+                        xy[3].gain_hp(int(xy[3].hp/3))
+                        hp_change(P,origs,orige,poke,pokee)
         if xy[0] == 2:
             if xy[1][0] != "":
                 new_battle_txt(P)
@@ -6889,7 +7222,7 @@ def battle_move_use(P,origs,orige,poke,pokee,move_back,eff,repeat = 0) -> None:
                 poke.ch += xy[2]
             else:
                 pokee.ch += xy[2]
-            hp_change(P,origs,orige,poke,pokee,move_back)
+            hp_change(P,origs,orige,poke,pokee)
             origs.ch = poke.ch
             orige.ch = pokee.ch
             new_battle_txt(P)
@@ -6936,6 +7269,7 @@ def mem(P) -> None:
     save.write(str(P.save_data.time)+'\n')
     save.write(str(P.save_data.register)+'\n')
     save.write(str(P.save_data.pokedex)+'\n')
+    save.write(str(P.save_data.pokestar)+'\n')
 
 def update_time(P):
     temptime = P.save_data.start_time
@@ -7112,15 +7446,17 @@ def add_item(P,item,number) -> None:
     #order bag
     for cat in P.bag:
         cat.sort()
+    if ["TM100 Confide",1] in P.bag[3]:
+        P.bag[3].append(P.bag[3].pop(P.bag[3].index( ["TM100 Confide",1])))
 
 def battle_bag(P) -> list:
     box = load("p/bag_box.png")
     back = load("p/bag.png")
-    i = load("p/item_ico.png")
-    m = load("p/med_ico.png")
-    b = load("p/balls_ico.png")
-    t = load("p/tm_ico.png")
-    k = load("p/key_ico.png")
+    i = load("p/ui/item_ico.png")
+    m = load("p/ui/med_ico.png")
+    b = load("p/ui/balls_ico.png")
+    t = load("p/ui/tm_ico.png")
+    k = load("p/ui/key_ico.png")
     high = load("p/bag_high.png")
     ico = i
     ix = 0
@@ -7308,11 +7644,11 @@ def item_in_bag(P,item):
     return 0
 
 def dex_entry(P,pokes,fade,from_dex = True):
-    back2 = load("p/Dex_Info.png")
+    back2 = load("p/ui/Dex_Info.png")
     if from_dex == False:
-        back2 = load("p/Dex_Info_2.png")
-    back0 = load("p/Dex_Info_0.png")
-    back1 = load("p/Dex_Info_1.png")
+        back2 = load("p/ui/Dex_Info_2.png")
+    back0 = load("p/ui/Dex_Info_0.png")
+    back1 = load("p/ui/Dex_Info_1.png")
     back = back2
     mega = pygame.transform.scale(load("p/mega_symbol.png"),(30,30))
     grass_ico = pygame.transform.scale(load("p/grass_icon.png"),(20,20))
@@ -7321,9 +7657,9 @@ def dex_entry(P,pokes,fade,from_dex = True):
     fish_ico = pygame.transform.scale(load("p/fish_icon.png"),(22,22))
     caught = P.save_data.pokedex[pokes][0]
     if caught == 0:
-        box = load("p/dex_box0.png")
+        box = load("p/ui/dex_box0.png")
     else:
-        box = load("p/dex_box1.png")
+        box = load("p/ui/dex_box1.png")
     f = open("poke/"+pokes+".txt")
     data = f.readlines()
     dex = int(data[8])
@@ -7351,6 +7687,8 @@ def dex_entry(P,pokes,fade,from_dex = True):
         txt0 = P.font.render(num+" "+pokes[10:],True,(0,0,0))
     elif pokes[:7] == 'Spooky_':
         txt0 = P.font.render(num+" "+pokes[7:],True,(0,0,0))
+    elif pokes[:4] == 'Icy_':
+        txt0 = P.font.render(num+" "+pokes[4:],True,(0,0,0))
     else:
         txt0 = P.font.render(num+" "+pokes,True,(0,0,0))
     type = P.font_s.render("Type:",True,(0,0,0))
@@ -7362,17 +7700,20 @@ def dex_entry(P,pokes,fade,from_dex = True):
     inch += str(inchi)
     locations = []
     if caught == 1:
-        cat = P.font_s.render(ast.literal_eval(data[10])[0]+" Pokemon",True,(0,0,0))
-        desc = []
         d = ast.literal_eval(data[10])
+        cat = P.font_s.render(d[0]+" Pokemon",True,(0,0,0))
+        desc = []
+        if len(d[1]) > 43:
+            d = split_text(d[1],43,5)
+            d.insert(0,"Category")
         for entry in range(len(d)):
             if entry != 0:
                 desc.append(P.font_s.render(d[entry],True,(80,25,0)))
         height = P.font_s.render("Height: "+str(ft)+"'"+inch+'"',True,(0,0,0))
         weight = P.font_s.render("Weight: "+str(round(float(data[6])*2.20462,1))+" lbs.",True,(0,0,0))
-        type1 = load("p/"+ast.literal_eval(data[2])[0]+"_ico.png")
+        type1 = load("p/ui/"+ast.literal_eval(data[2])[0]+"_ico.png")
         if ast.literal_eval(data[2])[1] != None:
-            type2 = load("p/"+ast.literal_eval(data[2])[1]+"_ico.png")
+            type2 = load("p/ui/"+ast.literal_eval(data[2])[1]+"_ico.png")
         else:
             type2 = None
         if ast.literal_eval(data[9]) == []:
@@ -7382,7 +7723,7 @@ def dex_entry(P,pokes,fade,from_dex = True):
                 if x not in P.save_data.pokedex[pokes][1]:
                     locations.append([P.font_vs.render("Unknown",True,(0,0,0)),None])
                 else:
-                    if x in ['echo_cave','mirror_cave','sunken_cave']:
+                    if x in ['echo_cave','mirror_cave','sunken_cave','snow']:
                         locations.append([P.font_vs.render(get_location(P,location = x),True,(0,0,0)),cave_ico])
                     elif x in ['route_3b','route_5b']:
                         locations.append([P.font_vs.render(get_location(P,location = x[:-1]),True,(0,0,0)),beach_ico])
@@ -7472,9 +7813,9 @@ def pokedex(P):
     front = load("p/Pokedex_f.png")
     outline = load("p/Pokedex_borders.png")
     mega = pygame.transform.scale(load("p/mega_symbol.png"),(30,30))
-    box0 = load("p/dex_box0.png")
-    box1 = load("p/dex_box1.png")
-    box2 = load("p/dex_box2.png")
+    box0 = load("p/ui/dex_box0.png")
+    box1 = load("p/ui/dex_box1.png")
+    box2 = load("p/ui/dex_box2.png")
     # box3 = load("p/dex_box3.png")
     # box3 = load("p/dex_box4.png")
     # box3 = load("p/dex_box4.png")
@@ -7577,6 +7918,8 @@ def pokedex(P):
                         txt0 = P.font.render(num+" "+x[0][10:],True,(0,0,0))
                     elif x[0][:7] == 'Spooky_':
                         txt0 = P.font.render(num+" "+x[0][7:],True,(0,0,0))
+                    elif x[0][:4] == 'Icy_':
+                        txt0 = P.font.render(num+" "+x[0][4:],True,(0,0,0))
                     else:
                         txt0 = P.font.render(num+" "+x[0],True,(0,0,0))
                 P.surface.blit(txt0,(410,277-scroll+y))
@@ -7618,14 +7961,17 @@ def pokedex(P):
                                             change_list.append(pok[5:]+"_M")
                                             dex[pok[5:]+"_M"] = dex.pop(pok)
                                         if pok[:7] == "Alolan_":
-                                            change_list.append(pok[5:]+"_A")
+                                            change_list.append(pok[7:]+"_A")
                                             dex[pok[7:]+"_A"] = dex.pop(pok)
                                         if pok[:10] == "Pineapple_":
                                             change_list.append(pok[10:]+"_P")
                                             dex[pok[10:]+"_P"] = dex.pop(pok)
-                                        if pok[:7] == "Spooky_":
+                                        elif pok[:7] == "Spooky_":
                                             change_list.append(pok[7:]+"_S")
                                             dex[pok[7:]+"_S"] = dex.pop(pok)
+                                        elif pok[:4] == "Icy_":
+                                            change_list.append(pok[4:]+"_I")
+                                            dex[pok[4:]+"_I"] = dex.pop(pok)
                                     dex = sorted(dex.items(),key = lambda x:x[0])
                                     for pok in range(len(dex)):
                                         if dex[pok][0] in change_list and dex[pok][0][-2:] == '_M':
@@ -7640,6 +7986,9 @@ def pokedex(P):
                                         if dex[pok][0] in change_list and dex[pok][0][-2:] == '_S':
                                             dex[pok] = list(dex[pok])
                                             dex[pok][0] = 'Spooky_'+dex[pok][0][:-2]
+                                        if dex[pok][0] in change_list and dex[pok][0][-2:] == '_I':
+                                            dex[pok] = list(dex[pok])
+                                            dex[pok][0] = 'Icy_'+dex[pok][0][:-2]
                                     sort = sort1
                                 else:
                                     dex = orig_dex.copy()
@@ -7756,14 +8105,22 @@ def pokedex(P):
         P.clock.tick(P.ani_spd)
     fade_out(P)
 
-def bag(P,pick_item = False) -> None:
+def learnable_tms(P,poke):
+    tm_list = []
+    for tm in P.bag[3]:
+        if poke in items.Item(tm[0]).mod():
+            tm_list.append(tm)
+    print(tm_list)
+    return tm_list
+
+def bag(P,pick_item = False,choose_tm = None) -> None:
     box = load("p/bag_box.png")
     back = load("p/bag.png")
-    i = load("p/item_ico.png")
-    m = load("p/med_ico.png")
-    b = load("p/balls_ico.png")
-    t = load("p/tm_ico.png")
-    k = load("p/key_ico.png")
+    i = load("p/ui/item_ico.png")
+    m = load("p/ui/med_ico.png")
+    b = load("p/ui/balls_ico.png")
+    t = load("p/ui/tm_ico.png")
+    k = load("p/ui/key_ico.png")
     high = load("p/bag_high.png")
     ico = i
     ix = 0
@@ -7774,6 +8131,12 @@ def bag(P,pick_item = False) -> None:
     scroll = 0
     scroll_mod = 0
     scroll_spd = 10
+    bag_list = P.bag[bag]
+    if choose_tm != None:
+        bag = 3
+        ico = t
+        ix = 240
+        bag_list = learnable_tms(P,choose_tm.code)
     su = False
     sd = False
     end = True
@@ -7794,29 +8157,29 @@ def bag(P,pick_item = False) -> None:
         y = 0
         if scroll <= 280:
             s = 0
-        elif scroll >= (((len(P.bag[bag])-1)*70)-210):
-            if len(P.bag[bag]) < 8:
+        elif scroll >= (((len(bag_list)-1)*70)-210):
+            if len(bag_list) < 8:
                 s = 0
             else:
-                s = (((len(P.bag[bag])-1)*70))-490
+                s = (((len(bag_list)-1)*70))-490
         else:
             s = scroll-280
-        for z in P.bag[bag]:
-            txt = P.font_s.render(z[0],True,(0,0,0))
+        for z in bag_list:
+            txt1 = P.font_s.render(z[0],True,(0,0,0))
             size_x = (360-(P.font_s.size(z[0])[0]))/2
             if z[0] in P.save_data.register:
-                txt = P.font_s.render("•"+z[0]+"•",True,(0,0,0))
+                txt1 = P.font_s.render("•"+z[0]+"•",True,(0,0,0))
                 size_x = (360-(P.font_s.size("•"+z[0]+"•")[0]))/2
             P.surface.blit(box,(420,20-s+y))
-            P.surface.blit(txt,(420+size_x,35-s+y))
-            if z == P.bag[bag][int(scroll/70)]:
+            P.surface.blit(txt1,(420+size_x,35-s+y))
+            if z == bag_list[int(scroll/70)]:
                 P.surface.blit(high,(420,20-s+y))
                 curr = z
             y += 70
         if(curr != ['',0]):
-            txt = P.font_s.render(curr[0],True,(0,0,0))
+            txt1 = P.font_s.render(curr[0],True,(0,0,0))
             txt2 = P.font_s.render(' x '+str(curr[1]),True,(0,0,0))
-            P.surface.blit(txt,((380-P.font_s.size(curr[0])[0])/2,150))
+            P.surface.blit(txt1,((380-P.font_s.size(curr[0])[0])/2,150))
             P.surface.blit(txt2,(180,195))
             ic = pygame.transform.scale(load("p/item/"+curr[0]+".png"),(50,50))
             P.surface.blit(ic,(130,185))
@@ -7836,7 +8199,19 @@ def bag(P,pick_item = False) -> None:
             for event in pygame.event.get(eventtype = KEYDOWN):
                 if event.key == pygame.key.key_code(P.controls[4]) and a>10 and curr != ['',0]:
                     if pick_item:
-                        if items.Item(curr[0]).price == -1:
+                        if choose_tm != None:
+                            # P.surface.blit(back_t,(0,0))
+                            if choose_tm.has_move(items.Item(curr[0]).type[0]):
+                                txt(P,choose_tm.name+" already knows "+items.Item(curr[0]).type[0]+"!")
+                            else:
+                                txt(P,"Booted up a TM.")
+                                txt(P,"It contained " + items.Item(curr[0]).type[0]+".")
+                                new_txt(P)
+                                write(P,"Teach "+items.Item(curr[0]).type[0]+" to "+choose_tm.name+"?")
+                                if choice(P):
+                                    if choose_tm.learn(P,moves.Move(items.Item(curr[0]).type[0]),False,True):
+                                        end = False
+                        elif items.Item(curr[0]).price == -1:
                             new_txt(P)
                             write(P,"The "+curr[0],"can't be held.")
                             cont(P)
@@ -7850,13 +8225,13 @@ def bag(P,pick_item = False) -> None:
                             if P.use_key_item != None:
                                 end = False
                             a = 0
-                    if scroll/70 > (len(P.bag[bag])-1):
+                    if scroll/70 > (len(bag_list)-1):
                         scroll -= 70
-                    if len(P.bag[bag]) == 0:
+                    if len(bag_list) == 0:
                         curr = ['',0]
                 if event.key == pygame.key.key_code(P.controls[5]) and a > 10:
                     end = False
-                elif event.key == pygame.key.key_code(P.controls[2]) and a > 10:
+                elif event.key == pygame.key.key_code(P.controls[2]) and choose_tm == None and a > 10:
                     if bag != 0:
                         curr = ['',0]
                         scroll = 0
@@ -7870,7 +8245,8 @@ def bag(P,pick_item = False) -> None:
                             ico = b
                         if bag == 3:
                             ico = t
-                elif event.key == pygame.key.key_code(P.controls[3]) and a > 10:
+                        bag_list = P.bag[bag]
+                elif event.key == pygame.key.key_code(P.controls[3]) and choose_tm == None and a > 10:
                     if bag != 4:
                         curr = ['',0]
                         scroll = 0
@@ -7884,13 +8260,14 @@ def bag(P,pick_item = False) -> None:
                             ico = t
                         if bag == 4:
                             ico = k
+                        bag_list = P.bag[bag]
         keys = pygame.key.get_pressed()
         if scroll%70 == 0:
             su = False
             sd = False
         if keys[pygame.key.key_code(P.controls[0])] and scroll > 0 and sd == False:
             su = True
-        if keys[pygame.key.key_code(P.controls[1])] and scroll < (len(P.bag[bag])-1)*70 and su == False:
+        if keys[pygame.key.key_code(P.controls[1])] and scroll < (len(bag_list)-1)*70 and su == False:
             sd = True
         if(su):
             if scroll_mod > 50 and scroll_spd == 10:
@@ -7947,18 +8324,18 @@ def set_mixer_volume(P,volume,song = None,sat = False):
         #volume = volume**2
     if P.song in ["music/echoing_cave.wav","music/isola.wav","music/forbidden.wav","music/route_6.wav","music/wallace_battle.wav","music/wallace_battle_loop.wav"] or song == "music/load.wav":
         volume *= 1.5
-    if P.song in ['music/fon_battle.wav',"music/cheryl_battle.wav","music/cheryl_battle_loop.wav","music/mairin_battle.wav","music/mairin_battle_loop.wav","music/siebold_battle.wav","music/siebold_battle_loop.wav"]:
+    if P.song in ['music/fon_battle.wav',"music/cheryl_battle.wav","music/cheryl_battle_loop.wav","music/mairin_battle.wav","music/mairin_battle_loop.wav","music/siebold_battle.wav","music/siebold_battle_loop.wav","music/lisia_battle.wav","music/lisia_battle_loop.wav","music/diantha_battle.wav","music/diantha_battle_loop.wav"]:
         volume *= 2
-    if (P.loc[:5] == 'house' and P.loc != 'house_1_18') or P.loc in ['egida_mine','egida_lab','fiore_garden','pianura_nursery','pianura_bakery','verde_garden','ombra_lab']:
+    if (P.loc[:5] == 'house' and P.loc != 'house_1_18') or P.loc in ['am_theater','egida_mine','egida_lab','fiore_garden','pianura_nursery','pianura_bakery','verde_garden','ombra_lab','cascata_bakery','cascata_mine','silfide_theater','silfide_nursery']:
         volume *= 0.6
     pygame.mixer.music.set_volume(volume)
 
 def rebind_controls(P):
     copy = P.surface.copy()
-    over1 = load("p/rebind_menu.png")
-    over2 = load("p/rebind_menu_2.png")
+    over1 = load("p/ui/rebind_menu.png")
+    over2 = load("p/ui/rebind_menu_2.png")
     over = over1
-    high = load("p/controls_high.png")
+    high = load("p/ui/controls_high.png")
     up = P.font_s.render("Up",True,(240,230,230))
     up1 = P.font_s.render(P.controls[0].upper(),True,(255,255,255))
     down = P.font_s.render("Down",True,(240,230,230))
@@ -8154,13 +8531,13 @@ def save_settings(P):
     set.close()
 
 def settings(P,saturday = False):
-    back1 = load("p/Settings.png")
-    back2 = load("p/Settings_2.png")
+    back1 = load("p/ui/Settings.png")
+    back2 = load("p/ui/Settings_2.png")
     back = back1
-    over1 = load("p/settings_overlay_1.png")
-    over2 = load("p/settings_overlay_2.png")
+    over1 = load("p/ui/settings_overlay_1.png")
+    over2 = load("p/ui/settings_overlay_2.png")
     over = over1
-    highlight = load("p/options_highlight.png")
+    highlight = load("p/ui/options_highlight.png")
     options = P.font_l.render("OPTIONS",True,(80,0,0))
     off_color = (150,150,150)
     on_color = (0,0,0)
@@ -8220,9 +8597,9 @@ def settings(P,saturday = False):
     #rebind
     rebind = P.font.render("Controls",True,on_color)
     save = P.font_l.render("SAVE CHANGES",True,on_color)
-    bar = load("p/vol_bar.png")
-    white = load("p/vol_white.png")
-    black = load("p/vol_black.png")
+    bar = load("p/ui/vol_bar.png")
+    white = load("p/ui/vol_white.png")
+    black = load("p/ui/vol_black.png")
     bgm_but = black
     sfx_but = black
     old_set = []
@@ -8520,12 +8897,12 @@ def settings(P,saturday = False):
 
 def profile(P):
     if P.save_data.gen == 0:
-        back1 = load("p/profile_boy_1.png")
-        back2 = load("p/profile_boy_2.png")
+        back1 = load("p/ui/profile_boy_1.png")
+        back2 = load("p/ui/profile_boy_2.png")
     else:
-        back1 = load("p/profile_girl_1.png")
-        back2 = load("p/profile_girl_2.png")
-    txtbox = load("p/profile_textbox.png")
+        back1 = load("p/ui/profile_girl_1.png")
+        back2 = load("p/ui/prorefile_girl_2.png")
+    txtbox = load("p/ui/profile_textbox.png")
     name = P.font_s.render("Name:   "+P.save_data.name,True,(255,255,255))
     money = P.font_s.render("Money:   $"+str(P.save_data.money),True,(255,255,255))
     max = P.font_s.render("Max Level:   "+str(poke_max(P,None)),True,(255,255,255))
@@ -8545,70 +8922,93 @@ def profile(P):
         if P.save_data.pokedex[pok][0] == 1:
             dex_count += 1
     dex = P.font_s.render("Pokedex:   "+str(dex_count)+"/221",True,(255,255,255))
-    analytic1 = load("p/analytic_1.png")
-    analytic2 = load("p/analytic_2.png")
+    analytic1 = load("p/ui/analytic_1.png")
+    analytic2 = load("p/ui/analytic_2.png")
     analytic = analytic1
-    affinity1 = load("p/affinity_1.png")
-    affinity2 = load("p/affinity_2.png")
+    affinity1 = load("p/ui/affinity_1.png")
+    affinity2 = load("p/ui/affinity_2.png")
     affinity = affinity1
-    nature1 = load("p/nature_1.png")
-    nature2 = load("p/nature_2.png")
+    nature1 = load("p/ui/nature_1.png")
+    nature2 = load("p/ui/nature_2.png")
     nature = nature1
-    ripple1 = load("p/ripple_1.png")
-    ripple2 = load("p/ripple_2.png")
+    ripple1 = load("p/ui/ripple_1.png")
+    ripple2 = load("p/ui/ripple_2.png")
     ripple = ripple1
+    dazzle1 = load("p/ui/dazzle_1.png")
+    dazzle2 = load("p/ui/dazzle_2.png")
+    dazzle = dazzle1
     job_list = []
-    research0 = load("p/research_icon_0.png")
-    research1 = load("p/research_icon_1.png")
-    research2 = load("p/research_icon_2.png")
+    research0 = load("p/ui/research_icon_0.png")
+    research1 = load("p/ui/research_icon_1.png")
+    research2 = load("p/ui/research_icon_2.png")
     research = research0
-    nursing0 = load("p/nursing_icon_0.png")
-    nursing1 = load("p/nursing_icon_1.png")
-    nursing2 = load("p/nursing_icon_2.png")
+    nursing0 = load("p/ui/nursing_icon_0.png")
+    nursing1 = load("p/ui/nursing_icon_1.png")
+    nursing2 = load("p/ui/nursing_icon_2.png")
     nursing = nursing0
-    garden0 = load("p/garden_icon_0.png")
-    garden1 = load("p/garden_icon_1.png")
-    garden2 = load("p/garden_icon_2.png")
+    garden0 = load("p/ui/garden_icon_0.png")
+    garden1 = load("p/ui/garden_icon_1.png")
+    garden2 = load("p/ui/garden_icon_2.png")
     garden = garden0
-    baking0 = load("p/baking_icon_0.png")
-    baking1 = load("p/baking_icon_1.png")
-    baking2 = load("p/baking_icon_2.png")
+    baking0 = load("p/ui/baking_icon_0.png")
+    baking1 = load("p/ui/baking_icon_1.png")
+    baking2 = load("p/ui/baking_icon_2.png")
     baking = baking0
+    theater0 = load("p/ui/theater_icon_0.png")
+    theater1 = load("p/ui/theater_icon_1.png")
+    theater2 = load("p/ui/theater_icon_2.png")
+    theater = theater0
     job_curr = 0
     gym_curr = 0
-    rlvl = None
-    nlvl = None
-    glvl = None
-    blvl = None
-    if P.prog[8][0][0] != -1:
-        research = research1
-        job_list.append("Research")
-        rlvl = P.font_s.render(str(P.prog[8][0][0]),True,(0,0,0))
-        rlength = P.font_s.size(str(P.prog[8][0][0]))[0]/2
-    if P.prog[8][1][0] != -1:
-        nursing = nursing1
-        job_list.append("Nursing")
-        nlvl = P.font_s.render(str(P.prog[8][1][0]),True,(0,0,0))
-        nlength = P.font_s.size(str(P.prog[8][1][0]))[0]/2
-    if P.prog[8][2][0] != -1:
-        garden = garden1
-        job_list.append("Gardening")
-        glvl = P.font_s.render(str(P.prog[8][2][0]),True,(0,0,0))
-        glength = P.font_s.size(str(P.prog[8][2][0]))[0]/2
-    if P.prog[8][3][0] != -1:
-        baking = baking1
-        job_list.append("Baking")
-        blvl = P.font_s.render(str(P.prog[8][3][0]),True,(0,0,0))
-        blength = P.font_s.size(str(P.prog[8][3][0]))[0]/2
+    deflvl = P.font_s.render("1",True,(0,0,0))
+    deflen = P.font_s.size("1")[0]/2
+    rlvl = deflvl
+    nlvl = deflvl
+    glvl = deflvl
+    blvl = deflvl
+    tlvl = deflvl
+    nexp = min(P.prog[8][1][1]*1.2,120)
+    rlength = deflen
+    nlength = deflen
+    glength = deflen
+    blength = deflen
+    tlength = deflen
     gym_list = []
     if P.prog[0] >= 48:
         gym_list.append("Analytic Badge")
+        research = research1
+        job_list.append("Research")
+        if P.prog[8][0][0] != -1:
+            rlvl = P.font_s.render(str(P.prog[8][0][0]),True,(0,0,0))
+            rlength = P.font_s.size(str(P.prog[8][0][0]))[0]/2
     if P.prog[0] >= 86:
         gym_list.append("Affinity Badge")
+        nursing = nursing1
+        job_list.append("Nursing")
+        if P.prog[8][1][0] != -1:
+            nlvl = P.font_s.render(str(P.prog[8][1][0]),True,(0,0,0))
+            nlength = P.font_s.size(str(P.prog[8][1][0]))[0]/2
     if P.prog[0] >= 106:
         gym_list.append("Nature Badge")
+        garden = garden1
+        job_list.append("Gardening")
+        if P.prog[8][2][0] != -1:
+            glvl = P.font_s.render(str(P.prog[8][2][0]),True,(0,0,0))
+            glength = P.font_s.size(str(P.prog[8][2][0]))[0]/2
     if P.prog[0] >= 144:
         gym_list.append("Ripple Badge")
+        baking = baking1
+        job_list.append("Baking")
+        if P.prog[8][3][0] != -1:
+            blvl = P.font_s.render(str(P.prog[8][3][0]),True,(0,0,0))
+            blength = P.font_s.size(str(P.prog[8][3][0]))[0]/2
+    if P.prog[0] >= 157:
+        gym_list.append("Dazzle Badge")
+        theater = theater1
+        job_list.append("Theater")
+        if P.prog[8][4][0] != -1:
+            tlvl = P.font_s.render(str(P.prog[8][4][0]),True,(0,0,0))
+            tlength = P.font_s.size(str(P.prog[8][4][0]))[0]/2
     titletxt = P.font.render("",True,(255,255,255))
     titlex = 0
     info = 0
@@ -8624,6 +9024,8 @@ def profile(P):
         P.surface.blit(nature,(334,235))
     if len(gym_list) > 3:
         P.surface.blit(ripple,(504,235))
+    if len(gym_list) > 4:
+        P.surface.blit(dazzle,(-5,415))
     P.surface.blit(name,(230,30))
     P.surface.blit(money,(230,70))
     P.surface.blit(max,(230,110))
@@ -8647,49 +9049,57 @@ def profile(P):
                 P.surface.blit(nature,(334,235))
             if len(gym_list) > 3:
                 P.surface.blit(ripple,(504,235))
+            if len(gym_list) > 4:
+                P.surface.blit(dazzle,(-5,415))
         if tab == 1:
-            if 'Research' in job_list:
-                P.surface.fill((100,190,240), Rect(21,395-(P.prog[8][0][1]*1.2),150,P.prog[8][0][1]*1.2))
-            P.surface.blit(research,(16,262))
-            if rlvl:
-                P.surface.blit(rlvl,(95-rlength,382))
-            if 'Nursing' in job_list:
-                n_exp = P.prog[8][1][1]*1.2
-                if P.prog[8][1][0] == 10:
-                    n_exp = 120
-                P.surface.fill((255,246,233), Rect(191,395-(n_exp),150,n_exp))
-            P.surface.blit(nursing,(186,262))
-            if nlvl:
-                P.surface.blit(nlvl,(265-nlength,382))
-            if 'Gardening' in job_list:
-                P.surface.fill((100,240,100), Rect(361,395-(P.prog[8][2][1]*1.2),150,P.prog[8][2][1]*1.2))
-            P.surface.blit(garden,(356,262))
-            if glvl:
-                P.surface.blit(glvl,(435-glength,382))
-            if 'Baking' in job_list:
-                P.surface.fill((250,160,100), Rect(531,395-(P.prog[8][3][1]*1.2),150,P.prog[8][3][1]*1.2))
-            P.surface.blit(baking,(526,262))
-            if blvl:
-                P.surface.blit(blvl,(605-blength,382))
+            if len(job_list) > 0:
+                P.surface.fill((100,190,240), Rect(21,390-(P.prog[8][0][1]*1.2),150,P.prog[8][0][1]*1.2))
+                P.surface.blit(research,(16,257))
+                P.surface.blit(rlvl,(95-rlength,377))
+            else:
+                P.surface.blit(research,(16,257))
+            if len(job_list) > 1:
+                P.surface.fill((255,246,233), Rect(191,390-(nexp),150,nexp))
+                P.surface.blit(nursing,(186,257))
+                P.surface.blit(nlvl,(265-nlength,377))
+            else:
+                P.surface.blit(nursing,(186,257))
+            if len(job_list) > 2:
+                P.surface.fill((100,240,100), Rect(361,390-(P.prog[8][2][1]*1.2),150,P.prog[8][2][1]*1.2))
+                P.surface.blit(garden,(356,257))
+                P.surface.blit(glvl,(435-glength,377))
+            else:
+                P.surface.blit(garden,(356,257))
+            if len(job_list) > 3:
+                P.surface.fill((250,160,100), Rect(531,390-(P.prog[8][3][1]*1.2),150,P.prog[8][3][1]*1.2))
+                P.surface.blit(baking,(526,257))
+                P.surface.blit(blvl,(605-blength,377))
+            else:
+                P.surface.blit(baking,(526,257))
+            if len(job_list) > 4:
+                P.surface.fill((255,160,215), Rect(21,570-(P.prog[8][4][1]*1.2),150,P.prog[8][4][1]*1.2))
+                P.surface.blit(theater,(16,437))
+                P.surface.blit(tlvl,(95-tlength,557))
+            else:
+                P.surface.blit(theater,(16,437))
         if info == 1:
             P.surface.blit(txtbox,(0,180))
             P.surface.blit(titletxt,(400-titlex,195))
         for event in pygame.event.get(eventtype = KEYDOWN):
             if a > 10:
-                if event.key == pygame.key.key_code(P.controls[4]) and info == 0 and len(gym_list) > 0:
-                    if tab == 0:
+                if event.key == pygame.key.key_code(P.controls[4]) and info == 0:
+                    if tab == 0 and len(gym_list) > 0:
                         titletxt = P.font.render("Analytic Badge",True,(255,255,255))
                         titlex = P.font.size("Analytic Badge")[0]/2
                         analytic = analytic2
                         info = 1
                         gym_curr = 0
-                    if tab == 1:
-                        if "Research" in job_list:
-                            titletxt = P.font.render("Research",True,(255,255,255))
-                            titlex = P.font.size("Research")[0]/2
-                            research = research2
-                            info = 1
-                            job_curr = 0
+                    if tab == 1 and len(job_list) > 0:
+                        titletxt = P.font.render("Research",True,(255,255,255))
+                        titlex = P.font.size("Research")[0]/2
+                        research = research2
+                        info = 1
+                        job_curr = 0
                 if event.key == pygame.key.key_code(P.controls[5]):
                     if info == 0:
                         end = False
@@ -8702,20 +9112,82 @@ def profile(P):
                             garden = garden1
                         elif baking == baking2:
                             baking = baking1
+                        elif theater == theater2:
+                            theater = theater1
                         analytic = analytic1
                         affinity = affinity1
                         nature = nature1
                         ripple = ripple1
+                        dazzle = dazzle1
                         info = 0
-                if event.key == pygame.key.key_code(P.controls[1]) and tab == 0 and info == 0:
-                    tab = 1
-                    back = back2
-                if event.key == pygame.key.key_code(P.controls[0]) and tab == 1 and info == 0:
-                    tab = 0
-                    back = back1
+                if event.key == pygame.key.key_code(P.controls[0]):
+                    if info == 0 and tab == 1:
+                        tab = 0
+                        back = back1
+                    elif info == 1:
+                        if tab == 1:
+                            if job_curr > 3:
+                                job_curr -= 4
+                                titletxt = P.font.render(job_list[job_curr],True,(255,255,255))
+                                titlex = P.font.size(job_list[job_curr])[0]/2
+                                if job_curr == 0:
+                                    theater = theater1
+                                    research = research2
+                        else:
+                            if gym_curr > 3:
+                                gym_curr -= 4
+                                titletxt = P.font.render(gym_list[gym_curr],True,(255,255,255))
+                                titlex = P.font.size(gym_list[gym_curr])[0]/2
+                                if gym_curr == 0:
+                                    dazzle = dazzle1
+                                    analytic = analytic2
+                                # elif gym_curr == 1:
+                                #     nature = nature1
+                                #     affinity = affinity2
+                                # elif gym_curr == 2:
+                                #     ripple = ripple1
+                                #     nature = nature2
+                                # elif gym_curr == 3:
+                                #     dazzle = dazzle1
+                                #     ripple = ripple2
+                if event.key == pygame.key.key_code(P.controls[1]):
+                    if info == 0 and tab == 0:
+                        tab = 1
+                        back = back2
+                    elif info == 1:
+                        if tab == 1:
+                            if job_curr < 4 and len(job_list) > 4:
+                                if job_curr == 0:
+                                    research = research1
+                                elif job_curr == 1:
+                                    nursing = nursing1
+                                elif job_curr == 2:
+                                    garden = garden1
+                                else:
+                                    baking = baking1
+                                job_curr = min(len(job_list)-1,job_curr+4)
+                                titletxt = P.font.render(job_list[job_curr],True,(255,255,255))
+                                titlex = P.font.size(job_list[job_curr])[0]/2
+                                if job_curr == 4:
+                                    theater = theater2
+                        else:
+                            if gym_curr < 4 and len(gym_list) > 4:
+                                if gym_curr == 0:
+                                    analytic = analytic1
+                                elif gym_curr == 1:
+                                    affinity = affinity1
+                                elif gym_curr == 1:
+                                    nature = nature1
+                                else:
+                                    ripple = ripple1
+                                gym_curr = min(len(gym_list)-1,gym_curr+4)
+                                titletxt = P.font.render(gym_list[gym_curr],True,(255,255,255))
+                                titlex = P.font.size(gym_list[gym_curr])[0]/2
+                                if gym_curr == 4:
+                                    dazzle = dazzle2
                 if event.key == pygame.key.key_code(P.controls[2]) and info == 1:
                     if tab == 1:
-                        if job_curr > 0:
+                        if job_curr not in [0,4]:
                             job_curr -= 1
                             titletxt = P.font.render(job_list[job_curr],True,(255,255,255))
                             titlex = P.font.size(job_list[job_curr])[0]/2
@@ -8729,7 +9201,7 @@ def profile(P):
                                 garden = garden2
                                 baking = baking1
                     else:
-                        if gym_curr > 0:
+                        if gym_curr not in [0,4]:
                             gym_curr -= 1
                             titletxt = P.font.render(gym_list[gym_curr],True,(255,255,255))
                             titlex = P.font.size(gym_list[gym_curr])[0]/2
@@ -8744,7 +9216,7 @@ def profile(P):
                                 nature = nature2
                 if event.key == pygame.key.key_code(P.controls[3]) and info == 1:
                     if tab == 1:
-                        if job_curr < len(job_list)-1:
+                        if job_curr < len(job_list)-1 and job_curr not in [3,7]:
                             job_curr += 1
                             titletxt = P.font.render(job_list[job_curr],True,(255,255,255))
                             titlex = P.font.size(job_list[job_curr])[0]/2
@@ -8758,7 +9230,7 @@ def profile(P):
                                 garden = garden1
                                 baking = baking2
                     else:
-                        if gym_curr < len(gym_list)-1:
+                        if gym_curr < len(gym_list)-1 and gym_curr not in [3,7]:
                             gym_curr += 1
                             titletxt = P.font.render(gym_list[gym_curr],True,(255,255,255))
                             titlex = P.font.size(gym_list[gym_curr])[0]/2
@@ -8780,8 +9252,8 @@ def profile(P):
 
 def team(P) -> None:
     box = load("p/team_box_1.png")
-    back = load("p/load_back.png")
-    tbox = load("p/4_box.png")
+    back = load("p/ui/load_back.png")
+    tbox = load("p/ui/4_box.png")
     hp_b = load("p/team_hp.png")
     item_ico = pygame.transform.scale(load("p/item_icon.png"),(20,25))
     mega = pygame.transform.scale(load("p/mega_symbol.png"),(30,30))
@@ -8825,12 +9297,12 @@ def team(P) -> None:
             P.surface.blit(nme,(x+110,y+20))
             if p.code[:5] == 'Mega_':
                 P.surface.blit(mega,(x+115+name_size,y+30))
-            if p.nurse:
+            if p.nurse != 0:
                 P.surface.blit(nurse,(x+115+name_size,y+30))
             P.surface.blit(hp,(x+200,y+90))
             P.surface.blit(hp_b,(x+110,y+65))
             if p.status != None:
-                status = load("p/"+p.status+"_ico.png")
+                status = load("p/ui/"+p.status+"_ico.png")
                 status = pygame.transform.scale(status,(50,20))
                 P.surface.blit(status,(x+145,y+95))
             if p.item != None:
@@ -8927,14 +9399,20 @@ def team(P) -> None:
                                             P.party[current].ch = P.party[current].hp
                                         txt(P,P.party[current].name+"'s HP was restored","by "+str(heal)+" points!")
                                         add_item(P,chose_item,-1)
+                                    elif items.Item(chose_item).type[0] == 'Ability Capsule' and len(P.party[current].ability_list()[0]) == 2:
+                                        fade_in(P)
+                                        new_abi = P.party[current].switch_ability()
+                                        txt(P,P.party[current].name+" changed abilities to "+new_abi+"!")
+                                        add_item(P,chose_item,-1)
                                     elif items.Item(chose_item).type[0] == 'Food' and P.party[current].friend != 400:
+                                        fade_in(P)
                                         if items.Item(chose_item).mod()[1] == 'All' or items.Item(chose_item).mod()[1] in P.party[current].type:
                                             P.party[current].gain_friend(items.Item(chose_item).mod()[0])
-                                            txt(P,P.party[current].name+" eagerly ate the",chose_item + " and grew", "friendlier!")
+                                            txt(P,P.party[current].name+" eagerly ate the "+chose_item + " and grew friendlier!")
                                             add_item(P,chose_item,-1)
                                         else:
                                             P.party[current].gain_friend(items.Item(chose_item).mod()[0]/2)
-                                            txt(P,P.party[current].name+" ate the",chose_item + " and grew", "friendlier!")
+                                            txt(P,P.party[current].name+" ate the "+chose_item + " and grew friendlier!")
                                             add_item(P,chose_item,-1)
                                     elif items.Item(chose_item).name == 'Sitrus Berry' and P.party[current].ch < P.party[current].hp and P.party[current].status != 'Faint':
                                         fade_in(P)
@@ -8943,7 +9421,7 @@ def team(P) -> None:
                                         if P.party[current].ch > P.party[current].hp:
                                             heal -= P.party[current].ch - P.party[current].hp
                                             P.party[current].ch = P.party[current].hp
-                                        txt(P,P.party[current].name+"'s HP was restored","by "+str(heal)+" points!")
+                                        txt(P,P.party[current].name+"'s HP was restored by "+str(heal)+" points!")
                                         add_item(P,chose_item,-1)
                                     elif items.Item(chose_item).type[0] == 'Battle Berry' and (type(items.Item(chose_item).mod()) == list and P.party[current].status in items.Item(chose_item).mod()[0]) or ((items.Item(chose_item).name == 'Lum Berry' or items.Item(chose_item).name == 'Persim Berry') and P.party[current].cfs > 0):
                                         fade_in(P)
@@ -8952,7 +9430,7 @@ def team(P) -> None:
                                         if items.Item(chose_item).name == 'Lum Berry':
                                             if P.party[current].cfs > 0:
                                                 P.party[current].cfs = 0
-                                                txt(P,P.party[current].name + " was cured", "of confusion!")
+                                                txt(P,P.party[current].name + " was cured of confusion!")
                                             s = P.party[current].status
                                         if s == None:
                                             pass
@@ -8981,7 +9459,7 @@ def team(P) -> None:
                                             txt(P,P.party[current].name + "'s level dropped!")
                                             perc = P.party[current].exp/P.party[current].get_exp()
                                             P.party[current].lvl -= 1
-                                            P.party[current].exp = perc*P.party[current].get_exp()
+                                            P.party[current].exp = int(perc*P.party[current].get_exp())
                                             P.party[current].update_stats()
                                             box = load("p/team_box_2.png")
                                             if P.party[current].code[-2:] == '_S':
@@ -9007,12 +9485,12 @@ def team(P) -> None:
                                             P.surface.blit(nme,(x+110,y+20))
                                             if P.party[current].code[:5] == 'Mega_':
                                                 P.surface.blit(mega,(x+115+name_size,y+30))
-                                            if P.party[current].nurse:
+                                            if P.party[current].nurse != 0:
                                                 P.surface.blit(nurse,(x+115+name_size,y+30))
                                             P.surface.blit(hp,(x+200,y+90))
                                             P.surface.blit(hp_b,(x+110,y+65))
                                             if P.party[current].status != None:
-                                                status = load("p/"+P.party[current].status+"_ico.png")
+                                                status = load("p/ui/"+P.party[current].status+"_ico.png")
                                                 status = pygame.transform.scale(status,(50,20))
                                                 P.surface.blit(status,(x+145,y+95))
                                             if P.party[current].item != None:
@@ -9034,6 +9512,7 @@ def team(P) -> None:
                                                 if P.party[current].exp == P.party[current].get_exp():
                                                     txt(P,P.party[current].name + " leveled up!")
                                                     # thp = P.party[current].hp
+                                                    P.leveled_up = [P.party[current]]
                                                     P.party[current].lvlup(P,False,True)
                                                     # if P.party[current].status != 'Faint':
                                                     #     P.party[current].ch += P.party[current].hp-thp
@@ -9061,16 +9540,19 @@ def team(P) -> None:
                                                     P.surface.blit(nme,(x+110,y+20))
                                                     if P.party[current].code[:5] == 'Mega_':
                                                         P.surface.blit(mega,(x+115+name_size,y+30))
-                                                    if P.party[current].nurse:
+                                                    if P.party[current].nurse != 0:
                                                         P.surface.blit(nurse,(x+115+name_size,y+30))
                                                     P.surface.blit(hp,(x+200,y+90))
                                                     P.surface.blit(hp_b,(x+110,y+65))
                                                     if P.party[current].status != None:
-                                                        status = load("p/"+P.party[current].status+"_ico.png")
+                                                        status = load("p/ui/"+P.party[current].status+"_ico.png")
                                                         status = pygame.transform.scale(status,(50,20))
                                                         P.surface.blit(status,(x+145,y+95))
                                                     if P.party[current].item != None:
                                                         P.surface.blit(item_ico,(x+70,y+70))
+                                            song = P.song
+                                            if evo_check(P,True):
+                                                play_music(P,song)
                                         add_item(P,chose_item,-1)
                                     elif items.Item(chose_item).type[0] == 'Heart Scale' and items.Item(chose_item).can_hs(P.party[current]):
                                         if use_hs(P,P.party[current]):
@@ -9172,6 +9654,17 @@ def team(P) -> None:
                                             play_music(P,song)
                                             add_item(P,chose_item,-1)
                                             a = -1
+                                        elif P.party[current].code_nos() == 'Snorunt' and chose_item == 'Dawn Stone' and P.party[current].gen == 1:
+                                            song = P.song
+                                            fade_out(P,P.song)
+                                            copy = P.party[current].copy()
+                                            copy.evo.append('Ominous Wind')
+                                            P.party[current] = poke.Poke('Froslass',[copy.lvl,copy.gen,copy.ch,copy.m1,copy.p1,copy.m2,copy.p2,copy.m3,copy.p3,copy.m4,copy.p4,copy.item,copy.status,copy.exp,copy.ball,copy.friend,copy.ability,True])
+                                            evolve(P,copy,P.party[current])
+                                            P.surface.set_clip(Rect(0,0,800,600))
+                                            play_music(P,song)
+                                            add_item(P,chose_item,-1)
+                                            a = -1
                                         else:
                                             fade_out(P)
                                             P.surface.blit(t,(0,0))
@@ -9180,7 +9673,7 @@ def team(P) -> None:
                                     elif items.Item(chose_item).type[0] == 'Balm Mushroom' and has_shiny(P.party[current]):
                                         fade_in(P)
                                         P.party[current].code += '_S'
-                                        P.party[current].icon = pygame.transform.scale(pygame.image.load("p/poke/"+P.party[current].code+"_ico.png"),(70,70))
+                                        P.party[current].reload_icon()
                                         txt(P,"Something strange happened","to "+P.party[current].name+"!")
                                         add_item(P,'Balm Mushroom',-1)
                                     else:
@@ -9349,9 +9842,23 @@ def has_mega_stone(P,p,name = False):
     else:
         return False
 
-def trade_poke(P,poke_code,pick_poke = False,name_hater = False, nurse_poke = False, return_nurse = False, mega_poke = False,massage_poke = False,petal_poke = False):
+def stat_to_petal(stat):
+    if stat == 'hp':
+        return 'Red Petal'
+    elif stat == 'ak':
+        return 'Blue Petal'
+    elif stat == 'sak':
+        return 'Purple Petal'
+    elif stat == 'df':
+        return 'Brown Petal'
+    elif stat == 'sdf':
+        return 'Green Petal'
+    else:
+        return 'Yellow Petal'
+
+def trade_poke(P,poke_code,pick_poke = False,name_hater = False, nurse_poke = False, return_nurse = False, mega_poke = False,massage_poke = False,petal_poke = False,star_poke = False):
     box = load("p/team_box_1.png")
-    back = load("p/load_back.png")
+    back = load("p/ui/load_back.png")
     hp_b = load("p/team_hp.png")
     item_ico = pygame.transform.scale(load("p/item_icon.png"),(20,25))
     mega = pygame.transform.scale(load("p/mega_symbol.png"),(30,30))
@@ -9382,7 +9889,7 @@ def trade_poke(P,poke_code,pick_poke = False,name_hater = False, nurse_poke = Fa
             name_size = P.font.size(p.name)[0]
             hp = P.font_s.render(str(p.ch)+"/"+str(p.hp),True,(255,255,255))
             P.surface.blit(box,(x,y))
-            if (p.code_nos() == poke_code and p.nurse == False) or (pick_poke and (petal_poke == False or len(p.petals) > 0) and (massage_poke == False or p.friend < 400) and (mega_poke == False or has_mega_stone(P,p.code_nos())) and (name_hater == False or p.name != p.actual_name) and (nurse_poke == False or p.friend != 400) and (((p.nurse == False or massage_poke) and return_nurse == False) or (return_nurse and p.friend == 400 and p.nurse))):
+            if (p.code_nos() == poke_code and p.nurse == 0) or (star_poke and p.nurse == 0) or (pick_poke and (petal_poke == False or len(p.petals) > 0) and (massage_poke == False or p.friend < 400) and (mega_poke == False or has_mega_stone(P,p.code_nos())) and (name_hater == False or p.name != p.actual_name) and (nurse_poke == False or p.friend != 400) and (((p.nurse == 0 or massage_poke) and return_nurse == False) or (return_nurse and p.nurse != 0))):
                 P.surface.blit(able,(x+150,y+70))
             else:
                 P.surface.blit(notable,(x+150,y+70))
@@ -9391,7 +9898,7 @@ def trade_poke(P,poke_code,pick_poke = False,name_hater = False, nurse_poke = Fa
             P.surface.blit(nme,(x+110,y+20))
             if p.code[:5] == 'Mega_':
                 P.surface.blit(mega,(x+115+name_size,y+30))
-            if p.nurse:
+            if p.nurse != 0:
                 P.surface.blit(nurse,(x+115+name_size,y+30))
             if p.item != None:
                 P.surface.blit(item_ico,(x+70,y+70))
@@ -9408,25 +9915,59 @@ def trade_poke(P,poke_code,pick_poke = False,name_hater = False, nurse_poke = Fa
             elif event.key == pygame.key.key_code(P.controls[2]) and current % 2 != 0:
                 current -= 1
             elif event.key == pygame.key.key_code(P.controls[4]) and a > 10:
-                if (P.party[current].code_nos() == poke_code and P.party[current].nurse == False) or (pick_poke and (petal_poke == False or len(P.party[current].petals) > 0) and (massage_poke == False or P.party[current].friend < 400) and (mega_poke == False or has_mega_stone(P,P.party[current].code_nos())) and (name_hater == False or P.party[current].name != P.party[current].actual_name) and (nurse_poke == False or P.party[current].friend != 400) and (((P.party[current].nurse == False or massage_poke) and return_nurse == False) or (return_nurse and P.party[current].friend == 400 and P.party[current].nurse))):
-                    if P.party[current].item != None and (pick_poke == False or nurse_poke):
-                        txt(P,P.party[current].name+" is holding an",'item.')
-                        new_txt(P)
-                        write(P,'Are you sure you want to',"select it?")
-                        if choice(P):
-                            result = P.party[current]
-                            end = False
-                        else:
-                            a = 1
+                if (P.party[current].code_nos() == poke_code and P.party[current].nurse == 0) or (star_poke and P.party[current].nurse == 0) or (pick_poke and (petal_poke == False or len(P.party[current].petals) > 0) and (massage_poke == False or P.party[current].friend < 400) and (mega_poke == False or has_mega_stone(P,P.party[current].code_nos())) and (name_hater == False or P.party[current].name != P.party[current].actual_name) and (nurse_poke == False or P.party[current].friend != 400) and (((P.party[current].nurse == 0 or massage_poke) and return_nurse == False) or (return_nurse and P.party[current].nurse != 0))):
+                    if party_alive(P) == 1 and P.party[current].status != 'Faint':
+                        txt(P,P.party[current].name+" is your last Pokemon!")
+                        a = 1
                     else:
+                        if return_nurse and P.party[current].friend < 400:
+                            txt(P,P.party[current].name+"'s friendship isn't maxed out yet, so you won't get the full reward.")
+                            new_txt(P)
+                            write(P,"Are you sure you want to return it?")
+                            if not choice(P):
+                                a = 1
+                        if pick_poke == False:
+                            if P.party[current].item != None:
+                                txt(P,"You got the "+P.party[current].item+" back from "+P.party[current].name+".")
+                                add_item(P,P.party[current].item,1)
+                                P.party[current].item = None
+                            if len(P.party[current].petals) > 0:
+                                if len(P.party[current].petals) == 1:
+                                    txt(P,"You got the petal back from "+P.party[current].name+".")
+                                else:
+                                    txt(P,"You got the petals back from "+P.party[current].name+".")
+                                for pet in P.party[current].petals:
+                                    add_item(P,stat_to_petal(pet),1)
+                                P.party[current].petals = []
+                        if nurse_poke:
+                            if P.party[current].item != None:
+                                new_txt(P)
+                                write(P,P.party[current].name +" is holding an item. Would you like to take the "+P.party[current].item+"?")
+                                if choice(P):
+                                    txt(P,"You got the "+P.party[current].item+" back from "+P.party[current].name+".")
+                                    add_item(P,P.party[current].item,1)
+                                    P.party[current].item = None
+                            if len(P.party[current].petals) > 0:
+                                new_txt(P)
+                                if len(P.party[current].petals) == 1:
+                                    write(P,P.party[current].name +" is holding a petal. Would you like to take it back?")
+                                else:
+                                    write(P,P.party[current].name +" is holding petals. Would you like to take them back?")
+                                if choice(P):
+                                    if len(P.party[current].petals) == 1:
+                                        txt(P,"You got the petal back from "+P.party[current].name+".")
+                                    else:
+                                        txt(P,"You got the petals back from "+P.party[current].name+".")
+                                    for pet in P.party[current].petals:
+                                        add_item(P,stat_to_petal(pet),1)
+                                    P.party[current].petals = []
+                    if a != 1:
                         result = P.party[current]
                         end = False
                 else:
-                    if return_nurse and P.party[current].nurse:
-                        txt(P,P.party[current].name+"'s friendship isn't","maxed out yet!")
-                    elif massage_poke:
+                    if massage_poke:
                         txt(P,P.party[current].name+"'s friendship is","already maxed out!")
-                    elif P.party[current].nurse:
+                    elif P.party[current].nurse != 0:
                         if nurse_poke:
                             txt(P,"This would probably be a bad","idea...")
                         else:
@@ -9456,12 +9997,17 @@ def trade_poke(P,poke_code,pick_poke = False,name_hater = False, nurse_poke = Fa
     fade_out(P)
     return result
 
-def summ(P,poke) -> None:
-    back = load("p/summary_1.png")
+def summ(P,poke,starpoke = False) -> None:
+    back1 = load("p/ui/summary_1.png")
+    back2 = load("p/ui/summary_2.png")
+    back = back1
+    plate = load("p/ui/name_back.png")
     if poke.code[-2:] == '_S':
-        back = load("p/summary_1_S.png")
+        plate = load("p/ui/name_back_s.png")
+    exp_back = load("p/ui/exp_back.png")
+    hearts = load("p/ui/hearts.png")
     friend = load("p/Friendship_f.png")
-    ball = pygame.transform.scale(load("p/"+poke.ball+".png"),(30,30))
+    ball = pygame.transform.scale(load("p/ui/"+poke.ball+".png"),(30,30))
     full = pygame.transform.scale(load("p/poke/"+poke.code+"_full.png"),(340,340))
     name = P.font.render(poke.name,True,(255,255,255))
     name_size = P.font.size(poke.name)[0]
@@ -9474,9 +10020,9 @@ def summ(P,poke) -> None:
     high = load("p/high_move.png")
     desc = load("p/move_desc.png")
     if poke.gen == 0:
-        gen_i = load("p/boy_ico.png")
+        gen_i = load("p/ui/boy_ico.png")
     if poke.gen == 1:
-        gen_i = load("p/girl_ico.png")
+        gen_i = load("p/ui/girl_ico.png")
     if poke.gen == 2:
         gen_i = load("p/blank.png")
     blank_p = pygame.transform.scale(load("p/petal_slot.png"),(70,70))
@@ -9518,131 +10064,106 @@ def summ(P,poke) -> None:
     if poke.m1 != None:
         num_m += 1
         m1 = P.font.render(str(poke.m1),True,(0,0,0))
-        mt1 = load("p/"+moves.Move(poke.m1).type+"_ico.png")
+        mt1 = load("p/ui/"+moves.Move(poke.m1).type+"_ico.png")
         mp1 = P.font.render("PP "+str(poke.p1)+"/"+str(moves.Move(poke.m1).pp),True,(0,0,0))
     if poke.m2 != None:
         num_m += 1
         m2 = P.font.render(str(poke.m2),True,(0,0,0))
-        mt2 = load("p/"+moves.Move(poke.m2).type+"_ico.png")
+        mt2 = load("p/ui/"+moves.Move(poke.m2).type+"_ico.png")
         mp2 = P.font.render("PP "+str(poke.p2)+"/"+str(moves.Move(poke.m2).pp),True,(0,0,0))
     if poke.m3 != None:
         num_m += 1
         m3 = P.font.render(str(poke.m3),True,(0,0,0))
-        mt3 = load("p/"+moves.Move(poke.m3).type+"_ico.png")
+        mt3 = load("p/ui/"+moves.Move(poke.m3).type+"_ico.png")
         mp3 = P.font.render("PP "+str(poke.p3)+"/"+str(moves.Move(poke.m3).pp),True,(0,0,0))
     if poke.m4 != None:
         num_m += 1
         m4 = P.font.render(str(poke.m4),True,(0,0,0))
-        mt4 = load("p/"+moves.Move(poke.m4).type+"_ico.png")
+        mt4 = load("p/ui/"+moves.Move(poke.m4).type+"_ico.png")
         mp4 = P.font.render("PP "+str(poke.p4)+"/"+str(moves.Move(poke.m4).pp),True,(0,0,0))
-    type1 = load("p/"+poke.type[0]+"_ico.png")
+    type1 = load("p/ui/"+poke.type[0]+"_ico.png")
     if poke.type[1] != None:
-        type2 = load("p/"+poke.type[1]+"_ico.png")
-    P.surface.blit(back,(0,0))
-    if poke.lvl != 100:
-        P.surface.fill((0,0,255), Rect(64,110,int(320*(poke.exp/poke.get_exp())),10))
-    else:
-        P.surface.fill((0,0,255), Rect(64,110,320,10))
-    P.surface.blit(exp,(10,105))
-    P.surface.blit(next_exp,(10,130))
-    P.surface.blit(full,(30,162))
-    P.surface.blit(ball,(18,18))
-    P.surface.blit(name,(60,10))
-    if poke.code[:5] == 'Mega_':
-        P.surface.blit(mega,(65+name_size,20))
-    if poke.nurse:
-        P.surface.blit(nurse,(65+name_size,20))
-    P.surface.blit(gen_i,(350,10))
-    P.surface.blit(lvl,(20,50))
-    P.surface.blit(item,(210,506))
-    P.surface.blit(ability,(160,547))
-    if poke.friend >= 0:
-        P.surface.fill((255,120,180), Rect(17,505,min(26,poke.friend/100*26),40))
-    if poke.friend >= 100:
-        P.surface.fill((255,120,180), Rect(52,505,min(26,(poke.friend-100)/100*26),40))
-    if poke.friend >= 200:
-        P.surface.fill((255,120,180), Rect(87,505,min(26,(poke.friend-200)/100*26),40))
-    if poke.friend >= 300:
-        if poke.friend == 400:
-            color = (255,240,0)
-        else:
-            color = (220,0,0)
-        P.surface.fill(color, Rect(122,505,min(26,(poke.friend-300)/100*26),40))
-    P.surface.blit(friend,(10,500))
-    for i in range(5):
-        P.surface.blit(petal_list[i],((i*20)-10,535))
-    if poke.m1 != None:
-        P.surface.blit(m1,(430,115))
-        P.surface.blit(mt1,(425,155))
-        P.surface.blit(mp1,(550,150))
-    if poke.m2 != None:
-        P.surface.blit(m2,(430,210))
-        P.surface.blit(mt2,(425,250))
-        P.surface.blit(mp2,(550,245))
-    if poke.m3 != None:
-        P.surface.blit(m3,(430,305))
-        P.surface.blit(mt3,(425,345))
-        P.surface.blit(mp3,(550,340))
-    if poke.m4 != None:
-        P.surface.blit(m4,(430,400))
-        P.surface.blit(mt4,(425,440))
-        P.surface.blit(mp4,(550,435))
-    P.surface.blit(type1,(170,55))
-    if poke.type[1] != None:
-        P.surface.blit(type2,(280,55))
-    fade_in(P)
-    a = 0
+        type2 = load("p/ui/"+poke.type[1]+"_ico.png")
     pos = 0
-    end = True
-    while end:
-        if mn == 1:
-            mv = moves.Move(poke.m1)
-        if mn == 2:
-            mv = moves.Move(poke.m2)
-        if mn == 3:
-            mv = moves.Move(poke.m3)
-        if mn == 4:
-            mv = moves.Move(poke.m4)
+    def refresh():
         P.surface.blit(back,(0,0))
-        if poke.lvl != 100:
-            P.surface.fill((0,0,255), Rect(64,110,int(320*(poke.exp/poke.get_exp())),10))
-        else:
-            P.surface.fill((0,0,255), Rect(64,110,320,10))
-        P.surface.blit(exp,(10,105))
-        P.surface.blit(next_exp,(10,130))
-        P.surface.blit(full,(30,162))
+        P.surface.blit(plate,(5,5))
         P.surface.blit(ball,(18,18))
         P.surface.blit(name,(60,10))
         if poke.code[:5] == 'Mega_':
             P.surface.blit(mega,(65+name_size,20))
-        if poke.nurse:
+        if poke.nurse != 0:
             P.surface.blit(nurse,(65+name_size,20))
         P.surface.blit(gen_i,(350,10))
-        P.surface.blit(lvl,(20,50))
         P.surface.blit(item,(210,506))
         P.surface.blit(ability,(160,547))
-        if poke.friend >= 0:
-            P.surface.fill((255,120,180), Rect(17,505,min(26,poke.friend/100*26),40))
-        if poke.friend >= 100:
-            P.surface.fill((255,120,180), Rect(52,505,min(26,(poke.friend-100)/100*26),40))
-        if poke.friend >= 200:
-            P.surface.fill((255,120,180), Rect(87,505,min(26,(poke.friend-200)/100*26),40))
-        if poke.friend >= 300:
-            if poke.friend == 400:
-                color = (255,240,0)
+        if not starpoke:
+            P.surface.blit(exp_back,(0,107))
+            if poke.lvl != 100:
+                P.surface.fill((0,0,255), Rect(64,110,int(320*(poke.exp/poke.get_exp())),10))
             else:
-                color = (220,0,0)
-            P.surface.fill(color, Rect(122,505,min(26,(poke.friend-300)/100*26),40))
-        P.surface.blit(friend,(10,500))
-        for i in range(5):
-            P.surface.blit(petal_list[i],((i*20)-10,535))
+                P.surface.fill((0,0,255), Rect(64,110,320,10))
+            P.surface.blit(exp,(10,105))
+            P.surface.blit(next_exp,(10,130))
+            P.surface.blit(lvl,(20,50))
+            P.surface.blit(hearts,(0,500))
+            if poke.friend >= 0:
+                P.surface.fill((255,120,180), Rect(17,505,min(26,poke.friend/100*26),40))
+            if poke.friend >= 100:
+                P.surface.fill((255,120,180), Rect(52,505,min(26,(poke.friend-100)/100*26),40))
+            if poke.friend >= 200:
+                P.surface.fill((255,120,180), Rect(87,505,min(26,(poke.friend-200)/100*26),40))
+            if poke.friend >= 300:
+                if poke.friend == 400:
+                    color = (255,240,0)
+                else:
+                    color = (220,0,0)
+                P.surface.fill(color, Rect(122,505,min(26,(poke.friend-300)/100*26),40))
+            P.surface.blit(friend,(10,500))
+            for i in range(5):
+                P.surface.blit(petal_list[i],((i*20)-10,535))
+            P.surface.blit(full,(30,162))
+            P.surface.blit(type1,(170,55))
+            if poke.type[1] != None:
+                P.surface.blit(type2,(280,55))
+        else:
+            P.surface.blit(full,(30,132))
+            if poke.type[1] != None:
+                P.surface.blit(type1,(90,55))
+                P.surface.blit(type2,(210,55))
+            else:
+                P.surface.blit(type1,(150,55))
+        if pos == 0:
+            if poke.m1 != None:
+                P.surface.blit(m1,(430,115))
+                P.surface.blit(mt1,(425,155))
+                P.surface.blit(mp1,(550,150))
+            if poke.m2 != None:
+                P.surface.blit(m2,(430,210))
+                P.surface.blit(mt2,(425,250))
+                P.surface.blit(mp2,(550,245))
+            if poke.m3 != None:
+                P.surface.blit(m3,(430,305))
+                P.surface.blit(mt3,(425,345))
+                P.surface.blit(mp3,(550,340))
+            if poke.m4 != None:
+                P.surface.blit(m4,(430,400))
+                P.surface.blit(mt4,(425,440))
+                P.surface.blit(mp4,(550,435))
+        elif pos == 1:
+            P.surface.blit(hp,(420,116))
+            P.surface.blit(atk,(420,181))
+            P.surface.blit(satk,(420,245))
+            P.surface.blit(df,(420,309))
+            P.surface.blit(sdf,(420,373))
+            P.surface.blit(spd,(420,437))
         if h == 1:
             if mv.cat == '0':
-                cat_ico = load("p/phy_ico.png")
+                cat_ico = load("p/ui/phy_ico.png")
             elif mv.cat == '1':
-                cat_ico = load("p/spe_ico.png")
+                cat_ico = load("p/ui/spe_ico.png")
             else:
-                cat_ico = load("p/sta_ico.png")
+                cat_ico = load("p/ui/sta_ico.png")
             P.surface.blit(high,(410,15+(95*mn)))
             P.surface.blit(desc,(5,130))
             cat = P.font.render("Category",True,(0,0,0))
@@ -9662,45 +10183,30 @@ def summ(P,poke) -> None:
             P.surface.blit(cat_ico,(270,140))
             P.surface.blit(power,(20,185))
             P.surface.blit(acc,(20,235))
-        if pos == 0:
-            if poke.m1 != None:
-                P.surface.blit(m1,(430,115))
-                P.surface.blit(mt1,(425,155))
-                P.surface.blit(mp1,(550,150))
-            if poke.m2 != None:
-                P.surface.blit(m2,(430,210))
-                P.surface.blit(mt2,(425,250))
-                P.surface.blit(mp2,(550,245))
-            if poke.m3 != None:
-                P.surface.blit(m3,(430,305))
-                P.surface.blit(mt3,(425,345))
-                P.surface.blit(mp3,(550,340))
-            if poke.m4 != None:
-                P.surface.blit(m4,(430,400))
-                P.surface.blit(mt4,(425,440))
-                P.surface.blit(mp4,(550,435))
-        if pos == 1:
-            P.surface.blit(hp,(420,116))
-            P.surface.blit(atk,(420,181))
-            P.surface.blit(satk,(420,245))
-            P.surface.blit(df,(420,309))
-            P.surface.blit(sdf,(420,373))
-            P.surface.blit(spd,(420,437))
-        P.surface.blit(type1,(170,55))
-        if poke.type[1] != None:
-            P.surface.blit(type2,(280,55))
+    refresh()
+    fade_in(P)
+    a = 0
+    end = True
+    while end:
+        if mn == 1:
+            mv = moves.Move(poke.m1)
+        if mn == 2:
+            mv = moves.Move(poke.m2)
+        if mn == 3:
+            mv = moves.Move(poke.m3)
+        if mn == 4:
+            mv = moves.Move(poke.m4)
+        refresh()
+
+
         for event in pygame.event.get(eventtype = KEYDOWN):
             if event.key == pygame.key.key_code(P.controls[3]) and h == 0:
                 if pos == 0:
-                    back = load("p/summary_2.png")
-                    if poke.code[-2:] == '_S':
-                        back = load("p/summary_2_S.png")
+                    back = back2
                     pos = 1
             elif event.key == pygame.key.key_code(P.controls[2]):
                 if pos == 1:
-                    back = load("p/summary_1.png")
-                    if poke.code[-2:] == '_S':
-                        back = load("p/summary_1_S.png")
+                    back = back1
                     pos = 0
             elif event.key == pygame.key.key_code(P.controls[5]) and a>20:
                 if h == 1:
@@ -9729,20 +10235,20 @@ def poke_party_to_list(party) -> dict:
 
 def menu(P,saturday = False) -> None:
     t = P.surface.copy()
-    poke_ico_1 = load("p/poke_ico_1.png")
-    poke_ico_2 = load("p/poke_ico_2.png")
-    save_ico_1 = load("p/save_ico_1.png")
-    save_ico_2 = load("p/save_ico_2.png")
-    exit_ico_1 = load("p/exit_ico_1.png")
-    exit_ico_2 = load("p/exit_ico_2.png")
-    bag_ico_1 =  load("p/bag_ico_1.png")
-    bag_ico_2 =  load("p/bag_ico_2.png")
-    dex_ico_1 =  load("p/dex_ico_1.png")
-    dex_ico_2 =  load("p/dex_ico_2.png")
-    set_ico_1 =  load("p/settings_ico_1.png")
-    set_ico_2 =  load("p/settings_ico_2.png")
-    prof_ico_1 =  load("p/profile_ico_1.png")
-    prof_ico_2 =  load("p/profile_ico_2.png")
+    poke_ico_1 = load("p/ui/poke_ico_1.png")
+    poke_ico_2 = load("p/ui/poke_ico_2.png")
+    save_ico_1 = load("p/ui/save_ico_1.png")
+    save_ico_2 = load("p/ui/save_ico_2.png")
+    exit_ico_1 = load("p/ui/exit_ico_1.png")
+    exit_ico_2 = load("p/ui/exit_ico_2.png")
+    bag_ico_1 =  load("p/ui/bag_ico_1.png")
+    bag_ico_2 =  load("p/ui/bag_ico_2.png")
+    dex_ico_1 =  load("p/ui/dex_ico_1.png")
+    dex_ico_2 =  load("p/ui/dex_ico_2.png")
+    set_ico_1 =  load("p/ui/settings_ico_1.png")
+    set_ico_2 =  load("p/ui/settings_ico_2.png")
+    prof_ico_1 =  load("p/ui/profile_ico_1.png")
+    prof_ico_2 =  load("p/ui/profile_ico_2.png")
     back_1 = load("p/menu_back_1.png")
     back_2 = load("p/menu_back_2.png")
     trans = load("p/menu_trans.png")
@@ -9863,7 +10369,7 @@ def menu(P,saturday = False) -> None:
                         cont(P)
                     if pos == 7:
                         new_txt(P)
-                        write(P,"Are you sure you want to exit?")
+                        write(P,"Are you sure you want to exit? Unsaved data will be lost.")
                         if choice(P):
                             P.running = False
                         # pygame.quit()
@@ -9966,7 +10472,7 @@ def use_keyitem(P,item):
         l = open_map(P,True)
         P.surface.blit(t,(0,0))
         fade_in(P)
-    if item == 'Felling Axe':
+    elif item == 'Felling Axe':
         if P.loc == 'scarab_l':
             if next_to(P,P.sl_tree1.x,P.sl_tree1.y):
                 P.sl_tree1.cut(True)
@@ -10109,6 +10615,286 @@ def use_keyitem(P,item):
             P.fishing = item
         else:
             txt(P,"You can't fish here!")
+    elif item == 'PokeStar Tablet':
+        temp = P.surface.copy()
+        fade_out(P)
+        pokestar(P)
+        P.surface.blit(temp,(0,0))
+        fade_in(P)
+
+def pokestar(P,choose = 0): #1 - theater 2 - tourney 3 - race
+    ui = load("p/pokestar/back.png")
+    txtbox = load("p/one_line_txt.png")
+    txt0 = P.font.render(" is selected.",True,(0,0,0))
+    cbox = load("p/ui/5_box.png")
+    summary = P.font.render("Summary",True,(0,0,0))
+    teach = P.font.render("Teach",True,(0,0,0))
+    skills = P.font.render("Skills",True,(0,0,0))
+    remove = P.font.render("Remove",True,(0,0,0))
+    cancel = P.font.render("Cancel",True,(0,0,0))
+    m_screen = load("p/pokestar/main_screen.png")
+    t_screen = load("p/pokestar/theater_screen.png")
+    t_stat = load("p/pokestar/theater_stat.png")
+    d_screen = load("p/pokestar/dark_screen.png")
+    mega = pygame.transform.scale(load("p/mega_symbol.png"),(30,30))
+    reg = load("p/pokestar/reg.png")
+    reg_high = load("p/pokestar/reg_high.png")
+    theater1 = load("p/pokestar/theater_1.png")
+    theater2 = load("p/pokestar/theater_2.png")
+    theater = theater1
+    t_back = load("p/pokestar/theater_back.png")
+    back = t_back
+    t_circle = load("p/pokestar/theater_circ.png")
+    t_high = load("p/pokestar/theater_high.png")
+    circle = t_circle
+    high = t_high
+    theater_list = []
+    for p in P.save_data.pokestar[0]:
+        theater_list.append(poke.Poke(p[0],p[1]))
+    flair = P.font_s.render("Flair       ",True,(0,0,0))
+    mem = P.font_s.render("Memory   ",True,(0,0,0))
+    charm = P.font_s.render("Charm   ",True,(0,0,0))
+    rhythm = P.font_s.render("Rhythm  ",True,(0,0,0))
+    stam = P.font_s.render("Stamina   ",True,(0,0,0))
+    arr_pos = 0
+    pos = 0
+    tab = 0 #0-menu,1-app,2-selected
+    screen_mod = 0
+    if choose == 1:
+        tab = 1
+        screen_mod = 360
+    a = 0
+    def refresh():
+        P.surface.blit(back,(0,70))
+        P.surface.blit(ui,(0,0))
+        if pos >= 12:
+            P.surface.blit(reg_high,(55,540))
+        else:
+            P.surface.blit(reg,(55,540))
+        loc = 0
+        for j in range(4):
+            for i in range(3):
+                if pos == loc:
+                    P.surface.blit(high,(30+(110*i),98+(108*j)))
+                else:
+                    P.surface.blit(circle,(30+(110*i),98+(108*j)))
+                if len(theater_list) > loc:
+                    P.surface.blit(theater_list[loc].icon,(35+(110*i),103+(108*j)))
+                loc += 1
+        if screen_mod <= 180:
+            P.surface.blit(m_screen,(0+screen_mod,0))
+            P.surface.blit(theater,(65+screen_mod,65))
+        else:
+            P.surface.blit(t_screen,(0+screen_mod,0))
+            if len(theater_list) > pos:
+                name = P.font.render(theater_list[pos].name,True,(255,255,255))
+                name_size = P.font.size(theater_list[pos].name)[0]
+                ball = pygame.transform.scale(load("p/ui/"+theater_list[pos].ball+".png"),(30,30))
+                full = pygame.transform.scale(load("p/poke/"+theater_list[pos].code+"_full.png"),(250,250))
+                if theater_list[pos].gen == 0:
+                    gen_i = load("p/ui/boy_ico.png")
+                if theater_list[pos].gen == 1:
+                    gen_i = load("p/ui/girl_ico.png")
+                if theater_list[pos].gen == 2:
+                    gen_i = load("p/blank.png")
+                type1 = load("p/ui/"+theater_list[pos].type[0]+"_ico.png")
+                if theater_list[pos].type[1] != None:
+                    type2 = load("p/ui/"+theater_list[pos].type[1]+"_ico.png")
+                    P.surface.blit(type1,(110+screen_mod,320))
+                    P.surface.blit(type2,(230+screen_mod,320))
+                else:
+                    P.surface.blit(type1,(170+screen_mod,320))
+                if screen_mod == 360:
+                    P.surface.blit(ball,(15,22))
+                    P.surface.blit(name,(60,15))
+                    if theater_list[pos].code[:5] == 'Mega_':
+                        P.surface.blit(mega,(65+name_size,25))
+                    P.surface.blit(gen_i,(330,15))
+                P.surface.fill((240,40,60), Rect(190+screen_mod,375,int(P.save_data.pokestar[0][pos][2][0]*1.76),20))
+                P.surface.fill((100,160,250), Rect(190+screen_mod,415,int(P.save_data.pokestar[0][pos][2][1]*1.76),20))
+                P.surface.fill((250,60,255), Rect(190+screen_mod,455,int(P.save_data.pokestar[0][pos][2][2]*1.76),20))
+                P.surface.fill((255,160,10), Rect(190+screen_mod,495,int(P.save_data.pokestar[0][pos][2][3]*1.76),20))
+                P.surface.fill((55,220,60), Rect(190+screen_mod,535,int(P.save_data.pokestar[0][pos][2][4]*1.76),20))
+                P.surface.blit(full,(100+screen_mod,50))
+                P.surface.blit(flair,(45+screen_mod,370))
+                P.surface.blit(mem,(45+screen_mod,410))
+                P.surface.blit(charm,(45+screen_mod,450))
+                P.surface.blit(rhythm,(45+screen_mod,490))
+                P.surface.blit(stam,(45+screen_mod,530))
+            P.surface.blit(t_stat,(180+screen_mod,365))
+        if screen_mod not in [0,360]:
+            d_screen.set_alpha(360-(2*abs(screen_mod-180)))
+            P.surface.blit(d_screen,(0+screen_mod,0))
+        if tab == 2:
+            P.surface.blit(txtbox,(0,530))
+            P.surface.blit(cbox,(550,260))
+            P.surface.blit(txt0,(20,540))
+            P.surface.blit(summary,(600,270))
+            P.surface.blit(teach,(600,320))
+            P.surface.blit(skills,(600,370))
+            P.surface.blit(remove,(600,420))
+            P.surface.blit(cancel,(600,470))
+            P.surface.blit(P.arrow,(550,270+(arr_pos*50)))
+    refresh()
+    fade_in(P)
+    theater = theater2
+    end = True
+    while end:
+        refresh()
+        for event in pygame.event.get(eventtype = KEYDOWN):
+            if a > 10 and screen_mod in [0,360]:
+                if event.key == pygame.key.key_code(P.controls[4]):
+                    if tab == 0:
+                        tab = 1
+                        theater = theater1
+                    elif tab == 1:
+                        if pos >= 12:
+                            if len(P.save_data.pokestar[0]) == 12:
+                                txt(P,"You can't register any more Pokemon!")
+                            else:
+                                new_txt(P)
+                                write(P,"Register a new Pokemon from your party?")
+                                if choice(P):
+                                    fade_out(P)
+                                    ans = trade_poke(P,None,star_poke = True)
+                                    if ans != None:
+                                        P.party.remove(ans)
+                                        ans.heal()
+                                        old = ans.copy()
+                                        ans.lvl = 50
+                                        ans.friend = 400
+                                        ans.ch = 787
+                                        P.save_data.pokestar[0].append([ans.code,ans.to_list(),[0,0,0,0,0],old.to_list()])
+                                        theater_list.append(poke.Poke(ans.code,ans.to_list()))
+                                    pos = 0
+                                    a = 0
+                                    refresh()
+                                    fade_in(P)
+                        elif pos < len(theater_list):
+                            if choose == 1:
+                                fade_out(P)
+                                P.pokestar_skills = P.save_data.pokestar[0][pos][2]
+                                return pos
+                            else:
+                                tab = 2
+                                a = 0
+                                arr_pos = 0
+                                txt0 = P.font.render(theater_list[pos].name + " is selected.",True,(0,0,0))
+                    elif tab == 2:
+                        if arr_pos == 0:
+                            fade_out(P)
+                            summ(P,theater_list[pos],starpoke = True)
+                            tab = 1
+                            refresh()
+                            fade_in(P)
+                            a = 0
+                        elif arr_pos == 1:
+                            tab = 1
+                            refresh()
+                            new_txt(P)
+                            write(P,"Teach a move with a Heart Scale or TM?")
+                            ans = choice(P,custom_text = ["H.Scale","TM"])
+                            if ans == 1:
+                                if item_in_bag(P,"Heart Scale"):
+                                    fade_out(P)
+                                    if use_hs(P,theater_list[pos],True):
+                                        add_item(P,"Heart Scale",-1)
+                                        P.save_data.pokestar[0][pos][1] = theater_list[pos].to_list()
+                                    refresh()
+                                    fade_in(P)
+                                else:
+                                    txt(P,"You don't have any Heart Scales!")
+                            elif ans == 2:
+                                if len(learnable_tms(P,theater_list[pos].code)) == 0:
+                                    txt(P,"You don't have any TMs "+theater_list[pos].name+" can learn!")
+                                else:
+                                    fade_out(P)
+                                    bag(P,True,theater_list[pos])
+                                    P.save_data.pokestar[0][pos][1] = theater_list[pos].to_list()
+                                    refresh()
+                                    fade_in(P)
+                            a = 0
+                        elif arr_pos == 2:
+                            tab = 1
+                            refresh()
+                            txt(P,"There are five acting skills that can improve your Pokemon's performances.")
+                            txt(P,"Flair increases the strength of finishing moves your Pokemon use or are hit by.")
+                            txt(P,"Your Pokemon can train it by getting KOs with or KO'd by a finishing move.")
+                            txt(P,"Memory increases the accuracy of all moves that your Pokemon use.")
+                            txt(P,"Your Pokemon can train it by successfully using any inaccurate moves.")
+                            txt(P,"Charm increases stat buffs on your Pokemon and debuffs on opponents.")
+                            txt(P,"Your Pokemon can train it by using any stat modifying moves.")
+                            txt(P,"Rhythm increases the speed at which your Pokemon uses status moves.")
+                            txt(P,"Your Pokemon can train it by outspeeding your opponents moves.")
+                            txt(P,"Lastly, Stamina decreases the damage your Pokemon take from non-finishing moves.")
+                            txt(P,"Your Pokemon can train it by being hit by non-finishing moves.")
+                            a = 0
+                        elif arr_pos == 3:
+                            tab = 1
+                            refresh()
+                            txt(P,"If you take "+theater_list[pos].name +" back, they will lose their acting skill levels.")
+                            new_txt(P)
+                            write(P,"Are you sure you want to take "+theater_list[pos].name+" back into your party?")
+                            if choice(P,reverse=True):
+                                ans = P.save_data.pokestar[0].pop(pos)
+                                return_poke = poke.Poke(ans[0],ans[3])
+                                return_poke.m1 = theater_list[pos].m1
+                                return_poke.p1 = theater_list[pos].p1
+                                return_poke.m2 = theater_list[pos].m2
+                                return_poke.p2 = theater_list[pos].p2
+                                return_poke.m3 = theater_list[pos].m3
+                                return_poke.p3 = theater_list[pos].p3
+                                return_poke.m4 = theater_list[pos].m4
+                                return_poke.p4 = theater_list[pos].p4
+                                get_poke(P,return_poke,False)
+                                del theater_list[pos]
+                                pos = 0
+                                refresh()
+                            a = 0
+                        else:
+                            tab = 1
+                if event.key == pygame.key.key_code(P.controls[5]):
+                    if tab == 0:
+                        end = False
+                    elif tab == 1:
+                        if choose == 1:
+                            end = False
+                        else:
+                            tab = 0
+                            pos = 0
+                    elif tab == 2:
+                        tab = 1
+                if event.key == pygame.key.key_code(P.controls[0]):
+                    if tab == 1 and pos > 2:
+                        pos -= 3
+                    elif tab == 2 and arr_pos > 0:
+                        arr_pos -= 1
+                if event.key == pygame.key.key_code(P.controls[1]):
+                    if tab == 1 and pos < 12:
+                        pos += 3
+                    elif tab == 2 and arr_pos < 4:
+                        arr_pos += 1
+                if event.key == pygame.key.key_code(P.controls[2]):
+                    if tab == 1:
+                        if 0 < pos < 12:
+                            pos -= 1
+                if event.key == pygame.key.key_code(P.controls[3]):
+                    if tab == 1:
+                        if pos < 11:
+                            pos += 1
+        if tab == 1 and screen_mod < 360:
+            screen_mod += 20
+            if screen_mod == 360:
+                pos = 0
+        if tab == 0 and screen_mod > 0:
+            screen_mod -= 20
+            if screen_mod == 0:
+                theater = theater2
+        a += 1
+        P.clock.tick(P.ani_spd)
+        update_screen(P)
+    fade_out(P)
+    return -1
 
 def memo_pad(P):
     mem_back = load("p/memo_pad.png")
@@ -10152,8 +10938,16 @@ def memo_pad(P):
         memo_list.append([P.font_s.render("Main Objective - Forbidden Forest",True,(0,0,0)),P.font_vs.render("Travel through the Forbidden Forest to continue your",True,(0,0,0)),P.font_vs.render("journey.",True,(0,0,0))])
     elif P.prog[0] < 144:
         memo_list.append([P.font_s.render("Main Objective - Cascata City",True,(0,0,0)),P.font_vs.render("Now that you've arrived in Cascata City, it's time to",True,(0,0,0)),P.font_vs.render("earn your fourth gym badge.",True,(0,0,0))])
-    elif P.prog[0] < 999:
+    elif P.prog[0] < 147:
         memo_list.append([P.font_s.render("Main Objective - Route 6",True,(0,0,0)),P.font_vs.render("Travel through the Sunken Cave to catch up to Wallace",True,(0,0,0)),P.font_vs.render("and back him up.",True,(0,0,0))])
+    elif P.prog[0] < 153:
+        memo_list.append([P.font_s.render("Main Objective - Route 6",True,(0,0,0)),P.font_vs.render("Wallace is busy fighting the Team Rocket Leader Proton.",True,(0,0,0)),P.font_vs.render("Go ahead to help Lisia with rampaging Tornadus.",True,(0,0,0))])
+    elif P.prog[0] < 157:
+        memo_list.append([P.font_s.render("Main Objective - Silfide City",True,(0,0,0)),P.font_vs.render("Enter Silfide City and challenge Lisia for your fifth",True,(0,0,0)),P.font_vs.render("gym badge.",True,(0,0,0))])
+    elif P.prog[0] == 159:
+        memo_list.append([P.font_s.render("Main Objective - Snowscape Ridge",True,(0,0,0)),P.font_vs.render("Deal with the Pokemon blocking the cave entrance on",True,(0,0,0)),P.font_vs.render("Snowscape Ridge.",True,(0,0,0))])
+    elif P.prog[0] < 162:
+        memo_list.append([P.font_s.render("Main Objective - Snowscape Ridge",True,(0,0,0)),P.font_vs.render("Travel through Snowscape Ridge to continue your",True,(0,0,0)),P.font_vs.render("journey.",True,(0,0,0))])
 
     #festival
     if not new_day(P.prog[11][10]):
@@ -10178,15 +10972,15 @@ def memo_pad(P):
             if P.prog[15][0] == 5:
                 memo_list.append([P.font_s.render("Mega Reversion - Egida City",True,(0,0,0)),P.font_vs.render("Talk to Colress' assistant to learn more about her",True,(0,0,0)),P.font_vs.render("research project.",True,(0,0,0))])
             elif P.prog[15][0] == 6:
-                memo_list.append([P.font_s.render("Mega Reversion - Egida City",True,(0,0,0)),P.font_vs.render("Bring the assistant a Mega Beedrill to help with her",True,(0,0,0)),P.font_vs.render("research project.",True,(0,0,0))])
+                memo_list.append([P.font_s.render("Mega Reversion - Egida City",True,(0,0,0)),P.font_vs.render("Show the assistant a Mega Beedrill to help with her",True,(0,0,0)),P.font_vs.render("research project.",True,(0,0,0))])
             elif P.prog[15][0] == 7:
-                memo_list.append([P.font_s.render("Mega Reversion - Egida City",True,(0,0,0)),P.font_vs.render("Bring the assistant a Mega Kangaskhan to help with",True,(0,0,0)),P.font_vs.render("her research project.",True,(0,0,0))])
+                memo_list.append([P.font_s.render("Mega Reversion - Egida City",True,(0,0,0)),P.font_vs.render("Show the assistant a Mega Kangaskhan to help with",True,(0,0,0)),P.font_vs.render("her research project.",True,(0,0,0))])
             elif P.prog[15][0] == 8:
-                memo_list.append([P.font_s.render("Mega Reversion - Egida City",True,(0,0,0)),P.font_vs.render("Bring the assistant a Mega Slowbro to help with her",True,(0,0,0)),P.font_vs.render("research project.",True,(0,0,0))])
+                memo_list.append([P.font_s.render("Mega Reversion - Egida City",True,(0,0,0)),P.font_vs.render("Show the assistant a Mega Slowbro to help with her",True,(0,0,0)),P.font_vs.render("research project.",True,(0,0,0))])
             elif P.prog[15][0] == 9:
-                memo_list.append([P.font_s.render("Mega Reversion - Egida City",True,(0,0,0)),P.font_vs.render("Bring the assistant a Mega Gyarados to help with her",True,(0,0,0)),P.font_vs.render("research project.",True,(0,0,0))])
+                memo_list.append([P.font_s.render("Mega Reversion - Egida City",True,(0,0,0)),P.font_vs.render("Show the assistant a Mega Gyarados to help with her",True,(0,0,0)),P.font_vs.render("research project.",True,(0,0,0))])
             elif P.prog[15][0] == 10:
-                memo_list.append([P.font_s.render("Mega Reversion - Egida City",True,(0,0,0)),P.font_vs.render("Bring the assistant a Mega Absol to help with her",True,(0,0,0)),P.font_vs.render("research project.",True,(0,0,0))])
+                memo_list.append([P.font_s.render("Mega Reversion - Egida City",True,(0,0,0)),P.font_vs.render("Show the assistant a Mega Absol to help with her",True,(0,0,0)),P.font_vs.render("research project.",True,(0,0,0))])
 
     #pine oddish
     if P.prog[1] == 1:
@@ -10272,7 +11066,11 @@ def memo_pad(P):
         memo_list.append([P.font_s.render("Magical Rocks - Route 6",True,(0,0,0)),P.font_vs.render("There's a researcher asking for you to show them a",True,(0,0,0)),P.font_vs.render("Pokemon that evolved from the Mossy Rock's energy.",True,(0,0,0))])
     elif P.prog[12][9] == 2:
         memo_list.append([P.font_s.render("Magical Rocks - Route 6",True,(0,0,0)),P.font_vs.render("The researcher wants you to find another Eevee",True,(0,0,0)),P.font_vs.render("evolution similar to the Leafeon you showed her.",True,(0,0,0))])
-
+    #theater
+    if P.prog[0] >= 157 and P.prog[8][4][0] == -1:
+        memo_list.append([P.font_s.render("Performing Arts - Silfide City",True,(0,0,0)),P.font_vs.render("You can bring your Pokemon to the Silfide Theater to",True,(0,0,0)),P.font_vs.render("participate in shows.",True,(0,0,0))])
+    elif P.prog[0] >= 157 and P.prog[8][4][0] == 1 and P.prog[8][4][1] == 0:
+        memo_list.append([P.font_s.render("Performing Arts - Silfide City",True,(0,0,0)),P.font_vs.render("Use the PokeStar Tablet to register a Pokemon for",True,(0,0,0)),P.font_vs.render("acting and participate in a show.",True,(0,0,0))])
     #journals
     if P.prog[20][23] == 1:
         jour_list.append([P.font_s.render("Gigalith: The Compressed Pokemon",True,(0,0,0)),P.font_vs.render("Gigalith compresses energy in the core inside its",True,(0,0,0)),P.font_vs.render("body, allowing it to fire attacks powerful enough to",True,(0,0,0)), P.font_vs.render("blow away mountains. When it fires these attacks at",True,(0,0,0)),P.font_vs.render("full power, the sheer force of the blast creates",True,(0,0,0)),P.font_vs.render("multiple cracks on its body.",True,(0,0,0))])
@@ -10446,11 +11244,11 @@ def memo_pad(P):
 
 def register(P):
     t = P.surface.copy()
-    reg = load("p/register.png")
-    regl = load("p/register_l.png")
-    regu = load("p/register_u.png")
-    regd = load("p/register_d.png")
-    regr = load("p/register_r.png")
+    reg = load("p/ui/register.png")
+    regl = load("p/ui/register_l.png")
+    regu = load("p/ui/register_u.png")
+    regd = load("p/ui/register_d.png")
+    regr = load("p/ui/register_r.png")
     back = reg
     if P.save_data.register[0] != None:
         up = pygame.transform.scale(load("p/item/"+P.save_data.register[0]+".png"),(40,40))
@@ -10777,11 +11575,11 @@ def title_screen(P) -> None:
     set_mixer_volume(P,P.vol)
     pygame.mixer.music.play(-1)
     logo = load("p/rose_logo.png")
-    back1 = load("p/title_back_1.png")
-    back2 = load("p/title_back_2.png")
-    back3 = load("p/title_back_3.png")
+    back1 = load("p/ui/title_back_1.png")
+    back2 = load("p/ui/title_back_2.png")
+    back3 = load("p/ui/title_back_3.png")
     back = back1
-    bak = load("p/title_back.png")
+    bak = load("p/ui/title_back.png")
     lat1 = load("p/latias_1.png")
     lat2 = load("p/latias_2.png")
     lat3 = load("p/latias_3.png")
@@ -10881,7 +11679,7 @@ def load_save(save_files, P,position = -1, fade = True) -> None:
         pygame.mixer.music.load(P.song)
         set_mixer_volume(P,P.vol,P.song)
         pygame.mixer.music.play(-1)
-    back = load("p/load_back_real.png")
+    back = load("p/ui/load_back_real.png")
     P.surface.blit(back,(0,0))
     save_b = load("p/save_box.png")
     counter = 0
@@ -11005,7 +11803,7 @@ def load_save(save_files, P,position = -1, fade = True) -> None:
                     if choice(P):
                         new_txt(P)
                         write(P,"Are you sure you want to","permanently delete this file?","(You can't undo this action.)")
-                        if choice(P):
+                        if choice(P,reverse = True):
                             txt(P,"Deleted "+save_files[pos-1][:-1]+"'s save file.")
                             os.remove("save_files/"+save_files[pos-1][:-1]+".txt")
                             f1 = open("save_files/S@ves.txt","r")
@@ -11192,7 +11990,7 @@ def new_save(P) -> None:
     new_w.write("r\n")
     new_w.write("['cruise_1','pc_am']\n")
     #update trainer
-    new_w.write("[0,0,0,0,0,[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],0,[[-1,0,None],[-1,0,None],[-1,0,None],[-1,0,None],[-1,0,None],[-1,0,None],[-1,0,None],[-1,0,None]],0,"+str(save.get_trees())+",[0,[None,[],{}],[None,None],None,[0,0],None,None,[None,[],{}],[None,[]],[0,0,None],None,[None,[],{}],[0,None]],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],None,None,[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],0,[[3,1,0,0,0,1,1,1,2,2,2,3,3,3,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0]],0,[0,[0,0,0,0,0]],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0],0]\n") #80 trainers 150 items 40 interacts 40 journals
+    new_w.write(save.get_prog()+"\n")
     new_w.write("[]\n")
     new_w.write("1500\n")
     new_w.write("[[],[],[],[],[]]\n")
@@ -11200,6 +11998,7 @@ def new_save(P) -> None:
     new_w.write("[00,00,00]\n")
     new_w.write("[None,None,None,None]\n")
     new_w.write("{}\n")
+    new_w.write("[[],[],[]]\n")
     new_w.close()
     save_w = open("save_files/S@ves.txt","a")
     save_w.write(name+"\n")
@@ -11306,7 +12105,9 @@ def trainer_check(P,trainer,music,font = None):
             P.habitat = 'mount'
         elif trainer.tid in [37,38]:
             P.habitat = 'beach'
-        if trainer.tid in [3,34,52,68]:
+        elif trainer.tid in [77]:
+            P.habitat = 'snow'
+        if trainer.tid in [3,34,52,68,79,80]:
             battle(P,trainer.team,no_pc = True)
         else:
             battle(P,trainer.team)
@@ -11389,6 +12190,42 @@ def trainer_check(P,trainer,music,font = None):
                 txt(P,"You can have my Old Rod.","Take it to any fishing spots","like this one and fish away!")
                 txt(P,"You received an Old Rod!")
                 add_item(P,"Old Rod",1)
+        elif trainer.tid == 79:
+            if lose:
+                t = P.surface.copy()
+                txt(P,"It seems like your Pokemon still have a lot of room to improve.")
+                txt(P,"I'll heal them so you can be on your way.")
+                fade_out(P)
+                P.clock.tick(1)
+                P.surface.blit(t,(0,0))
+                fade_in(P)
+                heal_party(P)
+                txt(P,"You can come back for a rematch once you've trained up some more!")
+            else:
+                P.prog[5][trainer.tid] = 1
+                trainer.lose_write()
+                txt(P,"Allow me to gift you this Shiny Stone on behalf of our island guardian.")
+                txt(P,"Some Pokemon love its dazzling glow and can use it to evolve!")
+                txt(P,"You received an Shiny Stone!")
+                add_item(P,"Shiny Stone",1)
+        elif trainer.tid == 80:
+            if lose:
+                t = P.surface.copy()
+                txt(P,"You put up a good fight, but it won't be that easy to best my Pokemon.")
+                txt(P,"I'll heal your team as thanks for giving me an exciting battle.")
+                fade_out(P)
+                P.clock.tick(1)
+                P.surface.blit(t,(0,0))
+                fade_in(P)
+                heal_party(P)
+                txt(P,"If you're hungry for a rematch, I'll be waiting for you right here!")
+            else:
+                P.prog[5][trainer.tid] = 1
+                trainer.lose_write()
+                txt(P,"Have this Razor Claw! It boosts the critical-hit ratio of Pokemon when held.")
+                txt(P,"A Sneasel holding one will also evolve when leveling at night.")
+                txt(P,"You received an Razor Claw!")
+                add_item(P,"Razor Claw",1)
         else:
             P.prog[5][trainer.tid] = 1
             if trainer.tid == 54 and face_d(P):
@@ -11404,7 +12241,7 @@ def choose_num(P,max_num,money = False,day = False) -> int:
     box = load("p/choose_num_box.png")
     if money:
         max_num = int(max_num/10)
-        box = load("p/1_box.png")
+        box = load("p/ui/1_box.png")
     num = 1
     end = True
     tim = 0
@@ -11471,7 +12308,7 @@ def choose_num(P,max_num,money = False,day = False) -> int:
         tim += 1
 
 def multi_choice(P,num,temp,txt1,txt2 = None,txt3 = None,txt4 = None):
-    tbox = load("p/"+str(num)+"_box.png")
+    tbox = load("p/ui/"+str(num)+"_box.png")
     P.surface.blit(tbox,(550,230+(50*(4-num))))
     one = P.font.render(txt1,True,(0,0,0))
     if num > 1:
@@ -11574,8 +12411,8 @@ def move(P, back, num, one, one_n, o, two = None, two_n = None, tw = None, three
 
 def battle_team(P, cpoke,team_type,pokee = 0):
     box = load("p/team_box_1.png")
-    back = load("p/load_back.png")
-    tbox = load("p/3_box.png")
+    back = load("p/ui/load_back.png")
+    tbox = load("p/ui/3_box.png")
     hp_b = load("p/team_hp.png")
     item_ico = pygame.transform.scale(load("p/item_icon.png"),(20,25))
     mega = pygame.transform.scale(load("p/mega_symbol.png"),(30,30))
@@ -11614,16 +12451,17 @@ def battle_team(P, cpoke,team_type,pokee = 0):
             else:
                 P.surface.fill((255,50,0), Rect(x+154,y+70,int(200*(p.ch/p.hp)),10))
             P.surface.blit(p.icon,(x+30,y+20))
-            P.surface.blit(lvl,(x+30,y+90))
+            if P.pokestar_battle == 0:
+                P.surface.blit(lvl,(x+30,y+90))
             P.surface.blit(nme,(x+110,y+20))
             if p.code[:5] == 'Mega_':
                 P.surface.blit(mega,(x+115+name_size,y+30))
-            if p.nurse:
+            if p.nurse != 0:
                 P.surface.blit(nurse,(x+115+name_size,y+30))
             P.surface.blit(hp,(x+200,y+90))
             P.surface.blit(hp_b,(x+110,y+65))
             if p.status != None:
-                status = load("p/"+p.status+"_ico.png")
+                status = load("p/ui/"+p.status+"_ico.png")
                 status = pygame.transform.scale(status,(50,20))
                 P.surface.blit(status,(x+145,y+95))
             if p.item != None:
@@ -11703,7 +12541,10 @@ def battle_team(P, cpoke,team_type,pokee = 0):
                                     P.surface.set_clip(Rect(0,0,800,600))
                                     temp4 = P.surface.copy()
                                     fade_out(P)
-                                    summ(P,P.party[current])
+                                    if P.pokestar_battle != 0:
+                                        summ(P,P.party[current],starpoke = True)
+                                    else:
+                                        summ(P,P.party[current])
                                     P.surface.blit(temp4,(0,0))
                                     fade_in(P)
                                     P.surface.set_clip(Rect(0,0,800,450))
@@ -11745,7 +12586,9 @@ def battle_team(P, cpoke,team_type,pokee = 0):
 
 def calc_lost_money(P):
     base = 8
-    if P.prog[0] >= 144:
+    if P.prog[0] >= 157:
+        base = 64
+    elif P.prog[0] >= 144:
         base = 48
     elif P.prog[0] >= 106:
         base = 32
@@ -11759,11 +12602,67 @@ def calc_lost_money(P):
     sum /= len(P.party)
     return int(sum*base)
 
-def print_blackout(P):
-    P.p = P.u1
-    P.load_npcs()
+def battle_end_process(P):
+    P.future_sight = [0,0,None,None]
     P.legendary_battle = False
     P.tourney_battle = False
+
+def theater_write(P,message,end = False):
+    spd = P.txt_spd
+    split = split_text(message,30,8)
+    pos = 275-(len(split)*25)
+    for line in split:
+        spd = write_h(P,spd,line, pos,(255,255,255),2)
+        pos += 50
+    cont(P)
+    if not end:
+        P.surface.fill((0,0,0))
+
+def theater_show(P,type,loc):
+    spd = P.txt_spd
+    if loc == 0:
+        hero = random.choice(['Pikachu','Eevee','Altaria','Squirtle','Starmie','Roserade','Luxray','Talonflame','Tsareena','Poliwhirl','Lopunny','Butterfree','Clefairy'])
+        villain = random.choice(['Arbok','Crawdaunt','Mightyena','Cloyster','Ariados','Golbat','Honchkrow','Dusknoir','Wobbuffet','Sharpedo','Meowth','Tentacruel','Drowzee'])
+    elif loc == 1:
+        hero = random.choice(['Machamp','Zangoose','Altaria','Squirtle','Starmie','Roserade','Luxray','Talonflame','Tsareena','Poliwhirl','Lopunny','Butterfree','Clefairy'])
+        villain = random.choice(['Arbok','Crawdaunt','Mightyena','Cloyster','Ariados','Golbat','Honchkrow','Dusknoir','Wobbuffet','Sharpedo','Gengar','Seviper','Drowzee'])
+    if type == 'Flair':
+        theater_write(P,"The lights dim as "+hero+" walks onto the stage. It looks side to side, as if expecting someone to come out of the shadows.")
+        theater_write(P,hero+" continues to walk forward, as "+villain+" slowly reveals themself from the darkness.")
+        theater_write(P,villain+" suddenly strikes, and "+hero+" swiftly turns around to block the attack. A fierce battle starts as they exchange blows back and forth.")
+        theater_write(P,villain+" lands a solid hit, stunning "+hero+", and then leaps forward to finish them off. Right before the move connects, "+hero+" rolls to the side and counters with a powerful attack.")
+        theater_write(P,hero+" stands victorious, breathing heavily from the fight. The curtains close as the audience breathe a sigh of relief.",True)
+    elif type == 'Memory':
+        theater_write(P,"The curtains open, revealing a "+hero+" and "+villain+" engaged in a close battle.")
+        theater_write(P,"The narrator's voice comments, \""+hero+" and "+villain+" can occasionally be found fighting in the wild.\"")
+        theater_write(P,"Both Pokemon take a step back and start circling each other. \"You can see them sizing each other up and looking for an opening to strike.\"")
+        theater_write(P,hero+" suddenly surges forward and launches a precise blow at "+villain+", knocking them out. \"And "+hero+" finds a solid hit onto "+villain+"!\"")
+        theater_write(P,"\""+hero+" returns to its shelter, triumphant over its victory.\" The curtains close on the remnants of the skirmish and the lights turn back on.",True)
+    elif type == 'Charm':
+        theater_write(P,"The stage lights turn on, revealing two "+hero+" slowly making their way across the room.")
+        theater_write(P,"As soon as they reach the middle of the stage, " +villain+" leaps out and separates the "+hero+". One of the "+hero+" cries out, as the other rushes forward to drive "+villain+" back.")
+        theater_write(P,villain+" attacks relentlessly, leaving the "+hero+" beat down and bruised, but it manages to make its way back to the other "+hero+".")
+        theater_write(P,"Having lost the element of surprise, "+villain+" slowly backs away from the "+hero+" fiercely standing their ground.")
+        theater_write(P,"Once "+villain+" has disappeared from view, the " +hero+" tend to each others wounds. The curtains close on the intimate scene and a few audience members wipe away their tears.",True)
+    elif type == 'Rhythm':
+        theater_write(P,hero+" and "+villain+" take to the stage, illuminated by spotlights. Tense music starts to fill the hall.")
+        theater_write(P,"As the melody starts to pick up, so does the battle as "+villain+" rushes forward for the first strike.")
+        theater_write(P,"With every move that the Pokemon throw at each other, the song continues to grow in power. Out of nowhere the music halts as "+villain+" slams "+hero+" down with a strong hit.")
+        theater_write(P,"Still lying on the ground, "+hero+" starts charging up an attack while the music starts to build back up.")
+        theater_write(P,hero+" suddenly leaps toward "+villain+", landing a perfect blow that knocks them out. The finale of the song plays out as the curtains close on the victorious "+hero+".",True)
+    else:
+        theater_write(P,villain+" is alone on the stage, gradually making its way towards the audience, when a loud cry suddenly comes out from behind it.")
+        theater_write(P,hero+" slowly comes into view and takes a stance, challenging "+villain+" to a fight. "+villain+" confidently turns around and sneers at "+hero+".")
+        theater_write(P,hero+" unleashes a barrage of moves but "+villain+" is unfazed. "+villain+" retaliates with a powerful blow that knocks "+hero+" across the stage.")
+        theater_write(P,villain+" then lunges forward to finish "+hero+" off, but "+hero+" dodges into the attack and sweeps "+villain+" off balance.")
+        theater_write(P,hero+" leaps into the air and delivers a decisive blow from which "+villain+" is unable to pick itself back up. The audience cheer as the curtains close on the battle.",True)
+    fade_out(P)
+    P.clock.tick(1)
+
+def print_blackout(P):
+    battle_end_process(P)
+    P.p = P.u1
+    P.load_npcs()
     #rival fight
     if P.prog[0] == 17:
         P.prog[0] = 16
@@ -11816,6 +12715,27 @@ def print_blackout(P):
     #tornadus fight
     if P.prog[0] == 148:
         P.prog[0] = 147
+    #lisia fight
+    if P.prog[0] == 155:
+        P.prog[0] = 153
+    P.camx = 0
+    P.camy = 0
+    #gym progress
+    #egida
+    if P.prog[0] == 47:
+        P.prog[0] += 1
+    #pianura
+    if P.prog[0] == 80:
+        P.prog[0] += 1
+    #verde
+    if P.prog[0] == 106:
+        P.prog[0] += 1
+    #cascata
+    if P.prog[0] == 144:
+        P.prog[0] += 1
+    #silfide
+    if P.prog[0] == 157:
+        P.prog[0] += 1
     spd = P.txt_spd
     spd = write_h(P,spd,P.save_data.name+" scurried to a", 200,(255,255,255),2)
     spd = write_h(P,spd,"Pokemon Center, protecting the", 250,(255,255,255),2)
@@ -11827,11 +12747,15 @@ def print_blackout(P):
 def blit_img(P,img,xy):
     P.surface.blit(img,(xy[0]+P.camx,xy[1]+P.camy))
 
-def choice(P,ax = 550,rx = 600, pos = True, reverse = False,ymod = 0, garden = False) -> bool:
+def choice(P,ax = 550,rx = 600, pos = True, reverse = False,ymod = 0, garden = False,custom_text = []) -> bool:
     t = P.surface.copy()
     P.surface.blit(P.choicebox,(ax,330+ymod))
-    yes = P.font.render("Yes",True,(0,0,0))
-    no = P.font.render("No",True,(0,0,0))
+    if custom_text == []:
+        yes = P.font.render("Yes",True,(0,0,0))
+        no = P.font.render("No",True,(0,0,0))
+    else:
+        yes = P.font.render(custom_text[0],True,(0,0,0))
+        no = P.font.render(custom_text[1],True,(0,0,0))
     if not garden:
         P.clock.tick(5)
     if reverse:
@@ -11847,6 +12771,8 @@ def choice(P,ax = 550,rx = 600, pos = True, reverse = False,ymod = 0, garden = F
         P.surface.blit(P.arrow,(ax,390+ymod))
     update_screen(P)
     ans = pos
+    if reverse:
+        ans = False
     a = 0
     if garden:
         a = 16
@@ -11862,13 +12788,25 @@ def choice(P,ax = 550,rx = 600, pos = True, reverse = False,ymod = 0, garden = F
                 P.surface.blit(t,(0,0))
                 if garden:
                     blit_garden_menu(P,False)
+                if custom_text != []:
+                    return 0
                 return False
             elif event.key == pygame.key.key_code(P.controls[0]):
-                ans = True
+                if custom_text != []:
+                    ans = 1
+                elif reverse:
+                    ans = False
+                else:
+                    ans = True
                 P.surface.blit(temp3,(0,0))
                 P.surface.blit(P.arrow,(ax,340+ymod))
             elif event.key == pygame.key.key_code(P.controls[1]):
-                ans = False
+                if custom_text != []:
+                    ans = 2
+                elif reverse:
+                    ans = True
+                else:
+                    ans = False
                 P.surface.blit(temp3,(0,0))
                 P.surface.blit(P.arrow,(ax,390+ymod))
         if garden:
@@ -11893,6 +12831,13 @@ def write(P, one: str, two: str = "", three: str = "",garden = False,spd_mult = 
     spd = P.txt_spd*spd_mult
     if garden:
         spd = 300
+    if len(one) > 30:
+        split = split_text(one,30,3)
+        one = split[0]
+        if len(split) > 1:
+            two = split[1]
+        if len(split) > 2:
+            three = split[2]
     spd = write_h(P,spd, one, 460,garden)
     spd = write_h(P,spd, two, 500,garden)
     spd = write_h(P,spd, three, 540,garden)
@@ -11901,6 +12846,11 @@ def write(P, one: str, two: str = "", three: str = "",garden = False,spd_mult = 
 
 def battle_write(P, one, two = "") -> None:
     spd = P.txt_spd*5
+    if len(one) > 30:
+        split = split_text(one,30,2)
+        one = split[0]
+        if len(split) > 1:
+            two = split[1]
     spd = write_h(P,spd, one, 480)
     spd = write_h(P,spd, two, 530)
     P.surface.set_clip((0,0,800,460))
@@ -11920,6 +12870,26 @@ def write_h(P, spd, string, height, color = (0,0,0), spd_mult = 5,garden = False
         update_screen(P)
     return spd
 
+def split_text(text,length,lines):
+    result = []
+    for l in range(lines):
+        if len(text) > length:
+            space = text.rfind(" ",0,length+1)
+            dash = text.rfind("-",0,length)
+            if dash > space:
+                result.append(text[:dash+1])
+                text = text[dash+1:]
+            elif space == -1:
+                result.append(text[:length])
+                text = text[length:]
+            else:
+                result.append(text[:space])
+                text = text[space+1:]
+        else:
+            result.append(text)
+            return result
+    return ["Text is " + str(len(text)) + " characters"]
+
 def cont(P,garden=False) -> None:
     end = True
     pygame.event.clear()
@@ -11936,4 +12906,12 @@ def txt(P,one, two = "", three = "",garden = False):
     new_txt(P)
     write(P,one,two,three,garden)
     cont(P,garden)
+
+def battle_txt(P,one,two = "",auto = True):
+    new_battle_txt(P)
+    battle_write(P,one,two)
+    if auto:
+        P.clock.tick(P.bat_spd)
+    else:
+        cont(P)
 

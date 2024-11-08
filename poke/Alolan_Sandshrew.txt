@@ -1,0 +1,11 @@
+['Snow Cloak']
+[1,1.5,.2,1.8,.7,.8]
+['Ice','Steel']
+['Ice Stone','Alolan_Sandslash','Icicle Spear']
+{1:['Scratch','Defense Curl'],3:'Bide',5:'Powder Snow',7:'Ice Ball',9:'Rapid Spin',11:'Fury Cutter',14:'Metal Claw',17:'Swift',20:'Fury Swipes',23:'Iron Defense',26:'Slash',30:'Iron Head',34:'Gyro Ball',38:'Swords Dance',42:'Hail',46:'Blizzard'}
+255
+40
+28
+288
+['snow']
+['Mouse','After fleeing a volcanic eruption, it ended up moving to an area of snowy mountains. Its ice shell is as hard as steel.'] 

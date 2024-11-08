@@ -1,0 +1,3 @@
+[type,category]
+['Description (20 per line)']
+buy price (-1 for unsellable, double sell price)

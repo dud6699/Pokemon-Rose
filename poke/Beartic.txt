@@ -1,0 +1,11 @@
+['Snow Cloak','Slush Rush']
+[1.9,2.6,1.4,1.6,1.6,1]
+['Ice',None]
+[]
+{1:['Icicle Crash','Sheer Cold','Thrash','Superpower','Aqua Jet','Growl','Powder Snow','Bide','Icy Wind'],5:'Powder Snow',9:'Bide',13:'Icy Wind',15:'Play Nice',17:'Fury Swipes',21:'Brine',25:'Endure',29:'Swagger',33:'Slash',36:'Flail',41:'Rest',45:'Blizzard',53:'Hail',59:'Thrash',66:'Sheer Cold'}
+60
+260
+102
+287
+['snow']
+['Freezing','They love the cold seas of the north. They create pathways across the ocean waters by freezing their own breath.'] 

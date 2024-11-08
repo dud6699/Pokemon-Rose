@@ -1,4 +1,4 @@
-['Hyper Cutter','Shell Armor']
+['Hyper Cutter','Shell Armor','*Adaptability']
 [1.26,2.4,1.8,1.7,1.1,1.1]
 ['Water','Dark']
 []

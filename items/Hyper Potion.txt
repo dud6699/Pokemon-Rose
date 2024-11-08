@@ -1,0 +1,3 @@
+['Potion','Medicine']
+['A spray-type medicine for treating wounds. It can be used to restore 120 HP to an injured Pokemon.']
+1200

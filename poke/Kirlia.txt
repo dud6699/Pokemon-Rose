@@ -7,5 +7,5 @@
 20.2
 31
 254
-['route_6']
+['route_6','snowscape_o']
 ['Emotion','It is said that a Kirlia that is exposed to', 'the positive emotions of its Trainer grows', 'beautiful. This Pokemon controls', 'psychokinetic powers with its highly', 'developed brain.'] 

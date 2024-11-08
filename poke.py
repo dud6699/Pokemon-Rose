@@ -12,8 +12,7 @@ from pygame.locals import*
 
 class Poke:
     def __init__(self, name, data, petals = None, over_ability = None, legendary = False):
-        if legendary:
-            print('hi')
+        self.debug = False
         self.name = name
         self.actual_name = name
         self.code = name
@@ -64,8 +63,13 @@ class Poke:
                 self.name = data[18]
         if len(data) >= 20:
             self.nurse = data[19]
+            #v1.2.8
+            if self.nurse == True:
+                self.nurse = 1
+            elif self.nurse == False:
+                self.nurse = 0
         else:
-            self.nurse = False
+            self.nurse = 0
         if len(data) >= 21:
             self.petals = data[20]
         elif petals:
@@ -98,6 +102,7 @@ class Poke:
         self.rest = False
         self.bellydrum = False
         self.trapped = [None,0]
+        self.beat_up = []
         self.type_hit = None
         self.child_hit = False
         self.magic_coat = False
@@ -106,6 +111,7 @@ class Poke:
         self.fury_count = 0
         self.damage_taken = 0
         self.yawn = 0
+        self.last_resort = [0,0,0,0]
         self.taunt = 0
         self.roost = 0
         self.procount = 0
@@ -129,6 +135,9 @@ class Poke:
         self.ff = 0
         self.legendary = legendary
 
+    def reload_icon(self):
+        self.icon = pygame.transform.scale(pygame.image.load("p/poke/"+self.code+"_ico.png"),(70,70))
+
     def code_nos(self):
         if self.code[-2:] == '_S':
             return self.code[:-2]
@@ -150,7 +159,7 @@ class Poke:
         return False
 
     def get_spd(self,P):
-        ans = self.spd*moves.modifier(self.spdm)
+        ans = self.spd*poke_func.pokestar_mod(P,self.player,self.spdm,moves.modifier(self.spdm))
         if (P.player_buffs[0] > 0 and self.player) or (P.enemy_buffs[0] > 0 and not self.player):
             ans *= 2
         if self.status != None and self.ability == 'Quick Feet':
@@ -174,13 +183,22 @@ class Poke:
             df *= 1.5
         return df
 
-    def take_damage(self,P,amount):
+    def take_damage(self,P,amount,recoil = False,dot = False):
         print(amount)
         can_exit = False
         if self.get_ability() in ['Wimp Out','Emergency Exit'] and self.ch > self.hp/2:
             can_exit = True
-        if (P.tourney_battle or self.legendary) and self.bellydrum == False and self.explode == False:
+        if (P.tourney_battle or self.legendary) and self.bellydrum == False and self.explode == False and recoil == False:
             amount /= 4
+        elif P.pokestar_battle != 0 and self.bellydrum == False and self.explode == False and recoil == False:
+            amount /= 2
+        if P.pokestar_battle != 0 and not dot and recoil == False and P.turn_count == 5 and not self.player:
+            print("finishing move:"+str(1+(P.pokestar_skills[0]/100)))
+            amount *= 1+(P.pokestar_skills[0]/100)
+        if P.pokestar_battle != 0 and not dot and recoil == False and self.player:
+            print("defense buff:"+str(1+(P.pokestar_skills[4]/100)))
+            amount *= 1-(P.pokestar_skills[4]/400)
+            poke_func.pokestar_gain(P,4,amount/self.hp*8)
         if amount > 0 and amount < 1:
             amount = 1
         if amount > self.ch:
@@ -190,12 +208,17 @@ class Poke:
         if amount < 0 and amount < self.ch-self.hp:
             amount = self.ch-self.hp
         self.ch -= int(amount)
-        if amount > 0:
+        if amount > 0 and not dot:
             self.damage_taken += int(amount)
         if can_exit and self.ch < self.hp/2 and self.ch > 0:
-            if type(P.opponent[0]) != str and self.player == False and P.legendary_battle == False and P.tourney_battle == False:
+            if type(P.opponent[0]) != str and self.player == False and P.legendary_battle == False and P.tourney_battle == False and P.pokestar_battle == 0:
                 P.end_battle = self
             self.exit = True
+
+    def gain_hp(self,amount):
+        self.ch += amount
+        if self.ch > self.hp:
+            self.ch = self.hp
 
     def get_ability(self):
         if self.gastro:
@@ -243,6 +266,7 @@ class Poke:
         self.stat_swap = [None,None,None,None,None,None]
         self.bellydrum = False
         self.trapped = [None,0]
+        self.beat_up = []
         self.type_hit = None
         self.magic_coat = False
         self.can_sucker = False
@@ -250,6 +274,7 @@ class Poke:
         self.chrg = 0
         self.taunt = 0
         self.yawn = 0
+        self.last_resort = [0,0,0,0]
         self.roost = 0
         self.fury_count = 0
         self.procount = 0
@@ -282,7 +307,7 @@ class Poke:
         return m.pp
 
     def equals(self, poke) -> bool:
-        return self.code == poke.code and self.name == poke.name and self.lvl == poke.lvl and self.gen == poke.gen and self.ch == poke.ch and self.m1 == poke.m1 and self.m2 == poke.m2 and self.m3 == poke.m3 and self.m4 == poke.m4 and self.p1 == poke.p1 and self.p2 == poke.p2 and self.p3 == poke.p3 and self.p4 == poke.p4 and self.status == poke.status and self.akm == poke.akm and self.sakm == poke.sakm and self.dfm == poke.dfm and self.sdfm == poke.sdfm and self.spdm == poke.spdm and self.accm == poke.accm and self.evam == poke.evam and self.idf == poke.idf and self.inf == poke.inf and self.leech == poke.leech and self.cfs == poke.cfs and self.mega_debuff == poke.mega_debuff
+        return self.code == poke.code and self.name == poke.name and self.lvl == poke.lvl and self.gen == poke.gen and self.ch == poke.ch and self.m1 == poke.m1 and self.m2 == poke.m2 and self.m3 == poke.m3 and self.m4 == poke.m4 and self.p1 == poke.p1 and self.p2 == poke.p2 and self.p3 == poke.p3 and self.p4 == poke.p4 and self.status == poke.status and self.akm == poke.akm and self.sakm == poke.sakm and self.dfm == poke.dfm and self.sdfm == poke.sdfm and self.spdm == poke.spdm and self.accm == poke.accm and self.evam == poke.evam and self.idf == poke.idf and self.leech == poke.leech and self.cfs == poke.cfs and self.mega_debuff == poke.mega_debuff
         #return (and self.item == poke.item and self.exp == poke.exp and self.ball == poke.ball and self.icon == poke.icon and self.full == poke.full and self.flinch == poke.flinch and self.ability == poke.ability and self.hp == poke.hp and self.ak == poke.ak and self.sak == poke.sak and self.df == poke.df and self.sdf == poke.sdf and self.spd == poke.spd and self.type == poke.type)
 
     def same(self, poke):
@@ -291,8 +316,8 @@ class Poke:
     def gain_friend(self,amount,P = None):
         if self.ball == 'Luxury Ball':
             amount *= 2
-        if self.ball == 'Nursery Ball' and amount < 1:
-            amount *= 14+P.prog[8][1][0]
+        if self.nurse == 1 and amount < 1:
+            amount *= 2*(14+P.prog[8][1][0])
         if self.friend + amount > 300:
             amount -= max(0,300-self.friend)
             if self.friend < 300:
@@ -311,10 +336,14 @@ class Poke:
         self.lvl += 1
         self.exp = 0
         if candy == False:
-            self.gain_friend((self.lvl/5)+10)
+            gain = (self.lvl/5)+10
+            if self.nurse in [2,5]:
+                 self.gain_friend(gain*(3+(P.prog[8][1][0]/2)))
+            else:
+                self.gain_friend(gain)
         thp = self.hp
         self.get_stats()
-        if self.lvl in self.moveset and self.nurse == False:
+        if self.lvl in self.moveset and self.nurse == 0:
             if type(self.moveset[self.lvl]) == list:
                 for mv in self.moveset[self.lvl]:
                     self.learn(P,moves.Move(mv),battle)
@@ -324,9 +353,44 @@ class Poke:
             if self.status != 'Faint':
                 self.ch += self.hp-thp
 
-    def can_poison(self,x = 0):
-        if 'Poison' in self.type or 'Steel' in self.type or (x == 1 and self.ability == 'Immunity') or self.status != None:
+    def can_status(self,P,status,cat = ""):
+        if cat != '2' and poke_func.in_terrain(P,'Misty',self):
             return False
+        if status in ['Psn','BPs']:
+            if 'Poison' in self.type or 'Steel' in self.type or (cat != '2' and self.ability == 'Immunity') or self.status != None:
+                return False
+        elif status == 'Brn':
+            if 'Fire' in self.type or self.get_ability() == 'Water Bubble' or self.status != None:
+                return False
+        elif status == 'Frz':
+            if 'Ice' in self.type or self.status != None:
+                return False
+        elif status == 'Par':
+            if 'Electric' in self.type  or (cat != '2' and self.ability == 'Limber') or self.status != None:
+                return False
+        elif status == 'Slp':
+            if (cat != '2' and self.ability == 'Insomnia') or (cat != '2' and poke_func.in_terrain(P,'Electric',self)) or self.status != None:
+                return False
+        return True
+
+    def can_poison(self,P,cat = ""):
+
+        return True
+
+    def can_burn(self,P,cat = ""):
+
+        return True
+
+    def can_freeze(self,P,cat = ""):
+
+        return True
+
+    def can_paralze(self,P,cat = ""):
+
+        return True
+
+    def can_sleep(self,P,cat = ""):
+
         return True
 
     def has_move(self,move,change_move = None):
@@ -350,7 +414,7 @@ class Poke:
             return True
         return False
 
-    def learn(self,P,move,battle = True):
+    def learn(self,P,move,battle = True,pokestar = False):
         if self.has_move(move.name):
             return -1
         chg = False
@@ -387,7 +451,7 @@ class Poke:
                 if poke_func.choice(P,550,600):
                     t = P.surface.copy()
                     poke_func.fade_out(P)
-                    new = self.new_move_summ(P,move)
+                    new = self.new_move_summ(P,move,pokestar)
                     P.surface.blit(t,(0,0))
                     poke_func.fade_in(P)
                     if new != "":
@@ -442,11 +506,12 @@ class Poke:
             return True
         return False
 
-    def new_move_summ(self,P,move):
-        back = pygame.image.load("p/new_move_summ.png")
+    def new_move_summ(self,P,move,pokestar = False):
+        back = pygame.image.load("p/ui/new_move_summ.png")
         if self.code[-2:] == '_S':
-            back = pygame.image.load("p/new_move_summ_S.png")
-        ball = pygame.transform.scale(poke_func.load("p/"+self.ball+".png"),(30,30))
+            back = pygame.image.load("p/ui/new_move_summ_S.png")
+        exp_back = pygame.image.load("p/ui/hs_exp.png")
+        ball = pygame.transform.scale(poke_func.load("p/ui/"+self.ball+".png"),(30,30))
         name = P.font.render(self.name,True,(255,255,255))
         name_size = P.font.size(self.name)[0]
         mega = pygame.transform.scale(poke_func.load("p/mega_symbol.png"),(30,30))
@@ -454,44 +519,39 @@ class Poke:
         high = pygame.image.load("p/high_move.png")
         desc = pygame.image.load("p/move_desc.png")
         if self.gen == 0:
-            gen_i = pygame.image.load("p/boy_ico.png")
+            gen_i = pygame.image.load("p/ui/boy_ico.png")
         if self.gen == 1:
-            gen_i = pygame.image.load("p/girl_ico.png")
+            gen_i = pygame.image.load("p/ui/girl_ico.png")
         if self.gen == 2:
             gen_i = pygame.image.load("p/blank.png")
         lvl = P.font.render("Lv."+str(self.lvl),True,(255,255,255))
         mn = 1
         m1 = P.font.render(str(self.m1),True,(0,0,0))
-        mt1 = pygame.image.load("p/"+moves.Move(self.m1).type+"_ico.png")
+        mt1 = pygame.image.load("p/ui/"+moves.Move(self.m1).type+"_ico.png")
         mp1 = P.font.render("PP "+str(moves.Move(self.m1).pp),True,(0,0,0))
         m2 = P.font.render(str(self.m2),True,(0,0,0))
-        mt2 = pygame.image.load("p/"+moves.Move(self.m2).type+"_ico.png")
+        mt2 = pygame.image.load("p/ui/"+moves.Move(self.m2).type+"_ico.png")
         mp2 = P.font.render("PP "+str(moves.Move(self.m2).pp),True,(0,0,0))
         m3 = P.font.render(str(self.m3),True,(0,0,0))
-        mt3 = pygame.image.load("p/"+moves.Move(self.m3).type+"_ico.png")
+        mt3 = pygame.image.load("p/ui/"+moves.Move(self.m3).type+"_ico.png")
         mp3 = P.font.render("PP "+str(moves.Move(self.m3).pp),True,(0,0,0))
         m4 = P.font.render(str(self.m4),True,(0,0,0))
-        mt4 = pygame.image.load("p/"+moves.Move(self.m4).type+"_ico.png")
+        mt4 = pygame.image.load("p/ui/"+moves.Move(self.m4).type+"_ico.png")
         mp4 = P.font.render("PP "+str(moves.Move(self.m4).pp),True,(0,0,0))
         m5 = P.font.render(str(move.name),True,(0,0,0))
-        mt5 = pygame.image.load("p/"+move.type+"_ico.png")
+        mt5 = pygame.image.load("p/ui/"+move.type+"_ico.png")
         mp5 = P.font.render("PP "+str(move.pp),True,(0,0,0))
         move_list = [self.m1,self.m2,self.m3,self.m4]
-        type1 = pygame.image.load("p/"+self.type[0]+"_ico.png")
+        type1 = pygame.image.load("p/ui/"+self.type[0]+"_ico.png")
         if self.type[1] != None:
-            type2 = pygame.image.load("p/"+self.type[1]+"_ico.png")
+            type2 = pygame.image.load("p/ui/"+self.type[1]+"_ico.png")
         P.surface.blit(back,(0,0))
-        if self.lvl != 100:
-            P.surface.fill((0,0,255), Rect(64,110,int(320*(self.exp/self.get_exp())),10))
-        else:
-            P.surface.fill((0,0,255), Rect(64,110,320,10))
-        P.surface.blit(exp,(10,105))
+
         P.surface.blit(ball,(18,18))
         P.surface.blit(name,(60,10))
         if self.code[:5] == 'Mega_':
             P.surface.blit(mega,(65+name_size,20))
         P.surface.blit(gen_i,(350,10))
-        P.surface.blit(lvl,(20,50))
         P.surface.blit(m1,(430,115))
         P.surface.blit(mt1,(425,155))
         P.surface.blit(mp1,(550,150))
@@ -507,9 +567,23 @@ class Poke:
         P.surface.blit(m5,(430,505))
         P.surface.blit(mt5,(425,545))
         P.surface.blit(mp5,(550,540))
-        P.surface.blit(type1,(170,55))
-        if self.type[1] != None:
-            P.surface.blit(type2,(280,55))
+        if not pokestar:
+            P.surface.blit(exp_back,(38,107))
+            if self.lvl != 100:
+                P.surface.fill((0,0,255), Rect(64,110,int(320*(self.exp/self.get_exp())),10))
+            else:
+                P.surface.fill((0,0,255), Rect(64,110,320,10))
+            P.surface.blit(exp,(10,105))
+            P.surface.blit(lvl,(20,50))
+            P.surface.blit(type1,(170,55))
+            if self.type[1] != None:
+                P.surface.blit(type2,(280,55))
+        else:
+            if self.type[1] != None:
+                P.surface.blit(type1,(90,55))
+                P.surface.blit(type2,(210,55))
+            else:
+                P.surface.blit(type1,(150,55))
         poke_func.fade_in(P)
         a = 0
         end = True
@@ -520,23 +594,17 @@ class Poke:
             else:
                 mv = moves.Move(move_list[mn-1])
             P.surface.blit(back,(0,0))
-            if self.lvl != 100:
-                P.surface.fill((0,0,255), Rect(64,110,int(320*(self.exp/self.get_exp())),10))
-            else:
-                P.surface.fill((0,0,255), Rect(64,110,320,10))
-            P.surface.blit(exp,(10,105))
             P.surface.blit(ball,(18,18))
             P.surface.blit(name,(60,10))
             if self.code[:5] == 'Mega_':
                 P.surface.blit(mega,(65+name_size,20))
             P.surface.blit(gen_i,(350,10))
-            P.surface.blit(lvl,(20,50))
             if mv.cat == '0':
-                cat_ico = pygame.image.load("p/phy_ico.png")
+                cat_ico = pygame.image.load("p/ui/phy_ico.png")
             elif mv.cat == '1':
-                cat_ico = pygame.image.load("p/spe_ico.png")
+                cat_ico = pygame.image.load("p/ui/spe_ico.png")
             else:
-                cat_ico = pygame.image.load("p/sta_ico.png")
+                cat_ico = pygame.image.load("p/ui/sta_ico.png")
             if mn == 5:
                 mod = 25
             else:
@@ -575,9 +643,23 @@ class Poke:
             P.surface.blit(m5,(430,505))
             P.surface.blit(mt5,(425,545))
             P.surface.blit(mp5,(550,540))
-            P.surface.blit(type1,(170,55))
-            if self.type[1] != None:
-                P.surface.blit(type2,(280,55))
+            if not pokestar:
+                P.surface.blit(exp_back,(38,107))
+                if self.lvl != 100:
+                    P.surface.fill((0,0,255), Rect(64,110,int(320*(self.exp/self.get_exp())),10))
+                else:
+                    P.surface.fill((0,0,255), Rect(64,110,320,10))
+                P.surface.blit(exp,(10,105))
+                P.surface.blit(lvl,(20,50))
+                P.surface.blit(type1,(170,55))
+                if self.type[1] != None:
+                    P.surface.blit(type2,(280,55))
+            else:
+                if self.type[1] != None:
+                    P.surface.blit(type1,(90,55))
+                    P.surface.blit(type2,(210,55))
+                else:
+                    P.surface.blit(type1,(150,55))
             for event in pygame.event.get(eventtype = KEYDOWN):
                 if event.key == pygame.key.key_code(P.controls[0]):
                     if mn > 1:
@@ -660,6 +742,7 @@ class Poke:
         copy.magic_coat = self.magic_coat
         copy.bellydrum = self.bellydrum
         copy.trapped = self.trapped
+        copy.beat_up = self.beat_up
         copy.type_hit = self.type_hit
         copy.chrg = self.chrg
         copy.explode = self.explode
@@ -669,6 +752,7 @@ class Poke:
         copy.gastro = self.gastro
         copy.taunt = self.taunt
         copy.yawn = self.yawn
+        copy.last_resort = copy.last_resort
         copy.roost = self.roost
         copy.dc = self.dc
         copy.slptim = self.slptim
@@ -759,8 +843,10 @@ class Poke:
             self.name = self.name[:-2]
         if self.name == 'Pineapple_Oddish':
             self.name = 'Oddish'
-        if self.name == 'Spooky_Wobbuffet':
+        elif self.name == 'Spooky_Wobbuffet':
             self.name = 'Wobbuffet'
+        elif self.name == 'Icy_Gigalith':
+            self.name = 'Gigalith'
         if self.name[:5] == 'Mega_':
             self.name = self.name[5:]
         if self.name[:7] == 'Alolan_':
@@ -781,8 +867,10 @@ class Poke:
             self.actual_name = self.actual_name[:-2]
         if self.actual_name == 'Pineapple_Oddish':
             self.actual_name = 'Oddish'
-        if self.actual_name == 'Spooky_Wobbuffet':
+        elif self.actual_name == 'Spooky_Wobbuffet':
             self.actual_name = 'Wobbuffet'
+        elif self.actual_name == 'Icy_Gigalith':
+            self.actual_name = 'Gigalith'
         if self.actual_name[:7] == 'Alolan_':
             self.actual_name = self.actual_name[7:]
         if self.actual_name[:5] == 'Mega_':
@@ -800,6 +888,7 @@ class Poke:
         if self.actual_name[-2:] == '_T':
             self.actual_name = self.actual_name[:-2]
         data = file.readlines()
+        #fix ability
         abilist = ast.literal_eval(data[0])
         no_hidden = abilist.copy()
         for a in range(len(abilist)):
@@ -812,10 +901,10 @@ class Poke:
                 self.ability = new_ability
             self.true_ability = new_ability
         #check ability
-        abis = open("info/abilities.txt","r")
-        abidata = [line[:-1] for line in abis]
-        if self.ability not in abidata:
-            print(self.ability)
+        # abis = open("info/abilities.txt","r")
+        # abidata = [line[:-1] for line in abis]
+        # if self.ability not in abidata:
+        #     print(self.ability)
         #
         self.orig_stats = ast.literal_eval(data[1])
         self.update_stats()
@@ -833,12 +922,13 @@ class Poke:
             else:
                 m = moves.Move(self.moveset[x])
         #
-        bf = pygame.image.load("p/poke/"+self.code+"_bf.png")
-        bfw = pygame.image.load("p/poke/" + self.code + "_bfw.png")
-        bb = pygame.image.load("p/poke/" + self.code + "_bb.png")
-        bbw = pygame.image.load("p/poke/" + self.code + "_bbw.png")
-        ico = pygame.image.load("p/poke/" + self.code + "_ico.png")
-        full = pygame.image.load("p/poke/" + self.code + "_full.png")
+        if self.debug:
+            bf = pygame.image.load("p/poke/"+self.code+"_bf.png")
+            bfw = pygame.image.load("p/poke/" + self.code + "_bfw.png")
+            bb = pygame.image.load("p/poke/" + self.code + "_bb.png")
+            bbw = pygame.image.load("p/poke/" + self.code + "_bbw.png")
+            ico = pygame.image.load("p/poke/" + self.code + "_ico.png")
+            full = pygame.image.load("p/poke/" + self.code + "_full.png")
         #check end
         self.cr = int(data[5])
         if weight:
@@ -859,6 +949,35 @@ class Poke:
             #     file.close()
         file.close()
 
+    def ability_list(self):
+        if self.code[-2:] == '_S':
+            file = open("poke/"+self.code[:-2]+".txt","r")
+        else:
+            file = open("poke/"+self.code+".txt","r")
+        data = file.readlines()
+        abilist = ast.literal_eval(data[0])
+        no_hidden = abilist.copy()
+        hidden = []
+        for a in range(len(abilist)):
+            if abilist[a][0] == '*':
+                no_hidden.remove(abilist[a])
+                hidden.append(abilist[a])
+                abilist[a] = abilist[a][1:]
+        return [no_hidden,hidden,abilist]
+
+    def switch_ability(self):
+        abilist = self.ability_list()
+        if len(abilist[0]) == 2:
+            pos = 0
+            if abilist[0][0] == self.true_ability:
+                pos = 1
+            if self.ability == self.true_ability:
+                self.ability = abilist[0][pos]
+            self.true_ability = abilist[0][pos]
+        else:
+            print("Switch Ability Failed: "+len(abilist[0]))
+        return self.true_ability
+
     def get_exp(self) -> int:
         l = self.lvl
         return int((4*(l+1)*(l+1)*(l+1)/5)-(4*l*l*l/5))
@@ -866,4 +985,17 @@ class Poke:
     def to_list(self):
         ret = [self.lvl,self.gen,self.ch,self.m1,self.p1,self.m2,self.p2,self.m3,self.p3,self.m4,self.p4,self.item,self.status,self.exp,self.ball,self.friend,self.ability,self.player,self.name,self.nurse,self.petals]
         return ret
+
+    def known_moves(self):
+        known = 0
+        if self.m1 != None:
+            known += 1
+        if self.m2 != None:
+            known += 1
+        if self.m3 != None:
+            known += 1
+        if self.m4 != None:
+            known += 1
+        return known
+
         

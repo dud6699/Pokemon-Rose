@@ -1,0 +1,3 @@
+['Double Team','TM']
+['By moving rapidly, the user makes illusory copies of itself to raise its evasiveness.']
+-1

@@ -1,0 +1,3 @@
+['Psych Up','TM']
+['The user hypnotizes itself into copying any stat change made by the target.']
+-1

@@ -1,0 +1,11 @@
+['Hyper Cutter','Iron Fist','*Anger Point']
+[1.94,2.64,1.24,1.54,1.34,0.86]
+['Fighting','Ice']
+[]
+{1:['Ice Punch','Bubble','Rock Smash','Leer','Pursuit'],5:'Rock Smash',9:'Leer',13:'Pursuit',17:'Bubble Beam',22:'Power-Up Punch',25:'Dizzy Punch',29:'Payback',33:'Reversal',37:'Crabhammer',42:'Iron Defense',45:'Dynamic Punch',49:'Close Combat'}
+60
+180
+67
+311
+[]
+['Woolly Crab','It stores coldness in its pincers and pummels its foes. It can even smash thick walls of ice to bits!'] 

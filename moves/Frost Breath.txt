@@ -1,0 +1,10 @@
+Ice
+1
+60
+.9
+{}
+1
+10
+['The user blows its cold breath on the target. This attack always results in a critical hit.']
+0
+0

@@ -1,0 +1,11 @@
+['Natural Cure']
+[.9,.8,.8,1.2,1.5,1]
+['Normal','Flying']
+[35,'Altaria','Dragon Breath']
+{1:['Peck','Growl'],3:'Astonish',5:'Sing',7:'Fury Attack',9:'Safeguard',11:'Disarming Voice',14:'Mist',17:'Round',20:'Natural Gift',23:'Take Down',26:'Refresh',30:'Mirror Move',34:'Cotton Guard',38:'Dragon Pulse',42:'Perish Song',46:'Moonblast'}
+255
+1.2
+16
+901
+[]
+['Cotton Bird','Swablu has light and fluffy wings that are like cottony clouds. This Pokemon is not frightened of people. It lands on the heads of people and sits there like a cotton-fluff hat.'] 

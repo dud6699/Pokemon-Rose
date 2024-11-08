@@ -1,6 +1,6 @@
 ['Shell Armor','Skill Link']
 [1,1.9,1.7,3.6,.9,1.4]
-['Water',None]
+['Water','Ice']
 []
 {1:['Hydro Pump','Shell Smash','Toxic Spikes','Withdraw','Supersonic','Protect','Aurora Beam'],13:'Spike Cannon',28:'Spikes',50:'Icicle Crash'}
 60

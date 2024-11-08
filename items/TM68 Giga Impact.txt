@@ -1,0 +1,3 @@
+['Giga Impact','TM']
+['The user charges at the target using every bit of its power. The user can\'t move on the next turn.']
+-1

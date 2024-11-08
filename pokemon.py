@@ -15,10 +15,11 @@ from pygame.locals import *
 class Pokemon:
     def __init__(self):
         pygame.display.set_mode((800,600),DOUBLEBUF)
-        #self.poke_tester()
+        # self.poke_tester()
         self.running = True
         self.state = 1
         #1
+        self.debug = False
         f = open("save_files/Sett!ngs.txt","r")
         data = f.readlines()
         self.txt_spd = ast.literal_eval(data[0][:-1])
@@ -69,6 +70,10 @@ class Pokemon:
         self.legendary_battle = False
         self.tourney_battle = False
         self.garden_timer = False
+        self.pokestar_battle = 0
+        self.pokestar_score = []
+        self.pokestar_usage = []
+        self.pokestar_skills = []
         self.behind_object = False
         self.future_sight = [0,0,None,None] # fs cast by ally/enemy (ally poke, enemy poke)
         self.prog = [0]
@@ -154,6 +159,8 @@ class Pokemon:
                     map_func.am_square(self)
                 elif self.loc == "square_1":
                     map_func.square_1(self)
+                elif self.loc == 'am_theater':
+                    map_func.am_theater(self)
                 elif self.loc == "north_am":
                     map_func.north_am(self)
                 elif self.loc == "egida":
@@ -260,6 +267,32 @@ class Pokemon:
                     map_func.mossy(self)
                 elif self.loc == 'silfide':
                     map_func.silfide(self)
+                elif self.loc == 'silfide_gymb':
+                    map_func.silfide_gymb(self)
+                elif self.loc[:11] == 'silfide_gym':
+                    map_func.silfide_gym_room(self,int(self.loc[11:]))
+                elif self.loc == 'silfide_nursery':
+                    map_func.silfide_nursery(self)
+                elif self.loc == 'silfide_theater':
+                    map_func.silfide_theater(self)
+                elif self.loc == 'snow_o1':
+                    map_func.snow_o1(self)
+                elif self.loc == 'snow_o2':
+                    map_func.snow_o2(self)
+                elif self.loc == 'snow_o3':
+                    map_func.snow_o3(self)
+                elif self.loc == 'snow_1':
+                    map_func.snow_1(self)
+                elif self.loc == 'snow_2':
+                    map_func.snow_2(self)
+                elif self.loc == 'snow_3':
+                    map_func.snow_3(self)
+                elif self.loc == 'snow_4':
+                    map_func.snow_4(self)
+                elif self.loc == 'nevoso':
+                    map_func.nevoso(self)
+                elif self.loc == 'nevoso_lab':
+                    map_func.nevoso_lab(self)
                 elif self.loc[:3] == "pc_":
                     self.save_data.pc = self.loc
                     map_func.poke_center(self,self.loc[3:])
@@ -305,10 +338,10 @@ class Pokemon:
 
     def load_npcs(self):
         #npcs:
-        self.r1_sci = npc.NPC(self,'Scientistm','Nerd',[2500,-1500],[['mr',60],['r',60],['ml',60],['l',80]],["The energy we get from the","Vigore Dam is enough to power","the entire city!","With all the research we've","been doing here, it may not be","that long until we can power","the entire island using only","renewable energy!",""])
+        self.egi_sci = npc.NPC(self,'Scientistm','Nerd',[2500,-1500],[['mr',60],['r',60],['ml',60],['l',80]],["The energy we get from the","Vigore Dam is enough to power","the entire city!","With all the research we've","been doing here, it may not be","that long until we can power","the entire island using only","renewable energy!",""])
         self.egi_pre = npc.NPC(self,'Preschoolerg','Creep',[1400,-600],[['d',60]],["Sometimes I like to just stare","at the people walking around","down there.","They're so small it makes me","feel like a grown up!",""])
         self.egi_sciu = npc.NPC(self,'Scientistf','Nerd',[1700,-680],[['md',60],['d',60],['mu',60],['u',80]],["The energy we get from the","Vigore Dam is enough to power","the entire city!","With all the research we've","been doing here, it may not be","that long until we can power","the entire island using only","renewable energy!",""])
-        self.egi_sci = npc.NPC(self,'Scientistm','Nerd',[1500,-150],[['mr',60],['r',60],['ml',60],['l',80]],["The energy we get from the","Vigore Dam is enough to power","the entire city!","With all the research we've","been doing here, it may not be","that long until we can power","the entire island using only","renewable energy!",""])
+        # self.egi_sci = npc.NPC(self,'Scientistm','Nerd',[1500,-150],[['mr',60],['r',60],['ml',60],['l',80]],["The energy we get from the","Vigore Dam is enough to power","the entire city!","With all the research we've","been doing here, it may not be","that long until we can power","the entire island using only","renewable energy!",""])
         self.egi_robb1 = npc.NPC(self,'Bug Catcher','Robb',[500,150],[['d',60],['r',80],['l',90],['u',40]],["","",""])
         self.egi_robb2 = npc.NPC(self,'Bug Catcher','Robb',[500,150],[['u',100]],["","",""])
         self.egi_colress_npc = npc.NPC(self,'Colress','',[1150,-800],[['u',40]],["Were you able to track down","the one that ran away?","","I would imagine he is still","pretty close to the Power", "Plant."])
@@ -324,7 +357,6 @@ class Pokemon:
         self.pia_rich = npc.NPC(self,'Rich Boy','Cherry',[1850,-850],[['r',20]],["Would you just look at the","size of this sundae!","","I don't think I'll be able to","fit all of this in my stomach","without it hurting!"])
         self.r4_tree1 = poke_func.cut_tree(self,1350,300,17)
         self.r4_tree2 = poke_func.cut_tree(self,1300,350,18)
-        self.r4_expf_npc = npc.NPC(self,'Expertf','Timmy',[1500,1200],[['l',80]],["People say this is a scorch","mark left by a lightning","strike from Thundurus.","It could just be a myth, but","it's exhilarating to think","about isn't it?"])
 
         self.isola_host = npc.NPC(self,'Hostess','Harper',[600,-500],[['d',40]],["","",""])
         self.isola_seed = npc.NPC(self,'Seedot','Harper',[1550,-100],[['d',40]],["SEEDOT!!!","",""])
@@ -356,6 +388,12 @@ class Pokemon:
         self.r6_lisia = npc.NPC(self,'Lisia','Grunt',[1700,-2850],[['d',40]],["Move along now, or you're","going to have a talk with my","superior!"])
         self.r6_tree1 = poke_func.cut_tree(self,3100,-1000,33)
         self.r6_tree2 = poke_func.cut_tree(self,3050,-950,34)
+        self.silfide_pre = npc.NPC(self,'Preschoolerg','Harper',[850,1550],[['u',40]],["AAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh","I'm getting dizzy..."])
+        self.silfide_exp = npc.NPC(self,'Expertf','Harper',[450,1600],[['l',40]],["These days it feels like the thin air is really wearing me out.","Maybe it's time for me to move back to Pianura City.","I'm really going to miss the view up here though..."])
+        self.silfide_young = npc.NPC(self,'Youngster','Harper',[2850,750],[['r',140],['md',20],['mr',40],['u',200],['ml',40],['mu',20]],["I need to make a model wind turbine for a science project.","These are a bit too complex to recreate, but they're useful as a reference."])
+        self.silfide_fan = npc.NPC(self,'Poke Fan','Harper',[1500,1400],[['u',60],['md',60],['d',40],['mu',60]],["Oh I can't wait to see Lisia's Altaria on the big stage!","You wouldn't believe how much I had to scramble to get these tickets!"])
+        self.silfide_heal = npc.NPC(self,'Healer','Harper',[1850,700],[['l',100],['mr',40],['r',80],['ml',40]],["I left my son's Pokemon at the nursery and it came back as its evolved form!","What am I supposed to do...he really liked that Buneary."])
+        self.snow_o1_dia = npc.NPC(self,'Diantha','Harper',[350,550],[['u',100]],["You already obtained the Charm Badge? Well you'll have to go this way to reach Forza City.","The good new is that I figured out how to clear up the cave entrance.","The bad news is that it's being blocked off by a pretty heavy Pokemon.","The even worse news is that he doesn't exist until a future update."])
         pre = 'Preschoolerb'
         she = 'he'
         if self.save_data.gen == 1:
@@ -394,9 +432,9 @@ class Pokemon:
         else:
             self.r1_robb = npc.NPC(self,'Bug Catcher','Robb',[1500,-1200],[['u',100]],["I bet there's an even cooler","Pokemon hiding in this grass!",""],loc = "route_1")
         if self.prog[5][3] == 0:
-            self.r1_noland = npc.NPC(self,'Gentleman','Noland',[2850,-500],[['r',100]],["It's not often I see a new","adventurer around here.","","Perhaps you would be willing", "to entertain this old man with","a battle?"],["Hmmph!","That certainly brought back","old memories!","It's been ages since I got","this heated over a Pokemon","battle!","Who knows, maybe you have what", "it takes to beat the champion!","Ha!"],True,[50,150,50,200],[poke.Poke('Nidorino',[16,0,787,"Focus Energy",-1,"Leer",-1,"Double Kick",-1,"Poison Sting",-1,'Eviolite',None,0,"Luxury Ball",400,"Rivalry"]),poke.Poke('Nidorina',[16,1,787,"Growl",-1,"Scratch",-1,"Poison Sting",-1,"Double Kick",-1,'Eviolite',None,0,"Luxury Ball",400,"Rivalry"])],3,loc = "route_1")
+            self.r1_gentle = npc.NPC(self,'Gentleman','Joey',[2850,-500],[['r',100]],["It's not often I see a new","adventurer around here.","","Perhaps you would be willing", "to entertain this old man with","a battle?"],["Hmmph!","That certainly brought back","old memories!","It's been ages since I got","this heated over a Pokemon","battle!","Who knows, maybe you have what", "it takes to beat the champion!","Ha!"],True,[50,150,50,200],[poke.Poke('Nidorino',[16,0,787,"Focus Energy",-1,"Leer",-1,"Double Kick",-1,"Poison Sting",-1,'Eviolite',None,0,"Luxury Ball",400,"Rivalry"]),poke.Poke('Nidorina',[16,1,787,"Growl",-1,"Scratch",-1,"Poison Sting",-1,"Double Kick",-1,'Eviolite',None,0,"Luxury Ball",400,"Rivalry"])],3,loc = "route_1")
         else:
-            self.r1_noland = npc.NPC(self,'Gentleman','Noland',[1500,-550],[['l',100]],["I still remember when this was","a statue of Cynthia back when","she oversaw the city.","I heard you can still find","that statue standing in the", "Alto Mare gym."],loc = "route_1")
+            self.r1_gentle = npc.NPC(self,'Gentleman','Joey',[1500,-550],[['l',100]],["I still remember when this was","a statue of Cynthia back when","she oversaw the city.","I heard you can still find","that statue standing in the", "Alto Mare gym."],loc = "route_1")
         if self.prog[5][4] == 0:
             self.r2_ayla = npc.NPC(self,'Battle Girl','Ayla',[950,-1100],[['d',40],['r',20],['l',20],['md',20],['u',40],['r',20],['l',20],['mu',20]],["Hey you look pretty strong!","Beating you will be part of my","training!"],["Ha ha! Just kidding!","You're way too strong...",""],True,[100,100,50,100],[poke.Poke('Machop',[9,random.randint(0,1),787,"Low Kick",-1,"Leer",-1,"Focus Energy",-1,"Karate Chop",-1,None,None,0,"Poke Ball",0,"Guts"]),poke.Poke('Timburr',[9,random.randint(0,1),787,"Pound",-1,"Leer",-1,"Bide",-1,"Focus Energy",-1,None,None,0,"Poke Ball",0,"Sheer Force"])],4,loc = "route_2")
         else:
@@ -497,7 +535,8 @@ class Pokemon:
             self.r4_fish = npc.NPC(self,'Fisherman','Richard',[2600,700],[['r',80]],["You know what shellfish are", "great for?","","Beating down all the trainers","passing by!",""],["Huh, I guess you proved me","wrong today!",""],True,[0,0,0,0],[poke.Poke('Kingler',[30,random.randint(0,1),787,"Stomp",-1,"Metal Claw",-1,"Mud Shot",-1,"Bubble Beam",-1,None,None,0,"Poke Ball",300,"Shell Armor"]),poke.Poke('Crawdaunt',[30,random.randint(0,1),787,"Night Slash",-1,"Bubble Beam",-1,"Protect",-1,"Double Hit",-1,None,None,0,"Poke Ball",300,"Shell Armor"]),poke.Poke('Cloyster',[32,random.randint(0,1),787,"Shell Smash",-1,"Ice Shard",-1,"Clamp",-1,"Razor Shell",-1,None,None,0,"Poke Ball",300,"Shell Armor"])],33,loc = "route_4")
         else:
             self.r4_fish = npc.NPC(self,'Fisherman','Harper',[2600,700],[['r',80]],["Well shellfish are great for","lots of other things!","","Like eating and stuff, you","know?",""],loc = "route_4")
-        self.r4_expf_train = npc.NPC(self,'Expertf','Stella',[1500,1200],[['l',80]],["Hello there! Not many people","choose to venture all the way","out here.","Perhaps you're looking for a","thrilling battle?",""],["Well that's quite surprising!","I suppose each new generation","really is more talented!"],True,[0,0,0,0],[poke.Poke('Ferrothorn',[40,random.randint(0,1),787,"Pin Missile",-1,"Iron Defense",-1,"Gyro Ball",-1,"Curse",-1,'Metal Coat',None,0,"Luxury Ball",400,"Iron Barbs"]),poke.Poke('Scizor',[40,random.randint(0,1),787,"Quick Attack",-1,"Iron Defense",-1,"Bullet Punch",-1,"Pursuit",-1,'Metal Coat',None,0,"Luxury Ball",400,"Technician"]),poke.Poke('Steelix',[40,random.randint(0,1),787,"Thunder Fang",-1,"Rock Slide",-1,"Crunch",-1,"Iron Tail",-1,'Metal Coat',None,0,"Luxury Ball",400,"Sturdy"])],34,loc = "route_4")
+        self.r4_expf_train = npc.NPC(self,'Expertf','Sarah',[1500,1200],[['l',80]],["Hello there! Not many people","choose to venture all the way","out here.","Perhaps you're looking for a","thrilling battle?",""],["Well that's quite surprising!","I suppose each new generation","really is more talented!"],True,[0,0,0,0],[poke.Poke('Ferrothorn',[40,random.randint(0,1),787,"Pin Missile",-1,"Iron Defense",-1,"Gyro Ball",-1,"Curse",-1,'Metal Coat',None,0,"Luxury Ball",400,"Iron Barbs"]),poke.Poke('Scizor',[40,random.randint(0,1),787,"Quick Attack",-1,"Iron Defense",-1,"Bullet Punch",-1,"Pursuit",-1,'Metal Coat',None,0,"Luxury Ball",400,"Technician"]),poke.Poke('Steelix',[40,random.randint(0,1),787,"Thunder Fang",-1,"Rock Slide",-1,"Crunch",-1,"Iron Tail",-1,'Metal Coat',None,0,"Luxury Ball",400,"Sturdy"])],34,loc = "route_4")
+        self.r4_expf_npc = npc.NPC(self,'Expertf','Sarah',[1500,1200],[['l',80]],["People say this is a scorch","mark left by a lightning","strike from Thundurus.","It could just be a myth, but","it's exhilarating to think","about isn't it?"])
         if self.prog[5][35] == 0:
             self.r5_psy = npc.NPC(self,'Psychic','Lucas',[600,-300],[['mr',40],['r',60],['md',40],['d',80],['ml',40],['l',100],['mu',40],['u',60]],["You better watch out or you'll", "end up hitting yourself!",""],["Hmm, looks like I should have","been watching out myself!",""],True,[150,150,150,150],[poke.Poke('Mismagius',[34,random.randint(0,1),787,"Confuse Ray",-1,"Pain Split",-1,"Mystical Fire",-1,"Shadow Ball",-1,None,None,0,"Poke Ball",350,"Levitate"]),poke.Poke('Wobbuffet',[35,random.randint(0,1),787,"Counter",-1,"Mirror Coat",-1,None,None,None,None,None,None,0,"Poke Ball",400,"Shadow Tag"])],35,loc = "route_5")
         else:
@@ -546,9 +585,9 @@ class Pokemon:
         else:
             self.ff6_sci = npc.NPC(self,'Scientistf','Olivia',[1150,950],[['u',20]],["We rolled dice to distribute", "our research locations.", "","Guess who rolled a one?","",""],loc = "forbidden_6")
         if self.prog[5][52] == 0:
-            self.ff8_psy = npc.NPC(self,'Psychic','Eli',[1200,950],[['l',200],['u',150]],["You think you can stand up to","me? I'll make you reconsider","that decision!"],["Wow! I don't remember the last","time I ran into a trainer as","strong as you around here!"],True,[0,0,0,0],[poke.Poke('Mega_Gengar',[50,random.randint(0,1),787,"Shadow Ball",-1,"Dark Pulse",-1,"Dream Eater",-1,"Hypnosis",-1,None,None,0,"Poke Ball",200,"Shadow Tag"]),poke.Poke('Mega_Alakazam',[50,random.randint(0,1),787,"Psychic",-1,"Recover",-1,"Reflect",-1,"Focus Blast",-1,None,None,0,"Poke Ball",200,"Trace"]),poke.Poke('Dusknoir',[52,random.randint(0,1),787,"Shadow Punch",-1,"Ice Punch",-1,"Fire Punch",-1,"Thunder Punch",-1,None,None,0,"Poke Ball",400,"Pressure"],petals=['ak','ak','ak','spd','spd'])],52,loc = "forbidden_8")
+            self.ff8_psy = npc.NPC(self,'Psychic','Issac',[1200,950],[['l',200],['u',150]],["You think you can stand up to","me? I'll make you reconsider","that decision!"],["Wow! I don't remember the last","time I ran into a trainer as","strong as you around here!"],True,[0,0,0,0],[poke.Poke('Mega_Gengar',[50,random.randint(0,1),787,"Shadow Ball",-1,"Dark Pulse",-1,"Dream Eater",-1,"Hypnosis",-1,None,None,0,"Poke Ball",200,"Shadow Tag"]),poke.Poke('Mega_Alakazam',[50,random.randint(0,1),787,"Psychic",-1,"Recover",-1,"Reflect",-1,"Focus Blast",-1,None,None,0,"Poke Ball",200,"Trace"]),poke.Poke('Dusknoir',[52,random.randint(0,1),787,"Shadow Punch",-1,"Ice Punch",-1,"Fire Punch",-1,"Thunder Punch",-1,None,None,0,"Poke Ball",400,"Pressure"],petals=['ak','ak','ak','spd','spd'])],52,loc = "forbidden_8")
         else:
-            self.ff8_psy = npc.NPC(self,'Psychic','Eli',[1200,950],[['l',200],['u',150]],["You had better keep your","focus, or your skills will","start to deteriorate.","And it would be embarassing if","I lost to a slacker!",""],loc = "forbidden_8")
+            self.ff8_psy = npc.NPC(self,'Psychic','Issac',[1200,950],[['l',200],['u',150]],["You better keep your focus, or your skills will start to deteriorate.","And it would be embarassing if I lost to a slacker!"],loc = "forbidden_8")
         if self.prog[5][53] == 0:
             self.r6_bug = npc.NPC(self,'Bug Catcher','Ian',[2650,4250],[['md',40],['d',150],['mr',100],['r',100],['mu',40],['u',120],['ml',100],['l',80]],["Hey, this is my territory!","Go find your own patch of", "grass to sneak around in!"],["Just stay outta my way, will","you? You're scaring all the", "Pokemon away!"],True,[100,100,100,100],[poke.Poke('Galvantula',[42,1,787,"Electro Ball",-1,"Signal Beam",-1,"Sticky Web",-1,"Thunder Wave",-1,None,None,0,"Poke Ball",200,"Compound Eyes"],petals=['spd','spd','spd']),poke.Poke('Crustle',[42,0,787,"Stealth Rock",-1,"X-Scissor",-1,"Shell Smash",-1,"Rock Slide",-1,None,None,0,"Poke Ball",300,"Shell Armor"],petals=['hp','hp','hp']),poke.Poke('Leavanny',[43,1,787,"Entrainment",-1,"Grass Whistle",-1,"Leaf Blade",-1,"X-Scissor",-1,None,None,0,"Poke Ball",400,"Swarm"],petals=['ak','ak','ak'])],53,loc = "route_6")
         else:
@@ -563,33 +602,33 @@ class Pokemon:
         else:
             self.sunken_pre = npc.NPC(self,'Preschoolerg','Lucy',[1300,800],[['md',40],['mr',70],['mu',70],['ml',20],['md',30],['ml',50]],["Splish Splash! Splish Splash!","Come on, move those legs!",""],spd = 1, loc = "sunken_cave")
         if self.prog[5][61] == 0:
-            self.sunken_hiker = npc.NPC(self,'Hiker','Wyatt',[2050,450],[['u',80],['r',60]],["Hey! Why are you busting up my","hidey-hole? I'm busy hunting", "for gems here!"],["Look what you did! Now people","are gonna come by and steal my", "gems!"],True,[0,0,0,0],[poke.Poke('Carbink',[45,2,787,"Skill Swap",-1,"Ancient Power",-1,"Reflect",-1,"Stealth Rock",-1,None,None,0,"Poke Ball",200,"Clear Body"]),poke.Poke('Seismitoad',[45,1,787,"Aqua Ring",-1,"Uproar",-1,"Muddy Water",-1,"Drain Punch",-1,None,None,0,"Poke Ball",200,"Poison Touch"]),poke.Poke('Steelix',[46,1,787,"Rock Slide",-1,"Dig",-1,"Crunch",-1,"Iron Tail",-1,None,None,0,"Poke Ball",100,"Sturdy"])],61,loc = "sunken_cave")
+            self.sunken_hiker = npc.NPC(self,'Hiker','Wyatt',[2050,450],[['u',80],['r',60]],["Hey! Why are you busting up my","hidey-hole? I'm busy hunting", "for gems here!"],["Look what you did! Now people","are gonna come by and steal my", "gems!"],True,[0,0,0,0],[poke.Poke('Carbink',[45,2,787,"Skill Swap",-1,"Ancient Power",-1,"Reflect",-1,"Stealth Rock",-1,None,None,0,"Poke Ball",200,"Clear Body"]),poke.Poke('Seismitoad',[45,1,787,"Aqua Ring",-1,"Uproar",-1,"Muddy Water",-1,"Drain Punch",-1,None,None,0,"Poke Ball",200,"Poison Touch"]),poke.Poke('Steelix',[47,1,787,"Rock Slide",-1,"Dig",-1,"Crunch",-1,"Iron Tail",-1,None,None,0,"Poke Ball",100,"Sturdy"])],61,loc = "sunken_cave")
         else:
             self.sunken_hiker = npc.NPC(self,'Hiker','Wyatt',[2050,450],[['u',80],['r',60]],["Hey! Stop looking this way!","There's nothing to see here!",""],loc = "sunken_cave")
         if self.prog[5][62] == 0:
-            self.sunken_sci = npc.NPC(self,'Scientistm','Dillon',[2250,1200],[['r',80]],["I've heard of mutations like","this, but I've never seen a", "real life example of it!"],["I guess it doesn't seem much","stronger than your average", "Quagsire, does it?"],True,[0,0,0,0],[poke.Poke('Magnezone',[46,2,787,"Discharge",-1,"Magnet Rise",-1,"Light Screen",-1,"Eerie Impulse",-1,None,None,0,"Poke Ball",200,"Soundproof"]),poke.Poke('Quagsire_S',[47,0,787,"Yawn",-1,"Earthquake",-1,"Amnesia",-1,"Slam",-1,None,None,0,"Poke Ball",300,"Water Absorb"])],62,loc = "sunken_cave")
+            self.sunken_sci = npc.NPC(self,'Scientistm','Dillon',[2250,1200],[['r',80]],["I've heard of mutations like","this, but I've never seen a", "real life example of it!"],["I guess it doesn't seem much","stronger than your average", "Quagsire, does it?"],True,[0,0,0,0],[poke.Poke('Magnezone',[47,2,787,"Discharge",-1,"Magnet Rise",-1,"Light Screen",-1,"Eerie Impulse",-1,None,None,0,"Poke Ball",200,"Soundproof"]),poke.Poke('Quagsire_S',[48,0,787,"Yawn",-1,"Earthquake",-1,"Amnesia",-1,"Slam",-1,None,None,0,"Poke Ball",300,"Water Absorb"])],62,loc = "sunken_cave")
         elif self.prog[5][62] == 1:
             self.sunken_sci = npc.NPC(self,'Scientistm','Dillon',[2250,1200],[['r',80]],["Interesting...it looks so","different, but it seems the","mutation is just cosmetic.","Maybe it's trying to adapt to","living in a different kind of", "environment?","What's up? I'm in your way?","Oh, I'm very sorry. I guess","I'll just move down this way."],loc = "sunken_cave")
         else:
             self.sunken_sci = npc.NPC(self,'Scientistm','Dillon',[2500,950],[['mu',60],['u',100],['md',60],['d',180]],["Quite fascinating, isn't it?","It's like a regional variant,","but with less variance."],loc = "sunken_cave")
         if self.prog[5][63] == 0:
-            self.r6_tri = npc.NPC(self,'Triathelete','Chase',[2100,2100],[['mr',300],['ml',300]],["Phew! I think you'll make a","great addition to my training","regime!"],["Oh man, I think I'm starting","to run out of steam...", "","But that's exactly when you've","gotta pick yourself up and","keep running!"],True,[0,0,200,200],[poke.Poke('Electrode',[46,2,787,"Mirror Coat",-1,"Thunder Wave",-1,"Flash Cannon",-1,"Discharge",-1,None,None,0,"Poke Ball",200,"Magnet Pull"]),poke.Poke('Hitmontop',[46,0,787,"Triple Kick",-1,"Counter",-1,"Rapid Spin",-1,"Rolling Kick",-1,None,None,0,"Poke Ball",200,"Technician"]),poke.Poke('Rapidash',[46,1,787,"Fire Blast",-1,"Inferno",-1,"Flame Wheel",-1,"Megahorn",-1,None,None,0,"Poke Ball",200,"Flash Fire"]),poke.Poke('Jolteon',[46,0,787,"Discharge",-1,"Last Resort",-1,"Thunder Wave",-1,"Baby-Doll Eyes",-1,None,None,0,"Poke Ball",300,"Volt Absorb"])],63,loc = "route_6",spd = 1)
+            self.r6_tri = npc.NPC(self,'Triathelete','Chase',[2100,2100],[['mr',300],['ml',300]],["Phew! I think you'll make a","great addition to my training","regime!"],["Oh man, I think I'm starting","to run out of steam...", "","But that's exactly when you've","gotta pick yourself up and","keep running!"],True,[0,0,200,200],[poke.Poke('Electrode',[47,2,787,"Mirror Coat",-1,"Thunder Wave",-1,"Flash Cannon",-1,"Discharge",-1,None,None,0,"Poke Ball",200,"Magnet Pull"]),poke.Poke('Hitmontop',[47,0,787,"Triple Kick",-1,"Counter",-1,"Rapid Spin",-1,"Rolling Kick",-1,None,None,0,"Poke Ball",200,"Technician"]),poke.Poke('Rapidash',[47,1,787,"Fire Blast",-1,"Inferno",-1,"Flame Wheel",-1,"Megahorn",-1,None,None,0,"Poke Ball",200,"Flash Fire"]),poke.Poke('Jolteon',[47,0,787,"Discharge",-1,"Last Resort",-1,"Thunder Wave",-1,"Baby-Doll Eyes",-1,None,None,0,"Poke Ball",300,"Volt Absorb"])],63,loc = "route_6",spd = 1)
         else:
             self.r6_tri = npc.NPC(self,'Triathelete','Chase',[2100,2100],[['mr',300],['ml',300]],["I think...I'm about to...pass","out...just one more...mile...",""],loc = "route_6",spd = 1)
         if self.prog[5][64] == 0:
-            self.r6_aroma = npc.NPC(self,'Aroma Lady','Iris',[4300,2550],[['mr',60],['r',60],['md',40],['d',80],['mu',40],['u',100],['ml',60],['l',60]],["I love bringing my Pokemon out","here to play in the fields!", "","Would you help me burn all the","energy they've gotten from","relaxing the whole day?"],["Well I guess it's time for","them to go back to resting for", "a while."],True,[100,100,100,100],[poke.Poke('Whimsicott',[47,0,787,"Dazzling Gleam",-1,"Tailwind",-1,"Cotton Guard",-1,"Energy Ball",-1,None,None,0,"Poke Ball",200,"Prankster"],petals=['sdf','sdf','sdf']),poke.Poke('Ribombee',[47,1,787,"Dazzling Gleam",-1,"Pollen Puff",-1,"Aromatherapy",-1,"Stun Spore",-1,None,None,0,"Poke Ball",200,"Shield Dust"],petals=['sdf','sdf','sdf']),poke.Poke('Leafeon',[47,1,787,"Synthesis",-1,"Swords Dance",-1,"Leaf Blade",-1,"Last Resort",-1,None,None,0,"Poke Ball",200,"Leaf Guard"],petals=['sdf','sdf','sdf'])],64,loc = "route_6")
+            self.r6_aroma = npc.NPC(self,'Aroma Lady','Iris',[4300,2550],[['mr',60],['r',60],['md',40],['d',80],['mu',40],['u',100],['ml',60],['l',60]],["I love bringing my Pokemon out","here to play in the fields!", "","Would you help me burn all the","energy they've gotten from","relaxing the whole day?"],["Well I guess it's time for","them to go back to resting for", "a while."],True,[100,100,100,100],[poke.Poke('Whimsicott',[48,0,787,"Dazzling Gleam",-1,"Tailwind",-1,"Cotton Guard",-1,"Energy Ball",-1,None,None,0,"Poke Ball",200,"Prankster"],petals=['sdf','sdf','sdf']),poke.Poke('Ribombee',[48,1,787,"Dazzling Gleam",-1,"Pollen Puff",-1,"Aromatherapy",-1,"Stun Spore",-1,None,None,0,"Poke Ball",200,"Shield Dust"],petals=['sdf','sdf','sdf']),poke.Poke('Leafeon',[48,1,787,"Synthesis",-1,"Swords Dance",-1,"Leaf Blade",-1,"Last Resort",-1,None,None,0,"Poke Ball",200,"Leaf Guard"],petals=['sdf','sdf','sdf'])],64,loc = "route_6")
         else:
             self.r6_aroma = npc.NPC(self,'Aroma Lady','Iris',[4300,2550],[['mr',60],['r',60],['md',40],['d',80],['mu',40],['u',100],['ml',60],['l',60]],["Why don't you join us? Lay in","the grass, stare at the lake,","and forget all your problems!"],loc = "route_6")
         if self.prog[5][65] == 0:
-            self.r6_bug2 = npc.NPC(self,'Bug Catcher','Max',[1350,50],[['md',40],['d',80],['md',40],['d',140],['mu',80],['u',80]],["Hey! Watch where you're","stepping! I haven't checked", "that spot yet!"],["Hmm, I guess I'll forgive you","since you showed me some", "pretty cool Pokemon..."],True,[100,100,0,0],[poke.Poke('Pinsir',[48,1,787,"Swords Dance",-1,"Thrash",-1,"X-Scissor",-1,"Brick Break",-1,None,None,0,"Poke Ball",300,"Hyper Cutter"]),poke.Poke('Accelgor',[48,0,787,"Bug Buzz",-1,"U-turn",-1,"Giga Drain",-1,"Double Team",-1,None,None,0,"Poke Ball",300,"Hydration"]),poke.Poke('Araquanid',[48,0,787,"Lunge",-1,"Crunch",-1,"Bubble Beam",-1,"Leech Life",-1,None,None,0,"Poke Ball",300,"Water Bubble"])],65,loc = "route_6")
+            self.r6_bug2 = npc.NPC(self,'Bug Catcher','Max',[1350,50],[['md',40],['d',80],['md',40],['d',140],['mu',80],['u',80]],["Hey! Watch where you're","stepping! I haven't checked", "that spot yet!"],["Hmm, I guess I'll forgive you","since you showed me some", "pretty cool Pokemon..."],True,[100,100,0,0],[poke.Poke('Pinsir',[50,1,787,"Swords Dance",-1,"Thrash",-1,"X-Scissor",-1,"Brick Break",-1,None,None,0,"Poke Ball",300,"Hyper Cutter"]),poke.Poke('Accelgor',[50,0,787,"Bug Buzz",-1,"U-turn",-1,"Giga Drain",-1,"Double Team",-1,None,None,0,"Poke Ball",300,"Hydration"]),poke.Poke('Araquanid',[50,0,787,"Lunge",-1,"Crunch",-1,"Bubble Beam",-1,"Leech Life",-1,None,None,0,"Poke Ball",300,"Water Bubble"])],65,loc = "route_6")
         else:
             self.r6_bug2 = npc.NPC(self,'Bug Catcher','Max',[1350,50],[['md',40],['d',80],['md',40],['d',140],['mu',80],['u',80]],["Some of these Pokemon are","getting way too big for me to","catch with this net."],loc = "route_6")
         if self.prog[5][66] == 0:
-            self.r6_fish1 = npc.NPC(self,'Fisherman','Dean',[3250,1800],[['r',20]],["Freshly caught Pokemon, ready","for their debut battle!", ""],["Seems like they need a bit of","training before they're ready", "for battling."],True,[0,0,0,0],[poke.Poke('Kingler',[50,1,787,"Slam",-1,"Guillotine",-1,"Metal Claw",-1,"Bubble Beam",-1,None,None,0,"Poke Ball",0,"Hyper Cutter"]),poke.Poke('Octillery',[50,0,787,"Gunk Shot",-1,"Signal Beam",-1,"Ice Beam",-1,"Octazooka",-1,None,None,0,"Poke Ball",0,"Sniper"]),poke.Poke('Kingdra',[50,0,787,"Dragon Pulse",-1,"Brine",-1,"Focus Energy",-1,"Hydro Pump",-1,None,None,0,"Poke Ball",0,"Sniper"])],66,loc = "route_6")
+            self.r6_fish1 = npc.NPC(self,'Fisherman','Dean',[3250,1800],[['r',20]],["Freshly caught Pokemon, ready","for their debut battle!", ""],["Seems like they need a bit of","training before they're ready", "for battling."],True,[0,0,0,0],[poke.Poke('Kingler',[52,1,787,"Slam",-1,"Guillotine",-1,"Metal Claw",-1,"Brine",-1,None,None,0,"Poke Ball",0,"Hyper Cutter"]),poke.Poke('Octillery',[52,0,787,"Gunk Shot",-1,"Signal Beam",-1,"Ice Beam",-1,"Octazooka",-1,None,None,0,"Poke Ball",0,"Sniper"]),poke.Poke('Kingdra',[52,0,787,"Dragon Pulse",-1,"Brine",-1,"Focus Energy",-1,"Hydro Pump",-1,None,None,0,"Poke Ball",0,"Sniper"])],66,loc = "route_6")
         else:
             self.r6_fish1 = npc.NPC(self,'Fisherman','Dean',[3250,1800],[['r',20]],["I guess it makes sense that","these Pokemon didn't warm up","to me immediately.","I did just yank them out of","the water after all...",""],loc = "route_6")
         if self.prog[5][67] == 0:
-            self.r6_fish2 = npc.NPC(self,'Fisherman','Tucker',[3450,1450],[['u',20]],["Behold!!!", "The untamed wrath of the sea!",""],["Okay, I guess this is more of","a lake than a sea...", ""],True,[0,0,0,0],[poke.Poke('Milotic',[48,1,787,"Hydro Pump",-1,"Attract",-1,"Dragon Tail",-1,"Recover",-1,None,None,0,"Poke Ball",400,"Marvel Scale"]),poke.Poke('Sharpedo',[48,0,787,"Crunch",-1,"Poison Fang",-1,"Ice Fang",-1,"Aqua Jet",-1,None,None,0,"Poke Ball",400,"Rough Skin"])],67,loc = "route_6")
+            self.r6_fish2 = npc.NPC(self,'Fisherman','Tucker',[3450,1450],[['u',20]],["Behold!!!", "The untamed wrath of the sea!",""],["Okay, I guess this is more of","a lake than a sea...", ""],True,[0,0,0,0],[poke.Poke('Milotic',[50,1,787,"Hydro Pump",-1,"Attract",-1,"Dragon Tail",-1,"Recover",-1,None,None,0,"Poke Ball",400,"Marvel Scale"]),poke.Poke('Sharpedo',[50,0,787,"Crunch",-1,"Poison Fang",-1,"Ice Fang",-1,"Aqua Jet",-1,None,None,0,"Poke Ball",400,"Rough Skin"])],67,loc = "route_6")
         else:
             self.r6_fish2 = npc.NPC(self,'Fisherman','Tucker',[3450,1450],[['u',20]],["When I come out here, I like","to pretend I'm at war with the","mighty ocean!"],loc = "route_6")
         if self.prog[5][68] == 0:
@@ -597,17 +636,49 @@ class Pokemon:
         else:
             self.r6_fish3_npc = npc.NPC(self,'Fisherman','David',[2950,1500],[['l',60]],["Have you had any luck using","the rod I gave you?","","Just make sure to keep your","hands steady and reel in when","the fish bites!"],loc = "route_6")
         if self.prog[5][69] == 0:
-            self.r6_hiker = npc.NPC(self,'Hiker','Brooks',[3300,-900],[['u',80],['l',80],['r',100]],["I'm sure there's something","valuable in those woods, but","I'm too scared to explore it!"],["How about you take a look in", "there? After all you seem to","be pretty competent!"],True,[150,0,150,150],[poke.Poke('Crustle',[48,1,787,"X-Scissor",-1,"Shell Smash",-1,"Rock Slide",-1,"Stealth Rock",-1,None,None,0,"Poke Ball",300,"Shell Armor"]),poke.Poke('Golurk',[48,1,787,"Dynamic Punch",-1,"Magnitude",-1,"Shadow Punch",-1,"Iron Defense",-1,None,None,0,"Poke Ball",300,"Iron Fist"]),poke.Poke('Aggron',[50,0,787,"Iron Defense",-1,"Rock Slide",-1,"Iron Tail",-1,"Double-Edge",-1,None,None,0,"Poke Ball",300,"Sturdy"])],69,loc = "route_6")
+            self.r6_hiker = npc.NPC(self,'Hiker','Brooks',[3300,-900],[['u',80],['l',80],['r',100]],["I'm sure there's something","valuable in those woods, but","I'm too scared to explore it!"],["How about you take a look in", "there? After all you seem to","be pretty competent!"],True,[150,0,150,150],[poke.Poke('Crustle',[51,1,787,"X-Scissor",-1,"Shell Smash",-1,"Rock Slide",-1,"Stealth Rock",-1,None,None,0,"Poke Ball",300,"Shell Armor"]),poke.Poke('Golurk',[51,1,787,"Dynamic Punch",-1,"Magnitude",-1,"Shadow Punch",-1,"Iron Defense",-1,None,None,0,"Poke Ball",300,"Iron Fist"]),poke.Poke('Aggron',[52,0,787,"Iron Defense",-1,"Rock Slide",-1,"Iron Tail",-1,"Double-Edge",-1,None,None,0,"Poke Ball",300,"Sturdy"])],69,loc = "route_6")
         else:
             self.r6_hiker = npc.NPC(self,'Hiker','Brooks',[3300,-900],[['u',80],['l',80],['r',100]],["So did you get a chance to","take a stroll in there? Find","any gold? Or diamonds?"],loc = "route_6")
         if self.prog[5][70] == 0:
-            self.r6_rock4 = npc.NPC(self,'Team Rocketf','Grunt',[2350,-1050],[['d',20]],["Halt! You're not allowed to", "go past here! We've got some","important business to do.","Wait...Did you already get","past me? Either way I'm not","letting you get away!"],["Let's pretend you just snuck","past me without me noticing.", "Sound good?"],True,[0,100,0,0],[poke.Poke('Vileplume',[50,1,787,"Moonlight",-1,"Giga Drain",-1,"Toxic",-1,"Petal Blizzard",-1,None,None,0,"Poke Ball",200,"Chlorophyll"],petals=['hp','hp','hp']),poke.Poke('Yanmega',[50,0,787,"U-turn",-1,"Bug Buzz",-1,"Air Slash",-1,"Ancient Power",-1,None,None,0,"Poke Ball",200,"Speed Boost"],petals=['spd','spd','spd']),poke.Poke('Honchkrow',[50,0,787,"Taunt",-1,"Wing Attack",-1,"Sucker Punch",-1,"Night Slash",-1,None,None,0,"Poke Ball",200,"Super Luck"],petals=['ak','ak','ak'])],70,loc = "route_6")
+            self.r6_rock4 = npc.NPC(self,'Team Rocketf','Grunt',[2350,-1050],[['d',20]],["Halt! You're not allowed to", "go past here! We've got some","important business to do.","Wait...Did you already get","past me? Either way I'm not","letting you get away!"],["Let's pretend you just snuck","past me without me noticing.", "Sound good?"],True,[0,100,0,0],[poke.Poke('Vileplume',[52,1,787,"Moonlight",-1,"Giga Drain",-1,"Toxic",-1,"Petal Blizzard",-1,None,None,0,"Poke Ball",200,"Chlorophyll"],petals=['hp','hp','hp']),poke.Poke('Yanmega',[52,0,787,"U-turn",-1,"Bug Buzz",-1,"Air Slash",-1,"Ancient Power",-1,None,None,0,"Poke Ball",200,"Speed Boost"],petals=['spd','spd','spd']),poke.Poke('Honchkrow',[52,0,787,"Taunt",-1,"Wing Attack",-1,"Sucker Punch",-1,"Night Slash",-1,None,None,0,"Poke Ball",200,"Super Luck"],petals=['ak','ak','ak'])],70,loc = "route_6")
         else:
             self.r6_rock4 = npc.NPC(self,'Team Rocketf','Grunt',[2350,-1050],[['d',20]],["Hey, I already let you go!","No need to gloat your victory","in my face!"],loc = "route_6")
         if self.prog[5][71] == 0:
-            self.r6_rock5 = npc.NPC(self,'Team Rocketm','Grunt',[1900,-1450],[['u',20]],["Stop right there! I've got", "orders to stop any passerbys","from continuing forward!","That means you! And if you","resist, I'll have to force you","to leave!"],["Hold on, this isn't how this", "was supposed to go...",""],True,[150,0,0,0],[poke.Poke('Magneton',[50,2,787,"Electric Terrain",-1,"Discharge",-1,"Flash Cannon",-1,"Metal Sound",-1,None,None,0,"Poke Ball",200,"Magnet Pull"],petals=['hp','hp','hp']),poke.Poke('Toxicroak',[50,1,787,"Poison Jab",-1,"Sucker Punch",-1,"Swagger",-1,"Revenge",-1,None,None,0,"Poke Ball",200,"Dry Skin"],petals=['ak','ak','ak']),poke.Poke('Golem',[50,0,787,"Double-Edge",-1,"Earthquake",-1,"Rock Blast",-1,"Explosion",-1,None,None,0,"Poke Ball",200,"Rock Head"],petals=['spd','spd','spd']),poke.Poke('Malamar',[50,0,787,"Topsy-Turvy",-1,"Psycho Cut",-1,"Night Slash",-1,"Superpower",-1,None,None,0,"Poke Ball",200,"Contrary"],petals=['hp','hp','hp'])],71,loc = "route_6")
+            self.r6_rock5 = npc.NPC(self,'Team Rocketm','Grunt',[1900,-1450],[['u',20]],["Stop right there! I've got", "orders to stop any passerbys","from continuing forward!","That means you! And if you","resist, I'll have to force you","to leave!"],["Hold on, this isn't how this", "was supposed to go...",""],True,[150,0,0,0],[poke.Poke('Magneton',[52,2,787,"Electric Terrain",-1,"Discharge",-1,"Flash Cannon",-1,"Metal Sound",-1,None,None,0,"Poke Ball",200,"Magnet Pull"],petals=['hp','hp','hp']),poke.Poke('Toxicroak',[52,1,787,"Poison Jab",-1,"Sucker Punch",-1,"Swagger",-1,"Revenge",-1,None,None,0,"Poke Ball",200,"Dry Skin"],petals=['ak','ak','ak']),poke.Poke('Golem',[52,0,787,"Double-Edge",-1,"Earthquake",-1,"Rock Blast",-1,"Explosion",-1,None,None,0,"Poke Ball",200,"Rock Head"],petals=['spd','spd','spd']),poke.Poke('Malamar',[52,0,787,"Topsy-Turvy",-1,"Psycho Cut",-1,"Night Slash",-1,"Superpower",-1,None,None,0,"Poke Ball",200,"Contrary"],petals=['hp','hp','hp'])],71,loc = "route_6")
         else:
             self.r6_rock5 = npc.NPC(self,'Team Rocketm','Grunt',[1900,-1450],[['u',20]],["What do I do? Proton didn't","give me instructions for if","I lost..."],loc = "route_6")
+        self.silfg_team1 = [poke.Poke('Shiinotic',[54,1,787,"Moonblast",-1,"Strength Sap",-1,"Leech Seed",-1,"Dream Eater",-1,None,None,0,"Ultra Ball",300,"Effect Spore"],petals=['hp','hp','hp']),poke.Poke('Azumarill',[55,0,787,"Superpower",-1,"Double-Edge",-1,"Play Rough",-1,"Aqua Tail",-1,None,None,0,"Ultra Ball",400,"Huge Power"],petals=['ak','ak','ak'])]
+        self.silfg_team2 = [poke.Poke('Dedenne',[53,0,787,"Play Rough",-1,"Discharge",-1,"Volt Switch",-1,"Nuzzle",-1,None,None,0,"Ultra Ball",300,"Cheek Pouch"],petals=['spd','spd','spd']),poke.Poke('Ribombee',[53,1,787,"Quiver Dance",-1,"Dazzling Gleam",-1,"Aromatherapy",-1,"Pollen Puff",-1,None,None,0,"Ultra Ball",300,"Shield Dust"],petals=['sak','sak','sak']),poke.Poke('Wigglytuff',[54,0,787,"Hyper Voice",-1,"Wake-Up Slap",-1,"Play Rough",-1,"Rest",-1,None,None,0,"Ultra Ball",400,"Cute Charm"],petals=['hp','hp','hp'])]
+        self.silfg_team3 = [poke.Poke('Carbink',[54,1,787,"Reflect",-1,"Stealth Rock",-1,"Stone Edge",-1,"Moonblast",-1,None,None,0,"Ultra Ball",300,"Clear Body"],petals=['df','df','df']),poke.Poke('Gardevoir',[55,1,787,"Magical Leaf",-1,"Calm Mind",-1,"Psychic",-1,"Moonblast",-1,None,None,0,"Ultra Ball",300,"Trace"],petals=['sak','sak','sak'])]
+        self.silfg_team4 = [poke.Poke('Whimsicott',[53,0,787,"Cotton Guard",-1,"Cotton Spore",-1,"Moonblast",-1,"Giga Drain",-1,None,None,0,"Ultra Ball",300,"Prankster"],petals=['sdf','sdf','sdf']),poke.Poke('Mr Mime',[53,0,787,"Light Screen",-1,"Reflect",-1,"Encore",-1,"Psychic",-1,None,None,0,"Ultra Ball",300,"Filter"],petals=['spd','df','df']),poke.Poke('Mawile',[54,0,787,"Play Rough",-1,"Iron Head",-1,"Sucker Punch",-1,"Taunt",-1,None,None,0,"Ultra Ball",300,"Intimidate"],petals=['ak','ak','ak'])]
+        if self.prog[5][76] == 0:
+            self.snow_1_young = npc.NPC(self,'Youngster','Sean',[650,1050],[['l',20]],["Hey! This is my secret tunnel! Go have fun somewhere else!"],["I guess you can take a look around. Just don't make a big mess!"],True,[0,0,100,0],[poke.Poke('Crawdaunt',[53,1,787,"Swords Dance",-1,"Crabhammer",-1,"Crunch",-1,"Taunt",-1,None,None,0,"Poke Ball",300,"Hyper Cutter"],petals=['df','df','df']),poke.Poke('Raichu',[53,0,787,"Nuzzle",-1,"Double Team",-1,"Wild Charge",-1,"Thunderbolt",-1,None,None,0,"Poke Ball",300,"Static"],petals=['sdf','sdf','sdf']),poke.Poke('Vanilluxe',[53,0,787,"Acid Armor",-1,"Mirror Shot",-1,"Weather Ball",-1,"Mirror Coat",-1,None,None,0,"Poke Ball",300,"Snow Warning"],petals=['sak','sak','sak'])],76,loc = "snow_1")
+        else:
+            self.snow_1_young = npc.NPC(self,'Youngster','Sean',[650,1050],[['l',20]],["So what do you think about my secret hideout? It's pretty cool huh?"],loc = "snow_1")
+        if self.prog[5][77] == 0:
+            self.snow_o2_battle = npc.NPC(self,'Battle Girl','Ava',[750,700],[['mr',80],['r',40],['md',40],['d',40],['mu',40],['u',20],['ml',80],['l',60]],["After a week of training in the snow like this, I'll be unstoppable!"],["That was just a warm up! You haven't seen my final form yet!"],True,[100,100,100,100],[poke.Poke('Primeape',[54,0,787,"Stomping Tantrum",-1,"Outrage",-1,"Close Combat",-1,"Final Gambit",-1,None,None,0,"Poke Ball",300,"Anger Point"],petals=['ak','ak','ak']),poke.Poke('Hitmonchan',[54,1,787,"Counter",-1,"Bullet Punch",-1,"Ice Punch",-1,"Close Combat",-1,None,None,0,"Poke Ball",300,"Iron Fist"],petals=['ak','ak','ak']),poke.Poke('Crabominable',[55,0,787,"Power-Up Punch",-1,"Crabhammer",-1,"Ice Punch",-1,"Close Combat",-1,None,None,0,"Poke Ball",400,"Iron Fist"],petals=['ak','ak','ak'])],77,loc = "snow_o2")
+        else:
+            self.snow_o2_battle = npc.NPC(self,'Battle Girl','Ava',[750,700],[['mr',80],['r',40],['md',40],['d',40],['mu',40],['u',20],['ml',80],['l',60]],["It's getting pretty chilly out here! And my legs are starting to feel like jello...","But if this is enough to make me give up, I'll never manage to win a tournament!"],loc = "snow_o2")
+        if self.prog[5][78] == 0:
+            self.snow_2_hiker = npc.NPC(self,'Hiker','Theo',[450,850],[['mr',80],['r',100],['ml',80],['l',120]],["Exploring these caves makes me feel like I'm going on an adventure!","Which means it's the perfect time to battle other trainers!"],["Phew! That really got my heart pumping. Nothing beats a good Pokemon battle!"],True,[0,0,100,100],[poke.Poke('Golem',[56,0,787,"Stone Edge",-1,"Earthquake",-1,"Explosion",-1,"Rock Polish",-1,None,None,0,"Poke Ball",400,"Sturdy"],petals=['ak','ak','ak']),poke.Poke('Mamoswine',[56,0,787,"Thrash",-1,"Ice Fang",-1,"Ice Shard",-1,"Earthquake",-1,None,None,0,"Poke Ball",300,"Oblivious"],petals=['hp','hp','hp'])],78,loc = "snow_2")
+        else:
+            self.snow_2_hiker = npc.NPC(self,'Hiker','Theo',[450,850],[['mr',80],['r',100],['ml',80],['l',120]],["These caves are so fun to explore! There's so many cool things to find!"],loc = "snow_2")
+        if self.prog[5][79] == 0:
+            self.r3_hex = npc.NPC(self,'Hex Maniac','Chloe',[3250,-550],[['u',60]],["I'll be the one to determine if you're worthy of being in Manaphy's presence!"],["You were able to defeat me? Manaphy must be looking favorably upon you."],True,[0,0,0,0],[poke.Poke('Togekiss',[30,1,787,"Magical Leaf",-1,"Fairy Wind",-1,"Yawn",-1,"Air Slash",-1,None,None,0,"Poke Ball",400,"Serene Grace"]),poke.Poke('Roserade',[30,1,787,"Growth",-1,"Poison Sting",-1,"Grass Whistle",-1,"Giga Drain",-1,None,None,0,"Poke Ball",400,"Poison Point"])],79,loc = "route_3")
+        else:
+            self.r3_hex = npc.NPC(self,'Hex Maniac','Chloe',[3250,-550],[['u',60]],["This shrine is dedicated to Manaphy, one of the fairies that guards these islands.","I recommend you make an offering as a sign of respect."],loc = "route_3")
+        if self.prog[5][80] == 0:
+            self.snow_o3_exp = npc.NPC(self,'Expertm','Wesley',[1650,700],[['r',60]],["You're not the same person that just passed by here are you?","Their aura was much more powerful than the one you're giving off."],["Well I'm quite impressed! You're certainly no weakling yourself!"],True,[0,0,0,0],[poke.Poke('Shiftry',[65,1,787,"Leaf Blade",-1,"Night Slash",-1,"Fake Out",-1,"Swagger",-1,"Razor Claw",None,0,"Poke Ball",400,"Early Bird"],petals=['spd','spd','spd','hp','hp']),poke.Poke('Crawdaunt',[65,0,787,"Swords Dance",-1,"Night Slash",-1,"Crabhammer",-1,"Protect",-1,"Razor Claw",None,0,"Poke Ball",400,"Adaptability"],petals=['ak','ak','ak','df','df']),poke.Poke('Bisharp',[65,0,787,"Night Slash",-1,"Iron Defense",-1,"Iron Head",-1,"Slash",-1,"Razor Claw",None,0,"Poke Ball",400,"Defiant"],petals=['df','df','df','ak','ak']),poke.Poke('Weavile',[65,0,787,"Night Slash",-1,"Ice Shard",-1,"Swords Dance",-1,"Shadow Claw",-1,"Razor Claw",None,0,"Poke Ball",400,"Pressure"],petals=['spd','spd','spd','ak','ak'])],80,loc = "snow_o3")
+        else:
+            self.snow_o3_exp = npc.NPC(self,'Expertm','Wesley',[1650,700],[['r',60]],["Out here it feels like the buzz of civilization is so far away.","If you squint you can see the top of Cascata Gym poking out past that crest."],loc = "snow_o3")
+        if self.prog[5][81] == 0:
+            self.snow_o3_aroma = npc.NPC(self,'Aroma Lady','Mia',[700,1150],[['l',80],['r',60],['d',120]],["I've been gathering herbs for the past hour. It's the perfect time for a break!"],["Aww, that ended a bit too quickly...guess it's time to get back to work!"],True,[100,100,100,100],[poke.Poke('Masquerain',[55,1,787,"Quiver Dance",-1,"Bug Buzz",-1,"Air Slash",-1,"Stun Spore",-1,None,None,0,"Poke Ball",300,"Intimidate"],petals=['spd','spd','spd']),poke.Poke('Shiinotic',[55,1,787,"Moonblast",-1,"Spore",-1,"Strength Sap",-1,"Giga Drain",-1,None,None,0,"Poke Ball",300,"Effect Spore"],petals=['hp','hp','hp']),poke.Poke('Alolan_Ninetales',[55,1,787,"Nasty Plot",-1,"Extrasensory",-1,"Ice Beam",-1,"Dazzling Gleam",-1,None,None,0,"Poke Ball",400,"Snow Cloak"],petals=['sak','sak','sak'])],81,loc = "snow_o3")
+        else:
+            self.snow_o3_aroma = npc.NPC(self,'Aroma Lady','Mia',[700,1150],[['l',80],['r',60],['d',120]],["There are a lot of unique plants growing in this harsh environment.","A couple of them are really delicious when cooked into a soup!"],loc = "snow_o3")
+        if self.prog[5][82] == 0:
+            self.snow_3_ace = npc.NPC(self,'Ace Trainerf','Stella',[1350,900],[['l',100],['d',60]],["I've spent the past 3 hours training my Pokemon. It's time to reap the rewards!"],["Maybe I should've taken a break before having a full on battle..."],True,[0,200,300,0],[poke.Poke('Delcatty',[55,1,787,"Fake Out",-1,"Play Rough",-1,"Double-Edge",-1,"Captivate",-1,None,None,0,"Ultra Ball",300,"Cute Charm"],petals=['df','df','df']),poke.Poke('Nidoqueen',[55,1,787,"Earth Power",-1,"Ice Beam",-1,"Superpower",-1,"Poison Jab",-1,None,None,0,"Ultra Ball",300,"Rivalry"],petals=['hp','hp','hp']),poke.Poke('Glaceon',[55,1,787,"Mirror Coat",-1,"Hail",-1,"Blizzard",-1,"Barrier",-1,None,None,0,"Ultra Ball",300,"Snow Cloak"],petals=['sdf','sdf','sdf']),poke.Poke('Froslass',[56,1,787,"Shadow Ball",-1,"Blizzard",-1,"Hail",-1,"Wake-Up Slap",-1,None,None,0,"Ultra Ball",400,"Snow Cloak"],petals=['spd','spd','spd'])],82,loc = "snow_3")
+        else:
+            self.snow_3_ace = npc.NPC(self,'Ace Trainerf','Stella',[1350,900],[['d',60]],["I heard rumors of a great training spot somewhere in these caves.","But I've explored every inch of this place, and I still haven't found it!"],loc = "snow_3")
 
 
 
@@ -624,6 +695,7 @@ class Pokemon:
             self.nurse_box = pygame.transform.scale(poke_func.load("p/nurse_icon.png"),(25,25))
             self.item_box = pygame.transform.scale(poke_func.load("p/item_icon.png"),(16,20))
             self.rain_img = poke_func.load("p/terrain/rain.png")
+            self.hail_img = poke_func.load("p/terrain/hail.png")
             self.wind_img = poke_func.load("p/terrain/wind.png")
             self.sun_img = poke_func.load("p/terrain/sunny.png")
             self.char_shad = poke_func.load("p/char_shadow.png")
@@ -638,9 +710,8 @@ class Pokemon:
             self.textbox = poke_func.load("p/textbox.png")
             self.exclaim = poke_func.load("p/exclaim.png")
             self.battlebox = poke_func.load("p/battle_txtbox.png")
-            self.choicebox = poke_func.load("p/2_box.png")
+            self.choicebox = poke_func.load("p/ui/2_box.png")
             self.arrow = poke_func.load("p/arrow.png")
-            self.pokeball = poke_func.load("p/Poke Ball.png")
             self.item_cave = poke_func.load("p/item_cave.png")
             self.item_out = poke_func.load("p/item.png")
             self.dwebble_rock = poke_func.load("p/dwebble.png")
@@ -648,6 +719,7 @@ class Pokemon:
             self.light = poke_func.load("p/am/lamp_light.png")
             self.grass = poke_func.load("p/am/grass_bot.png")
             self.dark_grass = poke_func.load("p/am/dark_grass_bot.png")
+            self.snow_grass = poke_func.load("p/am/snow_grass_bot.png")
             self.small_door = poke_func.load("p/am/house_1_door.png")
             self.traffic_cone = poke_func.load("p/egida/traffic_cone.png")
             self.black_back = poke_func.load("p/black_back.png")
@@ -665,7 +737,7 @@ class Pokemon:
             self.cave_in_d = poke_func.load("p/cave_in_d.png")
             self.cave_in_r = poke_func.load("p/cave_in_r.png")
             self.cave_out_r = poke_func.load("p/cave_out_r.png")
-            self.caught_icon = pygame.transform.scale(poke_func.load("p/Poke Ball.png"),(25,25))
+            self.caught_icon = pygame.transform.scale(poke_func.load("p/ui/Poke Ball.png"),(25,25))
             self.garden_bin = poke_func.load("p/gardening/bin.png")
             self.garden_water_bin = poke_func.load("p/gardening/water_bucket.png")
             self.garden_fertilizer = poke_func.load("p/gardening/fertilizer.png")
@@ -674,8 +746,8 @@ class Pokemon:
             self.ff_bell = poke_func.load("p/ombra/bell.png")
             self.repel_img = poke_func.load("p/item/Repel.png")
             self.repel_bar = poke_func.load("p/repel_bar.png")
-            self.beadr = poke_func.load("p/silfide/beauty_door_r.png")
-            self.beadl = poke_func.load("p/silfide/beauty_door_l.png")
+            self.theadr = poke_func.load("p/silfide/beauty_door_r.png")
+            self.theadl = poke_func.load("p/silfide/beauty_door_l.png")
             #route 1
             self.route_1 = poke_func.load("p/am/Route_1.png")
             self.r1_trees = poke_func.load("p/am/route_1_trees.png")
@@ -803,6 +875,19 @@ class Pokemon:
             self.silfide_wind = poke_func.load("p/silfide/windmill.png")
             self.silfide_foam = poke_func.load("p/silfide/Silfide_foam.png")
             self.silfide_foamf = poke_func.load("p/silfide/Silfide_foamf.png")
+            self.silfide_cloud = poke_func.load("p/silfide/silfide_clouds.png")
+            #snowscape
+            self.snow_o1_gigau = pygame.transform.scale(poke_func.load("p/spr/Icy_Gigalith_u1.png"),(100,120))
+            self.snow_o1_gigad = pygame.transform.scale(poke_func.load("p/spr/Icy_Gigalith_d1.png"),(100,120))
+            self.snow_o1_back = poke_func.load("p/nevoso/Snowscape_o1.png")
+            self.snow_o1_foam = poke_func.load("p/nevoso/Snowscape_o1_foam.png")
+            self.snow_o1_f = poke_func.load("p/nevoso/Snowscape_o1f.png")
+            self.snow_in_d = poke_func.load("p/nevoso/light_in_d.png")
+            self.snow_in_u = poke_func.load("p/nevoso/light_in_u.png")
+            self.snow_in_r = poke_func.load("p/nevoso/light_in_r.png")
+            self.snow_peg_1 = poke_func.load("p/nevoso/cave_peg.png")
+            self.snow_peg_2 = poke_func.load("p/nevoso/cave_rope.png")
+            self.snow_rope = poke_func.load("p/nevoso/cave_rope_u.png")
 
 if __name__ == '__main__':
     pygame.init()

@@ -1,3 +1,0 @@
-[type,category]
-['Description (20 per line)']
-price (-1 for unsellable half buy price)

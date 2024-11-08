@@ -1,0 +1,11 @@
+['Snow Cloak','*Cursed Body']
+[1.4,1.6,1.6,1.4,1.4,2.2]
+['Ice','Ghost']
+[]
+{1:['Ominous Wind','Destiny Bond','Powder Snow','Leer','Double Team','Ice Shard'],5:'Double Team',10:'Ice Shard',14:'Icy Wind',19:'Astonish',23:'Draining Kiss',28:'Will-O-Wisp',32:'Confuse Ray',37:'Wake-Up Slap',41:'Captivate',42:'Shadow Ball',48:'Blizzard',54:'Hail',61:'Destiny Bond'}
+75
+26.6
+51
+310
+[]
+['Snow Land','It freezes foes with an icy breath nearly  -60 degrees Fahrenheit. What seems to be its body is actually hollow.'] 

@@ -4,3 +4,6 @@ fakeout
 self destruct explosion
 hex
 dream eater nightmare
+restore moves (adjust?)
+terrains
+status moves

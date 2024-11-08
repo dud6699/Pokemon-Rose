@@ -1,0 +1,3 @@
+['Dazzling Gleam','TM']
+['The user damages the opposing Pokemon by emitting a powerful flash.']
+-1

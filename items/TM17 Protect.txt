@@ -1,0 +1,3 @@
+['Protect','TM']
+['Enables the user to evade all attacks. Its chance of failing rises if it is used in succession.']
+-1

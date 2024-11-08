@@ -1,0 +1,11 @@
+['Snow Warning','*Soundproof']
+[1.2,1.24,1.24,1,1.2,.8]
+['Grass','Ice']
+[40,'Abomasnow']
+{1:['Powder Snow','Leer'],5:'Razor Leaf',9:'Icy Wind',13:'Grass Whistle',17:'Swagger',21:'Mist',26:'Ice Shard',31:'Ingrain',36:'Wood Hammer',41:'Blizzard',46:'Sheer Cold'}
+120
+50.5
+39
+291
+['snow_o']
+['Frost Tree','During cold seasons, it migrates to the mountain\'s lower reaches. It returns to the snow-covered summit in the spring.'] 

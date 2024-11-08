@@ -5,6 +5,6 @@ Normal
 {}
 1
 5
-['The user charges at', 'the target using', 'every bit of its', 'power. The user', 'can\'t move on the', 'next turn.']
+['The user charges at the target using every bit of its power. The user can\'t move on the next turn.']
 0
 5

@@ -1,9 +1,11 @@
 ace trainer (m/f)
+aroma lady
 battle girl
+beauty
 bug catcher
 colress
 eusine
-expert
+expert (m/f)
 fisherman
 gentleman
 healer
@@ -12,12 +14,18 @@ hiker
 lass
 latias
 manaphy
-preschooler
+poke fan
+preschooler (b/g)
 professor
 psychic
+rich boy
 rival (m/f)
-scientist
+sailor
+scientist (m/f)
 steven
 rocker grunt (m/f)
 triathelete
 youngster
+
+potential:
+guitarist

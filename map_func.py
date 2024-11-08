@@ -10,6 +10,2826 @@ import math
 from poke_func import*
 from pygame.locals import*
 
+def nevoso_lab_b(P):
+    P.surface.fill((0,0,0))
+    P.surface.blit(P.nevoso_lab_back, (P.px, P.py))
+
+def nevoso_lab_p(P,temppx,temppy,move):
+
+    P.nevoso_lab_scim.move()
+    P.nevoso_lab_exp.move()
+    #rects start
+    r0 = (P.px+200,P.py+50,250,40)
+    r1 = (P.px,P.py+100,200,40)
+    r2 = (P.px+450,P.py+100,50,40)
+    r3 = (P.px+500,P.py+150,50,40)
+    r4 = (P.px+550,P.py+200,50,240)
+    r5 = (P.px-50,P.py+150,50,290)
+    r6 = (P.px+100,P.py+300,100,140)
+    r7 = (P.px+200,P.py+350,50,40)
+    r8 = (P.px+250,P.py+250,50,190)
+    if P.px >= 125:
+        r8 = (P.px+300,P.py+250,50,190)
+    r9 = (P.px,P.py+450,550,40)
+    r10 = P.nevoso_lab_scim.get_rect()
+    r11 = P.nevoso_lab_exp.get_rect()
+    rects = [r11,r10,r9,r8,r7,r6,r5,r4,r3,r2,r1,r0]
+    #rects end
+    #rect_draw(P,rects)
+    if move:
+        player_move(P,rects)
+    else:
+        blit_player(P)
+    P.nevoso_lab_scim.move(temppx,temppy)
+    P.nevoso_lab_exp.move(temppx,temppy)
+
+def nevoso_lab_f(P,temppx,temppy):
+    P.surface.blit(P.nevoso_lab_f,(temppx+98,temppy+242))
+    show_location(P, None, 0)
+
+def nevoso_lab(P) -> None:
+    def refresh():
+        nevoso_lab_b(P)
+        nevoso_lab_p(P,P.px,P.py,False)
+        nevoso_lab_f(P,P.px,P.py)
+    set_mixer_volume(P,P.vol)
+    if P.song != "music/nevoso.wav":
+        P.song = "music/nevoso.wav"
+        pygame.mixer.music.load(P.song)
+        pygame.mixer.music.play(-1)
+    P.nevoso_lab_back = load("p/nevoso/nevoso_lab.png")
+    P.nevoso_lab_f = load("p/egida/lab_f.png")
+    P.nevoso_lab_scim = npc.NPC(P,'Scientistm','Dude',[100,150],[['d',20]],["I apologize, but the equipment","we have is a little tricky to","work with.","I'd suggest for you to get some","experience at another lab","before helping out here."])
+    P.nevoso_lab_exp = npc.NPC(P,'Expertm','Dude',[200,350],[['l',20]],["I hope my Repel canister has","been serving you well!","","If you ever catch me visiting","the Alto Mare festival, I can","upgrade it for you!"])
+    move = True
+    tim = 0
+    refresh()
+    fade_in(P)
+    end = True
+    m = 0
+    while end:
+        #print(P.px,P.py)
+        nevoso_lab_b(P)
+        temppx = P.px
+        temppy = P.py
+        nevoso_lab_p(P,temppx,temppy,move)
+        nevoso_lab_f(P,temppx,temppy)
+        for event in map_keys():
+            if (event.type == KEYDOWN or P.buffer_talk) and tim > 20:
+                if event.key == pygame.key.key_code(P.controls[6]) and move:
+                    m = 1
+                elif event.key == pygame.key.key_code(P.controls[7]) and move:
+                    P.register_click = 1
+                elif (event.key == pygame.key.key_code(P.controls[4]) or P.buffer_talk) and move:
+                    if event.key == pygame.key.key_code(P.controls[4]):
+                        P.buffer_talk = 10
+                    temp_buff = P.buffer_talk
+                    P.buffer_talk = None
+                    if P.nevoso_lab_exp.talk():
+                        refresh()
+                        P.nevoso_lab_exp.write()
+                    elif next_to(P,0,100):
+                        if not new_day(P.prog[8][0][2]) and P.prog[8][0][2][0] != None:
+                            txt(P,'There are some gems in the box.')
+                        else:
+                            txt(P,"The box is filled with gems.")
+                    elif next_to(P,450,100) or next_to(P,500,150):
+                        txt(P,"You can't tell what's inside,","but it's quite heavy.")
+                    elif P.py == 175 and P.px in [125,75,25] and face_u(P):
+                        txt(P,"The monitor is off.")
+                    elif P.nevoso_lab_scim.talk():
+                        refresh()
+                        if P.prog[8][0][0] == -1:
+                            P.nevoso_lab_scim.write()
+                        elif P.prog[8][0][0] < 4:
+                            txt(P,"I apologize, but the equipment","we have is a little tricky to","work with.")
+                            txt(P,"I'd suggest for you to get","some experience at another lab","before helping out here.")
+                            txt(P,"Come back once your research","skill has hit level 4!")
+                        else:
+                            temp = P.surface.copy()
+                            if not new_day(P.prog[8][0][2]):
+                                txt(P,"We're pretty much out of work","to do today!")
+                                txt(P,"If you still want to practice","I can let you try again, but","you'll receive less rewards.")
+                                new_txt(P)
+                                write(P,'Would you like to go again?')
+                            else:
+                                txt(P,"We have some gems ready for","analysis. I can help guide you","through the process.")
+                                txt(P,"Our equipment is quite old, so","you may find that some of the","lenses aren't always working.")
+                                new_txt(P)
+                                write(P,'Are you ready to begin?')
+                            if choice(P):
+                                fade_out(P)
+                                points = research_game(P,3,[0,True],loc = 1)
+                                lowest = points[1]
+                                points = points[0]
+                                print("points"+str(points))
+                                P.surface.blit(temp,(0,0))
+                                fade_in(P)
+                                if points == -1:
+                                    txt(P,"Thanks anyways for offering to","help. I understand you're a","busy person.")
+                                    txt(P,"I'll be waiting here for", "when you return.")
+                                elif points == 3000:
+                                    txt(P,"Wow! I didn't even see you","touch the analysis tools!")
+                                    txt(P,"You must really be getting","the hang of this! That was", "incredible!")
+                                elif lowest == True:
+                                    txt(P,"Hmm, I think you could use","a little more training.")
+                                    txt(P,"Pokemon type interactions are","very well documented. You may","want to research a bit.")
+                                elif points > 2800:
+                                    txt(P,"Amazing job! You worked so","efficiently, I almost feel bad","that we're out of gems.")
+                                elif points > 2550:
+                                    txt(P,"Nice going! Thanks for lending","a hand, it really helps a lot!")
+                                elif points > 2100:
+                                    txt(P,"Pretty good! With some more","experience, I'm sure you'll","keep improving!")
+                                else:
+                                    txt(P,"Not bad! If you ever need a","few tips, feel free to ask","around.")
+                                lvled = False
+                                if points == -1:
+                                    pass
+                                elif points == 3000:
+                                    money = int(3000 * (0.9+(0.15*P.prog[8][0][0])))
+                                    if not new_day(P.prog[8][0][2]):
+                                        txt(P,"Here, take $"+str(int(money/5))+" for that","stellar performance!")
+                                        P.save_data.money += int(money/5)
+                                    else:
+                                        txt(P,"Here, take $"+str(money)+" for that","stellar performance!")
+                                        P.save_data.money += money
+                                    lvled = gain_skill(P,0,30)
+                                else:
+                                    #$ multiplier
+                                    points *= 1.5
+                                    exp = 100+round((points**2)/50000)*5
+                                    print(exp)
+                                    lvled = gain_skill(P,0,int(exp/100))
+                                    if not new_day(P.prog[8][0][2]):
+                                        exp /= 5
+                                    money = int(exp*(1+(0.15*P.prog[8][0][0])))
+                                    txt(P,"Here, have $"+str(money)+" for your","help. Be sure to stop by when","our next shipment is in!")
+                                    P.save_data.money += money
+                                if lvled:
+                                    txt(P,"Congratulations, your research","skill leveled up!")
+                                    txt(P,"You may find it easier to","identify some of these gems.")
+                                if points != -1 and new_day(P.prog[8][0][2]):
+                                    P.prog[8][0][2] = datetime.date.today().strftime("%m/%d/%Y")
+                            else:
+                                txt(P,"Alright, let me know when","you're available!")
+                    else:
+                        P.buffer_talk = temp_buff
+        keys = pygame.key.get_pressed()
+        if P.px == -25 and P.py == -125 and keys[pygame.key.key_code(P.controls[1])] and P.p == P.d1:
+            P.px = -475
+            P.py = -975
+            P.loc = 'nevoso'
+            end = False
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and m == 1:
+            menu(P)
+            m = 0
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and P.register_click == 1:
+            register(P)
+            P.register_click = -10
+        tim += 1
+        tick_buffer(P)
+        update_screen(P)
+        P.clock.tick(P.ani_spd)
+    P.move_out_dir = 'd'
+    fade_out(P)
+    set_mixer_volume(P,P.vol)
+
+def nevoso_b(P,wx,wy,gy):
+    draw_waves(P, wx, wy)
+    pc = 0
+    if P.px == -825 and P.py > -575 and P.py <= -525:
+        pc = (575 + P.py)
+    P.surface.blit(P.pc_black,(P.px+1180,P.py+780))
+    P.surface.blit(P.pcdr, (P.px + 1225 + pc, P.py + 780 - (pc/5)))
+    P.surface.blit(P.pcdl, (P.px + 1188 - pc, P.py + 780 - (pc/5)))
+    P.surface.blit(P.nevoso_back, (P.px, P.py))
+    #lab
+    if P.px == -475 and P.py > -1025 and P.py <= -975:
+        P.surface.fill((231,231,205), Rect(P.px+850,P.py+1240,-(975+P.py),60))
+    else:   
+        if P.px <= -850 and P.px >= -900:
+            P.surface.fill((231,231,205), Rect(0,P.py+1240,900+P.px,60))
+        elif P.py <= -1240 and P.py >= -1300:
+            P.surface.fill((231,231,205), Rect(P.px+850,0,50,1300+P.py))
+        else:
+            P.surface.fill((231,231,205), Rect(P.px+850,P.py+1240,50,60))
+    if P.px == -525 and -575 < P.py <= -525:
+        blit_small_door(P,-535)
+    elif P.px == -925 and -1425 < P.py <= -1375:
+        blit_small_door(P,-1385)
+    elif P.px == -1275 and -1425 < P.py <= -1375:
+        blit_small_door(P,-1385)
+    # elif P.px == -775 and -1075 < P.py <= -1025:
+    #     P.surface.blit(P.d1_door,(P.px+1152,P.py+1279))
+    # elif P.px == -1375 and -1075 < P.py <= -1025:
+    #     P.surface.blit(P.mine_door,(P.px+1750,P.py+1285))
+    P.surface.blit(P.gondola, (P.px+1850, P.py + 1250 + abs(P.foam)+gy))
+    P.surface.blit(P.char_shad, (P.px + 1861, P.py + 1310 + abs(P.foam)+gy))
+    P.surface.blit(P.gondolier, (P.px + 1862, P.py + 1290 + abs(P.foam)+gy))
+    P.surface.blit(P.nevoso_foam,(P.px+708,P.py+1434+abs(P.foam)))
+
+def nevoso_p(P,temppx,temppy,move,gond,gy):
+    P.nevoso_pre.move()
+    P.nevoso_lass.move()
+    P.nevoso_young.move()
+    P.nevoso_exp.move()
+    r1 = (P.px+400,P.py+350,100,40)
+    r2 = (P.px+500,P.py+300,100,40)
+    r3 = (P.px+600,P.py+350,100,40)
+    r4 = (P.px+700,P.py+400,50,440)
+    r5 = (P.px+750,P.py+800,150,40)
+    r6 = (P.px+900,P.py+750,50,40)
+    r7 = (P.px+950,P.py+800,250,40)
+    r8 = (P.px+1200,P.py+750,50,40)
+    r9 = (P.px+1250,P.py+800,150,40)
+    r10 = (P.px+1350,P.py+600,50,190)
+    r11 = (P.px+1400,P.py+550,300,40)
+    r12 = (P.px+1650,P.py+400,50,140)
+    r13 = (P.px+1500,P.py+400,150,40)
+    r14 = (P.px+1450,P.py+300,50,90)
+    r15 = (P.px+1500,P.py+250,50,40)
+    r16 = (P.px+1550,P.py+300,50,40)
+    r17 = (P.px+1600,P.py+250,150,40)
+    r18 = (P.px+1750,P.py+300,50,990)
+    r19 = (P.px+1450,P.py+800,300,40)
+    r20 = (P.px+1800,P.py+1250,50,40)
+    r21 = (P.px+1850,P.py+1300,50,90)
+    r22 = (P.px+1750,P.py+1400,100,40)
+    r23 = (P.px+1100,P.py+1450,650,40)
+    r24 = (P.px+1100,P.py+1500,50,190)
+    r25 = (P.px+1150,P.py+1650,150,40)
+    r26 = (P.px+1300,P.py+1600,50,40)
+    r27 = (P.px+1350,P.py+1650,300,40)
+    r28 = (P.px+1650,P.py+1600,50,40)
+    r29 = (P.px+1700,P.py+1650,50,40)
+    r30 = (P.px+1750,P.py+1700,50,140)
+    r31 = (P.px+600,P.py+1850,1150,40)
+    r32 = (P.px+550,P.py+1800,50,40)
+    r33 = (P.px+500,P.py+1700,50,90)
+    r34 = (P.px+550,P.py+1650,50,40)
+    r35 = (P.px+600,P.py+1600,250,40)
+    r36 = (P.px+850,P.py+1450,50,190)
+    r37 = (P.px+600,P.py+1450,250,40)
+    r38 = (P.px+550,P.py+1300,50,140)
+    r39 = (P.px+600,P.py+1250,250,40)
+    r40 = (P.px+850,P.py+1200,50,40)
+    r41 = (P.px+900,P.py+1000,50,290)
+    r42 = (P.px+400,P.py+1000,500,40)
+    r43 = (P.px+350,P.py+400,50,590)
+    r44 = (P.px+1200,P.py+1000,50,40)
+    r45 = (P.px+1250,P.py+1150,50,40)
+    r46 = (P.px+1450,P.py+1100,100,40)
+    r47 = P.nevoso_young.get_rect()
+    r48 = P.nevoso_lass.get_rect()
+    r49 = P.nevoso_pre.get_rect()
+    r50 = P.nevoso_exp.get_rect()
+    rects = [r50,r49,r48,r47,r46,r45,r44,r43,r42,r41,r40,r39,r38,r37,r36,r35,r34,r33,r32,r31,r30,r29,r28,r27,r26,r25,r24,r23,r22,r21,r20,r19,r18,r17,r16,r15,r14,r13,r12,r11,r10,r9,r8,r7,r6,r5,r4,r3,r2,r1]
+    #rects end
+    # rect_draw(P,rects)
+    if gond != 0:
+        P.surface.blit(P.char_shad,(P.px+1861,P.py+1363+abs(P.foam)+gy))
+        P.surface.blit(P.p,(P.px+1860,P.py+1340+abs(P.foam)+gy))
+    else:
+        if move:
+            player_move(P,rects)
+        else:
+            blit_player(P)
+    P.nevoso_pre.move(temppx,temppy)
+    P.nevoso_lass.move(temppx,temppy)
+    P.nevoso_young.move(temppx,temppy)
+    P.nevoso_exp.move(temppx,temppy)
+
+
+def nevoso_f(P,temppx,temppy,tim,fall):
+    draw_falls(P,fall,1815,0,324,temppx,temppy)
+    P.surface.blit(P.nevoso_foam_1,(temppx+1700,temppy+200+abs(P.ocean)/2))
+    P.surface.blit(P.nevoso_foam_2,(temppx+1700,temppy+200+abs(P.f2)))
+    P.surface.blit(P.nevoso_foam_3,(temppx+1700,temppy+200+abs(P.f3)))
+    P.surface.blit(P.nevoso_f, (temppx + 500, temppy + 243))
+    set_sky(P)
+    if ((get_time() > 19 or get_time() < 6) or P.lighting == 'Night') and P.lighting != 'Day':
+        P.surface.blit(P.pc_light,(temppx+1165,temppy+601))
+    show_location(P, P.loc_txt, tim)
+
+def nevoso(P) -> None:
+    def refresh():
+        nevoso_b(P,wx,wy,gy)
+        nevoso_p(P,P.px,P.py,False,gond,gy)
+        nevoso_f(P,P.px,P.py,tim,fall)
+    if P.song != "music/nevoso.wav":
+        P.song = "music/nevoso.wav"
+        pygame.mixer.music.load(P.song)
+        set_mixer_volume(P,P.vol)
+        pygame.mixer.music.play(-1)
+    set_location(P)
+    gond = 0
+    gy = 0
+    wx = 0
+    wy = 0
+    fall = 0
+    fade = None
+    move = True
+    tim = 0
+    P.nevoso_back = load("p/nevoso/Nevoso_Town.png")
+    P.nevoso_foam = load("p/nevoso/Nevoso_foam.png")
+    P.nevoso_f = load("p/nevoso/Nevoso_f.png")
+    P.nevoso_foam_1 = load("p/nevoso/Nevoso_fall_1.png")
+    P.nevoso_foam_2 = load("p/nevoso/Nevoso_fall_2.png")
+    P.nevoso_foam_3 = load("p/nevoso/Nevoso_fall_3.png")
+    P.nevoso_pre = npc.NPC(P,'Preschoolerb','Elec',[1150,1000],[['r',100]],["Look at my snowmon! It looks like a Voltorb. Or maybe an Electrode.","But if you look at it from above it kinda looks like a Jigglypuff!"])
+    P.nevoso_young = npc.NPC(P,'Youngster','Oct',[1550,1100],[['l',240],['mu',20],['ml',20],['d',160],['mr',20],['md',20]],["Hahaha! My Octillery lands another critical hit!!!"])
+    P.nevoso_lass = npc.NPC(P,'Lass','Kirl',[1300,1150],[['l',100]],["I'm so done playing outside! Willy always has to mess everything up!","I spent the whole day making this Kirlia and he broke her head with a snowball!"])
+    P.nevoso_exp = npc.NPC(P,'Expertf','Old',[1050,1200],[['r',360],['md',40],['mr',60],['u',300],['ml',60],['mu',40]],["It really warms my heart to see the kids having fun with each other."])
+    refresh()
+    fade_in(P)
+    end = True
+    m = 0
+    while end:
+        print(P.px,P.py)
+        nevoso_b(P,wx,wy,gy)
+        temppx = P.px
+        temppy = P.py
+        nevoso_p(P,temppx,temppy,move,gond,gy)
+        nevoso_f(P,temppx,temppy,tim,fall)
+        if gond == 1:
+            gond = 2
+            fade_in(P)
+        for event in map_keys():
+            if (event.type == KEYDOWN or P.buffer_talk) and gond == 0 and tim > 20:
+                if event.key == pygame.key.key_code(P.controls[6]) and move:
+                    m = 1
+                elif event.key == pygame.key.key_code(P.controls[7]) and move:
+                    P.register_click = 1
+                elif (event.key == pygame.key.key_code(P.controls[4]) or P.buffer_talk) and move:
+                    if event.key == pygame.key.key_code(P.controls[4]):
+                        P.buffer_talk = 10
+                    temp_buff = P.buffer_talk
+                    P.buffer_talk = None
+                    if P.px == -1425 and P.py == -1025 and face_r(P):
+                        nxtl = gondolier(P)
+                        if nxtl != "Nevoso Town":
+                            gond = 1
+                            new_txt(P)
+                            write(P,"Alright, come aboard.")
+                            cont(P)
+                            new_txt(P)
+                            write(P,"Next stop, " + nxtl + "!")
+                            cont(P)
+                            fade_out(P)
+                            P.p = P.d1
+                    elif next_to(P,1550,300):
+                        txt(P,"You can see the edge of a cliff high above you.")
+                    elif P.nevoso_pre.talk():
+                        refresh()
+                        P.nevoso_pre.write()
+                    elif P.nevoso_young.talk():
+                        refresh()
+                        P.nevoso_young.write()
+                    elif P.nevoso_lass.talk():
+                        refresh()
+                        P.nevoso_lass.write()
+                    elif P.nevoso_exp.talk():
+                        refresh()
+                        P.nevoso_exp.write()
+                    else:
+                        P.buffer_talk = temp_buff
+        if gond == 2:
+            gy += 3
+        if gy >= 300:
+            fade_out(P)
+            get_gondo(P,nxtl)
+            end = False
+            fade = P.song
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and m == 1:
+            menu(P)
+            m = 0
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and P.register_click == 1:
+            register(P)
+            P.register_click = -10
+        if P.py == -75 and P.px in [-125,-175] and face_u(P):
+            P.px += 50
+            P.py = -525
+            P.loc = "snow_4"
+            P.move_out_dir = 'u'
+            end = False
+        if P.py == -525 and P.px == -825 and face_u(P):
+            P.px = 125
+            P.py = -325
+            P.loc = "pc_nevoso"
+            fade = P.song
+            end = False
+        if P.px == -525 and P.py == -525 and face_u(P):
+            P.px = -25
+            P.py = -75
+            P.loc = "house_3_13"
+            end = False
+        if P.px == -925 and P.py == -1375 and face_u(P):
+            P.px = -25
+            P.py = -75
+            P.loc = "house_3_14"
+            end = False
+        if P.px == -1275 and P.py == -1375 and face_u(P):
+            P.px = -25
+            P.py = -75
+            P.loc = "house_3_15"
+            end = False
+        if P.px == -475 and P.py == -975 and face_u(P):
+            P.px = -25
+            P.py = -125
+            P.loc = "nevoso_lab"
+            end = False
+        #ocean start
+        if wx == 400:
+            wx = 0
+        if wy == 400:
+            wy = 0
+        if tim%2 == 0:
+            wx += 1
+        if tim%5 == 0:
+            wy += 1
+        if P.ocean == 15:
+            P.ocean = -15
+        if P.f2 == 7:
+            P.f2 = -7
+        if P.f3 == 5:
+            P.f3 = -5
+        if tim%5 == 0:
+            P.f2 += 1
+            P.f3 += 1
+            P.ocean += 1
+        if tim%10 == 0:
+            P.foam += 1
+            if P.foam == 5:
+                P.foam = -5
+            if P.gondola == P.gondola_1:
+                P.gondola = P.gondola_2
+            else:
+                P.gondola = P.gondola_1
+        fall += 5
+        if fall == 150:
+            fall = 0
+        tim += 1
+        tick_buffer(P)
+        update_screen(P)
+        P.clock.tick(P.ani_spd)
+    fade_out(P,fade)
+
+def snow_4_b(P):
+    P.surface.blit(P.snow_4_back,(P.px,P.py))
+
+def snow_4_p(P,temppx,temppy,move):
+    #rects start
+    r1 = (P.px+400,P.py+300,50,40)
+    r2 = (P.px+450,P.py+250,600,40)
+    r3 = (P.px+1050,P.py+300,50,90)
+    r4 = (P.px+1050,P.py+400,200,40)
+    r5 = (P.px+1250,P.py+350,200,40)
+    r6 = (P.px+1450,P.py+400,50,40)
+    r7 = (P.px+1500,P.py+450,50,190)
+    r8 = (P.px+1350,P.py+500,50,40)
+    r9 = (P.px+1250,P.py+650,300,40)
+    r10 = (P.px+900,P.py+600,350,40)
+    r11 = (P.px+850,P.py+500,50,90)
+    r12 = (P.px+600,P.py+450,300,40)
+    r13 = (P.px+600,P.py+500,50,290)
+    r14 = (P.px+550,P.py+800,50,40)
+    r15 = (P.px+450,P.py+850,100,40)
+    r16 = (P.px+400,P.py+800,50,40)
+    r17 = (P.px+350,P.py+350,50,440)
+    rects = [r17,r16,r15,r14,r13,r12,r11,r10,r9,r8,r7,r6,r5,r4,r3,r2,r1]
+    # rect_draw(P,rects)
+    #rects end
+    if move:
+        player_move(P,rects)
+    else:
+        blit_player(P)
+
+def snow_4_f(P,temppx,temppy,tim):
+    P.surface.blit(P.snow_rope,(temppx+1350,temppy+450))
+    P.surface.blit(P.snow_4_caved,(temppx+400,temppy+750))
+    trans = pygame.Surface((800,600))
+    trans.set_alpha(50)
+    trans.fill((0,0,20))
+    P.surface.blit(trans,(0,0))
+    P.surface.blit(P.snow_in_d,(temppx+400,temppy+700))
+    show_location(P, P.loc_txt, tim)
+
+def snow_4(P) -> None:
+    def refresh():
+        snow_4_b(P)
+        snow_4_p(P,P.px,P.py,False)
+        snow_4_f(P,P.px,P.py,tim)
+    if P.song != "music/snowscape.wav":
+        play_music(P,"music/snowscape.wav")
+    P.snow_4_back = load("p/nevoso/Snowscape_4.png")
+    P.snow_4_caved = load("p/nevoso/cave_4d.png")
+    P.habitat = 'icy_cave'
+    move = True
+    set_location(P)
+    tim = 0
+    refresh()
+    fade_in(P)
+    end = True
+    m = 0
+    while end:
+        print(P.px,P.py)
+        snow_4_b(P)
+        temppx = P.px
+        temppy = P.py
+        snow_4_p(P,temppx,temppy,move)
+        snow_4_f(P,temppx,temppy,tim)
+        for event in map_keys():
+            if (event.type == KEYDOWN or P.buffer_talk) and tim > 20:
+                if event.key == pygame.key.key_code(P.controls[6]) and move:
+                    m = 1
+                elif event.key == pygame.key.key_code(P.controls[7]) and move:
+                    P.register_click = 1
+                elif (event.key == pygame.key.key_code(P.controls[4]) or P.buffer_talk) and move:
+                    if event.key == pygame.key.key_code(P.controls[4]):
+                        P.buffer_talk = 10
+                    temp_buff = P.buffer_talk
+                    P.buffer_talk = None
+                    if next_to(P,1350,500):
+                        new_txt(P)
+                        write(P,"Climb up using the rope?")
+                        if choice(P):
+                            P.px -= 250
+                            P.py -= 600
+                            P.loc = "snow_3"
+                            end = False
+                    else:
+                        P.buffer_talk = temp_buff
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and m == 1:
+            menu(P)
+            m = 0
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and P.register_click == 1:
+            register(P)
+            P.register_click = -10
+        if P.py == -525 and P.px in [-75,-125] and face_d(P):
+            P.px -= 50
+            P.py = -75
+            P.loc = "nevoso"
+            P.move_out_dir = 'd'
+            end = False
+        if move and wild_grass(P,0,0,0,0,0.7,all = True):
+            te = P.surface.copy()
+            P.song = "music/wild_battle.wav"
+            pygame.mixer.music.load(P.song)
+            set_mixer_volume(P,P.vol)
+            pygame.mixer.music.play(0)
+            rando = random.random()
+            if rando <= .25:
+                r = random.randint(46,54)
+                if r < 51:
+                    battle(P,[poke.Poke('Swinub',[r,random.randint(0,1),787,"Mist",-1,"Ice Shard",-1,"Blizzard",-1,"Earthquake",-1,None,None,0,"Poke Ball"])])
+                elif r < 54:
+                    battle(P,[poke.Poke('Piloswine',[r,random.randint(0,1),787,"Thrash",-1,"Ice Fang",-1,"Blizzard",-1,"Earthquake",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Mamoswine',[r,random.randint(0,1),787,"Thrash",-1,"Ice Fang",-1,"Blizzard",-1,"Earthquake",-1,None,None,0,"Poke Ball"])])
+            elif rando <= .45:
+                r = random.randint(46,54)
+                if r < 51:
+                    battle(P,[poke.Poke('Vanillite',[r,random.randint(0,1),787,"Hail",-1,"Mirror Shot",-1,"Ice Beam",-1,"Mirror Coat",-1,None,None,0,"Poke Ball"])])
+                elif r < 54:
+                    battle(P,[poke.Poke('Vanillish',[r,random.randint(0,1),787,"Acid Armor",-1,"Mirror Shot",-1,"Ice Beam",-1,"Mirror Coat",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Vanilluxe',[r,random.randint(0,1),787,"Acid Armor",-1,"Mirror Shot",-1,"Ice Beam",-1,"Mirror Coat",-1,None,None,0,"Poke Ball"])])
+            elif rando <= .65:
+                r = random.randint(46,54)
+                if r < 53:
+                    battle(P,[poke.Poke('Cubchoo',[r,random.randint(0,1),787,"Charm",-1,"Flail",-1,"Rest",-1,"Blizzard",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Beartic',[r,random.randint(0,1),787,"Rest",-1,"Slash",-1,"Hail",-1,"Icicle Crash",-1,None,None,0,"Poke Ball"])])
+            elif rando <= .8:
+                battle(P,[poke.Poke('Alolan_Sandshrew',[random.randint(46,49),random.randint(0,1),787,"Swords Dance",-1,"Iron Head",-1,"Slash",-1,"Blizzard",-1,None,None,0,"Poke Ball"])])
+            elif rando <= .93:
+                r = random.randint(48,52)
+                if r < 50:
+                    battle(P,[poke.Poke('Cryogonal',[r,random.randint(0,1),787,"Recover",-1,"Freeze-Dry",-1,"Reflect",-1,"Confuse Ray",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Cryogonal',[r,random.randint(0,1),787,"Recover",-1,"Freeze-Dry",-1,"Reflect",-1,"Solar Beam",-1,None,None,0,"Poke Ball"])])
+            else:
+                r = random.randint(48,54)
+                if r < 50:
+                    battle(P,[poke.Poke('Icy_Gigalith',[r,random.randint(0,1),787,"Double-Edge",-1,"Hail",-1,"Icicle Crash",-1,"Rock Slide",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Icy_Gigalith',[r,random.randint(0,1),787,"Double-Edge",-1,"Hail",-1,"Icicle Crash",-1,"Stone Edge",-1,None,None,0,"Poke Ball"])])
+            play_music(P,"music/snowscape.wav")
+            P.surface.blit(te,(0,0))
+            fade_in(P)
+        tim += 1
+        tick_buffer(P)
+        update_screen(P)
+        P.clock.tick(P.ani_spd)
+    fade_out(P,P.song)
+
+def snow_3_b(P):
+    P.surface.blit(P.snow_3_back,(P.px,P.py))
+    if P.prog[6][86] == 0:
+        P.surface.blit(P.item_cave,(P.px+1050,P.py+800))
+
+def snow_3_p(P,temppx,temppy,move):
+    P.snow_3_ace.move()
+    #rects start
+    r1 = (P.px+500,P.py+350,50,40)
+    r2 = (P.px+400,P.py+250,250,40)
+    r3 = (P.px+650,P.py+300,50,90)
+    r4 = (P.px+650,P.py+400,150,40)
+    r5 = (P.px+800,P.py+450,50,40)
+    r6 = (P.px+850,P.py+500,50,90)
+    r7 = (P.px+800,P.py+600,50,190)
+    r8 = (P.px+850,P.py+750,400,40)
+    r9 = (P.px+1250,P.py+700,50,90)
+    r10 = (P.px+1300,P.py+650,400,40)
+    r11 = (P.px+1700,P.py+700,50,190)
+    r12 = (P.px+1650,P.py+900,50,40)
+    r13 = (P.px+1700,P.py+950,50,240)
+    r14 = (P.px+1600,P.py+1100,50,40)
+    r15 = (P.px+1300,P.py+1200,400,40)
+    r16 = (P.px+1250,P.py+1000,50,190)
+    r17 = (P.px+1200,P.py+800,50,40)
+    r18 = (P.px+1400,P.py+800,200,190)
+    r19 = (P.px+700,P.py+1000,550,40)
+    r20 = (P.px+650,P.py+950,50,40)
+    r21 = (P.px+600,P.py+700,50,240)
+    r22 = (P.px+400,P.py+700,200,40)
+    r23 = (P.px+350,P.py+300,50,390)
+    r24,r25,r26 = r1,r1,r1
+    if P.px >= -575:
+        r24 = (P.px+1000,P.py+800,50,90)
+    if P.py <= -625:
+        r25 = (P.px+1000,P.py+850,400,40)
+    if P.prog[6][86] == 0:
+        r26 = (P.px+1050,P.py+800,50,40)
+    r27 = P.snow_3_ace.get_rect()
+    rects = [r27,r26,r25,r24,r23,r22,r21,r20,r19,r18,r17,r16,r15,r14,r13,r12,r11,r10,r9,r8,r7,r6,r5,r4,r3,r2,r1]
+    # rect_draw(P,rects)
+    #rects end
+    if move:
+        player_move(P,rects)
+    else:
+        blit_player(P)
+    P.snow_3_ace.move(temppx,temppy)
+
+def snow_3_f(P,temppx,temppy,tim):
+    P.surface.blit(P.snow_peg_1,(temppx+500,temppy+300))
+    P.surface.blit(P.snow_peg_2,(temppx+1600,temppy+1050))
+    P.surface.blit(P.snow_3_caver,(temppx+650,temppy+450))
+    trans = pygame.Surface((800,600))
+    trans.set_alpha(50)
+    trans.fill((0,0,20))
+    P.surface.blit(trans,(0,0))
+    P.surface.blit(P.snow_in_r,(temppx+650,temppy+450))
+    show_location(P, P.loc_txt, tim)
+
+def snow_3(P) -> None:
+    def refresh():
+        snow_3_b(P)
+        snow_3_p(P,P.px,P.py,False)
+        snow_3_f(P,P.px,P.py,tim)
+    if P.song != "music/snowscape.wav":
+        play_music(P,"music/snowscape.wav")
+    P.snow_3_back = load("p/nevoso/Snowscape_3.png")
+    P.snow_3_caver = load("p/nevoso/cave_3r.png")
+    P.habitat = 'icy_cave'
+    move = True
+    set_location(P)
+    tim = 0
+    refresh()
+    fade_in(P)
+    end = True
+    m = 0
+    while end:
+        print(P.px,P.py)
+        snow_3_b(P)
+        if move == True and P.snow_3_ace.trainer_check():
+            move = False
+        temppx = P.px
+        temppy = P.py
+        P.ledge = 0
+        if -975 <= P.px <= -625:
+            if P.py > -600 and P.py < -575:
+                P.ledge = (P.py+575)/2
+            elif P.py > -625 and P.py <= -600:
+                P.ledge = -(P.py+625)/2
+        if -575 <= P.py <= -525:
+            if P.px > -625 and P.px < -600:
+                P.ledge = -((625+P.px)/1.5)
+            elif P.px >= -600 and P.px < -575:
+                P.ledge = (575+P.px)/1.5
+        snow_3_p(P,temppx,temppy,move)
+        snow_3_f(P,temppx,temppy,tim)
+        if trainer_check(P,P.snow_3_ace,"music/snowscape.wav"):
+            P.snow_3_ace = npc.NPC(P,'Ace Trainerf','Stella',[P.snow_3_ace.x,P.snow_3_ace.y],[[P.snow_3_ace.face(),100]],["I heard rumors of a great training spot somewhere in these caves.","But I've explored every inch of this place, and I still haven't found it!"])
+            move = True
+        for event in map_keys():
+            if (event.type == KEYDOWN or P.buffer_talk) and tim > 20:
+                if event.key == pygame.key.key_code(P.controls[6]) and move:
+                    m = 1
+                elif event.key == pygame.key.key_code(P.controls[7]) and move:
+                    P.register_click = 1
+                elif (event.key == pygame.key.key_code(P.controls[4]) or P.buffer_talk) and move:
+                    if event.key == pygame.key.key_code(P.controls[4]):
+                        P.buffer_talk = 10
+                    temp_buff = P.buffer_talk
+                    P.buffer_talk = None
+                    if next_to(P,1050,800) and P.prog[6][86] == 0:
+                        txt(P,P.save_data.name + " found an Ice Stone!")
+                        txt(P,P.save_data.name + " put the Ice Stone in the Items pocket.")
+                        add_item(P,"Ice Stone",1)
+                        P.prog[6][86] = 1
+                    elif P.snow_3_ace.talk():
+                        if P.snow_3_ace.trainer:
+                            move = False
+                        else:
+                            refresh()
+                            P.snow_3_ace.write()
+                    elif next_to(P,500,350):
+                        txt(P,"You could tie a rope to this stake to climb down the tunnel.")
+                    elif next_to(P,1600,1100):
+                        new_txt(P)
+                        write(P,"Climb down using the rope?")
+                        if choice(P):
+                            P.px += 250
+                            P.py += 600
+                            P.loc = "snow_4"
+                            end = False
+                    else:
+                        P.buffer_talk = temp_buff
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and m == 1:
+            menu(P)
+            m = 0
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and P.register_click == 1:
+            register(P)
+            P.register_click = -10
+        if P.px == -425 and P.py in [-275,-225] and face_r(P):
+            P.py -= 700
+            P.px = -25
+            P.loc = "snow_o3"
+            P.move_out_dir = 'r'
+            end = False
+        if move and wild_grass(P,0,0,0,0,0.7,all = True):
+            te = P.surface.copy()
+            P.song = "music/wild_battle.wav"
+            pygame.mixer.music.load(P.song)
+            set_mixer_volume(P,P.vol)
+            pygame.mixer.music.play(0)
+            rando = random.random()
+            if rando <= .25:
+                r = random.randint(46,54)
+                if r < 51:
+                    battle(P,[poke.Poke('Swinub',[r,random.randint(0,1),787,"Mist",-1,"Ice Shard",-1,"Blizzard",-1,"Earthquake",-1,None,None,0,"Poke Ball"])])
+                elif r < 54:
+                    battle(P,[poke.Poke('Piloswine',[r,random.randint(0,1),787,"Thrash",-1,"Ice Fang",-1,"Blizzard",-1,"Earthquake",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Mamoswine',[r,random.randint(0,1),787,"Thrash",-1,"Ice Fang",-1,"Blizzard",-1,"Earthquake",-1,None,None,0,"Poke Ball"])])
+            elif rando <= .45:
+                r = random.randint(46,54)
+                if r < 51:
+                    battle(P,[poke.Poke('Vanillite',[r,random.randint(0,1),787,"Hail",-1,"Mirror Shot",-1,"Ice Beam",-1,"Mirror Coat",-1,None,None,0,"Poke Ball"])])
+                elif r < 54:
+                    battle(P,[poke.Poke('Vanillish',[r,random.randint(0,1),787,"Acid Armor",-1,"Mirror Shot",-1,"Ice Beam",-1,"Mirror Coat",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Vanilluxe',[r,random.randint(0,1),787,"Acid Armor",-1,"Mirror Shot",-1,"Ice Beam",-1,"Mirror Coat",-1,None,None,0,"Poke Ball"])])
+            elif rando <= .65:
+                r = random.randint(46,54)
+                if r < 53:
+                    battle(P,[poke.Poke('Cubchoo',[r,random.randint(0,1),787,"Charm",-1,"Flail",-1,"Rest",-1,"Blizzard",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Beartic',[r,random.randint(0,1),787,"Rest",-1,"Slash",-1,"Hail",-1,"Icicle Crash",-1,None,None,0,"Poke Ball"])])
+            elif rando <= .8:
+                battle(P,[poke.Poke('Alolan_Sandshrew',[random.randint(46,49),random.randint(0,1),787,"Swords Dance",-1,"Iron Head",-1,"Slash",-1,"Blizzard",-1,None,None,0,"Poke Ball"])])
+            elif rando <= .93:
+                r = random.randint(48,52)
+                if r < 50:
+                    battle(P,[poke.Poke('Cryogonal',[r,random.randint(0,1),787,"Recover",-1,"Freeze-Dry",-1,"Reflect",-1,"Confuse Ray",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Cryogonal',[r,random.randint(0,1),787,"Recover",-1,"Freeze-Dry",-1,"Reflect",-1,"Solar Beam",-1,None,None,0,"Poke Ball"])])
+            else:
+                r = random.randint(48,54)
+                if r < 50:
+                    battle(P,[poke.Poke('Icy_Gigalith',[r,random.randint(0,1),787,"Double-Edge",-1,"Hail",-1,"Icicle Crash",-1,"Rock Slide",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Icy_Gigalith',[r,random.randint(0,1),787,"Double-Edge",-1,"Hail",-1,"Icicle Crash",-1,"Stone Edge",-1,None,None,0,"Poke Ball"])])
+            play_music(P,"music/snowscape.wav")
+            P.surface.blit(te,(0,0))
+            fade_in(P)
+        tim += 1
+        tick_buffer(P)
+        update_screen(P)
+        P.clock.tick(P.ani_spd)
+    fade_out(P,P.song)
+
+def snow_o3_b(P):
+    P.surface.blit(P.snow_o3_back,(P.px,P.py))
+    cloud_mod = (-925-P.py)/5
+    P.surface.blit(P.snow_o3_cloud,(P.px+1450,P.py-200+cloud_mod))
+    P.surface.blit(P.snow_o3_cloudf,(P.px+1442,P.py))
+    if P.prog[6][84] == 0:
+        P.surface.blit(P.item_out,(P.px+2000,P.py+1100))
+        P.surface.blit(P.snow_grass,(P.px+2000,P.py+1090))
+
+def snow_o3_p(P,temppx,temppy,move = False):
+    if P.snow_o3_lat:
+        P.snow_o3_lat.move(mov=True)
+    if P.snow_o3_exp.move():
+        draw_grass(P,P.snow_o3_exp.x,P.snow_o3_exp.y,-1275,-425,50,50,[P.px,P.py],snow = True)
+    if P.snow_o3_aroma.move():
+        draw_grass(P,P.snow_o3_aroma.x,P.snow_o3_aroma.y,-275,-775,200,200,[P.px,P.py],snow = True)
+    #rects start
+    r1 = (P.px+650,P.py+300,400,40)
+    r2 = (P.px+1050,P.py+250,100,40)
+    r3 = (P.px+1150,P.py+300,300,40)
+    r4 = (P.px+1450,P.py+350,50,290)
+    r5 = (P.px+1500,P.py+600,200,40)
+    r6 = (P.px+1700,P.py+650,50,590)
+    r7 = (P.px+1450,P.py+1250,250,40)
+    r8 = (P.px+1400,P.py+1050,50,290)
+    r9 = (P.px+1150,P.py+1050,250,40)
+    r10 = (P.px+1100,P.py+850,50,190)
+    r11 = (P.px+850,P.py+850,250,40)
+    r12 = (P.px+850,P.py+900,50,440)
+    r13 = (P.px+450,P.py+1350,400,40)
+    r14 = (P.px+400,P.py+1300,50,40)
+    r15 = (P.px+350,P.py+1200,50,90)
+    r16 = (P.px+400,P.py+1150,50,40)
+    r17 = (P.px+450,P.py+1100,200,40)
+    r18 = (P.px+600,P.py+350,50,740)
+    r19 = P.snow_o3_exp.get_rect()
+    r20 = P.snow_o3_aroma.get_rect()
+    rects = [r20,r19,r18,r17,r16,r15,r14,r13,r12,r11,r10,r9,r8,r7,r6,r5,r4,r3,r2,r1]
+    # rect_draw(P,rects)
+    if move:
+        player_move(P,rects)
+    else:
+        blit_player(P)
+    draw_grass(P,temppx,temppy,-275,-75,400,100,snow = True)
+    draw_grass(P,temppx,temppy,-275,-175,300,200,ignore = [(-525,-225),(-525,-275),(-475,-275),(-475,-325),(-525,-325)],snow = True)
+    draw_grass(P,temppx,temppy,-275,-375,100,150,ignore = [(-325,-475)],snow = True)
+    draw_grass(P,temppx,temppy,-875,-175,200,200,ignore = [(-875,-175),(-925,-175),(-875,-225),(-875,-275)],snow = True)
+    draw_grass(P,temppx,temppy,-875,-375,450,150,ignore = [(-975,-475),(-925,-475),(-875,-475)],snow = True)
+    draw_grass(P,temppx,temppy,-1075,-525,250,400,ignore = [(-1075,-575),(-1075,-625),(-1075,-825),(-1075,-875),(-1125,-875),(-1175,-875)],snow = True)
+    draw_grass(P,temppx,temppy,-775,-575,300,200,ignore = [(-925,-575),(-975,-575),(-1025,-575),(-975,-625),(-1025,-625)],snow = True)
+    draw_grass(P,temppx,temppy,-275,-625,200,250,ignore = [(-375,-625),(-425,-625),(-425,-675),(-375,-675),(-425,-725)],snow = True)
+    draw_grass(P,temppx,temppy,-75,-875,400,200,ignore = [(-75,-925),(-75,-975)],snow = True)
+    if P.snow_o3_exp.move(temppx,temppy):
+        draw_grass(P,P.snow_o3_exp.x,P.snow_o3_exp.y,-1275,-425,50,50,[temppx,temppy],snow = True)
+    if P.snow_o3_aroma.move(temppx,temppy):
+        draw_grass(P,P.snow_o3_aroma.x,P.snow_o3_aroma.y,-275,-775,200,200,[temppx,temppy],snow = True)
+
+def snow_o3_f(P,temppx,temppy,tim):
+    P.surface.blit(P.snow_o3_caveu,(temppx+1050,temppy+275))
+    P.surface.blit(P.snow_o3_cavel,(temppx+350,temppy+1150))
+    if True:
+        P.surface.blit(P.snow_o3_peg,(temppx+1550,temppy+1200))
+    set_sky(P)
+    show_location(P,P.loc_txt,tim)
+
+def snow_o3(P) -> None:
+    def refresh():
+        snow_o3_b(P)
+        snow_o3_p(P,P.px,P.py)
+        snow_o3_f(P,P.px,P.py,tim)
+    if P.song != "music/snowscape_out.wav":
+        P.song = "music/snowscape_out.wav"
+        pygame.mixer.music.load(P.song)
+        set_mixer_volume(P,P.vol)
+        pygame.mixer.music.play(-1)
+    P.habitat = 'snow_grass'
+    P.snow_o3_back = load("p/nevoso/Snowscape_o3.png")
+    P.snow_o3_cloud = load("p/nevoso/snow_o3_cloud.png")
+    P.snow_o3_cloudf = load("p/nevoso/snow_o3_cloudf.png")
+    P.snow_o3_peg = load("p/nevoso/cave_peg.png")
+    P.snow_o3_rope = load("p/nevoso/down_rope.png")
+    P.snow_o3_caveu = load("p/nevoso/cave_o3u.png")
+    P.snow_o3_cavel = load("p/nevoso/cave_o3l.png")
+    if P.prog[0] == 160:
+        P.snow_o3_lat = npc.NPC(P,'Latias','Harper',[1000,600],[['d',120],['l',60],['r',80],['mr',60],['md',80]],["Where could she have gone?","I've been looking everywhere","for her!","Huh? Sorry I don't think we've","met before...You must have the","wrong person."])
+    else:
+        P.snow_o3_lat = None
+    set_location(P)
+    exp_talk = 50
+    tim = 0
+    refresh()
+    fade_in(P)
+    end = True
+    move = True
+    m = 0
+    while end:
+        print(P.px,P.py)
+        if P.py == -75 and P.prog[0] == 160:
+            if move:
+                move = False
+            if P.snow_o3_lat.y == 800:
+                move = True
+                P.prog[0] += 1
+                P.snow_o3_lat = None
+        snow_o3_b(P)
+        if move == True and P.snow_o3_exp.trainer_check():
+            move = False
+        if move == True and P.snow_o3_aroma.trainer_check():
+            move = False
+        temppx = P.px
+        temppy = P.py
+        snow_o3_p(P,temppx,temppy,move)
+        snow_o3_f(P,temppx,temppy,tim)
+        if exp_talk > 50 and P.snow_o3_exp and trainer_check(P,P.snow_o3_exp,"music/snowscape_out.wav"):
+            if P.prog[5][80] == 0:
+                P.snow_o3_exp = npc.NPC(P,'Expertm','Wesley',[1650,700],[['r',60]],["You're not the same person that just passed by here are you?","Their aura was much more powerful than the one you're giving off."],["Well I'm quite impressed! You're certainly no weakling yourself!"],True,[0,0,0,0],[poke.Poke('Shiftry',[65,1,787,"Leaf Blade",-1,"Night Slash",-1,"Fake Out",-1,"Swagger",-1,"Razor Claw",None,0,"Poke Ball",400,"Early Bird"],petals=['spd','spd','spd','hp','hp']),poke.Poke('Crawdaunt',[65,0,787,"Swords Dance",-1,"Night Slash",-1,"Crabhammer",-1,"Protect",-1,"Razor Claw",None,0,"Poke Ball",400,"Adaptability"],petals=['ak','ak','ak','df','df']),poke.Poke('Bisharp',[65,0,787,"Night Slash",-1,"Iron Defense",-1,"Iron Head",-1,"Slash",-1,"Razor Claw",None,0,"Poke Ball",400,"Defiant"],petals=['df','df','df','ak','ak']),poke.Poke('Weavile',[65,0,787,"Night Slash",-1,"Ice Shard",-1,"Swords Dance",-1,"Shadow Claw",-1,"Razor Claw",None,0,"Poke Ball",400,"Pressure"],petals=['spd','spd','spd','ak','ak'])],80,loc = "snow_o3")
+                exp_talk = 0
+            else:
+                P.snow_o3_exp = npc.NPC(P,'Expertm','Wesley',[1650,700],[['r',60]],["Out here it feels like the buzz of civilization is so far away.","If you squint you can see the top of Cascata Gym poking out past that crest."],loc = "snow_o3")
+            move = True
+        if trainer_check(P,P.snow_o3_aroma,"music/snowscape_out.wav"):
+            P.snow_o3_aroma = npc.NPC(P,'Aroma Lady','Stella',[P.snow_o3_aroma.x,P.snow_o3_aroma.y],[['l',80],['r',60],['d',120]],["There are a lot of unique plants growing in this harsh environment.","A couple of them are really delicious when cooked into a soup!"],tim = P.snow_o3_aroma.tim,curr = P.snow_o3_aroma.curr,extra_walk = P.snow_o3_aroma.extra_walk)
+            move = True
+        for event in map_keys():
+            if (event.type == KEYDOWN or P.buffer_talk) and tim > 20:
+                if event.key == pygame.key.key_code(P.controls[6]) and move:
+                    m = 1
+                elif event.key == pygame.key.key_code(P.controls[7]) and move:
+                    P.register_click = 1
+                elif (event.key == pygame.key.key_code(P.controls[4]) or P.buffer_talk) and move:
+                    if event.key == pygame.key.key_code(P.controls[4]):
+                        P.buffer_talk = 10
+                    temp_buff = P.buffer_talk
+                    P.buffer_talk = None
+                    if P.snow_o3_aroma.talk():
+                        if P.snow_o3_aroma.trainer:
+                            move = False
+                        else:
+                            refresh()
+                            P.snow_o3_aroma.write()
+                    elif exp_talk > 50 and P.snow_o3_exp and P.snow_o3_exp.talk():
+                        if P.snow_o3_exp.trainer:
+                            move = False
+                        else:
+                            refresh()
+                            P.snow_o3_exp.write()
+                    elif P.px == -1175 and P.py == -925 and face_d(P):
+                        txt(P,"You could tie a rope to this stake to climb down the cliff.")
+                    else:
+                        P.buffer_talk = temp_buff
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and m == 1:
+            menu(P)
+            m = 0
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and P.register_click == 1:
+            register(P)
+            P.register_click = -10
+        if P.py == -25 and P.px in [-675,-725] and face_u(P):
+            P.px += 300
+            P.py = -725
+            P.loc = "snow_2"
+            P.move_out_dir = 'u'
+            end = False
+        if P.px == -25 and P.py in [-975,-925] and face_l(P):
+            P.py += 700
+            P.px = -425
+            P.loc = "snow_3"
+            P.move_out_dir = 'l'
+            end = False
+        if move and (wild_grass(P,temppy,-275,-75,400,100) or wild_grass(P,-75,-875,400,200,ignore = [(-75,-925),(-75,-975)]) or wild_grass(P,-275,-625,200,250,ignore = [(-375,-625),(-425,-625),(-425,-675),(-375,-675),(-425,-725)]) or wild_grass(P,-775,-575,300,200,ignore = [(-925,-575),(-975,-575),(-1025,-575),(-975,-625),(-1025,-625)]) or wild_grass(P,-1075,-525,250,400,ignore = [(-1075,-575),(-1075,-625),(-1075,-825),(-1075,-875),(-1125,-875),(-1175,-875)]) or wild_grass(P,-875,-375,450,150,ignore = [(-975,-475),(-925,-475),(-875,-475)]) or wild_grass(P,-875,-175,200,200,ignore = [(-875,-175),(-925,-175),(-875,-225),(-875,-275)]) or wild_grass(P,-275,-375,100,150,ignore = [(-325,-475)]) or wild_grass(P,-275,-175,300,200,ignore = [(-525,-225),(-525,-275),(-475,-275),(-475,-325),(-525,-325)])):
+            te = P.surface.copy()
+            P.song = "music/wild_battle.wav"
+            pygame.mixer.music.load(P.song)
+            set_mixer_volume(P,P.vol)
+            pygame.mixer.music.play(0)
+            rando = random.random()
+            if rando <= .25:
+                r = random.randint(46,54)
+                if r < 53:
+                    battle(P,[poke.Poke('Snover',[r,random.randint(0,1),787,"Grass Whistle",-1,"Ingrain",-1,"Blizzard",-1,"Wood Hammer",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Abomasnow',[r,random.randint(0,1),787,"Swagger",-1,"Ingrain",-1,"Blizzard",-1,"Wood Hammer",-1,None,None,0,"Poke Ball"])])
+            elif rando <= .45:
+                r = random.randint(46,52)
+                if r < 51:
+                    battle(P,[poke.Poke('Hoothoot',[r,random.randint(0,1),787,"Uproar",-1,"Air Slash",-1,"Roost",-1,"Moonblast",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Noctowl',[r,random.randint(0,1),787,"Synchronoise",-1,"Air Slash",-1,"Roost",-1,"Moonblast",-1,None,None,0,"Poke Ball"])])
+            elif rando <= .65:
+                r = random.randint(46,54)
+                if r < 51:
+                    battle(P,[poke.Poke('Ralts',[r,random.randint(0,1),787,"Psychic",-1,"Calm Mind",-1,"Future Sight",-1,"Charm",-1,None,None,0,"Poke Ball"])])
+                elif r < 54:
+                    battle(P,[poke.Poke('Kirlia',[r,random.randint(0,1),787,"Psychic",-1,"Calm Mind",-1,"Dream Eater",-1,"Hypnosis",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Gardevoir',[r,random.randint(0,1),787,"Psychic",-1,"Calm Mind",-1,"Draining Kiss",-1,"Captivate",-1,None,None,0,"Poke Ball"])])
+            elif rando <= .8:
+                battle(P,[poke.Poke('Alolan_Vulpix',[random.randint(46,49),random.randint(0,1),787,"Blizzard",-1,"Ice Beam",-1,"Extrasensory",-1,"Captivate",-1,None,None,0,"Poke Ball"])])
+            elif rando <= .93:
+                battle(P,[poke.Poke('Sneasel',[random.randint(47,50),random.randint(0,1),787,"Screech",-1,"Slash",-1,"Beat Up",-1,"Ice Shard",-1,None,None,0,"Poke Ball"])])
+            else:
+                r = random.randint(47,54)
+                if r < 49:
+                    battle(P,[poke.Poke('Pawniard',[r,random.randint(0,1),787,"Slash",-1,"Metal Claw",-1,"Assurance",-1,"Iron Defense",-1,None,None,0,"Poke Ball"])])
+                elif r < 53:
+                    battle(P,[poke.Poke('Pawniard',[r,random.randint(0,1),787,"Slash",-1,"Metal Claw",-1,"Night Slash",-1,"Iron Defense",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Bisharp',[r,random.randint(0,1),787,"Scary Face",-1,"Metal Claw",-1,"Night Slash",-1,"Iron Defense",-1,None,None,0,"Poke Ball"])])
+            P.song = "music/snowscape_out.wav"
+            pygame.mixer.music.load(P.song)
+            set_mixer_volume(P,P.vol)
+            pygame.mixer.music.play(-1)
+            P.surface.blit(te,(0,0))
+            fade_in(P)
+        exp_talk += 1
+        tim += 1
+        tick_buffer(P)
+        update_screen(P)
+        P.clock.tick(P.ani_spd)
+    fade_out(P,P.song)
+
+
+def snow_2_b(P):
+    P.surface.blit(P.snow_2_back,(P.px,P.py))
+    if P.prog[6][85] == 0:
+        P.surface.blit(P.item_cave,(P.px+1300,P.py+700))
+
+def snow_2_p(P,temppx,temppy,move):
+    P.snow_2_hiker.move()
+    #rects start
+    r1 = (P.px+450,P.py+350,50,40)
+    r2 = (P.px+400,P.py+450,50,40)
+    r3 = (P.px+400,P.py+250,200,40)
+    r4 = (P.px+600,P.py+300,50,90)
+    r5 = (P.px+650,P.py+350,100,40)
+    r6 = (P.px+750,P.py+300,50,90)
+    r7 = (P.px+800,P.py+250,550,40)
+    r8 = (P.px+1350,P.py+300,50,640)
+    r9 = (P.px+1300,P.py+950,50,40)
+    r10 = (P.px+850,P.py+1000,450,40)
+    r11 = (P.px+750,P.py+1050,100,40)
+    r12 = (P.px+400,P.py+1000,350,40)
+    r13 = (P.px+350,P.py+300,50,690)
+    r14 = (P.px+850,P.py+550,50,40)
+    r15 = (P.px+900,P.py+400,50,140)
+    r16 = (P.px+950,P.py+400,250,40)
+    r17 = (P.px+1200,P.py+400,50,390)
+    r18 = (P.px+600,P.py+750,600,40)
+    r19 = (P.px+600,P.py+600,50,140)
+    r20 = (P.px+650,P.py+600,200,40)
+    r21,r22 = r1,r1
+    if P.py <= -525:
+        r21 = (P.px+1250,P.py+750,100,40)
+    if P.prog[6][85] == 0:
+        r22 = (P.px+1300,P.py+700,50,40)
+    r23 = P.snow_2_hiker.get_rect()
+    rects = [r23,r22,r21,r20,r19,r18,r17,r16,r15,r14,r13,r12,r11,r10,r9,r8,r7,r6,r5,r4,r3,r2,r1]
+    # rect_draw(P,rects)
+    #rects end
+    if move:
+        player_move(P,rects)
+    else:
+        blit_player(P)
+    P.snow_2_hiker.move(temppx,temppy)
+
+def snow_2_f(P,temppx,temppy,tim):
+    P.surface.blit(P.snow_rope,(temppx+450,temppy+300))
+    P.surface.blit(P.snow_2_caved,(temppx+700,temppy+950))
+    trans = pygame.Surface((800,600))
+    trans.set_alpha(50)
+    trans.fill((0,0,20))
+    P.surface.blit(trans,(0,0))
+    P.surface.blit(P.snow_in_d,(temppx+700,temppy+900))
+    show_location(P, P.loc_txt, tim)
+
+def snow_2(P) -> None:
+    def refresh():
+        snow_2_b(P)
+        snow_2_p(P,P.px,P.py,False)
+        snow_2_f(P,P.px,P.py,tim)
+    if P.song != "music/snowscape.wav":
+        play_music(P,"music/snowscape.wav")
+    P.snow_2_back = load("p/nevoso/Snowscape_2.png")
+    P.snow_2_caved = load("p/nevoso/cave_2d.png")
+    P.habitat = 'icy_cave'
+    move = True
+    set_location(P)
+    tim = 0
+    refresh()
+    fade_in(P)
+    end = True
+    m = 0
+    while end:
+        print(P.px,P.py)
+        snow_2_b(P)
+        if move == True and P.snow_2_hiker.trainer_check():
+            move = False
+        temppx = P.px
+        temppy = P.py
+        P.ledge = 0
+        if (P.px <= -875 and P.px >= -925):
+            if P.py > -500 and P.py < -475:
+                P.ledge = (P.py+475)/2
+            elif P.py > -525 and P.py <= -500:
+                P.ledge = -(P.py+525)/2
+        snow_2_p(P,temppx,temppy,move)
+        snow_2_f(P,temppx,temppy,tim)
+        if trainer_check(P,P.snow_2_hiker,"music/snowscape.wav"):
+            P.snow_2_hiker = npc.NPC(P,'Hiker','Sean',[P.snow_2_hiker.x,P.snow_2_hiker.y],[['mr',80],['r',100],['ml',80],['l',120]],["These caves are so fun to explore! There's so many cool things to find!"],tim = P.snow_2_hiker.tim,curr = P.snow_2_hiker.curr,extra_walk = P.snow_2_hiker.extra_walk)
+            move = True
+        for event in map_keys():
+            if (event.type == KEYDOWN or P.buffer_talk) and tim > 20:
+                if event.key == pygame.key.key_code(P.controls[6]) and move:
+                    m = 1
+                elif event.key == pygame.key.key_code(P.controls[7]) and move:
+                    P.register_click = 1
+                elif (event.key == pygame.key.key_code(P.controls[4]) or P.buffer_talk) and move:
+                    if event.key == pygame.key.key_code(P.controls[4]):
+                        P.buffer_talk = 10
+                    temp_buff = P.buffer_talk
+                    P.buffer_talk = None
+                    if next_to(P,1300,700) and P.prog[6][85] == 0:
+                        txt(P,P.save_data.name + " found a Shiny Candy!")
+                        txt(P,P.save_data.name + " put the Shiny Candy in the Medicine pocket.")
+                        add_item(P,"Shiny Candy",1)
+                        P.prog[6][85] = 1
+                    elif P.snow_2_hiker.talk():
+                        if P.snow_2_hiker.trainer:
+                            move = False
+                        else:
+                            refresh()
+                            P.snow_2_hiker.write()
+                    elif next_to(P,450,350):
+                        new_txt(P)
+                        write(P,"Climb up using the rope?")
+                        if choice(P):
+                            P.py -= 250
+                            P.loc = "snow_1"
+                            end = False
+                    else:
+                        P.buffer_talk = temp_buff
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and m == 1:
+            menu(P)
+            m = 0
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and P.register_click == 1:
+            register(P)
+            P.register_click = -10
+        if P.py == -725 and P.px in [-375,-425] and face_d(P):
+            P.px -= 300
+            P.py = -25
+            P.loc = "snow_o3"
+            P.move_out_dir = 'd'
+            end = False
+        if move and wild_grass(P,0,0,0,0,0.7,all = True):
+            te = P.surface.copy()
+            P.song = "music/wild_battle.wav"
+            pygame.mixer.music.load(P.song)
+            set_mixer_volume(P,P.vol)
+            pygame.mixer.music.play(0)
+            rando = random.random()
+            if rando <= .25:
+                r = random.randint(46,54)
+                if r < 51:
+                    battle(P,[poke.Poke('Swinub',[r,random.randint(0,1),787,"Mist",-1,"Ice Shard",-1,"Blizzard",-1,"Earthquake",-1,None,None,0,"Poke Ball"])])
+                elif r < 54:
+                    battle(P,[poke.Poke('Piloswine',[r,random.randint(0,1),787,"Thrash",-1,"Ice Fang",-1,"Blizzard",-1,"Earthquake",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Mamoswine',[r,random.randint(0,1),787,"Thrash",-1,"Ice Fang",-1,"Blizzard",-1,"Earthquake",-1,None,None,0,"Poke Ball"])])
+            elif rando <= .45:
+                r = random.randint(46,54)
+                if r < 51:
+                    battle(P,[poke.Poke('Vanillite',[r,random.randint(0,1),787,"Hail",-1,"Mirror Shot",-1,"Ice Beam",-1,"Mirror Coat",-1,None,None,0,"Poke Ball"])])
+                elif r < 54:
+                    battle(P,[poke.Poke('Vanillish',[r,random.randint(0,1),787,"Acid Armor",-1,"Mirror Shot",-1,"Ice Beam",-1,"Mirror Coat",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Vanilluxe',[r,random.randint(0,1),787,"Acid Armor",-1,"Mirror Shot",-1,"Ice Beam",-1,"Mirror Coat",-1,None,None,0,"Poke Ball"])])
+            elif rando <= .65:
+                r = random.randint(46,54)
+                if r < 53:
+                    battle(P,[poke.Poke('Cubchoo',[r,random.randint(0,1),787,"Charm",-1,"Flail",-1,"Rest",-1,"Blizzard",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Beartic',[r,random.randint(0,1),787,"Rest",-1,"Slash",-1,"Hail",-1,"Icicle Crash",-1,None,None,0,"Poke Ball"])])
+            elif rando <= .8:
+                battle(P,[poke.Poke('Alolan_Sandshrew',[random.randint(46,49),random.randint(0,1),787,"Swords Dance",-1,"Iron Head",-1,"Slash",-1,"Blizzard",-1,None,None,0,"Poke Ball"])])
+            elif rando <= .93:
+                r = random.randint(48,52)
+                if r < 50:
+                    battle(P,[poke.Poke('Cryogonal',[r,random.randint(0,1),787,"Recover",-1,"Freeze-Dry",-1,"Reflect",-1,"Confuse Ray",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Cryogonal',[r,random.randint(0,1),787,"Recover",-1,"Freeze-Dry",-1,"Reflect",-1,"Solar Beam",-1,None,None,0,"Poke Ball"])])
+            else:
+                r = random.randint(48,54)
+                if r < 50:
+                    battle(P,[poke.Poke('Icy_Gigalith',[r,random.randint(0,1),787,"Double-Edge",-1,"Hail",-1,"Icicle Crash",-1,"Rock Slide",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Icy_Gigalith',[r,random.randint(0,1),787,"Double-Edge",-1,"Hail",-1,"Icicle Crash",-1,"Stone Edge",-1,None,None,0,"Poke Ball"])])
+            play_music(P,"music/snowscape.wav")
+            P.surface.blit(te,(0,0))
+            fade_in(P)
+        tim += 1
+        tick_buffer(P)
+        update_screen(P)
+        P.clock.tick(P.ani_spd)
+    fade_out(P,P.song)
+
+def snow_o2_b(P):
+    cloud_mod = (-725-P.py)/5
+    P.surface.blit(P.snow_o2_cloud,(P.px-300,P.py+cloud_mod))
+    P.surface.blit(P.snow_o2_back,(P.px,P.py))
+    if P.prog[6][84] == 0:
+        P.surface.blit(P.item_out,(P.px+2000,P.py+1100))
+        P.surface.blit(P.snow_grass,(P.px+2000,P.py+1090))
+    if True:
+        P.surface.blit(P.snow_o2_peg,(P.px+50,P.py+900))
+        
+
+def snow_o2_p(P,temppx,temppy,move = False):
+    P.snow_o2_battle.move()
+    #rects start
+    r1 = (P.px+100,P.py+1050,700,40)
+    r2 = (P.px+800,P.py+1100,100,40)
+    r3 = (P.px+900,P.py+1050,300,40)
+    r4 = (P.px+1200,P.py+750,50,290)
+    r5 = (P.px+1250,P.py+750,700,40)
+    r6 = (P.px+1950,P.py+750,50,390)
+    r7 = (P.px+2000,P.py+1150,200,40)
+    r8 = (P.px+2200,P.py+550,50,590)
+    r9 = (P.px+1950,P.py+500,250,40)
+    r10 = (P.px+2000,P.py+300,50,190)
+    r11 = (P.px+1800,P.py+250,200,40)
+    r12 = (P.px+1850,P.py+300,100,40)
+    r13 = (P.px+1750,P.py+300,50,190)
+    r14 = (P.px+1600,P.py+500,250,40)
+    r15 = (P.px+1550,P.py+550,50,90)
+    r16 = (P.px+500,P.py+600,1050,40)
+    r17 = (P.px+450,P.py+650,50,190)
+    r18 = (P.px+100,P.py+800,350,40)
+    r19 = (P.px+50,P.py+850,50,190)
+    r20 = r1
+    if P.prog[6][84] == 0:
+        r20 = (P.px+2000,P.py+1100,50,40)
+    r21 = P.snow_o2_battle.get_rect()
+    rects = [r21,r20,r19,r18,r17,r16,r15,r14,r13,r12,r11,r10,r9,r8,r7,r6,r5,r4,r3,r2,r1]
+    # rect_draw(P,rects)
+    if move:
+        player_move(P,rects)
+    else:
+        blit_player(P)
+    draw_grass(P,temppx,temppy,275,-675,650,100,ignore = [(-325,-675),(175,-675),(225,-675),(275,-675)],snow = True)
+    draw_grass(P,temppx,temppy,25,-575,300,100,ignore = [(25,-575),(-225,-575)],snow = True)
+    draw_grass(P,temppx,temppy,-125,-425,200,150,ignore = [(-275,-475),(-275,-525),(-225,-525)],snow = True)
+    draw_grass(P,temppx,temppy,-125,-375,300,50,snow = True)
+    draw_grass(P,temppx,temppy,-575,-575,250,200,ignore = [(-575,-575),(-625,-575),(-575,-625)],snow = True)
+    draw_grass(P,temppx,temppy,-725,-375,750,100,ignore = [(-1425,-375),(-1375,-375),(-725,-425)],snow = True)
+    draw_grass(P,temppx,temppy,-1225,-275,100,100,ignore = [(-1275,-275)],snow = True)
+    draw_grass(P,temppx,temppy,-1625,-375,200,500,ignore = [(-1625,-375),(-1675,-375),(-1725,-375),(-1675,-425),(-1625,-425)],snow = True)
+    P.snow_o2_battle.move(temppx,temppy)
+
+def snow_o2_f(P,temppx,temppy,tim):
+    # P.surface.blit(P.r4_f,(temppx+900,temppy+1044))
+    P.surface.blit(P.snow_o2_caved,(temppx+750,temppy+1000))
+    set_sky(P)
+    show_location(P,P.loc_txt,tim)
+
+def snow_o2(P) -> None:
+    def refresh():
+        snow_o2_b(P)
+        snow_o2_p(P,P.px,P.py)
+        snow_o2_f(P,P.px,P.py,tim)
+    if P.song != "music/snowscape_out.wav":
+        P.song = "music/snowscape_out.wav"
+        pygame.mixer.music.load(P.song)
+        set_mixer_volume(P,P.vol)
+        pygame.mixer.music.play(-1)
+    P.habitat = 'snow_grass'
+    P.snow_o2_back = load("p/nevoso/Snowscape_o2.png")
+    P.snow_o2_cloud = load("p/nevoso/Snowscape_o2_clouds.png")
+    P.snow_o2_peg = load("p/nevoso/left_peg.png")
+    P.snow_o2_rope = load("p/nevoso/left_rope.png")
+    P.snow_o2_caved = load("p/nevoso/cave_o2d.png")
+    set_location(P)
+    tim = 0
+    refresh()
+    fade_in(P)
+    end = True
+    move = True
+    m = 0
+    while end:
+        # print(P.px,P.py)
+        snow_o2_b(P)
+        if move == True and P.snow_o2_battle.trainer_check():
+            move = False
+        temppx = P.px
+        temppy = P.py
+        snow_o2_p(P,temppx,temppy,move)
+        snow_o2_f(P,temppx,temppy,tim)
+        if trainer_check(P,P.snow_o2_battle,"music/snowscape_out.wav"):
+            P.snow_o2_battle = npc.NPC(P,'Battle Girl','Ava',[P.snow_o2_battle.x,P.snow_o2_battle.y],[['mr',80],['r',40],['md',40],['d',40],['mu',40],['u',20],['ml',80],['l',60]],["It's getting pretty chilly out here! And my legs are starting to feel like jello...","But if this is enough to make me give up, I'll never manage to win a tournament!"],tim = P.snow_o2_battle.tim,curr = P.snow_o2_battle.curr,extra_walk = P.snow_o2_battle.extra_walk)
+            move = True
+        for event in map_keys():
+            if (event.type == KEYDOWN or P.buffer_talk) and tim > 20:
+                if event.key == pygame.key.key_code(P.controls[6]) and move:
+                    m = 1
+                elif event.key == pygame.key.key_code(P.controls[7]) and move:
+                    P.register_click = 1
+                elif (event.key == pygame.key.key_code(P.controls[4]) or P.buffer_talk) and move:
+                    if event.key == pygame.key.key_code(P.controls[4]):
+                        P.buffer_talk = 10
+                    temp_buff = P.buffer_talk
+                    P.buffer_talk = None
+                    if P.snow_o2_battle.talk():
+                        if P.snow_o2_battle.trainer:
+                            move = False
+                        else:
+                            refresh()
+                            P.snow_o2_battle.write()
+                    elif P.px == 275 and P.py == -625 and face_l(P):
+                        txt(P,"You could tie a rope to this stake to climb down the cliff.")
+                    elif next_to(P,1850,300) or next_to(P,1900,300):
+                        txt(P,"You can feel waves of energy pass over you as the crystal pulses.")
+                    elif next_to(P,2000,1100) and P.prog[6][84] == 0:
+                        txt(P,P.save_data.name + " found a TM32 Double Team!")
+                        txt(P,P.save_data.name + " put the TM32 in the TMs pocket.")
+                        add_item(P,"TM32 Double Team",1)
+                        P.prog[6][84] = 1
+                    else:
+                        P.buffer_talk = temp_buff
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and m == 1:
+            menu(P)
+            m = 0
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and P.register_click == 1:
+            register(P)
+            P.register_click = -10
+        if P.px in [-425,-475] and P.py == -775 and face_d(P):
+            P.px -= 50
+            P.py =  -25
+            P.move_out_dir = 'd'
+            P.loc = "snow_1"
+            end = False
+        if move and (wild_grass(P,275,-675,650,100,ignore = [(-325,-675),(175,-675),(225,-675),(275,-675)]) or wild_grass(P,25,-575,300,100,ignore = [(25,-575),(-225,-575)]) or wild_grass(P,-125,-425,200,150,ignore = [(-275,-475),(-275,-525),(-225,-525)]) or wild_grass(P,-125,-375,300,50) or wild_grass(P,-575,-575,250,200,ignore = [(-575,-575),(-625,-575),(-575,-625)]) or wild_grass(P,-725,-375,750,100,ignore = [(-1425,-375),(-1375,-375),(-725,-425)]) or wild_grass(P,-1225,-275,100,100,ignore = [(-1275,-275)]) or wild_grass(P,-1625,-375,200,500,ignore = [(-1625,-375),(-1675,-375),(-1725,-375),(-1675,-425),(-1625,-425)])):
+            te = P.surface.copy()
+            P.song = "music/wild_battle.wav"
+            pygame.mixer.music.load(P.song)
+            set_mixer_volume(P,P.vol)
+            pygame.mixer.music.play(0)
+            rando = random.random()
+            if rando <= .25:
+                r = random.randint(46,54)
+                if r < 53:
+                    battle(P,[poke.Poke('Snover',[r,random.randint(0,1),787,"Grass Whistle",-1,"Ingrain",-1,"Blizzard",-1,"Wood Hammer",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Abomasnow',[r,random.randint(0,1),787,"Swagger",-1,"Ingrain",-1,"Blizzard",-1,"Wood Hammer",-1,None,None,0,"Poke Ball"])])
+            elif rando <= .45:
+                r = random.randint(46,52)
+                if r < 51:
+                    battle(P,[poke.Poke('Hoothoot',[r,random.randint(0,1),787,"Uproar",-1,"Air Slash",-1,"Roost",-1,"Moonblast",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Noctowl',[r,random.randint(0,1),787,"Synchronoise",-1,"Air Slash",-1,"Roost",-1,"Moonblast",-1,None,None,0,"Poke Ball"])])
+            elif rando <= .65:
+                r = random.randint(46,54)
+                if r < 51:
+                    battle(P,[poke.Poke('Ralts',[r,random.randint(0,1),787,"Psychic",-1,"Calm Mind",-1,"Future Sight",-1,"Charm",-1,None,None,0,"Poke Ball"])])
+                elif r < 54:
+                    battle(P,[poke.Poke('Kirlia',[r,random.randint(0,1),787,"Psychic",-1,"Calm Mind",-1,"Dream Eater",-1,"Hypnosis",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Gardevoir',[r,random.randint(0,1),787,"Psychic",-1,"Calm Mind",-1,"Draining Kiss",-1,"Captivate",-1,None,None,0,"Poke Ball"])])
+            elif rando <= .8:
+                battle(P,[poke.Poke('Alolan_Vulpix',[random.randint(46,49),random.randint(0,1),787,"Blizzard",-1,"Ice Beam",-1,"Extrasensory",-1,"Captivate",-1,None,None,0,"Poke Ball"])])
+            elif rando <= .93:
+                battle(P,[poke.Poke('Sneasel',[random.randint(47,50),random.randint(0,1),787,"Screech",-1,"Slash",-1,"Beat Up",-1,"Ice Shard",-1,None,None,0,"Poke Ball"])])
+            else:
+                r = random.randint(47,54)
+                if r < 49:
+                    battle(P,[poke.Poke('Pawniard',[r,random.randint(0,1),787,"Slash",-1,"Metal Claw",-1,"Assurance",-1,"Iron Defense",-1,None,None,0,"Poke Ball"])])
+                elif r < 53:
+                    battle(P,[poke.Poke('Pawniard',[r,random.randint(0,1),787,"Slash",-1,"Metal Claw",-1,"Night Slash",-1,"Iron Defense",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Bisharp',[r,random.randint(0,1),787,"Scary Face",-1,"Metal Claw",-1,"Night Slash",-1,"Iron Defense",-1,None,None,0,"Poke Ball"])])
+            P.song = "music/snowscape_out.wav"
+            pygame.mixer.music.load(P.song)
+            set_mixer_volume(P,P.vol)
+            pygame.mixer.music.play(-1)
+            P.surface.blit(te,(0,0))
+            fade_in(P)
+        tim += 1
+        tick_buffer(P)
+        update_screen(P)
+        P.clock.tick(P.ani_spd)
+    fade_out(P,P.song)
+
+def snow_1_b(P):
+    P.surface.blit(P.snow_1_back,(P.px,P.py))
+    if P.prog[6][83] == 0:
+        P.surface.blit(P.item_cave,(P.px+650,P.py+1400))
+
+def snow_1_p(P,temppx,temppy,move):
+    P.snow_1_young.move()
+    #rects start
+    r1 = (P.px+1100,P.py+1350,100,40)
+    r2 = (P.px+1200,P.py+1400,100,40)
+    r3 = (P.px+1300,P.py+1350,100,40)
+    r4 = (P.px+1400,P.py+700,50,640)
+    r5 = (P.px+1350,P.py+650,50,40)
+    r6 = (P.px+1000,P.py+600,350,40)
+    r7 = (P.px+1000,P.py+350,50,240)
+    r8 = (P.px+950,P.py+300,50,40)
+    r9 = (P.px+850,P.py+250,100,40)
+    r10 = (P.px+800,P.py+300,50,40)
+    r11 = (P.px+750,P.py+350,50,190)
+    r12 = (P.px+400,P.py+500,350,40)
+    r13 = (P.px+350,P.py+550,50,140)
+    r14 = (P.px+450,P.py+600,50,40)
+    r15 = (P.px+400,P.py+700,400,40)
+    r16 = (P.px+750,P.py+750,50,90)
+    r17 = (P.px+650,P.py+850,450,90)
+    r18 = (P.px+600,P.py+950,50,40)
+    r19 = (P.px+550,P.py+1000,50,440)
+    r20 = (P.px+600,P.py+1450,100,40)
+    r21 = (P.px+700,P.py+1050,50,390)
+    r22 = (P.px+750,P.py+1050,300,40)
+    r23 = (P.px+1050,P.py+1050,50,290)
+    r24 = P.snow_1_young.get_rect()
+    r25 = r1
+    if P.prog[6][83] == 0:
+        r25 = (P.px+650,P.py+1400,50,40)
+    rects = [r25,r24,r23,r22,r21,r20,r19,r18,r17,r16,r15,r14,r13,r12,r11,r10,r9,r8,r7,r6,r5,r4,r3,r2,r1]
+    # rect_draw(P,rects)
+    #rects end
+    if move:
+        player_move(P,rects)
+    else:
+        blit_player(P)
+    P.snow_1_young.move(temppx,temppy)
+
+def snow_1_f(P,temppx,temppy,tim):
+    P.surface.blit(P.snow_peg_2,(temppx+450,temppy+550))
+    P.surface.blit(P.snow_1_caved,(temppx+1150,temppy+1300))
+    P.surface.blit(P.snow_1_caveu,(temppx+850,temppy+250))
+    trans = pygame.Surface((800,600))
+    trans.set_alpha(50)
+    trans.fill((0,0,20))
+    P.surface.blit(trans,(0,0))
+    P.surface.blit(P.snow_in_d,(temppx+1150,temppy+1250))
+    P.surface.blit(P.snow_in_u,(temppx+850,temppy+275))
+    show_location(P, P.loc_txt, tim)
+
+def snow_1(P) -> None:
+    def refresh():
+        snow_1_b(P)
+        snow_1_p(P,P.px,P.py,False)
+        snow_1_f(P,P.px,P.py,tim)
+    if P.song != "music/snowscape.wav":
+        play_music(P,"music/snowscape.wav")
+    P.snow_1_back = load("p/nevoso/Snowscape_1.png")
+    P.snow_1_caveu = load("p/nevoso/cave_1u.png")
+    P.snow_1_caved = load("p/nevoso/cave_1d.png")
+    P.habitat = 'icy_cave'
+    move = True
+    set_location(P)
+    tim = 0
+    refresh()
+    fade_in(P)
+    end = True
+    m = 0
+    while end:
+        print(P.px,P.py)
+        snow_1_b(P)
+        if move == True and P.snow_1_young.trainer_check():
+            move = False
+        temppx = P.px
+        temppy = P.py
+        snow_1_p(P,temppx,temppy,move)
+        snow_1_f(P,temppx,temppy,tim)
+        if trainer_check(P,P.snow_1_young,"music/snowscape.wav"):
+            P.snow_1_young = npc.NPC(P,'Youngster','Sean',[P.snow_1_young.x,P.snow_1_young.y],[['l',20]],["So what do you think about my secret hideout? It's pretty cool huh?"])
+            move = True
+        for event in map_keys():
+            if (event.type == KEYDOWN or P.buffer_talk) and tim > 20:
+                if event.key == pygame.key.key_code(P.controls[6]) and move:
+                    m = 1
+                elif event.key == pygame.key.key_code(P.controls[7]) and move:
+                    P.register_click = 1
+                elif (event.key == pygame.key.key_code(P.controls[4]) or P.buffer_talk) and move:
+                    if event.key == pygame.key.key_code(P.controls[4]):
+                        P.buffer_talk = 10
+                    temp_buff = P.buffer_talk
+                    P.buffer_talk = None
+                    if next_to(P,650,1400) and P.prog[6][83] == 0:
+                        txt(P,P.save_data.name + " found an Ability Capsule!")
+                        txt(P,P.save_data.name + " put the Ability Capsule in the Medicine pocket.")
+                        add_item(P,"Ability Capsule",1)
+                        P.prog[6][83] = 1
+                    elif P.snow_1_young.talk():
+                        if P.snow_1_young.trainer:
+                            move = False
+                        else:
+                            refresh()
+                            P.snow_1_young.write()
+                    elif next_to(P,450,600):
+                        new_txt(P)
+                        write(P,"Climb down using the rope?")
+                        if choice(P):
+                            P.py += 250
+                            P.loc = "snow_2"
+                            end = False
+                    else:
+                        P.buffer_talk = temp_buff
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and m == 1:
+            menu(P)
+            m = 0
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and P.register_click == 1:
+            register(P)
+            P.register_click = -10
+        if P.py == -1075 and P.px in [-825,-875] and face_d(P):
+            P.px += 850
+            P.py = -125
+            P.loc = "snow_o1"
+            P.move_out_dir = 'd'
+            end = False
+        if P.py == -25 and P.px in [-525,-475] and face_u(P):
+            P.px += 50
+            P.py = -775
+            P.loc = "snow_o2"
+            P.move_out_dir = 'u'
+            end = False
+        if move and wild_grass(P,0,0,0,0,0.7,all = True):
+            te = P.surface.copy()
+            P.song = "music/wild_battle.wav"
+            pygame.mixer.music.load(P.song)
+            set_mixer_volume(P,P.vol)
+            pygame.mixer.music.play(0)
+            rando = random.random()
+            if rando <= .25:
+                r = random.randint(46,54)
+                if r < 51:
+                    battle(P,[poke.Poke('Swinub',[r,random.randint(0,1),787,"Mist",-1,"Ice Shard",-1,"Blizzard",-1,"Earthquake",-1,None,None,0,"Poke Ball"])])
+                elif r < 54:
+                    battle(P,[poke.Poke('Piloswine',[r,random.randint(0,1),787,"Thrash",-1,"Ice Fang",-1,"Blizzard",-1,"Earthquake",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Mamoswine',[r,random.randint(0,1),787,"Thrash",-1,"Ice Fang",-1,"Blizzard",-1,"Earthquake",-1,None,None,0,"Poke Ball"])])
+            elif rando <= .45:
+                r = random.randint(46,54)
+                if r < 51:
+                    battle(P,[poke.Poke('Vanillite',[r,random.randint(0,1),787,"Hail",-1,"Mirror Shot",-1,"Ice Beam",-1,"Mirror Coat",-1,None,None,0,"Poke Ball"])])
+                elif r < 54:
+                    battle(P,[poke.Poke('Vanillish',[r,random.randint(0,1),787,"Acid Armor",-1,"Mirror Shot",-1,"Ice Beam",-1,"Mirror Coat",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Vanilluxe',[r,random.randint(0,1),787,"Acid Armor",-1,"Mirror Shot",-1,"Ice Beam",-1,"Mirror Coat",-1,None,None,0,"Poke Ball"])])
+            elif rando <= .65:
+                r = random.randint(46,54)
+                if r < 53:
+                    battle(P,[poke.Poke('Cubchoo',[r,random.randint(0,1),787,"Charm",-1,"Flail",-1,"Rest",-1,"Blizzard",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Beartic',[r,random.randint(0,1),787,"Rest",-1,"Slash",-1,"Hail",-1,"Icicle Crash",-1,None,None,0,"Poke Ball"])])
+            elif rando <= .8:
+                battle(P,[poke.Poke('Alolan_Sandshrew',[random.randint(46,49),random.randint(0,1),787,"Swords Dance",-1,"Iron Head",-1,"Slash",-1,"Blizzard",-1,None,None,0,"Poke Ball"])])
+            elif rando <= .93:
+                r = random.randint(48,52)
+                if r < 50:
+                    battle(P,[poke.Poke('Cryogonal',[r,random.randint(0,1),787,"Recover",-1,"Freeze-Dry",-1,"Reflect",-1,"Confuse Ray",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Cryogonal',[r,random.randint(0,1),787,"Recover",-1,"Freeze-Dry",-1,"Reflect",-1,"Solar Beam",-1,None,None,0,"Poke Ball"])])
+            else:
+                r = random.randint(48,54)
+                if r < 50:
+                    battle(P,[poke.Poke('Icy_Gigalith',[r,random.randint(0,1),787,"Double-Edge",-1,"Hail",-1,"Icicle Crash",-1,"Rock Slide",-1,None,None,0,"Poke Ball"])])
+                else:
+                    battle(P,[poke.Poke('Icy_Gigalith',[r,random.randint(0,1),787,"Double-Edge",-1,"Hail",-1,"Icicle Crash",-1,"Stone Edge",-1,None,None,0,"Poke Ball"])])
+            play_music(P,"music/snowscape.wav")
+            P.surface.blit(te,(0,0))
+            fade_in(P)
+        tim += 1
+        tick_buffer(P)
+        update_screen(P)
+        P.clock.tick(P.ani_spd)
+    fade_out(P,P.song)
+
+def snow_o1_b(P):
+    P.surface.blit(P.snow_o1_back, (P.px-100, P.py+100))
+    cloud_mod = (abs(P.py)-1125)/5
+    P.surface.blit(P.silfide_cloud,(P.px-100,P.py-cloud_mod-650))
+    P.surface.blit(P.snow_o1_foam,(P.px+860,P.py+100))
+
+def snow_o1_p(P,temppx,temppy,move):
+    if P.snow_o1_dia:
+        P.snow_o1_dia.move()
+    #top
+    r1 = (P.px+500,P.py+450,50,140)
+    r2 = (P.px+300,P.py+400,50,40)
+    r3 = (P.px+350,P.py+350,100,40)
+    r4 = (P.px+450,P.py+400,50,40)
+    r5 = (P.px+250,P.py+450,50,490)
+    r6= (P.px+300,P.py+950,550,40)
+    r7 = (P.px+850,P.py+750,50,190)
+    r8 = (P.px+500,P.py+600,400,40)
+    r9,r10 = r1,r1
+    if P.snow_o1_dia:
+        r9 = P.snow_o1_dia.get_rect()
+    if P.prog[0] < 160:
+        r10 = (P.px+350,P.py+450,100,40)
+    rects = [r10,r9,r8,r7,r6,r5,r4,r3,r2,r1]
+    #rects end
+    # rect_draw(P,rects)
+    if move:
+        player_move(P,rects)
+    else:
+        blit_player(P)
+    if P.snow_o1_dia:
+        P.snow_o1_dia.move(temppx,temppy)
+
+def snow_o1_f(P,temppx,temppy,tim):
+    P.surface.blit(P.snow_o1_f,(temppx+300,temppy+375))
+    if P.prog[0] < 160:
+        blit_img(P,P.snow_o1_giga,(temppx+350,temppy+380))
+    set_sky(P)
+    show_location(P, P.loc_txt, tim)
+
+def snow_o1(P,enter = False) -> None:
+    def refresh():
+        snow_o1_b(P)
+        snow_o1_p(P,P.px,P.py,False)
+        snow_o1_f(P,P.px,P.py,tim)
+    if P.song != "music/snowscape_out.wav":
+        P.song = "music/snowscape_out.wav"
+        pygame.mixer.music.load(P.song)
+        set_mixer_volume(P,P.vol)
+        pygame.mixer.music.play(-1)
+    set_location(P)
+    fade = None
+    move = True
+    tim = 0
+    P.habitat = 'snow'
+    P.snow_o1_giga = P.snow_o1_gigau
+    if P.prog[0] > 158:
+        P.snow_o1_dia = None
+    if enter == False:
+        refresh()
+        fade_in(P)
+    end = True
+    m = 0
+    while end:
+        print(P.px,P.py)
+        snow_o1_b(P)
+        temppx = P.px
+        temppy = P.py
+        snow_o1_p(P,temppx,temppy,move)
+        snow_o1_f(P, temppx,temppy,tim)
+        if P.prog[0] == 158 and P.snow_o1_dia.x >= 850:
+            P.snow_o1_dia = None
+            move = True
+            P.prog[0] += 1
+        for event in map_keys():
+            if (event.type == KEYDOWN or P.buffer_talk) and tim > 20:
+                if event.key == pygame.key.key_code(P.controls[6]) and move:
+                    m = 1
+                elif event.key == pygame.key.key_code(P.controls[7]) and move:
+                    P.register_click = 1
+                elif (event.key == pygame.key.key_code(P.controls[4]) or P.buffer_talk) and move:
+                    if event.key == pygame.key.key_code(P.controls[4]):
+                        P.buffer_talk = 10
+                    temp_buff = P.buffer_talk
+                    P.buffer_talk = None
+                    if P.snow_o1_dia and P.snow_o1_dia.talk():
+                        refresh()
+                        if P.prog[0] < 158:
+                            txt(P,"The entrance to the cave seems to have gotten blocked off overnight.")
+                            txt(P,"You might as well take your time to challenge the Silfide Gym as I investigate it.")
+                        elif P.prog[0] == 158:
+                            t = P.surface.copy()
+                            txt(P,"You already obtained the Charm Badge? Well you'll have to go this way to reach Forza City.")
+                            txt(P,"Unfortunately it looks like it's been blocked off by a pretty heavy Pokemon.")
+                            txt(P,"Now that I've figured it out though, I'm more interested in learning more about you.")
+                            txt(P,"If you got this far, you must be serious about challenging the Pokemon League.")
+                            txt(P,"Why don't we take this opportunity to have a friendly battle?")
+                            play_music(P,"music/diantha_battle.wav",0)
+                            battle(P,["Diantha",poke.Poke('Gardevoir',[70,1,787,"Moonblast",-1,"Psychic",-1,"Calm Mind",-1,"Heal Pulse",-1,None,None,0,"Poke Ball",400,'Synchronize'],petals=['df','df','df','hp','hp'])])
+                            play_music(P,"music/snowscape_out.wav")
+                            P.surface.blit(t,(0,0))
+                            fade_in(P)
+                            txt(P,"That was quite enlightening. You may have the potential to make it all the way!")
+                            txt(P,"I'm sure you can deal with this cave dilemma, so I'll leave it in your hands.")
+                            txt(P,"Next time we meet, I would love to see how much you've grown!")
+                            if P.px == 25 and P.py == -325:
+                                P.snow_o1_dia = npc.NPC(P,'Diantha','Diantha',[350,550],[['mr',20],['md',60],['mr',240]],[""])
+                            else:
+                                P.snow_o1_dia = npc.NPC(P,'Diantha','Diantha',[350,550],[['md',60],['mr',240]],[""])
+                            add_memo(P)
+                            move = False
+                    elif next_to_multi(P,[(350,450),(400,450)]) != -1 and P.prog[0] <= 159:
+                        if P.prog[0] == 159:
+                            if P.px in [75,-75]:
+                                txt(P,"The Pokemon isn't moving. You should approach it from behind.")
+                            else:
+                                txt(P,"You nudge the Pokemon, and it slowly stirs awake.")
+                                P.snow_o1_giga = P.snow_o1_gigad
+                                refresh()
+                                update_screen(P)
+                                P.clock.tick(1)
+                                P.song = "music/wild_battle.wav"
+                                pygame.mixer.music.load(P.song)
+                                set_mixer_volume(P,P.vol)
+                                pygame.mixer.music.play(0)
+                                battle(P,[poke.Poke('Icy_Gigalith',[55,random.randint(0,1),787,'Glacial Press',-1,'Stone Edge',-1,'Hail',-1,'Curse',-1,None,None,0,"Poke Ball"])])
+                                P.prog[0] += 1
+                                play_music(P,"music/snowscape_out.wav")
+                                refresh()
+                                fade_in(P)
+                                add_memo(P)
+                        else:
+                            txt(P,"There's a giant block of ice in the cave entrance.")
+                    else:
+                        P.buffer_talk = temp_buff
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and m == 1:
+            menu(P)
+            m = 0
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and P.register_click == 1:
+            register(P)
+            P.register_click = -10
+        if P.py == -125 and P.px in [25,-25] and face_u(P):
+            P.px -= 850
+            P.py = -1075
+            P.loc = "snow_1"
+            P.move_out_dir = 'u'
+            end = False
+        if P.px == -525 and P.py in [-375,-425] and face_r(P):
+            P.px = 875
+            P.py -= 650
+            P.loc = "silfide"
+            silfide(P,True)
+            end = False
+        tim += 1
+        tick_buffer(P)
+        update_screen(P)
+        P.clock.tick(P.ani_spd)
+    fade_out(P,fade)
+
+def silfide_theater_b(P):
+    P.surface.fill((0,0,0))
+    P.surface.blit(P.silf_theater_back, (P.px, P.py))
+    P.surface.blit(P.char_shad,(P.px+300,P.py+113))
+    P.surface.blit(P.silf_theater_gentle,(P.px+298,P.py+84))
+    P.surface.blit(P.char_shad,(P.px+450,P.py+113))
+    P.surface.blit(P.silf_theater_beaut,(P.px+448,P.py+84))
+
+def silfide_theater_p(P,temppx,temppy,move):
+    P.silf_theater_rich.move()
+    P.silf_theater_beauty.move()
+    P.silf_theater_lass.move()
+    P.silf_theater_exp.move()
+    if P.silf_theater_lisia:
+        P.silf_theater_lisia.move()
+    #rects start
+    r0 = (P.px,P.py+50,200,40)
+    r1 = (P.px+200,P.py+100,50,90)
+    r2 = (P.px+250,P.py+150,300,40)
+    r3 = (P.px+550,P.py+100,50,90)
+    r4 = (P.px+600,P.py+50,200,40)
+    r5 = (P.px+800,P.py+100,50,390)
+    r6 = (P.px-50,P.py+100,50,390)
+    r7 = (P.px,P.py+500,800,40)
+    r8 = P.silf_theater_rich.get_rect()
+    r9 = P.silf_theater_beauty.get_rect()
+    r10 = P.silf_theater_lass.get_rect()
+    r11 = P.silf_theater_exp.get_rect()
+    r12 = r1
+    if P.silf_theater_lisia:
+        r12 = P.silf_theater_lisia.get_rect()
+    rects = [r12,r11,r10,r9,r8,r7,r6,r5,r4,r3,r2,r1,r0]
+    #rects end
+    # rect_draw(P,rects)
+    if move:
+        player_move(P,rects)
+    else:
+        blit_player(P)
+    if P.silf_theater_lisia:
+        P.silf_theater_lisia.move(temppx,temppy)
+    P.silf_theater_rich.move(temppx,temppy)
+    P.silf_theater_beauty.move(temppx,temppy)
+    P.silf_theater_lass.move(temppx,temppy)
+    P.silf_theater_exp.move(temppx,temppy)
+
+def silfide_theater_f(P,temppx,temppy):
+    show_location(P, None, 0)
+
+def silfide_theater(P) -> None:
+    def refresh():
+        silfide_theater_b(P)
+        silfide_theater_p(P,P.px,P.py,False)
+        silfide_theater_f(P,P.px,P.py)
+    set_mixer_volume(P,P.vol)
+    if P.song != "music/silfide.wav":
+        P.song = "music/silfide.wav"
+        pygame.mixer.music.load(P.song)
+        pygame.mixer.music.play(-1)
+    P.silf_theater_back = load("p/silfide/silfide_theater.png")
+    P.silf_theater_gentle = pygame.transform.scale(load("p/spr/Gentleman_d1.png"),(54,64))
+    P.silf_theater_beaut = pygame.transform.scale(load("p/spr/Beauty_d1.png"),(54,64))
+    P.silf_theater_lisia = None
+    if P.prog[0] >= 157:
+        P.silf_theater_lisia = npc.NPC(P,'Lisia','',[150,150],[['r',40]],["","",""])
+    P.silf_theater_rich = npc.NPC(P,'Rich Boy','Dude',[500,200],[['u',20]],["I can't believe I forgot my wallet! What am I gonna do about the tickets?","I had one chance to go out with her and now I blew it!"])
+    P.silf_theater_beauty = npc.NPC(P,'Beauty','Dude',[550,350],[['mr',20],['r',40],['ml',20],['l',40]],["What's taking him so long? We're going to miss the show at this rate!"])
+    P.silf_theater_lass = npc.NPC(P,'Lass','Dude',[150,400],[['r',200],['u',80]],["My granny has been watching Squirtle here ever since his debut.","She likes to come watch every new show where he's on the cast."])
+    P.silf_theater_exp = npc.NPC(P,'Expertf','Dude',[200,400],[['l',20]],["My granddaughter comes with me to watch all the shows I want. Isn't she such a sweetie?"])
+    P.habitat = 'theater'
+    move = True
+    tim = 0
+    refresh()
+    fade_in(P)
+    end = True
+    m = 0
+    while end:
+        # print(P.px,P.py)
+        silfide_theater_b(P)
+        temppx = P.px
+        temppy = P.py
+        silfide_theater_p(P,temppx,temppy,move)
+        silfide_theater_f(P,temppx,temppy)
+        for event in map_keys():
+            if (event.type == KEYDOWN or P.buffer_talk) and tim > 20:
+                if event.key == pygame.key.key_code(P.controls[6]) and move:
+                    m = 1
+                elif event.key == pygame.key.key_code(P.controls[7]) and move:
+                    P.register_click = 1
+                elif (event.key == pygame.key.key_code(P.controls[4]) or P.buffer_talk) and move:
+                    if event.key == pygame.key.key_code(P.controls[4]):
+                        P.buffer_talk = 10
+                    temp_buff = P.buffer_talk
+                    P.buffer_talk = None
+                    if P.px == 75 and P.py == 75 and face_u(P):
+                        if P.prog[8][4][0] == -1 and P.prog[0] < 158:
+                            txt(P,"Welcome to the Silfide City Theater! We hold performances starring all sorts of Pokemon.")
+                            txt(P,"If you win the Charm Badge from Lisia, your Pokemon can perform here as well!")
+                        else:
+                            if P.prog[8][4][0] == -1:
+                                txt(P,"Welcome to the Silfide City Theater! Would you like to participate in a show?")
+                                txt(P,"Take this PokeStar Tablet. You can use it to register your Pokemon for acting.")
+                                txt(P,"You received a PokeStar Tablet!")
+                                txt(P,"Registered Pokemon will gain proficiency in skills catered towards acting.")
+                                txt(P,"You should go ahead and start by registering a Pokemon to the PokeStar Tablet.")
+                                txt(P,"But choose carefully! Registered Pokemon can no longer be used in battle.")
+                                txt(P,"And if you unregister them, they will lose all progress in their acting skills.")
+                                txt(P,"Their level won't matter for performing, but make sure they have a varied moveset.")
+                                P.prog[8][4][0] = 1
+                                add_item(P,"PokeStar Tablet",1)
+                                add_memo(P,"Performing Arts")
+                            elif len(P.save_data.pokestar[0]) == 0:
+                                txt(P,"You need to register a Pokemon in your PokeStar Tablet before they can perform.")
+                                txt(P,"Come right back once you have a Pokemon registered!")
+                            else:
+                                if not new_day(P.prog[8][4][2]):
+                                    txt(P,"We don't have many shows left today, so we don't need much help.")
+                                    txt(P,"You can still perform in one, but I can't give as many rewards.")
+                                    new_txt(P)
+                                    write(P,"Would you still like to enter?")
+                                    if not choice(P):
+                                        txt(P,"Alright, we'll have more shows tomorrow!")
+                                        break
+                                else:
+                                    txt(P,"Would you like to enter a Pokemon into a Theater show?")
+                                    txt(P,"You can have your registered PokeStar Pokemon star in the next show.")
+                                    new_txt(P)
+                                    write(P,"Would you like to participate?")
+                                    if not choice(P):
+                                        txt(P,"Alright, come back when you're ready!")
+                                        break
+                                one_list = [poke.Poke('Honchkrow',[50,1,787,'Tailwind',-1,'Haze',-1,'Wing Attack',-1,random.choice(['Night Slash','Foul Play']),-1,None,None,0,"Poke Ball",400,'Ability']),poke.Poke('Dusknoir',[50,1,787,'Will-O-Wisp',-1,'Psych Up',-1,'Shadow Sneak',-1,random.choice(['Hex','Giga Impact']),-1,None,None,0,"Poke Ball",400,'Ability']),poke.Poke('Cloyster',[50,1,787,'Shell Smash',-1,'Clamp',-1,'Ice Shard',-1,random.choice(['Icicle Crash','Icicle Spear']),-1,None,None,0,"Poke Ball",400,'Ability']),poke.Poke('Sharpedo',[50,1,787,'Focus Energy',-1,'Agility',-1,'Bite',-1,random.choice(['Waterfall','Crunch']),-1,None,None,0,"Poke Ball",400,'Ability']),poke.Poke('Crawdaunt',[50,1,787,'Swords Dance',-1,'Harden',-1,'Vice Grip',-1,random.choice(['Crabhammer','Crunch']),-1,None,None,0,"Poke Ball",400,'Ability'])]
+                                two_list = [poke.Poke('Mightyena',[50,1,787,'Scary Face',-1,'Bite',-1,'Tackle',-1,'Fire Fang',-1,None,None,0,"Poke Ball",400,'Ability']),poke.Poke('Wobbuffet',[50,1,787,'Safeguard',-1,'Counter',-1,'Mirror Coat',-1,'Charm',-1,None,None,0,"Poke Ball",400,'Ability']),poke.Poke('Golbat',[50,1,787,'Confuse Ray',-1,'Bite',-1,'Wing Attack',-1,'Swift',-1,None,None,0,"Poke Ball",400,'Ability']),poke.Poke('Arbok',[50,1,787,'Glare',-1,'Bite',-1,'Acid Spray',-1,'Poison Fang',-1,None,None,0,"Poke Ball",400,'Ability']),poke.Poke('Ariados',[50,random.randint(0,1),787,'Toxic Thread',-1,'Shadow Sneak',-1,'Infestation',-1,'Poison Sting',-1,None,None,0,"Poke Ball",400,'Ability'])]
+                                #1 - onetimebuff stat weak strong 2 - onetimebuff weak weak weak
+                                if random.random() > 0.5:
+                                    opp = random.choice(one_list)
+                                    P.pokestar_battle = 1
+                                else:
+                                    opp = random.choice(two_list)
+                                    P.pokestar_battle = 2
+                                txt(P,"In these shows, your Pokemon will play as the hero fighting against a villain.")
+                                txt(P,"The villain that your Pokemon will fight today is a "+opp.name+".")
+                                txt(P,"Who would you like to enter?")
+                                fade_out(P)
+                                pos = pokestar(P,1)
+                                refresh()
+                                fade_in(P)
+                                if pos != None:
+                                    txt(P,"Alright, let's get this show started!")
+                                    P.song = "music/theater_battle.wav"
+                                    pygame.mixer.music.load(P.song)
+                                    set_mixer_volume(P,P.vol)
+                                    pygame.mixer.music.play(0)
+                                    P.temp_party = P.party.copy()
+                                    P.party = [poke.Poke(P.save_data.pokestar[0][pos][0],P.save_data.pokestar[0][pos][1])]
+                                    P.pokestar_score = [0,0,0,0] # hit first - finishing damage - prog - killed (no, yes, u died, both)
+                                    P.pokestar_usage = []
+                                    # to add absol arcanine milotic gengar noivern roserade togekiss crawdaunt
+                                    battle(P,[opp],no_pc = True)
+                                    play_music(P,"music/silfide.wav")
+                                    refresh()
+                                    fade_in(P)
+                                    print("Score: "+str(P.pokestar_score))
+                                    first_time = False
+                                    if P.prog[8][4][0] == 1 and P.prog[8][4][1] == 0:
+                                        first_time = True
+                                    if P.pokestar_score[2] != -1:
+                                        overkill = False
+                                        score = 100
+                                        if P.pokestar_score[0] != 0:
+                                            score -= 30
+                                        if P.pokestar_score[2] < 4:
+                                            flair = 0
+                                        else:
+                                            flair = P.pokestar_score[1]
+                                            if flair > 0.75:
+                                                if flair > 0.8:
+                                                    overkill = True
+                                                flair = 1.5-flair
+                                            score += flair*100
+                                        if P.pokestar_score[3] in [1,3] and flair > 0:
+                                            pokestar_gain(P,0,flair*15)
+                                            score += 25
+                                        if P.pokestar_score[3] in [2,3]:
+                                            score -= 30
+                                        print("score: "+str(score))
+                                        if score >= 190:
+                                            txt(P,"Your Pokemon's performance was incredible! The audience really loved the show!")
+                                        elif score >= 150:
+                                            txt(P,"Your Pokemon did pretty well out there! The audience looked quite happy as they left!")
+                                        elif score >= 90:
+                                            txt(P,"That was a decent performance. The audience seemed to enjoy it.")
+                                        else:
+                                            txt(P,"You might need to practice some more. The audience was a little disappointed.")
+                                        if P.pokestar_score[0] > 0 and P.pokestar_score[2] > 1:
+                                            txt(P,"In the future, you should avoid hitting the opponent in the opening exchange.")
+                                        if P.pokestar_score[3] in [2,3]:
+                                            txt(P,"You should be careful not to let your Pokemon faint during the show.")
+                                            txt(P,"It doesn't look very good to lose as the hero in these situations.")
+                                        if P.pokestar_score[3] in [0,2]:
+                                            txt(P,"You need to take out the opponent with your finishing move for the final scene.")
+                                        if P.pokestar_score[3] in [1,3]:
+                                            if P.pokestar_score[2] < 4:
+                                                txt(P,"You need to wait for the final scene before taking out the opponent.")
+                                                txt(P,"The audience wants to see a powerful finishing move at the end of the show.")
+                                            elif flair < 0.3:
+                                                txt(P,"Try to leave the opponent with some more HP before you finish them off.")
+                                                txt(P,"The more damage your finishing move does, the more dramatic it will be!")
+                                            elif overkill:
+                                                txt(P,"It would be good to deal a bit more damage before using your finishing move.")
+                                                txt(P,"That would make the build up to the final scene more dramatic.")
+                                        lvled = False
+                                        exp = score*5
+                                        print(exp)
+                                        lvled = gain_skill(P,4,int(exp/100))
+                                        if not new_day(P.prog[8][4][2]):
+                                            exp /= 5
+                                        money = int(exp*(0.7+(0.1*P.prog[8][4][0])))
+                                        hs = int(money/400)
+                                        if random.random() < money/2000:
+                                            hs += 1
+                                        if hs == 0:
+                                            txt(P,"Here, have $"+str(money)+" for your help.")
+                                        elif hs == 1:
+                                            txt(P,"Here, have $"+str(money)+" for your help. Take this Heart Scale as well!")
+                                            txt(P,"You received a Heart Scale!")
+                                            add_item(P,"Heart Scale",hs)
+                                        else:
+                                            txt(P,"Here, have $"+str(money)+" for your help. Take these Heart Scales as well!")
+                                            txt(P,"You received "+str(hs)+" Heart Scales!")
+                                            add_item(P,"Heart Scale",hs)
+                                        P.save_data.money += money
+                                        if lvled:
+                                            get_theater_tm(P)
+                                        if P.pokestar_score[0] != -1 and new_day(P.prog[8][4][2]):
+                                            P.prog[8][4][2] = datetime.date.today().strftime("%m/%d/%Y")
+                                        if first_time:
+                                            add_memo(P,"Performing Arts",1)
+                                    else:
+                                        txt(P,"Come back when you have enough time to finish a performance.")
+                                        txt(P,"It's not easy having to replace an actor in the middle of the show.")
+                                    P.save_data.pokestar[0][pos][2] = P.pokestar_skills
+                                    P.party = P.temp_party.copy()
+                                    P.pokestar_battle = 0
+                                else:
+                                    txt(P,"Alright, come back when you're ready!")
+                                
+                    elif P.px == -75 and P.py == 75 and face_u(P):
+                        if get_time() in [0,5,10,15,20]:
+                            txt(P,"Would you like to watch a show? We have a Drama that's about to start.")
+                            skill = "Flair"
+                        elif get_time() in [1,6,11,16,21]:
+                            txt(P,"Would you like to watch a show? We have a Documentary that's about to start.")
+                            skill = "Memory"
+                        elif get_time() in [2,7,12,17,22]:
+                            txt(P,"Would you like to watch a show? We have a Romance show that's about to start.")
+                            skill = "Charm"
+                        elif get_time() in [3,8,13,18,23]:
+                            txt(P,"Would you like to watch a show? We have a Musical show that's about to start.")
+                            skill = "Rhythm"
+                        else:
+                            txt(P,"Would you like to watch a show? We have an Action show that's about to start.")
+                            skill = "Stamina"
+                        txt(P,"If you bring a PokeStar Pokemon along, its "+skill+" will increase.")
+                        if item_in_bag(P,"Theater Ticket"):
+                            new_txt(P)
+                            write(P,"Would you like to use a Theater Ticket to watch it?")
+                            if not choice(P):
+                                break
+                        else:
+                            new_txt(P)
+                            write(P,"A ticket costs $800. Would you like to watch it?")
+                            if not choice(P):
+                                break
+                        if len(P.save_data.pokestar[0]) > 0:
+                            txt(P,"Which PokeStar Pokemon would you like to bring?")
+                            fade_out(P)
+                            pos = pokestar(P,1)
+                            refresh()
+                            fade_in(P)
+                            if pos == -1:
+                                txt(P,"Come back when you're free!")
+                            else:
+                                txt(P,"Enjoy the show!")
+                                fade_out(P)
+                                theater_show(P,skill,0)
+                                P.px = random.choice([325,275,-275,-325])
+                                P.py = 175
+                                P.p = P.d1
+                                refresh()
+                                fade_in(P)
+                                r = random.random()
+                                if r < 0.25:
+                                    txt(P,P.save_data.pokestar[0][pos][1][18]+" wasn't very interested in show. Their "+skill+" increased a bit.")
+                                elif r < 0.75:
+                                    txt(P,P.save_data.pokestar[0][pos][1][18]+" enjoyed the show. Their "+skill+" increased a good amount.")
+                                else:
+                                    txt(P,P.save_data.pokestar[0][pos][1][18]+" loved the show. Their "+skill+" increased a lot!")
+                                skill_num = ['Flair','Memory','Charm','Rhythm','Stamina'].index(skill)
+                                P.save_data.pokestar[0][pos][2][skill_num] = min(100,P.save_data.pokestar[0][pos][2][skill_num]+20+(r*20))
+                        else:
+                            txt(P,"You don't have any registered PokeStar Pokemon. Do you still want to watch the show?")
+                            if choice(P):
+                                refresh()
+                                txt(P,"Enjoy the show!")
+                                fade_out(P)
+                                theater_show(P,skill,0)
+                                P.px = random.choice([325,275,-275,-325])
+                                P.py = 175
+                                P.p = P.d1
+                                refresh()
+                                fade_in(P)
+                            else:
+                                txt(P,"Come back when you're free!")
+                    elif P.silf_theater_lisia and P.silf_theater_lisia.talk():
+                        refresh()
+                        txt(P,"Thanks for stopping by! I absolutely love performing and watching shows here!")
+                        txt(P,"If you want to participate in a show, you can talk to that gentleman behind the desk.")
+                        new_txt(P)
+                        write(P,"Would you like to know more about how Theater shows work?")
+                        if choice(P):
+                            txt(P,"Alrighty! Theater shows are like normal battles, but you have a specific role to play.")
+                            txt(P,"Make sure you pay attention to the script notes during the show.")
+                            txt(P,"It will give you hints for what kind of moves you should use on each turn.")
+                            txt(P,"Attacks in theater shows will do less damage than in normal battles.")
+                            txt(P,"Damage differences from resistances and weaknesses are also less extreme.")
+                            txt(P,"What better way to learn than to try it out though, am I right?")
+                        else:
+                            txt(P,"Alright, I hope you enjoy your time here!")
+                    elif P.silf_theater_rich.talk():
+                        refresh()
+                        P.silf_theater_rich.write()
+                    elif P.silf_theater_beauty.talk():
+                        refresh()
+                        P.silf_theater_beauty.write()
+                    elif P.silf_theater_lass.talk():
+                        refresh()
+                        P.silf_theater_lass.write()
+                    elif P.silf_theater_exp.talk():
+                        refresh()
+                        P.silf_theater_exp.write()
+                    elif next_to_multi(P,[(50,50),(100,50),(650,50),(700,50)]) != -1:
+                        txt(P,"You need to buy a ticket to watch a show.")
+                    else:
+                        P.buffer_talk = temp_buff
+        keys = pygame.key.get_pressed()
+        if P.px in [-25,25] and P.py == -175 and keys[pygame.key.key_code(P.controls[1])] and P.p == P.d1:
+            P.px -= 1100
+            P.py = -925
+            P.loc = 'silfide'
+            end = False
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and m == 1:
+            menu(P)
+            m = 0
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and P.register_click == 1:
+            register(P)
+            P.register_click = -10
+        tim += 1
+        tick_buffer(P)
+        update_screen(P)
+        P.clock.tick(P.ani_spd)
+    P.move_out_dir = 'd'
+    fade_out(P)
+    set_mixer_volume(P,P.vol)
+
+def silfide_nursery_b(P):
+    P.surface.fill((0,0,0))
+    P.surface.blit(P.silf_nurse_back, (P.px, P.py))
+    P.surface.blit(P.char_shad,(P.px+300,P.py+113))
+    P.surface.blit(P.silf_nurse_mom,(P.px+298,P.py+84))
+    P.surface.blit(P.char_shad,(P.px+200,P.py+113))
+    P.surface.blit(P.silf_nurse_exp,(P.px+198,P.py+84))
+
+def silfide_nursery_p(P,temppx,temppy,move):
+    #rects start
+    r0 = (P.px,P.py+50,50,40)
+    r1 = (P.px,P.py+400,550,40)
+    r2 = (P.px+550,P.py+100,50,290)
+    r3 = (P.px-50,P.py+100,50,290)
+    r4 = (P.px+50,P.py+100,50,40)
+    r5 = (P.px+450,P.py+100,50,40)
+    r6 = (P.px+100,P.py+150,350,40)
+    r7 = (P.px+500,P.py+50,50,40)
+    rects = [r7,r6,r5,r4,r3,r2,r1,r0]
+    #rects end
+    #rect_draw(P,rects)
+    if move:
+        player_move(P,rects)
+    else:
+        blit_player(P)
+
+def silfide_nursery_f(P,temppx,temppy):
+    show_location(P, None, 0)
+
+def silfide_nursery(P) -> None:
+    def refresh():
+        silfide_nursery_b(P)
+        silfide_nursery_p(P,P.px,P.py,False)
+        silfide_nursery_f(P,P.px,P.py)
+    set_mixer_volume(P,P.vol)
+    if P.song != "music/silfide.wav":
+        P.song = "music/silfide.wav"
+        pygame.mixer.music.load(P.song)
+        pygame.mixer.music.play(-1)
+    P.silf_nurse_back = load("p/silfide/silfide_nursery.png")
+    P.silf_nurse_mom = pygame.transform.scale(load("p/spr/healer_d1.png"),(54,64))
+    P.silf_nurse_exp = pygame.transform.scale(load("p/spr/Aroma Lady_d1.png"),(54,64))
+    move = True
+    tim = 0
+    refresh()
+    fade_in(P)
+    end = True
+    m = 0
+    while end:
+        #print(P.px,P.py)
+        silfide_nursery_b(P)
+        temppx = P.px
+        temppy = P.py
+        silfide_nursery_p(P,temppx,temppy,move)
+        silfide_nursery_f(P,temppx,temppy)
+        for event in map_keys():
+            if (event.type == KEYDOWN or P.buffer_talk) and tim > 20:
+                if event.key == pygame.key.key_code(P.controls[6]) and move:
+                    m = 1
+                elif event.key == pygame.key.key_code(P.controls[7]) and move:
+                    P.register_click = 1
+                elif (event.key == pygame.key.key_code(P.controls[4]) or P.buffer_talk) and move:
+                    if event.key == pygame.key.key_code(P.controls[4]):
+                        P.buffer_talk = 10
+                    temp_buff = P.buffer_talk
+                    P.buffer_talk = None
+                    if P.px == 75 and P.py == 75 and face_u(P):
+                        if P.prog[14][1] == None:
+                            temp = P.surface.copy()
+                            txt(P,"Would you like to leave one of your Pokemon to stay here at the nursery?")
+                            txt(P,"We help train Pokemon, giving them experience in addition to friendship.")
+                            new_txt(P)
+                            write(P,"It'll cost $1000 to leave a","Pokemon here. Is that okay?")
+                            if choice(P):
+                                if P.save_data.money < 1000:
+                                    txt(P,"You don't have enough money!")
+                                    break
+                                txt(P,"Which Pokemon would you like to leave here?")
+                                fade_out(P)
+                                ans = trade_poke(P,None,True,nurse_poke = True)
+                                P.surface.blit(temp,(0,0))
+                                fade_in(P)
+                                if ans != None:
+                                    if ans.gen == 0:
+                                        hh = 'him'
+                                    else:
+                                        hh = 'her'
+                                    txt(P,"Okay, we'll take good care of "+ans.name+"! Remember to come back tomorrow to pick "+hh+" up!")
+                                    ans.heal()
+                                    P.prog[14][1] = [ans.code,ans.to_list(),datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S"),random.random()]
+                                    P.party.remove(ans)
+                                    P.save_data.money -= 1000
+                                else:
+                                    txt(P,"Feel free to come back if you change your mind!")
+                            else:
+                                txt(P,"Feel free to come back if you change your mind!")
+                        elif date_diff(P.prog[14][1][2]) < 82800:
+                            if P.prog[14][1][1][1] == 0:
+                                hh = ['him','he','his']
+                            else:
+                                hh = ['her','she','her']
+                            txt(P,P.prog[14][1][1][18]+" isn't ready to leave. If you take "+hh[0]+" back, "+hh[1]+" won't get " + hh[2] + " benefits.")
+                            new_txt(P)
+                            write(P,"Are you sure you want to take back "+P.prog[14][1][1][18]+"?")
+                            if choice(P):
+                                txt(P,"Okay, here you go!")
+                                get_poke(P,poke.Poke(P.prog[14][1][0],P.prog[14][1][1]),False)
+                                P.prog[14][1] = None
+                            else:
+                                txt(P,"Okay, don't forget to pick "+hh[0]+" up!")
+                        else:
+                            r = P.prog[14][1][3]
+                            if P.prog[14][1][1][1] == 0:
+                                p_info = [P.prog[14][1][1][18],'he','He']
+                            else:
+                                p_info = [P.prog[14][1][1][18],'she','She']
+                            if r < 0.15:
+                                txt(P,p_info[0]+" seemed like "+p_info[1]+" had an amazing time! "+p_info[2]+" grew a lot stronger!")
+                                amount = 200
+                            elif r < 0.30:
+                                txt(P,p_info[0]+" missed you. "+p_info[2]+" is a bit stronger, but we could have done better!")
+                                amount = 80
+                            else:
+                                txt(P,p_info[0]+" had a good time! "+p_info[2]+" should be quite a bit stronger now!")
+                                amount = 140
+                            txt(P,"Here you go. Thanks for using our service!")
+                            return_poke = poke.Poke(P.prog[14][1][0],P.prog[14][1][1])
+                            return_poke.gain_friend(amount)
+                            exp = amount*80
+                            ende = True
+                            while ende:
+                                return_poke.exp += exp
+                                if return_poke.exp >= return_poke.get_exp():
+                                    exp = return_poke.exp - return_poke.get_exp()
+                                    return_poke.exp = return_poke.get_exp()
+                                else:
+                                    exp = 0
+                                    ende = False
+                                if poke_max(P,return_poke):
+                                    break
+                                if return_poke.exp == return_poke.get_exp():
+                                    txt(P,return_poke.name + " leveled up!")
+                                    P.leveled_up = [return_poke]
+                                    return_poke.lvlup(P,False,True)
+                            get_poke(P,return_poke,False)
+                            refresh()
+                            evo_check(P)
+                            P.prog[14][1] = None
+                    elif P.px == 175 and P.py == 75 and face_u(P):
+                        t = P.surface.copy()
+                        if P.prog[8][1][0] == -1:
+                            txt(P,"Taking care of the Pokemon here is more involved than you might be used to.")
+                            txt(P,"You should try helping out at the Pianura Nursery before working here.")
+                        elif P.prog[8][1][0] < 4:
+                            txt(P,"Taking care of the Pokemon here is more involved than you might be used to.")
+                            txt(P,"You should help out some more at the Pianura Nursery before working here.")
+                            txt(P,"Come back once your nursery skill has hit level 4!")
+                        elif P.prog[8][1][2] != None:
+                            if P.prog[8][1][2][1][19] in [2,5]:
+                                new_txt(P)
+                                write(P,"Are you done nursing",P.prog[8][1][2][1][18]+"?")
+                                if choice(P):
+                                    fade_out(P)
+                                    ans = trade_poke(P,None,True,return_nurse = True)
+                                    P.surface.blit(t,(0,0))
+                                    fade_in(P)
+                                    if ans != None:
+                                        mod = (ans.friend - P.prog[8][1][2][1][15])/(400 - P.prog[8][1][2][1][15])
+                                        P.party.remove(ans)
+                                        if mod <= 0.05:
+                                            mod = 0
+                                        elif mod <= 0.25:
+                                            mod = 0.25
+                                        if mod != 0:
+                                            exp = 6*(200 - P.prog[8][1][2][1][15])
+                                            money = int(mod*(1200+exp)*(0.7+(0.2*P.prog[8][1][0])))
+                                            lvled = gain_skill(P,1,int((1400+exp)/80*mod))
+                                            if P.prog[8][1][2][1][19] == 5:
+                                                money = int(money/5)
+                                            if mod == 0.25:
+                                                txt(P,"Here's $"+str(money)+" for your trouble!")
+                                                txt(P,"You should take more time to increase their friendship to improve your earnings.")
+                                            else:
+                                                txt(P,"Good work! You can have $"+str(money),"for your trouble!")
+                                            P.save_data.money += money
+                                            if lvled:
+                                                get_baby_poke(P)
+                                        else:
+                                            txt(P,P.prog[8][1][2][1][18]+"'s friendship hasn't increased much since you picked them up.")
+                                            txt(P,"I'm afraid we can't give you any rewards this time.")
+                                            txt(P,"Be sure to spend more time with them in the future!")
+                                        P.prog[8][1][2] = None
+                                    else:
+                                        txt(P,"Well come back when you've increased its friendship!")
+                                else:
+                                    txt(P,"Well come back when you've increased its friendship!")
+                            elif P.prog[8][1][2][1][19] in [1,4]:
+                                txt(P,"You're already taking care of a Pokemon for the Pianura Nursery.")
+                                txt(P,"Come back once you've completed that job for them.")
+                            else:
+                                txt(P,"You're already taking care of a Pokemon for the ??? Nursery.")
+                                txt(P,"Come back once you've completed that job for them.")
+                        elif len(P.party) == 6:
+                            txt(P,"If you want to take care of a","Pokemon, clear up a spot in","your team and come back!")
+                        else:
+                            poke_list = [['Noctowl','Air Slash','Roost'],['Crawdaunt','Swords Dance','Crabhammer'],['Tangrowth','Grassy Terrain','Power Whip'],['Fearow','Drill Peck','Drill Run'],['Exploud','Hyper Voice','Synchronoise'],['Floatzel','Aqua Tail','Aqua Jet'],['Butterfree','Bug Buzz','Quiver Dance'],['Primeape','Close Combat','Outrage'],['Togedemaru','Wild Charge','Spiky Shield'],['Lanturn','Discharge','Aqua Ring'],['Reuniclus','Psychic','Recover'],['Yanmega','U-turn','Air Slash'],['Ribombee','Pollen Puff','Dazzling Gleam'],['Rapidash','Flare Blitz','Take Down'],['Victreebel','Poison Jab','Razor Leaf']]
+                            name_listm = ['Daniel','The Boss','Eric','Timmy','Alex','Toby','Jerry','Justin','Ash','Nathan','Latios','Alvin','Ethan','Simon','Kevin','David','Josh','Joey','Wesley','Jenjo','Longinus','Lance','Issac']
+                            if P.save_data.gen == 0 and len(P.save_data.name) <= 9:
+                                name_listm.append(P.save_data.name)
+                            name_listf = ['Catherine','Sarah','Glitter','Venice','Latias','Jenny','Chloe','Violet','Rose','Baby','Sky','Jello','Sherbet','Rachel','Emily','Ella']
+                            if P.save_data.gen == 1 and len(P.save_data.name) <= 9:
+                                name_listf.append(P.save_data.name)
+                            move_list = ['Confide','Frustration','Return','Facade','Swagger','Rest','Protect','Double Team']
+                            r = random.randint(0,len(poke_list)-1)
+                            moves = [poke_list[r][1],poke_list[r][2]]
+                            for x in range(2):
+                                rm = random.randint(0,len(move_list)-1)
+                                moves.append(move_list.pop(rm))
+                            gen = random.randint(0,1)
+                            if gen == 0:
+                                poke_name = name_listm[random.randint(0,len(name_listm)-1)]
+                            else:
+                                poke_name = name_listf[random.randint(0,len(name_listf)-1)]
+                            take = False
+                            nd_mod = 0
+                            if not new_day(P.prog[8][1][3]):
+                                txt(P,"It looks like we don't have many Pokemon left to be taken care of today.")
+                                txt(P,"If you still want to practice, you can take another one, but you'll receive less rewards.")
+                                new_txt(P)
+                                write(P,"Do you still want to take this "+poke_list[r][0]+"?")
+                                nd_mod = 3
+                                if choice(P):
+                                    take = True
+                            else:
+                                txt(P,"Are you interested in helping us care for the Pokemon we have kept here?")
+                                txt(P,"We'll give you a Pokemon, and you can return it once you've raised its friendship.")
+                                txt(P,"The Pokemon we have need to be trained, so you'll want to use them in battle.")
+                                new_txt(P)
+                                write(P,"We have a "+poke_list[r][0]+" here for you to care for. Would you like to take it?")
+                                if choice(P):
+                                    take = True
+                            if take:
+                                txt(P,"Here you go! Its Pokeball boosts friendship gained from leveling in battle!")
+                                txt(P,"You can identify the Pokemon you're nursing by the symbol next to its name.")
+                                txt(P,"Remember that they won't learn any moves or evolve, and you can't change their name!")
+                                txt(P,"Take good care of "+poke_name+"!")
+                                given = poke.Poke(poke_list[r][0],[random.randint(45,52),gen,787,moves[0],-1,moves[1],-1,moves[2],-1,moves[3],-1,None,None,0,"Nursery Ball",random.randint(50,200),'Random Ability',True,poke_name,2+nd_mod])
+                                get_poke(P,given,False)
+                                P.prog[8][1][2] = [given.code,given.to_list()]
+                                if nd_mod == 0:
+                                    P.prog[8][1][3] = datetime.date.today().strftime("%m/%d/%Y")
+                            else:
+                                if nd_mod == 0:
+                                    txt(P,"Well come back when you're","ready!")
+                                else:
+                                    txt(P,"Feel free to come back tomorrow!")
+                    elif next_to(P,50,100) or next_to(P,450,100):
+                        txt(P,"These are some pretty roses!")
+                    elif P.px == -25 and P.py == 75 and face_u(P):
+                        t = P.surface.copy()
+                        txt(P,P.save_data.name+" booted up the", "computer.")
+                        fade_out(P)
+                        open_cpu(P)
+                        P.surface.blit(t,(0,0))
+                        fade_in(P)
+                    else:
+                        P.buffer_talk = temp_buff
+        keys = pygame.key.get_pressed()
+        if P.px == 125 and P.py == -75 and keys[pygame.key.key_code(P.controls[1])] and P.p == P.d1:
+            P.px = -1625
+            P.py = -225
+            P.loc = 'silfide'
+            end = False
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and m == 1:
+            menu(P)
+            m = 0
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and P.register_click == 1:
+            register(P)
+            P.register_click = -10
+        tim += 1
+        tick_buffer(P)
+        update_screen(P)
+        P.clock.tick(P.ani_spd)
+    P.move_out_dir = 'd'
+    fade_out(P)
+    set_mixer_volume(P,P.vol)
+
+def silfide_gym_room_b(P,num):
+    P.surface.fill((0,0,0))
+    blit_img(P,P.silfide_gym_room_back,(P.px,P.py))
+    xy = [316,295]
+    if num == 2:
+        xy = [0,295]
+    elif num == 3:
+        xy = [0,145]
+    elif num == 4:
+        xy = [316,145]
+    blit_img(P,P.silfide_gym_room_mat,(P.px+xy[0],P.py+xy[1]))
+    blit_img(P,P.silfide_gym_room_orb,(P.px+150,P.py+70))
+
+def silfide_gym_room_p(P,temppx,temppy,move):
+    if P.silfide_gym_room_npc:
+        P.silfide_gym_room_npc.move()
+    #rects start
+    r1 = (P.px,P.py+50,350,40)
+    r2 = (P.px-50,P.py+100,50,290)
+    r3 = (P.px,P.py+400,350,40)
+    r4 = (P.px+350,P.py+100,50,290)
+    r5 = (P.px+150,P.py+100,50,40)
+    r6 = r1
+    if P.silfide_gym_room_npc:
+        r6 = P.silfide_gym_room_npc.get_rect()
+    # if P.verde_gymb_mairin:
+    #     r20 = P.verde_gymb_mairin.get_rect()
+    rects = [r6,r5,r4,r3,r2,r1]
+    # rect_draw(P,rects)
+    if move:
+        player_move(P,rects)
+    else:
+        blit_player(P)
+    if P.silfide_gym_room_npc:
+        P.silfide_gym_room_npc.move(temppx,temppy)
+
+def silfide_gym_room_f(P,temppx,temppy,tim):
+    show_location(P, P.loc_txt, tim)
+
+def silfide_gym_room(P,num) -> None:
+    def refresh():
+        silfide_gym_room_b(P,num)
+        silfide_gym_room_p(P,P.px,P.py,False)
+        silfide_gym_room_f(P,P.px,P.py,tim)
+    if P.song != "music/gym.wav":
+        P.song = "music/gym.wav"
+        pygame.mixer.music.load(P.song)
+        set_mixer_volume(P,P.vol)
+        pygame.mixer.music.play(-1)
+    P.silfide_gym_room_back = load("p/silfide/Silfide_Gym_Room.png")
+    P.silfide_gym_room_gorb = load("p/silfide/empty_orb.png")
+    P.silfide_gym_room_orb = P.silfide_gym_room_gorb
+    if num == 1 and P.prog[22][0] == 0:
+        P.silfide_gym_room_orb = load("p/silfide/pink_orb.png")
+    elif num == 2 and P.prog[22][1] == 0:
+        P.silfide_gym_room_orb = load("p/silfide/green_orb.png")
+    elif num == 3 and P.prog[22][2] == 0:
+        P.silfide_gym_room_orb = load("p/silfide/red_orb.png")
+    elif num == 4 and P.prog[22][3] == 0:
+        P.silfide_gym_room_orb = load("p/silfide/blue_orb.png")
+    P.silfide_gym_room_mat = load("p/silfide/mat.png")
+    P.silfide_gym_room_npc = None
+    if num == 1:
+        if P.prog[5][72] == 0:
+            P.silfide_gym_room_npc = npc.NPC(P,'Ace Trainerm','Henry',[250,150],[['l',40]],["Hey! You've got to beat me in a battle before you go around touching things!"],["Well, you beat me fair and square. I guess you're free to do as you please."],True,[0,0,100,0],P.silfg_team1,72)
+        else:
+            P.silfide_gym_room_npc = npc.NPC(P,'Ace Trainerm','Henry',[200,100],[['l',40]],["Did you know that Misty Terrain protects Pokemon from many status effects?","It can be quite useful against Pokemon that don't rely on brute strength."])
+    elif num == 2:
+        if P.prog[5][73] == 1:
+            P.silfide_gym_room_npc = npc.NPC(P,'Ace Trainerf','Myra',[150,250],[['d',40]],["That fight would've gone a lot differently if I got a good nap in."])
+    elif num == 3:
+        if P.prog[5][74] == 0:
+            P.silfide_gym_room_npc = npc.NPC(P,'Ace Trainerf','Layla',[150,150],[['u',40]],["Oh, you want to get your hands on this orb here?","Well then you better prove you're worthy of challenging this gym!"],["Whew! You sure are one tough challenger!"],True,[0,0,0,0],P.silfg_team3,74)
+        else:
+            P.silfide_gym_room_npc = npc.NPC(P,'Ace Trainerf','Layla',[100,100],[['r',40]],["These orbs hold some special powers that tend to be useful for Fairy Pokemon."])
+    elif num == 4:
+        if P.prog[5][75] == 0:
+            P.silfide_gym_room_npc = npc.NPC(P,'Ace Trainerm','Mason',[150,150],[['d',40]],["Today's my first day on the job, and I'm gonna nail it!"],["That didn't quite go the way I was imagining it last night.","Well I guess I'm supposed to let you turn off the orb now..."],True,[0,0,0,0],P.silfg_team4,75)
+        else:
+            P.silfide_gym_room_npc = npc.NPC(P,'Ace Trainerm','Mason',[100,150],[['r',40]],["You know, part of my job is letting talented challengers progress through the gym.","So maybe I'm actually doing a great job!"])
+    P.habitat = 'indoor'
+    move = True
+    tim = 0
+    set_location(P)
+    refresh()
+    fade_in(P)
+    end = True
+    m = 0
+    while end:
+        # print(P.px,P.py)
+        silfide_gym_room_b(P,num)
+        if (move == True or (num == 2 and move == False)) and P.silfide_gym_room_npc and P.silfide_gym_room_npc.trainer_check():
+            move = False
+        temppx = P.px
+        temppy = P.py
+        silfide_gym_room_p(P,temppx,temppy,move)
+        silfide_gym_room_f(P,temppx,temppy,tim)
+        if P.silfide_gym_room_npc and trainer_check(P,P.silfide_gym_room_npc,"music/gym.wav"):
+            if num == 1:
+                P.silfide_gym_room_npc = npc.NPC(P,'Ace Trainerm','Henry',[P.silfide_gym_room_npc.x,P.silfide_gym_room_npc.y],[[P.silfide_gym_room_npc.face(),40]],["Did you know that Misty Terrain protects Pokemon from many status effects?","It can be quite useful against Pokemon that don't rely on brute strength."])
+            elif num == 2:
+                P.silfide_gym_room_npc = npc.NPC(P,'Ace Trainerf','Myra',[150,200],[['u',40]],["That fight would've gone a lot differently if I got a good nap in."])
+            elif num == 3:
+                if P.px == 175:
+                    P.silfide_gym_room_npc = npc.NPC(P,'Ace Trainerf','Layla',[150,150],[['r',40]],["These orbs hold some special powers that tend to be useful for Fairy Pokemon."],extra_walk = ['l',50,0])
+                else:
+                    P.silfide_gym_room_npc = npc.NPC(P,'Ace Trainerf','Layla',[150,150],[['l',40]],["These orbs hold some special powers that tend to be useful for Fairy Pokemon."],extra_walk = ['r',50,0])
+            else:
+                if P.px == 275:
+                    P.silfide_gym_room_npc = npc.NPC(P,'Ace Trainerm','Mason',[150,150],[['l',40]],["You know, part of my job is letting talented challengers progress through the gym.","So maybe I'm actually doing a great job!"],extra_walk = ['r',50,0])
+                else:
+                    P.silfide_gym_room_npc = npc.NPC(P,'Ace Trainerm','Mason',[150,150],[['r',40]],["You know, part of my job is letting talented challengers progress through the gym.","So maybe I'm actually doing a great job!"],extra_walk = ['l',50,0])
+            move = True
+        if num == 2 and P.px == 225 and P.py == 125 and P.prog[5][73] == 0 and move == True:
+            P.silfide_gym_room_npc = npc.NPC(P,'Ace Trainerf','Myra',[0,300],[['mr',60],['mu',40]],["Sorry I'm late!","Oh shoot, there's already a","trainer here?"],["Man, I could've slept another 30 minutes..."],True,[150,0,0,0],P.silfg_team2,73)
+            move = False
+        for event in map_keys():
+            if (event.type == KEYDOWN or P.buffer_talk) and tim > 20:
+                if event.key == pygame.key.key_code(P.controls[6]) and move:
+                    m = 1
+                elif event.key == pygame.key.key_code(P.controls[7]) and move:
+                    P.register_click = 1
+                elif (event.key == pygame.key.key_code(P.controls[4]) or P.buffer_talk) and move:
+                    if event.key == pygame.key.key_code(P.controls[4]):
+                        P.buffer_talk = 10
+                    temp_buff = P.buffer_talk
+                    P.buffer_talk = None
+                    if P.silfide_gym_room_npc and P.silfide_gym_room_npc.talk():
+                        if P.silfide_gym_room_npc.trainer:
+                            move = False
+                        else:
+                            refresh()
+                            P.silfide_gym_room_npc.write()
+                    elif next_to(P,150,100):
+                        if P.prog[22][num-1] == 0:
+                            if face_u(P):
+                                new_txt(P)
+                                write(P,"The orb is glowing. Press the button?")
+                                if choice(P):
+                                    txt(P,"You turned off the orb.")
+                                    P.prog[22][num-1] = 1
+                                    P.silfide_gym_room_orb = P.silfide_gym_room_gorb
+                            else:
+                                txt(P,"The orb is glowing.")
+                        else:
+                            if face_u(P):
+                                new_txt(P)
+                                write(P,"The orb is turned off. Press the button?")
+                                if choice(P):
+                                    txt(P,"You turned on the orb.")
+                                    P.prog[22][num-1] = 0
+                                    if num == 1:
+                                        P.silfide_gym_room_orb = load("p/silfide/pink_orb.png")
+                                    elif num == 2:
+                                        P.silfide_gym_room_orb = load("p/silfide/green_orb.png")
+                                    elif num == 3:
+                                        P.silfide_gym_room_orb = load("p/silfide/red_orb.png")
+                                    else:
+                                        P.silfide_gym_room_orb = load("p/silfide/blue_orb.png")
+                            else:
+                                txt(P,"The orb is turned off.")
+                    else:
+                        P.buffer_talk = temp_buff
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and m == 1:
+            menu(P)
+            m = 0
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and P.register_click == 1:
+            register(P)
+            P.register_click = -10
+        keys = pygame.key.get_pressed()
+        if num == 1 and P.px == 75 and P.py == -25 and keys[pygame.key.key_code(P.controls[3])] and P.p == P.r1:
+            P.px = -25
+            P.py = -175
+            P.move_out_dir = 'r'
+            P.loc = "silfide_gymb"
+            end = False
+        if num == 2 and P.px == 375 and P.py == -25 and keys[pygame.key.key_code(P.controls[2])] and P.p == P.l1:
+            P.px = -1025
+            P.py = -175
+            P.move_out_dir = 'l'
+            P.loc = "silfide_gymb"
+            end = False
+        if num == 3 and P.px == 375 and P.py == 125 and keys[pygame.key.key_code(P.controls[2])] and P.p == P.l1:
+            P.px = -1025
+            P.py = -475
+            P.move_out_dir = 'l'
+            P.loc = "silfide_gymb"
+            end = False
+        if num == 4 and P.px == 75 and P.py == 125 and keys[pygame.key.key_code(P.controls[3])] and P.p == P.r1:
+            P.px = -25
+            P.py = -475
+            P.move_out_dir = 'r'
+            P.loc = "silfide_gymb"
+            end = False
+        tim += 1
+        tick_buffer(P)
+        update_screen(P)
+        P.clock.tick(P.ani_spd)
+    fade_out(P)
+
+def silfide_gymb_b(P):
+    blit_img(P,P.silfide_gymb_back,(P.px,P.py))
+    if P.prog[22][0] == 1:
+        blit_img(P,P.silfide_gymb_orb1,(P.px+752,P.py+283))
+    if P.prog[22][1] == 1:
+        blit_img(P,P.silfide_gymb_orb2,(P.px+1048,P.py+283))
+    if P.prog[22][2] == 1:
+        blit_img(P,P.silfide_gymb_orb3,(P.px+1048,P.py+630))
+    if P.prog[22][3] == 1:
+        blit_img(P,P.silfide_gymb_orb4,(P.px+752,P.py+630))
+
+def silfide_gymb_p(P,temppx,temppy,move):
+    P.silfide_gymb_off.move()
+    if P.silfide_gymb_lisia:
+        P.silfide_gymb_lisia.move(mov = True)
+    #rects start
+    r1 = (P.px+350,P.py+450,50,40)
+    r2 = (P.px+400,P.py+400,200,40)
+    r3 = (P.px+400,P.py+500,100,40)
+    r4 = (P.px+500,P.py+500,50,240)
+    r5 = (P.px+600,P.py+450,50,290)
+    r6 = (P.px+400,P.py+700,100,40)
+    r7 = (P.px+350,P.py+750,50,40)
+    r8 = (P.px+400,P.py+800,450,40)
+    r9 = (P.px+850,P.py+800,50,140)
+    r10 = (P.px+800,P.py+950,50,90)
+    r11 = (P.px+850,P.py+1050,150,40)
+    r12 = (P.px+1000,P.py+950,50,90)
+    r13 = (P.px+950,P.py+800,50,140)
+    r14 = (P.px+1000,P.py+800,450,40)
+    r15 = (P.px+1450,P.py+750,50,40)
+    r16 = (P.px+1350,P.py+700,100,40)
+    r17 = (P.px+1300,P.py+500,50,240)
+    r18 = (P.px+1350,P.py+500,100,40)
+    r19 = (P.px+1450,P.py+450,50,40)
+    r20 = (P.px+1250,P.py+400,200,40)
+    r21 = (P.px+1200,P.py+450,50,290)
+    r22 = (P.px+950,P.py+700,250,40)
+    r23 = (P.px+950,P.py+650,100,40)
+    r24 = (P.px+1050,P.py+350,50,290)
+    r25 = (P.px+950,P.py+300,100,40)
+    r26 = (P.px+900,P.py+250,50,40)
+    r27 = (P.px+800,P.py+300,100,40)
+    r28 = (P.px+750,P.py+350,50,290)
+    r29 = (P.px+800,P.py+650,100,40)
+    r30 = (P.px+650,P.py+700,250,40)
+    r31 = P.silfide_gymb_off.get_rect()
+    r32 = r1
+    if P.silfide_gymb_lisia:
+        r32 = P.silfide_gymb_lisia.get_rect()
+    rects = [r32,r31,r30,r29,r28,r27,r26,r25,r24,r23,r22,r21,r20,r19,r18,r17,r16,r15,r14,r13,r12,r11,r10,r9,r8,r7,r6,r5,r4,r3,r2,r1]
+    # rect_draw(P,rects)
+    if move:
+        if P.prog[0] == 154 and P.py > -375:
+            player_move(P,rects,manual_input = 'd',spd = 3)
+        else:
+            player_move(P,rects)
+    else:
+        blit_player(P)
+    P.silfide_gymb_off.move(temppx,temppy)
+
+def silfide_gymb_f(P,temppx,temppy,tim):
+    blit_img(P,P.silfide_gymb_f,(temppx,temppy))
+    set_sky(P)
+    if P.prog[22][0] == 0:
+        blit_img(P,P.silfide_gymb_orb1,(temppx+752,temppy+283))
+    if P.prog[22][1] == 0:
+        blit_img(P,P.silfide_gymb_orb2,(temppx+1048,temppy+283))
+    if P.prog[22][2] == 0:
+        blit_img(P,P.silfide_gymb_orb3,(temppx+1048,temppy+630))
+    if P.prog[22][3] == 0:
+        blit_img(P,P.silfide_gymb_orb4,(temppx+752,temppy+630))
+    show_location(P, P.loc_txt, tim)
+
+#misty terrain, starting buff for fairy types to spd  , fairy moves boosted, fairy types protected from supereffective
+def silfide_gymb(P) -> None:
+    def refresh():
+        silfide_gymb_b(P)
+        silfide_gymb_p(P,P.px,P.py,False)
+        silfide_gymb_f(P,P.px,P.py,tim)
+    if P.song != "music/gym.wav":
+        P.song = "music/gym.wav"
+        pygame.mixer.music.load(P.song)
+        set_mixer_volume(P,P.vol)
+        pygame.mixer.music.play(-1)
+    P.silfide_gymb_back = load("p/silfide/Silfide_Gym_Back.png")
+    P.silfide_gymb_f = load("p/silfide/Silfide_Gym_Back_f.png")
+    P.silfide_gymb_off = npc.NPC(P,'Officer','Finn',[850,950],[['d',40]],["Welcome to the Silfide City Gym! Lisia is a huge fan of Fairy-type Pokemon.","They are extremely effective at dealing with powerful Dragon-type Pokemon.","If you bring Poison or Steel-type Pokemon, it'll make your fight a lot easier."])
+    P.silfide_gymb_gorb = load("p/silfide/empty_orb.png")
+    P.silfide_gymb_orb1 = P.silfide_gymb_gorb
+    P.silfide_gymb_orb2 = P.silfide_gymb_gorb
+    P.silfide_gymb_orb3 = P.silfide_gymb_gorb
+    P.silfide_gymb_orb4 = P.silfide_gymb_gorb
+    if P.prog[22][0] == 0:
+        P.silfide_gymb_orb1 = load("p/silfide/pink_orb.png")
+    if P.prog[22][1] == 0:
+        P.silfide_gymb_orb2 = load("p/silfide/green_orb.png")
+    if P.prog[22][2] == 0:
+        P.silfide_gymb_orb3 = load("p/silfide/red_orb.png")
+    if P.prog[22][3] == 0:
+        P.silfide_gymb_orb4 = load("p/silfide/blue_orb.png")
+    P.silfide_gymb_lisia = None
+    if P.prog[0] <= 157:
+        P.silfide_gymb_lisia = npc.NPC(P,'Lisia','',[900,300],[['d',40]],["","",""])
+    P.habitat = 'indoor'
+    move = True
+    tim = 0
+    set_location(P)
+    refresh()
+    fade_in(P)
+    end = True
+    m = 0
+    while end:
+        # print(P.px,P.py)
+        if P.prog[0] == 154 and P.py == -375:
+            P.p = P.u1
+            P.prog[0] += 1
+            move = False
+        silfide_gymb_b(P)
+        temppx = P.px
+        temppy = P.py
+        silfide_gymb_p(P,temppx,temppy,move)
+        silfide_gymb_f(P,temppx,temppy,tim)
+        for event in map_keys():
+            if (event.type == KEYDOWN or P.buffer_talk) and tim > 20:
+                if event.key == pygame.key.key_code(P.controls[6]) and move:
+                    m = 1
+                elif event.key == pygame.key.key_code(P.controls[7]) and move:
+                    P.register_click = 1
+                elif (event.key == pygame.key.key_code(P.controls[4]) or P.buffer_talk) and move:
+                    if event.key == pygame.key.key_code(P.controls[4]):
+                        P.buffer_talk = 10
+                    temp_buff = P.buffer_talk
+                    P.buffer_talk = None
+                    if P.silfide_gymb_off.talk():
+                        refresh()
+                        P.silfide_gymb_off.write()
+                    elif P.px == -525 and P.py == -75 and face_u(P):
+                        if P.prog[0] == 153:
+                            txt(P,"You're " + P.save_data.name +" right? I'm Lisia, the Silfide City Gym Leader!")
+                            txt(P,"Sorry we didn't get a proper introduction back on Route 6.")
+                            txt(P,"But what better way to get to know each other than through a Pokemon battle?")
+                            txt(P,"Hurry up and get in position so we can get started!")
+                            P.prog[0] += 1
+                        elif P.prog[0] == 157:
+                            txt(P,"If you've got some time before you head out, you should stop by the theater.")
+                            txt(P,"You might find that your Pokemon are good at more than just battling!")
+                    else:
+                        P.buffer_talk = temp_buff
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and m == 1:
+            menu(P)
+            m = 0
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and P.register_click == 1:
+            register(P)
+            P.register_click = -10
+        keys = pygame.key.get_pressed()
+        if P.px == -525 and P.py == -725 and keys[pygame.key.key_code(P.controls[1])] and P.p == P.d1:
+            P.move_out_dir = 'd'
+            P.px = -1175
+            P.py = -225
+            P.loc = "silfide"
+            end = False
+        if P.px == -25 and P.py == -175 and P.p == P.l1:
+            P.px = 75
+            P.py = -25
+            P.loc = "silfide_gym1"
+            end = False
+        if P.px == -1025 and P.py == -175 and P.p == P.r1:
+            P.px = 375
+            P.py = -25
+            P.loc = "silfide_gym2"
+            end = False
+        if P.px == -1025 and P.py == -475 and P.p == P.r1:
+            P.px = 375
+            P.py = 125
+            P.loc = "silfide_gym3"
+            end = False
+        if P.px == -25 and P.py == -475 and P.p == P.l1:
+            P.px = 75
+            P.py = 125
+            P.loc = "silfide_gym4"
+            end = False
+        if P.prog[0] == 155:
+            if P.camy == 150:
+                t = P.surface.copy()
+                if sum(P.prog[22]) == 0:
+                    txt(P,"Pretty bold of you to be challenging me in the fully powered field.")
+                    txt(P,"You better not regret it!")
+                else:
+                    txt(P,"You were a big help back there with the Tornadus and Team Rocket.")
+                    txt(P,"But that just means I'm more psyched to win this battle!")
+                play_music(P,"music/lisia_battle.wav",0)
+                #battle(P,["Leader Mairin",poke.Poke('Mega_Venusaur',[15,0,787,"Thunder Shock",-1,"Thunder Wave",-1,"Magnet Bomb",-1,"Light Screen",-1,None,None,0,"Poke Ball",0,'Magnet Pull'])])
+                battle(P,["Leader Lisia",poke.Poke('Sylveon',[55,1,787,"Light Screen",-1,"Moonblast",-1,"Skill Swap",-1,"Misty Terrain",-1,None,None,0,"Poke Ball",400,'Cute Charm'],petals=['hp','hp','spd','spd','spd']),poke.Poke('Togekiss',[55,1,787,"Dazzling Gleam",-1,"Aura Sphere",-1,"Air Slash",-1,"Yawn",-1,None,None,0,"Poke Ball",400,'Serene Grace'],petals=['sak','sak','sak','spd','spd']),poke.Poke('Dedenne',[55,0,787,"Dazzling Gleam",-1,"Discharge",-1,"Volt Switch",-1,"Thunder Wave",-1,"Sitrus Berry",None,0,"Poke Ball",400,'Cheek Pouch'],petals=['df','df','hp','hp','hp']),poke.Poke('Azumarill',[55,0,787,"Superpower",-1,"Aqua Tail",-1,"Play Rough",-1,"Double-Edge",-1,None,None,0,"Poke Ball",400,'Huge Power'],petals=['hp','hp','ak','ak','ak']),poke.Poke('Clefable',[55,1,787,"Minimize",-1,"Moonlight",-1,"Dazzling Gleam",-1,"Metronome",-1,None,None,0,"Poke Ball",400,'Magic Guard'],petals=['hp','hp','hp','sdf','sdf']),poke.Poke('Mega_Altaria',[55,1,787,"Cotton Guard",-1,"Return",-1,"Earthquake",-1,"Dragon Pulse",-1,None,None,0,"Premier Ball",400,'Pixilate'],petals=['hp','hp','hp','sdf','sdf'])])
+                play_music(P,"music/gym.wav")
+                P.surface.blit(t,(0,0))
+                fade_in(P)
+                if sum(P.prog[22]) == 0:
+                    txt(P,"Well I'm impressed! You used that field even better than I did!")
+                else:
+                    txt(P,"That was brilliant! Your Pokemon really outshone mine in that battle! ")
+                txt(P,"Here's the Dazzle Badge!","With it your Pokemon can now","reach level 60.")
+                txt(P,"It also approves your Pokemon to participate in theater shows.")
+                txt(P,"Take this TM99 Dazzling Gleam. You can use it to teach your Pokemon Dazzling Gleam.")
+                txt(P,"You received TM99 Dazzling Gleam!")
+                txt(P,"It's a very powerful Fairy type move, and it's super flashy!")
+                txt(P,"I had a lot of fun in that battle! Keep it up for the rest of your journey!")
+                add_item(P,"TM99 Dazzling Gleam",1)
+                P.prog[0] += 1
+            else:
+                P.camy  += 2
+        if P.prog[0] == 156:
+            P.camy  -= 2
+            if P.camy  == 0:
+                move = True
+                P.prog[0] += 1
+                add_memo(P)
+                add_memo(P,"Performing Arts")
+        tim += 1
+        tick_buffer(P)
+        update_screen(P)
+        P.clock.tick(P.ani_spd)
+    fade_out(P)
+
 def silfide_b(P,wx,wy,listx,listy,gy):
     draw_waves(P, wx, wy)
     bea = 0
@@ -17,19 +2837,20 @@ def silfide_b(P,wx,wy,listx,listy,gy):
         bea = (975 + P.py)
     if bea != 0:
         P.surface.fill((45,45,45), Rect(P.px+1450,P.py+1180,200,100))
-    P.surface.blit(P.beadl, (P.px + 1450 - bea, P.py + 1180))
-    P.surface.blit(P.beadr, (P.px + 1500 + bea, P.py + 1180))
+    P.surface.blit(P.theadl, (P.px + 1450 - bea, P.py + 1180))
+    P.surface.blit(P.theadr, (P.px + 1500 + bea, P.py + 1180))
     pc = 0
     if P.px == -2025 and P.py > -825 and P.py <= -775:
         pc = (825 + P.py)
     P.surface.blit(P.pc_black,(P.px+2380,P.py+1030))
     P.surface.blit(P.pcdr, (P.px + 2425 + pc, P.py + 1030 - (pc/5)))
     P.surface.blit(P.pcdl, (P.px + 2388 - pc, P.py + 1030 - (pc/5)))
-    P.surface.blit(P.silfide_back, (P.px-500, P.py))
+    P.surface.blit(P.silfide_back, (P.px-950, P.py))
     P.surface.blit(P.silfide_foam, (P.px+992, P.py+807+abs(P.foam)))
     cloud_mod = (abs(P.py)-1775)/5
     P.surface.blit(P.r6_cloud,(P.px+350,P.py+2200-cloud_mod))
-    P.surface.blit(P.silfide_foamf, (P.px+974, P.py+792))
+    P.surface.blit(P.silfide_cloud,(P.px-1500,P.py-cloud_mod))
+    P.surface.blit(P.silfide_foamf, (P.px-626, P.py+92))
     if P.px == -925 and -1725 < P.py <= -1675:
         blit_small_door(P,-1685)
     elif P.px == -1425 and -1725 < P.py <= -1675:
@@ -49,11 +2870,14 @@ def silfide_b(P,wx,wy,listx,listy,gy):
     P.surface.blit(P.gondola, (P.px+2550, P.py + 1550 + abs(P.foam)+gy))
     P.surface.blit(P.char_shad, (P.px + 2561, P.py + 1610 + abs(P.foam)+gy))
     P.surface.blit(P.gondolier, (P.px + 2562, P.py + 1590 + abs(P.foam)+gy))
-    #P.surface.blit(P.cascata_foam,(P.px-111,P.py+1060+abs(P.foam)))
     draw_lamps(P,P.px,P.py,listx,listy,"b")
 
 def silfide_p(P,temppx,temppy,move,gond,gy):
-    P.cascata_gentle.move()
+    P.silfide_pre.move()
+    P.silfide_exp.move()
+    P.silfide_young.move()
+    P.silfide_fan.move()
+    P.silfide_heal.move()
     #top
     r1 = (P.px+1100,P.py+2150,350,40)
     r2 = (P.px+1550,P.py+2150,900,40)
@@ -85,8 +2909,8 @@ def silfide_p(P,temppx,temppy,move,gond,gy):
     r28 = (P.px+400,P.py+550,50,140)
     r29 = (P.px+450,P.py+700,300,40)
     r30 = (P.px+700,P.py+750,50,490)
-    r31 = (P.px-450,P.py+1250,1200,40)
-    r32 = (P.px-450,P.py+1400,900,40)
+    r31 = (P.px-550,P.py+1250,1000,40)
+    r32 = (P.px-550,P.py+1400,1000,40)
     r33 = (P.px+400,P.py+1450,50,290)
     r34 = (P.px+450,P.py+1750,950,40)
     r35 = (P.px+1350,P.py+1800,50,190)
@@ -136,20 +2960,28 @@ def silfide_p(P,temppx,temppy,move,gond,gy):
     r75 = (P.px+2700,P.py+900,100,140)
     r76 = (P.px+2900,P.py+650,100,140)
     r77 = (P.px+2950,P.py+900,100,140)
-    #block
-    r78 = (P.px+350,P.py+1300,50,90)
-    rects = [r78,r77,r76,r75,r74,r73,r72,r71,r70,r69,r68,r67,r66,r65,r64,r63,r62,r61,r60,r59,r58,r57,r56,r55,r54,r53,r52,r51,r50,r49,r48,r47,r46,r45,r44,r43,r42,r41,r40,r39,r38,r37,r36,r35,r34,r33,r32,r31,r30,r29,r28,r27,r26,r25,r24,r23,r22,r21,r20,r19,r18,r17,r16,r15,r14,r13,r12,r11,r10,r9,r8,r7,r6,r5,r4,r3,r2,r1]
+    #npcs
+    r78 = P.silfide_pre.get_rect()
+    r79 = P.silfide_young.get_rect()
+    r80 = P.silfide_exp.get_rect()
+    r81 = P.silfide_fan.get_rect()
+    r82 = P.silfide_heal.get_rect()
+    rects = [r82,r81,r80,r79,r78,r77,r76,r75,r74,r73,r72,r71,r70,r69,r68,r67,r66,r65,r64,r63,r62,r61,r60,r59,r58,r57,r56,r55,r54,r53,r52,r51,r50,r49,r48,r47,r46,r45,r44,r43,r42,r41,r40,r39,r38,r37,r36,r35,r34,r33,r32,r31,r30,r29,r28,r27,r26,r25,r24,r23,r22,r21,r20,r19,r18,r17,r16,r15,r14,r13,r12,r11,r10,r9,r8,r7,r6,r5,r4,r3,r2,r1]
     #rects end
-    #rect_draw(P,rects)
+    # rect_draw(P,rects)
     if gond != 0:
         P.surface.blit(P.char_shad,(P.px+2561,P.py+1663+abs(P.foam)+gy))
         P.surface.blit(P.p,(P.px+2560,P.py+1640+abs(P.foam)+gy))
     else:
         if move:
-            player_move(P,rects,[Rect(P.px+200,P.py+1750,50,150)])
+            player_move(P,rects)
         else:
             blit_player(P)
-    P.cascata_gentle.move(temppx,temppy)
+    P.silfide_pre.move(temppx,temppy)
+    P.silfide_exp.move(temppx,temppy)
+    P.silfide_young.move(temppx,temppy)
+    P.silfide_fan.move(temppx,temppy)
+    P.silfide_heal.move(temppx,temppy)
 
 def silfide_f(P,temppx,temppy,listx,listy,tim,gond):
     if P.py <= -1475 and gond == 0:
@@ -183,7 +3015,10 @@ def silfide_f(P,temppx,temppy,listx,listy,tim,gond):
     show_location(P, P.loc_txt, tim)
 
 def silfide(P,enter = False,wx = 0,wy = 0) -> None:
-    #sci_tim = None,sci_curr = None
+    def refresh():
+        silfide_b(P,wx,wy,listx,listy,gy)
+        silfide_p(P,P.px,P.py,False,gond,gy)
+        silfide_f(P,P.px,P.py,listx,listy,tim,gond)
     if P.song != "music/silfide.wav":
         P.song = "music/silfide.wav"
         pygame.mixer.music.load(P.song)
@@ -195,19 +3030,17 @@ def silfide(P,enter = False,wx = 0,wy = 0) -> None:
     fade = None
     move = True
     tim = 0
-    listx = []
-    listy = []
-    #listx = [815,839,839,839,941,941,941,1438,1438,1890,1880,242,638,994,1336]
-    #listy = [750,540,1005,1280,640,905,1170,790,640,900,1200,1600,1600,1600,1600]
+    if P.prog[0] == 157:
+        P.prog[0] += 1
+    listx = [865,1315,1818,2212,740,942,942,1038,2038,2038,2240,2590,1361,1619,1386,1594,2236]
+    listy = [400,400,400,400,1150,800,1050,1300,800,1050,950,950,1100,1100,1850,1850,1850]
     if enter == False:
-        silfide_b(P,wx,wy,listx,listy,gy)
-        silfide_p(P,P.px,P.py,False,gond,gy)
-        silfide_f(P,P.px,P.py,listx,listy,tim,gond)
+        refresh()
         fade_in(P)
     end = True
     m = 0
     while end:
-        print(P.px,P.py)
+        # print(P.px,P.py)
         silfide_b(P,wx,wy,listx,listy,gy)
         temppx = P.px
         temppy = P.py
@@ -239,13 +3072,21 @@ def silfide(P,enter = False,wx = 0,wy = 0) -> None:
                             cont(P)
                             fade_out(P)
                             P.p = P.d1
-                    elif P.px == -25 and face_l(P):
-                        txt("The end of the world.")
-                    # elif P.cascata_tri.talk():
-                    #     cascata_b(P,wx,wy,listx,listy,gy)
-                    #     cascata_p(P,temppx,temppy,False,gond,gy)
-                    #     cascata_f(P, temppx, temppy, listx,listy,tim,fall,gond)
-                    #     P.cascata_tri.write()
+                    elif P.silfide_pre.talk():
+                        refresh()
+                        P.silfide_pre.write()
+                    elif P.silfide_exp.talk():
+                        refresh()
+                        P.silfide_exp.write()
+                    elif P.silfide_young.talk():
+                        refresh()
+                        P.silfide_young.write()
+                    elif P.silfide_fan.talk():
+                        refresh()
+                        P.silfide_fan.write()
+                    elif P.silfide_heal.talk():
+                        refresh()
+                        P.silfide_heal.write()
                     else:
                         P.buffer_talk = temp_buff
         if gond == 2:
@@ -266,6 +3107,12 @@ def silfide(P,enter = False,wx = 0,wy = 0) -> None:
             P.py = 3375
             P.loc = "route_6"
             route_6(P,True,wx,wy)
+            end = False
+        if P.px == 925 and P.py in [-1025,-1075] and face_l(P):
+            P.px = -475
+            P.py += 650
+            P.loc = "snow_o1"
+            snow_o1(P,True)
             end = False
         if P.px == -925 and P.py == -1675 and face_u(P):
             P.px = -25
@@ -292,10 +3139,20 @@ def silfide(P,enter = False,wx = 0,wy = 0) -> None:
             P.py = -125
             P.loc = "house_21_9"
             end = False
-        if P.px == -1325 and P.py == -675:
+        if  P.px == -1625 and P.py == -225 and face_u(P):
             P.px = 125
-            P.py = -225
-            P.loc = "cascata_gym_11"
+            P.py = -75
+            P.loc = "silfide_nursery"
+            end = False
+        if  P.px in [-1075,-1125] and P.py == -925 and face_u(P):
+            P.px += 1100
+            P.py = -175
+            P.loc = "silfide_theater"
+            end = False
+        if P.px == -1175 and P.py == -225:
+            P.px = -525
+            P.py = -725
+            P.loc = "silfide_gymb"
             fade = P.song
             end = False
         if  P.px == -2025 and P.py == -775 and face_u(P):
@@ -304,6 +3161,7 @@ def silfide(P,enter = False,wx = 0,wy = 0) -> None:
             P.loc = "pc_silfide"
             fade = P.song
             end = False
+
         #ocean start
         if wx == 400:
             wx = 0
@@ -378,6 +3236,10 @@ def mossy_f(P,temppx,temppy,tim):
     show_location(P, P.loc_txt, tim)
 
 def mossy(P) -> None:
+    def refresh():
+        mossy_b(P)
+        mossy_p(P,P.px,P.py,False)
+        mossy_f(P,P.px,P.py,tim)
     if P.song != "music/route_6.wav":
         P.song = "music/route_6.wav"
         pygame.mixer.music.load(P.song)
@@ -387,18 +3249,15 @@ def mossy(P) -> None:
     P.moss_back = load("p/cascata/Mossy_Rock.png")
     P.moss_f = load("p/cascata/Mossy_Rock_f.png")
     P.moss_sci = npc.NPC(P,'Scientistf','Lucy',[500,450],[['u',180]],["I'm spending some extra time","studying how the rock's energy","increases experience gain.","Perhaps it's energy gets","absorbed by these plants the","Pokemon are feeding on?"])
-    fade = None
     move = True
     tim = 0
     set_location(P)
-    mossy_b(P)
-    mossy_p(P,P.px,P.py,False)
-    mossy_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
     while end:
-        print(P.px,P.py)
+        #print(P.px,P.py)
         mossy_b(P)
         temppx = P.px
         temppy = P.py
@@ -416,9 +3275,7 @@ def mossy(P) -> None:
                     temp_buff = P.buffer_talk
                     P.buffer_talk = None
                     if P.moss_sci.talk():
-                        mossy_b(P)
-                        mossy_p(P,P.px,P.py,False)
-                        mossy_f(P,P.px,P.py,tim)
+                        refresh()
                         if P.prog[12][9] == 0:
                             txt(P,"The Pokemon in this clearing","give more experience than","typical wild Pokemon.")
                             txt(P,"Seems like it would make a","great training location for","trainers like you.")
@@ -1265,7 +4122,7 @@ def fishing(P,wx,wy,tim):
         if P.loc == 'route_6':
             route_6_b(P,wx,wy)
             route_6_p(P,P.px,P.py,False)
-            route_6_f(P,P.px,P.py,tim,0,0)
+            route_6_f(P,P.px,P.py,[],[],tim,0,0)
         P.surface.blit(P.fishing_hud,(0,hud_pos))
         P.surface.blit(P.fishing_dark,(lx-800,5))
         P.surface.blit(P.fishing_dark,(rx,5))
@@ -1330,12 +4187,10 @@ def fishing(P,wx,wy,tim):
                         P.legendary_battle = True
                         P.tourney_battle = True
                         P.temp_party = P.party.copy()
-                        pos = 0
-                        while len(P.party) > 1:
-                            if P.party[pos].code_nos() != 'Sharpedo' or P.party[pos].status == 'Faint' or pos == 1:
-                                P.party.remove(P.party[pos])
-                            else:
-                                pos += 1
+                        for p in P.party:
+                            if p.code_nos() == 'Sharpedo' and p.status != 'Faint':
+                                P.party = [p]
+                                break
                         battle(P,pokemon,no_pc = True)
                         play_music(P,"music/route_6.wav")
                         P.surface.blit(te,(0,0))
@@ -1371,12 +4226,10 @@ def fishing(P,wx,wy,tim):
                         P.legendary_battle = True
                         P.tourney_battle = True
                         P.temp_party = P.party.copy()
-                        pos = 0
-                        while len(P.party) > 1:
-                            if P.party[pos].code_nos() != 'Gyarados' or P.party[pos].status == 'Faint' or pos == 1:
-                                P.party.remove(P.party[pos])
-                            else:
-                                pos += 1
+                        for p in P.party:
+                            if p.code_nos() == 'Gyarados' and p.status != 'Faint':
+                                P.party = [p]
+                                break
                         battle(P,pokemon,no_pc = True)
                         play_music(P,"music/route_4.wav")
                         P.surface.blit(te,(0,0))
@@ -1476,7 +4329,7 @@ def fishing(P,wx,wy,tim):
     if P.loc == 'route_6':
         route_6_b(P,wx,wy)
         route_6_p(P,P.px,P.py,False)
-        route_6_f(P,P.px,P.py,tim,0,0)
+        route_6_f(P,P.px,P.py,[],[],tim,0,0)
     if not failed:
         fade_in(P)
     return [wx,wy,tim]
@@ -1509,8 +4362,11 @@ def ralts_cave_f(P,temppx,temppy,tim):
     P.surface.blit(P.ralts_light,(temppx+450,temppy+400))
     show_location(P,P.loc_txt,tim)
 
-
 def ralts_cave(P) -> None:
+    def refresh():
+        ralts_cave_b(P)
+        ralts_cave_p(P,P.px,P.py,False)
+        ralts_cave_f(P,P.px,P.py,tim)
     if P.song != "music/sunken_cave.wav":
         P.song = "music/sunken_cave.wav"
         set_mixer_volume(P,P.vol)
@@ -1536,20 +4392,17 @@ def ralts_cave(P) -> None:
         P.move_out_dir = 'u'
     move = True
     tim = 0
-    ralts_cave_b(P)
-    ralts_cave_p(P,P.px,P.py,False)
-    ralts_cave_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
     while end:
-        print(P.px,P.py)
+        #print(P.px,P.py)
         ralts_cave_b(P)
         temppx = P.px
         temppy = P.py
         ralts_cave_p(P,temppx,temppy,move)
         ralts_cave_f(P,temppx,temppy,tim)
-
         if P.px == -225 and P.py == -425 and P.prog[15][num] == 0:
             te = P.surface.copy()
             txt(P,"There is a "+ralts+" standing","in the middle of the cave.")
@@ -1562,12 +4415,10 @@ def ralts_cave(P) -> None:
                 P.legendary_battle = True
                 P.tourney_battle = True
                 P.temp_party = P.party.copy()
-                pos = 0
-                while len(P.party) > 1:
-                    if P.party[pos].code_nos() != ralts or P.party[pos].status == 'Faint' or pos == 1:
-                        P.party.remove(P.party[pos])
-                    else:
-                        pos += 1
+                for p in P.party:
+                    if p.code_nos() == ralts and p.status != 'Faint':
+                        P.party = [p]
+                        break
                 if ralts == 'Gallade':
                     battle(P,[poke.Poke(ralts,[60,0,787,'Psycho Cut',-1,'Protect',-1,'Swords Dance',-1,'Counter',-1,None,None,0,"Poke Ball",0,'Steadfast'])],no_pc = True)
                 else:
@@ -1594,9 +4445,7 @@ def ralts_cave(P) -> None:
                         add_item(P,'Gardevoirite',1)
                     fade_out(P,color=(255,200,255),spd = 20)
                     P.ralts_spr = None
-                    ralts_cave_b(P)
-                    ralts_cave_p(P,P.px,P.py,False)
-                    ralts_cave_f(P,P.px,P.py,tim)
+                    refresh()
                     fade_in(P,color=(255,200,255),spd = 15)
                     P.prog[15][num] = 2
                 P.party = P.temp_party.copy()
@@ -1784,6 +4633,10 @@ def sunken_cave_f(P,temppx,temppy,tim):
     show_location(P, P.loc_txt, tim)
 
 def sunken_cave(P) -> None:
+    def refresh():
+        sunken_cave_b(P)
+        sunken_cave_p(P,P.px,P.py,False)
+        sunken_cave_f(P,P.px,P.py,tim)
     if P.song != "music/sunken_cave.wav":
         play_music(P,"music/sunken_cave.wav")
     P.sunken_back = load("p/cascata/Sunken_Cave.png")
@@ -1804,9 +4657,7 @@ def sunken_cave(P) -> None:
     move = True
     set_location(P)
     tim = 0
-    sunken_cave_b(P)
-    sunken_cave_p(P,P.px,P.py,False)
-    sunken_cave_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -1847,9 +4698,7 @@ def sunken_cave(P) -> None:
                 P.prog[15][15] = 0
                 P.sunken_maw = P.sunken_mawu
             fade_out(P)
-            sunken_cave_b(P)
-            sunken_cave_p(P,P.px,P.py,False)
-            sunken_cave_f(P,P.px,P.py,tim)
+            refresh()
             fade_in(P)
         if (P.px == -1625 and P.py == -575 and face_d(P) and P.prog[15][15] == 0) or (P.px == -925 and P.py == -225 and face_u(P) and P.prog[15][15] == 1) or (P.px == -1825 and P.py == -925 and face_r(P) and P.prog[15][15] == 2) or (P.px == -2025 and P.py == -925 and face_l(P) and P.prog[15][15] == 2):
             if P.prog[15][0] == 0:
@@ -1877,12 +4726,10 @@ def sunken_cave(P) -> None:
             pygame.mixer.music.play(0)
             P.legendary_battle = True
             P.temp_party = P.party.copy()
-            pos = 0
-            while len(P.party) > 1:
-                if P.party[pos].code_nos() != 'Mawile' or P.party[pos].status == 'Faint' or pos == 1:
-                    P.party.remove(P.party[pos])
-                else:
-                    pos += 1
+            for p in P.party:
+                if p.code_nos() == 'Mawile' and p.status != 'Faint':
+                    P.party = [p]
+                    break
             battle(P,[poke.Poke('Mawile',[50,1,787,'Iron Head',-1,'Iron Defense',-1,None,None,None,None,None,None,0,"Poke Ball",0,"Hyper Cutter"])],no_pc = True)
             play_music(P,"music/sunken_cave.wav")
             P.surface.blit(te,(0,0))
@@ -1894,9 +4741,7 @@ def sunken_cave(P) -> None:
                 txt(P,"The Mawile fled deeper into", "the cave!")
                 fade_out(P)
                 P.sunken_maw = P.sunken_mawu
-                sunken_cave_b(P)
-                sunken_cave_p(P,P.px,P.py,False)
-                sunken_cave_f(P,P.px,P.py,tim)
+                refresh()
                 fade_in(P)
                 move = True
             else:
@@ -1905,9 +4750,7 @@ def sunken_cave(P) -> None:
                 add_item(P,'Mawilite',1)
                 fade_out(P)
                 P.sunken_maw = None
-                sunken_cave_b(P)
-                sunken_cave_p(P,P.px,P.py,False)
-                sunken_cave_f(P,P.px,P.py,tim)
+                refresh()
                 fade_in(P)
                 move = True
             P.party = P.temp_party.copy()
@@ -1944,32 +4787,24 @@ def sunken_cave(P) -> None:
                         if P.sunken_pre.trainer:
                             move = False
                         else:
-                            sunken_cave_b(P)
-                            sunken_cave_p(P,temppx,temppy,False)
-                            sunken_cave_f(P,temppx,temppy,tim)
+                            refresh()
                             P.sunken_pre.write()
                     elif P.sunken_hiker.talk():
                         if P.sunken_hiker.trainer:
                             move = False
                         else:
-                            sunken_cave_b(P)
-                            sunken_cave_p(P,temppx,temppy,False)
-                            sunken_cave_f(P,temppx,temppy,tim)
+                            refresh()
                             P.sunken_hiker.write()
                     elif P.sunken_sci.talk():
                         if P.sunken_sci.trainer:
                             move = False
                         elif P.prog[5][62] == 1:
-                            sunken_cave_b(P)
-                            sunken_cave_p(P,temppx,temppy,False)
-                            sunken_cave_f(P,temppx,temppy,tim)
+                            refresh()
                             P.sunken_sci.write()
                             P.sunken_sci = npc.NPC(P,'Scientistm','Lucy',[P.sunken_sci.x,P.sunken_sci.y],[['mr',100],['mu',100]],["","",""])
                             move = False
                         else:
-                            sunken_cave_b(P)
-                            sunken_cave_p(P,temppx,temppy,False)
-                            sunken_cave_f(P,temppx,temppy,tim)
+                            refresh()
                             P.sunken_sci.write()
                     else:
                         P.buffer_talk = temp_buff
@@ -2078,18 +4913,21 @@ def cascata_bakery_p(P,temppx,temppy,move):
         blit_player(P)
     P.cas_bake_sailor.move(temppx,temppy)
 
-
 def cascata_bakery_f(P,temppx,temppy):
     P.surface.blit(P.cas_bake_f,(temppx,temppy))
     show_location(P, None, 0)
 
 def cascata_bakery(P) -> None:
+    def refresh():
+        cascata_bakery_b(P)
+        cascata_bakery_p(P,P.px,P.py,False)
+        cascata_bakery_f(P,P.px,P.py)
     set_mixer_volume(P,P.vol)
     if P.song != "music/cascata.wav":
         P.song = "music/cascata.wav"
         pygame.mixer.music.load(P.song)
         pygame.mixer.music.play(-1)
-    box = load("p/3_box.png")
+    box = load("p/ui/3_box.png")
     P.cas_bake_sieb = npc.NPC(P,'Siebold','Dude',[450,100],[['l',20]],["","",""])
     P.cas_bake_clerk = pygame.transform.scale(load("p/spr/mart_clerk_l1.png"),(55,66))
     P.cas_bake_back = load("p/cascata/cascata_bakery.png")
@@ -2098,14 +4936,12 @@ def cascata_bakery(P) -> None:
     P.cas_bake_cust = None
     move = True
     tim = 0
-    cascata_bakery_b(P)
-    cascata_bakery_p(P,P.px,P.py,False)
-    cascata_bakery_f(P,P.px,P.py)
+    refresh()
     fade_in(P)
     end = True
     m = 0
     while end:
-        print(P.px,P.py)
+        #print(P.px,P.py)
         cascata_bakery_b(P)
         temppx = P.px
         temppy = P.py
@@ -2172,9 +5008,7 @@ def cascata_bakery(P) -> None:
                         P.surface.blit(mt,(0,0))
                         txt(P,"Please come again!")
                     elif P.cas_bake_sailor.talk():
-                        cascata_bakery_b(P)
-                        cascata_bakery_p(P,P.px,P.py,False)
-                        cascata_bakery_f(P,P.px,P.py)
+                        refresh()
                         P.cas_bake_sailor.write()
                     elif next_to(P,350,350):
                         txt(P,"The table is covered with all","sorts of tasty treats!")
@@ -2201,9 +5035,7 @@ def cascata_bakery(P) -> None:
                             P.cas_bake_cust = npc.NPC(P,cust,'Dude',[350,100],[['r',20]],["","",""])
                             fade_out(P)
                             P.clock.tick(1)
-                            cascata_bakery_b(P)
-                            cascata_bakery_p(P,P.px,P.py,False)
-                            cascata_bakery_f(P,P.px,P.py)
+                            refresh()
                             fade_in(P)
                             berry = random.choice(['Oran','Rawst','Pecha','Cheri','Sitrus'])
                             mash = random.choice([0]+[1]*3+[2]*5+[3]*8+[4]*3)
@@ -2267,9 +5099,7 @@ def cascata_bakery(P) -> None:
                             if pof == 4:
                                 txt(P,"I like 'em nice and crunchy!")
                             P.p = P.r1
-                            cascata_bakery_b(P)
-                            cascata_bakery_p(P,P.px,P.py,False)
-                            cascata_bakery_f(P,P.px,P.py)
+                            refresh()
                             txt(P,"Now that you have the order,","come on back and let's get", "cooking!")
                             fade_out(P)
                             first_time = False
@@ -2280,9 +5110,7 @@ def cascata_bakery(P) -> None:
                             P.px = 25
                             P.py = 175
                             P.cas_bake_cust = None
-                            cascata_bakery_b(P)
-                            cascata_bakery_p(P,P.px,P.py,False)
-                            cascata_bakery_f(P,P.px,P.py)
+                            refresh()
                             fade_in(P)
                             print(results[0])
                             if results[0] == -1:
@@ -2402,12 +5230,16 @@ def cascata_mine_f(P,temppx,temppy):
     show_location(P, None, 0)
 
 def cascata_mine(P) -> None:
+    def refresh():
+        cascata_mine_b(P)
+        cascata_mine_p(P,P.px,P.py,False)
+        cascata_mine_f(P,P.px,P.py)
     set_mixer_volume(P,P.vol)
     if P.song != "music/cascata.wav":
         P.song = "music/cascata.wav"
         pygame.mixer.music.load(P.song)
         pygame.mixer.music.play(-1)
-    box = load("p/3_box.png")
+    box = load("p/ui/3_box.png")
     P.cas_mine_clerk = pygame.transform.scale(load("p/spr/mart_clerk_d1.png"),(55,66))
     P.cas_mine_back = load("p/cascata/cascata_mine.png")
     P.cas_mine_f = load("p/cascata/cascata_minef.png")
@@ -2415,9 +5247,7 @@ def cascata_mine(P) -> None:
     P.cas_mine_lass = npc.NPC(P,'Lass','Dude',[50,300],[['d',20]],["Wow! Take a look at that dark","blue gem! It's color is so","mesmerizing!","It's like every time I come by","this shop, my allowance money","just disappears!"])
     move = True
     tim = 0
-    cascata_mine_b(P)
-    cascata_mine_p(P,P.px,P.py,False)
-    cascata_mine_f(P,P.px,P.py)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -2489,9 +5319,7 @@ def cascata_mine(P) -> None:
                         P.surface.blit(mt,(0,0))
                         txt(P,"Please come again!")
                     elif P.cas_mine_lass.talk():
-                        cascata_mine_b(P)
-                        cascata_mine_p(P,temppx,temppy,False)
-                        cascata_mine_f(P,temppx,temppy)
+                        refresh()
                         P.cas_mine_lass.write()
                     elif (P.py == -25 and P.px in [175,225,275,325,375] and face_d(P)) or (P.py == -75 and P.px == 125 and face_l(P)):
                         txt(P,"A bunch of gems are being","displayed.")
@@ -2623,6 +5451,10 @@ def cascata_gymb_f(P,temppx,temppy,tim,bubble):
         P.surface.blit(trans,(0,0))
 
 def cascata_gymb(P) -> None:
+    def refresh():
+        cascata_gymb_b(P,wx,wy,bubble)
+        cascata_gymb_p(P,False)
+        cascata_gymb_f(P,P.px,P.py,tim,bubble)
     if P.song != "music/gym.wav":
         P.song = "music/gym.wav"
         pygame.mixer.music.load(P.song)
@@ -2656,9 +5488,7 @@ def cascata_gymb(P) -> None:
     wy = 0
     bubble = 0
     set_location(P)
-    cascata_gymb_b(P,wx,wy,bubble)
-    cascata_gymb_p(P,False)
-    cascata_gymb_f(P,P.px,P.py,tim,bubble)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -2668,9 +5498,7 @@ def cascata_gymb(P) -> None:
             P.prog[0] += 1
         if P.prog[0] == 137 and P.py == -225:
             P.casgb_wallace = npc.NPC(P,'Wallace','',[650,450],[['d',40]],["","",""])
-            cascata_gymb_b(P,wx,wy,bubble)
-            cascata_gymb_p(P,False)
-            cascata_gymb_f(P,P.px,P.py,tim,bubble)
+            refresh()
             te = P.surface.copy()
             txt(P,"Excuse me, I was just stopping","by to ask Siebold a couple of", "questions.")
             txt(P,"I'm assuming you're here to", "try your hand at the Cascata", "Gym badge?")
@@ -2727,9 +5555,7 @@ def cascata_gymb(P) -> None:
                         else:
                             txt(P,"It didn't seem to do anything.")
                     elif P.casgb_siebold and P.casgb_siebold.talk():
-                        cascata_gymb_b(P,wx,wy,bubble)
-                        cascata_gymb_p(P,False)
-                        cascata_gymb_f(P,P.px,P.py,tim,bubble)
+                        refresh()
                         P.casgb_siebold.write()
                     else:
                         P.buffer_talk = temp_buff
@@ -2763,7 +5589,7 @@ def cascata_gymb(P) -> None:
                 P.surface.blit(t,(0,0))
                 fade_in(P)
                 txt(P,"Though it upsets me a little,","these results are proof of","your hunger for success!")
-                txt(P,"Here's the Ripple Badge!","With it your Pokemon can now","reach level 50.")
+                txt(P,"Here's the Ripple Badge!","With it your Pokemon can now","reach level 55.")
                 txt(P,"Take this TM55 Scald.","You can use it to teach your","Pokemon Scald.")
                 txt(P,"You received TM55 Scald!")
                 txt(P,"It's a water type move that","also has a chance of burning","its target.")
@@ -2817,8 +5643,6 @@ def cascata_gymb(P) -> None:
         tick_buffer(P)
         update_screen(P)
         P.clock.tick(P.ani_spd)
-    if P.prog[0] == 144:
-        P.prog[0] += 1
     if P.loc == 'cascata_gym_32':
         P.clock.tick(1)
     if P.loc == 'sunken_cave':
@@ -2879,7 +5703,6 @@ def cascata_gym_b(P,num,bubble):
         blit_bubble(P,'cascata_gym_00',-bubble,295,690)
     elif num == 33:
         blit_bubble(P,'cascata_gym_25',-bubble,45,190)
-
 
 def cascata_gym_p(P,temppx,temppy,move,num):
     if P.casg_npc1:
@@ -3034,6 +5857,10 @@ def cascata_gym_f(P,temppx,temppy,num,bubble,tim):
         P.surface.blit(trans,(0,0))
 
 def cascata_gym(P,num) -> None:
+    def refresh():
+        cascata_gym_b(P,num,bubble)
+        cascata_gym_p(P,P.px,P.py,False,num)
+        cascata_gym_f(P,P.px,P.py,num,bubble,tim)
     if P.song != "music/gym.wav":
         P.song = "music/gym.wav"
         pygame.mixer.music.load(P.song)
@@ -3082,9 +5909,7 @@ def cascata_gym(P,num) -> None:
             P.casg_npc1 = npc.NPC(P,'Ace Trainerf','Julia',[150,400],[['u',120],['d',60],['r',160]],["You don't see it? That one","right there with a ring of","light around it."])
     move = True
     tim = 0
-    cascata_gym_b(P,num,bubble)
-    cascata_gym_p(P,P.px,P.py,False,num)
-    cascata_gym_f(P,P.px,P.py,num,bubble,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -3131,9 +5956,7 @@ def cascata_gym(P,num) -> None:
                         if P.casg_npc1.trainer:
                             move = False
                         else:
-                            cascata_gym_b(P,num,bubble)
-                            cascata_gym_p(P,P.px,P.py,False,num)
-                            cascata_gym_f(P,P.px,P.py,num,bubble,tim)
+                            refresh()
                             P.casg_npc1.write()
                     elif num == 23 and next_to(P,450,300) and P.prog[21][1] == 1:
                         txt(P,"You can see the floor below","through the hole.")
@@ -3521,7 +6344,10 @@ def cascata_f(P,temppx,temppy,listx,listy,tim,fall,gond):
     show_location(P, P.loc_txt, tim)
 
 def cascata(P,enter = False,wx = 0,wy = 0,fall=0) -> None:
-    #sci_tim = None,sci_curr = None
+    def refresh():
+        cascata_b(P,wx,wy,listx,listy,gy)
+        cascata_p(P,P.px,P.py,False,gond,gy)
+        cascata_f(P,P.px,P.py,listx,listy,tim,fall,gond)
     if P.song != "music/cascata.wav":
         P.song = "music/cascata.wav"
         pygame.mixer.music.load(P.song)
@@ -3530,6 +6356,8 @@ def cascata(P,enter = False,wx = 0,wy = 0,fall=0) -> None:
     set_location(P)
     gond = 0
     gy = 0
+    if P.prog[0] == 144:
+        P.prog[0] += 1
     if P.prog[0] == 135:
         P.prog[0] += 1
         add_memo(P)
@@ -3539,9 +6367,7 @@ def cascata(P,enter = False,wx = 0,wy = 0,fall=0) -> None:
     listx = [815,839,839,839,941,941,941,1438,1438,1890,1880,242,638,994,1336]
     listy = [750,540,1005,1280,640,905,1170,790,640,900,1200,1600,1600,1600,1600]
     if enter == False:
-        cascata_b(P,wx,wy,listx,listy,gy)
-        cascata_p(P,P.px,P.py,False,gond,gy)
-        cascata_f(P,P.px,P.py,listx,listy,tim,fall,gond)
+        refresh()
         fade_in(P)
     end = True
     m = 0
@@ -3579,29 +6405,19 @@ def cascata(P,enter = False,wx = 0,wy = 0,fall=0) -> None:
                             fade_out(P)
                             P.p = P.d1
                     elif P.cascata_tri.talk():
-                        cascata_b(P,wx,wy,listx,listy,gy)
-                        cascata_p(P,temppx,temppy,False,gond,gy)
-                        cascata_f(P, temppx, temppy, listx,listy,tim,fall,gond)
+                        refresh()
                         P.cascata_tri.write()
                     elif P.cascata_beauty.talk():
-                        cascata_b(P,wx,wy,listx,listy,gy)
-                        cascata_p(P,temppx,temppy,False,gond,gy)
-                        cascata_f(P, temppx, temppy, listx,listy,tim,fall,gond)
+                        refresh()
                         P.cascata_beauty.write()
                     elif P.cascata_fish.talk():
-                        cascata_b(P,wx,wy,listx,listy,gy)
-                        cascata_p(P,temppx,temppy,False,gond,gy)
-                        cascata_f(P, temppx, temppy, listx,listy,tim,fall,gond)
+                        refresh()
                         P.cascata_fish.write()
                     elif P.cascata_bug.talk():
-                        cascata_b(P,wx,wy,listx,listy,gy)
-                        cascata_p(P,temppx,temppy,False,gond,gy)
-                        cascata_f(P, temppx, temppy, listx,listy,tim,fall,gond)
+                        refresh()
                         P.cascata_bug.write()
                     elif P.cascata_gentle.talk():
-                        cascata_b(P,wx,wy,listx,listy,gy)
-                        cascata_p(P,temppx,temppy,False,gond,gy)
-                        cascata_f(P, temppx, temppy, listx,listy,tim,fall,gond)
+                        refresh()
                         P.cascata_gentle.write()
                     else:
                         P.buffer_talk = temp_buff
@@ -4062,8 +6878,7 @@ def route_6_p(P,temppx,temppy,move):
         draw_grass(P,P.r6_rock3.x,P.r6_rock3.y,-4175,-1225,200,200,[temppx,temppy])
         draw_grass(P,P.r6_rock3.x,P.r6_rock3.y,-1825,-375,150,300,[temppx,temppy],ignore = [(-1825,-575),(-1825,-625),(-1875,-625)])
 
-
-def route_6_f(P,temppx,temppy,tim,fall,wind):
+def route_6_f(P,temppx,temppy,listx,listy,tim,fall,wind):
     if P.prog[0] < 149:
         P.surface.blit(P.r6_alt,(temppx+1725,temppy-2825))
         P.surface.blit(P.r6_torn,(temppx+1675,temppy-2800))
@@ -4108,10 +6923,16 @@ def route_6_f(P,temppx,temppy,tim,fall,wind):
         blit_wind(P,wind)
     elif pygame.mixer.Channel(0).get_busy():
         pygame.mixer.Channel(0).fadeout(1000)
-    set_sky(P)
+    # set_sky(P)
+    draw_lamps(P,temppx,temppy,listx,listy,bf = 'b')
+    draw_lamps(P,temppx,temppy,listx,listy)
     show_location(P, P.loc_txt, tim)
 
 def route_6(P,enter = False,wx = 0,wy = 0,fall = 0) -> None:
+    def refresh():
+        route_6_b(P,wx,wy)
+        route_6_p(P,P.px,P.py,False)
+        route_6_f(P,P.px,P.py,listx,listy,tim,fall,wind)
     if P.song != "music/route_6.wav":
         P.song = "music/route_6.wav"
         pygame.mixer.music.load(P.song)
@@ -4123,6 +6944,8 @@ def route_6(P,enter = False,wx = 0,wy = 0,fall = 0) -> None:
     torn_timer = 0
     P.ff_dark = P.lantern_dark
     P.r6_snor = P.r6_snor1
+    listx = [1636,1844]
+    listy = [-3400,-3400]
     if P.prog[5][68] == 1 and datetime.datetime.today().weekday() == 6 and get_time() >= 6:
         P.r6_fish3 = None
     else:
@@ -4138,15 +6961,13 @@ def route_6(P,enter = False,wx = 0,wy = 0,fall = 0) -> None:
         P.r6_rock7 = None
         P.r6_rock8 = None
     tim = 0
-    fish_talk = 0
+    fish_talk = 50
     set_location(P)
     wind = 0
     if enter == False:
         if P.py == 325 and P.px in [-1375,-1425,-1475]:
             P.behind_object = True
-        route_6_b(P,wx,wy)
-        route_6_p(P,P.px,P.py,False)
-        route_6_f(P,P.px,P.py,tim,fall,wind)
+        refresh()
         fade_in(P)
     end = True
     m = 0
@@ -4168,7 +6989,7 @@ def route_6(P,enter = False,wx = 0,wy = 0,fall = 0) -> None:
             else:
                 txt(P,"You should bring a Gardevoir","before entering the cave.")
             P.prog[15][17] = 0
-        print(P.px,P.py)
+        # print(P.px,P.py)
         #print(beach_poke)
         route_6_b(P,wx,wy)
         if move == True and P.r6_bug.trainer_check():
@@ -4194,7 +7015,7 @@ def route_6(P,enter = False,wx = 0,wy = 0,fall = 0) -> None:
         temppx = P.px
         temppy = P.py
         route_6_p(P,temppx,temppy,move)
-        route_6_f(P,temppx,temppy,tim,fall,wind)
+        route_6_f(P,temppx,temppy,listx,listy,tim,fall,wind)
 
         if trainer_check(P,P.r6_bug,"music/route_6.wav"):
             P.r6_bug = npc.NPC(P,'Bug Catcher','Ian',[P.r6_bug.x,P.r6_bug.y],[['md',40],['d',150],['mr',100],['r',100],['mu',40],['u',120],['ml',100],['l',80]],["Hey, didn't I tell you not to","get in my way?","","Now you're just trying to rile","me up, aren't you?",""],tim = P.r6_bug.tim,curr = P.r6_bug.curr,extra_walk = P.r6_bug.extra_walk)
@@ -4264,12 +7085,10 @@ def route_6(P,enter = False,wx = 0,wy = 0,fall = 0) -> None:
             pygame.mixer.music.play(0)
             P.legendary_battle = True
             P.temp_party = P.party.copy()
-            pos = 0
-            while len(P.party) > 1:
-                if P.party[pos].code_nos() != 'Audino' or P.party[pos].status == 'Faint' or pos == 1:
-                    P.party.remove(P.party[pos])
-                else:
-                    pos += 1
+            for p in P.party:
+                if p.code_nos() == 'Audino' and p.status != 'Faint':
+                    P.party = [p]
+                    break
             battle(P,[poke.Poke('Audino',[50,1,787,'Simple Beam',-1,'Entrainment',-1,'Refresh',-1,None,None,None,None,0,"Nursery Ball",0,'Healer'])],no_pc = True)
             play_music(P,"music/route_6.wav")
             P.surface.blit(te,(0,0))
@@ -4283,18 +7102,14 @@ def route_6(P,enter = False,wx = 0,wy = 0,fall = 0) -> None:
                 P.p = P.r1
                 P.px = -1625
                 P.py = 1125
-                route_6_b(P,wx,wy)
-                route_6_p(P,P.px,P.py,False)
-                route_6_f(P,P.px,P.py,tim,fall,wind)
+                refresh()
                 fade_in(P)
             else:
                 P.prog[15][20] += 1
                 txt(P,"The Audino seems satisfied!","It handed you a mysterious","stone before leaving.")
                 add_item(P,'Audinite',1)
                 fade_out(P)
-                route_6_b(P,wx,wy)
-                route_6_p(P,P.px,P.py,False)
-                route_6_f(P,P.px,P.py,tim,fall,wind)
+                refresh()
                 fade_in(P)
             P.party = P.temp_party.copy()
             P.legendary_battle = False
@@ -4364,6 +7179,7 @@ def route_6(P,enter = False,wx = 0,wy = 0,fall = 0) -> None:
             txt(P,"I'll stay here to keep Proton", "at bay. Go on ahead and lend", "her a hand, will you?")
             P.r6_wallace.set_motion([['r',20]])
             move = True
+            add_memo(P)
             P.prog[0] += 1
         if P.prog[0] == 147 and P.py == 2925 and face_u(P):
             txt(P,"I'm assuming you're here to","help? My Altaria is starting","to get pretty tired.")
@@ -4380,16 +7196,14 @@ def route_6(P,enter = False,wx = 0,wy = 0,fall = 0) -> None:
             set_mixer_volume(P,P.vol)
             pygame.mixer.music.play(0)
             P.legendary_battle = True
-            battle(P,[poke.Poke('Tornadus_T',[70,0,737,'Air Slash',-1,'Extrasensory',-1,'Dark Pulse',-1,'Hurricane',-1,None,None,0,"Poke Ball"],legendary=True)])
+            battle(P,[poke.Poke('Tornadus_T',[65,0,737,'Air Slash',-1,'Extrasensory',-1,'Dark Pulse',-1,'Hurricane',-1,None,None,0,"Poke Ball"],legendary=True)])
             P.legendary_battle = False
             P.clock.tick(1)
             P.prog[0] += 1
             set_mixer_volume(P,P.vol)
             play_music(P,"music/route_6.wav")
             P.habitat = 'grass'
-            route_6_b(P,wx,wy)
-            route_6_p(P,P.px,P.py,False)
-            route_6_f(P,P.px,P.py,tim,fall,wind)
+            refresh()
             fade_in(P)
             l_mod = 0
             if P.px == -1375:
@@ -4408,9 +7222,7 @@ def route_6(P,enter = False,wx = 0,wy = 0,fall = 0) -> None:
                 P.p = P.l1
             else:
                 P.p = P.r1
-            route_6_b(P,wx,wy)
-            route_6_p(P,P.px,P.py,False)
-            route_6_f(P,P.px,P.py,tim,fall,wind)
+            refresh()
             update_screen(P)
             P.clock.tick(P.ani_spd)
             txt(P,"Looks like things turned out","okay. I just finished up as","well with those gang members.")
@@ -4420,9 +7232,7 @@ def route_6(P,enter = False,wx = 0,wy = 0,fall = 0) -> None:
             P.prog[0] += 1
         if P.prog[0] == 151 and P.r6_wallace.y == -2300:
             P.p = P.u1
-            route_6_b(P,wx,wy)
-            route_6_p(P,P.px,P.py,False)
-            route_6_f(P,P.px,P.py,tim,fall,wind)
+            refresh()
             update_screen(P)
             P.clock.tick(P.ani_spd)
             txt(P,"Well I should get back to the","city and make sure no one got","injured in that mess.")
@@ -4432,6 +7242,7 @@ def route_6(P,enter = False,wx = 0,wy = 0,fall = 0) -> None:
             P.prog[0] += 1
         if P.prog[0] == 152 and P.r6_lisia.y == -3050:
             P.prog[0] += 1
+            add_memo(P)
             P.r6_lisia = None
             P.r6_wallace = None
             P.r6_proton = None
@@ -4451,9 +7262,7 @@ def route_6(P,enter = False,wx = 0,wy = 0,fall = 0) -> None:
                     temp_buff = P.buffer_talk
                     P.buffer_talk = None
                     if P.r6_rock1 and P.r6_rock1.talk():
-                        route_6_b(P,wx,wy)
-                        route_6_p(P,P.px,P.py,False)
-                        route_6_f(P,P.px,P.py,tim,fall,wind)
+                        refresh()
                         if P.py == -3275:
                             txt(P,"Haha! You'll never get past","this Snorlax! Wait...how did","you get behind me?")
                             txt(P,"Here's your punishment for","trespassing!")
@@ -4463,23 +7272,17 @@ def route_6(P,enter = False,wx = 0,wy = 0,fall = 0) -> None:
                             play_music(P,"music/route_6.wav")
                             P.r6_rock1 = npc.NPC(P,'Team Rocketf','Grunt',[2450,3600],[['u',20]],["","",""])
                             P.r6_rock2 = npc.NPC(P,'Team Rocketm','Grunt',[2450,3500],[['d',20]],["","",""])
-                            route_6_b(P,wx,wy)
-                            route_6_p(P,P.px,P.py,False)
-                            route_6_f(P,P.px,P.py,tim,fall,wind)
+                            refresh()
                             P.p = P.u1
                             fade_in(P)
-                            route_6_b(P,wx,wy)
-                            route_6_p(P,P.px,P.py,False)
-                            route_6_f(P,P.px,P.py,tim,fall,wind)
+                            refresh()
                             txt(P,"Ha! she was just a distraction","so I could sneak up on you!","Take this!")
                             play_music(P,"music/trainer_battle.wav",0)
                             battle(P,["Team Rocketm Grunt",poke.Poke('Zangoose',[45,1,787,"Revenge",-1,"Crush Claw",-1,"Detect",-1,"X-Scissor",-1,None,None,0,"Poke Ball",0,"Immunity"],petals = ['ak','ak']),poke.Poke('Mightyena',[45,1,787,"Ice Fang",-1,"Roar",-1,"Yawn",-1,"Crunch",-1,None,None,0,"Poke Ball",0,"Intimidate"],petals = ['ak','ak']),poke.Poke('Toxicroak',[45,1,787,"Sucker Punch",-1,"Revenge",-1,"Swagger",-1,"Taunt",-1,None,None,0,"Poke Ball",0,"Dry Skin"],petals = ['ak','ak']),poke.Poke('Snorlax',[48,1,787,"Body Slam",-1,"Snore",-1,"Rest",-1,"Belly Drum",-1,None,None,0,"Poke Ball",0,"Thick Fat"],petals = ['hp','hp','hp'])])
                             play_music(P,"music/route_6.wav")
                             P.habitat = 'grass'
                             P.prog[5][59] += 1
-                            route_6_b(P,wx,wy)
-                            route_6_p(P,P.px,P.py,False)
-                            route_6_f(P,P.px,P.py,tim,fall,wind)
+                            refresh()
                             fade_in(P)
                             txt(P,"What?!! But this Snorlax is so","big! How'd he get beaten that", "easily by some punk?")
                             txt(P,"Whatever, we'll be finished","here soon. Hopefully we won't","get yelled at.")
@@ -4489,9 +7292,7 @@ def route_6(P,enter = False,wx = 0,wy = 0,fall = 0) -> None:
                         else:
                             P.r6_rock1.write()
                     elif P.r6_rock2 and P.r6_rock2.talk():
-                        route_6_b(P,wx,wy)
-                        route_6_p(P,P.px,P.py,False)
-                        route_6_f(P,P.px,P.py,tim,fall,wind)
+                        refresh()
                         if P.py == -3275:
                             txt(P,"This road is closed for","maintenance. Wait...you're","going the wrong way!")
                             txt(P,"You're not allowed to be","there!")
@@ -4501,23 +7302,17 @@ def route_6(P,enter = False,wx = 0,wy = 0,fall = 0) -> None:
                             play_music(P,"music/route_6.wav")
                             P.r6_rock1 = npc.NPC(P,'Team Rocketm','Grunt',[2700,3600],[['u',20]],["","",""])
                             P.r6_rock2 = npc.NPC(P,'Team Rocketf','Grunt',[2700,3500],[['d',20]],["","",""])
-                            route_6_b(P,wx,wy)
-                            route_6_p(P,P.px,P.py,False)
-                            route_6_f(P,P.px,P.py,tim,fall,wind)
+                            refresh()
                             P.p = P.u1
                             fade_in(P)
-                            route_6_b(P,wx,wy)
-                            route_6_p(P,P.px,P.py,False)
-                            route_6_f(P,P.px,P.py,tim,fall,wind)
+                            refresh()
                             txt(P,"Ha! he was just a distraction","so I could sneak up on you!","Take this!")
                             play_music(P,"music/trainer_battle.wav",0)
                             battle(P,["Team Rocketm Grunt",poke.Poke('Seviper',[45,0,787,"Coil",-1,"Crunch",-1,"Poison Jab",-1,"Glare",-1,None,None,0,"Poke Ball",0,"Shed Skin"],petals = ['ak','ak']),poke.Poke('Beedrill',[45,0,787,"Poison Jab",-1,"Pin Missile",-1,"Toxic Spikes",-1,"Fell Stinger",-1,None,None,0,"Poke Ball",0,"Swarm"],petals = ['spd','spd']),poke.Poke('Victreebel',[45,0,787,"Knock Off",-1,"Leaf Blade",-1,"Stockpile",-1,"Swallow",-1,None,None,0,"Poke Ball",0,"Chlorophyll"],petals = ['sdf','sdf']),poke.Poke('Snorlax',[48,1,787,"Body Slam",-1,"Snore",-1,"Rest",-1,"Belly Drum",-1,None,None,0,"Poke Ball",0,"Thick Fat"],petals = ['hp','hp','hp'])])
                             play_music(P,"music/route_6.wav")
                             P.habitat = 'grass'
                             P.prog[5][59] += 1
-                            route_6_b(P,wx,wy)
-                            route_6_p(P,P.px,P.py,False)
-                            route_6_f(P,P.px,P.py,tim,fall,wind)
+                            refresh()
                             fade_in(P)
                             txt(P,"What?!! But this Snorlax is so","big! How'd he get beaten that", "easily by some punk?")
                             txt(P,"Whatever, we'll be finished","here soon. Hopefully we won't","get yelled at.")
@@ -4534,101 +7329,73 @@ def route_6(P,enter = False,wx = 0,wy = 0,fall = 0) -> None:
                         if P.r6_bug.trainer:
                             move = False
                         else:
-                            route_6_b(P,wx,wy)
-                            route_6_p(P,P.px,P.py,False)
-                            route_6_f(P,P.px,P.py,tim,fall,wind)
+                            refresh()
                             P.r6_bug.write()
                     elif P.r6_tri.talk():
                         if P.r6_tri.trainer:
                             move = False
                         else:
-                            route_6_b(P,wx,wy)
-                            route_6_p(P,P.px,P.py,False)
-                            route_6_f(P,P.px,P.py,tim,fall,wind)
+                            refresh()
                             P.r6_tri.write()
                     elif P.r6_aroma.talk():
                         if P.r6_aroma.trainer:
                             move = False
                         else:
-                            route_6_b(P,wx,wy)
-                            route_6_p(P,P.px,P.py,False)
-                            route_6_f(P,P.px,P.py,tim,fall,wind)
+                            refresh()
                             P.r6_aroma.write()
                     elif P.r6_bug2.talk():
                         if P.r6_bug2.trainer:
                             move = False
                         else:
-                            route_6_b(P,wx,wy)
-                            route_6_p(P,P.px,P.py,False)
-                            route_6_f(P,P.px,P.py,tim,fall,wind)
+                            refresh()
                             P.r6_bug2.write()
                     elif P.r6_fish1.talk():
                         if P.r6_fish1.trainer:
                             move = False
                         else:
-                            route_6_b(P,wx,wy)
-                            route_6_p(P,P.px,P.py,False)
-                            route_6_f(P,P.px,P.py,tim,fall,wind)
+                            refresh()
                             P.r6_fish1.write()
                     elif P.r6_fish2.talk():
                         if P.r6_fish2.trainer:
                             move = False
                         else:
-                            route_6_b(P,wx,wy)
-                            route_6_p(P,P.px,P.py,False)
-                            route_6_f(P,P.px,P.py,tim,fall,wind)
+                            refresh()
                             P.r6_fish2.write()
-                    elif P.r6_fish3 and P.r6_fish3.talk():
+                    elif fish_talk > 50 and P.r6_fish3 and P.r6_fish3.talk():
                         if P.r6_fish3.trainer:
                             move = False
                         else:
-                            route_6_b(P,wx,wy)
-                            route_6_p(P,P.px,P.py,False)
-                            route_6_f(P,P.px,P.py,tim,fall,wind)
+                            refresh()
                             P.r6_fish3.write()
                     elif P.r6_hiker.talk():
                         if P.r6_hiker.trainer:
                             move = False
                         else:
-                            route_6_b(P,wx,wy)
-                            route_6_p(P,P.px,P.py,False)
-                            route_6_f(P,P.px,P.py,tim,fall,wind)
+                            refresh()
                             P.r6_hiker.write()
                     elif P.r6_rock4 and P.r6_rock4.talk():
                         if P.r6_rock4.trainer:
                             move = False
                         else:
-                            route_6_b(P,wx,wy)
-                            route_6_p(P,P.px,P.py,False)
-                            route_6_f(P,P.px,P.py,tim,fall,wind)
+                            refresh()
                             P.r6_rock4.write()
                     elif P.r6_rock5 and P.r6_rock5.talk():
                         if P.r6_rock5.trainer:
                             move = False
                         else:
-                            route_6_b(P,wx,wy)
-                            route_6_p(P,P.px,P.py,False)
-                            route_6_f(P,P.px,P.py,tim,fall,wind)
+                            refresh()
                             P.r6_rock5.write()
                     elif P.r6_rock6 and P.r6_rock6.talk():
-                        route_6_b(P,wx,wy)
-                        route_6_p(P,P.px,P.py,False)
-                        route_6_f(P,P.px,P.py,tim,fall,wind)
+                        refresh()
                         P.r6_rock6.write()
                     elif P.r6_rock7 and P.r6_rock7.talk():
-                        route_6_b(P,wx,wy)
-                        route_6_p(P,P.px,P.py,False)
-                        route_6_f(P,P.px,P.py,tim,fall,wind)
+                        refresh()
                         P.r6_rock7.write()
                     elif P.r6_rock8 and P.r6_rock8.talk():
-                        route_6_b(P,wx,wy)
-                        route_6_p(P,P.px,P.py,False)
-                        route_6_f(P,P.px,P.py,tim,fall,wind)
+                        refresh()
                         P.r6_rock8.write()
                     elif P.r6_healer and P.r6_healer.talk():
-                        route_6_b(P,wx,wy)
-                        route_6_p(P,P.px,P.py,False)
-                        route_6_f(P,P.px,P.py,tim,fall,wind)
+                        refresh()
                         if P.prog[12][7] == 0:
                             txt(P,"Help! Please! Some stranger","just ran by and snatched my","kid away from me!")
                             txt(P,"I saw them go further down","that way. Can you please get","my child back?")
@@ -4645,9 +7412,7 @@ def route_6(P,enter = False,wx = 0,wy = 0,fall = 0) -> None:
                             txt(P,"You received a Pearl String!")
                             add_item(P,"Pearl String",1)
                             P.r6_healer.set_motion([['d',20]])
-                            route_6_b(P,wx,wy)
-                            route_6_p(P,P.px,P.py,False)
-                            route_6_f(P,P.px,P.py,tim,fall,wind)
+                            refresh()
                             txt(P,"Now you're gonna hold my hand","real tight and we're heading","straight home!")
                             move = False
                             if P.px == -4075:
@@ -4662,9 +7427,7 @@ def route_6(P,enter = False,wx = 0,wy = 0,fall = 0) -> None:
                         else:
                             P.r6_healer.write()
                     elif P.r6_pre and P.r6_pre.talk():
-                        route_6_b(P,wx,wy)
-                        route_6_p(P,P.px,P.py,False)
-                        route_6_f(P,P.px,P.py,tim,fall,wind)
+                        refresh()
                         if P.prog[12][7] == 3:
                             txt(P,"Hey, you're back! That lady","came back and took my mom with","her this time.")
                             txt(P,"Do you think you could go find","them? I'll give you a prize","for your trouble!")
@@ -4677,9 +7440,7 @@ def route_6(P,enter = False,wx = 0,wy = 0,fall = 0) -> None:
                             txt(P,"You received a Dawn Stone!")
                             add_item(P,"Dawn Stone",1)
                             P.r6_pre.set_motion([['l',20]])
-                            route_6_b(P,wx,wy)
-                            route_6_p(P,P.px,P.py,False)
-                            route_6_f(P,P.px,P.py,tim,fall,wind)
+                            refresh()
                             txt(P,"Okay mom, I'm ready to go!")
                             move = False
                             if P.py == -1575:
@@ -4694,9 +7455,7 @@ def route_6(P,enter = False,wx = 0,wy = 0,fall = 0) -> None:
                         else:
                             P.r6_pre.write()
                     elif P.r6_rock3 and P.r6_rock3.talk():
-                        route_6_b(P,wx,wy)
-                        route_6_p(P,P.px,P.py,False)
-                        route_6_f(P,P.px,P.py,tim,fall,wind)
+                        refresh()
                         P.r6_rock3.set_motion([[P.r6_rock3.face(),20]])
                         if P.prog[12][7] == 1:
                             bg = 'boy'
@@ -4708,9 +7467,7 @@ def route_6(P,enter = False,wx = 0,wy = 0,fall = 0) -> None:
                             play_music(P,"music/trainer_battle.wav",0)
                             battle(P,["Team Rocketf Grunt",poke.Poke('Fearow',[47,0,787,"Drill Run",-1,"Drill Peck",-1,"Roost",-1,"Focus Energy",-1,None,None,0,"Poke Ball",200,"Keen Eye"],petals = ['spd','spd','spd']),poke.Poke('Hypno',[47,1,787,"Future Sight",-1,"Swagger",-1,"Wake-Up Slap",-1,"Zen Headbutt",-1,None,None,0,"Poke Ball",200,"Insomnia"],petals = ['sdf','sdf','sdf']),poke.Poke('Mismagius',[47,0,787,"Shadow Ball",-1,"Pain Split",-1,"Mystical Fire",-1,"Psybeam",-1,None,None,0,"Poke Ball",100,"Levitate"],petals = ['sak','sak','sak']),poke.Poke('Exploud',[48,1,787,"Hyper Voice",-1,"Sleep Talk",-1,"Rest",-1,"Roar",-1,None,None,0,"Poke Ball",100,"Soundproof"],petals = ['sak','sak','sak'])])
                             play_music(P,"music/route_6.wav")
-                            route_6_b(P,wx,wy)
-                            route_6_p(P,P.px,P.py,False)
-                            route_6_f(P,P.px,P.py,tim,fall,wind)
+                            refresh()
                             fade_in(P)
                             txt(P,"Fine, you win. That kid was","starting to get pretty","annoying anyways.")
                             P.r6_rock3.spd = 1
@@ -4731,9 +7488,7 @@ def route_6(P,enter = False,wx = 0,wy = 0,fall = 0) -> None:
                             play_music(P,"music/trainer_battle.wav",0)
                             battle(P,["Team Rocketf Grunt",poke.Poke('Fearow',[47,0,787,"Drill Run",-1,"Drill Peck",-1,"Roost",-1,"Focus Energy",-1,None,None,0,"Poke Ball",200,"Keen Eye"],petals = ['spd','spd','spd']),poke.Poke('Hypno',[47,1,787,"Future Sight",-1,"Swagger",-1,"Wake-Up Slap",-1,"Zen Headbutt",-1,None,None,0,"Poke Ball",200,"Insomnia"],petals = ['sdf','sdf','sdf']),poke.Poke('Mismagius',[47,0,787,"Shadow Ball",-1,"Pain Split",-1,"Mystical Fire",-1,"Psybeam",-1,None,None,0,"Poke Ball",200,"Levitate"],petals = ['sak','sak','sak']),poke.Poke('Cloyster',[47,1,787,"Icicle Spear",-1,"Whirlpool",-1,"Spike Cannon",-1,"Shell Smash",-1,None,None,0,"Poke Ball",200,"Skill Link"],petals = ['spd','spd','spd']),poke.Poke('Exploud',[48,1,787,"Hyper Voice",-1,"Sleep Talk",-1,"Rest",-1,"Roar",-1,None,None,0,"Poke Ball",200,"Soundproof"],petals = ['sak','sak','sak']),poke.Poke('Golem',[48,1,787,"Earthquake",-1,"Explosion",-1,"Rock Blast",-1,"Steamroller",-1,None,None,0,"Poke Ball",200,"Sturdy"],petals = ['ak','ak','ak'])])
                             play_music(P,"music/route_6.wav")
-                            route_6_b(P,wx,wy)
-                            route_6_p(P,P.px,P.py,False)
-                            route_6_f(P,P.px,P.py,tim,fall,wind)
+                            refresh()
                             fade_in(P)
                             txt(P,"Huh? I lost? Even with all my","Pokemon? You must be the wrong","person, I'm sure of it!")
                             txt(P,"I'm off to go find the real","troublemaker this time!","")
@@ -5118,7 +7873,6 @@ def forbidden_8_p(P,temppx,temppy,move):
     if not tree4:
         P.ff8_tree4.blit(temppx,temppy)
 
-
 def forbidden_8_f(P,temppx,temppy,tim):
     P.surface.blit(P.ff8_f,(temppx+440,temppy+300))
     P.surface.blit(P.ff_bell,(temppx+1625,temppy+775))
@@ -5132,6 +7886,10 @@ def forbidden_8_f(P,temppx,temppy,tim):
     show_location(P, P.loc_txt, tim)
 
 def forbidden_8(P) -> None:
+    def refresh():
+        forbidden_8_b(P,wx,wy)
+        forbidden_8_p(P,P.px,P.py,False)
+        forbidden_8_f(P,P.px,P.py,tim)
     if P.song != "music/forbidden.wav":
         P.song = "music/forbidden.wav"
         pygame.mixer.music.load(P.song)
@@ -5157,11 +7915,9 @@ def forbidden_8(P) -> None:
     wx = 0
     wy = 0
     tim = 0
-    psy_talk = 0
+    psy_talk = 50
     set_location(P)
-    forbidden_8_b(P,wx,wy)
-    forbidden_8_p(P,P.px,P.py,False)
-    forbidden_8_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -5181,10 +7937,10 @@ def forbidden_8(P) -> None:
         forbidden_8_f(P,temppx,temppy,tim)
         if psy_talk > 50 and trainer_check(P,P.ff8_psy,"music/forbidden.wav"):
             if P.prog[5][52] == 0:
-                P.ff8_psy = npc.NPC(P,'Psychic','Eli',[1200,950],[['l',200],['u',150]],["You think you can stand up to","me? I'll make you reconsider","that decision!"],["Wow! I don't remember the last","time I ran into a trainer as","strong as you around here!"],True,[0,0,0,0],[poke.Poke('Mega_Gengar',[50,random.randint(0,1),787,"Shadow Ball",-1,"Dark Pulse",-1,"Dream Eater",-1,"Hypnosis",-1,None,None,0,"Poke Ball",200,"Shadow Tag"]),poke.Poke('Mega_Alakazam',[50,random.randint(0,1),787,"Psychic",-1,"Recover",-1,"Reflect",-1,"Focus Blast",-1,None,None,0,"Poke Ball",200,"Trace"]),poke.Poke('Dusknoir',[52,random.randint(0,1),787,"Shadow Punch",-1,"Ice Punch",-1,"Fire Punch",-1,"Thunder Punch",-1,None,None,0,"Poke Ball",400,"Pressure"],petals=['ak','ak','ak','spd','spd'])],52,loc = "forbidden_8")
+                P.ff8_psy = npc.NPC(P,'Psychic','Issac',[1200,950],[['l',200],['u',150]],["You think you can stand up to","me? I'll make you reconsider","that decision!"],["Wow! I don't remember the last","time I ran into a trainer as","strong as you around here!"],True,[0,0,0,0],[poke.Poke('Mega_Gengar',[50,random.randint(0,1),787,"Shadow Ball",-1,"Dark Pulse",-1,"Dream Eater",-1,"Hypnosis",-1,None,None,0,"Poke Ball",200,"Shadow Tag"]),poke.Poke('Mega_Alakazam',[50,random.randint(0,1),787,"Psychic",-1,"Recover",-1,"Reflect",-1,"Focus Blast",-1,None,None,0,"Poke Ball",200,"Trace"]),poke.Poke('Dusknoir',[52,random.randint(0,1),787,"Shadow Punch",-1,"Ice Punch",-1,"Fire Punch",-1,"Thunder Punch",-1,None,None,0,"Poke Ball",400,"Pressure"],petals=['ak','ak','ak','spd','spd'])],52,loc = "forbidden_8")
                 psy_talk = 0
             else:
-                P.ff8_psy = npc.NPC(P,'Psychic','Eli',[1200,950],[['l',200],['u',150]],["You had better keep your","focus, or your skills will","start to deteriorate.","And it would be embarassing if","I lost to a slacker!",""],loc = "forbidden_8")
+                P.ff8_psy = npc.NPC(P,'Psychic','Issac',[1200,950],[['l',200],['u',150]],["You better keep your focus, or your skills will start to deteriorate.","And it would be embarassing if I lost to a slacker!"],loc = "forbidden_8")
             move = True
         if P.prog[0] == 133 and P.px >= -225 and face_l(P):
             if P.ff_dark != P.lantern_light:
@@ -5197,9 +7953,7 @@ def forbidden_8(P) -> None:
         if P.prog[0] == 134 and P.ff8_cel.tim <= 10 and P.ff8_cel.face() == 'r':
             P.ff8_cel = None
             fade_out(P,color = (230,255,230),spd = 20)
-            forbidden_8_b(P,wx,wy)
-            forbidden_8_p(P,P.px,P.py,False)
-            forbidden_8_f(P,P.px,P.py,tim)
+            refresh()
             fade_in(P,color = (230,255,230),spd = 15)
             P.prog[0] += 1
             move = True
@@ -5226,12 +7980,10 @@ def forbidden_8(P) -> None:
             pygame.mixer.music.play(0)
             P.legendary_battle = True
             P.temp_party = P.party.copy()
-            pos = 0
-            while len(P.party) > 1:
-                if P.party[pos].code_nos() != 'Alakazam' or P.party[pos].status == 'Faint' or pos == 1:
-                    P.party.remove(P.party[pos])
-                else:
-                    pos += 1
+            for p in P.party:
+                if p.code_nos() == 'Alakazam' and p.status != 'Faint':
+                    P.party = [p]
+                    break
             battle(P,[poke.Poke('Alakazam',[60,1,787,'Psychic',-1,None,None,None,None,None,None,None,None,0,"Poke Ball",0,'Meditate'])],no_pc = True)
             play_music(P,"music/forbidden.wav")
             P.surface.blit(te,(0,0))
@@ -5245,18 +7997,14 @@ def forbidden_8(P) -> None:
                 P.px = -325
                 P.py = -275
                 fade_out(P,color = (255,220,255),spd = 20)
-                forbidden_8_b(P,wx,wy)
-                forbidden_8_p(P,P.px,P.py,False)
-                forbidden_8_f(P,P.px,P.py,tim)
+                refresh()
                 fade_in(P,color = (255,220,255),spd = 15)
                 move = True
             else:
                 P.prog[15][14] += 1
                 add_item(P,'Alakazite',1)
                 fade_out(P,color = (255,220,255),spd = 20)
-                forbidden_8_b(P,wx,wy)
-                forbidden_8_p(P,P.px,P.py,False)
-                forbidden_8_f(P,P.px,P.py,tim)
+                refresh()
                 fade_in(P,color = (255,220,255),spd = 15)
                 txt(P,"There was a mysterious stone","left behind after the Alakazam", "teleported away.")
                 move = True
@@ -5277,9 +8025,7 @@ def forbidden_8(P) -> None:
                         if P.ff8_psy.trainer:
                             move = False
                         else:
-                            forbidden_8_b(P,wx,wy)
-                            forbidden_8_p(P,temppx,temppy,False)
-                            forbidden_8_f(P,temppx,temppy,tim)
+                            refresh()
                             P.ff8_psy.write()
                     elif (P.px == -1175 and P.py in [-525,-575,-725,-775] and face_r(P)) or (P.px == -125 and P.py in [-725,-775,-925,-975] and face_l(P)):
                         txt(P,"There is a bell hanging from","this tree.")
@@ -5410,10 +8156,8 @@ def forbidden_8(P) -> None:
     if fail_exit:
         print_forbidden(P)
 
-
 def forbidden_7_b(P,cam_mod = 0):
     P.surface.blit(P.ff7_back,(P.px,P.py+cam_mod))
-
 
 def forbidden_7_p(P,temppx,temppy,move,cam_mod = 0):
     if P.ff7_ari:
@@ -5472,8 +8216,6 @@ def forbidden_7_p(P,temppx,temppy,move,cam_mod = 0):
     draw_grass(P,temppx,temppy,-925,-425,350,150,ignore = [(-925,-425),(-975,-425)])
     draw_grass(P,temppx,temppy,-1175,-375,100,50)
 
-
-
 def forbidden_7_f(P,temppx,temppy,tim,cam_mod=0):
     P.surface.blit(P.ff7_f,(temppx+390,temppy+422+cam_mod))
     P.surface.blit(P.ff_bell,(temppx+375,temppy+625))
@@ -5485,6 +8227,10 @@ def forbidden_7_f(P,temppx,temppy,tim,cam_mod=0):
     show_location(P, P.loc_txt, tim)
 
 def forbidden_7(P) -> None:
+    def refresh():
+        forbidden_7_b(P)
+        forbidden_7_p(P,P.px,P.py,False)
+        forbidden_7_f(P,P.px,P.py,tim)
     if P.song != "music/forbidden.wav":
         P.song = "music/forbidden.wav"
         pygame.mixer.music.load(P.song)
@@ -5510,9 +8256,7 @@ def forbidden_7(P) -> None:
     tim = 0
     cam_mod = 0
     set_location(P)
-    forbidden_7_b(P)
-    forbidden_7_p(P,P.px,P.py,False)
-    forbidden_7_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -5745,6 +8489,10 @@ def rotom_shed_f(P,temppx,temppy):
     show_location(P, None, 0)
 
 def rotom_shed(P) -> None:
+    def refresh():
+        rotom_shed_b(P,rotomy)
+        rotom_shed_p(P,P.px,P.py,False)
+        rotom_shed_f(P,P.px,P.py)
     set_mixer_volume(P,P.vol)
     if P.song != "music/forbidden.wav":
         P.song = "music/forbidden.wav"
@@ -5757,9 +8505,7 @@ def rotom_shed(P) -> None:
     tim = 0
     rotomy = 0
     P.habitat = 'indoor'
-    rotom_shed_b(P,rotomy)
-    rotom_shed_p(P,P.px,P.py,False)
-    rotom_shed_f(P,P.px,P.py)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -5849,8 +8595,6 @@ def forbidden_r_p(P,temppx,temppy,move):
     else:
         blit_player(P)
 
-
-
 def forbidden_r_f(P,temppx,temppy,tim):
     P.surface.blit(P.ffr_f,(temppx+510,temppy+550))
     P.surface.blit(P.ff_dark,(0,0))
@@ -5858,6 +8602,10 @@ def forbidden_r_f(P,temppx,temppy,tim):
     show_location(P, P.loc_txt, tim)
 
 def forbidden_r(P) -> None:
+    def refresh():
+        forbidden_r_b(P)
+        forbidden_r_p(P,P.px,P.py,False)
+        forbidden_r_f(P,P.px,P.py,tim)
     if P.song != "music/forbidden.wav":
         P.song = "music/forbidden.wav"
         pygame.mixer.music.load(P.song)
@@ -5870,9 +8618,7 @@ def forbidden_r(P) -> None:
     move = True
     tim = 0
     set_location(P)
-    forbidden_r_b(P)
-    forbidden_r_p(P,P.px,P.py,False)
-    forbidden_r_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -5937,7 +8683,6 @@ def forbidden_r(P) -> None:
 def forbidden_6_b(P):
     P.surface.blit(P.ff6_back,(P.px,P.py))
 
-
 def forbidden_6_p(P,temppx,temppy,move):
     P.ff6_sci.move()
     #rects start
@@ -5983,8 +8728,6 @@ def forbidden_6_p(P,temppx,temppy,move):
 
     P.ff6_sci.move(temppx,temppy)
 
-
-
 def forbidden_6_f(P,temppx,temppy,tim):
     P.surface.blit(P.ff6_f,(temppx+390,temppy+300))
     P.surface.blit(P.ff_bell,(temppx+575,temppy+275))
@@ -5998,6 +8741,10 @@ def forbidden_6_f(P,temppx,temppy,tim):
     show_location(P, P.loc_txt, tim)
 
 def forbidden_6(P) -> None:
+    def refresh():
+        forbidden_6_b(P)
+        forbidden_6_p(P,P.px,P.py,False)
+        forbidden_6_f(P,P.px,P.py,tim)
     if P.song != "music/forbidden.wav":
         P.song = "music/forbidden.wav"
         pygame.mixer.music.load(P.song)
@@ -6011,9 +8758,7 @@ def forbidden_6(P) -> None:
     move = True
     tim = 0
     set_location(P)
-    forbidden_6_b(P)
-    forbidden_6_p(P,P.px,P.py,False)
-    forbidden_6_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -6044,9 +8789,7 @@ def forbidden_6(P) -> None:
                         if P.ff6_sci.trainer:
                             move = False
                         else:
-                            forbidden_6_b(P)
-                            forbidden_6_p(P,P.px,P.py,False)
-                            forbidden_6_f(P,P.px,P.py,tim)
+                            refresh()
                             P.ff6_sci.write()
                     elif (P.px == -75 and P.py in [-325,-375,-525,-575] and face_l(P)) or (P.py == -125 and P.px in [-175,-225,-375,-425] and face_u(P)) or (P.py == -975 and P.px in [-625,-575,-425,-375] and face_d(P)):
                         txt(P,"There is a bell hanging from","this tree.")
@@ -6190,13 +8933,17 @@ def ombra_lab_f(P,temppx,temppy):
     show_location(P, None, 0)
 
 def ombra_lab(P) -> None:
+    def refresh():
+        ombra_lab_b(P)
+        ombra_lab_p(P,P.px,P.py,False)
+        ombra_lab_f(P,P.px,P.py)
     set_mixer_volume(P,P.vol)
     if P.song != "music/ombra.wav":
         P.song = "music/ombra.wav"
         pygame.mixer.music.load(P.song)
         pygame.mixer.music.play(-1)
     P.ombra_lab_back = load("p/ombra/ombra_lab.png")
-    P.ombra_lab_f = load("p/ombra/ombra_lab_f.png")
+    P.ombra_lab_f = load("p/egida/lab_f.png")
     P.ombra_lab_scif = npc.NPC(P,'Scientistf','Dude',[100,150],[['d',20]],["I apologize, but the equipment","we have is a little tricky to","work with.","I'd suggest for you to get some","experience at another lab","before helping out here."])
     if datetime.datetime.today().weekday() == 6 and get_time() >= 6:
         P.ombra_lab_scim = None
@@ -6204,9 +8951,7 @@ def ombra_lab(P) -> None:
         P.ombra_lab_scim = npc.NPC(P,'Scientistm','Dude',[50,350],[['r',20]],["I hope my Repel canister has","been serving you well!","","If you ever catch me visiting","the Alto Mare festival, I can","upgrade it for you!"])
     move = True
     tim = 0
-    ombra_lab_b(P)
-    ombra_lab_p(P,P.px,P.py,False)
-    ombra_lab_f(P,P.px,P.py)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -6229,9 +8974,7 @@ def ombra_lab(P) -> None:
                     temp_buff = P.buffer_talk
                     P.buffer_talk = None
                     if P.ombra_lab_scim and P.ombra_lab_scim.talk():
-                        ombra_lab_b(P)
-                        ombra_lab_p(P,P.px,P.py,False)
-                        ombra_lab_f(P,P.px,P.py)
+                        refresh()
                         P.ombra_lab_scim.write()
                     elif next_to(P,0,100):
                         if not new_day(P.prog[8][0][2]) and P.prog[8][0][2][0] != None:
@@ -6243,9 +8986,7 @@ def ombra_lab(P) -> None:
                     elif P.py == 175 and P.px in [125,75,25] and face_u(P):
                         txt(P,"The monitor is off.")
                     elif P.ombra_lab_scif.talk():
-                        ombra_lab_b(P)
-                        ombra_lab_p(P,P.px,P.py,False)
-                        ombra_lab_f(P,P.px,P.py)
+                        refresh()
                         if P.prog[8][0][0] == -1:
                             P.ombra_lab_scif.write()
                         elif P.prog[8][0][0] < 4:
@@ -6293,12 +9034,13 @@ def ombra_lab(P) -> None:
                                 if points == -1:
                                     pass
                                 elif points == 3000:
+                                    money = int(3000 * (0.9+(0.15*P.prog[8][0][0])))
                                     if not new_day(P.prog[8][0][2]):
-                                        txt(P,"Here, take $600 for that","stellar performance!")
-                                        P.save_data.money += 600
+                                        txt(P,"Here, take $"+str(int(money/5))+" for that","stellar performance!")
+                                        P.save_data.money += int(money/5)
                                     else:
-                                        txt(P,"Here, take $3000 for that","stellar performance!")
-                                        P.save_data.money += 3000
+                                        txt(P,"Here, take $"+str(money)+" for that","stellar performance!")
+                                        P.save_data.money += money
                                     lvled = gain_skill(P,0,30)
                                 else:
                                     #$ multiplier
@@ -6308,7 +9050,7 @@ def ombra_lab(P) -> None:
                                     lvled = gain_skill(P,0,int(exp/100))
                                     if not new_day(P.prog[8][0][2]):
                                         exp /= 5
-                                    money = int(exp*(1+(0.2*P.prog[8][0][0])))
+                                    money = int(exp*(1+(0.15*P.prog[8][0][0])))
                                     txt(P,"Here, have $"+str(money)+" for your","help. Be sure to stop by when","our next shipment is in!")
                                     P.save_data.money += money
                                 if lvled:
@@ -6365,7 +9107,7 @@ def ombra_b(P,wx,wy,listx,listy,pcx,pcy,gy):
         P.surface.fill((209,218,223), Rect(P.px+600,P.py+340,-(350-P.ombra_sci.y),60))
     else:
         if P.px <= -600 and P.px >= -650:
-            P.surface.fill((209,218,223), Rect(P.px+650-(650+P.px),P.py+340,650+P.px,60))
+            P.surface.fill((209,218,223), Rect(0,P.py+340,650+P.px,60))
         else:
             P.surface.fill((209,218,223), Rect(P.px+600,P.py+340,50,60))
     P.surface.blit(P.gondola, (P.px + 1450, P.py +350 + abs(P.foam)+gy))
@@ -6485,7 +9227,10 @@ def ombra_f(P,temppx,temppy,listx,listy,tim):
     show_location(P, P.loc_txt, tim)
 
 def ombra(P) -> None:
-    #change?
+    def refresh():
+        ombra_b(P,wx,wy,listx,listy,pcx,pcy,gy)
+        ombra_p(P,P.px,P.py,False,gond,gy)
+        ombra_f(P,P.px,P.py,listx,listy,tim)
     if P.song != "music/ombra.wav":
         P.song = "music/ombra.wav"
         pygame.mixer.music.load(P.song)
@@ -6531,9 +9276,7 @@ def ombra(P) -> None:
     tim = 0
     listx = [338,692,892,1238]
     listy = [250,250,250,250]
-    ombra_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-    ombra_p(P,P.px,P.py,False,gond,gy)
-    ombra_f(P,P.px,P.py,listx,listy,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -6605,9 +9348,7 @@ def ombra(P) -> None:
                         else:
                             txt(P,"The torch is lit.")
                     elif P.ombra_sci and P.ombra_sci.talk():
-                        ombra_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-                        ombra_p(P,P.px,P.py,False,gond,gy)
-                        ombra_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         if P.prog[19][0] == 0:
                             txt(P,"There's something weird about","these torches, but I can't","quite figure it out.")
                             txt(P,"Why don't you take a stab at","it? I'm all out of ideas.")
@@ -6644,9 +9385,7 @@ def ombra(P) -> None:
                         P.ombra_maro = None
                         P.ombra_fire = P.ombra_fire1
                         play_music(P,"music/ombra.wav")
-                        ombra_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-                        ombra_p(P,P.px,P.py,False,gond,gy)
-                        ombra_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         add_memo(P,"Light the Torches",1)
                         fade_in(P)
                     else:
@@ -6795,6 +9534,10 @@ def forbidden_5_f(P,temppx,temppy,tim):
     show_location(P, P.loc_txt, tim)
 
 def forbidden_5(P) -> None:
+    def refresh():
+        forbidden_5_b(P)
+        forbidden_5_p(P,P.px,P.py,False)
+        forbidden_5_f(P,P.px,P.py,tim)
     if P.song != "music/forbidden.wav":
         P.song = "music/forbidden.wav"
         pygame.mixer.music.load(P.song)
@@ -6809,9 +9552,7 @@ def forbidden_5(P) -> None:
     move = True
     tim = 0
     set_location(P)
-    forbidden_5_b(P)
-    forbidden_5_p(P,P.px,P.py,False)
-    forbidden_5_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -6840,9 +9581,7 @@ def forbidden_5(P) -> None:
                             txt(P,"You hear something up ahead.")
                             txt(P,"You took out your lantern.")
                             P.ff_dark = P.lantern_light
-                            forbidden_5_b(P)
-                            forbidden_5_p(P,P.px,P.py,False)
-                            forbidden_5_f(P,P.px,P.py,tim)
+                            refresh()
                         txt(P,"Something is staring at you","from the darkness.")
                         new_txt(P)
                         write(P,"Press forward?")
@@ -6854,9 +9593,7 @@ def forbidden_5(P) -> None:
                             battle(P,[poke.Poke('Spooky_Wobbuffet',[40,random.randint(0,1),787,'Extrasensory',-1,'Guard Split',-1,'Night Shade',-1,'Hypnosis',-1,None,None,0,"Poke Ball"])])
                             P.prog[0] += 1
                             play_music(P,"music/forbidden.wav")
-                            forbidden_5_b(P)
-                            forbidden_5_p(P,P.px,P.py,False)
-                            forbidden_5_f(P,P.px,P.py,tim)
+                            refresh()
                             fade_in(P)
                     else:
                         P.buffer_talk = temp_buff
@@ -6920,9 +9657,9 @@ def forbidden_4_p(P,temppx,temppy,move):
         P.ff4_tree2.blit()
     if tree3:
         P.ff4_tree3.blit()
+    P.ff4_hex.move()
     if tree4:
         P.ff4_tree4.blit()
-    P.ff4_hex.move()
     if P.ff4_cel and P.ff4_cel.y >= 350:
         P.ff4_cel.move(mov=True)
     r1 = (P.px+750,P.py+500,50,90)
@@ -6991,10 +9728,9 @@ def forbidden_4_p(P,temppx,temppy,move):
         P.ff4_tree2.blit(temppx,temppy)
     if not tree3:
         P.ff4_tree3.blit(temppx,temppy)
+    P.ff4_hex.move(temppx,temppy)
     if not tree4:
         P.ff4_tree4.blit(temppx,temppy)
-    P.ff4_hex.move(temppx,temppy)
-
 
 def forbidden_4_f(P,temppx,temppy,tim):
     P.surface.blit(P.ff4_f,(temppx+450,temppy+300))
@@ -7011,6 +9747,10 @@ def forbidden_4_f(P,temppx,temppy,tim):
     show_location(P, P.loc_txt, tim)
 
 def forbidden_4(P) -> None:
+    def refresh():
+        forbidden_4_b(P)
+        forbidden_4_p(P,P.px,P.py,False)
+        forbidden_4_f(P,P.px,P.py,tim)
     if P.song != "music/forbidden.wav":
         P.song = "music/forbidden.wav"
         pygame.mixer.music.load(P.song)
@@ -7039,9 +9779,7 @@ def forbidden_4(P) -> None:
     move = True
     tim = 0
     set_location(P)
-    forbidden_4_b(P)
-    forbidden_4_p(P,P.px,P.py,False)
-    forbidden_4_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -7059,9 +9797,7 @@ def forbidden_4(P) -> None:
                 txt(P,"You hear something up ahead.")
                 txt(P,"You took out your lantern.")
                 P.ff_dark = P.lantern_light
-                forbidden_4_b(P)
-                forbidden_4_p(P,P.px,P.py,False)
-                forbidden_4_f(P,P.px,P.py,tim)
+                refresh()
             if P.prog[15][0] == 0:
                 txt(P,"There is a Banette standing in", "the clearing.")
                 print_mega_area(P)
@@ -7073,9 +9809,7 @@ def forbidden_4(P) -> None:
                     if choice(P):
                         P.prog[15][13] += 1
                         fade_out(P,color = (255,255,255),spd = 20)
-                        forbidden_4_b(P)
-                        forbidden_4_p(P,P.px,P.py,False)
-                        forbidden_4_f(P,P.px,P.py,tim)
+                        refresh()
                         fade_in(P,color=(255,255,255),spd = 15)
                         txt(P,"The Banette disappeared!")
                 else:
@@ -7095,9 +9829,7 @@ def forbidden_4(P) -> None:
         if P.prog[0] == 114 and P.ff4_cel.tim <= 10 and P.ff4_cel.face() == 'r':
             fade_out(P,color = (230,255,230),spd = 20)
             P.ff4_cel = npc.NPC(P,'Celebi','',[1425,300],[['u',40]],["","",""])
-            forbidden_4_b(P)
-            forbidden_4_p(P,P.px,P.py,False)
-            forbidden_4_f(P,P.px,P.py,tim)
+            refresh()
             fade_in(P,color = (230,255,230),spd = 15)
             P.prog[0] += 1
             move = True
@@ -7128,9 +9860,7 @@ def forbidden_4(P) -> None:
                         if P.ff4_hex.trainer:
                             move = False
                         else:
-                            forbidden_4_b(P)
-                            forbidden_4_p(P,P.px,P.py,False)
-                            forbidden_4_f(P,P.px,P.py,tim)
+                            refresh()
                             P.ff4_hex.write()
                     elif (P.px == -1175 and P.py in [-325,-375,-525,-575] and face_r(P)) or (P.prog[0] >= 115 and P.py == -125 and P.px in [-1025,-1075,-875,-825] and face_u(P)):
                         txt(P,"There is a bell hanging from","this tree.")
@@ -7148,12 +9878,10 @@ def forbidden_4(P) -> None:
                             if next_to(P,1300,800):
                                 P.tourney_battle = True
                             P.temp_party = P.party.copy()
-                            pos = 0
-                            while len(P.party) > 1:
-                                if P.party[pos].code_nos() != 'Banette' or P.party[pos].status == 'Faint' or pos == 1:
-                                    P.party.remove(P.party[pos])
-                                else:
-                                    pos += 1
+                            for p in P.party:
+                                if p.code_nos() == 'Banette' and p.status != 'Faint':
+                                    P.party = [p]
+                                    break
                             if next_to(P,1300,800):
                                 battle(P,[poke.Poke('Banette',[40,1,787,'Sucker Punch',-1,'Shadow Ball',-1,'Hex',-1,'Will-O-Wisp',-1,None,None,0,"Poke Ball",0,'Insomnia'])],no_pc = True)
                             else:
@@ -7164,9 +9892,7 @@ def forbidden_4(P) -> None:
                             if P.party[0].status == 'Faint':
                                 P.prog[15][13] = 0
                                 fade_out(P,color = (255,255,255),spd = 20)
-                                forbidden_4_b(P)
-                                forbidden_4_p(P,P.px,P.py,False)
-                                forbidden_4_f(P,P.px,P.py,tim)
+                                refresh()
                                 fade_in(P,color = (255,255,255),spd = 15)
                                 P.party[0].status = None
                                 P.party[0].ch = P.party[0].hp
@@ -7175,17 +9901,13 @@ def forbidden_4(P) -> None:
                                 P.prog[15][13] = 0
                                 txt(P,"Something felt off about","that Banette.")
                                 fade_out(P,color = (255,255,255),spd = 20)
-                                forbidden_4_b(P)
-                                forbidden_4_p(P,P.px,P.py,False)
-                                forbidden_4_f(P,P.px,P.py,tim)
+                                refresh()
                                 fade_in(P,color = (255,255,255),spd = 15)
                                 txt(P,"The Banette vanished!")
                             else:
                                 P.prog[15][13] += 1
                                 fade_out(P,color = (255,255,255),spd = 20)
-                                forbidden_4_b(P)
-                                forbidden_4_p(P,P.px,P.py,False)
-                                forbidden_4_f(P,P.px,P.py,tim)
+                                refresh()
                                 fade_in(P,color = (255,255,255),spd = 15)
                                 txt(P,"The Banette vanished, leaving","behind a mysterious stone.")
                                 add_item(P,'Banettite',1)
@@ -7382,7 +10104,6 @@ def forbidden_3_p(P,temppx,temppy,move):
         if not gen:
             P.surface.blit(P.char_shad,(temppx+P.ff3_tempgen.x,temppy+P.ff3_tempgen.y+13))
 
-
 def forbidden_3_f(P,temppx,temppy,tim):
     P.surface.blit(P.ff3_f,(temppx+495,temppy+300))
     if P.prog[0] >= 111:
@@ -7397,6 +10118,10 @@ def forbidden_3_f(P,temppx,temppy,tim):
     show_location(P, P.loc_txt, tim)
 
 def forbidden_3(P) -> None:
+    def refresh():
+        forbidden_3_b(P)
+        forbidden_3_p(P,P.px,P.py,False)
+        forbidden_3_f(P,P.px,P.py,tim)
     if P.song != "music/forbidden.wav":
         P.song = "music/forbidden.wav"
         pygame.mixer.music.load(P.song)
@@ -7423,9 +10148,7 @@ def forbidden_3(P) -> None:
     move = True
     tim = 0
     set_location(P)
-    forbidden_3_b(P)
-    forbidden_3_p(P,P.px,P.py,False)
-    forbidden_3_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -7452,12 +10175,10 @@ def forbidden_3(P) -> None:
                 P.legendary_battle = True
                 P.tourney_battle = True
                 P.temp_party = P.party.copy()
-                pos = 0
-                while len(P.party) > 1:
-                    if P.party[pos].code_nos() != 'Gengar' or P.party[pos].status == 'Faint' or pos == 1:
-                        P.party.remove(P.party[pos])
-                    else:
-                        pos += 1
+                for p in P.party:
+                    if p.code_nos() == 'Gengar' and p.status != 'Faint':
+                        P.party = [p]
+                        break
                 battle(P,[poke.Poke('Gengar',[50,1,787,'Dark Pulse',-1,'Shadow Ball',-1,'Sucker Punch',-1,'Confuse Ray',-1,None,None,0,"Poke Ball",0,'Cursed Body'])],no_pc = True)
                 play_music(P,"music/forbidden.wav")
                 P.surface.blit(te,(0,0))
@@ -7471,9 +10192,7 @@ def forbidden_3(P) -> None:
                     P.py = -75
                     P.px = -675
                     fade_out(P)
-                    forbidden_3_b(P)
-                    forbidden_3_p(P,P.px,P.py,False)
-                    forbidden_3_f(P,P.px,P.py,tim)
+                    refresh()
                     P.ff3_gen = npc.NPC(P,'Gengar','',[850,450],[['md',100],['mr',180],['mu',100],['ml',180]],["","",""],vision = [50,50,50,50])
                     fade_in(P)
                     move = True
@@ -7483,9 +10202,7 @@ def forbidden_3(P) -> None:
                     add_item(P,'Gengarite',1)
                     fade_out(P)
                     P.ff3_gen = None
-                    forbidden_3_b(P)
-                    forbidden_3_p(P,P.px,P.py,False)
-                    forbidden_3_f(P,P.px,P.py,tim)
+                    refresh()
                     fade_in(P)
                     move = True
                 P.party = P.temp_party.copy()
@@ -7496,17 +10213,15 @@ def forbidden_3(P) -> None:
                 P.p = P.d1
                 P.py = -75
                 P.px = -675
+                P.prog[15][12] = 0
                 fade_out(P)
-                forbidden_3_b(P)
-                forbidden_3_p(P,P.px,P.py,False)
-                forbidden_3_f(P,P.px,P.py,tim)
+                refresh()
                 fade_in(P)
                 if P.prog[15][0] == 0:
                     print_mega_area(P)
                 else:
                     txt(P,"You should bring a Gengar","before approaching it.")
                 P.ff3_gen = npc.NPC(P,'Gengar','',[850,450],[['md',100],['mr',180],['mu',100],['ml',180]],["","",""],vision = [50,50,50,50])
-                P.prog[15][12] = 0
             move = True
         if trainer_check(P,P.ff3_rock1,"music/forbidden.wav"):
             P.ff3_rock1 = npc.NPC(P,'Team Rocketm','Hugo',[500,1000],[['l',80]],["You're heartless! What do you", "not get about leaving someone", "alone?"])
@@ -7526,9 +10241,7 @@ def forbidden_3(P) -> None:
         if P.prog[0] == 110 and P.ff3_cel.tim <= 10 and P.ff3_cel.face() == 'l':
             fade_out(P,color = (230,255,230),spd = 20)
             P.ff3_cel = npc.NPC(P,'Celebi','',[625,500],[['u',40]],["","",""])
-            forbidden_3_b(P)
-            forbidden_3_p(P,P.px,P.py,False)
-            forbidden_3_f(P,P.px,P.py,tim)
+            refresh()
             fade_in(P,color = (230,255,230),spd = 15)
             P.prog[0] += 1
             move = True
@@ -7563,9 +10276,7 @@ def forbidden_3(P) -> None:
                         if P.ff3_rock1.trainer:
                             move = False
                         else:
-                            forbidden_3_b(P)
-                            forbidden_3_p(P,P.px,P.py,False)
-                            forbidden_3_f(P,P.px,P.py,tim)
+                            refresh()
                             P.ff3_rock1.write()
                     elif (P.prog[0] >= 112 and P.px == -325 and P.py in [-475,-425,-275,-225] and face_l(P)) or (P.py == -125 and P.px in [-575,-625,-775,-825] and face_u(P)):
                         txt(P,"There is a bell hanging from","this tree.")
@@ -7740,6 +10451,10 @@ def forbidden_2_f(P,temppx,temppy,tim):
     show_location(P, P.loc_txt, tim)
 
 def forbidden_2(P) -> None:
+    def refresh():
+        forbidden_2_b(P)
+        forbidden_2_p(P,P.px,P.py,False)
+        forbidden_2_f(P,P.px,P.py,tim)
     if P.song != "music/forbidden.wav":
         P.song = "music/forbidden.wav"
         pygame.mixer.music.load(P.song)
@@ -7758,9 +10473,7 @@ def forbidden_2(P) -> None:
     move = True
     tim = 0
     set_location(P)
-    forbidden_2_b(P)
-    forbidden_2_p(P,P.px,P.py,False)
-    forbidden_2_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -7786,9 +10499,7 @@ def forbidden_2(P) -> None:
                 txt(P,"You hear something up ahead.")
                 txt(P,"You took out your lantern.")
                 P.ff_dark = P.lantern_light
-                forbidden_2_b(P)
-                forbidden_2_p(P,temppx,temppy,False)
-                forbidden_2_f(P,temppx,temppy,tim)
+                refresh()
             move = False
             P.ff2_cel = npc.NPC(P,'Celebi','',[1200,1100],[['d',60],['md',40],['d',40]],["","",""])
             P.prog[0] += 1
@@ -7811,17 +10522,13 @@ def forbidden_2(P) -> None:
                         if P.ff2_rock1.trainer:
                             move = False
                         else:
-                            forbidden_2_b(P)
-                            forbidden_2_p(P,P.px,P.py,False)
-                            forbidden_2_f(P,P.px,P.py,tim)
+                            refresh()
                             P.ff2_rock1.write()
                     elif P.ff2_rock2.talk():
                         if P.ff2_rock2.trainer:
                             move = False
                         else:
-                            forbidden_2_b(P)
-                            forbidden_2_p(P,P.px,P.py,False)
-                            forbidden_2_f(P,P.px,P.py,tim)
+                            refresh()
                             P.ff2_rock2.write()
                     elif (P.px == -125 and P.py in [-275,-225,-425,-475] and face_l(P)) or (P.py == -875 and P.px in [-875,-725,-675] and face_d(P)):
                         txt(P,"There is a bell hanging from","this tree.")
@@ -7913,7 +10620,6 @@ def forbidden_2(P) -> None:
     if fail_exit:
         print_forbidden(P)
 
-
 def forbidden_1_b(P):
     P.surface.blit(P.ff1_back,(P.px,P.py))
 
@@ -7973,6 +10679,10 @@ def forbidden_1_f(P,temppx,temppy,tim):
     show_location(P, P.loc_txt, tim)
 
 def forbidden_1(P) -> None:
+    def refresh():
+        forbidden_1_b(P)
+        forbidden_1_p(P,P.px,P.py,False)
+        forbidden_1_f(P,P.px,P.py,tim)
     if P.song != "music/forbidden.wav":
         P.song = "music/forbidden.wav"
         pygame.mixer.music.load(P.song)
@@ -7987,9 +10697,7 @@ def forbidden_1(P) -> None:
     move = True
     tim = 0
     set_location(P)
-    forbidden_1_b(P)
-    forbidden_1_p(P,P.px,P.py,False)
-    forbidden_1_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -8002,7 +10710,6 @@ def forbidden_1(P) -> None:
         temppy = P.py
         forbidden_1_p(P,temppx,temppy,move)
         forbidden_1_f(P,temppx,temppy,tim)
-
         if trainer_check(P,P.ff1_psy,"music/forbidden.wav"):
             P.ff1_psy = npc.NPC(P,'Psychic','Hugo',[P.ff1_psy.x,P.ff1_psy.y],[['mr',20],['r',120],['ml',20],['l',100]],["There was a large gang that","walked through here a couple","moments ago.","I'm not quite sure what they","were up to, but they seemed","to have ill intentions."],tim = P.ff1_psy.tim,curr = P.ff1_psy.curr,extra_walk = P.ff1_psy.extra_walk)
             move = True
@@ -8021,9 +10728,7 @@ def forbidden_1(P) -> None:
                         if P.ff1_psy.trainer:
                             move = False
                         else:
-                            forbidden_1_b(P)
-                            forbidden_1_p(P,P.px,P.py,False)
-                            forbidden_1_f(P,P.px,P.py,tim)
+                            refresh()
                             P.ff1_psy.write()
                     elif (P.px == -1175 and P.py in [-75,-125,-275,-325] and face_r(P)) or (P.py == -825 and P.px in [-575,-625,-775,-825] and face_d(P)):
                         txt(P,"There is a bell hanging from","this tree.")
@@ -8166,7 +10871,6 @@ def verde_gymb_p(P,temppx,temppy,move,cam_mod = 0):
     else:
         blit_player(P,mod = cam_mod)
 
-
 def verde_gymb_f(P,temppx,temppy,tim,cam_mod = 0):
     P.surface.blit(P.verde_gymb_berry1,(temppx+275,temppy+365+cam_mod))
     P.surface.blit(P.verde_gymb_berry1,(temppx+115,temppy+365+cam_mod))
@@ -8187,6 +10891,10 @@ def verde_gymb_f(P,temppx,temppy,tim,cam_mod = 0):
     show_location(P, P.loc_txt, tim)
 
 def verde_gymb(P) -> None:
+    def refresh():
+        verde_gymb_b(P)
+        verde_gymb_p(P,P.px,P.py,False)
+        verde_gymb_f(P,P.px,P.py,tim)
     if P.song != "music/gym.wav":
         P.song = "music/gym.wav"
         pygame.mixer.music.load(P.song)
@@ -8203,9 +10911,7 @@ def verde_gymb(P) -> None:
     cam_mod = 0
     tim = 0
     set_location(P)
-    verde_gymb_b(P)
-    verde_gymb_p(P,P.px,P.py,False)
-    verde_gymb_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -8269,7 +10975,7 @@ def verde_gymb(P) -> None:
                     gloom = poke.Poke('Vileplume',[35,0,787,"Sunny Day",-1,"Moonlight",-1,"Giga Drain",-1,"Grass Knot",-1,None,None,0,"Poke Ball",400,'Chlorophyll'],petals=['sdf','sdf','sdf','sak','sak'])
                 else:
                     gloom = poke.Poke('Bellossom',[35,0,787,"Sunny Day",-1,"Grass Knot",-1,"Solar Beam",-1,"Attract",-1,None,None,0,"Poke Ball",400,'Chlorophyll'],petals=['spd','spd','spd','sak','sak'])
-                battle(P,["Leader Mairin",poke.Poke('Whimsicott',[35,0,787,"Tailwind",-1,"Grass Knot",-1,"Stun Spore",-1,"Leech Seed",-1,None,None,0,"Poke Ball",300,'Prankster'],petals=['hp','hp','hp','df','df']),poke.Poke('Leavanny',[35,0,787,"Slash",-1,"Fell Stinger",-1,"Leaf Blade",-1,"Shadow Claw",-1,None,None,0,"Poke Ball",400,'Swarm'],petals=['ak','ak','ak','spd','spd']),gloom,poke.Poke('Roserade',[35,0,787,"Sludge Bomb",-1,"Grass Whistle",-1,"Giga Drain",-1,"Grass Knot",-1,None,None,0,"Poke Ball",400,'Poison Point'],petals=['sak','sak','sak','spd','spd']),poke.Poke('Quilladin',[35,0,787,"Seed Bomb",-1,"Grass Knot",-1,"Take Down",-1,"Pin Missile",-1,"Eviolite",None,0,"Poke Ball",400,'Overgrow'],petals=['hp','hp','hp','df','df']),poke.Poke('Mega_Venusaur',[35,0,787,"Grass Knot",-1,"Sludge Bomb",-1,"Growth",-1,"Synthesis",-1,None,None,0,"Premier Ball",300,'Thick Fat'],petals=['hp','hp','hp','sdf','sdf'])])
+                battle(P,["Leader Mairin",poke.Poke('Whimsicott',[35,0,787,"Tailwind",-1,"Grass Knot",-1,"Stun Spore",-1,"Leech Seed",-1,None,None,0,"Poke Ball",300,'Prankster'],petals=['hp','hp','hp','df','df']),poke.Poke('Leavanny',[35,1,787,"Slash",-1,"Fell Stinger",-1,"Leaf Blade",-1,"Shadow Claw",-1,None,None,0,"Poke Ball",400,'Swarm'],petals=['ak','ak','ak','spd','spd']),gloom,poke.Poke('Roserade',[35,1,787,"Sludge Bomb",-1,"Grass Whistle",-1,"Giga Drain",-1,"Grass Knot",-1,None,None,0,"Poke Ball",400,'Poison Point'],petals=['sak','sak','sak','spd','spd']),poke.Poke('Quilladin',[35,0,787,"Seed Bomb",-1,"Grass Knot",-1,"Take Down",-1,"Pin Missile",-1,"Eviolite",None,0,"Poke Ball",400,'Overgrow'],petals=['hp','hp','hp','df','df']),poke.Poke('Mega_Venusaur',[35,0,787,"Grass Knot",-1,"Sludge Bomb",-1,"Growth",-1,"Synthesis",-1,None,None,0,"Premier Ball",300,'Thick Fat'],petals=['hp','hp','hp','sdf','sdf'])])
                 play_music(P,"music/gym.wav")
                 P.surface.blit(t,(0,0))
                 fade_in(P)
@@ -8297,7 +11003,6 @@ def verde_gymb(P) -> None:
         update_screen(P)
         P.clock.tick(P.ani_spd)
     fade_out(P)
-
 
 def verde_gym_b(P):
     P.surface.fill((0,0,0))
@@ -8392,7 +11097,6 @@ def verde_gym_p(P,temppx,temppy,move):
         P.verde_gym_pot5.move(temppx,temppy)
     if P.verde_gym_pot6:
         P.verde_gym_pot6.move(temppx,temppy)
-
 
 def verde_gym_f(P,temppx,temppy,tim):
     P.surface.blit(P.verde_gym_f,(temppx+398,temppy+688))
@@ -8535,6 +11239,10 @@ def verde_outin(P,tim):
     fade_in(P)
 
 def verde_gym(P) -> None:
+    def refresh():
+        verde_gym_b(P)
+        verde_gym_p(P,P.px,P.py,False)
+        verde_gym_f(P,P.px,P.py,tim)
     def shake_tree(num):
         if face_r(P):
             dir = 'l'
@@ -8558,7 +11266,7 @@ def verde_gym(P) -> None:
             if num == 3:
                 P.verde_gym_pot3 = npc.NPC(P,'Preschoolerb','Mateo',[900,500],[[dir,20]],["S U R P R I S E ! ! !", "",""],["Oh, you're not my mom!","Sorry about that!",""],True,[50,50,50,50],P.verde_gym_pot3team,42,y_offset = -10)
             if num == 4:
-                P.verde_gym_pot4 = npc.NPC(P,'Bug Catcher','Wesley',[1000,500],[[dir,20]],["You wouldn't believe how many", "critters are crawling around","in this tree!"],["Well that's the last of them.","Guess I'll have to go looking","for more!"],True,[50,50,50,50],P.verde_gym_pot4team,43,y_offset = -10)
+                P.verde_gym_pot4 = npc.NPC(P,'Bug Catcher','Eli',[1000,500],[[dir,20]],["You wouldn't believe how many", "critters are crawling around","in this tree!"],["Well that's the last of them.","Guess I'll have to go looking","for more!"],True,[50,50,50,50],P.verde_gym_pot4team,43,y_offset = -10)
             if num == 5:
                 P.verde_gym_pot5 = npc.NPC(P,'Scientistf','Madison',[250,650],[[dir,20]],["Ow ow ow!","I think I got something stuck","in my hair!"],["Ah, that's much better. I","thought I would be stuck there","all day!"],True,[50,50,50,50],P.verde_gym_pot5team,44,y_offset = -10)
             if num == 6:
@@ -8635,9 +11343,7 @@ def verde_gym(P) -> None:
     move = True
     tim = 0
     set_location(P)
-    verde_gym_b(P)
-    verde_gym_p(P,P.px,P.py,False)
-    verde_gym_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     fade = None
     end = True
@@ -8703,44 +11409,28 @@ def verde_gym(P) -> None:
                     temp_buff = P.buffer_talk
                     P.buffer_talk = None
                     if P.verde_gym_guide.talk():
-                        verde_gym_b(P)
-                        verde_gym_p(P,P.px,P.py,False)
-                        verde_gym_f(P,P.px,P.py,tim)
+                        refresh()
                         P.verde_gym_guide.write()
                     elif P.verde_gym_pot0 and P.verde_gym_pot0.talk():
-                        verde_gym_b(P)
-                        verde_gym_p(P,P.px,P.py,False)
-                        verde_gym_f(P,P.px,P.py,tim)
+                        refresh()
                         P.verde_gym_pot0.write()
                     elif P.verde_gym_pot1 and P.verde_gym_pot1.talk():
-                        verde_gym_b(P)
-                        verde_gym_p(P,P.px,P.py,False)
-                        verde_gym_f(P,P.px,P.py,tim)
+                        refresh()
                         P.verde_gym_pot1.write()
                     elif P.verde_gym_pot2 and P.verde_gym_pot2.talk():
-                        verde_gym_b(P)
-                        verde_gym_p(P,P.px,P.py,False)
-                        verde_gym_f(P,P.px,P.py,tim)
+                        refresh()
                         P.verde_gym_pot2.write()
                     elif P.verde_gym_pot3 and P.verde_gym_pot3.talk():
-                        verde_gym_b(P)
-                        verde_gym_p(P,P.px,P.py,False)
-                        verde_gym_f(P,P.px,P.py,tim)
+                        refresh()
                         P.verde_gym_pot3.write()
                     elif P.verde_gym_pot4 and P.verde_gym_pot4.talk():
-                        verde_gym_b(P)
-                        verde_gym_p(P,P.px,P.py,False)
-                        verde_gym_f(P,P.px,P.py,tim)
+                        refresh()
                         P.verde_gym_pot4.write()
                     elif P.verde_gym_pot5 and P.verde_gym_pot5.talk():
-                        verde_gym_b(P)
-                        verde_gym_p(P,P.px,P.py,False)
-                        verde_gym_f(P,P.px,P.py,tim)
+                        refresh()
                         P.verde_gym_pot5.write()
                     elif P.verde_gym_pot6 and P.verde_gym_pot6.talk():
-                        verde_gym_b(P)
-                        verde_gym_p(P,P.px,P.py,False)
-                        verde_gym_f(P,P.px,P.py,tim)
+                        refresh()
                         P.verde_gym_pot6.write()
                     elif next_to(P,400,750):
                         txt(P,"It's a status in the shape of","Latias' head.")
@@ -8852,6 +11542,10 @@ def verde_garden_f(P,temppx,temppy):
     show_location(P, None, 0)
 
 def verde_garden(P) -> None:
+    def refresh():
+        verde_garden_b(P)
+        verde_garden_p(P,P.px,P.py,False)
+        verde_garden_f(P,P.px,P.py)
     set_mixer_volume(P,P.vol)
     if P.song != "music/verde.wav":
         P.song = "music/verde.wav"
@@ -8863,9 +11557,7 @@ def verde_garden(P) -> None:
     P.verde_gar_girl = npc.NPC(P,'Preschoolerg','Berry',[100,350],[['r',200]],["Look at the berries on this","tree! Don't they look super","tasty?","My mom said she'll buy me a","tree when I'm all grown up!",""])
     move = True
     tim = 0
-    verde_garden_b(P)
-    verde_garden_p(P,P.px,P.py,False)
-    verde_garden_f(P,P.px,P.py)
+    refresh()
     fade_in(P)
     if P.garden_timer:
         if P.garden_score == -1:
@@ -8961,7 +11653,7 @@ def verde_garden(P) -> None:
                         if P.prog[8][2][0] == -1 and P.prog[0] < 106:
                             txt(P,"Welcome!","Are you here to help out with","the trees?")
                             txt(P,"I don't think you're quite","ready to handle them yet.","")
-                            txt(P,"If you get a recommendation","from Mairin, we can help you","get situated.")
+                            txt(P,"If you get a recommendation from our gym leader Mairin, we can get you situated.")
                         else:
                             if P.prog[8][2][0] == -1:
                                 P.prog[8][2][0] = 1
@@ -8990,9 +11682,7 @@ def verde_garden(P) -> None:
                     elif next_to(P,50,350) or next_to(P,150,350):
                         txt(P,"It's a Chesto Berry Tree.")
                     elif P.verde_gar_girl.talk():
-                        verde_garden_b(P)
-                        verde_garden_p(P,P.px,P.py,False)
-                        verde_garden_f(P,P.px,P.py)
+                        refresh()
                         P.verde_gar_girl.write()
                     else:
                         P.buffer_talk = temp_buff
@@ -9261,7 +11951,7 @@ def gardening(P,loc):
                         new_txt(P)
                         write(P,"Are you sure you want to","leave? You'll lose all your","progress.",garden = True)
                         P.clock.tick(10)
-                        if not choice(P,reverse = True,garden = True):
+                        if choice(P,reverse = True,garden = True):
                             P.garden_score = -1
                             P.px = -75
                             P.py = 25
@@ -9466,7 +12156,10 @@ def verde_f(P,temppx,temppy,listx,listy,tim,gardening = False):
         blit_garden_menu(P)
 
 def verde(P,enter = False) -> None:
-    #sci_tim = None,sci_curr = None
+    def refresh():
+        verde_b(P,wx,wy,listx,listy,pcx,pcy,gy)
+        verde_p(P,P.px,P.py,False,gond,gy)
+        verde_f(P,P.px,P.py,listx,listy,tim)
     if P.song != "music/verde.wav":
         P.song = "music/verde.wav"
         pygame.mixer.music.load(P.song)
@@ -9496,9 +12189,7 @@ def verde(P,enter = False) -> None:
     listx = [538,742,538,742,834,1042,1038,1142,1842,2288,2342,2588,3088,3292,2992,3538]
     listy = [5,5,-180,-180,-350,-350,-797,-797,-350,-350,-1050,-1050,50,50,-348,-348]
     if enter == False:
-        verde_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-        verde_p(P,P.px,P.py,False,gond,gy)
-        verde_f(P,P.px,P.py,listx,listy,tim)
+        refresh()
         fade_in(P)
     end = True
     m = 0
@@ -9548,29 +12239,19 @@ def verde(P,enter = False) -> None:
                             fade_out(P)
                             P.p = P.d1
                     elif P.verde_boy.talk():
-                        verde_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-                        verde_p(P,temppx,temppy,False,gond,gy)
-                        verde_f(P,temppx,temppy,listx,listy,tim)
+                        refresh()
                         P.verde_boy.write()
                     elif P.verde_fan.talk():
-                        verde_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-                        verde_p(P,temppx,temppy,False,gond,gy)
-                        verde_f(P,temppx,temppy,listx,listy,tim)
+                        refresh()
                         P.verde_fan.write()
                     elif P.verde_beauty.talk():
-                        verde_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-                        verde_p(P,temppx,temppy,False,gond,gy)
-                        verde_f(P,temppx,temppy,listx,listy,tim)
+                        refresh()
                         P.verde_beauty.write()
                     elif P.verde_gentle.talk():
-                        verde_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-                        verde_p(P,temppx,temppy,False,gond,gy)
-                        verde_f(P,temppx,temppy,listx,listy,tim)
+                        refresh()
                         P.verde_gentle.write()
                     elif P.verde_lass and P.verde_lass.talk():
-                        verde_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-                        verde_p(P,temppx,temppy,False,gond,gy)
-                        verde_f(P,temppx,temppy,listx,listy,tim)
+                        refresh()
                         P.verde_lass.write()
                     else:
                         P.buffer_talk = temp_buff
@@ -9697,7 +12378,7 @@ def route_5_p(P,temppx,temppy,move):
     P.r5_lass.move()
     P.r5_beauty.move()
     if P.r5_sci:
-        P.r5_sci.move()
+        P.r5_sci.move(mov=True)
     #rects start
     r1 = (P.px+2750,P.py-100,50,690)
     r2 = (P.px+2250,P.py-150,500,40)
@@ -9798,8 +12479,6 @@ def route_5_p(P,temppx,temppy,move):
     if P.r5_rival and P.r5_rival.move(temppx,temppy):
         draw_grass(P,P.r5_rival.x,P.r5_rival.y,-1675,275,200,100,[temppx,temppy],ignore = [(-1675,275),(-1725,275)])
 
-
-
 def route_5_f(P,temppx,temppy,tim):
     P.surface.blit(P.r5_f,(temppx+401,temppy-657))
     P.surface.blit(P.r5_foam,(temppx+211,temppy+298+abs(P.foam)))
@@ -9813,6 +12492,10 @@ def route_5_f(P,temppx,temppy,tim):
     show_location(P, P.loc_txt, tim)
 
 def route_5(P,enter = False,wx = 0,wy = 0) -> None:
+    def refresh():
+        route_5_b(P,wx,wy,beachx,beachy,beach_poke)
+        route_5_p(P,P.px,P.py,False)
+        route_5_f(P,P.px,P.py,tim)
     if P.song != "music/route_5.wav":
         P.song = "music/route_5.wav"
         pygame.mixer.music.load(P.song)
@@ -9834,9 +12517,7 @@ def route_5(P,enter = False,wx = 0,wy = 0) -> None:
     beach_poke = 0
     set_location(P)
     if enter == False:
-        route_5_b(P,wx,wy,beachx,beachy,beach_poke)
-        route_5_p(P,P.px,P.py,False)
-        route_5_f(P,P.px,P.py,tim)
+        refresh()
         fade_in(P)
     end = True
     m = 0
@@ -9882,12 +12563,10 @@ def route_5(P,enter = False,wx = 0,wy = 0) -> None:
             pygame.mixer.music.play(0)
             P.legendary_battle = True
             P.temp_party = P.party.copy()
-            pos = 0
-            while len(P.party) > 1:
-                if P.party[pos].code_nos() != 'Scizor' or P.party[pos].status == 'Faint' or pos == 1:
-                    P.party.remove(P.party[pos])
-                else:
-                    pos += 1
+            for p in P.party:
+                if p.code_nos() == 'Scizor' and p.status != 'Faint':
+                    P.party = [p]
+                    break
             battle(P,[poke.Poke('Scizor',[30,1,787,'Bullet Punch',-1,None,None,None,None,None,None,None,None,0,"Poke Ball",0,'Stun'])],no_pc = True)
             play_music(P,"music/route_5.wav")
             P.surface.blit(te,(0,0))
@@ -9901,9 +12580,7 @@ def route_5(P,enter = False,wx = 0,wy = 0) -> None:
                 P.p = P.d1
                 P.px = -825
                 P.py = 375
-                route_5_b(P,wx,wy,beachx,beachy,beach_poke)
-                route_5_p(P,P.px,P.py,False)
-                route_5_f(P,P.px,P.py,tim)
+                refresh()
                 fade_in(P)
                 move = True
             else:
@@ -9912,9 +12589,7 @@ def route_5(P,enter = False,wx = 0,wy = 0) -> None:
                 add_item(P,'Scizorite',1)
                 fade_out(P)
                 P.r5_sci = None
-                route_5_b(P,wx,wy,beachx,beachy,beach_poke)
-                route_5_p(P,P.px,P.py,False)
-                route_5_f(P,P.px,P.py,tim)
+                refresh()
                 fade_in(P)
                 move = True
             P.party = P.temp_party.copy()
@@ -9974,33 +12649,25 @@ def route_5(P,enter = False,wx = 0,wy = 0) -> None:
                         if P.r5_psy.trainer:
                             move = False
                         else:
-                            route_5_b(P,wx,wy,beachx,beachy,beach_poke)
-                            route_5_p(P,P.px,P.py,False)
-                            route_5_f(P,P.px,P.py,tim)
+                            refresh()
                             P.r5_psy.write()
                     elif P.r5_bug.talk():
                         if P.r5_bug.trainer:
                             move = False
                         else:
-                            route_5_b(P,wx,wy,beachx,beachy,beach_poke)
-                            route_5_p(P,P.px,P.py,False)
-                            route_5_f(P,P.px,P.py,tim)
+                            refresh()
                             P.r5_bug.write()
                     elif P.r5_lass.talk():
                         if P.r5_lass.trainer:
                             move = False
                         else:
-                            route_5_b(P,wx,wy,beachx,beachy,beach_poke)
-                            route_5_p(P,P.px,P.py,False)
-                            route_5_f(P,P.px,P.py,tim)
+                            refresh()
                             P.r5_lass.write()
                     elif P.r5_beauty.talk():
                         if P.r5_beauty.trainer:
                             move = False
                         else:
-                            route_5_b(P,wx,wy,beachx,beachy,beach_poke)
-                            route_5_p(P,P.px,P.py,False)
-                            route_5_f(P,P.px,P.py,tim)
+                            refresh()
                             P.r5_beauty.write()
                     elif next_to(P,2400,-250) and P.prog[6][51] == 0:
                         txt(P,P.save_data.name + " found a Red Petal!")
@@ -10286,7 +12953,10 @@ def isola_f(P,temppx,temppy,tim):
     show_location(P, P.loc_txt, tim)
 
 def isola(P,enter = False,wx = 0,wy = 0) -> None:
-    #sci_tim = None,sci_curr = None
+    def refresh():
+        isola_b(P,wx,wy,pcx,pcy,gy)
+        isola_p(P,P.px,P.py,False,gond,gy)
+        isola_f(P,P.px,P.py,tim)
     if P.song != "music/isola.wav":
         P.song = "music/isola.wav"
         pygame.mixer.music.load(P.song)
@@ -10319,9 +12989,7 @@ def isola(P,enter = False,wx = 0,wy = 0) -> None:
     pcx = 0
     pcy = 0
     if enter == False:
-        isola_b(P,wx,wy,pcx,pcy,gy)
-        isola_p(P,P.px,P.py,False,gond,gy)
-        isola_f(P,P.px,P.py,tim)
+        refresh()
         fade_in(P)
     end = True
     m = 0
@@ -10333,9 +13001,7 @@ def isola(P,enter = False,wx = 0,wy = 0) -> None:
                 dir = 'l'
                 P.p = P.r1
             P.isola_aroma = npc.NPC(P,'Aroma Lady','Harper',[1050,-700],[[dir,40]],["Hey! I just saw some strange","people making their way down","to Route 4.","They looked like they were up","to something real suspicious.","","You look like someone that can","handle them. Could you go over","and check it out?"])
-            isola_b(P,wx,wy,pcx,pcy,gy)
-            isola_p(P,P.px,P.py,False,gond,gy)
-            isola_f(P,P.px,P.py,tim)
+            refresh()
             P.isola_aroma.write()
             P.isola_aroma = npc.NPC(P,'Aroma Lady','Harper',[1050,-700],[['u',40]],["Hey! I just saw some strange","people making their way down","to Route 4.","They looked like they were up","to something real suspicious.","","You look like someone that can","handle them. Could you go over","and check it out?"])
             if P.prog[12][4] == 0:
@@ -10379,26 +13045,18 @@ def isola(P,enter = False,wx = 0,wy = 0) -> None:
                     elif P.px == -1175 and P.py in [375,425,475] and face_r(P):
                         txt(P,"There's a gondola tied to the","end of this dock.")
                     elif P.isola_lat and P.isola_lat.talk():
-                        isola_b(P,wx,wy,pcx,pcy,gy)
-                        isola_p(P,temppx,temppy,False,gond,gy)
-                        isola_f(P,temppx,temppy,tim)
+                        refresh()
                         P.isola_lat.write()
                     elif P.isola_lato and P.isola_lato.talk():
-                        isola_b(P,wx,wy,pcx,pcy,gy)
-                        isola_p(P,temppx,temppy,False,gond,gy)
-                        isola_f(P,temppx,temppy,tim)
+                        refresh()
                         P.isola_lato.write()
                     elif P.isola_seed and P.isola_seed.talk():
-                        isola_b(P,wx,wy,pcx,pcy,gy)
-                        isola_p(P,temppx,temppy,False,gond,gy)
-                        isola_f(P,temppx,temppy,tim)
+                        refresh()
                         P.font = pygame.font.SysFont("courier", 40, bold = False, italic = True)
                         P.isola_seed.write()
                         P.font = pygame.font.SysFont("courier", 40, bold = True, italic = False)
                     elif P.isola_fish and P.isola_fish.talk():
-                        isola_b(P,wx,wy,pcx,pcy,gy)
-                        isola_p(P,temppx,temppy,False,gond,gy)
-                        isola_f(P,temppx,temppy,tim)
+                        refresh()
                         if P.prog[16] == 0:
                             txt(P,"Hey there traveler! I enjoy","searching for rare items out","in the ocean!")
                             txt(P,"Lately though, I've been","feeling kinda lonely all by","myself out there.")
@@ -10437,9 +13095,7 @@ def isola(P,enter = False,wx = 0,wy = 0) -> None:
                         else:
                             P.isola_fish.write()
                     elif P.isola_aroma.talk():
-                        isola_b(P,wx,wy,pcx,pcy,gy)
-                        isola_p(P,temppx,temppy,False,gond,gy)
-                        isola_f(P,temppx,temppy,tim)
+                        refresh()
                         P.isola_aroma.write()
                     else:
                         P.buffer_talk = temp_buff
@@ -10649,8 +13305,7 @@ def route_4_p(P,temppx,temppy,move = False):
         P.r4_manaphy.move(temppx,temppy,mov=True)
         draw_grass(P,P.r4_manaphy.x,P.r4_manaphy.y,-925,-1025,700,200,[temppx,temppy],ignore = [(-1425,-1025),(-1475,-1025),(-1525,-1025),(-1575,-1025),(-1525,-1075),(-1575,-1075)],dark = True)
     if P.r4_expf:
-        P.r4_expf.move(temppx,temppy)
-        
+        P.r4_expf.move(temppx,temppy) 
 
 def route_4_f(P,temppx,temppy,tim):
     P.surface.blit(P.r4_f,(temppx+900,temppy+1044))
@@ -10659,6 +13314,10 @@ def route_4_f(P,temppx,temppy,tim):
     show_location(P,P.loc_txt,tim)
 
 def route_4(P,enter = False,wx = 0,wy = 0) -> None:
+    def refresh():
+        route_4_b(P,wx,wy)
+        route_4_p(P,P.px,P.py)
+        route_4_f(P,P.px,P.py,tim)
     if P.song != "music/route_4.wav":
         P.song = "music/route_4.wav"
         pygame.mixer.music.load(P.song)
@@ -10686,16 +13345,13 @@ def route_4(P,enter = False,wx = 0,wy = 0) -> None:
     tim = 0
     gran_talk = 50
     if enter == False:
-        route_4_b(P,wx,wy)
-        route_4_p(P,P.px,P.py)
-        route_4_f(P,P.px,P.py,tim)
+        refresh()
         fade_in(P)
     end = True
     move = True
-    pause = False
     m = 0
     while end:
-        print(P.px,P.py)
+        # print(P.px,P.py)
         if P.fishing != None:
             vars = fishing(P,wx,wy,tim)
             wx = vars[0]
@@ -10704,9 +13360,7 @@ def route_4(P,enter = False,wx = 0,wy = 0) -> None:
         if P.prog[0] == 89 and P.prog[12][4] == 1 and P.py == -775:
             move = False
             P.r4_latias = npc.NPC(P,'Latias','Harper',[2300,1200],[['u',80]],["","",""])
-            route_4_b(P,wx,wy)
-            route_4_p(P,P.px,P.py,False)
-            route_4_f(P,P.px,P.py,tim)
+            refresh()
             P.r4_latias = npc.NPC(P,'Latias','Harper',[2300,1200],[['mr',P.r4_latias.x_dist()*2/5],['mu',40],['u',20]],["","",""])
             P.r4_latias.trainer_walk = ['u',0,20]
             P.prog[0] += 1
@@ -10716,9 +13370,7 @@ def route_4(P,enter = False,wx = 0,wy = 0) -> None:
             P.prog[0] += 1
         if P.prog[0] == 91 and P.px == -1625:
             P.r4_rock2 = npc.NPC(P,'Team Rocketf','Harper',[1900,1250],[['r',80]],["","",""])
-            route_4_b(P,wx,wy)
-            route_4_p(P,P.px,P.py,False)
-            route_4_f(P,P.px,P.py,tim)
+            refresh()
             txt(P,"Hey! We're pretty busy here!", "You had better stay back if","you know what's good for you!")
             txt(P,"Or are you just here looking","for trouble?")
             P.r4_rock2 = npc.NPC(P,'Team Rocketf','Harper',[1900,1250],[['mr',20],['r',100]],["","",""])
@@ -10729,7 +13381,6 @@ def route_4(P,enter = False,wx = 0,wy = 0) -> None:
             txt(P,"Well if you ain't gonna back","off, I'll just have to force","you to!")
             play_music(P,"music/trainer_battle.wav",0)
             P.habitat = 'mount'
-            #battle(P,["Team Rocketf Grunt",poke.Poke('Wynaut',[10,random.randint(0,1),21,"Tackle",35,"Lick",30,"Odor Sleuth",40,None,None,None,None,0,"Poke Ball"])])
             battle(P,["Team Rocketf Grunt",poke.Poke('Ariados',[31,random.randint(0,1),787,"Sucker Punch",-1,"Swords Dance",-1,"Shadow Sneak",-1,"Infestation",-1,None,None,0,"Poke Ball",200,"Insomnia"]),poke.Poke('Seviper',[31,random.randint(0,1),787,"Poison Jab",-1,"Night Slash",-1,"Glare",-1,"Wrap",-1,None,None,0,"Poke Ball",200,"Shed Skin"]),poke.Poke('Mismagius',[32,random.randint(0,1),787,"Magical Leaf",-1,"Will-O-Wisp",-1,"Hex",-1,"Psybeam",-1,None,None,0,"Poke Ball",200,"Levitate"])])
             P.habitat = 'mount_grass'
             P.r4_rock2 = npc.NPC(P,'Team Rocketf','Harper',[P.r4_rock2.x,1250],[['ml',20],['r',200]],["","",""])
@@ -10746,9 +13397,7 @@ def route_4(P,enter = False,wx = 0,wy = 0) -> None:
             P.prog[0] += 1
         if P.prog[0] == 93 and P.r4_rock1.face() == 'd':
             P.p = P.u1
-            route_4_b(P,wx,wy)
-            route_4_p(P,P.px,P.py,False)
-            route_4_f(P,P.px,P.py,tim)
+            refresh()
             te = P.surface.copy()
             txt(P,"Well she was just softening","you up for me anyways!")
             play_music(P,"music/trainer_battle.wav",0)
@@ -10813,9 +13462,7 @@ def route_4(P,enter = False,wx = 0,wy = 0) -> None:
         if P.prog[15][10] == 1 and P.px == -1125 and P.py == 525:
             P.r4_kang = pygame.transform.scale(load("p/spr/Kangaskhan_l1.png"),(75,90))
             P.p = P.r1
-            route_4_b(P,wx,wy)
-            route_4_p(P,P.px,P.py,False)
-            route_4_f(P,P.px,P.py,tim)
+            refresh()
             te = P.surface.copy()
             txt(P,"The Kangaskhan attacked!")
             P.song = "music/wild_battle.wav"
@@ -10826,12 +13473,10 @@ def route_4(P,enter = False,wx = 0,wy = 0) -> None:
             P.legendary_battle = True
             P.habitat = 'mount'
             P.temp_party = P.party.copy()
-            pos = 0
-            while len(P.party) > 1:
-                if P.party[pos].code_nos() != 'Kangaskhan' or P.party[pos].status == 'Faint' or pos == 1:
-                    P.party.remove(P.party[pos])
-                else:
-                    pos += 1
+            for p in P.party:
+                if p.code_nos() == 'Kangaskhan' and p.status != 'Faint':
+                    P.party = [p]
+                    break
             P.party.insert(0,poke.Poke('Kangaskhan_M',[20,1,787,'Tackle',-1,'Baby-Doll Eyes',-1,'Endure',-1,None,None,None,None,0,"Nest Ball",300,'Guts',True]))
             battle(P,[poke.Poke('Kangaskhan',[32,1,787,'Fake Out',-1,'Bite',-1,'Mega Punch',-1,'Chip Away',-1,None,None,0,"Poke Ball",0,'Scrappy'])],no_pc = True)
             play_music(P,"music/route_4.wav")
@@ -10846,9 +13491,7 @@ def route_4(P,enter = False,wx = 0,wy = 0) -> None:
                 P.p = P.l1
                 P.px = -875
                 P.r4_kang = pygame.transform.scale(load("p/spr/Kangaskhan_r1.png"),(75,90))
-                route_4_b(P,wx,wy)
-                route_4_p(P,P.px,P.py,False)
-                route_4_f(P,P.px,P.py,tim)
+                refresh()
                 fade_in(P)
                 move = True
             else:
@@ -10856,9 +13499,7 @@ def route_4(P,enter = False,wx = 0,wy = 0) -> None:
                 txt(P,"The Kangaskhan looks content.","It hands you a mysterious","stone before leaving.")
                 add_item(P,'Kangaskhanite',1)
                 fade_out(P)
-                route_4_b(P,wx,wy)
-                route_4_p(P,P.px,P.py,False)
-                route_4_f(P,P.px,P.py,tim)
+                refresh()
                 fade_in(P)
                 move = True
             P.party = P.temp_party.copy()
@@ -10880,11 +13521,11 @@ def route_4(P,enter = False,wx = 0,wy = 0) -> None:
             move = True
         if gran_talk > 50 and trainer_check(P,P.r4_expf,"music/route_4.wav"):
             if P.prog[5][34] == 0:
-                P.r4_expf = npc.NPC(P,'Expertf','Stella',[1500,1200],[['l',80]],["Hello there! Not many people","choose to venture all the way","out here.","Perhaps you're looking for a","thrilling battle?",""],["Well that's quite surprising!","I suppose each new generation","really is more talented!"],True,[0,0,0,0],P.r4_team1,34,loc = "route_4")
+                P.r4_expf = npc.NPC(P,'Expertf','Sarah',[1500,1200],[['l',80]],["Hello there! Not many people","choose to venture all the way","out here.","Perhaps you're looking for a","thrilling battle?",""],["Well that's quite surprising!","I suppose each new generation","really is more talented!"],True,[0,0,0,0],[poke.Poke('Ferrothorn',[40,random.randint(0,1),787,"Pin Missile",-1,"Iron Defense",-1,"Gyro Ball",-1,"Curse",-1,'Metal Coat',None,0,"Luxury Ball",400,"Iron Barbs"]),poke.Poke('Scizor',[40,random.randint(0,1),787,"Quick Attack",-1,"Iron Defense",-1,"Bullet Punch",-1,"Pursuit",-1,'Metal Coat',None,0,"Luxury Ball",400,"Technician"]),poke.Poke('Steelix',[40,random.randint(0,1),787,"Thunder Fang",-1,"Rock Slide",-1,"Crunch",-1,"Iron Tail",-1,'Metal Coat',None,0,"Luxury Ball",400,"Sturdy"])],34,loc = "route_4")
                 gran_talk = 0
                 move = True
             else:
-                P.r4_expf = npc.NPC(P,'Expertf','Timmy',[1500,1200],[['l',80]],["People say this is a scorch","mark left by a lightning","strike from Thundurus.","It could just be a myth, but","it's exhilarating to think","about isn't it?"])
+                P.r4_expf = npc.NPC(P,'Expertf','Sarah',[1500,1200],[['l',80]],["People say this is a scorch","mark left by a lightning","strike from Thundurus.","It could just be a myth, but","it's exhilarating to think","about isn't it?"])
                 move = True
         for event in map_keys():
             if (event.type == KEYDOWN or P.buffer_talk) and tim > 20:
@@ -10901,33 +13542,25 @@ def route_4(P,enter = False,wx = 0,wy = 0) -> None:
                         if P.r4_expert.trainer:
                             move = False
                         else:
-                            route_4_b(P,wx,wy)
-                            route_4_p(P,P.px,P.py,False)
-                            route_4_f(P,P.px,P.py,tim)
+                            refresh()
                             P.r4_expert.write()
                     elif P.r4_battle.talk():
                         if P.r4_battle.trainer:
                             move = False
                         else:
-                            route_4_b(P,wx,wy)
-                            route_4_p(P,P.px,P.py,False)
-                            route_4_f(P,P.px,P.py,tim)
+                            refresh()
                             P.r4_battle.write()
                     elif P.r4_fish.talk():
                         if P.r4_fish.trainer:
                             move = False
                         else:
-                            route_4_b(P,wx,wy)
-                            route_4_p(P,P.px,P.py,False)
-                            route_4_f(P,P.px,P.py,tim)
+                            refresh()
                             P.r4_fish.write()
                     elif gran_talk > 50 and P.r4_expf and P.r4_expf.talk():
                         if P.r4_expf.trainer:
                             move = False
                         else:
-                            route_4_b(P,wx,wy)
-                            route_4_p(P,P.px,P.py,False)
-                            route_4_f(P,P.px,P.py,tim)
+                            refresh()
                             P.r4_expf.write()
                     elif next_to(P,500,-300) and P.prog[6][46] == 0:
                         txt(P,P.save_data.name + " found a Rare Candy!")
@@ -11040,9 +13673,6 @@ def route_4(P,enter = False,wx = 0,wy = 0) -> None:
         tick_buffer(P)
         update_screen(P)
         P.clock.tick(P.ani_spd)
-        if pause:
-            P.clock.tick(P.ani_spd/30)
-            pause = False
     fade_out(P,P.song)
 
 def pia_gymb_b(P,cam_mod = 0):
@@ -11082,7 +13712,6 @@ def pia_gymb_p(P,temppx,temppy,move,cam_mod = 0):
             player_move(P,rects,mod = cam_mod)
     else:
         blit_player(P,mod = cam_mod)
-
 
 def pia_gymb_f(P,temppx,temppy,tim,cam_mod = 0):
     show_location(P, P.loc_txt, tim)
@@ -11196,7 +13825,6 @@ def pia_gymb(P) -> None:
         P.clock.tick(P.ani_spd)
     fade_out(P)
 
-
 def pia_gym_b(P,num):
     P.surface.fill((0,0,0))
     P.surface.blit(P.piag_back, (P.px, P.py))
@@ -11238,6 +13866,10 @@ def pia_gym_f(P,temppx,temppy,tim):
     show_location(P, P.loc_txt, tim)
 
 def pia_gym(P,num) -> None:
+    def refresh():
+        pia_gym_b(P,num)
+        pia_gym_p(P,P.px,P.py,False,num)
+        pia_gym_f(P,P.px,P.py,tim)
     if P.song != "music/gym.wav":
         P.song = "music/gym.wav"
         pygame.mixer.music.load(P.song)
@@ -11275,9 +13907,7 @@ def pia_gym(P,num) -> None:
             P.piag_npc1 = npc.NPC(P,'Preschoolerg','Harper',[200,350],[['l',40]],["Cheryl? Who's that?","",""])
     move = True
     tim = 0
-    pia_gym_b(P,num)
-    pia_gym_p(P,P.px,P.py,False,num)
-    pia_gym_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -11315,9 +13945,7 @@ def pia_gym(P,num) -> None:
                         if P.piag_npc1.trainer:
                             move = False
                         else:
-                            pia_gym_b(P,num)
-                            pia_gym_p(P,P.px,P.py,False,num)
-                            pia_gym_f(P,P.px,P.py,tim)
+                            refresh()
                             P.piag_npc1.write()
                     elif ((P.py == 125 and P.px in [75,125] and (num != 3 or P.prog[0] < 82)) or (P.py == 125 and P.px == 175 and num == 3 and P.prog[0] >= 82)) and face_u(P):
                         if num == 1:
@@ -11338,6 +13966,7 @@ def pia_gym(P,num) -> None:
                                 txt(P,"Slowpoke can evolve when a","Shellder attaches to it by","biting down.")
                                 txt(P,"Slowpoke evolve at level 37,","or if given a King's Rock, but","only with Shellder present.")
                                 txt(P,"This process will render","Shellder unusable as a Pokemon","for battling.")
+                                add_journal(P,16)
                         elif num == 4:
                             new_txt(P)
                             write(P,"A message is written on the","bookshelf in permanent ink.","Read?")
@@ -11363,9 +13992,7 @@ def pia_gym(P,num) -> None:
                                 P.piag_npc1 = npc.NPC(P,'Gentleman','Anderson',[250,150],[['u',40]],["I wouldn't know where you","could find Cheryl. Or maybe I","might?"],["Well that door right there is","looking quite suspicious if","you ask me."],True,[0,0,0,0],P.piag_team3,27)
                             fade_out(P)
                             P.clock.tick(2)
-                            pia_gym_b(P,num)
-                            pia_gym_p(P,P.px,P.py,False,num)
-                            pia_gym_f(P,P.px,P.py,tim)
+                            refresh()
                             fade_in(P)
                     elif next_to(P,0,100) and P.prog[6][41] == 0 and num == 5:
                         txt(P,P.save_data.name + " found a Luxury","Ball!")
@@ -11486,6 +14113,10 @@ def pia_gym_main_f(P,temppx,temppy,tim):
     show_location(P, P.loc_txt, tim)
 
 def pia_gym_main(P) -> None:
+    def refresh():
+        pia_gym_main_b(P)
+        pia_gym_main_p(P,P.px,P.py,False)
+        pia_gym_main_f(P,P.px,P.py,tim)
     if P.song != "music/gym.wav":
         P.song = "music/gym.wav"
         pygame.mixer.music.load(P.song)
@@ -11498,9 +14129,7 @@ def pia_gym_main(P) -> None:
     move = True
     tim = 0
     set_location(P)
-    pia_gym_main_b(P)
-    pia_gym_main_p(P,P.px,P.py,False)
-    pia_gym_main_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     fade = None
     end = True
@@ -11524,9 +14153,7 @@ def pia_gym_main(P) -> None:
                     temp_buff = P.buffer_talk
                     P.buffer_talk = None
                     if P.pia_gym_guide.talk():
-                        pia_gym_main_b(P)
-                        pia_gym_main_p(P,P.px,P.py,False)
-                        pia_gym_main_f(P,P.px,P.py,tim)
+                        refresh()
                         P.pia_gym_guide.write()
                     elif next_to(P,150,650):
                         txt(P,"It's a status in the shape of","Latias' head.")
@@ -11616,7 +14243,6 @@ def mirror_cave_b(P):
         P.surface.blit(P.mc_gem,(P.px+1900,P.py+50))
     if P.prog[15][8] != 2:
         P.surface.blit(P.mc_steel,(P.px+2300,P.py+990))
-    
 
 def mirror_cave_p(P,temppx,temppy,move):
     P.mc_hex.move()
@@ -11735,6 +14361,10 @@ def mirror_cave_f(P,temppx,temppy,tim):
     show_location(P, P.loc_txt, tim)
 
 def mirror_cave(P) -> None:
+    def refresh():
+        mirror_cave_b(P)
+        mirror_cave_p(P,P.px,P.py,False)
+        mirror_cave_f(P,P.px,P.py,tim)
     if P.song != "music/mirror_cave.wav":
         P.song = "music/mirror_cave.wav"
         pygame.mixer.music.load(P.song)
@@ -11769,9 +14399,7 @@ def mirror_cave(P) -> None:
         mod = 3
     tim = 0
     set_location(P)
-    mirror_cave_b(P)
-    mirror_cave_p(P,P.px,P.py,False)
-    mirror_cave_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -11785,7 +14413,7 @@ def mirror_cave(P) -> None:
         temppx = P.px
         temppy = P.py
         P.ledge = 0
-        if (P.px <= -625 and P.px >= -674):
+        if (P.px <= -625 and P.px >= -675):
             if P.py > 25 and P.py < 50:
                 P.ledge = (25-P.py)/2
             elif P.py >= 50 and P.py < 75:
@@ -11810,9 +14438,7 @@ def mirror_cave(P) -> None:
                 txt(P,"You hear something up ahead.")
                 txt(P,"You took out your lantern.")
                 P.mc_dark = P.lantern_light
-                mirror_cave_b(P)
-                mirror_cave_p(P,P.px,P.py,False)
-                mirror_cave_f(P,P.px,P.py,tim)
+                refresh()
             if P.prog[15][0] == 0:
                 txt(P,"There's a Steelix sleeping at","the end of this tunnel.")
                 print_mega_area(P)
@@ -11835,12 +14461,10 @@ def mirror_cave(P) -> None:
             pygame.mixer.music.play(0)
             P.legendary_battle = True
             P.temp_party = P.party.copy()
-            pos = 0
-            while len(P.party) > 1:
-                if P.party[pos].code_nos() != 'Steelix' or P.party[pos].status == 'Faint' or pos == 1:
-                    P.party.remove(P.party[pos])
-                else:
-                    pos += 1
+            for p in P.party:
+                if p.code_nos() == 'Steelix' and p.status != 'Faint':
+                    P.party = [p]
+                    break
             steel = poke.Poke('Steelix',[43,0,787,'Earthquake',-1,None,None,None,None,None,None,None,'Slp',0,"Poke Ball",0,'Sturdy'])
             steel.slptim = 3
             battle(P,[steel],no_pc = True)
@@ -11855,9 +14479,7 @@ def mirror_cave(P) -> None:
                 fade_out(P)
                 P.p = P.r1
                 P.px = -2325
-                mirror_cave_b(P)
-                mirror_cave_p(P,P.px,P.py,False)
-                mirror_cave_f(P,P.px,P.py,tim)
+                refresh()
                 fade_in(P)
                 move = True
             else:
@@ -11865,9 +14487,7 @@ def mirror_cave(P) -> None:
                 txt(P,"You got the mysterious stone","and the Steelix disappeared","into the darkness.")
                 add_item(P,'Steelixite',1)
                 fade_out(P)
-                mirror_cave_b(P)
-                mirror_cave_p(P,P.px,P.py,False)
-                mirror_cave_f(P,P.px,P.py,tim)
+                refresh()
                 fade_in(P)
                 move = True
             P.party = P.temp_party.copy()
@@ -11909,12 +14529,10 @@ def mirror_cave(P) -> None:
                             P.tourney_battle = True
                             P.legendary_battle = True
                             P.temp_party = P.party.copy()
-                            pos = 0
-                            while len(P.party) > 1:
-                                if P.party[pos].code_nos() != 'Sableye' or P.party[pos].status == 'Faint' or pos == 1:
-                                    P.party.remove(P.party[pos])
-                                else:
-                                    pos += 1
+                            for p in P.party:
+                                if p.code_nos() == 'Sableye' and p.status != 'Faint':
+                                    P.party = [p]
+                                    break
                             battle(P,[poke.Poke('Sableye',[32,1,787,'Confuse Ray',-1,'Shadow Claw',-1,'Punishment',-1,'Shadow Sneak',-1,None,None,0,"Poke Ball",0,'Keen Eye'])],no_pc = True)
                             play_music(P,"music/mirror_cave.wav")
                             P.surface.blit(te,(0,0))
@@ -11940,17 +14558,13 @@ def mirror_cave(P) -> None:
                         if P.mc_hiker.trainer:
                             move = False
                         else:
-                            mirror_cave_b(P)
-                            mirror_cave_p(P,P.px,P.py,False)
-                            mirror_cave_f(P,P.px,P.py,tim)
+                            refresh()
                             P.mc_hiker.write()
                     elif P.mc_hex.talk():
                         if P.mc_hex.trainer:
                             move = False
                         else:
-                            mirror_cave_b(P)
-                            mirror_cave_p(P,P.px,P.py,False)
-                            mirror_cave_f(P,P.px,P.py,tim)
+                            refresh()
                             P.mc_hex.write()
                     elif next_to(P,700,1200) and P.prog[6][36] == 0:
                         txt(P,P.save_data.name + " found a TM78","Bulldoze!")
@@ -12108,12 +14722,16 @@ def pianura_bakery_f(P,temppx,temppy):
     show_location(P, None, 0)
 
 def pianura_bakery(P) -> None:
+    def refresh():
+        pianura_bakery_b(P)
+        pianura_bakery_p(P,P.px,P.py,False)
+        pianura_bakery_f(P,P.px,P.py)
     set_mixer_volume(P,P.vol)
     if P.song != "music/pianura.wav":
         P.song = "music/pianura.wav"
         pygame.mixer.music.load(P.song)
         pygame.mixer.music.play(-1)
-    box = load("p/3_box.png")
+    box = load("p/ui/3_box.png")
     #23
     if P.prog[0] >= 87 and get_time() >= 19 and get_time() < 23:
         x = 0
@@ -12130,9 +14748,7 @@ def pianura_bakery(P) -> None:
     P.pia_bake_mom = npc.NPC(P,'Healer','Dude',[250,200],[['u',20]],["It's so delicious, but I can","feel myself getting fatter by","the second!"])
     move = True
     tim = 0
-    pianura_bakery_b(P)
-    pianura_bakery_p(P,P.px,P.py,False)
-    pianura_bakery_f(P,P.px,P.py)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -12204,19 +14820,13 @@ def pianura_bakery(P) -> None:
                         P.surface.blit(mt,(0,0))
                         txt(P,"Please come again!")
                     elif P.pia_bake_kid.talk():
-                        pianura_bakery_b(P)
-                        pianura_bakery_p(P,P.px,P.py,False)
-                        pianura_bakery_f(P,P.px,P.py)
+                        refresh()
                         P.pia_bake_kid.write()
                     elif P.pia_bake_mom.talk():
-                        pianura_bakery_b(P)
-                        pianura_bakery_p(P,P.px,P.py,False)
-                        pianura_bakery_f(P,P.px,P.py)
+                        refresh()
                         P.pia_bake_mom.write()
                     elif P.pia_bake_cheryl and P.pia_bake_cheryl.talk():
-                        pianura_bakery_b(P)
-                        pianura_bakery_p(P,P.px,P.py,False)
-                        pianura_bakery_f(P,P.px,P.py)
+                        refresh()
                         P.pia_bake_cheryl.write()
                     elif next_to(P,350,350):
                         txt(P,"The table is covered with all","sorts of tasty treats!")
@@ -12294,6 +14904,10 @@ def pianura_nursery_f(P,temppx,temppy):
     show_location(P, None, 0)
 
 def pianura_nursery(P) -> None:
+    def refresh():
+        pianura_nursery_b(P)
+        pianura_nursery_p(P,P.px,P.py,False)
+        pianura_nursery_f(P,P.px,P.py)
     set_mixer_volume(P,P.vol)
     if P.song != "music/pianura.wav":
         P.song = "music/pianura.wav"
@@ -12312,9 +14926,7 @@ def pianura_nursery(P) -> None:
     P.pia_nurse_exp = pygame.transform.scale(load("p/spr/Expertf_d1.png"),(54,64))
     move = True
     tim = 0
-    pianura_nursery_b(P)
-    pianura_nursery_p(P,P.px,P.py,False)
-    pianura_nursery_f(P,P.px,P.py)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -12337,12 +14949,10 @@ def pianura_nursery(P) -> None:
                     temp_buff = P.buffer_talk
                     P.buffer_talk = None
                     if P.pia_nurse_cheryl and P.pia_nurse_cheryl.talk():
-                        pianura_nursery_b(P)
-                        pianura_nursery_p(P,P.px,P.py,False)
-                        pianura_nursery_f(P,P.px,P.py)
+                        refresh()
                         P.pia_nurse_cheryl.write()
                     elif P.px == 75 and P.py == 75 and face_u(P):
-                        if P.prog[14] == None:
+                        if P.prog[14][0] == None:
                             temp = P.surface.copy()
                             txt(P,"Would you like to leave one of","your Pokemon to stay here at","the nursery?")
                             txt(P,"If you leave it here with us","for a day, it's friendship","will increase.")
@@ -12364,14 +14974,14 @@ def pianura_nursery(P) -> None:
                                         hh = 'her'
                                     txt(P,"Okay, we'll take good care of",ans.name+"! Remember to come","back tomorrow to pick "+hh+" up!")
                                     ans.heal()
-                                    P.prog[14] = [[ans.code,ans.to_list()],datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S"),random.random()]
+                                    P.prog[14][0] = [ans.code,ans.to_list(),datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S"),random.random()]
                                     P.party.remove(ans)
                                     P.save_data.money -= 800
                                 else:
                                     txt(P,"Feel free to come back if","you change your mind!")
                             else:
                                 txt(P,"Feel free to come back if","you change your mind!")
-                        elif date_diff(P.prog[14][1]) < 82800:
+                        elif date_diff(P.prog[14][0][2]) < 82800:
                             if P.prog[14][0][1][1] == 0:
                                 hh = ['him','his']
                             else:
@@ -12382,91 +14992,87 @@ def pianura_nursery(P) -> None:
                             if choice(P):
                                 txt(P,"Okay, here you go!")
                                 get_poke(P,poke.Poke(P.prog[14][0][0],P.prog[14][0][1]),False)
-                                P.prog[14] = None
+                                P.prog[14][0] = None
                             else:
                                 txt(P,"Okay, don't forget to pick",hh[0]+" up!")
                         else:
-                            r = P.prog[14][2]
+                            r = P.prog[14][0][3]
                             if P.prog[14][0][1][1] == 0:
                                 p_info = [P.prog[14][0][1][18],'he','He']
                             else:
                                 p_info = [P.prog[14][0][1][18],'she','She']
                             if r < 0.15:
                                 txt(P,p_info[0]+" seemed like "+p_info[1],"had an amazing time! "+p_info[2]+" got a","lot friendlier!")
-                                amount = 150
+                                amount = 240
                             elif r < 0.30:
                                 txt(P,p_info[0]+" missed you. "+p_info[2]+" is","a little friendlier, but we","could have done better!")
-                                amount = 40
+                                amount = 80
                             else:
                                 txt(P,p_info[0]+" had a good time!",p_info[2]+" should be quite a bit","friendlier now!")
-                                amount = 80
+                                amount = 160
                             txt(P,"Here you go. Thanks for using","our service!")
                             return_poke = poke.Poke(P.prog[14][0][0],P.prog[14][0][1])
                             return_poke.gain_friend(amount)
                             get_poke(P,return_poke,False)
-                            P.prog[14] = None
+                            P.prog[14][0] = None
                     elif P.px == 175 and P.py == 75 and face_u(P):
                         t = P.surface.copy()
                         if P.prog[8][1][0] == -1 and P.prog[0] < 86:
                             txt(P,"Are you interested in helping","us care for the Pokemon we","have kept here?")
                             txt(P,"You don't look ready to help","out yet, but if that changes","we'll gladly accept your help!")
                         elif P.prog[8][1][2] != None:
-                            new_txt(P)
-                            write(P,"Are you done nursing",P.prog[8][1][2][1][18]+"?")
-                            if choice(P):
-                                fade_out(P)
-                                ans = trade_poke(P,None,True,return_nurse = True)
-                                P.surface.blit(t,(0,0))
-                                fade_in(P)
-                                if ans != None:
-                                    exp = 4*(200 - P.prog[8][1][2][1][15])
-                                    money = int(800+(exp*(0.9+(0.1*P.prog[8][1][0]))))
-                                    lvled = gain_skill(P,1,int((900+exp)/80))
-                                    txt(P,"Good work! You can have $"+str(money),"for your trouble!")
-                                    P.save_data.money += money
-                                    P.party.remove(ans)
-                                    P.prog[8][1][2] = None
-                                    if lvled:
-                                        if P.prog[8][1][0] == 10 and P.prog[8][1][1] != 100:
-                                            txt(P,"We've got a Pokemon here for","you as thanks for all your","help!")
-                                            baby_list = [poke.Poke('Smoochum',[1,random.randint(0,1),787,"Pound",-1,None,None,None,None,None,None,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Riolu',[1,random.randint(0,1),787,"Foresight",-1,"Quick Attack",-1,"Endure",-1,None,None,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Magby',[1,random.randint(0,1),787,"Smog",-1,"Leer",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Elekid',[1,random.randint(0,1),787,"Quick Attack",-1,"Leer",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Pichu',[1,random.randint(0,1),787,"Thunder Shock",-1,"Charm",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Togepi',[1,random.randint(0,1),787,"Growl",-1,"Charm",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Tyrogue',[1,random.randint(0,1),787,"Tackle",-1,"Bulk Up",-1,"Fake Out",-1,"Foresight",-1,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Budew',[1,random.randint(0,1),787,"Absorb",-1,None,None,None,None,None,None,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Mantyke',[1,random.randint(0,1),787,"Tackle",-1,"Bubble",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Happiny',[1,random.randint(0,1),787,"Pound",-1,"Charm",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Cleffa',[1,random.randint(0,1),787,"Pound",-1,"Charm",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Munchlax',[1,random.randint(0,1),787,"Tackle",-1,"Last Resort",-1,"Lick",-1,"Metronome",-1,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Chingling',[1,random.randint(0,1),787,"Wrap",-1,None,None,None,None,None,None,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Azurill',[1,random.randint(0,1),787,"Splash",-1,"Water Gun",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Wynaut',[1,random.randint(0,1),787,"Splash",-1,"Charm",-1,"Encore",-1,None,None,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Bonsly',[1,random.randint(0,1),787,"Fake Tears",-1,"Copycat",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Mime Jr',[1,random.randint(0,1),787,"Barrier",-1,"Confusion",-1,"Pound",-1,"Tickle",-1,None,None,0,"Nest Ball",0,'Ability']),poke.Poke('Igglybuff',[1,random.randint(0,1),787,"Sing",-1,"Charm",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability'])]
-                                            gift = random.choice(baby_list)
-                                        else:
-                                            txt(P,"Your nursing skill leveled up!")
-                                            txt(P,"The bonus your nursing Pokemon","receive will be a little","higher than before!")
-                                            if P.prog[8][1][0] == 2:
-                                                gift = poke.Poke('Igglybuff',[1,random.randint(0,1),787,"Sing",-1,"Charm",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability'])
-                                            elif P.prog[8][1][0] == 3:
-                                                gift = poke.Poke('Mime Jr',[1,random.randint(0,1),787,"Barrier",-1,"Confusion",-1,"Pound",-1,"Tickle",-1,None,None,0,"Nest Ball",0,'Ability'])
-                                            elif P.prog[8][1][0] == 4:
-                                                gift = poke.Poke('Bonsly',[1,random.randint(0,1),787,"Fake Tears",-1,"Copycat",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability'])
-                                            elif P.prog[8][1][0] == 5:
-                                                gift = poke.Poke('Wynaut',[1,random.randint(0,1),787,"Splash",-1,"Charm",-1,"Encore",-1,None,None,None,None,0,"Nest Ball",0,'Ability'])
-                                            elif P.prog[8][1][0] == 6:
-                                                gift = poke.Poke('Azurill',[1,random.randint(0,1),787,"Splash",-1,"Water Gun",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability'])
-                                            elif P.prog[8][1][0] == 7:
-                                                gift = poke.Poke('Chingling',[1,random.randint(0,1),787,"Wrap",-1,None,None,None,None,None,None,None,None,0,"Nest Ball",0,'Ability'])
-                                            elif P.prog[8][1][0] == 8:
-                                                gift = poke.Poke('Munchlax',[1,random.randint(0,1),787,"Tackle",-1,"Last Resort",-1,"Lick",-1,"Metronome",-1,None,None,0,"Nest Ball",0,'Ability'])
-                                            elif P.prog[8][1][0] == 9:
-                                                gift = poke.Poke('Cleffa',[1,random.randint(0,1),787,"Pound",-1,"Charm",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability'])
+                            if P.prog[8][1][2][1][19] in [1,4]:
+                                new_txt(P)
+                                write(P,"Are you done nursing",P.prog[8][1][2][1][18]+"?")
+                                if choice(P):
+                                    fade_out(P)
+                                    ans = trade_poke(P,None,True,return_nurse = True)
+                                    P.surface.blit(t,(0,0))
+                                    fade_in(P)
+                                    if ans != None:
+                                        mod = (ans.friend - P.prog[8][1][2][1][15])/(400 - P.prog[8][1][2][1][15])
+                                        P.party.remove(ans)
+                                        if mod <= 0.05:
+                                            mod = 0
+                                        elif mod <= 0.25:
+                                            mod = 0.25
+                                        if mod != 0:
+                                            exp = 4*(200 - P.prog[8][1][2][1][15])
+                                            money = int(mod*(800+exp)*(0.9+(0.1*P.prog[8][1][0])))
+                                            lvled = gain_skill(P,1,int((900+exp)/80*mod))
+                                            if P.prog[8][1][2][1][19] == 4:
+                                                money = int(money/5)
+                                            if mod == 0.25:
+                                                txt(P,"Here's "+str(money)+" for your trouble!")
+                                                txt(P,"You should take more time to increase their friendship to improve your earnings.")
                                             else:
-                                                gift = poke.Poke('Happiny',[1,random.randint(0,1),787,"Pound",-1,"Charm",-1,None,None,None,None,None,None,0,"Nest Ball",0,'Ability'])
-                                            txt(P,"Take this gift to commemorate","your improvement!")
-                                        txt(P,"You received "+gift.name+"!")
-                                        get_poke(P,gift,False)
+                                                txt(P,"Good work! You can have $"+str(money),"for your trouble!")
+                                            P.save_data.money += money
+                                            if lvled:
+                                                get_baby_poke(P)
+                                        else:
+                                            txt(P,P.prog[8][1][2][1][18]+"'s friendship hasn't increased much since you picked them up.")
+                                            txt(P,"I'm afraid we can't give you any rewards this time.")
+                                            txt(P,"Be sure to spend more time with them in the future!")
+                                        P.prog[8][1][2] = None
+                                    else:
+                                        txt(P,"Well come back when you've increased its friendship!")
                                 else:
-                                    txt(P,"Well come back when you've","maxed out its friendship!")
+                                    txt(P,"Well come back when you've increased its friendship!")
+                            elif P.prog[8][1][2][1][19] in [2,5]:
+                                txt(P,"You're already taking care of a Pokemon for the Silfide Nursery.")
+                                txt(P,"Come back once you've completed that job for them.")
                             else:
-                                txt(P,"Well come back when you've","maxed out its friendship!")
+                                txt(P,"You're already taking care of a Pokemon for the ??? Nursery.")
+                                txt(P,"Come back once you've completed that job for them.")
                         elif len(P.party) == 6:
                             txt(P,"If you want to take care of a","Pokemon, clear up a spot in","your team and come back!")
                         else:
                             poke_list = ['Skitty','Poochyena','Oddish','Pidgey','Whismur','Lotad','Joltik','Machop','Aron','Whismur','Electrike','Psyduck','Hoothoot','Karrablast','Shelmet','Ponyta','Seedot']
-                            name_listm = ['Daniel','The Boss','Eric','Timmy','Alex','Toby','Jerry','Justin','Ash','Nathan','Latios','Alvin','Pun Pun','Fish','Kevin','David','Josh','Burger']
+                            name_listm = ['Daniel','The Boss','Eric','Timmy','Alex','Toby','Jerry','Justin','Ash','Nathan','Latios','Alvin','Ethan','Simon','Kevin','David','Josh','Joey','Wesley','Jenjo','Longinus','Lance','Issac']
                             if P.save_data.gen == 0 and len(P.save_data.name) <= 9:
                                 name_listm.append(P.save_data.name)
-                            name_listf = ['Catherine','Sarah','Glitter','Venice','Latias','Jenny','Chloe','Violet','Rose','Baby','Sky','Jello','Sherbet']
+                            name_listf = ['Catherine','Sarah','Glitter','Venice','Latias','Jenny','Chloe','Violet','Rose','Baby','Sky','Jello','Sherbet','Rachel','Emily','Ella']
                             if P.save_data.gen == 1 and len(P.save_data.name) <= 9:
                                 name_listf.append(P.save_data.name)
                             move_list = ['Confide','Frustration','Return','Facade','Swagger','Round','Rest','Protect','Attract','Captivate','Double Team']
@@ -12480,23 +15086,41 @@ def pianura_nursery(P) -> None:
                             else:
                                 poke_name = name_listf[random.randint(0,len(name_listf)-1)]
                             r = random.randint(0,len(poke_list)-1)
-                            txt(P,"Are you interested in helping","us care for the Pokemon we","have kept here?")
-                            txt(P,"We'll give you a Pokemon, and","you can return it once you've","gotten it to max frienship.")
-                            new_txt(P)
-                            write(P,"We have a "+poke_list[r],"here for you to care for.","Would you like to take it?")
-                            if choice(P):
+                            nd_mod = 0
+                            take = False
+                            if not new_day(P.prog[8][1][3]):
+                                txt(P,"It looks like we don't have many Pokemon left to be taken care of today.")
+                                txt(P,"If you still want to practice, you can take another one, but you'll receive less rewards.")
+                                new_txt(P)
+                                write(P,"Do you still want to take this "+poke_list[r]+"?")
+                                nd_mod = 3
+                                if choice(P):
+                                    take = True
+                            else:
+                                txt(P,"Are you interested in helping","us care for the Pokemon we","have kept here?")
+                                txt(P,"We'll give you a Pokemon, and","you can return it once you've","raised its friendship.")
+                                new_txt(P)
+                                write(P,"We have a "+poke_list[r],"here for you to care for.","Would you like to take it?")
+                                if choice(P):
+                                    take = True
+                            if take:
                                 txt(P,"Here you go! The Pokeball it","has will boost the friendship","it gains from walking!")
                                 txt(P,"You can identify the Pokemon","you're nursing by the symbol","next to its name.")
                                 txt(P,"Remember that they won't learn","any moves or evolve, and you","can't change their name!")
                                 txt(P,"Take good care of "+poke_name+"!")
-                                given = poke.Poke(poke_list[r],[random.randint(10,20),gen,787,moves[0],-1,moves[1],-1,moves[2],-1,moves[3],-1,None,None,0,"Nursery Ball",random.randint(50,200),'Random Ability',True,poke_name,True])
+                                given = poke.Poke(poke_list[r],[random.randint(10,20),gen,787,moves[0],-1,moves[1],-1,moves[2],-1,moves[3],-1,None,None,0,"Nursery Ball",random.randint(50,200),'Random Ability',True,poke_name,1+nd_mod])
                                 get_poke(P,given,False)
                                 if P.prog[8][1][0] == -1:
                                     P.prog[8][1][0] = 1
                                     add_memo(P,"Nursing Pokemon",1)
                                 P.prog[8][1][2] = [given.code,given.to_list()]
+                                if nd_mod == 0:
+                                    P.prog[8][1][3] = datetime.date.today().strftime("%m/%d/%Y")
                             else:
-                                txt(P,"Well come back when you're","ready!")
+                                if nd_mod == 0:
+                                    txt(P,"Well come back when you're","ready!")
+                                else:
+                                    txt(P,"Feel free to come back tomorrow!")
                     elif next_to(P,50,100) or next_to(P,450,100):
                         txt(P,"These are some pretty roses!")
                     elif P.px == -25 and P.py == 75 and face_u(P):
@@ -12712,6 +15336,10 @@ def pianura_f(P,temppx,temppy,listx,listy,tim):
     show_location(P, P.loc_txt, tim)
 
 def pianura(P,enter = False,x_pos = -200) -> None:
+    def refresh():
+        pianura_b(P,wx,wy,listx,listy,pcx,pcy,gy)
+        pianura_p(P,P.px,P.py,False,gond,gy)
+        pianura_f(P,P.px,P.py,listx,listy,tim)
     #sci_tim = None,sci_curr = None
     if P.song != "music/pianura.wav":
         P.song = "music/pianura.wav"
@@ -12754,9 +15382,7 @@ def pianura(P,enter = False,x_pos = -200) -> None:
     listx = [338,338,638,638,91,1042,1042,1042,1492,1867,1192,1192,1738,1738,545,1038,1192,1650,2085]
     listy = [550,750,750,1000,1000,850,1075,1300,1300,1300,700,300,700,300,-402,-402,-402,-402,-402]
     if enter == False:
-        pianura_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-        pianura_p(P,P.px,P.py,False,gond,gy)
-        pianura_f(P,P.px,P.py,listx,listy,tim)
+        refresh()
         fade_in(P)
     end = True
     m = 0
@@ -12765,9 +15391,7 @@ def pianura(P,enter = False,x_pos = -200) -> None:
         if P.prog[0] == 65 and P.py == 425:
             move = False
             P.pia_rival = npc.NPC(P,'Rival',P.save_data.rival,[1100,-250],[['d',20]],["","",""])
-            pianura_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-            pianura_p(P,P.px,P.py,False,gond,gy)
-            pianura_f(P,P.px,P.py, listx, listy, tim)
+            refresh()
             txt(P,"Hey "+P.save_data.name+"!","You came at just the right", "time!")
             P.pia_cheryl = npc.NPC(P,'Cheryl','Cherry',[1100,-350],[['mr',20],['md',40],['d',20]],["","",""])
             P.prog[0] += 1
@@ -12824,59 +15448,37 @@ def pianura(P,enter = False,x_pos = -200) -> None:
                             fade_out(P)
                             P.p = P.d1
                     elif P.pia_mom.talk():
-                        pianura_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-                        pianura_p(P,P.px,P.py,False,gond,gy)
-                        pianura_f(P,P.px,P.py, listx, listy, tim)
+                        refresh()
                         P.pia_mom.write()
                     elif P.pia_kid.talk():
-                        pianura_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-                        pianura_p(P,P.px,P.py,False,gond,gy)
-                        pianura_f(P,P.px,P.py, listx, listy, tim)
+                        refresh()
                         P.pia_kid.write()
                     elif P.pia_hiker.talk():
-                        pianura_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-                        pianura_p(P,P.px,P.py,False,gond,gy)
-                        pianura_f(P,P.px,P.py, listx, listy, tim)
+                        refresh()
                         P.pia_hiker.write()
                     elif P.pia_ace.talk():
-                        pianura_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-                        pianura_p(P,P.px,P.py,False,gond,gy)
-                        pianura_f(P,P.px,P.py, listx, listy, tim)
+                        refresh()
                         P.pia_ace.write()
                     elif P.pia_lass.talk():
-                        pianura_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-                        pianura_p(P,P.px,P.py,False,gond,gy)
-                        pianura_f(P,P.px,P.py, listx, listy, tim)
+                        refresh()
                         P.pia_lass.write()
                     elif P.pia_beauty.talk():
-                        pianura_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-                        pianura_p(P,P.px,P.py,False,gond,gy)
-                        pianura_f(P,P.px,P.py, listx, listy, tim)
+                        refresh()
                         P.pia_beauty.write()
                     elif P.pia_rich.talk():
-                        pianura_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-                        pianura_p(P,P.px,P.py,False,gond,gy)
-                        pianura_f(P,P.px,P.py, listx, listy, tim)
+                        refresh()
                         P.pia_rich.write()
                     elif P.pia_bea.talk():
-                        pianura_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-                        pianura_p(P,P.px,P.py,False,gond,gy)
-                        pianura_f(P,P.px,P.py, listx, listy, tim)
+                        refresh()
                         P.pia_bea.write()
                     elif P.pia_fish1 and P.pia_fish1.talk():
-                        pianura_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-                        pianura_p(P,P.px,P.py,False,gond,gy)
-                        pianura_f(P,P.px,P.py, listx, listy, tim)
+                        refresh()
                         P.pia_fish1.write()
                     elif P.pia_fish2 and P.pia_fish2.talk():
-                        pianura_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-                        pianura_p(P,P.px,P.py,False,gond,gy)
-                        pianura_f(P,P.px,P.py, listx, listy, tim)
+                        refresh()
                         P.pia_fish2.write()
                     elif P.pia_cheryl and P.pia_cheryl.talk():
-                        pianura_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-                        pianura_p(P,P.px,P.py,False,gond,gy)
-                        pianura_f(P,P.px,P.py, listx, listy, tim)
+                        refresh()
                         P.pia_cheryl.write()
                     else:
                         P.buffer_talk = temp_buff
@@ -13206,6 +15808,10 @@ def scarab_r_f(P,temppx,temppy,tim,cam_mod = 0):
     show_location(P, P.loc_txt, tim)
 
 def scarab_r(P) -> None:
+    def refresh():
+        scarab_r_b(P)
+        scarab_r_p(P,P.px,P.py,False)
+        scarab_r_f(P,P.px,P.py,tim)
     if P.song != "music/scarab_woods.wav":
         P.song = "music/scarab_woods.wav"
         pygame.mixer.music.load(P.song)
@@ -13254,9 +15860,7 @@ def scarab_r(P) -> None:
     tim = 0
     cam_mod = 0
     set_location(P)
-    scarab_r_b(P)
-    scarab_r_p(P,P.px,P.py,False)
-    scarab_r_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -13281,9 +15885,7 @@ def scarab_r(P) -> None:
             else:
                 P.sr_rival = npc.NPC(P,'Rival',P.save_data.rival,[2050,500],[['u',50]],["","",""])
                 P.p = P.d1
-                scarab_r_b(P)
-                scarab_r_p(P,P.px,P.py,False)
-                scarab_r_f(P,P.px,P.py,tim)
+                refresh()
                 txt(P,"Shoot! Looks like they caught", "us!")
                 P.p = P.r1
                 P.sr_rival = npc.NPC(P,'Rival',P.save_data.rival,[2050,500],[['md',20],['mr',120],['r',50]],["","",""])
@@ -13354,9 +15956,7 @@ def scarab_r(P) -> None:
         if P.prog[0] == 54 and P.py == -125 and P.px <= -1525:
             move = False
             P.sr_rival = npc.NPC(P,'Rival',P.save_data.rival,[2050,500],[['u',50]],["","",""])
-            scarab_r_b(P)
-            scarab_r_p(P,P.px,P.py,False)
-            scarab_r_f(P,P.px,P.py,tim)
+            refresh()
             txt(P,"Hey, you can come a little","closer. But be really quiet.")
             P.prog[0] += 1
         scarab_r_b(P,cam_mod)
@@ -13394,12 +15994,10 @@ def scarab_r(P) -> None:
             P.legendary_battle = True
             P.tourney_battle = True
             P.temp_party = P.party.copy()
-            pos = 0
-            while len(P.party) > 1:
-                if P.party[pos].code_nos() != 'Pinsir' or P.party[pos].status == 'Faint' or pos == 1:
-                    P.party.remove(P.party[pos])
-                else:
-                    pos += 1
+            for p in P.party:
+                if p.code_nos() == 'Pinsir' and p.status != 'Faint':
+                    P.party = [p]
+                    break
             battle(P,[poke.Poke('Pinsir',[35,0,787,'Focus Energy',-1,'Harden',-1,'Bind',-1,'X-Scissor',-1,None,None,0,"Poke Ball",0,'Hyper Cutter'])],no_pc = True)
             play_music(P,"music/scarab_woods.wav")
             P.surface.blit(te,(0,0))
@@ -13415,9 +16013,7 @@ def scarab_r(P) -> None:
                 P.py = 825
                 P.sr_pin1 = npc.NPC(P,'Pinsir','Grunt',[1750,-550],[['l',20]],["","",""])
                 P.sr_pin2 = npc.NPC(P,'Pinsir','Grunt',[1700,-550],[['r',20]],["","",""])
-                scarab_r_b(P)
-                scarab_r_p(P,P.px,P.py,False)
-                scarab_r_f(P,P.px,P.py,tim)
+                refresh()
                 fade_in(P)
                 move = True
             else:
@@ -13427,9 +16023,7 @@ def scarab_r(P) -> None:
                 fade_out(P)
                 P.sr_pin1 = None
                 P.sr_pin2 = None
-                scarab_r_b(P)
-                scarab_r_p(P,P.px,P.py,False)
-                scarab_r_f(P,P.px,P.py,tim)
+                refresh()
                 fade_in(P)
                 move = True
             P.party = P.temp_party.copy()
@@ -13456,17 +16050,13 @@ def scarab_r(P) -> None:
                         if P.sr_beauty.trainer:
                             move = False
                         else:
-                            scarab_r_b(P)
-                            scarab_r_p(P,P.px,P.py,False)
-                            scarab_r_f(P,P.px,P.py,tim)
+                            refresh()
                             P.sr_beauty.write()
                     elif P.sr_ace.talk():
                         if P.sr_ace.trainer:
                             move = False
                         else:
-                            scarab_r_b(P)
-                            scarab_r_p(P,P.px,P.py,False)
-                            scarab_r_f(P,P.px,P.py,tim)
+                            refresh()
                             P.sr_ace.write()
                     elif next_to(P,1150,-650) and P.prog[6][28] == 0:
                         txt(P,P.save_data.name + " found a Tiny", "Mushroom!")
@@ -13626,6 +16216,10 @@ def fiore_garden_f(P,temppx,temppy):
     show_location(P, None, 0)
 
 def fiore_garden(P) -> None:
+    def refresh():
+        fiore_garden_b(P)
+        fiore_garden_p(P,P.px,P.py,False)
+        fiore_garden_f(P,P.px,P.py)
     set_mixer_volume(P,P.vol)
     if P.song != "music/fiore.wav":
         P.song = "music/fiore.wav"
@@ -13639,9 +16233,7 @@ def fiore_garden(P) -> None:
         P.fio_gar_aroma = npc.NPC(P,'Aroma Lady','Berry',[50,300],[['d',200],['mu',80],['l',300],['mr',80],['r',200],['md',40],['ml',20],['md',60],['l',300],['mu',20],['ml',60]],["Every weekend, I take some of","the berries grown here to sell","in Alto Mare.","The prices are quite good, so","if you ever have the chance","you should stop by!"])
     move = True
     tim = 0
-    fiore_garden_b(P)
-    fiore_garden_p(P,P.px,P.py,False)
-    fiore_garden_f(P,P.px,P.py)
+    refresh()
     fade_in(P)
     if P.garden_timer:
         if P.garden_score == -1:
@@ -13760,9 +16352,7 @@ def fiore_garden(P) -> None:
                     elif next_to(P,50,350) or next_to(P,150,350):
                         txt(P,"It's an Aguav Berry Tree.")
                     elif P.fio_gar_aroma and P.fio_gar_aroma.talk():
-                        fiore_garden_b(P)
-                        fiore_garden_p(P,P.px,P.py,False)
-                        fiore_garden_f(P,P.px,P.py)
+                        refresh()
                         P.fio_gar_aroma.write()
                     else:
                         P.buffer_talk = temp_buff
@@ -13965,6 +16555,10 @@ def fiore_f(P,temppx,temppy,tim,gardening = False):
         blit_garden_menu(P)
 
 def fiore(P) -> None:
+    def refresh():
+        fiore_b(P,wx,wy,pcx,pcy,gy)
+        fiore_p(P,P.px,P.py,False,gond,gy)
+        fiore_f(P,P.px,P.py,tim)
     #change?
     if P.song != "music/fiore.wav":
         P.song = "music/fiore.wav"
@@ -14006,9 +16600,7 @@ def fiore(P) -> None:
     wx = 0
     wy = 0
     tim = 0
-    fiore_b(P,wx,wy,pcx,pcy,gy)
-    fiore_p(P,P.px,P.py,False,gond,gy)
-    fiore_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -14063,9 +16655,7 @@ def fiore(P) -> None:
                         add_item(P,"TM83 Infestation",1)
                         P.prog[6][26] = 1
                     elif P.fio_healer.talk():
-                        fiore_b(P,wx,wy,pcx,pcy,gy)
-                        fiore_p(P,P.px,P.py,False,gond,gy)
-                        fiore_f(P,P.px,P.py,tim)
+                        refresh()
                         P.fio_healer.write()
                     elif next_to(P,950,-850) or next_to(P,700,-700) or next_to(P,700,-750) or next_to(P,700,-800) or next_to(P,700,-850) or next_to(P,750,-850) or next_to(P,800,-850) or next_to(P,850,-850) or next_to(P,900,-850):
                         if next_to(P,850,-850):
@@ -14106,9 +16696,7 @@ def fiore(P) -> None:
                             else:
                                 txt(P,"The Pinab Berry bush doesn't","look like it's been getting","enough nutrients.")
                     elif P.fio_aroma.talk():
-                        fiore_b(P,wx,wy,pcx,pcy,gy)
-                        fiore_p(P,P.px,P.py,False,gond,gy)
-                        fiore_f(P,P.px,P.py,tim)
+                        refresh()
                         P.fio_aroma.write()
                     else:
                         P.buffer_talk = temp_buff
@@ -14368,6 +16956,10 @@ def scarab_l_f(P,temppx,temppy,tim):
     show_location(P, P.loc_txt, tim)
 
 def scarab_l(P) -> None:
+    def refresh():
+        scarab_l_b(P)
+        scarab_l_p(P,P.px,P.py,False)
+        scarab_l_f(P,P.px,P.py,tim)
     if P.song != "music/scarab_woods.wav":
         P.song = "music/scarab_woods.wav"
         pygame.mixer.music.load(P.song)
@@ -14397,9 +16989,7 @@ def scarab_l(P) -> None:
     move = True
     tim = 0
     set_location(P)
-    scarab_l_b(P)
-    scarab_l_p(P,P.px,P.py,False)
-    scarab_l_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -14448,12 +17038,10 @@ def scarab_l(P) -> None:
             P.legendary_battle = True
             P.tourney_battle = True
             P.temp_party = P.party.copy()
-            pos = 0
-            while len(P.party) > 1:
-                if P.party[pos].code_nos() != 'Heracross' or P.party[pos].status == 'Faint' or pos == 1:
-                    P.party.remove(P.party[pos])
-                else:
-                    pos += 1
+            for p in P.party:
+                if p.code_nos() == 'Heracross' and p.status != 'Faint':
+                    P.party = [p]
+                    break
             battle(P,[poke.Poke('Heracross',[35,1,787,'Leer',-1,'Take Down',-1,'Aerial Ace',-1,'Counter',-1,None,None,0,"Poke Ball",0,'Swarm'])],no_pc = True)
             play_music(P,"music/scarab_woods.wav")
             P.surface.blit(te,(0,0))
@@ -14469,9 +17057,7 @@ def scarab_l(P) -> None:
                 P.py = -525
                 P.sl_hera1 = npc.NPC(P,'Heracross','Grunt',[600,800],[['l',20]],["","",""])
                 P.sl_hera2 = npc.NPC(P,'Heracross','Grunt',[550,800],[['r',20]],["","",""])
-                scarab_l_b(P)
-                scarab_l_p(P,P.px,P.py,False)
-                scarab_l_f(P,P.px,P.py,tim)
+                refresh()
                 fade_in(P)
                 move = True
             else:
@@ -14481,9 +17067,7 @@ def scarab_l(P) -> None:
                 fade_out(P)
                 P.sl_hera1 = None
                 P.sl_hera2 = None
-                scarab_l_b(P)
-                scarab_l_p(P,P.px,P.py,False)
-                scarab_l_f(P,P.px,P.py,tim)
+                refresh()
                 fade_in(P)
                 move = True
             P.party = P.temp_party.copy()
@@ -14534,33 +17118,25 @@ def scarab_l(P) -> None:
                         # if P.r3_bug.trainer:
                         #     move = False
                         # else:
-                        scarab_l_b(P)
-                        scarab_l_p(P,P.px,P.py,False)
-                        scarab_l_f(P,P.px,P.py,tim)
+                        refresh()
                         P.sl_rocket.write()
                     elif P.sl_psy.talk():
                         if P.sl_psy.trainer:
                             move = False
                         else:
-                            scarab_l_b(P)
-                            scarab_l_p(P,P.px,P.py,False)
-                            scarab_l_f(P,P.px,P.py,tim)
+                            refresh()
                             P.sl_psy.write()
                     elif P.sl_rich.talk():
                         if P.sl_rich.trainer:
                             move = False
                         else:
-                            scarab_l_b(P)
-                            scarab_l_p(P,P.px,P.py,False)
-                            scarab_l_f(P,P.px,P.py,tim)
+                            refresh()
                             P.sl_rich.write()
                     elif P.sl_ace.talk():
                         if P.sl_ace.trainer:
                             move = False
                         else:
-                            scarab_l_b(P)
-                            scarab_l_p(P,P.px,P.py,False)
-                            scarab_l_f(P,P.px,P.py,tim)
+                            refresh()
                             P.sl_ace.write()
                     elif next_to(P,2550,300) and P.prog[6][19] == 0:
                         item_fight(P,"music/scarab_woods.wav",19,17,('Mega Drain','Growth','Astonish','Bide'),'Foongus')
@@ -14700,8 +17276,8 @@ def route_3_b(P,wx,wy,beachx,beachy,beach_poke):
 
 def route_3_p(P,temppx,temppy,move):
     #rects start
-    if P.r3_noland:
-        P.r3_noland.move(mov=True)
+    if P.r3_gentle:
+        P.r3_gentle.move(mov=True)
     if P.r3_worker:
         P.r3_worker.move()
     if P.r3_worker2:
@@ -14842,7 +17418,7 @@ def route_3_p(P,temppx,temppy,move):
         r76 = P.r3_tri2.get_rect()
     r71 = P.r3_hex.get_rect()
     rects = [r506,r505,r504,r503,r502,r501,r500,r76,r75,r74,r73,r72,r71,r70,r69,r68,r67,r66,r65,r64,r63,r62,r61,r60,r59,r58,r57,r56,r55,r54,r53,r52,r51,r50,r49,r48,r47,r46,r45,r44,r43,r42,r41,r40,r39,r38,r93,r92,r91,r90,r37,r36,r35,r34,r33,r32,r31,r30,r29,r28,r27,r26,r25,r24,r23,r22,r21,r20,r19,r18,r17,r16,r15,r14,r13,r12,r11,r10,r9,r8,r7,r6,r5,r4,r3,r2,r1]
-    #rect_draw(P,rects)
+    # rect_draw(P,rects)
     if move:
         if P.prog[0] == 74 and P.px == -4825 and P.py == 475:
             player_move(P,rects,manual_input = 'l')
@@ -14851,7 +17427,7 @@ def route_3_p(P,temppx,temppy,move):
         elif P.px >= -1800:
             player_move(P,rects,[Rect(P.px+2200,P.py-350,50,200)])
         elif P.px >= -4750:
-            player_move(P,rects,[Rect(P.px+2200,P.py-350,50,190)],[Rect(P.px+5100,P.py-350,50,190)])
+            player_move(P,rects,[Rect(P.px+2200,P.py-350,50,190)],[Rect(P.px+5100,P.py-350,50,200)])
         else:
             if P.px == -5525 and P.py == 225 and face_u(P) and P.prog[15][6] == 0:
                 player_move(P,rects,manual_input = 'd')
@@ -14937,6 +17513,10 @@ def route_3_f(P,temppx,temppy,rain,tim,thunder = 0):
     return thunder
 
 def route_3(P,enter = False,x_pos = 5900) -> None:
+    def refresh():
+        route_3_b(P,wx,wy,beachx,beachy,beach_poke)
+        route_3_p(P,P.px,P.py,False)
+        route_3_f(P,P.px,P.py,rain,tim)
     if P.song != "music/route_3.wav":
         P.song = "music/route_3.wav"
         pygame.mixer.music.load(P.song)
@@ -14970,7 +17550,6 @@ def route_3(P,enter = False,x_pos = 5900) -> None:
     beachx = [4425,4475,4525,4575,4625,4675,4725,4775,4825,4875,4925,4975,5025,5075,5125,5175,5225,5275,5325,5375,5425,5475,5525,5575,5625,5675,5725,5775]
     beachy = [-700,-710,-720,-725,-730,-730,-730,-725,-715,-705,-695,-685,-680,-675,-675,-680,-685,-690,-695,-700,-705,-705,-705,-700,-690,-680,-660,-645]
     beachy_pos = [875,875,925,925,925,925,925,925,875,875,875,875,875,875,875,875,875,875,875,875,875,875,875,875,875,875,825,825]
-    P.r3_hex = npc.NPC(P,'Hex Maniac','Harper',[3250,-550],[['u',60]],["This shrine is dedicated to","Manaphy, one of the fairies","that guards these islands.","I recommend you make an","offering as a sign of respect.",""])
     P.r3_battle.x = x_pos
     if P.prog[15][6] == 0:
         P.r3_lop = npc.NPC(P,'Lopunny','Dude',[5900,-200],[['d',20]],["","",""])
@@ -14979,9 +17558,9 @@ def route_3(P,enter = False,x_pos = 5900) -> None:
     if P.prog[15][7] == 2:
         P.r3_slow = P.r3_slow0
     if P.prog[5][3] == 0:
-        P.r3_noland = npc.NPC(P,'Gentleman','Noland',[700,450],[['r',100]],["","",""])
+        P.r3_gentle = npc.NPC(P,'Gentleman','Joey',[700,450],[['r',100]],["","",""])
     else:
-        P.r3_noland = None
+        P.r3_gentle = None
     if P.prog[0] <= 74:
         P.r3_worker = npc.NPC(P,'Officer','Dude',[2150,-250],[['l',20]],["I'm sorry, but it's far too","dangerous to continue down","Route 3 at the moment.", "If you need to get to Pianura","City, you'll have better luck","passing through Scarab Woods."])
     else:
@@ -15008,12 +17587,11 @@ def route_3(P,enter = False,x_pos = 5900) -> None:
     wx = 0
     wy = 0
     tim = 0
+    hex_talk = 50
     beach_poke = 0
     set_location(P)
     if enter == False:
-        route_3_b(P,wx,wy,beachx,beachy,beach_poke)
-        route_3_p(P,P.px,P.py,False)
-        route_3_f(P,P.px,P.py,rain,tim)
+        refresh()
         fade_in(P)
     end = True
     m = 0
@@ -15023,7 +17601,7 @@ def route_3(P,enter = False,x_pos = 5900) -> None:
             wx = vars[0]
             wy = vars[1]
             tim = vars[2]
-        #print(P.px,P.py)
+        # print(P.px,P.py)
         # print(beach_poke)
         if P.prog[0] >= 80 and type(beach_poke) == float and tim%10 == 0:
             if random.random() < beach_poke:
@@ -15049,9 +17627,7 @@ def route_3(P,enter = False,x_pos = 5900) -> None:
             txt(P,"Right in the middle of that","storm is a being straight out","of the legends.")
             P.r3_cheryl = npc.NPC(P,'Cheryl','Cherry',[5150,-300],[['d',20]],["","",""])
             P.p = P.u1
-            route_3_b(P,wx,wy,beachx,beachy,beach_poke)
-            route_3_p(P,P.px,P.py,False)
-            route_3_f(P,P.px,P.py,rain,tim)
+            refresh()
             txt(P,"I've done my part trying to","keep it at bay, but my Pokemon","are quite exhausted.")
             txt(P,"I'd like you to head in there","to finish the job I started.","Good luck!")
             P.r3_cheryl = npc.NPC(P,'Cheryl','Cherry',[5150,-300],[['l',20]],["","",""])
@@ -15061,9 +17637,7 @@ def route_3(P,enter = False,x_pos = 5900) -> None:
         if P.prog[0] == 74 and P.px == -4825 and P.py == 475:
             P.p = P.u1
             P.r3_rival = npc.NPC(P,'Rival',P.save_data.rival,[5200,-250],[['d',20]],["","",""])
-            route_3_b(P,wx,wy,beachx,beachy,beach_poke)
-            route_3_p(P,P.px,P.py,False)
-            route_3_f(P,P.px,P.py,rain,tim)
+            refresh()
             txt(P,"Wait! You're going the wrong","way! Don't worry, I'm sure", "you'll be fine!")
             txt(P,"Cheryl wouldn't have asked you","to help if she didn't think","you could handle it!")
             P.r3_rival = npc.NPC(P,'Rival',P.save_data.rival,[5200,-250],[['l',20]],["","",""])
@@ -15103,6 +17677,8 @@ def route_3(P,enter = False,x_pos = 5900) -> None:
         if move == True and P.r3_fish2 and P.r3_fish2.trainer_check():
             move = False
         if move == True and P.r3_tri2 and P.r3_tri2.trainer_check():
+            move = False
+        if move == True and P.r3_hex and P.r3_hex.trainer_check():
             move = False
         temppx = P.px
         temppy = P.py
@@ -15153,12 +17729,10 @@ def route_3(P,enter = False,x_pos = 5900) -> None:
             pygame.mixer.music.play(0)
             P.legendary_battle = True
             P.temp_party = P.party.copy()
-            pos = 0
-            while len(P.party) > 1:
-                if P.party[pos].code_nos() != 'Lopunny' or P.party[pos].status == 'Faint' or pos == 1:
-                    P.party.remove(P.party[pos])
-                else:
-                    pos += 1
+            for p in P.party:
+                if p.code_nos() == 'Lopunny' and p.status != 'Faint':
+                    P.party = [p]
+                    break
             battle(P,[poke.Poke('Lopunny',[30,1,787,'Dizzy Punch',-1,None,None,None,None,None,None,None,None,0,"Poke Ball",0,'Dodge'])],no_pc = True)
             play_music(P,"music/route_3.wav")
             P.surface.blit(te,(0,0))
@@ -15173,9 +17747,7 @@ def route_3(P,enter = False,x_pos = 5900) -> None:
                 P.p = P.d1
                 P.px = -5525
                 P.py = 175
-                route_3_b(P,wx,wy,beachx,beachy,beach_poke)
-                route_3_p(P,P.px,P.py,False)
-                route_3_f(P,P.px,P.py,rain,tim)
+                refresh()
                 fade_in(P)
                 move = True
             else:
@@ -15184,9 +17756,7 @@ def route_3(P,enter = False,x_pos = 5900) -> None:
                 add_item(P,'Lopunnite',1)
                 fade_out(P)
                 P.r3_lop = None
-                route_3_b(P,wx,wy,beachx,beachy,beach_poke)
-                route_3_p(P,P.px,P.py,False)
-                route_3_f(P,P.px,P.py,rain,tim)
+                refresh()
                 fade_in(P)
                 move = True
             P.party = P.temp_party.copy()
@@ -15201,12 +17771,10 @@ def route_3(P,enter = False,x_pos = 5900) -> None:
             pygame.mixer.music.play(0)
             P.legendary_battle = True
             P.temp_party = P.party.copy()
-            pos = 0
-            while len(P.party) > 1:
-                if P.party[pos].code_nos() != 'Slowbro' or P.party[pos].status == 'Faint' or pos == 1:
-                    P.party.remove(P.party[pos])
-                else:
-                    pos += 1
+            for p in P.party:
+                if p.code_nos() == 'Slowbro' and p.status != 'Faint':
+                    P.party = [p]
+                    break
             battle(P,[poke.Poke('Slowbro',[38,1,787,'Water Pulse',-1,"Yawn",-1,"Confusion",-1,"Calm Mind",-1,None,None,0,"Poke Ball",0,'Ranged'])],no_pc = True)
             play_music(P,"music/route_3.wav")
             P.surface.blit(te,(0,0))
@@ -15221,9 +17789,7 @@ def route_3(P,enter = False,x_pos = 5900) -> None:
                 P.p = P.d1
                 P.px = -3925
                 P.py = 925
-                route_3_b(P,wx,wy,beachx,beachy,beach_poke)
-                route_3_p(P,P.px,P.py,False)
-                route_3_f(P,P.px,P.py,rain,tim)
+                refresh()
                 fade_in(P)
                 move = True
             else:
@@ -15232,9 +17798,7 @@ def route_3(P,enter = False,x_pos = 5900) -> None:
                 add_item(P,'Slowbronite',1)
                 fade_out(P)
                 P.r3_slow = P.r3_slow0
-                route_3_b(P,wx,wy,beachx,beachy,beach_poke)
-                route_3_p(P,P.px,P.py,False)
-                route_3_f(P,P.px,P.py,rain,tim)
+                refresh()
                 fade_in(P)
                 move = True
             P.party = P.temp_party.copy()
@@ -15260,6 +17824,13 @@ def route_3(P,enter = False,x_pos = 5900) -> None:
         if trainer_check(P,P.r3_tri2,"music/route_3.wav"):
             P.r3_tri2 = npc.NPC(P,'Triathelete','Harper',[P.r3_tri2.x,P.r3_tri2.y],[['mr',500],['ml',500]],["I don't have the time to talk","to you, okay?",""],tim = P.r3_tri2.tim,curr = P.r3_tri2.curr,extra_walk = P.r3_tri2.extra_walk,spd = 1)
             move = True
+        if hex_talk > 50 and P.r3_hex and trainer_check(P,P.r3_hex,"music/route_3.wav"):
+            if P.prog[5][79] == 0:
+                P.r3_hex = npc.NPC(P,'Hex Maniac','Chloe',[3250,-550],[['u',60]],["I'll be the one to determine if you're worthy of being in Manaphy's presence!"],["You were able to defeat me? Manaphy must be looking favorably upon you."],True,[0,0,0,0],[poke.Poke('Togekiss',[28,1,787,"Magical Leaf",-1,"Fairy Wind",-1,"Yawn",-1,"Air Slash",-1,None,None,0,"Poke Ball",400,"Serene Grace"]),poke.Poke('Roserade',[28,1,787,"Growth",-1,"Poison Sting",-1,"Grass Whistle",-1,"Giga Drain",-1,None,None,0,"Poke Ball",400,"Poison Point"])],79,loc = "route_3")
+                hex_talk = 0
+            else:
+                P.r3_hex = npc.NPC(P,'Hex Maniac','Chloe',[3250,-550],[['u',60]],["This shrine is dedicated to Manaphy, one of the fairies that guards these islands.","I recommend you make an offering as a sign of respect."],loc = "route_3")
+            move = True
         for event in map_keys():
             if (event.type == KEYDOWN or P.buffer_talk) and tim > 20:
                 if event.key == pygame.key.key_code(P.controls[6]) and move:
@@ -15275,82 +17846,61 @@ def route_3(P,enter = False,x_pos = 5900) -> None:
                         if P.r3_bug.trainer:
                             move = False
                         else:
-                            route_3_b(P,wx,wy,beachx,beachy,beach_poke)
-                            route_3_p(P,P.px,P.py,False)
-                            route_3_f(P,P.px,P.py,rain,tim)
+                            refresh()
                             P.r3_bug.write()
                     elif P.r3_hika.talk():
                         if P.r3_hika.trainer:
                             move = False
                         else:
-                            route_3_b(P,wx,wy,beachx,beachy,beach_poke)
-                            route_3_p(P,P.px,P.py,False)
-                            route_3_f(P,P.px,P.py,rain,tim)
+                            refresh()
                             P.r3_hika.write()
                     elif P.r3_sci.talk():
                         if P.r3_sci.trainer:
                             move = False
                         else:
-                            route_3_b(P,wx,wy,beachx,beachy,beach_poke)
-                            route_3_p(P,P.px,P.py,False)
-                            route_3_f(P,P.px,P.py,rain,tim)
+                            refresh()
                             P.r3_sci.write()
                     elif P.r3_battle.talk():
                         if P.r3_battle.trainer:
                             move = False
                         else:
-                            route_3_b(P,wx,wy,beachx,beachy,beach_poke)
-                            route_3_p(P,P.px,P.py,False)
-                            route_3_f(P,P.px,P.py,rain,tim)
+                            refresh()
                             P.r3_battle.write()
                     elif P.r3_fish1 and P.r3_fish1.talk():
                         if P.r3_fish1.trainer:
                             move = False
                         else:
-                            route_3_b(P,wx,wy,beachx,beachy,beach_poke)
-                            route_3_p(P,P.px,P.py,False)
-                            route_3_f(P,P.px,P.py,rain,tim)
+                            refresh()
                             P.r3_fish1.write()
                     elif P.r3_fish2 and P.r3_fish2.talk():
                         if P.r3_fish2.trainer:
                             move = False
                         else:
-                            route_3_b(P,wx,wy,beachx,beachy,beach_poke)
-                            route_3_p(P,P.px,P.py,False)
-                            route_3_f(P,P.px,P.py,rain,tim)
+                            refresh()
                             P.r3_fish2.write()
                     elif P.r3_tri2 and P.r3_tri2.talk():
                         if P.r3_tri2.trainer:
                             move = False
                         else:
-                            route_3_b(P,wx,wy,beachx,beachy,beach_poke)
-                            route_3_p(P,P.px,P.py,False)
-                            route_3_f(P,P.px,P.py,rain,tim)
+                            refresh()
                             P.r3_tri2.write()
-                    elif P.r3_hex and P.r3_hex.talk():
-                        route_3_b(P,wx,wy,beachx,beachy,beach_poke)
-                        route_3_p(P,P.px,P.py,False)
-                        route_3_f(P,P.px,P.py,rain,tim)
-                        P.r3_hex.write()
+                    elif hex_talk > 50 and P.r3_hex and P.r3_hex.talk():
+                        if P.r3_hex.trainer:
+                            move = False
+                        else:
+                            refresh()
+                            P.r3_hex.write()
                     elif P.r3_beauty and P.r3_beauty.talk():
-                        route_3_b(P,wx,wy,beachx,beachy,beach_poke)
-                        route_3_p(P,P.px,P.py,False)
-                        route_3_f(P,P.px,P.py,rain,tim)
+                        refresh()
                         P.r3_beauty.write()
                     elif P.r3_tri and P.r3_tri.talk():
-                        route_3_b(P,wx,wy,beachx,beachy,beach_poke)
-                        route_3_p(P,P.px,P.py,False)
-                        route_3_f(P,P.px,P.py,rain,tim)
+                        refresh()
                         P.r3_tri.write()
                     elif P.r3_todd and P.r3_todd.talk():
-                        route_3_b(P,wx,wy,beachx,beachy,beach_poke)
-                        route_3_p(P,P.px,P.py,False)
-                        route_3_f(P,P.px,P.py,rain,tim)
+                        refresh()
                         P.r3_todd.write()
                     elif P.r3_lass and P.r3_lass.talk():
-                        route_3_b(P,wx,wy,beachx,beachy,beach_poke)
-                        route_3_p(P,P.px,P.py,False)
-                        route_3_f(P,P.px,P.py,rain,tim)
+                        refresh()
                         P.r3_lass.write()
                     elif P.px == -3925 and P.py == 625 and face_u(P) and P.prog[0] == 74:
                         P.prog[0] += 1
@@ -15358,9 +17908,7 @@ def route_3(P,enter = False,x_pos = 5900) -> None:
                         txt(P,"Go get 'em, "+P.save_data.name+"! I've","seen you fight enough to know","this'll be easy for you!")
                     elif P.prog[0] == 74 and next_to(P,5150,-300):
                         P.r3_cheryl = npc.NPC(P,'Cheryl','Cherry',[5150,-300],[['d',20]],["","",""])
-                        route_3_b(P,wx,wy,beachx,beachy,beach_poke)
-                        route_3_p(P,P.px,P.py,False)
-                        route_3_f(P,P.px,P.py,rain,tim)
+                        refresh()
                         txt(P,"I've already weakened it quite","a bit for you. I'm sure you'll","be fine!")
                         P.r3_cheryl = npc.NPC(P,'Cheryl','Cherry',[5150,-300],[['l',20]],["","",""])
                     elif P.prog[0] == 74 and P.px == -4725 and P.py == 600 and face_r(P):
@@ -15461,14 +18009,10 @@ def route_3(P,enter = False,x_pos = 5900) -> None:
                         fade_in(P)
                         beach_poke = 0
                     elif P.r3_worker and P.r3_worker.talk():
-                        route_3_b(P,wx,wy,beachx,beachy,beach_poke)
-                        route_3_p(P,P.px,P.py,False)
-                        route_3_f(P,P.px,P.py,rain,tim)
+                        refresh()
                         P.r3_worker.write()
                     elif P.r3_worker2 and P.r3_worker2.talk():
-                        route_3_b(P,wx,wy,beachx,beachy,beach_poke)
-                        route_3_p(P,P.px,P.py,False)
-                        route_3_f(P,P.px,P.py,rain,tim)
+                        refresh()
                         if P.prog[0] == 69:
                             txt(P,"You are "+P.save_data.name+", correct?","Right this way, Cheryl is","waiting for you.")
                             P.r3_worker2 = npc.NPC(P,'Officer','Dude',[5600,-50],[['mu',20],['ml',20],['r',20]],["","",""])
@@ -15640,6 +18184,7 @@ def route_3(P,enter = False,x_pos = 5900) -> None:
             P.ocean = -15
         if tim%5 == 0:
             P.ocean += 1
+        hex_talk += 1
         tim += 1
         if P.prog[0] >= 70 and P.prog[0] <= 74 and P.px >= -5000:
             rain += 1
@@ -15789,6 +18334,10 @@ def power_plant_b_f(P,temppx,temppy,tim):
     show_location(P, P.loc_txt, tim)
 
 def power_plant_b(P) -> None:
+    def refresh():
+        power_plant_b_b(P)
+        power_plant_b_p(P,P.px,P.py,False)
+        power_plant_b_f(P,P.px,P.py,tim)
     if P.song != "music/power_plant.wav":
         P.song = "music/power_plant.wav"
         pygame.mixer.music.load(P.song)
@@ -15811,9 +18360,7 @@ def power_plant_b(P) -> None:
     move = True
     tim = 0
     set_location(P)
-    power_plant_b_b(P)
-    power_plant_b_p(P,P.px,P.py,False)
-    power_plant_b_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -15827,9 +18374,7 @@ def power_plant_b(P) -> None:
             P.prog[0] += 1
         if P.prog[0] == 29:
             P.ppb_colress = npc.NPC(P,'Colress','',[150,200],[['r',20]],["","",""])
-            power_plant_b_b(P)
-            power_plant_b_p(P,P.px,P.py,False)
-            power_plant_b_f(P,P.px,P.py,tim)
+            refresh()
             update_screen(P)
             P.clock.tick(P.ani_spd)
             txt(P,"Ah, thank you for coming. You","showed up at the perfect", "time.")
@@ -15838,18 +18383,14 @@ def power_plant_b(P) -> None:
             P.ppb_rocket2 = npc.NPC(P,'Team Rocketm','Grunt',[600,50],[['md',60],['ml',60],['l',80]],["","",""])
         if P.prog[0] == 30 and P.ppb_rocket2.x == 450:
             P.p = P.r1
-            power_plant_b_b(P)
-            power_plant_b_p(P,P.px,P.py,False)
-            power_plant_b_f(P,P.px,P.py,tim)
+            refresh()
             update_screen(P)
             P.clock.tick(P.ani_spd)
             txt(P,'Hey, I brought the research', 'papers from his lab!')
             P.ppb_rocket1 = npc.NPC(P,'Team Rocketf','Grunt',[150,350],[['mu',20],['r',60]],["","",""])
             P.prog[0] += 1
         if P.prog[0] == 31 and P.ppb_rocket1.y == 300:
-            power_plant_b_b(P)
-            power_plant_b_p(P,P.px,P.py,False)
-            power_plant_b_f(P,P.px,P.py,tim)
+            refresh()
             update_screen(P)
             P.clock.tick(P.ani_spd)
             txt(P,'Why did you come back here!!?','You\'re supposed to bring those','back to headquarters!')
@@ -15875,9 +18416,7 @@ def power_plant_b(P) -> None:
             P.prog[0] += 1
         if P.prog[0] == 34 and P.ppb_colress.y == 200:
             P.p = P.l1
-            power_plant_b_b(P)
-            power_plant_b_p(P,P.px,P.py,False)
-            power_plant_b_f(P,P.px,P.py,tim)
+            refresh()
             update_screen(P)
             P.clock.tick(P.ani_spd)
             txt(P,'Perfect, you\'re finished up','as well!')
@@ -15885,9 +18424,7 @@ def power_plant_b(P) -> None:
             P.ppb_rocket2 = npc.NPC(P,'Team Rocketm','Grunt',[350,200],[['mr',20],['l',80]],["","",""])
             P.prog[0] += 1
         if P.prog[0] == 35 and P.ppb_rocket2.x == 400:
-            power_plant_b_b(P)
-            power_plant_b_p(P,P.px,P.py,False)
-            power_plant_b_f(P,P.px,P.py,tim)
+            refresh()
             update_screen(P)
             P.clock.tick(P.ani_spd)
             txt(P,'You\'re not getting your hands','on me! I\'m outta here!')
@@ -15899,9 +18436,7 @@ def power_plant_b(P) -> None:
             P.prog[0] += 1
         if P.prog[0] == 37 and P.ppb_colress.x == 250:
             P.p = P.l1
-            power_plant_b_b(P)
-            power_plant_b_p(P,P.px,P.py,False)
-            power_plant_b_f(P,P.px,P.py,tim)
+            refresh()
             update_screen(P)
             P.clock.tick(P.ani_spd)
             txt(P,'I\'ll take this troublemaker', 'back to Egida to question her','about this incident.')
@@ -15910,9 +18445,7 @@ def power_plant_b(P) -> None:
             P.ppb_colress = None
             P.ppb_rocket1 = None
             fade_out(P)
-            power_plant_b_b(P)
-            power_plant_b_p(P,P.px,P.py,False)
-            power_plant_b_f(P,P.px,P.py,tim)
+            refresh()
             fade_in(P)
             P.prog[0] += 1
             move = True
@@ -15935,9 +18468,7 @@ def power_plant_b(P) -> None:
                     temp_buff = P.buffer_talk
                     P.buffer_talk = None
                     if P.ppb_eusine and P.ppb_eusine.talk():
-                        power_plant_b_b(P)
-                        power_plant_b_p(P,P.px,P.py,False)
-                        power_plant_b_f(P,P.px,P.py,tim)
+                        refresh()
                         P.ppb_eusine.write()
                     elif P.py == 175 and P.px in [275,325] and face_u(P):
                         txt(P,"You don't really understand","any of it.")
@@ -16045,6 +18576,10 @@ def power_plant_1_f(P,temppx,temppy,tim):
     show_location(P, P.loc_txt, tim)
 
 def power_plant_1(P) -> None:
+    def refresh():
+        power_plant_1_b(P)
+        power_plant_1_p(P,P.px,P.py,False)
+        power_plant_1_f(P,P.px,P.py,tim)
     if P.song != "music/power_plant.wav":
         P.song = "music/power_plant.wav"
         pygame.mixer.music.load(P.song)
@@ -16061,9 +18596,7 @@ def power_plant_1(P) -> None:
     move = True
     tim = 0
     set_location(P)
-    power_plant_1_b(P)
-    power_plant_1_p(P,P.px,P.py,False)
-    power_plant_1_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -16087,9 +18620,7 @@ def power_plant_1(P) -> None:
                     temp_buff = P.buffer_talk
                     P.buffer_talk = None
                     if P.pp1_eusine and P.pp1_eusine.talk():
-                        power_plant_1_b(P)
-                        power_plant_1_p(P,P.px,P.py,False)
-                        power_plant_1_f(P,P.px,P.py,tim)
+                        refresh()
                         P.pp1_eusine.write()
                     elif next_to(P,600,400):
                         txt(P,"The trashcan's empty.")
@@ -16251,6 +18782,10 @@ def vigore_dam_f(P,temppx,temppy,tim):
     show_location(P, P.loc_txt, tim)
 
 def vigore_dam(P) -> None:
+    def refresh():
+        vigore_dam_b(P,wx,wy,fall)
+        vigore_dam_p(P,P.px,P.py,False)
+        vigore_dam_f(P,P.px,P.py,tim)
     if P.song != "music/vigore.wav":
         P.song = "music/vigore.wav"
         pygame.mixer.music.load(P.song)
@@ -16287,9 +18822,7 @@ def vigore_dam(P) -> None:
     P.f2 = 0
     P.f3 = 0
     set_location(P)
-    vigore_dam_b(P,wx,wy,fall)
-    vigore_dam_p(P,P.px,P.py,False)
-    vigore_dam_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -16330,12 +18863,10 @@ def vigore_dam(P) -> None:
             pygame.mixer.music.play(0)
             P.legendary_battle = True
             P.temp_party = P.party.copy()
-            pos = 0
-            while len(P.party) > 1:
-                if P.party[pos].code_nos() != 'Manectric' or P.party[pos].status == 'Faint' or pos == 1:
-                    P.party.remove(P.party[pos])
-                else:
-                    pos += 1
+            for p in P.party:
+                if p.code_nos() == 'Manectric' and p.status != 'Faint':
+                    P.party = [p]
+                    break
             battle(P,[poke.Poke('Manectric',[26,0,787,'Spark',-1,'Quick Attack',-1,'Bite',-1,'Howl',-1,None,None,0,"Poke Ball",0,'Lightning Rod'])],no_pc = True)
             play_music(P,"music/vigore.wav")
             P.surface.blit(te,(0,0))
@@ -16352,9 +18883,7 @@ def vigore_dam(P) -> None:
                 P.vigore_mane1 = npc.NPC(P,'Manectric','Grunt',[3850,-1050],[['l',20]],["","",""])
                 P.vigore_mane2 = npc.NPC(P,'Manectric','Grunt',[4350,-1100],[['l',20]],["","",""])
                 P.vigore_mane3 = npc.NPC(P,'Manectric','Grunt',[4250,-1150],[['d',20]],["","",""])
-                vigore_dam_b(P,wx,wy,fall)
-                vigore_dam_p(P,P.px,P.py,False)
-                vigore_dam_f(P,P.px,P.py,tim)
+                refresh()
                 fade_in(P)
                 move = True
             else:
@@ -16373,9 +18902,7 @@ def vigore_dam(P) -> None:
                     P.vigore_mane1 = None
                     P.vigore_mane2 = None
                     P.vigore_mane3 = None
-                    vigore_dam_b(P,wx,wy,fall)
-                    vigore_dam_p(P,P.px,P.py,False)
-                    vigore_dam_f(P,P.px,P.py,tim)
+                    refresh()
                     fade_in(P)
                     move = True
             P.party = P.temp_party.copy()
@@ -16392,9 +18919,7 @@ def vigore_dam(P) -> None:
                     temp_buff = P.buffer_talk
                     P.buffer_talk = None
                     if P.vigore_rocket and P.vigore_rocket.talk():
-                        vigore_dam_b(P,wx,wy,fall)
-                        vigore_dam_p(P,P.px,P.py,False)
-                        vigore_dam_f(P,P.px,P.py,tim)
+                        refresh()
                         P.vigore_rocket.write()
                         P.prog[0] += 1
                         P.px = -775
@@ -16406,9 +18931,7 @@ def vigore_dam(P) -> None:
                         if P.vigore_victor.trainer:
                             move = False
                         else:
-                            vigore_dam_b(P,wx,wy,fall)
-                            vigore_dam_p(P,P.px,P.py,False)
-                            vigore_dam_f(P,P.px,P.py,tim)
+                            refresh()
                             P.vigore_victor.write()
                     elif next_to(P,500,-1400) and P.prog[6][10] == 0:
                         txt(P,P.save_data.name + " found a Common", "Candy!")
@@ -16440,23 +18963,17 @@ def vigore_dam(P) -> None:
                             P.vigore_troy.extra_walk = ['u',0,0]
                             move = False
                         else:
-                            vigore_dam_b(P,wx,wy,fall)
-                            vigore_dam_p(P,P.px,P.py,False)
-                            vigore_dam_f(P,P.px,P.py,tim)
+                            refresh()
                             P.vigore_troy.write()
                     elif P.vigore_genos.talk():
                         if P.vigore_genos.trainer:
                             P.vigore_genos.extra_walk = ['u',0,0]
                             move = False
                         else:
-                            vigore_dam_b(P,wx,wy,fall)
-                            vigore_dam_p(P,P.px,P.py,False)
-                            vigore_dam_f(P,P.px,P.py,tim)
+                            refresh()
                             P.vigore_genos.write()
                     elif face_d(P) == False and P.vigore_healer.talk():
-                        vigore_dam_b(P,wx,wy,fall)
-                        vigore_dam_p(P,P.px,P.py,False)
-                        vigore_dam_f(P,P.px,P.py,tim)
+                        refresh()
                         t = P.surface.copy()
                         P.vigore_healer.write()
                         fade_out(P)
@@ -16557,7 +19074,6 @@ def vigore_dam(P) -> None:
     if P.loc == 'egida':
         P.clock.tick(.5)
 
-
 def aron_cave_b(P):
     P.surface.blit(P.aron_back, (P.px, P.py))
     if P.prog[15][2] == 0:
@@ -16590,8 +19106,11 @@ def aron_cave_f(P,temppx,temppy,tim):
     set_sky(P)
     show_location(P,P.loc_txt,tim)
 
-
 def aron_cave(P) -> None:
+    def refresh():
+        aron_cave_b(P)
+        aron_cave_p(P,P.px,P.py,False)
+        aron_cave_f(P,P.px,P.py,tim)
     if P.song != "music/echoing_cave.wav":
         P.song = "music/echoing_cave.wav"
         set_mixer_volume(P,P.vol)
@@ -16604,9 +19123,7 @@ def aron_cave(P) -> None:
     P.aron_aggron = pygame.transform.scale(load("p/spr/Aggron_d1.png"),(120,120))
     move = True
     tim = 0
-    aron_cave_b(P)
-    aron_cave_p(P,P.px,P.py,False)
-    aron_cave_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -16626,12 +19143,10 @@ def aron_cave(P) -> None:
             pygame.mixer.music.play(0)
             P.legendary_battle = True
             P.temp_party = P.party.copy()
-            pos = 0
-            while len(P.party) > 1:
-                if P.party[pos].code_nos() != 'Aggron' or P.party[pos].status == 'Faint' or pos == 1:
-                    P.party.remove(P.party[pos])
-                else:
-                    pos += 1
+            for p in P.party:
+                if p.code_nos() == 'Aggron' and p.status != 'Faint':
+                    P.party = [p]
+                    break
             battle(P,[poke.Poke('Aggron',[45,1,787,'Iron Defense',-1,None,None,None,None,None,None,None,None,0,"Nursery Ball",0,'Sturdy'])],no_pc = True)
             play_music(P,"music/echoing_cave.wav")
             P.surface.blit(te,(0,0))
@@ -16652,9 +19167,7 @@ def aron_cave(P) -> None:
                 txt(P,"The Aggron has calmed down.","It left a mysterious stone in","your hand before leaving.")
                 add_item(P,'Aggronite',1)
                 fade_out(P)
-                aron_cave_b(P)
-                aron_cave_p(P,P.px,P.py,False)
-                aron_cave_f(P,P.px,P.py,tim)
+                refresh()
                 fade_in(P)
             P.party = P.temp_party.copy()
             P.legendary_battle = False
@@ -16878,6 +19391,10 @@ def echo_cave_f(P,temppx,temppy,tim):
     show_location(P, P.loc_txt, tim)
 
 def echo_cave(P) -> None:
+    def refresh():
+        echo_cave_b(P,wx,wy)
+        echo_cave_p(P,P.px,P.py,False)
+        echo_cave_f(P,P.px,P.py,tim)
     if P.song != "music/echoing_cave.wav":
         play_music(P,"music/echoing_cave.wav")
     P.echo_cave1 = load("p/egida/Echoing_Cave.png")
@@ -16906,9 +19423,7 @@ def echo_cave(P) -> None:
     a = 0
     set_location(P)
     tim = 0
-    echo_cave_b(P,wx,wy)
-    echo_cave_p(P,P.px,P.py,False)
-    echo_cave_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -16971,9 +19486,7 @@ def echo_cave(P) -> None:
             P.prog[0] += 1
         if P.prog[0] == 25 and P.py >= 1675 and P.px == -375:
             P.p = P.l1
-            echo_cave_b(P,wx,wy)
-            echo_cave_p(P,P.px,P.py,False)
-            echo_cave_f(P,P.px,P.py,tim)
+            refresh()
             P.prog[0] = -1
             P.echo_man = npc.NPC(P,'Manaphy','one',[600,-1000],[['mu',200],['d',300]],["","",""],["","",""])
             move = False
@@ -17032,17 +19545,13 @@ def echo_cave(P) -> None:
                         if P.echo_carlos.trainer:
                             move = False
                         else:
-                            echo_cave_b(P,wx,wy)
-                            echo_cave_p(P,P.px,P.py,False)
-                            echo_cave_f(P,P.px,P.py,tim)
+                            refresh()
                             P.echo_carlos.write()
                     elif P.echo_vivi.talk():
                         if P.echo_vivi.trainer:
                             move = False
                         else:
-                            echo_cave_b(P,wx,wy)
-                            echo_cave_p(P,P.px,P.py,False)
-                            echo_cave_f(P,P.px,P.py,tim)
+                            refresh()
                             P.echo_vivi.write()
                     else:
                         P.buffer_talk = temp_buff
@@ -17187,6 +19696,10 @@ def route_2_f(P,temppx,temppy,listx,listy,tim):
     show_location(P,P.loc_txt,tim)
 
 def route_2(P,enter = False) -> None:
+    def refresh():
+        route_2_b(P)
+        route_2_p(P,P.px,P.py)
+        route_2_f(P,P.px,P.py,listx,listy,tim)
     if P.song != "music/route_2.wav":
         P.song = "music/route_2.wav"
         pygame.mixer.music.load(P.song)
@@ -17198,13 +19711,10 @@ def route_2(P,enter = False) -> None:
     listy = [-1250]
     set_location(P)
     if enter == False:
-        route_2_b(P)
-        route_2_p(P,P.px,P.py)
-        route_2_f(P,P.px,P.py,listx,listy,tim)
+        refresh()
         fade_in(P)
     end = True
     move = True
-    pause = False
     m = 0
     tim = 0
     fade = False
@@ -17240,9 +19750,7 @@ def route_2(P,enter = False) -> None:
                         if P.r2_ayla.trainer:
                             move = False
                         else:
-                            route_2_b(P)
-                            route_2_p(P,P.px,P.py,False)
-                            route_2_f(P,P.px,P.py,listx,listy,tim)
+                            refresh()
                             P.r2_ayla.write()
                     elif next_to(P,P.r2_tree1.x,P.r2_tree1.y):
                         P.r2_tree1.cut()
@@ -17250,9 +19758,7 @@ def route_2(P,enter = False) -> None:
                         if P.r2_robby.trainer:
                             move = False
                         else:
-                            route_2_b(P)
-                            route_2_p(P,P.px,P.py,False)
-                            route_2_f(P,P.px,P.py,listx,listy,tim)
+                            refresh()
                             P.r2_robby.write()
                     else:
                         P.buffer_talk = temp_buff
@@ -17333,9 +19839,6 @@ def route_2(P,enter = False) -> None:
         tick_buffer(P)
         update_screen(P)
         P.clock.tick(P.ani_spd)
-        if pause:
-            P.clock.tick(P.ani_spd/30)
-            pause = False
     if fade:
         fade_out(P,P.song)
 
@@ -17390,11 +19893,14 @@ def egida_gym_b_p(P,temppx,temppy,move,cam_mod = 0):
     else:
         blit_player(P,mod = cam_mod)
 
-
 def egida_gym_b_f(P,temppx,temppy,tim,cam_mod = 0):
     show_location(P, P.loc_txt, tim)
 
 def egida_gym_b(P) -> None:
+    def refresh():
+        egida_gym_b_b(P)
+        egida_gym_b_p(P,P.px,P.py,False)
+        egida_gym_b_f(P,P.px,P.py,tim)
     if P.song != "music/gym.wav":
         P.song = "music/gym.wav"
         pygame.mixer.music.load(P.song)
@@ -17412,9 +19918,7 @@ def egida_gym_b(P) -> None:
     cam_mod = 0
     tim = 0
     set_location(P)
-    egida_gym_b_b(P)
-    egida_gym_b_p(P,P.px,P.py,False)
-    egida_gym_b_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -17555,6 +20059,10 @@ def egida_gym_l_f(P,temppx,temppy,tim):
     show_location(P, P.loc_txt, tim)
 
 def egida_gym_l(P) -> None:
+    def refresh():
+        egida_gym_l_b(P)
+        egida_gym_l_p(P,P.px,P.py,False)
+        egida_gym_l_f(P,P.px,P.py,tim)
     if P.song != "music/gym.wav":
         P.song = "music/gym.wav"
         pygame.mixer.music.load(P.song)
@@ -17566,9 +20074,7 @@ def egida_gym_l(P) -> None:
     tim = 0
     P.habitat = 'indoor'
     set_location(P)
-    egida_gym_l_b(P)
-    egida_gym_l_p(P,P.px,P.py,False)
-    egida_gym_l_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -17599,9 +20105,7 @@ def egida_gym_l(P) -> None:
                         if P.egi_gyml_sci.trainer:
                             move = False
                         else:
-                            egida_gym_l_b(P)
-                            egida_gym_l_p(P,P.px,P.py,False)
-                            egida_gym_l_f(P,P.px,P.py,tim)
+                            refresh()
                             P.egi_gyml_sci.write()
                     elif P.px == 225 and P.py == 125 and face_u(P):
                         if P.prog[0] == 40:
@@ -17664,6 +20168,10 @@ def egida_gym_r_f(P,temppx,temppy,tim):
     show_location(P, P.loc_txt, tim)
 
 def egida_gym_r(P) -> None:
+    def refresh():
+        egida_gym_r_b(P)
+        egida_gym_r_p(P,P.px,P.py,False)
+        egida_gym_r_f(P,P.px,P.py,tim)
     if P.song != "music/gym.wav":
         P.song = "music/gym.wav"
         pygame.mixer.music.load(P.song)
@@ -17677,9 +20185,7 @@ def egida_gym_r(P) -> None:
     P.habitat = 'indoor'
     tim = 0
     set_location(P)
-    egida_gym_r_b(P)
-    egida_gym_r_p(P,P.px,P.py,False)
-    egida_gym_r_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -17710,9 +20216,7 @@ def egida_gym_r(P) -> None:
                         if P.egi_gymr_sci.trainer:
                             move = False
                         else:
-                            egida_gym_r_b(P)
-                            egida_gym_r_p(P,P.px,P.py,False)
-                            egida_gym_r_f(P,P.px,P.py,tim)
+                            refresh()
                             P.egi_gymr_sci.write()
                     elif next_to(P,50,350) or next_to(P,250,350) or next_to(P,50,200) or next_to(P,250,200):
                         txt(P,"There's a fossil on display.")
@@ -17785,7 +20289,6 @@ def egida_gym_main_p(P,temppx,temppy,move):
         blit_player(P)
     P.egi_gym_guide.move(temppx,temppy)
 
-
 def egida_gym_main_f(P,temppx,temppy,tim):
     if P.prog[5][12] == 1:
         P.surface.blit(P.egi_gym_light,(temppx+513,temppy+29))
@@ -17795,6 +20298,10 @@ def egida_gym_main_f(P,temppx,temppy,tim):
     show_location(P, P.loc_txt, tim)
 
 def egida_gym_main(P) -> None:
+    def refresh():
+        egida_gym_main_b(P)
+        egida_gym_main_p(P,P.px,P.py,False)
+        egida_gym_main_f(P,P.px,P.py,tim)
     if P.song != "music/gym.wav":
         P.song = "music/gym.wav"
         pygame.mixer.music.load(P.song)
@@ -17811,9 +20318,7 @@ def egida_gym_main(P) -> None:
     move = True
     tim = 0
     set_location(P)
-    egida_gym_main_b(P)
-    egida_gym_main_p(P,P.px,P.py,False)
-    egida_gym_main_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     fade = None
     end = True
@@ -17837,9 +20342,7 @@ def egida_gym_main(P) -> None:
                     temp_buff = P.buffer_talk
                     P.buffer_talk = None
                     if P.egi_gym_guide.talk():
-                        egida_gym_main_b(P)
-                        egida_gym_main_p(P,P.px,P.py,False)
-                        egida_gym_main_f(P,P.px,P.py,tim)
+                        refresh()
                         P.egi_gym_guide.write()
                     elif next_to(P,350,350):
                         txt(P,"It's a status in the shape of","Latias' head.")
@@ -17911,21 +20414,23 @@ def egida_mine_f(P,temppx,temppy):
     show_location(P, None, 0)
 
 def egida_mine(P) -> None:
+    def refresh():
+        egida_mine_b(P)
+        egida_mine_p(P,P.px,P.py,False)
+        egida_mine_f(P,P.px,P.py)
     set_mixer_volume(P,P.vol)
     if P.song != "music/egida_city.wav":
         P.song = "music/egida_city.wav"
         pygame.mixer.music.load(P.song)
         pygame.mixer.music.play(-1)
-    box = load("p/3_box.png")
+    box = load("p/ui/3_box.png")
     P.egi_mine_clerk = pygame.transform.scale(load("p/spr/mart_clerk_d1.png"),(55,66))
     P.egi_mine_back = load("p/egida/egida_mine.png")
     P.egi_mine_f = load("p/egida/egida_mine_f.png")
     P.egi_mine_hiker = npc.NPC(P,'Hiker','Dude',[100,100],[['d',20]],["Man would just you look at all","those gems! I wish I could see","these when I'm out hiking!"])
     move = True
     tim = 0
-    egida_mine_b(P)
-    egida_mine_p(P,P.px,P.py,False)
-    egida_mine_f(P,P.px,P.py)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -18071,13 +20576,17 @@ def egida_lab_f(P,temppx,temppy):
     show_location(P, None, 0)
 
 def egida_lab(P) -> None:
+    def refresh():
+        egida_lab_b(P)
+        egida_lab_p(P,P.px,P.py,False)
+        egida_lab_f(P,P.px,P.py)
     set_mixer_volume(P,P.vol)
     if P.song != "music/egida_city.wav":
         P.song = "music/egida_city.wav"
         pygame.mixer.music.load(P.song)
         pygame.mixer.music.play(-1)
     P.egi_lab_back = load("p/egida/egida_lab.png")
-    P.egi_lab_f = load("p/egida/egida_lab_f.png")
+    P.egi_lab_f = load("p/egida/lab_f.png")
     P.egi_lab_scif = npc.NPC(P,'Scientistf','Dude',[50,350],[['r',20]],["I'm researching the various","methods of evolution. You","wanna see what I've found?","Hee hee, it's secret! Well","maybe if you get the approval","of Colress I'll show you!"])
     P.egi_lab_scim = npc.NPC(P,'Scientistm','Dude',[100,150],[['d',20]],["In this facility, we have the","latest tools for analyzing","elemental gems!","You don't seem qualified to","help out, but if that changes","don't be afraid to stop by!"])
     if P.prog[0] < 48:
@@ -18088,9 +20597,7 @@ def egida_lab(P) -> None:
         P.egi_lab_colress = npc.NPC(P,'Colress','Colly',[200,350],[['l',20]],["Well the gems will appear to","change depending on the type","of lens you view it through.","If the element of the lens is","effective on the gem, it will","appear to glow.","If it isn't very effective,","the gem will appear duller","than usual.","In cases where the elements","are neutral, the gem will","appear unchanged.","If you use fewer lenses and","guesses, you'll earn more","money and research experience."])
     move = True
     tim = 0
-    egida_lab_b(P)
-    egida_lab_p(P,P.px,P.py,False)
-    egida_lab_f(P,P.px,P.py)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -18113,9 +20620,7 @@ def egida_lab(P) -> None:
                     temp_buff = P.buffer_talk
                     P.buffer_talk = None
                     if P.egi_lab_scif.talk():
-                        egida_lab_b(P)
-                        egida_lab_p(P,P.px,P.py,False)
-                        egida_lab_f(P,P.px,P.py)
+                        refresh()
                         if P.prog[15][0] == 5:
                             txt(P,"Hey there! I'm working on a","technique I'm calling Mega","Reversion.")
                             txt(P,"It would be a huge help if you","could show me some Mega","Pokemon to study.")
@@ -18190,9 +20695,7 @@ def egida_lab(P) -> None:
                     elif P.py == 175 and P.px in [125,75,25] and face_u(P):
                         txt(P,"The monitor is off.")
                     elif P.egi_lab_scim.talk():
-                        egida_lab_b(P)
-                        egida_lab_p(P,P.px,P.py,False)
-                        egida_lab_f(P,P.px,P.py)
+                        refresh()
                         if P.prog[8][0][0] == -1:
                             P.egi_lab_scim.write()
                         else:
@@ -18211,7 +20714,6 @@ def egida_lab(P) -> None:
                                 points = research_game(P,3,[0,True])
                                 lowest = points[1]
                                 points = points[0]
-                                print("points"+str(points))
                                 P.surface.blit(temp,(0,0))
                                 fade_in(P)
                                 if points == -1:
@@ -18235,12 +20737,13 @@ def egida_lab(P) -> None:
                                 if points == -1:
                                     pass
                                 elif points == 3000:
+                                    money = int(2000*(0.9+(0.1*P.prog[8][0][0])))
                                     if not new_day(P.prog[8][0][2]):
-                                        txt(P,"Here, take $400 for that","stellar performance!")
-                                        P.save_data.money += 400
+                                        txt(P,"Here, take $"+str(int(money/5))+" for that","stellar performance!")
+                                        P.save_data.money += int(money/5)
                                     else:
-                                        txt(P,"Here, take $2000 for that","stellar performance!")
-                                        P.save_data.money += 2000
+                                        txt(P,"Here, take $+"+str(money)+" for that","stellar performance!")
+                                        P.save_data.money += money
                                     lvled = gain_skill(P,0,20)
                                 else:
                                     exp = 100+round((points**2)/50000)*5
@@ -18264,9 +20767,7 @@ def egida_lab(P) -> None:
                             else:
                                 txt(P,"Alright, well let me know when","you have the time!")
                     elif P.egi_lab_colress and P.egi_lab_colress.talk():
-                        egida_lab_b(P)
-                        egida_lab_p(P,P.px,P.py,False)
-                        egida_lab_f(P,P.px,P.py)
+                        refresh()
                         if P.prog[8][0][0] >= 2 and P.prog[15][0] == 0:
                             if P.prog[0] < 87:
                                 txt(P,"Thanks for all the hard work","you've been putting in. It's","been a great help!")
@@ -18420,7 +20921,7 @@ def egida_under_b(P,wx,wy,lifty,listx,listy,gy):
         P.surface.fill((173,192,206), Rect(P.px+750,P.py+140,125-P.py,60))
     else:
         if P.px <= -750 and P.px >= -800:
-            P.surface.fill((173,192,206), Rect(P.px+800-(800+P.px),P.py+140,800+P.px,60))
+            P.surface.fill((173,192,206), Rect(0,P.py+140,800+P.px,60))
         else:
             P.surface.fill((173,192,206), Rect(P.px+750,P.py+140,50,60))
     draw_lamps(P, P.px, P.py, listx, listy,bf = "b")
@@ -18525,12 +21026,16 @@ def egida_under_f(P,temppx,temppy,listx,listy,tim,lifty):
         P.surface.blit(trans,(0,0))
 
 def egida_under(P) -> None:
+    def refresh():
+        egida_under_b(P,wx,wy,lifty,listx,listy,gy)
+        egida_under_p(P,P.px,P.py,False,lifty,gond,gy)
+        egida_under_f(P,P.px,P.py,listx,listy,tim,lifty)
     if P.song != "music/egida_city.wav":
         P.song = "music/egida_city.wav"
         pygame.mixer.music.load(P.song)
         set_mixer_volume(P,P.vol)
         pygame.mixer.music.play(-1)
-    if P.prog[0] in [80,47]:
+    if P.prog[0] == 47:
         P.prog[0] += 1
     set_location(P)
     P.egidau_cave = load("p/egida/egida_cave.png")
@@ -18560,9 +21065,7 @@ def egida_under(P) -> None:
     lifty = 0
     fade = None
     use_l = False
-    egida_under_b(P,wx,wy,lifty,listx,listy,gy)
-    egida_under_p(P,P.px,P.py,False,lifty,gond,gy)
-    egida_under_f(P,P.px,P.py,listx,listy,tim,lifty)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -18608,24 +21111,16 @@ def egida_under(P) -> None:
                             fade_out(P)
                             P.p = P.d1
                     elif P.egidau_scif.talk():
-                        egida_under_b(P,wx,wy,lifty,listx,listy,gy)
-                        egida_under_p(P,P.px,P.py,False,lifty,gond,gy)
-                        egida_under_f(P,P.px,P.py,listx,listy,tim,lifty)
+                        refresh()
                         P.egidau_scif.write()
                     elif P.egidau_scim.talk():
-                        egida_under_b(P,wx,wy,lifty,listx,listy,gy)
-                        egida_under_p(P,P.px,P.py,False,lifty,gond,gy)
-                        egida_under_f(P,P.px,P.py,listx,listy,tim,lifty)
+                        refresh()
                         P.egidau_scim.write()
                     elif P.egidau_hiker.talk():
-                        egida_under_b(P,wx,wy,lifty,listx,listy,gy)
-                        egida_under_p(P,P.px,P.py,False,lifty,gond,gy)
-                        egida_under_f(P,P.px,P.py,listx,listy,tim,lifty)
+                        refresh()
                         P.egidau_hiker.write()
                     elif P.egidau_worker and P.egidau_worker.talk():
-                        egida_under_b(P,wx,wy,lifty,listx,listy,gy)
-                        egida_under_p(P,P.px,P.py,False,lifty,gond,gy)
-                        egida_under_f(P,P.px,P.py,listx,listy,tim,lifty)
+                        refresh()
                         P.egidau_worker.write()
                     else:
                         P.buffer_talk = temp_buff
@@ -18828,7 +21323,11 @@ def egida_f(P,temppx,temppy,listx,listy,tim,lifty):
         trans.fill((0,0,0))
         P.surface.blit(trans,(0,0))
 
-def egida(P, enter = False,sci_tim = None,sci_curr = None,x_pos = 1500) -> None:
+def egida(P, enter = False) -> None:
+    def refresh():
+        egida_b(P,pcx,pcy,lifty,listx,listy,tim)
+        egida_p(P,P.px,P.py,False,temp_y,lifty)
+        egida_f(P,P.px,P.py,listx,listy,tim,lifty)
     if P.song != "music/egida_city.wav":
         P.song = "music/egida_city.wav"
         pygame.mixer.music.load(P.song)
@@ -18838,10 +21337,9 @@ def egida(P, enter = False,sci_tim = None,sci_curr = None,x_pos = 1500) -> None:
     set_location(P)
     P.egi_rocket = None
     move = True
-    if sci_tim:
-        P.egi_sci.tim = sci_tim
-        P.egi_sci.curr = sci_curr
-        P.egi_sci.x = x_pos
+    if P.egi_sci.y == -1500:
+        P.egi_sci.x -= 1000
+        P.egi_sci.y += 1350
     if P.prog[5][2] == 0:
         P.egi_robb = P.egi_robb1
     else:
@@ -18869,14 +21367,13 @@ def egida(P, enter = False,sci_tim = None,sci_curr = None,x_pos = 1500) -> None:
         else:
             pcx = 0
             pcy = 0
-        egida_b(P,pcx,pcy,lifty,listx,listy,tim)
-        egida_p(P,P.px,P.py,False,temp_y,lifty)
-        egida_f(P,P.px,P.py,listx,listy,tim,lifty)
+        refresh()
         fade_in(P)
     end = True
     m = 0
     fade = True
     while end:
+        # print(P.egi_sci.x)
         #print(P.px,P.py)
         # fps = str(int(P.clock.get_fps()))
         # print(fps)
@@ -18887,9 +21384,7 @@ def egida(P, enter = False,sci_tim = None,sci_curr = None,x_pos = 1500) -> None:
             txt(P,"If you have the time, I would","love to accept a challenge","from you.")
             fade_out(P)
             P.egi_colress = None
-            egida_b(P,pcx,pcy,lifty,listx,listy,tim)
-            egida_p(P,P.px,P.py,False,temp_y,lifty)
-            egida_f(P,P.px,P.py,listx,listy,tim,lifty)
+            refresh()
             fade_in(P)
             P.prog[0] += 1
             move = True
@@ -18931,9 +21426,7 @@ def egida(P, enter = False,sci_tim = None,sci_curr = None,x_pos = 1500) -> None:
                     temp_buff = P.buffer_talk
                     P.buffer_talk = None
                     if P.egi_colress and P.egi_colress.talk():
-                        egida_b(P,pcx,pcy,lifty,listx,listy,tim)
-                        egida_p(P,P.px,P.py,False,temp_y,lifty)
-                        egida_f(P,P.px,P.py,listx,listy,tim,lifty)
+                        refresh()
                         P.egi_colress.write()
                     elif P.px == -475 and P.py == 975:
                         txt(P,"It's locked.")
@@ -18947,14 +21440,10 @@ def egida(P, enter = False,sci_tim = None,sci_curr = None,x_pos = 1500) -> None:
                                 move = False
                                 use_l = True
                     elif P.egi_pre.talk():
-                        egida_b(P,pcx,pcy,lifty,listx,listy,tim)
-                        egida_p(P,P.px,P.py,False,temp_y,lifty)
-                        egida_f(P,P.px,P.py,listx,listy,tim,lifty)
+                        refresh()
                         P.egi_pre.write()
                     elif P.egi_sci.talk():
-                        egida_b(P,pcx,pcy,lifty,listx,listy,tim)
-                        egida_p(P,P.px,P.py,False,temp_y,lifty)
-                        egida_f(P,P.px,P.py,listx,listy,tim,lifty)
+                        refresh()
                         P.egi_sci.write()
                     else:
                         P.buffer_talk = temp_buff
@@ -19014,7 +21503,7 @@ def egida(P, enter = False,sci_tim = None,sci_curr = None,x_pos = 1500) -> None:
             P.px -= 1000
             P.py += 1350
             P.loc = "route_1"
-            route_1(P,True,P.egi_sci.tim,P.egi_sci.curr,P.egi_sci.x+1000)
+            route_1(P,True)
             fade = False
             end = False
         tim += 1
@@ -19023,7 +21512,6 @@ def egida(P, enter = False,sci_tim = None,sci_curr = None,x_pos = 1500) -> None:
         P.clock.tick(P.ani_spd)
     if fade:
         fade_out(P)
-
 
 def bee_zone_b(P):
     P.surface.blit(P.beez_back, (P.px, P.py))
@@ -19059,9 +21547,12 @@ def bee_zone_f(P,temppx,temppy,tim):
     P.surface.blit(P.beez_f,(temppx+458,temppy+350))
     set_sky(P)
     show_location(P,P.loc_txt,tim)
-    
 
 def bee_zone(P) -> None:
+    def refresh():
+        bee_zone_b(P)
+        bee_zone_p(P,P.px,P.py,False)
+        bee_zone_f(P,P.px,P.py,tim)
     if P.song != "music/route_1.wav":
         P.song = "music/route_1.wav"
         set_mixer_volume(P,P.vol)
@@ -19078,9 +21569,7 @@ def bee_zone(P) -> None:
         P.beez_drill = None
     move = True
     tim = 0
-    bee_zone_b(P)
-    bee_zone_p(P,P.px,P.py,False)
-    bee_zone_f(P,P.px,P.py,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -19094,16 +21583,12 @@ def bee_zone(P) -> None:
         if P.px == -275 and P.py == -125 and P.prog[15][1] == 0:
             move = False
             P.beez_drill = npc.NPC(P,'Beedrill','Lightyear',[500,400],[['r',20]],["","",""])
-            bee_zone_b(P)
-            bee_zone_p(P,P.px,P.py,False)
-            bee_zone_f(P,P.px,P.py,tim)
+            refresh()
             P.beez_drill.trainer_walk = ['d',100,20]
             P.prog[15][1] += 1
         if P.prog[15][1] == 1 and P.beez_drill.y == 450:
             P.beez_drill = npc.NPC(P,'Beedrill','Lightyear',[500,450],[['u',20]],["","",""])
-            bee_zone_b(P)
-            bee_zone_p(P,P.px,P.py,False)
-            bee_zone_f(P,P.px,P.py,tim)
+            refresh()
             txt(P,"The Beedrill is pointing","aggresively at the Metapod.")
             P.prog[15][1] += 1
             move = True
@@ -19115,12 +21600,10 @@ def bee_zone(P) -> None:
             pygame.mixer.music.play(0)
             P.legendary_battle = True
             P.temp_party = P.party.copy()
-            pos = 0
-            while len(P.party) > 1:
-                if P.party[pos].code_nos() != 'Beedrill' or P.party[pos].status == 'Faint' or pos == 1:
-                    P.party.remove(P.party[pos])
-                else:
-                    pos += 1
+            for p in P.party:
+                if p.code_nos() == 'Beedrill' and p.status != 'Faint':
+                    P.party = [p]
+                    break
             battle(P,[poke.Poke('Metapod',[20,1,787,'Rejuvenate',-1,None,None,None,None,None,None,None,None,0,"Nursery Ball",0,'Shed Skin'])],no_pc = True)
             play_music(P,"music/route_1.wav")
             P.surface.blit(te,(0,0))
@@ -19139,16 +21622,12 @@ def bee_zone(P) -> None:
             else:
                 P.prog[15][1] += 1
                 P.p = P.d1
-                bee_zone_b(P)
-                bee_zone_p(P,P.px,P.py,False)
-                bee_zone_f(P,P.px,P.py,tim)
+                refresh()
                 txt(P,"The Beedrill looked pleased.","It left a mysterious stone in","your hand before leaving.")
                 add_item(P,'Beedrillite',1)
                 fade_out(P)
                 P.beez_drill = None
-                bee_zone_b(P)
-                bee_zone_p(P,P.px,P.py,False)
-                bee_zone_f(P,P.px,P.py,tim)
+                refresh()
                 fade_in(P)
             P.party = P.temp_party.copy()
             P.legendary_battle = False
@@ -19183,7 +21662,6 @@ def bee_zone(P) -> None:
     fade_out(P)
     set_mixer_volume(P,P.vol)
 
-
 def route_1_b(P,wx,wy):
     draw_waves(P,wx,wy)
     P.surface.blit(P.route_1,(P.px+50,P.py-2000))
@@ -19196,8 +21674,8 @@ def route_1_b(P,wx,wy):
 def route_1_p(P,temppx,temppy,move = False):
     P.r1_timmy.move()
     P.r1_amy.move()
-    P.r1_noland.move()
-    P.r1_sci.move(mov=True)
+    P.r1_gentle.move()
+    P.egi_sci.move(mov=True)
     if P.r1_robb.move():
         draw_grass(P,P.r1_robb.x,P.r1_robb.y,-1025,1525,600,200,[P.px,P.py])
         draw_grass(P,P.r1_robb.x,P.r1_robb.y,-1025,1325,200,250,[P.px,P.py])
@@ -19231,7 +21709,7 @@ def route_1_p(P,temppx,temppy,move = False):
     r16 = P.r1_timmy.get_rect()
     r18 = P.r1_amy.get_rect()
     r19 = P.r1_robb.get_rect()
-    r20 = P.r1_noland.get_rect()
+    r20 = P.r1_gentle.get_rect()
     r17 = (P.px+2900,P.py-500,50,90)
     rects = [r71,r70,r21,r20,r19,r18,r17,r16,r15,r14,r13,r12,r11,r10,r9,r8,r7,r6,r5,r4,r3,r2,r1]
     #rect_draw(P,rects)
@@ -19254,7 +21732,7 @@ def route_1_p(P,temppx,temppy,move = False):
     draw_grass(P,temppx,temppy,-1875,1075,200,200)
     P.r1_timmy.move(temppx,temppy)
     P.r1_amy.move(temppx,temppy)
-    P.r1_noland.move(temppx,temppy)
+    P.r1_gentle.move(temppx,temppy)
     if P.r1_robb.move(temppx,temppy):
         draw_grass(P,P.r1_robb.x,P.r1_robb.y,-1025,1525,600,200,[temppx,temppy])
         draw_grass(P,P.r1_robb.x,P.r1_robb.y,-1025,1325,200,250,[temppx,temppy])
@@ -19270,16 +21748,20 @@ def route_1_f(P,temppx,temppy,listx,listy,tim):
     draw_lamps(P,temppx,temppy,listx,listy)
     show_location(P,P.loc_txt,tim)
 
-def route_1(P,enter = False,sci_tim = None,sci_curr = None,x_pos = 2500) -> None:
+def route_1(P,enter = False) -> None:
+    def refresh():
+        route_1_b(P,wx,wy)
+        route_1_p(P,P.px,P.py)
+        route_1_f(P,P.px,P.py,listx,listy,tim)
     if P.song != "music/route_1.wav":
         P.song = "music/route_1.wav"
         pygame.mixer.music.load(P.song)
         set_mixer_volume(P,P.vol)
         pygame.mixer.music.play(-1)
-    if sci_tim:
-        P.r1_sci.x = x_pos
-        P.r1_sci.tim = sci_tim
-        P.r1_sci.curr = sci_curr
+    if P.egi_sci.y == -150:
+        P.egi_sci.loc = "route_1"
+        P.egi_sci.x += 1000
+        P.egi_sci.y -= 1350
     if P.prog[0] == 16:
         P.r1_rival = npc.NPC(P,'Rival',P.save_data.rival,[2150,-1300],[['u',100]],["","",""])
     else:
@@ -19291,16 +21773,13 @@ def route_1(P,enter = False,sci_tim = None,sci_curr = None,x_pos = 2500) -> None
     wx = 0
     wy = 0
     tim = 0
-    noland_talk = 50
+    gentle_talk = 50
     if enter == False:
-        route_1_b(P,wx,wy)
-        route_1_p(P,P.px,P.py)
-        route_1_f(P,P.px,P.py,listx,listy,tim)
+        refresh()
         fade_in(P)
     bee_in = False
     end = True
     move = True
-    pause = False
     m = 0
     fade = True
     while end:
@@ -19312,7 +21791,7 @@ def route_1(P,enter = False,sci_tim = None,sci_curr = None,x_pos = 2500) -> None
             move = False
         if move == True and P.r1_robb.trainer_check():
             move = False
-        if move == True and noland_talk > 50 and P.r1_noland.trainer_check():
+        if move == True and gentle_talk > 50 and P.r1_gentle.trainer_check():
             move = False
         temppx = P.px
         temppy = P.py
@@ -19383,19 +21862,19 @@ def route_1(P,enter = False,sci_tim = None,sci_curr = None,x_pos = 2500) -> None
         if trainer_check(P,P.r1_robb,"music/route_1.wav"):
             P.r1_robb = npc.NPC(P,'Bug Catcher','Robb',[P.r1_robb.x,P.r1_robb.y],[[P.r1_robb.face(),100]],["I bet there's an even cooler","Pokemon hiding in this grass!",""])
             move = True
-        if noland_talk > 50 and trainer_check(P,P.r1_noland,"music/route_1.wav"):
+        if gentle_talk > 50 and trainer_check(P,P.r1_gentle,"music/route_1.wav"):
             if P.prog[5][3] == 0:
-                P.r1_noland = npc.NPC(P,'Gentleman','Noland',[2850,-500],[['r',100]],["It's not often I see a new","adventurer around here.","","Perhaps you would be willing", "to entertain this old man with","a battle?"],["Hmmph!","That certainly brought back","old memories!","It's been ages since I got","this heated over a Pokemon","battle!","Who knows, maybe you have what", "it takes to beat the champion!","Ha!"],True,[50,150,50,200],[poke.Poke('Nidorino',[16,0,787,"Focus Energy",-1,"Leer",-1,"Double Kick",-1,"Poison Sting",-1,None,None,0,"Poke Ball",0,"Rivalry"]),poke.Poke('Nidorina',[16,1,787,"Growl",-1,"Scratch",-1,"Poison Sting",-1,"Double Kick",-1,None,None,0,"Poke Ball",0,"Rivalry"])],3,loc = "route_1")
-                noland_talk = 0
+                P.r1_gentle = npc.NPC(P,'Gentleman','Joey',[2850,-500],[['r',100]],["It's not often I see a new","adventurer around here.","","Perhaps you would be willing", "to entertain this old man with","a battle?"],["Hmmph!","That certainly brought back","old memories!","It's been ages since I got","this heated over a Pokemon","battle!","Who knows, maybe you have what", "it takes to beat the champion!","Ha!"],True,[50,150,50,200],[poke.Poke('Nidorino',[16,0,787,"Focus Energy",-1,"Leer",-1,"Double Kick",-1,"Poison Sting",-1,None,None,0,"Poke Ball",0,"Rivalry"]),poke.Poke('Nidorina',[16,1,787,"Growl",-1,"Scratch",-1,"Poison Sting",-1,"Double Kick",-1,None,None,0,"Poke Ball",0,"Rivalry"])],3,loc = "route_1")
+                gentle_talk = 0
                 move = True
             else:
                 if face_r(P):
-                    P.r1_noland = npc.NPC(P,'Gentleman','Noland',[P.r1_noland.x,P.r1_noland.y],[['md',20],['ml',200]],["","",""])
+                    P.r1_gentle = npc.NPC(P,'Gentleman','Joey',[P.r1_gentle.x,P.r1_gentle.y],[['md',20],['ml',200]],["","",""])
                 else:
-                    P.r1_noland = npc.NPC(P,'Gentleman','Noland',[P.r1_noland.x,P.r1_noland.y],[['ml',200]],["","",""])
-        if move == False and P.r1_noland.x == 2350:
+                    P.r1_gentle = npc.NPC(P,'Gentleman','Joey',[P.r1_gentle.x,P.r1_gentle.y],[['ml',200]],["","",""])
+        if move == False and P.r1_gentle.x == 2350:
             move = True
-            P.r1_noland = npc.NPC(P,'Gentleman','Noland',[1500,-550],[['l',100]],["I still remember when this was","a statue of Cynthia back when","she oversaw the city.","I heard you can still find","that statue standing in the", "Alto Mare gym."])
+            P.r1_gentle = npc.NPC(P,'Gentleman','Joey',[1500,-550],[['l',100]],["I still remember when this was","a statue of Cynthia back when","she oversaw the city.","I heard you can still find","that statue standing in the", "Alto Mare gym."])
         for event in map_keys():
             if (event.type == KEYDOWN or P.buffer_talk) and tim > 20:
                 if event.key == pygame.key.key_code(P.controls[6]) and move:
@@ -19411,9 +21890,7 @@ def route_1(P,enter = False,sci_tim = None,sci_curr = None,x_pos = 2500) -> None
                         if P.r1_timmy.trainer:
                             move = False
                         else:
-                            route_1_b(P,wx,wy)
-                            route_1_p(P,P.px,P.py,False)
-                            route_1_f(P,P.px,P.py,listx,listy,tim)
+                            refresh()
                             P.r1_timmy.write()
                     elif next_to(P,1400,-1250) and P.prog[6][9] == 0:
                         txt(P,P.save_data.name + " found an Everstone!")
@@ -19424,26 +21901,20 @@ def route_1(P,enter = False,sci_tim = None,sci_curr = None,x_pos = 2500) -> None
                         if P.r1_amy.trainer:
                             move = False
                         else:
-                            route_1_b(P,wx,wy)
-                            route_1_p(P,P.px,P.py,False)
-                            route_1_f(P,P.px,P.py,listx,listy,tim)
+                            refresh()
                             P.r1_amy.write()
                     elif P.r1_robb.talk():
                         if P.r1_robb.trainer:
                             move = False
                         else:
-                            route_1_b(P,wx,wy)
-                            route_1_p(P,P.px,P.py,False)
-                            route_1_f(P,P.px,P.py,listx,listy,tim)
+                            refresh()
                             P.r1_robb.write()
-                    elif noland_talk > 50 and P.r1_noland.talk():
-                        if P.r1_noland.trainer:
+                    elif gentle_talk > 50 and P.r1_gentle.talk():
+                        if P.r1_gentle.trainer:
                             move = False
                         else:
-                            route_1_b(P,wx,wy)
-                            route_1_p(P,P.px,P.py,False)
-                            route_1_f(P,P.px,P.py,listx,listy,tim)
-                            P.r1_noland.write()
+                            refresh()
+                            P.r1_gentle.write()
                     elif next_to(P,1300,-550) or next_to(P,1350,-550) or next_to(P,1400,-550) or next_to(P,1450,-550) or next_to(P,1300,-600) or next_to(P,1350,-600) or next_to(P,1400,-600) or next_to(P,1450,-600):
                         if face_u(P):
                             txt(P,"Zinnia: Guardian of Alto Mare")
@@ -19475,7 +21946,7 @@ def route_1(P,enter = False,sci_tim = None,sci_curr = None,x_pos = 2500) -> None
             P.py -= 1350
             P.loc = "egida"
             update_locs(P)
-            egida(P,True,P.r1_sci.tim,P.r1_sci.curr,P.r1_sci.x-1000)
+            egida(P,True)
             fade = False
             end = False
         if move and (wild_grass(P,-1025,1525,600,200,ignore = [(-1025,1525)]) or wild_grass(P,-1025,1325,200,250) or wild_grass(P,-1875,1525,200,300) or wild_grass(P,-1875,1075,200,200)):
@@ -19527,14 +21998,11 @@ def route_1(P,enter = False,sci_tim = None,sci_curr = None,x_pos = 2500) -> None
             P.foam += 1
             if P.foam == 5:
                 P.foam = -5
-        noland_talk += 1
+        gentle_talk += 1
         tim += 1
         tick_buffer(P)
         update_screen(P)
         P.clock.tick(P.ani_spd)
-        if pause:
-            P.clock.tick(P.ani_spd/30)
-            pause = False
     if fade:
         fade_out(P,P.song)
     elif P.loc == 'beedrill':
@@ -19634,11 +22102,15 @@ def poke_center_f(P,temppx,temppy):
     show_location(P, None, 0)
 
 def poke_center(P,loc) -> None:
+    def refresh():
+        poke_center_b(P,heal,[],[])
+        poke_center_p(P,P.px,P.py,300)
+        poke_center_f(P,P.px,P.py)
     P.pc_npc1 = None
     P.pc_npc2 = None
     P.pc_npc3 = None
     birthday = False
-    if P.prog[13] != None and datetime.datetime.now().month == P.prog[13][0] and datetime.datetime.now().day == P.prog[13][1] and party_fainted(P) == False and P.prog[13][2] == 0:
+    if P.prog[13] != None and datetime.datetime.now().month == P.prog[13][0] and datetime.datetime.now().day == P.prog[13][1] and party_alive(P) == 0 and P.prog[13][2] == 0:
         birthday = True
         P.prog[13][2] += 1
     if P.prog[13] != None and (datetime.datetime.now().month != P.prog[13][0] or datetime.datetime.now().day != P.prog[13][1]) and P.prog[13][2] != 0:
@@ -19697,11 +22169,15 @@ def poke_center(P,loc) -> None:
             else:
                 P.pc_candy = npc.NPC(P,'Candyman','Bro',[500,300],[['d',40]],[""])
     elif loc == 'silfide':
+        P.pc_npc1 = npc.NPC(P,'Hiker','Dude',[0,550],[['r',40]],["The hike up here was brutal, but it makes this couch feel so much comfier!"])
+        P.pc_npc2 = npc.NPC(P,'Ace Trainerm','Boy',[300,400],[['u',40]],["Despite having such a bubbly personality, Lisia really is a tough gym leader!","I'm gonna end up training here for a month at the rate I'm going!"])
         if P.prog[9] == 1 and get_time() in [3,11,19]:
             if P.px == -125 and P.py == -25:
                 P.pc_candy = npc.NPC(P,'Candyman','Bro',[450,300],[['d',40]],[""])
             else:
                 P.pc_candy = npc.NPC(P,'Candyman','Bro',[500,300],[['d',40]],[""])
+    elif loc == 'nevoso':
+        pass
     if P.pc_candy:
         song = "music/pc_candy.wav"
     else:
@@ -19726,11 +22202,11 @@ def poke_center(P,loc) -> None:
     machine2 = load("p/am/pc_machine_2.png")
     P.pc_machine = machine1
     P.pc_couch = load("p/am/pc_couch.png")
-    candy_box = load("p/3_box.png")
+    candy_box = load("p/ui/3_box.png")
     box = candy_box
     txt_mod = 0
     if P.prog[0] >= 123:
-        box = load("p/4_box.png")
+        box = load("p/ui/4_box.png")
         txt_mod = 50
     heal = 300
     m = 0
@@ -19738,9 +22214,7 @@ def poke_center(P,loc) -> None:
     plugged = 1
     poke_list = []
     pokemon_list = []
-    poke_center_b(P,heal,[],[])
-    poke_center_p(P,P.px,P.py,300)
-    poke_center_f(P,P.px,P.py)
+    refresh()
     end = True
     fade_in(P)
     while end:
@@ -19765,7 +22239,7 @@ def poke_center(P,loc) -> None:
             P.prog[13][2] += 1
             set_channel_volume(P,P.sfx_vol,1)
             pygame.mixer.Channel(1).play(pygame.mixer.Sound('music/sfx/birthday_pop.wav'))
-        if P.px == 125 and P.py == -125 and party_fainted(P) and tim == 0:
+        if P.px == 125 and P.py == -125 and party_alive(P) == 0 and tim == 0:
             P.pc_nurse = P.pc_nurseb
             heal = 0
             poke_list = []
@@ -19903,9 +22377,7 @@ def poke_center(P,loc) -> None:
                         else:
                             txt(P,"Good luck on your adventure!")
                     elif P.pc_candy and P.pc_candy.talk():
-                        poke_center_b(P,heal,poke_list,pokemon_list)
-                        poke_center_p(P,P.px,P.py,heal)
-                        poke_center_f(P,P.px,P.py)
+                        refresh()
                         mt = P.surface.copy()
                         new_txt(P)
                         write(P,"Hey there Munchkin!","Wanna buy some sweets?")
@@ -19955,14 +22427,10 @@ def poke_center(P,loc) -> None:
                         P.surface.blit(mt,(0,0))
                         txt(P,"Hee hee, pleasure doing","business with ya!")
                     elif P.pc_npc1 and P.pc_npc1.talk():
-                        poke_center_b(P,heal,poke_list,pokemon_list)
-                        poke_center_p(P,P.px,P.py,heal)
-                        poke_center_f(P,P.px,P.py)
+                        refresh()
                         P.pc_npc1.write()
                     elif P.pc_npc2 and P.pc_npc2.talk():
-                        poke_center_b(P,heal,poke_list,pokemon_list)
-                        poke_center_p(P,P.px,P.py,heal)
-                        poke_center_f(P,P.px,P.py)
+                        refresh()
                         if P.loc == 'pc_am':
                             txt(P,"Press ["+P.controls[5]+"] to run!","Feel the wind blowing through", "your hair!")
                             txt(P,"Indoors, outdoors, everything","is better when you're running!","")
@@ -19970,9 +22438,7 @@ def poke_center(P,loc) -> None:
                         else:
                             P.pc_npc2.write()
                     elif P.pc_npc3 and P.pc_npc3.talk():
-                        poke_center_b(P,heal,poke_list,pokemon_list)
-                        poke_center_p(P,P.px,P.py,heal)
-                        poke_center_f(P,P.px,P.py)
+                        refresh()
                         P.pc_npc3.write()
                     elif next_to(P,0,300):
                         txt(P,"These are some pretty roses!")
@@ -20087,6 +22553,10 @@ def poke_center(P,loc) -> None:
                 P.px = -2025
                 P.py = -775
                 P.loc = 'silfide'
+            if loc == 'nevoso':
+                P.px = -825
+                P.py = -525
+                P.loc = 'nevoso'
             end = False
         if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and m == 1:
             menu(P)
@@ -20131,6 +22601,9 @@ def poke_center(P,loc) -> None:
 def house_3_b(P):
     P.surface.fill((0,0,0))
     P.surface.blit(P.h3_back, (P.px, P.py))
+    if P.h3_clam:
+        blit_img(P,P.char_shad, (P.px + 150, P.py +290))
+        blit_img(P,P.h3_clam,(P.px+150,P.py+270))
 
 def house_3_p(P,temppx,temppy,move):
     if P.h3_npc1:
@@ -20190,6 +22663,10 @@ def house_3_f(P,temppx,temppy):
     show_location(P, None, 0)
 
 def house_3(P,num) -> None:
+    def refresh():
+        house_3_b(P)
+        house_3_p(P,P.px,P.py,False)
+        house_3_f(P,P.px,P.py)
     music = None
     if num == 1:
         music = "music/fiore.wav"
@@ -20201,6 +22678,8 @@ def house_3(P,num) -> None:
         music = "music/route_6.wav"
     elif num <= 12:
         music = "music/silfide.wav"
+    elif num <= 15:
+        music = "music/nevoso.wav"
     set_mixer_volume(P,P.vol)
     if P.song != music:
         P.song = music
@@ -20210,11 +22689,18 @@ def house_3(P,num) -> None:
     P.h3_npc1 = None
     P.h3_npc2 = None
     P.h3_npc3 = None
+    P.h3_clam = None
     if num == 1:
         if not (datetime.datetime.today().weekday() == 5 and get_time() >= 6 and P.prog[1] == 3):
             P.h3_npc1 = npc.NPC(P,'Gentleman','Pineapple',[250,250],[['l',40]],["Thanks again for the help!","Don't forget to stop by my","stand in Alto Mare!"])
     elif num == 2:
         P.h3_npc1 = npc.NPC(P,'Preschoolerb','Clamperl',[100,300],[['r',40]],["This Loudred is so much more","interesting than that lame","Clamperl!","I just hope my mom doesn't get","too mad at me for giving it","away!"])
+        if P.prog[12][2] == 2:
+            P.h3_npc2 = npc.NPC(P,'Loudred','Loudred',[50,200],[['mr',100],['md',60],['ml',100],['mu',60]],["LOUDRED!!!"])
+        else:
+            P.h3_clam1 = pygame.transform.scale(load("p/spr/Clamperl_d1.png"),(50,60))
+            P.h3_clam2 = pygame.transform.scale(load("p/spr/Clamperl_d2.png"),(50,60))
+            P.h3_clam = P.h3_clam1
     elif num == 4:
         P.h3_npc1 = npc.NPC(P,'Hiker','Nature',[50,150],[['u',40]],["I feel like living in Isola","Town is the perfect balance","between city and nature!","I can go out and take in the","fresh air, but always come","back to relax in my home!"])
     elif num == 5:
@@ -20239,13 +22725,16 @@ def house_3(P,num) -> None:
         P.h3_npc2 = npc.NPC(P,'Gentleman','Hawlucha',[100,250],[['r',40]],["As you can see, Delcatty seems","to be adapting quite well to","our home.","I trust you've been taking","good care of Hawlucha?",""])
         if P.prog[12][8] == 2:
             P.h3_npc3 = npc.NPC(P,'Delcatty','Delcatty',[200,200],[['mr',80],['r',100],['mu',40],['u',60],['ml',80],['l',120],['md',40],['d',100]],["The Delcatty nuzzles up to you","as you give it a good petting.",""])
-    # elif num == 10:
-    #     P.h1_npc1 = npc.NPC(P,'Preschoolerb','Kid',[300,300],[['u',40]],["Oh...Looks like mom forgot to","lock the door again. That's","the third time this week...","What if someone just came in","here and kidnapped me? That'd","be pretty scary!","Well I'm pretty sure that only","happens in movies and stuff.","Right?"])
+    elif num == 10:
+        P.h3_npc1 = npc.NPC(P,'Aroma Lady','Kid',[100,150],[['u',40]],["I feel like my mom has been having a harder time moving around these days.","She hasn't said anything, but she's been sitting down a lot more than before."])
+    elif num == 11:
+        P.h3_npc1 = npc.NPC(P,'Team Rocketf','Kid',[50,150],[['u',40]],["AHHH!!! Please don't tell anyone you saw me. I didn't know what we were doing.","That legendary Pokemon scared the wits outta me!"])
+        P.h3_npc2 = npc.NPC(P,'Rich Boy','Kid',[500,250],[['l',40]],["Why did she just barge into my house like that? And what is she wearing?","She's kinda cute though, don't you think?"])
+    elif num == 12:
+        P.h3_npc1 = npc.NPC(P,'Scientistm','Kid',[100,300],[['r',40]],["The wind turbines here generate most of the energy used on this island.","Besides doing maintenance checks every now and then, my job here is pretty easygoing."])
     move = True
     tim = 0
-    house_3_b(P)
-    house_3_p(P,P.px,P.py,False)
-    house_3_f(P,P.px,P.py)
+    refresh()
     fade_in(P)
     if num == 8:
         if P.prog[12][5] < 4:
@@ -20260,15 +22749,11 @@ def house_3(P,num) -> None:
                 P.habitat = 'indoor'
                 add_item(P,"Odd Keystone",-1)
                 P.prog[12][5] += 1
-                house_3_b(P)
-                house_3_p(P,P.px,P.py,False)
-                house_3_f(P,P.px,P.py)
+                refresh()
                 txt(P,"The fog concentrated into the","stone.")
                 fade_out(P,color = (70,50,60),spd = 3)
                 P.prog[12][5] += 1
-                house_3_b(P)
-                house_3_p(P,P.px,P.py,False)
-                house_3_f(P,P.px,P.py)
+                refresh()
                 fade_in(P,color = (70,50,60),spd = 3)
                 txt(P,"The Spiritomb attacked!")
                 P.song = "music/wild_battle.wav"
@@ -20278,9 +22763,7 @@ def house_3(P,num) -> None:
                 battle(P,[poke.Poke('Spiritomb',[40,random.randint(0,1),787,'Nasty Plot',-1,'Sucker Punch',-1,'Dream Eater',-1,'Hypnosis',-1,None,None,0,"Poke Ball"])])
                 P.prog[12][5] += 1
                 play_music(P,"music/ombra.wav")
-                house_3_b(P)
-                house_3_p(P,P.px,P.py,False)
-                house_3_f(P,P.px,P.py)
+                refresh()
                 fade_in(P)
                 add_memo(P,"Homeless Ghost",1)
     end = True
@@ -20304,9 +22787,7 @@ def house_3(P,num) -> None:
                     temp_buff = P.buffer_talk
                     P.buffer_talk = None
                     if P.h3_npc1 and P.h3_npc1.talk():
-                        house_3_b(P)
-                        house_3_p(P,P.px,P.py,False)
-                        house_3_f(P,P.px,P.py)
+                        refresh()
                         if P.h3_npc1.name == 'Ferro':
                             if P.prog[12][6] == 0:
                                 txt(P,"I really wish I could see if","anything is sitting on top of","this bookshelf.")
@@ -20427,6 +22908,7 @@ def house_3(P,num) -> None:
                                         get_poke(P,poke.Poke('Clamperl',[20,random.randint(0,1),787,"Clamp",-1,"Water Gun",-1,"Whirlpool",-1,"Iron Defense",-1,'Pearl',None,0,"Luxury Ball",0,'Shell Armor']),False)
                                         P.prog[12][2] += 1
                                         add_memo(P,"Anyone Want a Clamperl?",1)
+                                        P.h3_clam = None
                                     else:
                                         txt(P,"Come on, surely it's not too","much to ask from a trainer of","your caliber!")
                                 else:
@@ -20445,10 +22927,8 @@ def house_3(P,num) -> None:
                         else:
                             P.h3_npc1.write()
                     elif P.h3_npc2 and P.h3_npc2.talk():
-                        house_3_b(P)
-                        house_3_p(P,P.px,P.py,False)
-                        house_3_f(P,P.px,P.py)
-                        if P.h3_npc2.name == 'Kadabra':
+                        refresh()
+                        if P.h3_npc2.name in ['Kadabra','Loudred']:
                             P.font = pygame.font.SysFont("courier", 40, bold = False, italic = True)
                             P.h3_npc2.write()
                             P.font = pygame.font.SysFont("courier", 40, bold = True, italic = False)
@@ -20486,10 +22966,10 @@ def house_3(P,num) -> None:
                         else:
                             P.h3_npc2.write()
                     elif P.h3_npc3 and P.h3_npc3.talk():
-                        house_3_b(P)
-                        house_3_p(P,P.px,P.py,False)
-                        house_3_f(P,P.px,P.py)
+                        refresh()
                         P.h3_npc3.write()
+                    elif P.h3_clam and next_to(P,150,300):
+                        txt(P,"The Clamperl is sleeping.")
                     elif P.py == 125 and P.px in [-75,-125] and face_u(P):
                         if num == 1:
                             new_txt(P)
@@ -20524,9 +23004,7 @@ def house_3(P,num) -> None:
                             new_txt(P)
                             write(P,"There's a note poking out of","one of the books.","Look at it?")
                             if choice(P):
-                                house_3_b(P)
-                                house_3_p(P,P.px,P.py,False)
-                                house_3_f(P,P.px,P.py)
+                                refresh()
                                 P.surface.blit(P.h3_note,(100,100))
                                 cont(P)
                         elif num == 6:
@@ -20640,7 +23118,7 @@ def house_3(P,num) -> None:
                         else:
                             txt(P,"You wash your hands.")
                     elif P.px == 375 and P.py == 125 and face_u(P):
-                        if num in [1,4]:
+                        if num in [1,4,10]:
                             txt(P,"Something smells delicious!")
                         else:
                             txt(P,"Nothing's cooking.")
@@ -20701,6 +23179,18 @@ def house_3(P,num) -> None:
                 P.px = -1775
                 P.py = -1675
                 P.loc = "silfide"
+            elif num == 13:
+                P.px = -525
+                P.py = -525
+                P.loc = "nevoso"
+            elif num == 14:
+                P.px = -925
+                P.py = -1375
+                P.loc = "nevoso"
+            elif num == 15:
+                P.px = -1275
+                P.py = -1375
+                P.loc = "nevoso"
             end = False    
         if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and m == 1:
             menu(P)
@@ -20714,6 +23204,11 @@ def house_3(P,num) -> None:
                 P.h3_ab = P.h3_ab2
             else:
                 P.h3_ab = P.h3_ab1
+        if tim%40 == 0 and P.h3_clam:
+            if P.h3_clam == P.h3_clam1:
+                P.h3_clam = P.h3_clam2
+            else:
+                P.h3_clam = P.h3_clam1
         tick_buffer(P)
         update_screen(P)
         P.clock.tick(P.ani_spd)
@@ -20782,6 +23277,10 @@ def house_2_2_f(P,temppx,temppy):
     show_location(P, None, 0)
 
 def house_2_2(P,num) -> None:
+    def refresh():
+        house_2_2_b(P)
+        house_2_2_p(P,P.px,P.py,False)
+        house_2_2_f(P,P.px,P.py)
     if num <= 3:
         if (P.song != "music/am_night.wav" and P.song != "music/am_day.wav"):
             if ((get_time() > 19 or get_time() < 6) and P.lighting == 'Dynamic') or P.lighting == 'Night':
@@ -20817,18 +23316,18 @@ def house_2_2(P,num) -> None:
     elif num == 4:
         P.h22_npc1 = npc.NPC(P,'Lass','Sis',[150,150],[['l',40]],["Just the other day, we were","assigned a statistics project","for homework.","And of all things, my sister", "wanted to get the distribution","of birthdays in the city!","What a nutcase, am I right?","",""])
     elif num == 6:
-        P.h22_npc1 = npc.NPC(P,'Beauty','Mom',[150,150],[['l',40]],["Sorry, I'm very busy. I've got to","wash the sheets and cook","dinner, and...and...","Ahh! I forgot to pick up my","cake from the bakery!",""])
+        P.h22_npc1 = npc.NPC(P,'Beauty','Mom',[150,150],[['l',40]],["Sorry, I'm very busy. I've got to wash the sheets and cook dinner, and...and...","Ahh! I forgot to pick up my cake from the bakery!"])
     elif num == 7:
         P.h22_npc1 = npc.NPC(P,'Youngster','Will',[150,300],[['l',40]],["And now I can evolve my","Charmeleon into Charizard EX!","Take that!","Haha, now I'm gonna run him","over with Fire Blasts!",""])
         P.h22_npc2 = npc.NPC(P,'Youngster','Josh',[50,300],[['r',40]],["I thought Tyler was supposed","to come today, but he's still","not here.","Will's parents buy him all the","good cards, so I can never","beat him."])
         P.h22_npc3 = npc.NPC(P,'Preschoolerb','Kid',[100,250],[['d',40]],["I don't know what's going on,","but it looks pretty cool!",""])
+    elif num == 9:
+        P.h22_npc1 = npc.NPC(P,'Gentleman','Grandpa',[550,400],[['u',40]],["I've narrowed it down so much, but I just can't decided between these two.","This one is such a classic but the other is perfect for maturing boys."])
     else:
         P.h22_npc1 = None
     move = True
     tim = 0
-    house_2_2_b(P)
-    house_2_2_p(P,P.px,P.py,False)
-    house_2_2_f(P,P.px,P.py)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -20851,19 +23350,13 @@ def house_2_2(P,num) -> None:
                     temp_buff = P.buffer_talk
                     P.buffer_talk = None
                     if P.h22_npc1 and P.h22_npc1.talk():
-                        house_2_2_b(P)
-                        house_2_2_p(P,P.px,P.py,False)
-                        house_2_2_f(P,P.px,P.py)
+                        refresh()
                         P.h22_npc1.write()
                     elif P.h22_npc2 and P.h22_npc2.talk():
-                        house_2_2_b(P)
-                        house_2_2_p(P,P.px,P.py,False)
-                        house_2_2_f(P,P.px,P.py)
+                        refresh()
                         P.h22_npc2.write()
                     elif P.h22_npc3 and P.h22_npc3.talk():
-                        house_2_2_b(P)
-                        house_2_2_p(P,P.px,P.py,False)
-                        house_2_2_f(P,P.px,P.py)
+                        refresh()
                         P.h22_npc3.write()
                     elif P.px == 75 and P.py == -75 and face_u(P):
                         time = datetime.datetime.now()
@@ -20878,6 +23371,8 @@ def house_2_2(P,num) -> None:
                         if hour > 12:
                             ap = " PM."
                             hour -= 12
+                        elif hour == 0:
+                            hour = 12
                         txt(P,"It's "+str(hour)+":"+min+ap)
                     elif next_to(P,250,100):
                         txt(P,"It's a healthy plant.")
@@ -21027,6 +23522,10 @@ def house_2_1_f(P,temppx,temppy):
     show_location(P, None, 0)
 
 def house_2_1(P,num) -> None:
+    def refresh():
+        house_2_1_b(P)
+        house_2_1_p(P,P.px,P.py,False)
+        house_2_1_f(P,P.px,P.py)
     music = None
     if num < 4:
         if (P.song != "music/am_night.wav" and P.song != "music/am_day.wav"):
@@ -21073,13 +23572,16 @@ def house_2_1(P,num) -> None:
     elif num == 8:
         if not has_poke(P,"Rotom_rotF"):
             P.h21_acc2 = load("p/silfide/fan.png")
+            P.h21_npc1 = npc.NPC(P,'Youngster','Punk',[50,250],[['u',40]],["My mom keeps telling me to go outside for fresh air, but this fan does just fine."])
+        else:
+            P.h21_npc1 = npc.NPC(P,'Youngster','Punk',[50,250],[['u',40]],["You wouldn't happen to know what happened to our fan, would you?","I looked away for one second, and it just disappeared!"])
+    elif num == 9:
+        P.h21_npc1 = npc.NPC(P,'Preschoolerb','Punk',[400,250],[['l',40]],["Are you here to see grandpa? He's upstairs finding a book for me.","The last one had too many words I didn't understand."])
     else:
         P.h21_npc1 = None
     move = True
     tim = 0
-    house_2_1_b(P)
-    house_2_1_p(P,P.px,P.py,False)
-    house_2_1_f(P,P.px,P.py)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -21102,9 +23604,7 @@ def house_2_1(P,num) -> None:
                     temp_buff = P.buffer_talk
                     P.buffer_talk = None
                     if P.h21_npc1 and P.h21_npc1.talk():
-                        house_2_1_b(P)
-                        house_2_1_p(P,P.px,P.py,False)
-                        house_2_1_f(P,P.px,P.py)
+                        refresh()
                         if P.h21_npc1.name == 'Birthday' and P.prog[13] == None:
                             txt(P,"Heya! I'm collecting birthdays","for this super important","school project!")
                             txt(P,"Gimme your birthday! But no","lying! My project has to be","flawless!")
@@ -21165,9 +23665,7 @@ def house_2_1(P,num) -> None:
                         else:
                             txt(P,"The trashcan's empty.")
                     elif P.h21_npc2 and P.h21_npc2.talk():
-                        house_2_1_b(P)
-                        house_2_1_p(P,P.px,P.py,False)
-                        house_2_1_f(P,P.px,P.py)
+                        refresh()
                         P.h21_npc2.write()
                     elif P.h21_acc and next_to(P,450,100):
                         txt(P,"It's a washing machine.")
@@ -21228,6 +23726,7 @@ def house_2_1(P,num) -> None:
                                             pass
                                         else:
                                             P.party[p].learn(P,moves.Move('Air Slash'),False)
+                                P.h21_npc1 = npc.NPC(P,'Youngster','Punk',[50,250],[['u',40]],["You wouldn't happen to know what happened to our fan, would you?","I looked away for one second, and it just disappeared!"])
                                 P.h21_acc2 = None
                         elif has_poke(P,"Rotom",True):
                             txt(P,"Rotom might like this", "appliance.")
@@ -21346,6 +23845,10 @@ def house_1_f(P,temppx,temppy):
     show_location(P, None, 0)
 
 def house_1(P,num) -> None:
+    def refresh():
+        house_1_b(P)
+        house_1_p(P,P.px,P.py,False)
+        house_1_f(P,P.px,P.py)
     music = None
     if num == 1:
         if ((get_time() > 19 or get_time() < 6) and P.lighting == 'Dynamic') or P.lighting == 'Night':
@@ -21379,7 +23882,7 @@ def house_1(P,num) -> None:
     P.h1_npc2 = None
     P.h1_acc = None
     if num == 1:
-        P.h1_npc1 = npc.NPC(P,'Rich Boy','Dude',[200,150],[['u',40]],["Oi! Can't you see I'm busy","prepping for a date? What's up","with people just barging into","some random stranger's homes","without asking for permission?",""])
+        P.h1_npc1 = npc.NPC(P,'Rich Boy','Dude',[200,150],[['u',40]],["Oi! Can't you see I'm busy prepping for a date?","What's up with people just barging into some random stranger's homes?"])
     elif num == 2:
         P.h1_npc1 = npc.NPC(P,'Healer','Mom',[0,150],[['u',40]],["Where did my little Carlos run","off to this time? I never know","what he's up to.","He's always late for dinner,","even though I tell him it's","ready at 6 pm every day!","I should just have him make","his own dinner! That'll teach","him a lesson!"])
     elif num == 3:
@@ -21428,9 +23931,7 @@ def house_1(P,num) -> None:
         P.h1_npc1 = None
     move = True
     tim = 0
-    house_1_b(P)
-    house_1_p(P,P.px,P.py,False)
-    house_1_f(P,P.px,P.py)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -21453,9 +23954,7 @@ def house_1(P,num) -> None:
                     temp_buff = P.buffer_talk
                     P.buffer_talk = None
                     if P.h1_npc1 and P.h1_npc1.talk():
-                        house_1_b(P)
-                        house_1_p(P,P.px,P.py,False)
-                        house_1_f(P,P.px,P.py)
+                        refresh()
                         if P.h1_npc1.name == 'Loud' and get_time() == 12:
                             if P.prog[12][3] < 2:
                                 txt(P,"Whew! I get really thirsty","after such a long day of","practicing.")
@@ -21496,18 +23995,7 @@ def house_1(P,num) -> None:
                                     txt(P,"Alright, here are your petals","back!")
                                     petal_list = []
                                     for pet in ans.petals:
-                                        if pet == 'hp':
-                                            petal_list.append("Red Petal")
-                                        elif pet == 'ak':
-                                            petal_list.append("Blue Petal")
-                                        elif pet == 'sak':
-                                            petal_list.append("Purple Petal")
-                                        elif pet == 'df':
-                                            petal_list.append("Brown Petal")
-                                        elif pet == 'sdf':
-                                            petal_list.append("Green Petal")
-                                        else:
-                                            petal_list.append("Yellow Petal")
+                                        petal_list.append(stat_to_petal(pet))
                                     ans.petals = []
                                     for pet in petal_list:
                                         txt(P,"You received a "+pet+"!")
@@ -21790,9 +24278,7 @@ def house_1(P,num) -> None:
                                 P.prog[12][3] += 1
                                 add_memo(P,"Music to my Ears")
                     elif P.h1_npc2 and P.h1_npc2.talk():
-                        house_1_b(P)
-                        house_1_p(P,P.px,P.py,False)
-                        house_1_f(P,P.px,P.py)
+                        refresh()
                         if P.h1_npc2.name == 'Name Hater':
                             t = P.surface.copy()
                             txt(P,"Hey there kid!","I'm the official Name Hater!")
@@ -22147,6 +24633,10 @@ def north_am_f(P,temppx,temppy,listx,listy,tim):
     show_location(P, P.loc_txt, tim)
 
 def north_am(P) -> None:
+    def refresh():
+        north_am_b(P,wx,wy,listx,listy,pcx,pcy,gy)
+        north_am_p(P,P.px,P.py,False,gond,gy)
+        north_am_f(P,P.px,P.py,listx,listy,tim)
     if ((get_time() > 19 or get_time() < 6) and P.lighting == 'Dynamic') or P.lighting == 'Night':
         song = "music/am_night.wav"
     else:
@@ -22199,9 +24689,7 @@ def north_am(P) -> None:
     vic_trans = 0
     listx = [442,715,1088,1289,1838,709,995,1283,1571,715,1289,1838,1838,1434,846,-60]
     listy = [-1250,-1250,-1250,-1250,-1250,-1000,-1000,-1000,-1000,-1500,-1500,-1500,-1700,-1745,-1745,-1600]
-    north_am_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-    north_am_p(P,P.px,P.py,False,gond,gy)
-    north_am_f(P,P.px,P.py,listx,listy,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -22215,7 +24703,7 @@ def north_am(P) -> None:
             pygame.mixer.music.load(P.song)
             set_mixer_volume(P,P.vol)
             pygame.mixer.music.play(-1)
-        #print(P.px,P.py)
+        # print(P.px,P.py)
         if P.prog[4] == 0 and P.px >= 275 and P.py >= 1775:
             move = False
             P.prog[4] += 1
@@ -22233,23 +24721,17 @@ def north_am(P) -> None:
             P.nam_rival = npc.NPC(P,'Rival',P.save_data.rival,[900,-1100],[['md',int(abs(npc_y_dist(P,P.nam_rival))*2/5)],['ml',60],['l',10]],["","",""])
             P.prog[0] += 1
         if P.prog[0] == 14 and npc_x_dist(P,P.nam_rival) == 50:
-            north_am_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-            north_am_p(P,P.px,P.py,False,gond,gy)
-            north_am_f(P,P.px,P.py,listx,listy,tim)
+            refresh()
             new_txt(P)
             write(P,"Hey "+P.save_data.name +"!","Hope you and your Pokemon have","been doing well.")
             cont(P)
             P.nam_rival = npc.NPC(P,'Rival',P.save_data.rival,[P.nam_rival.x,P.nam_rival.y],[['u',10]],["","",""])
-            north_am_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-            north_am_p(P,P.px,P.py,False,gond,gy)
-            north_am_f(P,P.px,P.py,listx,listy,tim)
+            refresh()
             new_txt(P)
             write(P,"This big building is a Pokemon","Center. You can stock up on","items and rest your Pokemon.")
             cont(P)
             P.nam_rival = npc.NPC(P,'Rival',P.save_data.rival,[P.nam_rival.x,P.nam_rival.y],[['l',10]],["","",""])
-            north_am_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-            north_am_p(P,P.px,P.py,False,gond,gy)
-            north_am_f(P,P.px,P.py,listx,listy,tim)
+            refresh()
             new_txt(P)
             write(P,"I'm gonna see if the gym","leader is taking challenges.","See you later!")
             cont(P)
@@ -22263,9 +24745,7 @@ def north_am(P) -> None:
             move = False
             pcx = 0
             pcy = 0
-            north_am_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-            north_am_p(P,P.px,P.py,False,gond,gy)
-            north_am_f(P,P.px,P.py,listx,listy,tim)
+            refresh()
             txt(P,"Hey there "+P.save_data.name+"!","I see you've already paid a",'visit to the Pokemon Center.')
             txt(P,"As you might have already","noticed, it's a good place to",'rest and restock on items.')
             txt(P,"I'm gonna see if the gym","leader is taking challenges.","See you later!")
@@ -22304,32 +24784,20 @@ def north_am(P) -> None:
                             P.p = P.d1
                     elif P.py == 2025 and face_u(P):
                         txt(P,"What a strange place to have","a deadend...","")
-                    elif P.py == 1375 and (P.px == -1025 or P.px == -1325) and face_u(P):
-                        txt(P,"You feel like this house needs","a renovation...")
                     elif P.nam_pre.talk():
-                        north_am_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-                        north_am_p(P,P.px,P.py,False,gond,gy)
-                        north_am_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         P.nam_pre.write()
                     elif P.nam_gentle.talk():
-                        north_am_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-                        north_am_p(P,P.px,P.py,False,gond,gy)
-                        north_am_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         P.nam_gentle.write()
                     elif P.nam_temp.talk():
-                        north_am_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-                        north_am_p(P,P.px,P.py,False,gond,gy)
-                        north_am_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         P.nam_temp.write()
                     elif P.nam_ace.talk():
-                        north_am_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-                        north_am_p(P,P.px,P.py,False,gond,gy)
-                        north_am_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         P.nam_ace.write()
                     elif P.nam_expert.talk():
-                        north_am_b(P,wx,wy,listx,listy,pcx,pcy,gy)
-                        north_am_p(P,P.px,P.py,False,gond,gy)
-                        north_am_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         P.nam_expert.write()
                     elif P.px == 425 and P.py == 1675:
                         txt(P,"There are some birds resting","in the bath.")
@@ -22421,8 +24889,231 @@ def north_am(P) -> None:
         P.clock.tick(P.ani_spd)
     fade_out(P,fade)
 
+def am_theater_b(P):
+    P.surface.fill((0,0,0))
+    P.surface.blit(P.am_theater_back, (P.px, P.py))
+    P.surface.blit(P.char_shad,(P.px+300,P.py+113))
+    P.surface.blit(P.am_theater_beauty,(P.px+298,P.py+84))
+    P.surface.blit(P.char_shad,(P.px+450,P.py+113))
+    P.surface.blit(P.am_theater_host,(P.px+448,P.py+84))
+
+def am_theater_p(P,temppx,temppy,move):
+    P.am_theater_rich.move()
+    P.am_theater_battle.move()
+    P.am_theater_bug.move()
+    P.am_theater_young.move()
+    P.am_theater_pre.move()
+    #rects start
+    r0 = (P.px,P.py+50,200,40)
+    r1 = (P.px+200,P.py+100,50,90)
+    r2 = (P.px+250,P.py+150,300,40)
+    r3 = (P.px+550,P.py+100,50,90)
+    r4 = (P.px+600,P.py+50,200,40)
+    r5 = (P.px+800,P.py+100,50,390)
+    r6 = (P.px-50,P.py+100,50,390)
+    r7 = (P.px,P.py+500,800,40)
+    r8 = P.am_theater_rich.get_rect()
+    r9 = P.am_theater_battle.get_rect()
+    r10 = P.am_theater_bug.get_rect()
+    r11 = P.am_theater_young.get_rect()
+    r12 = P.am_theater_pre.get_rect()
+    rects = [r12,r11,r10,r9,r8,r7,r6,r5,r4,r3,r2,r1,r0]
+    #rects end
+    # rect_draw(P,rects)
+    if move:
+        player_move(P,rects)
+    else:
+        blit_player(P)
+    P.am_theater_rich.move(temppx,temppy)
+    P.am_theater_battle.move(temppx,temppy)
+    P.am_theater_bug.move(temppx,temppy)
+    P.am_theater_young.move(temppx,temppy)
+    P.am_theater_pre.move(temppx,temppy)
+
+def am_theater_f(P,temppx,temppy):
+    show_location(P, None, 0)
+
+def am_theater(P) -> None:
+    def refresh():
+        am_theater_b(P)
+        am_theater_p(P,P.px,P.py,False)
+        am_theater_f(P,P.px,P.py)
+    set_mixer_volume(P,P.vol)
+    if ((get_time() > 19 or get_time() < 6) and P.lighting == 'Dynamic') or P.lighting == 'Night':
+        song = "music/am_night.wav"
+    else:
+        song = "music/am_day.wav"
+    if P.song != song:
+        P.song = song
+        pygame.mixer.music.load(P.song)
+        pygame.mixer.music.play(-1)
+    P.am_theater_back = load("p/am/am_theater.png")
+    P.am_theater_beauty = pygame.transform.scale(load("p/spr/Beauty_d1.png"),(54,64))
+    P.am_theater_host = pygame.transform.scale(load("p/spr/Hostess_d1.png"),(54,64))
+    P.am_theater_rich = npc.NPC(P,'Rich Boy','Dude',[500,250],[['u',80],['l',60],['r',80],['d',40]],["Why is she not here yet? I even showed up 15 minutes early!","What if something terrible happened to her?"])
+    P.am_theater_battle = npc.NPC(P,'Battle Girl','Dude',[700,200],[['mu',20],['u',40],['md',20],['d',40]],["It was so cool getting to watch Machamp battle on the big stage!","I'm going to try some of those moves out in my martial arts class tomorrow!"])
+    P.am_theater_pre = npc.NPC(P,'Preschoolerb','Dude',[150,400],[['u',200],['l',120],['r',150]],["My friend at school told me this show was super scary.","I wanted to stay at home but my brother said I couldn't miss it."])
+    P.am_theater_bug = npc.NPC(P,'Bug Catcher','Dude',[200,350],[['l',20]],["This better be worth the watch. I could be playing outside instead of being here."])
+    P.am_theater_young = npc.NPC(P,'Youngster','Dude',[100,350],[['r',20]],["It's about time Pikachu got the opportunity to play a main role!","This battle between him and Meowth is gonna be legendary!"])
+    P.habitat = 'theater'
+    move = True
+    tim = 0
+    refresh()
+    fade_in(P)
+    end = True
+    m = 0
+    while end:
+        # print(P.px,P.py)
+        am_theater_b(P)
+        temppx = P.px
+        temppy = P.py
+        am_theater_p(P,temppx,temppy,move)
+        am_theater_f(P,temppx,temppy)
+        for event in map_keys():
+            if (event.type == KEYDOWN or P.buffer_talk) and tim > 20:
+                if event.key == pygame.key.key_code(P.controls[6]) and move:
+                    m = 1
+                elif event.key == pygame.key.key_code(P.controls[7]) and move:
+                    P.register_click = 1
+                elif (event.key == pygame.key.key_code(P.controls[4]) or P.buffer_talk) and move:
+                    if event.key == pygame.key.key_code(P.controls[4]):
+                        P.buffer_talk = 10
+                    temp_buff = P.buffer_talk
+                    P.buffer_talk = None
+                    if P.px == 75 and P.py == 75 and face_u(P):
+                        if P.prog[8][4][0] == -1 and P.prog[0] < 158:
+                            txt(P,"Welcome to the Alto Mare Theater! We hold performances starring all sorts of Pokemon.")
+                            txt(P,"You need a registered PokeStar Pokemon before you can help with the shows.")
+                            txt(P,"You'll have to travel to Silfide City to get a PokeStar Tablet though!")
+                        else:
+                            if P.prog[8][4][0] < 7:
+                                txt(P,"Welcome to the Alto Mare Theater! We hold performances starring all sorts of Pokemon.")
+                                txt(P,"If you want to help with the shows, you should get some experience elsewhere first.")
+                                txt(P,"Come back once you've reached Theater level 7!")
+                                txt(P,"But still gotta wait for another update.")
+                            else:
+                                if len(P.save_data.pokestar[0]) == 0:
+                                    txt(P,"You need to register a Pokemon in your PokeStar Tablet before they can perform.")
+                                    txt(P,"Come right back once you have a Pokemon registered!")
+                                else:
+                                    txt(P,"These shows will be available in a future update.")
+                    elif P.px == -75 and P.py == 75 and face_u(P):
+                        if get_time() in [0,5,10,15,20]:
+                            txt(P,"Would you like to watch a show? We have a Musical show that's about to start.")
+                            skill = "Rhythm"
+                        elif get_time() in [1,6,11,16,21]:
+                            txt(P,"Would you like to watch a show? We have an Action show that's about to start.")
+                            skill = "Stamina"
+                        elif get_time() in [2,7,12,17,22]:
+                            txt(P,"Would you like to watch a show? We have a Drama that's about to start.")
+                            skill = "Flair"
+                        elif get_time() in [3,8,13,18,23]:
+                            txt(P,"Would you like to watch a show? We have a Documentary that's about to start.")
+                            skill = "Memory"
+                        else:
+                            txt(P,"Would you like to watch a show? We have a Romance show that's about to start.")
+                            skill = "Charm"
+                        txt(P,"If you bring a PokeStar Pokemon along, its "+skill+" will increase.")
+                        if item_in_bag(P,"Theater Ticket"):
+                            new_txt(P)
+                            write(P,"Would you like to use a Theater Ticket to watch it?")
+                            if not choice(P):
+                                break
+                        else:
+                            new_txt(P)
+                            write(P,"A ticket costs $800. Would you like to watch it?")
+                            if not choice(P):
+                                break
+                        if len(P.save_data.pokestar[0]) > 0:
+                            txt(P,"Which PokeStar Pokemon would you like to bring?")
+                            fade_out(P)
+                            pos = pokestar(P,1)
+                            refresh()
+                            fade_in(P)
+                            if pos == -1:
+                                txt(P,"Come back when you're free!")
+                            else:
+                                txt(P,"Enjoy the show!")
+                                fade_out(P)
+                                theater_show(P,skill,1)
+                                P.px = random.choice([325,275,-275,-325])
+                                P.py = 175
+                                P.p = P.d1
+                                refresh()
+                                fade_in(P)
+                                r = random.random()
+                                if r < 0.25:
+                                    txt(P,P.save_data.pokestar[0][pos][1][18]+" wasn't very interested in show. Their "+skill+" increased a bit.")
+                                elif r < 0.75:
+                                    txt(P,P.save_data.pokestar[0][pos][1][18]+" enjoyed the show. Their "+skill+" increased a good amount.")
+                                else:
+                                    txt(P,P.save_data.pokestar[0][pos][1][18]+" loved the show. Their "+skill+" increased a lot!")
+                                skill_num = ['Flair','Memory','Charm','Rhythm','Stamina'].index(skill)
+                                P.save_data.pokestar[0][pos][2][skill_num] = min(100,P.save_data.pokestar[0][pos][2][skill_num]+20+(r*20))
+                                add_item(P,"Theater Ticket",-1)
+                        else:
+                            txt(P,"You don't have any registered PokeStar Pokemon. Do you still want to watch the show?")
+                            if choice(P):
+                                refresh()
+                                txt(P,"Enjoy the show!")
+                                fade_out(P)
+                                theater_show(P,skill,1)
+                                P.px = random.choice([325,275,-275,-325])
+                                P.py = 175
+                                P.p = P.d1
+                                refresh()
+                                fade_in(P)
+                                add_item(P,"Theater Ticket",-1)
+                            else:
+                                txt(P,"Come back when you're free!")
+                    elif P.am_theater_rich.talk():
+                        refresh()
+                        P.am_theater_rich.write()
+                    elif P.am_theater_battle.talk():
+                        refresh()
+                        P.am_theater_battle.write()
+                    elif P.am_theater_bug.talk():
+                        refresh()
+                        P.am_theater_bug.write()
+                    elif P.am_theater_young.talk():
+                        refresh()
+                        P.am_theater_young.write()
+                    elif P.am_theater_pre.talk():
+                        refresh()
+                        P.am_theater_pre.write()
+                    elif next_to_multi(P,[(50,50),(100,50),(650,50),(700,50)]) != -1:
+                        txt(P,"You need to buy a ticket to watch a show.")
+                    else:
+                        P.buffer_talk = temp_buff
+        keys = pygame.key.get_pressed()
+        if P.px in [-25,25] and P.py == -175 and keys[pygame.key.key_code(P.controls[1])] and P.p == P.d1:
+            P.px -= 400
+            P.py = 1675
+            P.loc = 'square_1'
+            end = False
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and m == 1:
+            menu(P)
+            m = 0
+        if P.xr == 0 and P.xl == 0 and P.yu == 0 and P.yd == 0 and P.register_click == 1:
+            register(P)
+            P.register_click = -10
+        tim += 1
+        tick_buffer(P)
+        update_screen(P)
+        P.clock.tick(P.ani_spd)
+    P.move_out_dir = 'd'
+    fade_out(P)
+    set_mixer_volume(P,P.vol)
+
 def square_1_b(P,wx,wy,listx,listy,gy,celebi = False):
     draw_waves(P, wx, wy)
+    thea = 0
+    if P.px in [-375,-425] and P.py > 1625 and P.py <= 1675:
+        thea = (P.py-1625)
+    if thea != 0:
+        P.surface.fill((45,45,45), Rect(P.px+750,P.py-1420,200,100))
+    P.surface.blit(P.theadl, (P.px + 750 - thea, P.py - 1420))
+    P.surface.blit(P.theadr, (P.px + 800 + thea, P.py - 1420))
     P.surface.blit(P.s1_square, (P.px, P.py - 2000))
     P.surface.blit(P.s1_fence2, (P.px + 1139, P.py - 1025))
     P.surface.blit(P.s1_corner, (P.px + 1139, P.py - 874))
@@ -22442,9 +25133,9 @@ def square_1_p(P,temppx,temppy,move,gond,gy):
         P.surface.blit(P.s1_fence3, (temppx + 399, temppy - 824))
     #rects start
     r1 = (P.px+400,P.py-300,800,50)
-    r2 = (P.px+350,P.py-1350,50,1050)
-    r3 = (P.px+400,P.py-1400,800,40)
-    r4 = (P.px+1200,P.py-1350,400,40)
+    r2 = (P.px+350,P.py-1350,50,1000)
+    r3 = (P.px+750,P.py-1450,100,40)
+    r4 = (P.px+850,P.py-1350,750,40)
     r5 = (P.px+1600,P.py-1300,50,150)
     r6 = (P.px+1200,P.py-1150,400,50)
     r7 = (P.px+1200,P.py-1100,50,100)
@@ -22470,8 +25161,11 @@ def square_1_p(P,temppx,temppy,move,gond,gy):
     r19 = P.s1_beauty.get_rect()
     r20 = P.s1_bug.get_rect()
     r21 = P.s1_lass.get_rect()
-    rects = [r21,r20,r19,r18,r17,r16,r15,r14,r13,r12,r11,r10,r9,r8,r7,r6,r5,r4,r3,r2,r1]
-    #rect_draw(P,rects)
+    r22 = (P.px+400,P.py-1350,350,40)
+    r23 = (P.px+700,P.py-1400,50,40)
+    r24 = (P.px+850,P.py-1400,50,40)
+    rects = [r24,r23,r22,r21,r20,r19,r18,r17,r16,r15,r14,r13,r12,r11,r10,r9,r8,r7,r6,r5,r4,r3,r2,r1]
+    # rect_draw(P,rects)
     #rects end
     if gond != 0:
         P.surface.blit(P.char_shad,(P.px+1311,P.py-837+abs(P.foam)+gy))
@@ -22582,6 +25276,10 @@ def s1_celebi(P,wx,wy,listx,listy):
     fade_out(P)
 
 def square_1(P) -> None:
+    def refresh():
+        square_1_b(P,wx,wy,listx,listy,gy)
+        square_1_p(P,P.px,P.py,False,gond,gy)
+        square_1_f(P,P.px,P.py,listx,listy,gond,tim)
     if ((get_time() > 19 or get_time() < 6) and P.lighting == 'Dynamic') or P.lighting == 'Night':
         song = "music/am_night.wav"
     else:
@@ -22603,7 +25301,7 @@ def square_1(P) -> None:
     P.s1_fence2 = load("p/am/square_fence_2_2.png")
     P.s1_fence3 = load("p/am/square_fence_2_extra.png")
     P.s1_corner = load("p/am/square_2_wall.png")
-    P.s1_beauty = npc.NPC(P,'Beauty','Beauty',[950,-1350],[['mr',40],['ml',40]],["I'm dying to go in for the","show but my friend is taking","his sweet time getting here."])
+    P.s1_beauty = npc.NPC(P,'Beauty','Beauty',[550,-1250],[['mr',40],['ml',40]],["I'm dying to go in for the","show but my friend is taking","his sweet time getting here."])
     if P.prog[2] == 0:
         P.s1_bug = npc.NPC(P,'Bug Catcher','Buggy',[500,-450],[['u',20]],["There's something rustling in","that tree, but I can't quite","make out what it is."])
     else:
@@ -22616,11 +25314,9 @@ def square_1(P) -> None:
     tim = 0
     move = True
     fade = None
-    listx = [1188,1188,788,392,392,392,1188,940,840,1188,392,1188,789]
-    listy = [-1500,-1300,-1500,-1500,-1225,-950,-950,-950,-950,-450,-450,-700,-450]
-    square_1_b(P,wx,wy,listx,listy,gy)
-    square_1_p(P,P.px,P.py,False,gond,gy)
-    square_1_f(P,P.px,P.py,listx,listy,gond,tim)
+    listx = [1188,1188,392,392,392,1188,940,840,1188,392,1188,789]
+    listy = [-1500,-1300,-1500,-1225,-950,-950,-950,-950,-450,-450,-700,-450]
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -22634,7 +25330,7 @@ def square_1(P) -> None:
             pygame.mixer.music.load(P.song)
             set_mixer_volume(P,P.vol)
             pygame.mixer.music.play(-1)
-        #print(P.px,P.py)
+        # print(P.px,P.py)
         square_1_b(P,wx,wy,listx,listy,gy)
         temppx = P.px
         temppy = P.py
@@ -22689,8 +25385,6 @@ def square_1(P) -> None:
                             cont(P)
                             fade_out(P)
                             P.p = P.d1
-                    elif P.py == 1625 and (P.px == -575 or P.px == -625):
-                        txt(P,"You feel like this house needs","a renovation...")
                     elif next_to(P,450,-500):
                         if face_u(P):
                             temp = P.surface.copy()
@@ -22706,19 +25400,13 @@ def square_1(P) -> None:
                         else:
                             txt(P,"You could probably climb the","tree with the ladder.")
                     elif P.s1_beauty.talk():
-                        square_1_b(P,wx,wy,listx,listy,gy)
-                        square_1_p(P,P.px,P.py,False,gond,gy)
-                        square_1_f(P,P.px,P.py,listx,listy,gond,tim)
+                        refresh()
                         P.s1_beauty.write()
                     elif P.s1_bug.talk():
-                        square_1_b(P,wx,wy,listx,listy,gy)
-                        square_1_p(P,P.px,P.py,False,gond,gy)
-                        square_1_f(P,P.px,P.py,listx,listy,gond,tim)
+                        refresh()
                         P.s1_bug.write()
                     elif P.s1_lass.talk():
-                        square_1_b(P,wx,wy,listx,listy,gy)
-                        square_1_p(P,P.px,P.py,False,gond,gy)
-                        square_1_f(P,P.px,P.py,listx,listy,gond,tim)
+                        refresh()
                         P.s1_lass.write()
                     else:
                         P.buffer_talk = temp_buff
@@ -22776,6 +25464,11 @@ def square_1(P) -> None:
                 fade = P.song
             P.loc = "am_square"
             end = False
+        if  P.px in [-425,-375] and P.py == 1675 and face_u(P):
+            P.px += 400
+            P.py = -175
+            P.loc = "am_theater"
+            end = False
         if wx == 400:
             wx = 0
         if wy == 400:
@@ -22817,7 +25510,7 @@ def am_square_p(P,temppx,temppy,move):
         P.ams_npc1.move()
     if P.ams_npc2:
         P.ams_npc2.move()
-    if P.ams_npc3 and P.ams_npc3.move():
+    if P.ams_npc3 and P.ams_npc3.move() and P.ams_npc3.name == 'Berry':
         P.surface.blit(P.ams_bs,(P.px + 2025, P.py - 280))
     if P.ams_npc4 and P.ams_npc4.move():
         P.surface.blit(P.ams_box,(P.px + 1200, P.py - 465))
@@ -22909,7 +25602,10 @@ def am_square_p(P,temppx,temppy,move):
     if P.ams_npc2:
         r48 = P.ams_npc2.get_rect()
     if P.ams_npc3:
-        r49 = (P.px+2050,P.py-300,50,140)
+        if P.ams_npc3.name == 'Berry':
+            r49 = (P.px+2050,P.py-300,50,140)
+        else:
+            r49 = P.ams_npc3.get_rect()
     if P.ams_npc4:
         r50 = (P.px+1200,P.py-450,100,40)
     if P.ams_npc5:
@@ -22935,7 +25631,7 @@ def am_square_p(P,temppx,temppy,move):
         P.ams_npc1.move(temppx,temppy)
     if P.ams_npc2:
         P.ams_npc2.move(temppx,temppy)
-    if P.ams_npc3 and P.ams_npc3.move(temppx,temppy):
+    if P.ams_npc3 and P.ams_npc3.move(temppx,temppy) and P.ams_npc3.name == 'Berry':
         P.surface.blit(P.ams_bs,(temppx + 2025, temppy - 280))
     if P.ams_npc4 and P.ams_npc4.move(temppx,temppy):
         P.surface.blit(P.ams_box,(temppx + 1200, temppy - 465))
@@ -22978,6 +25674,10 @@ def am_square_f(P,temppx,temppy,listx,listy,tim):
     show_location(P, P.loc_txt, tim)
 
 def am_square(P) -> None:
+    def refresh():
+        am_square_b(P,wx,wy,listx,listy)
+        am_square_p(P,P.px,P.py,False)
+        am_square_f(P,P.px,P.py,listx,listy,tim)
     saturday = False
     mus_vol = P.vol
     P.ams_npc1 = None
@@ -22992,7 +25692,7 @@ def am_square(P) -> None:
     P.ams_npc10 = None
     P.ams_clerk = None
     if datetime.datetime.today().weekday() == 5 and get_time() >= 6:
-    #if True:
+    # if True:
         P.ams_beauty = npc.NPC(P,'Beauty','Beauty',[1400,50],[['u',20]],["I love the music that guy is","playing! It reminds me of my","mom's favorite song!","I want to give him some money","but for some odd reason my","boyfriend won't let me."])
         P.ams_boi = npc.NPC(P,'Rich Boy','Boi',[1350,50],[['u',20]],["Do you think that guy's gonna","move to another spot anytime","soon?","I really want to get a good","picture in front of the","fountain but he's in the way."])
         P.ams_scientist = npc.NPC(P,'Scientistm','Scientist',[1250,400],[['md',40],['d',80],['md',20],['d',40],['u',60],['mu',20],['u',90],['mu',40],['u',60],['d',50]],["Latias is one of the guardians","of Alto Mare, distinguished by","its gorgeous red coat.","I would do anything to see it","in person some day...",""])
@@ -23028,7 +25728,7 @@ def am_square(P) -> None:
                 f2.close()
         if P.prog[0] >= 144:
             P.ams_clerk = pygame.transform.scale(load("p/spr/mart_clerk_d1.png"),(55,66))
-            if P.prog[11][11][0] == None or (datetime.datetime.today().date()-datetime.date(P.prog[11][11][0][0],P.prog[11][11][0][1],P.prog[11][11][0][2])).days > 6:
+            if P.prog[11][11][0] == None or (datetime.datetime.today().date()-datetime.date(P.prog[11][11][0][0],P.prog[11][11][0][1],P.prog[11][11][0][2])).days > 5:
                 dess_list = ['Jello','Sundae','Cupcake','Lava Cake','Cinnamon Roll','Coffee','Taiyaki','Fruit Salad','Donut','Cotton Candy','Sponge Cake','Gummy Worms']
                 dess_num = random.randint(2,4)
                 store_list = []
@@ -23052,7 +25752,7 @@ def am_square(P) -> None:
                 f2.writelines(data)
                 f2.close()
         P.ams_bs = load("p/am/berry_stand.png")
-        if P.prog[11][1][0] == None or (datetime.datetime.today().date()-datetime.date(P.prog[11][1][0][0],P.prog[11][1][0][1],P.prog[11][1][0][2])).days > 6:
+        if P.prog[11][1][0] == None or (datetime.datetime.today().date()-datetime.date(P.prog[11][1][0][0],P.prog[11][1][0][1],P.prog[11][1][0][2])).days > 5:
             berry_list = ['Oran','Sitrus','Pecha','Cheri','Lum','Persim','Chesto','Rawst','Aspear']
             berry_num = random.randint(2,4)
             store_list = []
@@ -23105,7 +25805,7 @@ def am_square(P) -> None:
             P.py = 725
     #datetime.datetime.today().weekday() == 6 and get_time() >= 6
     elif datetime.datetime.today().weekday() == 6 and get_time() >= 6:
-    #elif True:
+    # elif True:
         P.ams_beauty = npc.NPC(P,'Beauty','Beauty',[1400,50],[['u',20]],["Wow! would you look at that","guy go! Do you think he ever","get tired?"])
         P.ams_boi = npc.NPC(P,'Rich Boy','Boi',[1350,50],[['u',20]],["Ugh, there's so many people","just coming and going as they","please.","It's like they have no respect","for people trying to get some","nice photos."])
         P.ams_scientist = npc.NPC(P,'Scientistm','Scientist',[1250,400],[['md',40],['d',80],['md',20],['d',40],['u',60],['mu',20],['u',90],['mu',40],['u',60],['d',50]],["Latias is one of the guardians","of Alto Mare, distinguished by","its gorgeous red coat.","I would do anything to see it","in person some day...",""])
@@ -23130,14 +25830,16 @@ def am_square(P) -> None:
                 f2.close()
         if P.prog[0] >= 125:
             P.ams_npc1 = npc.NPC(P,'Scientistm','Repel',[1300,-450],[['d',40]],["","",""])
+        if P.prog[0] >= 157:
+            P.ams_npc3 = npc.NPC(P,'Beauty','Ticket',[1950,-250],[['md',40],['d',40],['l',80],['r',60],['mu',40],['u',60],['r',100],['l',80]],["Sorry, we only have one per person. You can use the ticket at the Alto Mare Theater.","Or you can even go visit Silfide or Cenere City to watch a show!"])
         P.ams_npc5 = npc.NPC(P,'Poke Fan','Shrooms',[1700,-150],[['d',120]],["Hey if you happen to have any", "mushrooms you don't need, I", "can take them off your hands.","I have some nice items I can","give you if you help me finish","this collection!"])
         P.ams_npc6 = npc.NPC(P,'Triathelete','Wata',[1000,-50],[['mr',190],['ml',190]],["You know what they say!","A bottle of water a day keeps","the old age away!","I think it goes something","along those lines...",""],spd = 1)
         if item_in_bag(P,"Old Rod"):
-            P.ams_npc2 = npc.NPC(P,'Fisherman','Fishing',[1550,-350],[['d',120]],["","",""])
+            P.ams_npc2 = npc.NPC(P,'Fisherman','Fishing',[1550,-350],[['d',120]],["Some text","",""])
         if P.prog[16] == 2:
             P.ams_npc9 = npc.NPC(P,'Fisherman','Rare',[900,-200],[['r',40]],["Maraca-aca!", "", ""])
             P.ams_npc10 = npc.NPC(P,'Seedot','Seed',[900,-150],[['r',40]],["SEEDOT!!!", "", ""])
-            if P.prog[11][7][0] == None or (datetime.datetime.today().date()-datetime.date(P.prog[11][7][0][0],P.prog[11][7][0][1],P.prog[11][7][0][2])).days > 6:
+            if P.prog[11][7][0] == None or (datetime.datetime.today().date()-datetime.date(P.prog[11][7][0][0],P.prog[11][7][0][1],P.prog[11][7][0][2])).days > 5:
                 l1 = ['Water Gem','Damp Rock','Mystic Water','Splash Plate','Oval Stone']
                 l2 = ['Ice Gem','Icy Rock','Never-Melt Ice','Icicle Plate','Light Clay']
                 l3 = ['Rock Gem','Smooth Rock','Hard Stone','Stone Plate','Everstone']
@@ -23202,6 +25904,9 @@ def am_square(P) -> None:
         elif P.px == -1175 and P.py == 625:
             #fisherman2
             P.px -= 50
+        elif P.px == -1575 and P.py == 525:
+            #ticket lady
+            P.px -= 50
     else:
         P.ams_beauty = npc.NPC(P,'Beauty','Beauty',[1450,50],[['u',20]],["I wonder if that kid is ever","going to move out of the way.","","I want to ask him to move but","he looks awfully stressed","about something."])
         P.ams_boi = npc.NPC(P,'Rich Boy','Boi',[1450,-100],[['d',20]],["Can't you see I'm posing for","a picture? Give a man some","space."])
@@ -23253,9 +25958,7 @@ def am_square(P) -> None:
     tim = 0
     listx = [1889,1691,1889,1691,1289,1091,1289,1091,1889,1691,1289,1091,2090,890,1666,1316,990,1090,1190,1990,1890,1790]
     listy = [-50,-50,700,700,-50,-50,700,700,325,325,325,325,-200,-200,-650,-650,-650,-650,-650,-650,-650,-650]
-    am_square_b(P,wx,wy,listx,listy)
-    am_square_p(P,P.px,P.py,False)
-    am_square_f(P,P.px,P.py,listx,listy,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -23270,7 +25973,7 @@ def am_square(P) -> None:
                 fes_vol = fes_vol**2
             pygame.mixer.Channel(0).set_volume(fes_vol*2)
             set_mixer_volume(P,mus_vol)
-        print(P.px,P.py)
+        # print(P.px,P.py)
         if not (datetime.datetime.today().weekday() in [5,6] and get_time() >= 6):
             if ((get_time() > 19 or get_time() < 6) and P.lighting == 'Dynamic') or P.lighting == 'Night':
                 song = "music/am_night.wav"
@@ -23306,16 +26009,12 @@ def am_square(P) -> None:
                     temp_buff = P.buffer_talk
                     P.buffer_talk = None
                     if P.ams_joey.talk():
-                        am_square_b(P,wx,wy,listx,listy)
-                        am_square_p(P,P.px,P.py,False)
-                        am_square_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         P.ams_joey.write()
                     elif next_to(P,1600,-150) or next_to(P,1550,-150) or next_to(P,1500,-150) or next_to(P,1450,-150) or next_to(P,1400,-150) or next_to(P,1350,-150) or next_to(P,1250,-200) or next_to(P,1300,-200) or next_to(P,1650,-200) or next_to(P,1700,-200) or next_to(P,1250,-250) or next_to(P,1300,-250) or next_to(P,1650,-250) or next_to(P,1700,-250) or next_to(P,1600,-300) or next_to(P,1550,-300) or next_to(P,1500,-300) or next_to(P,1450,-300) or next_to(P,1400,-300) or next_to(P,1350,-300):
                         txt(P,"You can see piles of coins at","the bottom of the fountain.")
                     elif P.ams_npc1 and P.ams_npc1.talk():
-                        am_square_b(P,wx,wy,listx,listy)
-                        am_square_p(P,P.px,P.py,False)
-                        am_square_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         if P.ams_npc1.name == 'Repel':
                             if new_day(P.prog[11][9][2]):
                                 new_txt(P)
@@ -23345,6 +26044,8 @@ def am_square(P) -> None:
                                     txt(P,"Your Repel was replaced with","a Super Repel!")
                                     add_item(P,"Super Repel",1)
                                     add_item(P,"Repel",-1)
+                                    if "Repel" in P.save_data.register:
+                                        P.save_data.register[P.save_data.register.index("Repel")] = "Super Repel"
                                     P.prog[11][9][0] = 500
                                     P.prog[11][9][1] += 1
                             elif P.prog[11][9][1] == 1:
@@ -23354,6 +26055,8 @@ def am_square(P) -> None:
                                     txt(P,"Your Super Repel was replaced","with a Max Repel!")
                                     add_item(P,"Max Repel",1)
                                     add_item(P,"Super Repel",-1)
+                                    if "Super Repel" in P.save_data.register:
+                                        P.save_data.register[P.save_data.register.index("Super Repel")] = "Max Repel"
                                     P.prog[11][9][0] = 2000
                                     P.prog[11][9][1] += 1
                             else:
@@ -23363,9 +26066,7 @@ def am_square(P) -> None:
                             P.ams_npc1.write()
                             P.font = pygame.font.SysFont("courier", 40, bold = True, italic = False)
                     elif P.ams_npc2 and P.ams_npc2.talk():
-                        am_square_b(P,wx,wy,listx,listy)
-                        am_square_p(P,P.px,P.py,False)
-                        am_square_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         if P.ams_npc2.name == 'Fishing':
                             txt(P,"Hey there! I hope you've been","taking some of your time to go","fishing!")
                             txt(P,"Looks like you've fished up",str(P.prog[11][12][0])+" Pokemon already.")
@@ -23416,10 +26117,8 @@ def am_square(P) -> None:
                                 else:
                                     txt(P,"No worries!","As long as you're having a","good time, I'm happy!")
                     elif P.ams_clerk and P.px == -775 and P.py == 725 and face_u(P):
-                        box = load("p/3_box.png")
-                        am_square_b(P,wx,wy,listx,listy)
-                        am_square_p(P,P.px,P.py,False)
-                        am_square_f(P,P.px,P.py,listx,listy,tim)
+                        box = load("p/ui/3_box.png")
+                        refresh()
                         mt = P.surface.copy()
                         new_txt(P)
                         write(P,"I have some treats from our","bakery at a discount.","Would you like anything?")
@@ -23471,64 +26170,72 @@ def am_square(P) -> None:
                     elif P.ams_clerk and next_to(P,1100,-500) or next_to(P,1150,-500):
                         txt(P,"The table is covered with all","sorts of tasty treats!")
                     elif P.ams_npc3 and P.ams_npc3.talk():
-                        box = load("p/3_box.png")
-                        am_square_b(P,wx,wy,listx,listy)
-                        am_square_p(P,P.px,P.py,False)
-                        am_square_f(P,P.px,P.py,listx,listy,tim)
-                        mt = P.surface.copy()
-                        new_txt(P)
-                        write(P,"Fresh berries!","Interested in buying any?")
-                        mart_t = P.surface.copy()
-                        buy = P.font.render("Buy",True,(0,0,0))
-                        sell = P.font.render("Sell",True,(0,0,0))
-                        leave = P.font.render("Leave",True,(0,0,0))
-                        endl = True
-                        ay = 290
-                        tim = 0
-                        while endl:
-                            P.surface.blit(mart_t,(0,0))
-                            P.surface.blit(box,(550,280))
-                            P.surface.blit(buy,(600,290))
-                            P.surface.blit(sell,(600,340))
-                            P.surface.blit(leave,(600,390))
-                            P.surface.blit(P.arrow,(550,ay))
-                            for event in map_keys():
-                                if event.type == KEYDOWN:
-                                    if event.key == pygame.key.key_code(P.controls[4]) and tim > 20:
-                                        if ay == 290:
-                                            P.prog[11][1][2] = poke_mart(P, mt, custom_shop = P.prog[11][1][1],stock = P.prog[11][1][2],price_mod = 0.5)
-                                            new_txt(P)
-                                            write(P,"Is there anything else you", "would like?")
-                                            mart_t = P.surface.copy()
-                                        elif ay == 340:
-                                            fade_out(P)
-                                            mart_sell(P)
-                                            P.surface.blit(mt,(0,0))
-                                            fade_in(P)
-                                            new_txt(P)
-                                            write(P,"Is there anything else you", "would like?")
-                                            mart_t = P.surface.copy()
-                                            ay = 290
-                                        else:
+                        if P.ams_npc3.name == 'Berry':
+                            box = load("p/ui/3_box.png")
+                            refresh()
+                            mt = P.surface.copy()
+                            new_txt(P)
+                            write(P,"Fresh berries!","Interested in buying any?")
+                            mart_t = P.surface.copy()
+                            buy = P.font.render("Buy",True,(0,0,0))
+                            sell = P.font.render("Sell",True,(0,0,0))
+                            leave = P.font.render("Leave",True,(0,0,0))
+                            endl = True
+                            ay = 290
+                            tim = 0
+                            while endl:
+                                P.surface.blit(mart_t,(0,0))
+                                P.surface.blit(box,(550,280))
+                                P.surface.blit(buy,(600,290))
+                                P.surface.blit(sell,(600,340))
+                                P.surface.blit(leave,(600,390))
+                                P.surface.blit(P.arrow,(550,ay))
+                                for event in map_keys():
+                                    if event.type == KEYDOWN:
+                                        if event.key == pygame.key.key_code(P.controls[4]) and tim > 20:
+                                            if ay == 290:
+                                                P.prog[11][1][2] = poke_mart(P, mt, custom_shop = P.prog[11][1][1],stock = P.prog[11][1][2],price_mod = 0.5)
+                                                new_txt(P)
+                                                write(P,"Is there anything else you", "would like?")
+                                                mart_t = P.surface.copy()
+                                            elif ay == 340:
+                                                fade_out(P)
+                                                mart_sell(P)
+                                                P.surface.blit(mt,(0,0))
+                                                fade_in(P)
+                                                new_txt(P)
+                                                write(P,"Is there anything else you", "would like?")
+                                                mart_t = P.surface.copy()
+                                                ay = 290
+                                            else:
+                                                endl = False
+                                        elif event.key == pygame.key.key_code(P.controls[5]) and tim > 20:
                                             endl = False
-                                    elif event.key == pygame.key.key_code(P.controls[5]) and tim > 20:
-                                        endl = False
-                                    elif event.key == pygame.key.key_code(P.controls[0]) and ay > 290:
-                                        ay -= 50
-                                    elif event.key == pygame.key.key_code(P.controls[1]) and ay < 440:
-                                        ay += 50
-                            tim += 1
-                            P.clock.tick(P.ani_spd)
-                            update_screen(P)
-                        tim = 0
-                        P.surface.blit(mt,(0,0))
-                        txt(P,"Have a great day!")
+                                        elif event.key == pygame.key.key_code(P.controls[0]) and ay > 290:
+                                            ay -= 50
+                                        elif event.key == pygame.key.key_code(P.controls[1]) and ay < 440:
+                                            ay += 50
+                                tim += 1
+                                P.clock.tick(P.ani_spd)
+                                update_screen(P)
+                            tim = 0
+                            P.surface.blit(mt,(0,0))
+                            txt(P,"Have a great day!")
+                        elif P.ams_npc3.name == 'Ticket':
+                            refresh()
+                            if P.prog[11][13] == None or (datetime.datetime.today().date()-datetime.date(P.prog[11][13][0],P.prog[11][13][1],P.prog[11][13][2])).days > 5:
+                                txt(P,"We're handing out free Theater Tickets as a promotion. Here's one for you!")
+                                txt(P,"You received a Theater Ticket!")
+                                add_item(P,"Theater Ticket",1)
+                                txt(P,"You can use them at any Theater to watch a show for free!")
+                                day = datetime.datetime.today().date()
+                                P.prog[11][13] = [day.year,day.month,day.day]
+                            else:
+                                P.ams_npc3.write()
                     elif saturday and P.ams_npc3 and next_to(P,2050,-250) or next_to(P,2050,-200):
                         txt(P,"The stand is filled with","fresh berries!")
                     elif P.ams_npc4 and P.ams_npc4.talk():
-                        am_square_b(P,wx,wy,listx,listy)
-                        am_square_p(P,P.px,P.py,False)
-                        am_square_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         if P.prog[11][2][0] == None or new_day(P.prog[11][2][0]):
                             txt(P,"Hey there!","I'm here as a representative","of the Poke Ball factory!")
                             txt(P,"Go ahead and press this button","to win one of our Poke Ball","samples!")
@@ -23541,9 +26248,7 @@ def am_square(P) -> None:
                     elif not saturday and P.ams_npc4 and next_to(P,1200,-450):
                         txt(P,"The box is filled with a","variety of Poke Balls!")
                     elif P.ams_npc5 and P.ams_npc5.talk():
-                        am_square_b(P,wx,wy,listx,listy)
-                        am_square_p(P,P.px,P.py,False)
-                        am_square_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         if P.ams_npc5.name == 'Petal':
                             if P.prog[11][8][0] == None or new_day(P.prog[11][8][0]):
                                 txt(P,"Hey! I picked these up when","rummaging through the flower","field!")
@@ -23616,9 +26321,7 @@ def am_square(P) -> None:
                             else:
                                 P.ams_npc5.write()
                     elif P.ams_npc6 and P.ams_npc6.talk():
-                        am_square_b(P,wx,wy,listx,listy)
-                        am_square_p(P,P.px,P.py,False)
-                        am_square_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         if P.prog[11][3] == None or (datetime.datetime.today().date()-datetime.date(P.prog[11][3][0],P.prog[11][3][1],P.prog[11][3][2])).days > 5:
                             txt(P,"Have some water! You don't","want to get dehydrated on a","nice day like this!")
                             txt(P,"You received a Fresh Water!")
@@ -23628,9 +26331,7 @@ def am_square(P) -> None:
                         else:
                             P.ams_npc6.write()
                     elif P.ams_npc7 and P.ams_npc7.talk():
-                        am_square_b(P,wx,wy,listx,listy)
-                        am_square_p(P,P.px,P.py,False)
-                        am_square_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         if P.prog[11][5] == None or (datetime.datetime.today().date()-datetime.date(P.prog[11][5][0],P.prog[11][5][1],P.prog[11][5][2])).days > 5:
                             txt(P,"So you found the time to stop","by! Thanks again for helping","me out!")
                             txt(P,"I'll let you take one of my","signature Pinap Berries for","free!")
@@ -23643,9 +26344,7 @@ def am_square(P) -> None:
                         else:
                             P.ams_npc7.write()
                     elif P.ams_npc8 and P.ams_npc8.talk():
-                        am_square_b(P,wx,wy,listx,listy)
-                        am_square_p(P,P.px,P.py,False)
-                        am_square_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         if P.prog[11][6] == None or (datetime.datetime.today().date()-datetime.date(P.prog[11][6][0],P.prog[11][6][1],P.prog[11][6][2])).days > 5:
                             t = P.surface.copy()
                             txt(P,"Hello! I give great massages","that will make your Pokemon","more friendly!")
@@ -23674,10 +26373,8 @@ def am_square(P) -> None:
                         else:
                             P.ams_npc8.write()
                     elif P.ams_npc9 and P.ams_npc9.talk():
-                        box = load("p/3_box.png")
-                        am_square_b(P,wx,wy,listx,listy)
-                        am_square_p(P,P.px,P.py,False)
-                        am_square_f(P,P.px,P.py,listx,listy,tim)
+                        box = load("p/ui/3_box.png")
+                        refresh()
                         mt = P.surface.copy()
                         new_txt(P)
                         write(P,"Hey there!","Take a look at what I found","this week!")
@@ -23727,46 +26424,30 @@ def am_square(P) -> None:
                         P.surface.blit(mt,(0,0))
                         txt(P,"See ya later!")
                     elif P.ams_npc10 and P.ams_npc10.talk():
-                        am_square_b(P,wx,wy,listx,listy)
-                        am_square_p(P,P.px,P.py,False)
-                        am_square_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         P.font = pygame.font.SysFont("courier", 40, bold = False, italic = True)
                         P.ams_npc10.write()
                         P.font = pygame.font.SysFont("courier", 40, bold = True, italic = False)
                     elif P.ams_beauty.talk():
-                        am_square_b(P,wx,wy,listx,listy)
-                        am_square_p(P,P.px,P.py,False)
-                        am_square_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         P.ams_beauty.write()
                     elif P.ams_scientist.talk():
-                        am_square_b(P,wx,wy,listx,listy)
-                        am_square_p(P,P.px,P.py,False)
-                        am_square_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         P.ams_scientist.write()
                     elif P.ams_sci.talk():
-                        am_square_b(P,wx,wy,listx,listy)
-                        am_square_p(P,P.px,P.py,False)
-                        am_square_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         P.ams_sci.write()
                     elif P.ams_pre.talk():
-                        am_square_b(P,wx,wy,listx,listy)
-                        am_square_p(P,P.px,P.py,False)
-                        am_square_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         P.ams_pre.write()
                     elif P.ams_gentle.talk():
-                        am_square_b(P,wx,wy,listx,listy)
-                        am_square_p(P,P.px,P.py,False)
-                        am_square_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         P.ams_gentle.write()
                     elif P.ams_boi.talk():
-                        am_square_b(P,wx,wy,listx,listy)
-                        am_square_p(P,P.px,P.py,False)
-                        am_square_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         P.ams_boi.write()
                     elif P.ams_lass.talk():
-                        am_square_b(P,wx,wy,listx,listy)
-                        am_square_p(P,P.px,P.py,False)
-                        am_square_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         P.ams_lass.write()
                     elif next_to(P,1800,750) or next_to(P,1750,750):
                         txt(P,"It's a giant statue of Latios.")
@@ -23981,6 +26662,10 @@ def dock_1_f(P,temppx,temppy,listx,listy,tim):
     show_location(P, P.loc_txt, tim)
 
 def dock_1(P) -> None:
+    def refresh():
+        dock_1_b(P,wx,wy,listx,listy)
+        dock_1_p(P,P.px,P.py,False)
+        dock_1_f(P,P.px,P.py,listx,listy,tim)
     if ((get_time() > 19 or get_time() < 6) and P.lighting == 'Dynamic') or P.lighting == 'Night':
         song = "music/am_night.wav"
     else:
@@ -24025,10 +26710,8 @@ def dock_1(P) -> None:
         P.d1_latias = npc.NPC(P,'Latias','Human',[2050,650],[['d',20]],["*blink* *blink*","","","*stare*",".....................","",])
     else:
         P.d1_latias = None
-    dock_1_b(P,wx,wy,listx,listy)
-    dock_1_p(P,P.px,P.py,False)
     tim = 0
-    dock_1_f(P,P.px,P.py,listx,listy,tim)
+    refresh()
     fade_in(P)
     end = True
     m = 0
@@ -24083,36 +26766,24 @@ def dock_1(P) -> None:
                         txt(P,"Come here to sign up for the","Tour de Alto Mare!")
                         txt(P,"I'm sorry, but you'll need ","certification to participate","in the race.")
                     elif P.d1_fisher.talk():
-                        dock_1_b(P,wx,wy,listx,listy)
-                        dock_1_p(P,P.px,P.py,False)
-                        dock_1_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         P.d1_fisher.write()
                     elif P.d1_lass.talk():
-                        dock_1_b(P,wx,wy,listx,listy)
-                        dock_1_p(P,P.px,P.py,False)
-                        dock_1_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         txt(P,"I read somewhere that you can","register up to four key items.")
                         txt(P,"Then if you press ["+P.controls[7]+"],","you can use those items really","quickly!")
                     elif P.d1_fisher2.talk():
-                        dock_1_b(P,wx,wy,listx,listy)
-                        dock_1_p(P,P.px,P.py,False)
-                        dock_1_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         P.d1_fisher2.write()
                     elif P.d1_ath.talk():
-                        dock_1_b(P,wx,wy,listx,listy)
-                        dock_1_p(P,P.px,P.py,False)
-                        dock_1_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         P.d1_ath.write()
                     elif P.d1_todd.talk():
-                        dock_1_b(P,wx,wy,listx,listy)
-                        dock_1_p(P,P.px,P.py,False)
-                        dock_1_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         P.d1_todd.write()
                     elif P.d1_latias and P.d1_latias.talk():
                         move = False
-                        dock_1_b(P,wx,wy,listx,listy)
-                        dock_1_p(P,P.px,P.py,False)
-                        dock_1_f(P,P.px,P.py,listx,listy,tim)
+                        refresh()
                         P.d1_latias.write()
                         if face_l(P):
                             P.d1_latias = npc.NPC(P,'Latias','Human',[2050,650],[['mu',20],['mr',40],['md',20],['mr',60],['r',20]],["", "",""])
@@ -24226,6 +26897,10 @@ def cruise_2_f(P,temppx,temppy):
     set_sky(P)
 
 def cruise_2(P) -> None:
+    def refresh():
+        cruise_2_b(P,wx,wy)
+        cruise_2_p(P,P.px,P.py,False)
+        cruise_2_f(P,P.px,P.py)
     if P.song != "music/cruise.wav":
         P.song = "music/cruise.wav"
         pygame.mixer.music.load(P.song)
@@ -24242,13 +26917,11 @@ def cruise_2(P) -> None:
     wx = 0
     wy = 0
     move = True
-    cruise_2_b(P,wx,wy)
-    cruise_2_p(P,P.px,P.py,False)
-    cruise_2_f(P,P.px,P.py)
-    fade_in(P)
-    end = True
     m = 0
     tim = 0
+    refresh()
+    fade_in(P)
+    end = True
     while end:
         #print(P.px,P.py)
         if P.prog[0] == 1 and P.c2_prof.x == 600:
@@ -24274,9 +26947,7 @@ def cruise_2(P) -> None:
                     P.buffer_talk = None
                     if P.c2_prof and P.c2_prof.talk():
                         move = False
-                        cruise_2_b(P,wx,wy)
-                        cruise_2_p(P,P.px,P.py,False)
-                        cruise_2_f(P,P.px,P.py)
+                        refresh()
                         P.c2_prof.write()
                         P.prog[0] += 1
                         if face_r(P):
@@ -24385,6 +27056,7 @@ def cruise_1(P) -> None:
     fade_in(P)
     move = True
     end = True
+    shiny = ""
     a = 0
     m = 0
     l = 0
@@ -24441,9 +27113,11 @@ def cruise_1(P) -> None:
                                 new_txt(P)
                                 write(P,"Do you want Litwick?")
                                 if choice(P,550,600):
+                                    if random.random() < 0.012:
+                                        shiny = "_S"
                                     P.prog[0] = 7
                                     P.save_data.starter = 'Litwick'
-                                    P.party.append(poke.Poke("Litwick",[5,random.randint(0,1),20,"Ember",25,"Astonish",15,"Minimize",10,"Smog",20,None,None,0,"Poke Ball",0,'Flame Body',True]))
+                                    P.party.append(poke.Poke("Litwick"+shiny,[5,random.randint(0,1),20,"Ember",25,"Astonish",15,"Minimize",10,"Smog",20,None,None,0,"Poke Ball",0,'Flame Body',True]))
                                     P.save_data.pokedex['Litwick'] = [1,[]]
                                     P.c1_back = c5
                                 else:
@@ -24473,9 +27147,11 @@ def cruise_1(P) -> None:
                                 new_txt(P)
                                 write(P,"Do you want Bounsweet?")
                                 if choice(P,550,600):
+                                    if random.random() < 0.012:
+                                        shiny = "_S"
                                     P.prog[0] = 7
                                     P.save_data.starter = 'Bounsweet'
-                                    P.party.append(poke.Poke("Bounsweet",[5,1,787,"Splash",-1,"Pound",-1,'Play Nice',-1,None,None,None,None,0,"Poke Ball",0,'Leaf Guard',True]))
+                                    P.party.append(poke.Poke("Bounsweet"+shiny,[5,1,787,"Splash",-1,"Pound",-1,'Play Nice',-1,None,None,None,None,0,"Poke Ball",0,'Leaf Guard',True]))
                                     P.save_data.pokedex['Bounsweet'] = [1,[]]
                                 else:
                                     pass
@@ -24487,9 +27163,11 @@ def cruise_1(P) -> None:
                                 new_txt(P)
                                 write(P,"Do you want Poliwag?")
                                 if choice(P,550,600):
+                                    if random.random() < 0.012:
+                                        shiny = "_S"
                                     P.prog[0] = 7
                                     P.save_data.starter = 'Poliwag'
-                                    P.party.append(poke.Poke("Poliwag",[5,random.randint(0,1),787,"Water Sport",-1,"Bubble",-1,None,None,None,None,None,None,0,"Poke Ball",0,'Water Absorb',True]))
+                                    P.party.append(poke.Poke("Poliwag"+shiny,[5,random.randint(0,1),787,"Water Sport",-1,"Bubble",-1,None,None,None,None,None,None,0,"Poke Ball",0,'Water Absorb',True]))
                                     P.save_data.pokedex['Poliwag'] = [1,[]]
                                 else:
                                     pass
@@ -24501,9 +27179,11 @@ def cruise_1(P) -> None:
                                 new_txt(P)
                                 write(P,"Do you want Fletchling?")
                                 if choice(P,550,600):
+                                    if random.random() < 0.012:
+                                        shiny = "_S"
                                     P.prog[0] = 7
                                     P.save_data.starter = 'Fletchling'
-                                    P.party.append(poke.Poke("Fletchling",[5,random.randint(0,1),787,"Tackle",-1,"Growl",-1,None,None,None,None,None,None,0,"Poke Ball",0,'Big Pecks',True]))
+                                    P.party.append(poke.Poke("Fletchling"+shiny,[5,random.randint(0,1),787,"Tackle",-1,"Growl",-1,None,None,None,None,None,None,0,"Poke Ball",0,'Big Pecks',True]))
                                     P.save_data.pokedex['Fletchling'] = [1,[]]
                                 else:
                                     pass
@@ -24514,8 +27194,8 @@ def cruise_1(P) -> None:
                             te = P.surface.copy()
                             txt(P,"Good choice!","How about let's test it out in","a Pokemon battle?")
                             play_music(P,"music/trainer_battle.wav",0)
-                            #battle(P,["Professor Burnet",poke.Poke('Wimpod',[40,0,787,"First Impression",10,None,None,None,None,None,None,None,None,0,"Fast Ball",0,'Pressure']),poke.Poke('Rayquaza',[18,0,787,"Tackle",10,"Tackle",10,None,None,None,None,None,None,0,"Fast Ball",0,'Pressure'])])
-                            battle(P,["Professor Burnet",poke.Poke('Munchlax',[3,1,787,"Tackle",35,"Odor Sleuth",30,None,None,None,None,None,None,0,"Poke Ball",0,'Thick Fat'])],no_pc = True)
+                            # battle(P,["Professor Burnet",poke.Poke('Glalie',[10,0,787,"Beat Up",10,None,None,None,None,None,None,None,None,0,"Fast Ball",0,'Pressure']),poke.Poke('Zubat',[30,0,787,"Beat Up",10,None,None,None,None,None,None,None,None,0,"Fast Ball",0,'Pressure']),poke.Poke('Rayquaza',[50,0,787,"Confuse Ray",10,None,None,None,None,None,None,None,None,0,"Fast Ball",0,'Pressure'])])
+                            battle(P,["Professor Burnet",poke.Poke('Munchlax',[3,1,787,"Tackle",35,"Odor Sleuth",30,None,None,None,None,None,None,0,"Poke Ball",0,'Pickup'])],no_pc = True)
                             play_music(P,"music/cruise.wav")
                             P.surface.blit(te,(0,0))
                             fade_in(P)

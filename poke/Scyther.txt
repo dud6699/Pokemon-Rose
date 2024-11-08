@@ -3,7 +3,7 @@
 ['Bug','Flying']
 ['Metal Coat','Scizor']
 {1:['Vacuum Wave','Quick Attack','Leer'],5:'Focus Energy',9:'Pursuit',13:'False Swipe',17:'Agility',21:'Wing Attack',25:'Fury Cutter',29:'Slash',33:'Razor Wind',37:'Double Team',41:'X-Scissor',45:'Night Slash',49:'Double Hit',50:'Air Slash',57:'Swords Dance',61:'Feint'}
-45
+90
 56
 59
 37
